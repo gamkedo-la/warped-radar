@@ -92,7 +92,7 @@ function Dialogue() {
        */
 
         //speaker fade in
-        if (speakerPics[this.page] != null) this.speakerFadeIn(leftPics, dialogue);
+        if (speakerPics[this.page] != null) this.speakerFadeIn(speakerPics, dialogue);
         this.drawBoxElements(dialogueBoxPic, nameBoxPic);
 
         if (this.isShowing) {

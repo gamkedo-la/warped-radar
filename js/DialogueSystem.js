@@ -1,10 +1,15 @@
-//Dialogue System by Kise, for Gamkedo <3 Feel free to make changes and improve the code base!!  
+//Dialogue System by Kise, for Gamkedo! <3 Feel free to make changes and improve the code base!!  
 function Dialogue() {
     this.isShowing = false;
     this.letterCounter = 0;
     this.page = 0;
-    
-    //speaker tween coords
+
+    //Fade in speaker vars
+    this.speakerCentredX = 220;
+    this.speakerAlpha = 0.0;
+    this.alphaChange = 0.1;
+
+    //speaker tweening vars
     this.speakerStartX = -265;
     this.speakerX = this.speakerStartX;
     this.speaker2StartX = 800;
@@ -76,11 +81,16 @@ function Dialogue() {
             if ("hasChoices" in chatEvent) playerHasChoices.push(chatEvent.hasChoices);
             if ("choices" in chatEvent) playerChoices.push(chatEvent.playerChoices);
         }
-        
+
+        /* comment these out to tween speakers in instead
         if (leftPics[this.page] != null) this.tweenInSpeaker(leftPics, s1PicLeave);
         if (rightPics[this.page] != null) this.tweenInSpeaker2(rightPics, s2PicLeave);
+        
+        this.drawBoxElements(dialogueBoxPic, nameBoxPic); //change dialogue pics here
+       */
 
-        //change dialogue pics here
+        //speaker fade in
+        if (leftPics[this.page] != null) this.speakerFadeIn(leftPics, dialogue);
         this.drawBoxElements(dialogueBoxPic, nameBoxPic);
 
         if (this.isShowing) {
@@ -119,6 +129,26 @@ function Dialogue() {
         setTimeout(function () {
             paused = false;
         }, 190);
+    }
+
+    this.speakerFadeIn = function (speakerImg, dialogue) {
+
+        if (this.isShowing) {
+            this.speakerAlpha += this.alphaChange;
+            if (this.speakerAlpha >= 1.0) {
+                this.speakerAlpha = 1.0;
+            }
+        }
+        if (!this.isShowing) {
+            this.speakerAlpha -= this.alphaChange;
+            if (this.speakerAlpha <= 0.0) {
+                this.speakerAlpha = 0.0;
+            }
+        }
+
+        canvasContext.globalAlpha = this.speakerAlpha;
+        canvasContext.drawImage(speakerImg[this.page], this.speakerCentredX, speakerY);
+        canvasContext.globalAlpha = 1;
     }
 
     this.tweenInSpeaker = function (speakerImg, leaveScreen) {

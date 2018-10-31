@@ -1,3 +1,7 @@
+/*
+To use speaker tweenIn functions, make sure object looks like this:
+*/
+
 var johnAndRoseConvo = [
     {
         who: "John",

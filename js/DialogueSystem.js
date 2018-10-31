@@ -41,7 +41,7 @@ function Dialogue() {
     var tweenPosSpeed = 20;
     var tweenNegSpeed = 40;
 
-    var letterSpeed = 0.7;
+    var letterSpeed = 1;
     var maxWidth = 270;
     var lineHeight = 30;
     var line;
@@ -55,6 +55,7 @@ function Dialogue() {
     this.create = function (conversation) {
         var dialogue = [],
             speakerNames = [],
+            voices = [],
             leftPics = [],
             rightPics = [],
             s1PicLeave = [],
@@ -67,6 +68,7 @@ function Dialogue() {
             var chatEvent = conversation[i];
             if ("text" in chatEvent) dialogue.push(chatEvent.text);
             if ("who" in chatEvent) speakerNames.push(chatEvent.who);
+            if ("voice" in chatEvent) voices.push(chatEvent.voice);
             if ("leftPic" in chatEvent) leftPics.push(chatEvent.leftPic);
             if ("rightPic" in chatEvent) rightPics.push(chatEvent.rightPic);
             if ("leftPicLeave" in chatEvent) s1PicLeave.push(chatEvent.leftPicLeave);
@@ -84,6 +86,9 @@ function Dialogue() {
         if (this.isShowing) {
             if (this.letterCounter < dialogue[this.page].length && !paused) {
                 this.letterCounter += letterSpeed;
+                if ((Math.floor(this.letterCounter) % 2) == 0) {
+                    voices[this.page].play();  
+                }
             }
             if (speakerNames[this.page] != null) {
                 colorText(speakerNames[this.page], nameBoxTextX, nameBoxTextY, nameBoxTextColour, nameBoxTextFontFace, nameBoxTextAlign, 1);
@@ -91,7 +96,6 @@ function Dialogue() {
             stringCopy = dialogue[this.page].substr(0, this.letterCounter);
 
             this.findPunctuation(stringCopy);
-            
             this.wrapText(stringCopy, textX, textY, maxWidth, lineHeight);
             if (this.letterCounter >= dialogue[this.page].length) {
                 //used AnimatedSprites.js 
@@ -114,7 +118,7 @@ function Dialogue() {
     }
     
     this.unPauseWords = function() {
-        setTimeout(function () { paused = false; }, 210);
+        setTimeout(function () { paused = false; }, 190);
     }
 
     this.drawSpeaker = function (speakerImg, leaveScreen) {

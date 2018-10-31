@@ -4,7 +4,7 @@ function Dialogue() {
     this.letterCounter = 0;
     this.page = 0;
 
-    //Fade in speaker vars
+    //speaker fade in vars
     this.speakerCentredX = 220;
     this.speakerAlpha = 0.0;
     this.alphaChange = 0.1;
@@ -61,10 +61,11 @@ function Dialogue() {
         var dialogue = [],
             speakerNames = [],
             voices = [],
-            leftPics = [],
+            speakerPics = [],
+            /*leftPics = [],
             rightPics = [],
             s1PicLeave = [],
-            s2PicLeave = [],
+            s2PicLeave = [],*/
             playerHasChoices = [],
             playerChoices = [],
             stringCopy;
@@ -74,15 +75,16 @@ function Dialogue() {
             if ("text" in chatEvent) dialogue.push(chatEvent.text);
             if ("who" in chatEvent) speakerNames.push(chatEvent.who);
             if ("voice" in chatEvent) voices.push(chatEvent.voice);
-            if ("leftPic" in chatEvent) leftPics.push(chatEvent.leftPic);
-            if ("rightPic" in chatEvent) rightPics.push(chatEvent.rightPic);
-            if ("leftPicLeave" in chatEvent) s1PicLeave.push(chatEvent.leftPicLeave);
-            if ("rightPicLeave" in chatEvent) s2PicLeave.push(chatEvent.rightPicLeave);
+            if ("speakerPic" in chatEvent) speakerPics.push(chatEvent.speakerPic);
             if ("hasChoices" in chatEvent) playerHasChoices.push(chatEvent.hasChoices);
             if ("choices" in chatEvent) playerChoices.push(chatEvent.playerChoices);
+            /*if ("leftPic" in chatEvent) leftPics.push(chatEvent.leftPic);
+            if ("rightPic" in chatEvent) rightPics.push(chatEvent.rightPic);
+            if ("leftPicLeave" in chatEvent) s1PicLeave.push(chatEvent.leftPicLeave);
+            if ("rightPicLeave" in chatEvent) s2PicLeave.push(chatEvent.rightPicLeave);*/
         }
 
-        /* comment these out to tween speakers in instead
+        /* speaker tween in
         if (leftPics[this.page] != null) this.tweenInSpeaker(leftPics, s1PicLeave);
         if (rightPics[this.page] != null) this.tweenInSpeaker2(rightPics, s2PicLeave);
         
@@ -90,13 +92,13 @@ function Dialogue() {
        */
 
         //speaker fade in
-        if (leftPics[this.page] != null) this.speakerFadeIn(leftPics, dialogue);
+        if (speakerPics[this.page] != null) this.speakerFadeIn(leftPics, dialogue);
         this.drawBoxElements(dialogueBoxPic, nameBoxPic);
 
         if (this.isShowing) {
             if (this.letterCounter < dialogue[this.page].length && !paused) {
                 this.letterCounter += letterSpeed;
-                //floored in case letter speed is less than 0
+                //floored in case letter speed is less than 1
                 if ((Math.floor(this.letterCounter) % 2) == 0) {
                     voices[this.page].play();
                 }
@@ -245,3 +247,14 @@ function Dialogue() {
     } */
 
 }
+
+/*
+NOTES:
+
+To use speaker tweenIn functions, make sure object in DialogueLines has these properties:
+    who, voice, text, leftPic (replaces speakerPic), rightPic, leftPicLeave, rightPicLeave
+ 
+ 
+ - To have either pic not show on screen, set left/rightPic to null
+ - To have either pic leave screen during a convo., still set the picture, but one or both of the leftPic/rightPicLeave bools to true
+*/

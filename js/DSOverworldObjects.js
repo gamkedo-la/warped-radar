@@ -22,7 +22,7 @@ function OverworldObject() {
                     dialogue.letterCounter = 0;
                     this.messageCounter++;
                 }
-                /* comment out for tweening speakers
+                /* for speaker tween in
                 if ((dialogue.speakerX <= dialogue.speakerStartX) && (dialogue.speaker2X >= dialogue.speaker2StartX)) {
                     dialogue.page = 0;
                 }

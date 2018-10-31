@@ -1,14 +1,14 @@
-//A simple dialogue system for Gamkedo! By Kise <3
+//Dialogue System by Kise, for Gamkedo <3 Feel free to make changes and improve the code base!!  
 function Dialogue() {
     this.isShowing = false;
     this.letterCounter = 0;
     this.page = 0;
-
+    
+    //speaker tween coords
     this.speakerStartX = -265;
     this.speakerX = this.speakerStartX;
     this.speaker2StartX = 800;
     this.speaker2X = this.speaker2StartX;
-
     var speakerFinalX = 50;
     var speaker2FinalX = 480;
     var speakerY = 80;
@@ -76,25 +76,23 @@ function Dialogue() {
             if ("hasChoices" in chatEvent) playerHasChoices.push(chatEvent.hasChoices);
             if ("choices" in chatEvent) playerChoices.push(chatEvent.playerChoices);
         }
-
-        if (leftPics[this.page] != null) this.drawSpeaker(leftPics, s1PicLeave);
-        if (rightPics[this.page] != null) this.drawSpeaker2(rightPics, s2PicLeave);
+        
+        if (leftPics[this.page] != null) this.tweenInSpeaker(leftPics, s1PicLeave);
+        if (rightPics[this.page] != null) this.tweenInSpeaker2(rightPics, s2PicLeave);
 
         //change dialogue pics here
-        this.drawBoxElements(dialogueBoxPic, nameBoxPic, speakerNames);
+        this.drawBoxElements(dialogueBoxPic, nameBoxPic);
 
         if (this.isShowing) {
             if (this.letterCounter < dialogue[this.page].length && !paused) {
                 this.letterCounter += letterSpeed;
+                //floored in case letter speed is less than 0
                 if ((Math.floor(this.letterCounter) % 2) == 0) {
-                    voices[this.page].play();  
+                    voices[this.page].play();
                 }
             }
-            if (speakerNames[this.page] != null) {
-                colorText(speakerNames[this.page], nameBoxTextX, nameBoxTextY, nameBoxTextColour, nameBoxTextFontFace, nameBoxTextAlign, 1);
-            }
+            colorText(speakerNames[this.page], nameBoxTextX, nameBoxTextY, nameBoxTextColour, nameBoxTextFontFace, nameBoxTextAlign, 1);
             stringCopy = dialogue[this.page].substr(0, this.letterCounter);
-
             this.findPunctuation(stringCopy);
             this.wrapText(stringCopy, textX, textY, maxWidth, lineHeight);
             if (this.letterCounter >= dialogue[this.page].length) {
@@ -116,12 +114,14 @@ function Dialogue() {
             this.unPauseWords();
         }
     }
-    
-    this.unPauseWords = function() {
-        setTimeout(function () { paused = false; }, 190);
+
+    this.unPauseWords = function () {
+        setTimeout(function () {
+            paused = false;
+        }, 190);
     }
 
-    this.drawSpeaker = function (speakerImg, leaveScreen) {
+    this.tweenInSpeaker = function (speakerImg, leaveScreen) {
         canvasContext.drawImage(speakerImg[this.page], this.speakerX, speakerY);
         if (leaveScreen[this.page] && this.speakerX >= this.speakerStartX) {
             this.speakerX -= tweenNegSpeed;
@@ -132,7 +132,7 @@ function Dialogue() {
         }
     }
 
-    this.drawSpeaker2 = function (speaker2Img, leaveScreen) {
+    this.tweenInSpeaker2 = function (speaker2Img, leaveScreen) {
         canvasContext.drawImage(speaker2Img[this.page], this.speaker2X, speaker2Y);
         if (leaveScreen[this.page] && this.speaker2X <= this.speaker2StartX) {
             this.speaker2X += tweenNegSpeed;
@@ -143,12 +143,10 @@ function Dialogue() {
         }
     }
 
-    this.drawBoxElements = function (dialogueBoxImg, nameBoxImg, noNameBox) {
+    this.drawBoxElements = function (dialogueBoxImg, nameBoxImg) {
         if (this.isShowing) {
             canvasContext.drawImage(dialogueBoxImg, dialogueBoxX, dialogueBoxY);
-            if (noNameBox[this.page] != null) {
-                canvasContext.drawImage(nameBoxImg, nameBoxX, nameBoxY);
-            }
+            canvasContext.drawImage(nameBoxImg, nameBoxX, nameBoxY);
         }
     }
 

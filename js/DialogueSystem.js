@@ -41,11 +41,12 @@ function Dialogue() {
     var tweenPosSpeed = 20;
     var tweenNegSpeed = 40;
 
-    var letterSpeed = 0.5;
+    var letterSpeed = 0.7;
     var maxWidth = 270;
     var lineHeight = 30;
     var line;
-    
+    var paused = false;
+
     var arrowEffectBufferX = 95;
     var arrowEffectBufferY = 118;
     var arrowEffectX = (dialogueBoxX * dialogueBoxX / 2) + arrowEffectBufferX;
@@ -79,21 +80,41 @@ function Dialogue() {
 
         //change dialogue pics here
         this.drawBoxElements(dialogueBoxPic, nameBoxPic, speakerNames);
-        
+
         if (this.isShowing) {
-            if (this.letterCounter < dialogue[this.page].length) {
+            if (this.letterCounter < dialogue[this.page].length && !paused) {
                 this.letterCounter += letterSpeed;
             }
             if (speakerNames[this.page] != null) {
                 colorText(speakerNames[this.page], nameBoxTextX, nameBoxTextY, nameBoxTextColour, nameBoxTextFontFace, nameBoxTextAlign, 1);
             }
             stringCopy = dialogue[this.page].substr(0, this.letterCounter);
+
+            this.findPunctuation(stringCopy);
+            
             this.wrapText(stringCopy, textX, textY, maxWidth, lineHeight);
             if (this.letterCounter >= dialogue[this.page].length) {
                 //used AnimatedSprites.js 
                 textArrowEffect.draw(arrowEffectX, arrowEffectY, 1);
             }
         }
+    }
+
+    this.findPunctuation = function (str) {
+        if (str.includes(".")) {
+            paused = true;
+            this.unPauseWords();
+        } else if (str.includes("!")) {
+            paused = true;
+            this.unPauseWords();
+        } else if (str.includes(",")) {
+            paused = true;
+            this.unPauseWords();
+        }
+    }
+    
+    this.unPauseWords = function() {
+        setTimeout(function () { paused = false; }, 210);
     }
 
     this.drawSpeaker = function (speakerImg, leaveScreen) {

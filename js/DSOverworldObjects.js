@@ -45,28 +45,15 @@ function OverworldObject() {
         }
     }
 
-    this.text = function (createElseIncrement, dialogue1, dialogue2, dialogue3, dialogue4, dialogue5, dialogue6) {
-        var chat = "";
-        switch (true) {
-            case (this.messageCounter == 1 || dialogue2 == undefined):
-                chat = dialogue1;
-                break;
-            case (this.messageCounter == 2 || dialogue3 == undefined):
-                chat = dialogue2;
-                break;
-            case (this.messageCounter == 3 || dialogue4 == undefined):
-                chat = dialogue3;
-                break;
-            case (this.messageCounter == 4 || dialogue5 == undefined):
-                chat = dialogue4;
-                break;
-            case (this.messageCounter == 5 || dialogue6 == undefined):
-                chat = dialogue5;
-                break;
-            case (this.messageCounter >= 6):
-                chat = dialogue6;
-                break;
+    this.text = function (createElseIncrement, dialogueList) {
+        var chat = null;
+        var chatLine = this.messageCounter - 1; //already 1 when dialogue starts
+        if (chatLine >= dialogueList.length) {
+            chatLine = dialogueList.length - 1;
+        } else if (chatLine < 0) {
+            return;
         }
+        chat = dialogueList[chatLine]; 
         this.eventText(createElseIncrement, chat);
     }
 
@@ -86,7 +73,7 @@ john.chatEvents = function (createElseIncrement) {
     if (this.pressedX) {
         john.eventText(createElseIncrement, omigoshJohn);
     } else { //regular text
-        john.text(createElseIncrement, johnAndRoseConvo, johnAndRoseConvo2);
+        john.text(createElseIncrement,[ johnAndRoseConvo, johnAndRoseConvo2]);
     }
 }
 
@@ -104,7 +91,7 @@ bob.chatEvents = function (createElseIncrement) {
     if (this.pressedZ) {
         bob.eventText(createElseIncrement, omigoshBob);
     } else { //regular text
-        bob.text(createElseIncrement, bobConvo);
+        bob.text(createElseIncrement, [bobConvo]);
     }
 }
 

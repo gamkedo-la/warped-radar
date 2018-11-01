@@ -17,6 +17,10 @@ const KEY_ENTER = 13;
 var pressed_space = false;
 var pressed_mbLeft = false;
 
+var cursorUp = false;
+var cursorDown = false;
+var key = 0;
+
 function setupInput() {
     document.addEventListener("keydown", keyPressed);
     document.addEventListener("keyup", keyReleased);
@@ -37,6 +41,14 @@ function keyPressed(evt) {
         case KEY_Z:
             bob.pressedZ = true;
             break;
+        case KEY_UP:
+            cursorUp = true;
+            key++;
+            break;
+        case KEY_DOWN:
+            cursorDown = true;
+            key++;
+            break;
     }
     keySet(evt, player, true);
     evt.preventDefault();
@@ -48,12 +60,18 @@ function keyReleased(evt) {
         case KEY_SPACE:
             pressed_space = false;
             break;
+        case KEY_UP:
+            cursorUp = false;
+            break;
+        case KEY_DOWN:
+            cursorDown = false;
+            break;
     }
     keySet(evt, player, false);
 }
 
 function mousePressed(evt) {
-    incrementTextPages();
+    //incrementTextPages();
     pressed_mbLeft = true;
 }
 

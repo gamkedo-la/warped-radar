@@ -16,7 +16,7 @@ function OverworldObject() {
 
     this.onTrigger = function (dialogue) {
         if (this.collidingWithPlayer() && !dialogue.isShowing) {
-            if (pressed_space || pressed_mbLeft) {
+            if (pressed_space /*|| pressed_mbLeft*/) {
                 if (dialogue.page <= 0) {
                     dialogue.isShowing = true;
                     dialogue.letterCounter = 0;

@@ -8,22 +8,20 @@ var johnAndRoseConvo = [
 
         leftPicLeave: false,
         rightPicLeave: false,
-        
-        hasChoices: false,
+    
         choices: null
     },
     {
         who: "Rose",
         voice: voiceHigh2,
-        text: "I'm fine, how about you?",
+        text: "",
         leftPic: johnPic,
         rightPic: rosePic,
 
         leftPicLeave: false,
         rightPicLeave: false,
         
-        hasChoices: false,
-        choices: null
+        choices:  ["Good how are you?", "I'm great", "Not so good"]
     },
     {
         who: "John",
@@ -35,7 +33,6 @@ var johnAndRoseConvo = [
         leftPicLeave: false,
         rightPicLeave: false,
         
-        hasChoices: false,
         choices: null
     },
     {
@@ -48,7 +45,6 @@ var johnAndRoseConvo = [
         leftPicLeave: false,
         rightPicLeave: false,
         
-        hasChoices: false,
         choices: null
     },
     {
@@ -61,7 +57,6 @@ var johnAndRoseConvo = [
         leftPicLeave: false,
         rightPicLeave: true,
         
-        hasChoices: false,
         choices: null
     },
     {
@@ -74,7 +69,6 @@ var johnAndRoseConvo = [
         leftPicLeave: false,
         rightPicLeave: false,
         
-        hasChoices: false,
         choices: null
     },
     {
@@ -87,7 +81,6 @@ var johnAndRoseConvo = [
         leftPicLeave: false,
         rightPicLeave: false,
         
-        hasChoices: false,
         choices: null
     }
 
@@ -104,7 +97,6 @@ var johnAndRoseConvo2 = [
         leftPicLeave: false,
         rightPicLeave: false,
         
-        hasChoices: false,
         choices: null
     },
     {
@@ -117,7 +109,6 @@ var johnAndRoseConvo2 = [
         leftPicLeave: false,
         rightPicLeave: false,
         
-        hasChoices: false,
         choices: null
     }
 
@@ -134,7 +125,6 @@ var bobConvo = [
         leftPicLeave: false,
         rightPicLeave: false,
         
-        hasChoices: false,
         choices: null
     },
     {
@@ -147,7 +137,6 @@ var bobConvo = [
         leftPicLeave: false,
         rightPicLeave: false,
         
-        hasChoices: false,
         choices: null
     },
     {
@@ -160,7 +149,6 @@ var bobConvo = [
         leftPicLeave: false,
         rightPicLeave: false,
         
-        hasChoices: false,
         choices: null
     }
 ];
@@ -176,7 +164,6 @@ var omigoshJohn = [
         leftPicLeave: false,
         rightPicLeave: false,
         
-        hasChoices: false,
         choices: null
     },
     {
@@ -189,7 +176,6 @@ var omigoshJohn = [
         leftPicLeave: false,
         rightPicLeave: false,
         
-        hasChoices: false,
         choices: null
     }
 ];
@@ -205,7 +191,6 @@ var omigoshBob = [
         leftPicLeave: false,
         rightPicLeave: false,
         
-        hasChoices: false,
         choices: null
     },
     {
@@ -218,7 +203,6 @@ var omigoshBob = [
         leftPicLeave: false,
         rightPicLeave: false,
         
-        hasChoices: false,
         choices: null
     },
     {
@@ -231,7 +215,6 @@ var omigoshBob = [
         leftPicLeave: false,
         rightPicLeave: false,
         
-        hasChoices: false,
         choices: null
     },
     {
@@ -244,7 +227,6 @@ var omigoshBob = [
         leftPicLeave: false,
         rightPicLeave: false,
         
-        hasChoices: false,
         choices: null
     }
 ];
@@ -256,7 +238,6 @@ var omigoshBob = [
         text: "Hello, how are you",
         speakerPic: johnPic,
         
-        hasChoices: false,
         choices: null
     },
     {
@@ -265,7 +246,6 @@ var omigoshBob = [
         text: "I'm fine, how about you?",
         speakerPic: johnPic,
     
-        hasChoices: false,
         choices: null
     },
     {
@@ -274,7 +254,6 @@ var omigoshBob = [
         text: "This is horrible example dialogue. Also, I'm doing great, thanks for asking.",
         speakerPic: johnPic2,
         
-        hasChoices: false,
         choices: null
     },
     {
@@ -283,7 +262,6 @@ var omigoshBob = [
         text: "OK, see ya",
         speakerPic: johnPic,
        
-        hasChoices: false,
         choices: null
     },
     {
@@ -292,7 +270,6 @@ var omigoshBob = [
         text: "Hey, wait!",
         speakerPic: johnPic2,
         
-        hasChoices: false,
         choices: null
     },
     {
@@ -301,7 +278,6 @@ var omigoshBob = [
         text: "...",
         speakerPic: johnPic2,
        
-        hasChoices: false,
         choices: null
     },
     {
@@ -310,7 +286,6 @@ var omigoshBob = [
         text: "Just kidding!",
         speakerPic: johnPic,
         
-        hasChoices: false,
         choices: null
     }
 
@@ -323,7 +298,6 @@ var johnAndRoseConvo2 = [
         text: "By the way, you're cool.",
         speakerPic: null,
         
-        hasChoices: false,
         choices: null
     },
     {
@@ -332,7 +306,6 @@ var johnAndRoseConvo2 = [
         text: "Thanks Rose, couldn't have said it better myself.",
         speakerPic: johnPic,
         
-        hasChoices: false,
         choices: null
     }
 
@@ -345,7 +318,6 @@ var bobConvo = [
         text: "Hi I'm bobs.",
         speakerPic: johnPic,
         
-        hasChoices: false,
         choices: null
     },
     {
@@ -354,7 +326,6 @@ var bobConvo = [
         text: "Oh that s was a typo I've had since birth. The accurate pronounciation is bob though.",
         speakerPic: johnPic,
         
-        hasChoices: false,
         choices: null
     },
     {
@@ -363,7 +334,6 @@ var bobConvo = [
         text: "Sighs",
         speakerPic: johnPic2,
        
-        hasChoices: false,
         choices: null
     }
 ];
@@ -375,7 +345,6 @@ var omigoshJohn = [
         text: "ayeyo you done did it again",
         speakerPic: johnPic,
         
-        hasChoices: false,
         choices: null
     },
     {
@@ -384,7 +353,6 @@ var omigoshJohn = [
         text: "u srs bro",
         speakerPic: johnPic,
        
-        hasChoices: false,
         choices: null
     }
 ];
@@ -396,7 +364,6 @@ var omigoshBob = [
         text: "AAAAAAAAA",
         speakerPic: johnPic2,
         
-        hasChoices: false,
         choices: null
     },
     {
@@ -405,7 +372,6 @@ var omigoshBob = [
         text: "M-my name.....",
         speakerPic: johnPic,
        
-        hasChoices: false,
         choices: null
     },
     {
@@ -414,7 +380,6 @@ var omigoshBob = [
         text: "The s is gone?!?!?!",
         speakerPic: johnPic,
         
-        hasChoices: false,
         choices: null
     },
     {
@@ -423,7 +388,6 @@ var omigoshBob = [
         text: "I... I don't know what to feel.",
         speakerPic: johnPic,
        
-        hasChoices: false,
         choices: null
     }
 ];*/

@@ -5,6 +5,7 @@ var johnPic2 = new Image();
 var rosePic = new Image();
 var rosePic2 = new Image();
 var textArrowSheet = new Image();
+var choiceCursorPic = new Image();
 
 var picsToLoad = 0;
 
@@ -28,7 +29,8 @@ function loadImages() {
         {varName: johnPic2, theFile: "img/john2.png"},
         {varName: rosePic, theFile: "img/rose.png"},
         {varName: rosePic2, theFile: "img/rose2.png"},
-        {varName: textArrowSheet, theFile: "img/textArrow.png"}
+        {varName: textArrowSheet, theFile: "img/textArrow.png"},
+        {varName: choiceCursorPic, theFile: "img/choicecursor.png"}
     ];
     
     picsToLoad = imageList.length;

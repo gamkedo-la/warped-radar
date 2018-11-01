@@ -57,6 +57,12 @@ function Dialogue() {
     var arrowEffectX = (dialogueBoxX * dialogueBoxX / 2) + arrowEffectBufferX;
     var arrowEffectY = dialogueBoxY + arrowEffectBufferY;
 
+    var choiceCursor = 0;
+    var choiceCursorX = 0;
+    var choiceCursorY = 0;
+    var choiceCommitted = -1;
+    var cursorControl = true;
+
     this.create = function (conversation) {
         var dialogue = [],
             speakerNames = [],
@@ -66,7 +72,6 @@ function Dialogue() {
             rightPics = [],
             s1PicLeave = [],
             s2PicLeave = [],
-            playerHasChoices = [],
             playerChoices = [],
             stringCopy;
 
@@ -76,8 +81,7 @@ function Dialogue() {
             if ("who" in chatEvent) speakerNames.push(chatEvent.who);
             if ("voice" in chatEvent) voices.push(chatEvent.voice);
             //if ("speakerPic" in chatEvent) speakerPics.push(chatEvent.speakerPic);
-            if ("hasChoices" in chatEvent) playerHasChoices.push(chatEvent.hasChoices);
-            if ("choices" in chatEvent) playerChoices.push(chatEvent.playerChoices);
+            if ("choices" in chatEvent) playerChoices.push(chatEvent.choices);
             if ("leftPic" in chatEvent) leftPics.push(chatEvent.leftPic);
             if ("rightPic" in chatEvent) rightPics.push(chatEvent.rightPic);
             if ("leftPicLeave" in chatEvent) s1PicLeave.push(chatEvent.leftPicLeave);
@@ -87,18 +91,21 @@ function Dialogue() {
         // speaker tween in
         if (leftPics[this.page] != null) this.tweenInSpeaker(leftPics, s1PicLeave);
         if (rightPics[this.page] != null) this.tweenInSpeaker2(rightPics, s2PicLeave);
-        
-        this.drawBoxElements(dialogueBoxPic, nameBoxPic); //change dialogue pics here
-       
+
+        this.drawBoxElements(dialogueBoxPic, nameBoxPic); //change dialogue pics here 
 
         //speaker fade in
         /*if (speakerPics[this.page] != null) this.speakerFadeIn(speakerPics, dialogue);
         this.drawBoxElements(dialogueBoxPic, nameBoxPic);*/
 
+        if (playerChoices[this.page] != null) {
+            this.showChoices(playerChoices[this.page]);
+            canvasContext.drawImage(choiceCursorPic, choiceCursorX, choiceCursorY);
+        }
+
         if (this.isShowing) {
             if (this.letterCounter < dialogue[this.page].length && !paused) {
                 this.letterCounter += letterSpeed;
-                //floored in case letter speed is less than 1
                 if ((Math.floor(this.letterCounter) % 2) == 0) {
                     voices[this.page].play();
                 }
@@ -107,10 +114,47 @@ function Dialogue() {
             stringCopy = dialogue[this.page].substr(0, this.letterCounter);
             this.findPunctuation(stringCopy);
             this.wrapText(stringCopy, textX, textY, maxWidth, lineHeight);
-            if (this.letterCounter >= dialogue[this.page].length) {
+            if (this.letterCounter >= dialogue[this.page].length && dialogue[this.page] != "") {
                 //used AnimatedSprites.js 
                 textArrowEffect.draw(arrowEffectX, arrowEffectY, 1);
             }
+        }
+    }
+
+    this.showChoices = function (choices, selected) {
+        var itemSpace = 30;
+        for (var i = 0; i < choices.length; i++) {
+            colorText(choices[i], 15 + textX, textY + itemSpace * i, textColour, textFontFace, textAlign, 1);
+            if (choiceCursor == i) {
+                var cursorXOffset = 12;
+                var cursorYOffset = 17;
+                choiceCursorX = textX - cursorXOffset;
+                choiceCursorY = (textY + itemSpace * i) - cursorYOffset;
+            }
+        }
+        if (cursorControl) {
+            if (cursorUp) {
+                if (key === 1) {
+                    choiceCursor--;
+                    voiceHigh1.play();
+                    if (choiceCursor < 0) {
+                        choiceCursor += choices.length;
+                    }
+                } 
+                key = 0;
+                return;
+            }
+            if (cursorDown) {
+                if (key === 1) {
+                    choiceCursor = (choiceCursor + 1) % choices.length;
+                    voiceHigh1.play();
+                    if (choiceCursor > choices.length - 1) {
+                        choiceCursor = 0;
+                    }
+                } 
+            }
+            key = 0;
+            return;
         }
     }
 

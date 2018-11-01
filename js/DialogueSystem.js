@@ -21,7 +21,7 @@ function Dialogue() {
 
     var dialogueBoxX = 35;
     var dialogueBoxY = 425;
-    
+
     var dialogueImage = dialogueBoxPic;
     var nameBoxImage = nameBoxPic;
 
@@ -54,14 +54,15 @@ function Dialogue() {
     var lineHeight = 30;
     var line;
     var paused = false;
-    
+
     var arrowEffectBufferX = 95;
     var arrowEffectBufferY = 118;
     var arrowEffectX = (dialogueBoxX * dialogueBoxX / 2) + arrowEffectBufferX;
     var arrowEffectY = dialogueBoxY + arrowEffectBufferY;
-    
+
     var choiceSound = voiceHigh1;
     var cursorControl = true;
+    var cursorSelectColour = "#536991";
     var choiceCursor = 0;
     var choiceCursorX = 0;
     var choiceCursorY = 0;
@@ -102,7 +103,7 @@ function Dialogue() {
         /*if (speakerPics[this.page] != null) this.speakerFadeIn(speakerPics, dialogue);
         this.drawBoxElements(dialogueBoxPic, nameBoxPic);*/
 
-        if (playerChoices[this.page] != null) {
+        if (playerChoices[this.page] != null && this.isShowing) {
             this.showChoices(playerChoices[this.page]);
             canvasContext.drawImage(choiceCursorPic, choiceCursorX, choiceCursorY);
         }
@@ -127,37 +128,42 @@ function Dialogue() {
 
     this.showChoices = function (choices, selected) {
         var itemSpace = 30;
+        var choiceCol;
         for (var i = 0; i < choices.length; i++) {
-            colorText(choices[i], 15 + textX, textY + itemSpace * i, textColour, textFontFace, textAlign, 1);
             if (choiceCursor == i) {
                 var cursorXOffset = 12;
                 var cursorYOffset = 17;
                 choiceCursorX = textX - cursorXOffset;
                 choiceCursorY = (textY + itemSpace * i) - cursorYOffset;
+                choiceCol = cursorSelectColour;
+            } else {
+                choiceCol = textColour;
             }
+            
+            colorText(choices[i], 15 + textX, textY + itemSpace * i, choiceCol, textFontFace, textAlign, 1);
         }
         if (cursorControl) {
             if (cursorUp) {
-                if (key === 1) {
+                if (cursorKeyPresses === 1) {
                     choiceCursor--;
                     choiceSound.play();
                     if (choiceCursor < 0) {
                         choiceCursor += choices.length;
                     }
-                } 
-                key = 0;
+                }
+                cursorKeyPresses = 0;
                 return;
             }
             if (cursorDown) {
-                if (key === 1) {
+                if (cursorKeyPresses === 1) {
                     choiceCursor = (choiceCursor + 1) % choices.length;
                     choiceSound.play();
                     if (choiceCursor > choices.length - 1) {
                         choiceCursor = 0;
                     }
-                } 
+                }
             }
-            key = 0;
+            cursorKeyPresses = 0;
             return;
         }
     }

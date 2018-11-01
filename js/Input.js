@@ -19,7 +19,7 @@ var pressed_mbLeft = false;
 
 var cursorUp = false;
 var cursorDown = false;
-var key = 0;
+var cursorKeyPresses = 0;
 
 function setupInput() {
     document.addEventListener("keydown", keyPressed);
@@ -43,11 +43,11 @@ function keyPressed(evt) {
             break;
         case KEY_UP:
             cursorUp = true;
-            key++;
+            cursorKeyPresses++;
             break;
         case KEY_DOWN:
             cursorDown = true;
-            key++;
+            cursorKeyPresses++;
             break;
     }
     keySet(evt, player, true);

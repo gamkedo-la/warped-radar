@@ -22,66 +22,6 @@ var johnAndRoseConvo = [
         rightPicLeave: false,
         
         choices:  ["Good how are you?", "I'm great", "Not so good"]
-    },
-    {
-        who: "John",
-        voice: voiceLow1,
-        text: "This is horrible example dialogue. Also, I'm doing great, thanks for asking.",
-        leftPic: johnPic2,
-        rightPic: rosePic,
-
-        leftPicLeave: false,
-        rightPicLeave: false,
-        
-        choices: null
-    },
-    {
-        who: "Rose",
-        voice: voiceHigh2,
-        text: "OK, see ya",
-        leftPic: johnPic,
-        rightPic: rosePic2,
-
-        leftPicLeave: false,
-        rightPicLeave: false,
-        
-        choices: null
-    },
-    {
-        who: "John",
-        voice: voiceLow1,
-        text: "Hey, wait!",
-        leftPic: johnPic2,
-        rightPic: rosePic2,
-
-        leftPicLeave: false,
-        rightPicLeave: true,
-        
-        choices: null
-    },
-    {
-        who: "John",
-        voice: voiceLow1,
-        text: "...",
-        leftPic: johnPic2,
-        rightPic: null,
-
-        leftPicLeave: false,
-        rightPicLeave: false,
-        
-        choices: null
-    },
-    {
-        who: "Rose",
-        voice: voiceHigh2,
-        text: "Just kidding!",
-        leftPic: johnPic,
-        rightPic: rosePic,
-
-        leftPicLeave: false,
-        rightPicLeave: false,
-        
-        choices: null
     }
 
 ];

@@ -72,7 +72,7 @@ john.chatEvents = function (createElseIncrement) {
     if (this.pressedX) {
         john.eventText(createElseIncrement, omigoshJohn);
     } else { //regular text
-        john.text(createElseIncrement,[ johnAndRoseConvo, johnAndRoseConvo2]);
+        john.text(createElseIncrement,[johnAndRoseConvo, johnAndRoseConvo2]);
     }
 }
 

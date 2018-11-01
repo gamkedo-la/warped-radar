@@ -22,14 +22,13 @@ function OverworldObject() {
                     dialogue.letterCounter = 0;
                     this.messageCounter++;
                 }
-                /* for speaker tween in
+                // for speaker tween in
                 if ((dialogue.speakerX <= dialogue.speakerStartX) && (dialogue.speaker2X >= dialogue.speaker2StartX)) {
                     dialogue.page = 0;
                 }
-                */
-                if (dialogue.speakerAlpha <= 0.0) { //for speaker fade in
+                /*if (dialogue.speakerAlpha <= 0.0) { //for speaker fade in
                     dialogue.page = 0;
-                }
+                }*/
             }
         } else if (!this.collidingWithPlayer()) {
             dialogue.isShowing = false;

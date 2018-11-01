@@ -61,11 +61,11 @@ function Dialogue() {
         var dialogue = [],
             speakerNames = [],
             voices = [],
-            speakerPics = [],
-            /*leftPics = [],
+            //speakerPics = [],
+            leftPics = [],
             rightPics = [],
             s1PicLeave = [],
-            s2PicLeave = [],*/
+            s2PicLeave = [],
             playerHasChoices = [],
             playerChoices = [],
             stringCopy;
@@ -75,25 +75,25 @@ function Dialogue() {
             if ("text" in chatEvent) dialogue.push(chatEvent.text);
             if ("who" in chatEvent) speakerNames.push(chatEvent.who);
             if ("voice" in chatEvent) voices.push(chatEvent.voice);
-            if ("speakerPic" in chatEvent) speakerPics.push(chatEvent.speakerPic);
+            //if ("speakerPic" in chatEvent) speakerPics.push(chatEvent.speakerPic);
             if ("hasChoices" in chatEvent) playerHasChoices.push(chatEvent.hasChoices);
             if ("choices" in chatEvent) playerChoices.push(chatEvent.playerChoices);
-            /*if ("leftPic" in chatEvent) leftPics.push(chatEvent.leftPic);
+            if ("leftPic" in chatEvent) leftPics.push(chatEvent.leftPic);
             if ("rightPic" in chatEvent) rightPics.push(chatEvent.rightPic);
             if ("leftPicLeave" in chatEvent) s1PicLeave.push(chatEvent.leftPicLeave);
-            if ("rightPicLeave" in chatEvent) s2PicLeave.push(chatEvent.rightPicLeave);*/
+            if ("rightPicLeave" in chatEvent) s2PicLeave.push(chatEvent.rightPicLeave);
         }
 
-        /* speaker tween in
+        // speaker tween in
         if (leftPics[this.page] != null) this.tweenInSpeaker(leftPics, s1PicLeave);
         if (rightPics[this.page] != null) this.tweenInSpeaker2(rightPics, s2PicLeave);
         
         this.drawBoxElements(dialogueBoxPic, nameBoxPic); //change dialogue pics here
-       */
+       
 
         //speaker fade in
-        if (speakerPics[this.page] != null) this.speakerFadeIn(speakerPics, dialogue);
-        this.drawBoxElements(dialogueBoxPic, nameBoxPic);
+        /*if (speakerPics[this.page] != null) this.speakerFadeIn(speakerPics, dialogue);
+        this.drawBoxElements(dialogueBoxPic, nameBoxPic);*/
 
         if (this.isShowing) {
             if (this.letterCounter < dialogue[this.page].length && !paused) {
@@ -134,7 +134,6 @@ function Dialogue() {
     }
 
     this.speakerFadeIn = function (speakerImg, dialogue) {
-
         if (this.isShowing) {
             this.speakerAlpha += this.alphaChange;
             if (this.speakerAlpha >= 1.0) {
@@ -247,14 +246,3 @@ function Dialogue() {
     } */
 
 }
-
-/*
-NOTES:
-
-To use speaker tweenIn functions, make sure object in DialogueLines has these properties:
-    who, voice, text, leftPic (replaces speakerPic), rightPic, leftPicLeave, rightPicLeave
- 
- 
- - To have either pic not show on screen, set left/rightPic to null
- - To have either pic leave screen during a convo., still set the picture, but one or both of the leftPic/rightPicLeave bools to true
-*/

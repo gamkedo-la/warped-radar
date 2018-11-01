@@ -21,6 +21,9 @@ function Dialogue() {
 
     var dialogueBoxX = 35;
     var dialogueBoxY = 425;
+    
+    var dialogueImage = dialogueBoxPic;
+    var nameBoxImage = nameBoxPic;
 
     var textXBuffer = 30;
     var textYBuffer = 45;
@@ -51,17 +54,18 @@ function Dialogue() {
     var lineHeight = 30;
     var line;
     var paused = false;
-
+    
     var arrowEffectBufferX = 95;
     var arrowEffectBufferY = 118;
     var arrowEffectX = (dialogueBoxX * dialogueBoxX / 2) + arrowEffectBufferX;
     var arrowEffectY = dialogueBoxY + arrowEffectBufferY;
-
+    
+    var choiceSound = voiceHigh1;
+    var cursorControl = true;
     var choiceCursor = 0;
     var choiceCursorX = 0;
     var choiceCursorY = 0;
     var choiceCommitted = -1;
-    var cursorControl = true;
 
     this.create = function (conversation) {
         var dialogue = [],
@@ -92,7 +96,7 @@ function Dialogue() {
         if (leftPics[this.page] != null) this.tweenInSpeaker(leftPics, s1PicLeave);
         if (rightPics[this.page] != null) this.tweenInSpeaker2(rightPics, s2PicLeave);
 
-        this.drawBoxElements(dialogueBoxPic, nameBoxPic); //change dialogue pics here 
+        this.drawBoxElements(dialogueImage, nameBoxImage);
 
         //speaker fade in
         /*if (speakerPics[this.page] != null) this.speakerFadeIn(speakerPics, dialogue);
@@ -136,7 +140,7 @@ function Dialogue() {
             if (cursorUp) {
                 if (key === 1) {
                     choiceCursor--;
-                    voiceHigh1.play();
+                    choiceSound.play();
                     if (choiceCursor < 0) {
                         choiceCursor += choices.length;
                     }
@@ -147,7 +151,7 @@ function Dialogue() {
             if (cursorDown) {
                 if (key === 1) {
                     choiceCursor = (choiceCursor + 1) % choices.length;
-                    voiceHigh1.play();
+                    choiceSound.play();
                     if (choiceCursor > choices.length - 1) {
                         choiceCursor = 0;
                     }

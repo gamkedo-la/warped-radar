@@ -97,18 +97,18 @@ function Dialogue() {
         }
 
         this.showSpeakers(leftPics, s1PicLeave, rightPics, s2PicLeave);
-        this.drawBoxElements(dialogueImage, nameBoxImage);
+        this.showBoxElements(dialogueImage, nameBoxImage);
         this.showTextElements(dialogue, voices, speakerNames);
         this.showChoices(playerChoices);
     }
 
     this.showSpeakerFadeIn = function (speakerPicList) {
-        if (speakerPicList[this.page] != null) this.speakerFadeIn(speakerPicList);
+        if (speakerPicList[this.page] != null) this.setupSpeakerFadeIn(speakerPicList);
     }
 
     this.showSpeakers = function (leftPicList, leftPicLeaveList, rightPicList, rightPicLeaveList) {
-        if (leftPicList[this.page] != null) this.tweenInSpeaker(leftPicList, leftPicLeaveList);
-        if (rightPicList[this.page] != null) this.tweenInSpeaker2(rightPicList, rightPicLeaveList);
+        if (leftPicList[this.page] != null) this.setupSpeakerTween(leftPicList, leftPicLeaveList);
+        if (rightPicList[this.page] != null) this.setupSpeaker2Tween(rightPicList, rightPicLeaveList);
     }
 
     this.showTextElements = function (dialogueList, voiceList, nameList) {
@@ -125,13 +125,13 @@ function Dialogue() {
             this.findPunctuation(stringCopy);
             this.wrapText(stringCopy, textX, textY, maxWidth, lineHeight);
             if (this.letterCounter >= dialogueList[this.page].length && dialogueList[this.page] != "") {
-                //used AnimatedSprites.js 
+                //uses AnimatedSprites.js 
                 textArrowEffect.draw(arrowEffectX, arrowEffectY, 1);
             }
         }
     }
 
-    this.drawBoxElements = function (dialogueBoxImg, nameBoxImg) {
+    this.showBoxElements = function (dialogueBoxImg, nameBoxImg) {
         if (this.isShowing) {
             canvasContext.drawImage(dialogueBoxImg, dialogueBoxX, dialogueBoxY);
             canvasContext.drawImage(nameBoxImg, nameBoxX, nameBoxY);
@@ -197,6 +197,46 @@ function Dialogue() {
             cursorKeyPresses = 0;
         }
     }
+    
+    this.setupSpeakerFadeIn = function (speakerImgList) {
+        if (this.isShowing) {
+            this.speakerAlpha += this.alphaChange;
+            if (this.speakerAlpha >= 1.0) {
+                this.speakerAlpha = 1.0;
+            }
+        }
+        if (!this.isShowing) {
+            this.speakerAlpha -= this.alphaChange;
+            if (this.speakerAlpha <= 0.0) {
+                this.speakerAlpha = 0.0;
+            }
+        }
+        canvasContext.globalAlpha = this.speakerAlpha;
+        canvasContext.drawImage(speakerImgList[this.page], this.speakerCentredX, speakerY);
+        canvasContext.globalAlpha = 1;
+    }
+
+    this.setupSpeakerTween = function (speakerImgList, leaveScreenList) {
+        canvasContext.drawImage(speakerImgList[this.page], this.speakerX, speakerY);
+        if (leaveScreenList[this.page] && this.speakerX >= this.speakerStartX) {
+            this.speakerX -= tweenNegSpeed;
+        } else if (!this.isShowing && this.speakerX > this.speakerStartX) {
+            this.speakerX -= tweenNegSpeed;
+        } else if (this.isShowing && this.speakerX < speakerFinalX) {
+            this.speakerX += tweenPosSpeed;
+        }
+    }
+
+    this.setupSpeaker2Tween = function (speaker2ImgList, leaveScreenList) {
+        canvasContext.drawImage(speaker2ImgList[this.page], this.speaker2X, speaker2Y);
+        if (leaveScreenList[this.page] && this.speaker2X <= this.speaker2StartX) {
+            this.speaker2X += tweenNegSpeed;
+        } else if (!this.isShowing && this.speaker2X < this.speaker2StartX) {
+            this.speaker2X += tweenNegSpeed;
+        } else if (this.isShowing && this.speaker2X > speaker2FinalX) {
+            this.speaker2X -= tweenPosSpeed;
+        }
+    }
 
     this.findPunctuation = function (str) {
         if (str.includes(".")) {
@@ -216,65 +256,7 @@ function Dialogue() {
             paused = false;
         }, 190);
     }
-
-    this.speakerFadeIn = function (speakerImgList) {
-        if (this.isShowing) {
-            this.speakerAlpha += this.alphaChange;
-            if (this.speakerAlpha >= 1.0) {
-                this.speakerAlpha = 1.0;
-            }
-        }
-        if (!this.isShowing) {
-            this.speakerAlpha -= this.alphaChange;
-            if (this.speakerAlpha <= 0.0) {
-                this.speakerAlpha = 0.0;
-            }
-        }
-        canvasContext.globalAlpha = this.speakerAlpha;
-        canvasContext.drawImage(speakerImgList[this.page], this.speakerCentredX, speakerY);
-        canvasContext.globalAlpha = 1;
-    }
-
-    this.tweenInSpeaker = function (speakerImgList, leaveScreenList) {
-        canvasContext.drawImage(speakerImgList[this.page], this.speakerX, speakerY);
-        if (leaveScreenList[this.page] && this.speakerX >= this.speakerStartX) {
-            this.speakerX -= tweenNegSpeed;
-        } else if (!this.isShowing && this.speakerX > this.speakerStartX) {
-            this.speakerX -= tweenNegSpeed;
-        } else if (this.isShowing && this.speakerX < speakerFinalX) {
-            this.speakerX += tweenPosSpeed;
-        }
-    }
-
-    this.tweenInSpeaker2 = function (speaker2ImgList, leaveScreenList) {
-        canvasContext.drawImage(speaker2ImgList[this.page], this.speaker2X, speaker2Y);
-        if (leaveScreenList[this.page] && this.speaker2X <= this.speaker2StartX) {
-            this.speaker2X += tweenNegSpeed;
-        } else if (!this.isShowing && this.speaker2X < this.speaker2StartX) {
-            this.speaker2X += tweenNegSpeed;
-        } else if (this.isShowing && this.speaker2X > speaker2FinalX) {
-            this.speaker2X -= tweenPosSpeed;
-        }
-    }
-
-    this.incrementPage = function (conversation) {
-        var dialogue = [];
-        for (var i = 0; i < conversation.length; i++) {
-            if ("text" in conversation[i]) {
-                dialogue.push(conversation[i].text);
-            }
-        }
-        if (this.letterCounter < dialogue[this.page].length) {
-            this.letterCounter = dialogue[this.page].length;
-        } else if (this.page < dialogue.length - 1 || this.page < dialogue.length - 1 && !cursorControl) {
-            this.letterCounter = 0;
-            this.page++;
-        } else if (this.page >= dialogue.length - 1 || this.page >= dialogue.length - 1 && !cursorControl) {
-            this.isShowing = false;
-            this.letterCounter = 0;
-        }
-    }
-
+    
     this.getWordsAndBreaksFromString = function (dialogueWords) {
         var breaks = dialogueWords.split("\n"),
             newLines = "";
@@ -313,6 +295,24 @@ function Dialogue() {
         line = "";
         this.calculateLineBreak(dialogueWords, x, y, maxWidth, lineHeight);
         colorText(line, x, y, textColour, textFontFace, textAlign, 1);
+    }
+
+    this.incrementPage = function (conversation) {
+        var dialogue = [];
+        for (var i = 0; i < conversation.length; i++) {
+            if ("text" in conversation[i]) {
+                dialogue.push(conversation[i].text);
+            }
+        }
+        if (this.letterCounter < dialogue[this.page].length) {
+            this.letterCounter = dialogue[this.page].length;
+        } else if (this.page < dialogue.length - 1 || this.page < dialogue.length - 1 && !cursorControl) {
+            this.letterCounter = 0;
+            this.page++;
+        } else if (this.page >= dialogue.length - 1 || this.page >= dialogue.length - 1 && !cursorControl) {
+            this.isShowing = false;
+            this.letterCounter = 0;
+        }
     }
 
     /*this.start = function () { //use this for vn style games

@@ -22,6 +22,7 @@ function Dialogue() {
     var dialogueBoxX = 35;
     var dialogueBoxY = 425;
 
+    //change dialogue pics here
     var dialogueImage = dialogueBoxPic;
     var nameBoxImage = nameBoxPic;
 
@@ -61,8 +62,11 @@ function Dialogue() {
     var arrowEffectY = dialogueBoxY + arrowEffectBufferY;
 
     var choiceSound = voiceHigh1;
+    var selectSound = selected;
     var cursorControl = true;
-    var cursorSelectColour = "#536991";
+    var choiceColour;
+    var cursorTextColour = "#536991";
+    var selectedTextColour = "white";
     var choiceCursor = 0;
     var choiceCursorX = 0;
     var choiceCursorY = 0;
@@ -93,7 +97,6 @@ function Dialogue() {
             if ("rightPicLeave" in chatEvent) s2PicLeave.push(chatEvent.rightPicLeave);
         }
 
-        // speaker tween in
         if (leftPics[this.page] != null) this.tweenInSpeaker(leftPics, s1PicLeave);
         if (rightPics[this.page] != null) this.tweenInSpeaker2(rightPics, s2PicLeave);
 
@@ -102,10 +105,14 @@ function Dialogue() {
         //speaker fade in
         /*if (speakerPics[this.page] != null) this.speakerFadeIn(speakerPics, dialogue);
         this.drawBoxElements(dialogueBoxPic, nameBoxPic);*/
-
-        if (playerChoices[this.page] != null && this.isShowing) {
+        if (playerChoices[this.page] != null && this.isShowing && choiceCommitted == -1) {
             this.showChoices(playerChoices[this.page]);
             canvasContext.drawImage(choiceCursorPic, choiceCursorX, choiceCursorY);
+            setTimeout(function () {
+                cursorControl = true;
+            }, 250);
+        } else {
+            cursorControl = false;
         }
 
         if (this.isShowing) {
@@ -128,21 +135,28 @@ function Dialogue() {
 
     this.showChoices = function (choices, selected) {
         var itemSpace = 30;
-        var choiceCol;
         for (var i = 0; i < choices.length; i++) {
             if (choiceCursor == i) {
                 var cursorXOffset = 12;
                 var cursorYOffset = 17;
                 choiceCursorX = textX - cursorXOffset;
                 choiceCursorY = (textY + itemSpace * i) - cursorYOffset;
-                choiceCol = cursorSelectColour;
+                if (choiceCommitted != -1) {
+                    choiceColour = selectedTextColour;
+                } else {
+                    choiceColour = cursorTextColour;
+                }
             } else {
-                choiceCol = textColour;
+                choiceColour = textColour;
             }
-            
-            colorText(choices[i], 15 + textX, textY + itemSpace * i, choiceCol, textFontFace, textAlign, 1);
+            colorText(choices[i], 15 + textX, textY + itemSpace * i, choiceColour, textFontFace, textAlign, 1);
         }
         if (cursorControl) {
+            if (pressed_space) {
+                cursorControl = false;
+                selectSound.play();
+                choiceCommitted = choiceCursor;
+            }
             if (cursorUp) {
                 if (cursorKeyPresses === 1) {
                     choiceCursor--;
@@ -151,8 +165,6 @@ function Dialogue() {
                         choiceCursor += choices.length;
                     }
                 }
-                cursorKeyPresses = 0;
-                return;
             }
             if (cursorDown) {
                 if (cursorKeyPresses === 1) {
@@ -164,7 +176,6 @@ function Dialogue() {
                 }
             }
             cursorKeyPresses = 0;
-            return;
         }
     }
 
@@ -244,10 +255,10 @@ function Dialogue() {
         }
         if (this.letterCounter < dialogue[this.page].length) {
             this.letterCounter = dialogue[this.page].length;
-        } else if (this.page < dialogue.length - 1) {
+        } else if (this.page < dialogue.length - 1 || this.page < dialogue.length - 1 && !cursorControl) {
             this.letterCounter = 0;
             this.page++;
-        } else if (this.page >= dialogue.length - 1) {
+        } else if (this.page >= dialogue.length - 1 || this.page >= dialogue.length - 1 && !cursorControl) {
             this.isShowing = false;
             this.letterCounter = 0;
         }

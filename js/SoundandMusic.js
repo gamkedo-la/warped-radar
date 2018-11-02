@@ -4,6 +4,7 @@ var voiceHigh1 = new SoundOverlapsClass("./audio/snd_voice1");
 var voiceHigh2 = new SoundOverlapsClass("./audio/snd_voice2");
 var voiceLow1 = new SoundOverlapsClass("./audio/snd_voice3");
 var voiceLow2 = new SoundOverlapsClass("./audio/snd_voice4");
+var selected = new SoundOverlapsClass("./audio/selected");
 //var smartBombSound = new SoundOverlapsClass("./audio/SmartBombSound");
 //var zebesBackgroundMusic = "./audio/dew-drops";
 

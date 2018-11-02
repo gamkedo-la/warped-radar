@@ -39,7 +39,7 @@ function drawAll() {
     player.draw();
     drawAndInitNPCs();
     drawDebugText();
-    
+   
     createDialogueEvents(); //make sure this is last
 }
 

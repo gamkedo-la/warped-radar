@@ -18,13 +18,15 @@ function Dialogue() {
     var speaker2FinalX = 480;
     var speakerY = 80;
     var speaker2Y = speakerY;
-
-    var dialogueBoxX = 35;
-    var dialogueBoxY = 425;
+    
+    var tweenPosSpeed = 20;
+    var tweenNegSpeed = 40;
 
     //change dialogue pics here
     var dialogueImage = dialogueBoxPic;
     var nameBoxImage = nameBoxPic;
+    var dialogueBoxX = 35;
+    var dialogueBoxY = 425;
 
     var textXBuffer = 30;
     var textYBuffer = 45;
@@ -33,6 +35,12 @@ function Dialogue() {
     var textColour = "#373F51";
     var textFontFace = "25px Arial";
     var textAlign = "left";
+    
+    var line;
+    var letterSpeed = 1;
+    var maxWidth = 270;
+    var lineHeight = 30;
+    var paused = false;
 
     var nameBoxXBuffer;
     var nameBoxYBuffer = 45;
@@ -47,30 +55,21 @@ function Dialogue() {
     var nameBoxTextFontFace = "20px Arial";
     var nameBoxTextAlign = textAlign;
 
-    var tweenPosSpeed = 20;
-    var tweenNegSpeed = 40;
-
-    var letterSpeed = 1;
-    var maxWidth = 270;
-    var lineHeight = 30;
-    var line;
-    var paused = false;
-
     var arrowEffectBufferX = 95;
     var arrowEffectBufferY = 118;
     var arrowEffectX = (dialogueBoxX * dialogueBoxX / 2) + arrowEffectBufferX;
     var arrowEffectY = dialogueBoxY + arrowEffectBufferY;
-
-    var choiceSound = voiceHigh1;
-    var selectSound = selected;
-    var cursorControl = true;
+    
     var choiceColour;
-    var cursorTextColour = "#536991";
-    var selectedTextColour = "white";
-    var choiceCursor = 0;
     var choiceCursorX = 0;
     var choiceCursorY = 0;
+    var choiceCursor = 0;
+    var cursorControl = true;
     var choiceCommitted = -1;
+    var choiceSound = voiceHigh1;
+    var selectSound = selected;
+    var cursorTextColour = "#536991"; 
+    var selectedTextColour = "white";
 
     this.create = function (conversation) {
         var dialogue = [],
@@ -95,7 +94,6 @@ function Dialogue() {
             if ("leftPicLeave" in chatEvent) s1PicLeave.push(chatEvent.leftPicLeave);
             if ("rightPicLeave" in chatEvent) s2PicLeave.push(chatEvent.rightPicLeave);
         }
-
         this.showSpeakers(leftPics, s1PicLeave, rightPics, s2PicLeave);
         this.showBoxElements(dialogueImage, nameBoxImage);
         this.showTextElements(dialogue, voices, speakerNames);
@@ -116,7 +114,8 @@ function Dialogue() {
         if (this.isShowing) {
             if (this.letterCounter < dialogueList[this.page].length && !paused) {
                 this.letterCounter += letterSpeed;
-                if ((Math.floor(this.letterCounter) % 2) == 0) {
+                //floored in case letter speed is changed
+                if ((Math.floor(this.letterCounter) % 2) == 0) { 
                     voiceList[this.page].play();
                 }
             }
@@ -197,7 +196,7 @@ function Dialogue() {
             cursorKeyPresses = 0;
         }
     }
-    
+
     this.setupSpeakerFadeIn = function (speakerImgList) {
         if (this.isShowing) {
             this.speakerAlpha += this.alphaChange;
@@ -256,7 +255,7 @@ function Dialogue() {
             paused = false;
         }, 190);
     }
-    
+
     this.getWordsAndBreaksFromString = function (dialogueWords) {
         var breaks = dialogueWords.split("\n"),
             newLines = "";
@@ -315,10 +314,10 @@ function Dialogue() {
         }
     }
 
-    /*this.start = function () { //use this for vn style games
+    this.start = function () { //could use this for vn style games?
         this.page = 0;
         this.isShowing = true;
         this.letterCounter = 0;
-    } */
+    } 
 
 }

@@ -76,84 +76,103 @@ function Dialogue() {
         var dialogue = [],
             speakerNames = [],
             voices = [],
-            //speakerPics = [],
+            speakerPics = [],
             leftPics = [],
             rightPics = [],
             s1PicLeave = [],
             s2PicLeave = [],
-            playerChoices = [],
-            stringCopy;
+            playerChoices = [];
 
         for (var i = 0; i < conversation.length; i++) {
             var chatEvent = conversation[i];
             if ("text" in chatEvent) dialogue.push(chatEvent.text);
             if ("who" in chatEvent) speakerNames.push(chatEvent.who);
             if ("voice" in chatEvent) voices.push(chatEvent.voice);
-            //if ("speakerPic" in chatEvent) speakerPics.push(chatEvent.speakerPic);
             if ("choices" in chatEvent) playerChoices.push(chatEvent.choices);
+            if ("speakerPic" in chatEvent) speakerPics.push(chatEvent.speakerPic);
             if ("leftPic" in chatEvent) leftPics.push(chatEvent.leftPic);
             if ("rightPic" in chatEvent) rightPics.push(chatEvent.rightPic);
             if ("leftPicLeave" in chatEvent) s1PicLeave.push(chatEvent.leftPicLeave);
             if ("rightPicLeave" in chatEvent) s2PicLeave.push(chatEvent.rightPicLeave);
         }
 
-        if (leftPics[this.page] != null) this.tweenInSpeaker(leftPics, s1PicLeave);
-        if (rightPics[this.page] != null) this.tweenInSpeaker2(rightPics, s2PicLeave);
-
+        this.showSpeakers(leftPics, s1PicLeave, rightPics, s2PicLeave);
         this.drawBoxElements(dialogueImage, nameBoxImage);
+        this.showTextElements(dialogue, voices, speakerNames);
+        this.showChoices(playerChoices);
+    }
 
-        //speaker fade in
-        /*if (speakerPics[this.page] != null) this.speakerFadeIn(speakerPics, dialogue);
-        this.drawBoxElements(dialogueBoxPic, nameBoxPic);*/
-        if (playerChoices[this.page] != null && this.isShowing && choiceCommitted == -1) {
-            this.showChoices(playerChoices[this.page]);
-            canvasContext.drawImage(choiceCursorPic, choiceCursorX, choiceCursorY);
-            setTimeout(function () {
-                cursorControl = true;
-            }, 250);
-        } else {
-            cursorControl = false;
-        }
+    this.showSpeakerFadeIn = function (speakerPicList) {
+        if (speakerPicList[this.page] != null) this.speakerFadeIn(speakerPicList);
+    }
 
+    this.showSpeakers = function (leftPicList, leftPicLeaveList, rightPicList, rightPicLeaveList) {
+        if (leftPicList[this.page] != null) this.tweenInSpeaker(leftPicList, leftPicLeaveList);
+        if (rightPicList[this.page] != null) this.tweenInSpeaker2(rightPicList, rightPicLeaveList);
+    }
+
+    this.showTextElements = function (dialogueList, voiceList, nameList) {
+        var stringCopy;
         if (this.isShowing) {
-            if (this.letterCounter < dialogue[this.page].length && !paused) {
+            if (this.letterCounter < dialogueList[this.page].length && !paused) {
                 this.letterCounter += letterSpeed;
                 if ((Math.floor(this.letterCounter) % 2) == 0) {
-                    voices[this.page].play();
+                    voiceList[this.page].play();
                 }
             }
-            colorText(speakerNames[this.page], nameBoxTextX, nameBoxTextY, nameBoxTextColour, nameBoxTextFontFace, nameBoxTextAlign, 1);
-            stringCopy = dialogue[this.page].substr(0, this.letterCounter);
+            colorText(nameList[this.page], nameBoxTextX, nameBoxTextY, nameBoxTextColour, nameBoxTextFontFace, nameBoxTextAlign, 1);
+            stringCopy = dialogueList[this.page].substr(0, this.letterCounter);
             this.findPunctuation(stringCopy);
             this.wrapText(stringCopy, textX, textY, maxWidth, lineHeight);
-            if (this.letterCounter >= dialogue[this.page].length && dialogue[this.page] != "") {
+            if (this.letterCounter >= dialogueList[this.page].length && dialogueList[this.page] != "") {
                 //used AnimatedSprites.js 
                 textArrowEffect.draw(arrowEffectX, arrowEffectY, 1);
             }
         }
     }
 
-    this.showChoices = function (choices, selected) {
+    this.drawBoxElements = function (dialogueBoxImg, nameBoxImg) {
+        if (this.isShowing) {
+            canvasContext.drawImage(dialogueBoxImg, dialogueBoxX, dialogueBoxY);
+            canvasContext.drawImage(nameBoxImg, nameBoxX, nameBoxY);
+        }
+    }
+
+    this.showChoices = function (choiceList) {
+        if (choiceList[this.page] != null && this.isShowing && choiceCommitted == -1) {
+            this.setupChoices(choiceList[this.page]);
+            canvasContext.drawImage(choiceCursorPic, choiceCursorX, choiceCursorY);
+            setTimeout(function () {
+                cursorControl = true;
+            }, 110);
+        } else {
+            cursorControl = false;
+        }
+    }
+
+    this.setupChoices = function (choiceList) {
         var itemSpace = 30;
-        for (var i = 0; i < choices.length; i++) {
+        for (var i = 0; i < choiceList.length; i++) {
             if (choiceCursor == i) {
                 var cursorXOffset = 12;
                 var cursorYOffset = 17;
                 choiceCursorX = textX - cursorXOffset;
                 choiceCursorY = (textY + itemSpace * i) - cursorYOffset;
-                if (choiceCommitted != -1) {
+                if (choiceCommitted != -1 || pressed_mbLeft) {
                     choiceColour = selectedTextColour;
+                    console.log("change colour gosh darnit");
                 } else {
                     choiceColour = cursorTextColour;
                 }
             } else {
                 choiceColour = textColour;
             }
-            colorText(choices[i], 15 + textX, textY + itemSpace * i, choiceColour, textFontFace, textAlign, 1);
+            colorText(choiceList[i], 15 + textX, textY + itemSpace * i, choiceColour, textFontFace, textAlign, 1);
         }
         if (cursorControl) {
             if (pressed_space) {
-                cursorControl = false;
+                console.log("choose this one!")
+                //cursorControl = false;
                 selectSound.play();
                 choiceCommitted = choiceCursor;
             }
@@ -162,15 +181,15 @@ function Dialogue() {
                     choiceCursor--;
                     choiceSound.play();
                     if (choiceCursor < 0) {
-                        choiceCursor += choices.length;
+                        choiceCursor += choiceList.length;
                     }
                 }
             }
             if (cursorDown) {
                 if (cursorKeyPresses === 1) {
-                    choiceCursor = (choiceCursor + 1) % choices.length;
+                    choiceCursor = (choiceCursor + 1) % choiceList.length;
                     choiceSound.play();
-                    if (choiceCursor > choices.length - 1) {
+                    if (choiceCursor > choiceList.length - 1) {
                         choiceCursor = 0;
                     }
                 }
@@ -198,7 +217,7 @@ function Dialogue() {
         }, 190);
     }
 
-    this.speakerFadeIn = function (speakerImg, dialogue) {
+    this.speakerFadeIn = function (speakerImgList) {
         if (this.isShowing) {
             this.speakerAlpha += this.alphaChange;
             if (this.speakerAlpha >= 1.0) {
@@ -211,15 +230,14 @@ function Dialogue() {
                 this.speakerAlpha = 0.0;
             }
         }
-
         canvasContext.globalAlpha = this.speakerAlpha;
-        canvasContext.drawImage(speakerImg[this.page], this.speakerCentredX, speakerY);
+        canvasContext.drawImage(speakerImgList[this.page], this.speakerCentredX, speakerY);
         canvasContext.globalAlpha = 1;
     }
 
-    this.tweenInSpeaker = function (speakerImg, leaveScreen) {
-        canvasContext.drawImage(speakerImg[this.page], this.speakerX, speakerY);
-        if (leaveScreen[this.page] && this.speakerX >= this.speakerStartX) {
+    this.tweenInSpeaker = function (speakerImgList, leaveScreenList) {
+        canvasContext.drawImage(speakerImgList[this.page], this.speakerX, speakerY);
+        if (leaveScreenList[this.page] && this.speakerX >= this.speakerStartX) {
             this.speakerX -= tweenNegSpeed;
         } else if (!this.isShowing && this.speakerX > this.speakerStartX) {
             this.speakerX -= tweenNegSpeed;
@@ -228,21 +246,14 @@ function Dialogue() {
         }
     }
 
-    this.tweenInSpeaker2 = function (speaker2Img, leaveScreen) {
-        canvasContext.drawImage(speaker2Img[this.page], this.speaker2X, speaker2Y);
-        if (leaveScreen[this.page] && this.speaker2X <= this.speaker2StartX) {
+    this.tweenInSpeaker2 = function (speaker2ImgList, leaveScreenList) {
+        canvasContext.drawImage(speaker2ImgList[this.page], this.speaker2X, speaker2Y);
+        if (leaveScreenList[this.page] && this.speaker2X <= this.speaker2StartX) {
             this.speaker2X += tweenNegSpeed;
         } else if (!this.isShowing && this.speaker2X < this.speaker2StartX) {
             this.speaker2X += tweenNegSpeed;
         } else if (this.isShowing && this.speaker2X > speaker2FinalX) {
             this.speaker2X -= tweenPosSpeed;
-        }
-    }
-
-    this.drawBoxElements = function (dialogueBoxImg, nameBoxImg) {
-        if (this.isShowing) {
-            canvasContext.drawImage(dialogueBoxImg, dialogueBoxX, dialogueBoxY);
-            canvasContext.drawImage(nameBoxImg, nameBoxX, nameBoxY);
         }
     }
 
@@ -264,8 +275,8 @@ function Dialogue() {
         }
     }
 
-    this.getWordsAndBreaksFromString = function (dialogue) {
-        var breaks = dialogue.split("\n"),
+    this.getWordsAndBreaksFromString = function (dialogueWords) {
+        var breaks = dialogueWords.split("\n"),
             newLines = "";
         for (var i = 0; i < breaks.length; i++) {
             newLines = newLines + breaks[i] + "  Gamkedo  ";
@@ -274,8 +285,8 @@ function Dialogue() {
         return words;
     }
 
-    this.calculateLineBreak = function (dialogue, x, y, maxWidth, lineHeight) {
-        var words = this.getWordsAndBreaksFromString(dialogue),
+    this.calculateLineBreak = function (dialogueWords, x, y, maxWidth, lineHeight) {
+        var words = this.getWordsAndBreaksFromString(dialogueWords),
             checkEndOfLine, checkTextWidth, textWidth;
         line = "";
         for (var i = 0; i < words.length; i++) {
@@ -298,9 +309,9 @@ function Dialogue() {
         }
     }
 
-    this.wrapText = function (dialogue, x, y, maxWidth, lineHeight) {
+    this.wrapText = function (dialogueWords, x, y, maxWidth, lineHeight) {
         line = "";
-        this.calculateLineBreak(dialogue, x, y, maxWidth, lineHeight);
+        this.calculateLineBreak(dialogueWords, x, y, maxWidth, lineHeight);
         colorText(line, x, y, textColour, textFontFace, textAlign, 1);
     }
 

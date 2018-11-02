@@ -21,7 +21,7 @@ var johnAndRoseConvo = [
         leftPicLeave: false,
         rightPicLeave: false,
         
-        choices:  ["Good how are you?", "I'm great", "Not so good"]
+        choices: ["Good, how are you?", "Meh", "I like tortles"]
     }
 
 ];

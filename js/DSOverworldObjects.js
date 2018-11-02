@@ -25,7 +25,7 @@ function OverworldObject() {
                 if ((dialogue.speakerX <= dialogue.speakerStartX) && (dialogue.speaker2X >= dialogue.speaker2StartX)) {
                     dialogue.page = 0;
                 }
-                /*if (dialogue.speakerAlpha <= 0.0) { //for speaker fade in
+               /* if (dialogue.speakerAlpha <= 0.0) { 
                     dialogue.page = 0;
                 }*/
             }

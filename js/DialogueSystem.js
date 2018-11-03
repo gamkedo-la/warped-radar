@@ -110,7 +110,7 @@ function Dialogue() {
         var nextBranch = [];
         if (choiceCommitted != -1 && choiceCursor != -1 && sceneList[this.page] != null && choiceList[this.page] != null) {
             this.isShowing = false;
-            colorText(choiceList[1][choiceCommitted][1], canvas.width/2, 100, "white", textFontFace, "center", 1);
+            colorText(choiceList[this.page][choiceCommitted][1], canvas.width/2, 100, "white", textFontFace, "center", 1);
             //console.log(choiceList[1][choiceCommitted][1]);
         }
     }

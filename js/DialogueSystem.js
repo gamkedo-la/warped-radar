@@ -326,11 +326,11 @@ function Dialogue() {
         }
         if (this.letterCounter < dialogue[this.page].length) {
             this.letterCounter = dialogue[this.page].length;
-        } else if (this.page < dialogue.length - 1 && !cursorControl && choiceCommitted == -1) {
+        } else if (this.page < dialogue.length - 1 && !cursorControl && choiceCommitted == -1 || this.page < dialogue.length - 1 && choiceCommitted != -1) {
             this.letterCounter = 0;
             this.page++;
             console.log("increment");
-        } else if (this.page >= dialogue.length - 1 && !cursorControl && choiceCommitted != -1) {
+        } else if (this.page >= dialogue.length - 1 || this.page >= dialogue.length - 1 && !cursorControl && choiceCommitted != -1) {
             this.isShowing = false;
             this.letterCounter = 0;
             console.log("end conversation");

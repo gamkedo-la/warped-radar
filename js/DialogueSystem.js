@@ -100,11 +100,11 @@ function Dialogue() {
 
         this.showSpeakers(leftPics, s1PicLeave, rightPics, s2PicLeave);
         this.showBoxElements(dialogueImage, nameBoxImage);
-        this.showTextElements(dialogue, scenes, voices, speakerNames);
+        this.showTextElements(conversation, dialogue, playerChoices, scenes, voices, speakerNames);
         this.showChoices(playerChoices, dialogue);
         this.makeAChoice(scenes, playerChoices);
-        
-        console.log(scenes[this.page]);
+
+        //console.log(scenes[this.page]);
     }
 
     this.makeAChoice = function (sceneList, choiceList) {
@@ -112,7 +112,7 @@ function Dialogue() {
         if (choiceCommitted != -1 && choiceCursor != -1 && sceneList[this.page] != null && choiceList[this.page] != null) {
             //this.isShowing = false;
             colorText(choiceList[this.page][choiceCommitted][1], canvas.width / 2, 100, "white", textFontFace, "center", 1);
-            sceneList[this.page] = choiceList[this.page][choiceCommitted][1];
+            //sceneList[this.page] = choiceList[this.page][choiceCommitted][1];
         }
     }
 
@@ -125,8 +125,8 @@ function Dialogue() {
         if (rightPicList[this.page] != null) this.setupSpeaker2Tween(rightPicList, rightPicLeaveList);
     }
 
-    this.showTextElements = function (dialogueList, sceneList, voiceList, nameList) {
-        var stringCopy;
+    this.showTextElements = function (conversation, dialogueList, choiceList, sceneList, voiceList, nameList) {
+        var typewriterText;
         if (this.isShowing) {
             if (this.letterCounter < dialogueList[this.page].length && !paused) {
                 this.letterCounter += letterSpeed;
@@ -135,12 +135,35 @@ function Dialogue() {
                     voiceList[this.page].play();
                 }
             }
+
+            for (var i = 0; i < conversation.length; i++) {
+                var chatEvent = conversation[i];
+                //check if there are no choices, and if no choices were selected
+                if (chatEvent.choices === null && choiceCommitted == -1) {
+                    //play the dialogue for this page
+                    typewriterText = dialogueList[this.page].substr(0, this.letterCounter); 
+                }
+               
+                if (choiceCommitted != -1) {
+                    //if there are choices and one was selected, scan whole array and find scene label that matches choice
+                    if (choiceList[this.page][choiceCommitted][1] == chatEvent.scene) {
+                        typewriterText = dialogueList[this.page].substr(0, this.letterCounter);
+                        //don't know how to change the text ^
+                        
+                        //if the match is found, break out of loop
+                        break;
+                    } else {//if the choice didn't match any scene, print its scene to the console
+                        console.log(chatEvent.scene);
+                    }
+                }
+            }
+            
             colorText(nameList[this.page], nameBoxTextX, nameBoxTextY, nameBoxTextColour, nameBoxTextFontFace, nameBoxTextAlign, 1);
 
-            stringCopy = dialogueList[this.page].substr(0, this.letterCounter);
-            this.findPunctuation(stringCopy);
+            
+            this.findPunctuation(typewriterText);
 
-            this.wrapText(stringCopy, textX, textY, maxWidth, lineHeight);
+            this.wrapText(typewriterText, textX, textY, maxWidth, lineHeight);
             if (this.letterCounter >= dialogueList[this.page].length && dialogueList[this.page] != "") {
                 //uses AnimatedSprites.js 
                 textArrowEffect.draw(arrowEffectX, arrowEffectY, 1);

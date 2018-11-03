@@ -97,21 +97,22 @@ function Dialogue() {
             if ("leftPicLeave" in chatEvent) s1PicLeave.push(chatEvent.leftPicLeave);
             if ("rightPicLeave" in chatEvent) s2PicLeave.push(chatEvent.rightPicLeave);
         }
+
         this.showSpeakers(leftPics, s1PicLeave, rightPics, s2PicLeave);
         this.showBoxElements(dialogueImage, nameBoxImage);
         this.showTextElements(dialogue, scenes, voices, speakerNames);
         this.showChoices(playerChoices, dialogue);
         this.makeAChoice(scenes, playerChoices);
-        //console.log("choice cursor: " + choiceCursor);
-        //console.log("choice committed: " + choiceCommitted);
+        
+        console.log(scenes[this.page]);
     }
 
     this.makeAChoice = function (sceneList, choiceList) {
         var nextBranch = [];
         if (choiceCommitted != -1 && choiceCursor != -1 && sceneList[this.page] != null && choiceList[this.page] != null) {
-            this.isShowing = false;
-            colorText(choiceList[this.page][choiceCommitted][1], canvas.width/2, 100, "white", textFontFace, "center", 1);
-            //console.log(choiceList[1][choiceCommitted][1]);
+            //this.isShowing = false;
+            colorText(choiceList[this.page][choiceCommitted][1], canvas.width / 2, 100, "white", textFontFace, "center", 1);
+            sceneList[this.page] = choiceList[this.page][choiceCommitted][1];
         }
     }
 
@@ -135,7 +136,7 @@ function Dialogue() {
                 }
             }
             colorText(nameList[this.page], nameBoxTextX, nameBoxTextY, nameBoxTextColour, nameBoxTextFontFace, nameBoxTextAlign, 1);
-            
+
             stringCopy = dialogueList[this.page].substr(0, this.letterCounter);
             this.findPunctuation(stringCopy);
 

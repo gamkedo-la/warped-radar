@@ -1,5 +1,6 @@
 var johnAndRoseConvo = [
     {
+        scene: "neutral",
         who: "John",
         voice: voiceLow1,
         text: "Hello, how are you",
@@ -8,10 +9,94 @@ var johnAndRoseConvo = [
 
         leftPicLeave: false,
         rightPicLeave: false,
-    
+
         choices: null
     },
     {
+        scene: "neutral",
+        who: "John",
+        voice: voiceHigh2,
+        text: "",
+        leftPic: johnPic,
+        rightPic: rosePic,
+
+        leftPicLeave: false,
+        rightPicLeave: false,
+
+        choices: [
+        ["Good, how are you?", "Good end"],
+        ["Meh", "Bad end"],
+        ["I like tortles", "Tortle end"]
+        ]
+
+    },
+    {
+        scene: "Good end",
+        who: "Rose",
+        voice: voiceHigh2,
+        text: "Wow, this has been really fun.",
+        leftPic: johnPic,
+        rightPic: rosePic,
+
+        leftPicLeave: false,
+        rightPicLeave: false,
+
+        choices: null
+    },
+    {
+        scene: "Good end",
+        who: "Rose",
+        voice: voiceHigh2,
+        text: "Call me sometime.",
+        leftPic: johnPic,
+        rightPic: rosePic,
+
+        leftPicLeave: false,
+        rightPicLeave: false,
+
+        choices: null
+    },
+    {
+        scene: "Bad end",
+        who: "Rose",
+        voice: voiceHigh2,
+        text: "Wow, ew.",
+        leftPic: johnPic,
+        rightPic: rosePic,
+
+        leftPicLeave: false,
+        rightPicLeave: false,
+
+        choices: null
+    },
+    {
+        scene: "Bad end",
+        who: "Rose",
+        voice: voiceHigh2,
+        text: "How could you even make that sound while I'm around",
+        leftPic: johnPic,
+        rightPic: rosePic,
+
+        leftPicLeave: false,
+        rightPicLeave: false,
+
+        choices: null
+    },
+    {
+        scene: "Tortle end",
+        who: "Rose",
+        voice: voiceHigh2,
+        text: "JONATHAN IS THAT YOU",
+        leftPic: johnPic,
+        rightPic: rosePic,
+
+        leftPicLeave: false,
+        rightPicLeave: false,
+
+        choices: null
+    },
+    {
+        scene: "Tortle end",
         who: "Rose",
         voice: voiceHigh2,
         text: "",
@@ -20,9 +105,42 @@ var johnAndRoseConvo = [
 
         leftPicLeave: false,
         rightPicLeave: false,
-        
-        choices: ["Good, how are you?", "Meh", "I like tortles"]
-    }
+
+        choices:
+            /*{
+                       trueEnd: "I LIKE TORTLES",
+                       worstEnd: "I LIKE TURTLES"
+                   }*/
+
+         [["I LIKE TORTLES?", "True end"],
+         ["I LIKE TURTLES", "Worst end"]]
+    },
+    {
+        scene: "True end",
+        who: "Rose",
+        voice: voiceHigh2,
+        text: "I LOVE YOU",
+        leftPic: johnPic,
+        rightPic: rosePic,
+
+        leftPicLeave: false,
+        rightPicLeave: false,
+
+        choices: null
+    },
+    {
+        scene: "Worst end",
+        who: "Rose",
+        voice: voiceHigh2,
+        text: "WOW YOU FAKE FAN, YOU RUINED MY LIFE",
+        leftPic: johnPic,
+        rightPic: rosePic,
+
+        leftPicLeave: false,
+        rightPicLeave: false,
+
+        choices: null
+    },
 
 ];
 
@@ -36,7 +154,7 @@ var johnAndRoseConvo2 = [
 
         leftPicLeave: false,
         rightPicLeave: false,
-        
+
         choices: null
     },
     {
@@ -48,7 +166,7 @@ var johnAndRoseConvo2 = [
 
         leftPicLeave: false,
         rightPicLeave: false,
-        
+
         choices: null
     }
 
@@ -64,7 +182,7 @@ var bobConvo = [
 
         leftPicLeave: false,
         rightPicLeave: false,
-        
+
         choices: null
     },
     {
@@ -76,7 +194,7 @@ var bobConvo = [
 
         leftPicLeave: false,
         rightPicLeave: false,
-        
+
         choices: null
     },
     {
@@ -88,7 +206,7 @@ var bobConvo = [
 
         leftPicLeave: false,
         rightPicLeave: false,
-        
+
         choices: null
     }
 ];
@@ -103,7 +221,7 @@ var omigoshJohn = [
 
         leftPicLeave: false,
         rightPicLeave: false,
-        
+
         choices: null
     },
     {
@@ -115,7 +233,7 @@ var omigoshJohn = [
 
         leftPicLeave: false,
         rightPicLeave: false,
-        
+
         choices: null
     }
 ];
@@ -130,19 +248,19 @@ var omigoshBob = [
 
         leftPicLeave: false,
         rightPicLeave: false,
-        
+
         choices: null
     },
     {
         who: "Bob",
-        voice: voiceLow2, 
+        voice: voiceLow2,
         text: "M-my name.....",
         leftPic: johnPic,
         rightPic: null,
 
         leftPicLeave: false,
         rightPicLeave: false,
-        
+
         choices: null
     },
     {
@@ -154,7 +272,7 @@ var omigoshBob = [
 
         leftPicLeave: false,
         rightPicLeave: false,
-        
+
         choices: null
     },
     {
@@ -166,7 +284,7 @@ var omigoshBob = [
 
         leftPicLeave: false,
         rightPicLeave: false,
-        
+
         choices: null
     }
 ];

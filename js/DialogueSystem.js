@@ -14,11 +14,12 @@ function Dialogue() {
     this.speakerX = this.speakerStartX;
     this.speaker2StartX = 800;
     this.speaker2X = this.speaker2StartX;
+
     var speakerFinalX = 50;
     var speaker2FinalX = 480;
     var speakerY = 80;
     var speaker2Y = speakerY;
-    
+
     var tweenPosSpeed = 20;
     var tweenNegSpeed = 40;
 
@@ -35,7 +36,7 @@ function Dialogue() {
     var textColour = "#373F51";
     var textFontFace = "25px Arial";
     var textAlign = "left";
-    
+
     var line;
     var letterSpeed = 1;
     var maxWidth = 270;
@@ -59,33 +60,35 @@ function Dialogue() {
     var arrowEffectBufferY = 118;
     var arrowEffectX = (dialogueBoxX * dialogueBoxX / 2) + arrowEffectBufferX;
     var arrowEffectY = dialogueBoxY + arrowEffectBufferY;
-    
+
     var choiceColour;
     var choiceCursorX = 0;
     var choiceCursorY = 0;
     var choiceCursor = 0;
-    var cursorControl = true;
+    var cursorControl = false;
     var choiceCommitted = -1;
     var choiceSound = voiceHigh1;
     var selectSound = selected;
-    var cursorTextColour = "#536991"; 
+    var cursorTextColour = "#536991";
     var selectedTextColour = "white";
 
     this.create = function (conversation) {
         var dialogue = [],
+            scenes = [],
+            playerChoices = [],
             speakerNames = [],
             voices = [],
             speakerPics = [],
             leftPics = [],
             rightPics = [],
             s1PicLeave = [],
-            s2PicLeave = [],
-            playerChoices = [];
+            s2PicLeave = [];
 
         for (var i = 0; i < conversation.length; i++) {
             var chatEvent = conversation[i];
             if ("text" in chatEvent) dialogue.push(chatEvent.text);
             if ("who" in chatEvent) speakerNames.push(chatEvent.who);
+            if ("scene" in chatEvent) scenes.push(chatEvent.scene);
             if ("voice" in chatEvent) voices.push(chatEvent.voice);
             if ("choices" in chatEvent) playerChoices.push(chatEvent.choices);
             if ("speakerPic" in chatEvent) speakerPics.push(chatEvent.speakerPic);
@@ -96,8 +99,20 @@ function Dialogue() {
         }
         this.showSpeakers(leftPics, s1PicLeave, rightPics, s2PicLeave);
         this.showBoxElements(dialogueImage, nameBoxImage);
-        this.showTextElements(dialogue, voices, speakerNames);
-        this.showChoices(playerChoices);
+        this.showTextElements(dialogue, scenes, voices, speakerNames);
+        this.showChoices(playerChoices, dialogue);
+        this.makeAChoice(scenes, playerChoices);
+        //console.log("choice cursor: " + choiceCursor);
+        //console.log("choice committed: " + choiceCommitted);
+    }
+
+    this.makeAChoice = function (sceneList, choiceList) {
+        var nextBranch = [];
+        if (choiceCommitted != -1 && choiceCursor != -1 && sceneList[this.page] != null && choiceList[this.page] != null) {
+            this.isShowing = false;
+            colorText(choiceList[1][choiceCommitted][1], canvas.width/2, 100, "white", textFontFace, "center", 1);
+            //console.log(choiceList[1][choiceCommitted][1]);
+        }
     }
 
     this.showSpeakerFadeIn = function (speakerPicList) {
@@ -109,19 +124,21 @@ function Dialogue() {
         if (rightPicList[this.page] != null) this.setupSpeaker2Tween(rightPicList, rightPicLeaveList);
     }
 
-    this.showTextElements = function (dialogueList, voiceList, nameList) {
+    this.showTextElements = function (dialogueList, sceneList, voiceList, nameList) {
         var stringCopy;
         if (this.isShowing) {
             if (this.letterCounter < dialogueList[this.page].length && !paused) {
                 this.letterCounter += letterSpeed;
                 //floored in case letter speed is changed
-                if ((Math.floor(this.letterCounter) % 2) == 0) { 
+                if ((Math.floor(this.letterCounter) % 2) == 0) {
                     voiceList[this.page].play();
                 }
             }
             colorText(nameList[this.page], nameBoxTextX, nameBoxTextY, nameBoxTextColour, nameBoxTextFontFace, nameBoxTextAlign, 1);
+            
             stringCopy = dialogueList[this.page].substr(0, this.letterCounter);
             this.findPunctuation(stringCopy);
+
             this.wrapText(stringCopy, textX, textY, maxWidth, lineHeight);
             if (this.letterCounter >= dialogueList[this.page].length && dialogueList[this.page] != "") {
                 //uses AnimatedSprites.js 
@@ -137,7 +154,8 @@ function Dialogue() {
         }
     }
 
-    this.showChoices = function (choiceList) {
+    this.showChoices = function (choiceList, dialogueList) {
+        if (!cursorControl) choiceCursor = 0;
         if (choiceList[this.page] != null && this.isShowing && choiceCommitted == -1) {
             this.setupChoices(choiceList[this.page]);
             canvasContext.drawImage(choiceCursorPic, choiceCursorX, choiceCursorY);
@@ -145,7 +163,10 @@ function Dialogue() {
                 cursorControl = true;
             }, 110);
         } else {
-            cursorControl = false;
+            if (choiceCommitted != -1 && cursorControl && this.page >= dialogueList.length - 1) {
+                cursorControl = false;
+                console.log("default bool switch");
+            }
         }
     }
 
@@ -166,12 +187,12 @@ function Dialogue() {
             } else {
                 choiceColour = textColour;
             }
-            colorText(choiceList[i], 15 + textX, textY + itemSpace * i, choiceColour, textFontFace, textAlign, 1);
+            colorText(choiceList[i][0], 15 + textX, textY + itemSpace * i, choiceColour, textFontFace, textAlign, 1);
         }
         if (cursorControl) {
             if (pressed_space) {
                 console.log("choose this one!")
-                //cursorControl = false;
+                cursorControl = false;
                 selectSound.play();
                 choiceCommitted = choiceCursor;
             }
@@ -305,12 +326,14 @@ function Dialogue() {
         }
         if (this.letterCounter < dialogue[this.page].length) {
             this.letterCounter = dialogue[this.page].length;
-        } else if (this.page < dialogue.length - 1 || this.page < dialogue.length - 1 && !cursorControl) {
+        } else if (this.page < dialogue.length - 1 && !cursorControl && choiceCommitted == -1) {
             this.letterCounter = 0;
             this.page++;
-        } else if (this.page >= dialogue.length - 1 || this.page >= dialogue.length - 1 && !cursorControl) {
+            console.log("increment");
+        } else if (this.page >= dialogue.length - 1 && !cursorControl && choiceCommitted != -1) {
             this.isShowing = false;
             this.letterCounter = 0;
+            console.log("end conversation");
         }
     }
 
@@ -318,6 +341,6 @@ function Dialogue() {
         this.page = 0;
         this.isShowing = true;
         this.letterCounter = 0;
-    } 
+    }
 
 }

@@ -2,7 +2,7 @@
 function Dialogue() {
     this.isShowing = false;
     this.letterCounter = 0;
-    this.page = 0;
+    this.page = -1;
 
     //speaker fade in vars
     this.speakerCentredX = 220;
@@ -62,11 +62,12 @@ function Dialogue() {
     var arrowEffectY = dialogueBoxY + arrowEffectBufferY;
 
     var choiceColour;
+    var nextChoiceLabel = -1;
+    var choiceMenuShowing = false;
+    var selectedChoice = -1;
     var choiceCursorX = 0;
     var choiceCursorY = 0;
     var choiceCursor = 0;
-    var cursorControl = false;
-    var choiceCommitted = -1;
     var choiceSound = voiceHigh1;
     var selectSound = selected;
     var cursorTextColour = "#536991";
@@ -100,19 +101,22 @@ function Dialogue() {
 
         this.showSpeakers(leftPics, s1PicLeave, rightPics, s2PicLeave);
         this.showBoxElements(dialogueImage, nameBoxImage);
-        this.showTextElements(conversation, dialogue, playerChoices, scenes, voices, speakerNames);
+        this.showTextElements(dialogue, playerChoices, scenes, voices, speakerNames);
         this.showChoices(playerChoices, dialogue);
-        this.makeAChoice(scenes, playerChoices);
-
-        //console.log(scenes[this.page]);
+        this.makeAChoice(playerChoices);
+        //console.log(this.page);
+        //console.log(nextChoiceLabel);
+        //console.log(choiceMenuShowing);
     }
 
-    this.makeAChoice = function (sceneList, choiceList) {
+    this.makeAChoice = function (choiceList) {
         var nextBranch = [];
-        if (choiceCommitted != -1 && choiceCursor != -1 && sceneList[this.page] != null && choiceList[this.page] != null) {
+        if (selectedChoice != -1 && choiceCursor != -1 && choiceList[this.page] != null) {
             //this.isShowing = false;
-            colorText(choiceList[this.page][choiceCommitted][1], canvas.width / 2, 100, "white", textFontFace, "center", 1);
-            //sceneList[this.page] = choiceList[this.page][choiceCommitted][1];
+            //colorText(choiceList[1][this.page][selectedChoice], canvas.width / 2, 100, "white", textFontFace, "center", 1);
+            nextChoiceLabel = choiceList[this.page][selectedChoice][1];
+            choiceMenuShowing = false;
+            //console.log(nextChoiceLabel);
         }
     }
 
@@ -125,7 +129,7 @@ function Dialogue() {
         if (rightPicList[this.page] != null) this.setupSpeaker2Tween(rightPicList, rightPicLeaveList);
     }
 
-    this.showTextElements = function (conversation, dialogueList, choiceList, sceneList, voiceList, nameList) {
+    this.showTextElements = function (dialogueList, choiceList, sceneList, voiceList, nameList) {
         var typewriterText;
         if (this.isShowing) {
             if (this.letterCounter < dialogueList[this.page].length && !paused) {
@@ -135,34 +139,9 @@ function Dialogue() {
                     voiceList[this.page].play();
                 }
             }
-
-            for (var i = 0; i < conversation.length; i++) {
-                var chatEvent = conversation[i];
-                //check if there are no choices, and if no choices were selected
-                if (chatEvent.choices === null && choiceCommitted == -1) {
-                    //play the dialogue for this page
-                    typewriterText = dialogueList[this.page].substr(0, this.letterCounter); 
-                }
-               
-                if (choiceCommitted != -1) {
-                    //if there are choices and one was selected, scan whole array and find scene label that matches choice
-                    if (choiceList[this.page][choiceCommitted][1] == chatEvent.scene) {
-                        typewriterText = dialogueList[this.page].substr(0, this.letterCounter);
-                        //don't know how to change the text ^
-                        
-                        //if the match is found, break out of loop
-                        break;
-                    } else {//if the choice didn't match any scene, print its scene to the console
-                        console.log(chatEvent.scene);
-                    }
-                }
-            }
-            
+            typewriterText = dialogueList[this.page].substr(0, this.letterCounter);
             colorText(nameList[this.page], nameBoxTextX, nameBoxTextY, nameBoxTextColour, nameBoxTextFontFace, nameBoxTextAlign, 1);
-
-            
             this.findPunctuation(typewriterText);
-
             this.wrapText(typewriterText, textX, textY, maxWidth, lineHeight);
             if (this.letterCounter >= dialogueList[this.page].length && dialogueList[this.page] != "") {
                 //uses AnimatedSprites.js 
@@ -179,16 +158,16 @@ function Dialogue() {
     }
 
     this.showChoices = function (choiceList, dialogueList) {
-        if (!cursorControl) choiceCursor = 0;
-        if (choiceList[this.page] != null && this.isShowing && choiceCommitted == -1) {
+        if (!choiceMenuShowing) choiceCursor = 0;
+        if (choiceList[this.page] != null && this.isShowing && selectedChoice == -1) {
             this.setupChoices(choiceList[this.page]);
             canvasContext.drawImage(choiceCursorPic, choiceCursorX, choiceCursorY);
             setTimeout(function () {
-                cursorControl = true;
+                choiceMenuShowing = true;
             }, 110);
         } else {
-            if (choiceCommitted != -1 && cursorControl && this.page >= dialogueList.length - 1) {
-                cursorControl = false;
+            if (selectedChoice != -1 && choiceMenuShowing && this.page >= dialogueList.length - 1) {
+                choiceMenuShowing = false;
                 console.log("default bool switch");
             }
         }
@@ -202,7 +181,7 @@ function Dialogue() {
                 var cursorYOffset = 17;
                 choiceCursorX = textX - cursorXOffset;
                 choiceCursorY = (textY + itemSpace * i) - cursorYOffset;
-                if (choiceCommitted != -1 || pressed_mbLeft) {
+                if (selectedChoice != -1 || pressed_mbLeft) {
                     choiceColour = selectedTextColour;
                     console.log("change colour gosh darnit");
                 } else {
@@ -213,12 +192,12 @@ function Dialogue() {
             }
             colorText(choiceList[i][0], 15 + textX, textY + itemSpace * i, choiceColour, textFontFace, textAlign, 1);
         }
-        if (cursorControl) {
+        if (choiceMenuShowing) {
             if (pressed_space) {
-                console.log("choose this one!")
-                cursorControl = false;
+                console.log("choose this one!");
+                choiceMenuShowing = false;
                 selectSound.play();
-                choiceCommitted = choiceCursor;
+                selectedChoice = choiceCursor;
             }
             if (cursorUp) {
                 if (cursorKeyPresses === 1) {
@@ -343,24 +322,40 @@ function Dialogue() {
 
     this.incrementPage = function (conversation) {
         var dialogue = [];
+        var playerChoices = [];
         for (var i = 0; i < conversation.length; i++) {
-            if ("text" in conversation[i]) {
-                dialogue.push(conversation[i].text);
-            }
+            var chatEvent = conversation[i];
+            if ("text" in chatEvent) dialogue.push(chatEvent.text);
+            if ("choices" in chatEvent) playerChoices.push(chatEvent.playerChoices);
         }
         if (this.letterCounter < dialogue[this.page].length) {
             this.letterCounter = dialogue[this.page].length;
-        } else if (this.page < dialogue.length - 1 && !cursorControl && choiceCommitted == -1 || this.page < dialogue.length - 1 && choiceCommitted != -1) {
+        } else if (this.page < dialogue.length - 1 && !choiceMenuShowing) {
             this.letterCounter = 0;
-            this.page++;
+            //this.page = -1; // first assume no match found
+            if (playerChoices[this.page] == null) this.page++;
+            if (nextChoiceLabel != -1) {
+                //first look for all occurences of the scene
+                for (var d = 0; d < conversation.length; d++) {
+                    if (conversation[d].scene == nextChoiceLabel) {
+                        console.log("b")
+                        console.log(this.page);
+                        this.page = d; // found the index where .scene was "True End"!
+                        break; // bail from for loop, quit searching
+                    }
+                }
+            } 
+            if (this.page == -1) { // means we didn't find a scene label match in the list
+                console.log("Error: no scene found matching target label " + nextChoiceLabel);
+
+            }
             console.log("increment");
-        } else if (this.page >= dialogue.length - 1 || this.page >= dialogue.length - 1 && !cursorControl && choiceCommitted != -1) {
+        } else if (this.page >= dialogue.length - 1 || this.page >= dialogue.length - 1 && !choiceMenuShowing) {
             this.isShowing = false;
             this.letterCounter = 0;
             console.log("end conversation");
         }
     }
-
     this.start = function () { //could use this for vn style games?
         this.page = 0;
         this.isShowing = true;

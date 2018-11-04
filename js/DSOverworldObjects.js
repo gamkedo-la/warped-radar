@@ -43,17 +43,17 @@ function OverworldObject() {
         }
     }
 
-//    this.text = function (createElseIncrement, dialogueList) {
-//        var chat = null;
-//        var chatLine = this.messageCounter - 1; //already 1 when dialogue starts
-//        if (chatLine >= dialogueList.length) {
-//            chatLine = dialogueList.length - 1;
-//        } else if (chatLine < 0) {
-//            return;
-//        }
-//        chat = dialogueList[chatLine]; 
-//        this.eventText(createElseIncrement, chat);
-//    }
+    this.text = function (createElseIncrement, dialogueList) {
+        var chat = null;
+        var chatLine = this.messageCounter - 1; //already 1 when dialogue starts
+        if (chatLine >= dialogueList.length) {
+            chatLine = dialogueList.length - 1;
+        } else if (chatLine < 0) {
+            return;
+        }
+        chat = dialogueList[chatLine]; 
+        this.eventText(createElseIncrement, chat);
+    }
 
     this.chatEvents = function (createElseIncrement) {
         return;
@@ -68,11 +68,11 @@ john.pressedX = false;
 john.colour = "#8789C0";
 
 john.chatEvents = function (createElseIncrement) {
-    /*if (this.pressedX) {
+    if (this.pressedX) {
         john.eventText(createElseIncrement, omigoshJohn);
-    } else { //regular text*/
+    } else { //regular text
         john.eventText(createElseIncrement,johnAndRoseConvo);
-    //}
+    }
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -86,11 +86,11 @@ bob.x = 200;
 bob.y = 100;
 
 bob.chatEvents = function (createElseIncrement) {
-    /*if (this.pressedZ) {
+    if (this.pressedZ) {
         bob.eventText(createElseIncrement, omigoshBob);
-    } else { //regular text*/
-        bob.eventText(createElseIncrement, bobConvo);
-    //}
+    } else { //regular text
+        bob.text(createElseIncrement, [bobConvo, omigoshBob]);
+    }
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////

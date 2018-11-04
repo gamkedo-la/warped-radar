@@ -106,11 +106,11 @@ var johnAndRoseConvo = [
         leftPicLeave: false,
         rightPicLeave: false,
 
-        choices:
-         [["I LIKE TORTLES?", "True end"],
-         ["I LIKE TURTLES", "Worst end"]]
+        choices: null
+         /*[["I LIKE TORTLES?", "True end"],
+         ["I LIKE TURTLES", "Worst end"]]*/
     },
-    {
+    /*{
         scene: "True end",
         who: "Rose",
         voice: voiceHigh2,
@@ -135,7 +135,7 @@ var johnAndRoseConvo = [
         rightPicLeave: false,
 
         choices: null
-    },
+    },*/
 
 ];
 

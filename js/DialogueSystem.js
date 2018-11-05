@@ -100,11 +100,20 @@ function Dialogue() {
             if ("leftPicLeave" in chatEvent) s1PicLeave.push(chatEvent.leftPicLeave);
             if ("rightPicLeave" in chatEvent) s2PicLeave.push(chatEvent.rightPicLeave);
         }
-        
+        var l = this.getSceneLength(conversation);
+        //console.log("Next choice label: " + nextChoiceLabel);
+        //console.log(l.length);
+        //console.log("Choice counter: " + choiceCounter);
+        //console.log("Current page: " + this.page);
+        console.log("Showing choice menu: " + choiceMenuShowing);
+
+        //console.log("Selected choice: " + selectedChoice);
+        //console.log("Choice cursor: " + choiceCursor);
+
         this.showSpeakers(leftPics, s1PicLeave, rightPics, s2PicLeave);
         this.showBoxElements(dialogueImage, nameBoxImage);
         this.showTextElements(conversation, dialogue, playerChoices, scenes, voices, speakerNames);
-        this.showChoices(playerChoices, dialogue);
+        this.showChoices(conversation, playerChoices, dialogue);
         this.makeAChoice(playerChoices);
     }
 
@@ -116,7 +125,7 @@ function Dialogue() {
         if (leftPicList[this.page] != null) this.setupSpeakerTween(leftPicList, leftPicLeaveList);
         if (rightPicList[this.page] != null) this.setupSpeaker2Tween(rightPicList, rightPicLeaveList);
     }
-    
+
     this.showBoxElements = function (dialogueBoxImg, nameBoxImg) {
         if (this.isShowing) {
             canvasContext.drawImage(dialogueBoxImg, dialogueBoxX, dialogueBoxY);
@@ -158,34 +167,37 @@ function Dialogue() {
         }
     }
 
-    
+
     this.makeAChoice = function (choiceList) {
-        if (selectedChoice != -1 && choiceCursor != -1 && choiceList[this.page] != null) {
+        if (selectedChoice != -1 && choiceList[this.page] != null) {
             chose = true;
+            choiceCounter = 1;
             nextChoiceLabel = choiceList[this.page][selectedChoice][1];
         }
     }
-    
+
     this.getSceneLength = function (conversation) {
         var sceneLength = [];
         if (nextChoiceLabel != -1) {
             for (var d = 0; d < conversation.length; d++) {
                 if (conversation[d].scene == nextChoiceLabel) {
-                   sceneLength.push(conversation[d].text);
+                    sceneLength.push(conversation[d].text);
                 }
             }
         }
         return sceneLength;
     }
 
-    this.showChoices = function (choiceList, dialogueList) {
+    this.showChoices = function (conversation, choiceList, dialogueList) {
+        var sceneText = this.getSceneLength(conversation);
         if (!choiceMenuShowing) choiceCursor = 0;
-        if (choiceList[this.page] != null && this.isShowing && selectedChoice == -1) {
-            this.setupChoices(choiceList[this.page]);
+        if (conversation[this.page].text == "" && choiceList[this.page] != null) {
+            this.setupChoices(conversation, choiceList[this.page]);
             canvasContext.drawImage(choiceCursorPic, choiceCursorX, choiceCursorY);
             setTimeout(function () {
                 choiceMenuShowing = true;
             }, 110);
+
         } else {
             if (selectedChoice != -1 && choiceMenuShowing && this.page >= dialogueList.length - 1) {
                 choiceMenuShowing = false;
@@ -194,15 +206,16 @@ function Dialogue() {
         }
     }
 
-    this.setupChoices = function (choiceList) {
+    this.setupChoices = function (conversation, choiceList) {
         var itemSpace = 30;
+        var sceneText = this.getSceneLength(conversation);
         for (var i = 0; i < choiceList.length; i++) {
             if (choiceCursor == i) {
                 var cursorXOffset = 12;
                 var cursorYOffset = 17;
                 choiceCursorX = textX - cursorXOffset;
                 choiceCursorY = (textY + itemSpace * i) - cursorYOffset;
-                if (selectedChoice != -1 || pressed_mbLeft) {
+                if (selectedChoice != -1) {
                     choiceColour = selectedTextColour;
                     console.log("change colour gosh darnit");
                 } else {
@@ -215,7 +228,6 @@ function Dialogue() {
         }
         if (choiceMenuShowing) {
             if (pressed_space) {
-                //choiceMenuShowing = false;
                 selectedChoice = choiceCursor;
                 selectSound.play();
                 console.log("choose this one!");
@@ -346,26 +358,25 @@ function Dialogue() {
         var playerChoices = [];
         var sceneText = this.getSceneLength(conversation);
         for (var i = 0; i < conversation.length; i++) {
-            if ("text" in  conversation[i]) dialogue.push(conversation[i].text);
+            if ("text" in conversation[i]) dialogue.push(conversation[i].text);
         }
         if (this.letterCounter < dialogue[this.page].length) {
             this.letterCounter = dialogue[this.page].length;
         } else if (this.page < dialogue.length - 1 && !choiceMenuShowing || nextChoiceLabel != -1 && choiceCounter < sceneText.length) {
             this.letterCounter = 0;
             this.page++;
-            if (nextChoiceLabel != -1) choiceCounter++;
+            if (choiceCounter < sceneText.length) choiceCounter++;
+            //if (choiceCounter >= sceneText.length - 1) choiceMenuShowing = false;
             console.log("increment");
         } else if (this.page >= dialogue.length - 1 || nextChoiceLabel != -1 && choiceCounter >= sceneText.length) {
             if (this.page < dialogue.length - 1) this.page = dialogue.length - 1;
             this.isShowing = false;
             this.letterCounter = 0;
-            //selectedChoice = -1;
-            //nextChoiceLabel = -1;
             choiceCounter = 0;
             console.log("end conversation");
         }
     }
-    
+
     this.start = function () { //could use this for vn style games?
         this.page = 0;
         this.isShowing = true;

@@ -107,10 +107,24 @@ var johnAndRoseConvo = [
         rightPicLeave: false,
 
         choices: null
-         /*[["I LIKE TORTLES?", "True end"],
-         ["I LIKE TURTLES", "Worst end"]]*/
+    }
+    ];/*,
+    {
+        scene: "Tortle end",
+        who: "Rose",
+        voice: voiceHigh2,
+        text: "",
+        leftPic: johnPic,
+        rightPic: rosePic,
+
+        leftPicLeave: false,
+        rightPicLeave: false,
+
+        choices: 
+         [["I LIKE TORTLES?", "True end"],
+         ["I LIKE TURTLES", "Worst end"]]
     },
-    /*{
+    {
         scene: "True end",
         who: "Rose",
         voice: voiceHigh2,
@@ -135,7 +149,7 @@ var johnAndRoseConvo = [
         rightPicLeave: false,
 
         choices: null
-    },*/
+    }
 
 ];
 

@@ -100,7 +100,7 @@ function Dialogue() {
             if ("leftPicLeave" in chatEvent) s1PicLeave.push(chatEvent.leftPicLeave);
             if ("rightPicLeave" in chatEvent) s2PicLeave.push(chatEvent.rightPicLeave);
         }
-
+        
         this.showSpeakers(leftPics, s1PicLeave, rightPics, s2PicLeave);
         this.showBoxElements(dialogueImage, nameBoxImage);
         this.showTextElements(conversation, dialogue, playerChoices, scenes, voices, speakerNames);
@@ -114,6 +114,7 @@ function Dialogue() {
             nextChoiceLabel = choiceList[this.page][selectedChoice][1];
             choiceMenuShowing = false;
             chose = true;
+            console.log( choiceList[this.page][selectedChoice][1]);
         }
     }
 
@@ -354,7 +355,8 @@ function Dialogue() {
         } else if (this.page < dialogue.length - 1 && !choiceMenuShowing || nextChoiceLabel != -1 && choiceCounter < sceneText.length) {
             this.letterCounter = 0;
             this.page++;
-            if (nextChoiceLabel != -1) choiceCounter++; 
+            if (nextChoiceLabel != -1) choiceCounter++;
+            /*if (choiceCounter >= sceneText.length && this.page < dialogue.length - 1) nextChoiceLabel = -1;*/
             console.log("increment");
         } else if (this.page >= dialogue.length - 1 || nextChoiceLabel != -1 && choiceCounter >= sceneText.length) {
             if (this.page < dialogue.length - 1) this.page = dialogue.length - 1

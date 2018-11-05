@@ -99,7 +99,7 @@ var johnAndRoseConvo = [
         scene: "Tortle end",
         who: "Rose",
         voice: voiceHigh2,
-        text: "",
+        text: "BOI",
         leftPic: johnPic,
         rightPic: rosePic,
 

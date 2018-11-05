@@ -62,9 +62,11 @@ function Dialogue() {
     var arrowEffectY = dialogueBoxY + arrowEffectBufferY;
 
     var choiceColour;
-    var nextChoiceLabel = -1;
+    var chose = false;
     var choiceMenuShowing = false;
+    var nextChoiceLabel = -1;
     var selectedChoice = -1;
+    var choiceCounter = 1;
     var choiceCursorX = 0;
     var choiceCursorY = 0;
     var choiceCursor = 0;
@@ -101,22 +103,17 @@ function Dialogue() {
 
         this.showSpeakers(leftPics, s1PicLeave, rightPics, s2PicLeave);
         this.showBoxElements(dialogueImage, nameBoxImage);
-        this.showTextElements(dialogue, playerChoices, scenes, voices, speakerNames);
+        this.showTextElements(conversation, dialogue, playerChoices, scenes, voices, speakerNames);
         this.showChoices(playerChoices, dialogue);
         this.makeAChoice(playerChoices);
-        //console.log(this.page);
-        //console.log(nextChoiceLabel);
-        //console.log(choiceMenuShowing);
     }
 
     this.makeAChoice = function (choiceList) {
         var nextBranch = [];
         if (selectedChoice != -1 && choiceCursor != -1 && choiceList[this.page] != null) {
-            //this.isShowing = false;
-            //colorText(choiceList[1][this.page][selectedChoice], canvas.width / 2, 100, "white", textFontFace, "center", 1);
             nextChoiceLabel = choiceList[this.page][selectedChoice][1];
             choiceMenuShowing = false;
-            //console.log(nextChoiceLabel);
+            chose = true;
         }
     }
 
@@ -129,7 +126,19 @@ function Dialogue() {
         if (rightPicList[this.page] != null) this.setupSpeaker2Tween(rightPicList, rightPicLeaveList);
     }
 
-    this.showTextElements = function (dialogueList, choiceList, sceneList, voiceList, nameList) {
+    this.getSceneLength = function (conversation) {
+        var sceneLength = [];
+        if (nextChoiceLabel != -1) {
+            for (var d = 0; d < conversation.length; d++) {
+                if (conversation[d].scene == nextChoiceLabel) {
+                   sceneLength.push(conversation[d].text);
+                }
+            }
+        }
+        return sceneLength;
+    }
+
+    this.showTextElements = function (conversation, dialogueList, choiceList, sceneList, voiceList, nameList) {
         var typewriterText;
         if (this.isShowing) {
             if (this.letterCounter < dialogueList[this.page].length && !paused) {
@@ -138,6 +147,19 @@ function Dialogue() {
                 if ((Math.floor(this.letterCounter) % 2) == 0) {
                     voiceList[this.page].play();
                 }
+            }
+            if (nextChoiceLabel != -1 && chose) {
+                if (chose) chose = false;
+                choiceMenuShowing = false;
+                for (var d = 0; d < conversation.length; d++) {
+                    if (conversation[d].scene == nextChoiceLabel) {
+                        this.page = d; // found the index where .scene was "True End"!
+                        break; // bail from for loop, quit searching
+                    }
+                }
+            }
+            if (this.page == -1) { // means we didn't find a scene label match in the list
+                console.log("Error: no scene found matching target label " + nextChoiceLabel);
             }
             typewriterText = dialogueList[this.page].substr(0, this.letterCounter);
             colorText(nameList[this.page], nameBoxTextX, nameBoxTextY, nameBoxTextColour, nameBoxTextFontFace, nameBoxTextAlign, 1);
@@ -323,36 +345,22 @@ function Dialogue() {
     this.incrementPage = function (conversation) {
         var dialogue = [];
         var playerChoices = [];
+        var sceneText = this.getSceneLength(conversation);
         for (var i = 0; i < conversation.length; i++) {
-            var chatEvent = conversation[i];
-            if ("text" in chatEvent) dialogue.push(chatEvent.text);
-            if ("choices" in chatEvent) playerChoices.push(chatEvent.playerChoices);
+            if ("text" in  conversation[i]) dialogue.push(conversation[i].text);
         }
         if (this.letterCounter < dialogue[this.page].length) {
             this.letterCounter = dialogue[this.page].length;
-        } else if (this.page < dialogue.length - 1 && !choiceMenuShowing) {
+        } else if (this.page < dialogue.length - 1 && !choiceMenuShowing || nextChoiceLabel != -1 && choiceCounter < sceneText.length) {
             this.letterCounter = 0;
-            //this.page = -1; // first assume no match found
-            if (playerChoices[this.page] == null) this.page++;
-            if (nextChoiceLabel != -1) {
-                //first look for all occurences of the scene
-                for (var d = 0; d < conversation.length; d++) {
-                    if (conversation[d].scene == nextChoiceLabel) {
-                        console.log("b")
-                        console.log(this.page);
-                        this.page = d; // found the index where .scene was "True End"!
-                        break; // bail from for loop, quit searching
-                    }
-                }
-            } 
-            if (this.page == -1) { // means we didn't find a scene label match in the list
-                console.log("Error: no scene found matching target label " + nextChoiceLabel);
-
-            }
+            this.page++;
+            if (nextChoiceLabel != -1) choiceCounter++; 
             console.log("increment");
-        } else if (this.page >= dialogue.length - 1 || this.page >= dialogue.length - 1 && !choiceMenuShowing) {
+        } else if (this.page >= dialogue.length - 1 || nextChoiceLabel != -1 && choiceCounter >= sceneText.length) {
+            if (this.page < dialogue.length - 1) this.page = dialogue.length - 1
             this.isShowing = false;
             this.letterCounter = 0;
+            choiceCounter = 0;
             console.log("end conversation");
         }
     }

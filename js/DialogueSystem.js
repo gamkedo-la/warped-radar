@@ -1,4 +1,4 @@
-//Dialogue System by Kise, for Gamkedo! <3 Feel free to make changes and improve the code base!!  
+//wip dialogue system by Kise, for Gamkedo! <3 Feel free to make changes and improve the code base!! 
 function Dialogue() {
     this.isShowing = false;
     this.letterCounter = 0;
@@ -38,7 +38,7 @@ function Dialogue() {
     var textAlign = "left";
 
     var line;
-    var letterSpeed = 1;
+    var letterSpeed = 0.8;
     var maxWidth = 270;
     var lineHeight = 30;
     var paused = false;
@@ -105,7 +105,7 @@ function Dialogue() {
         //console.log(l.length);
         //console.log("Choice counter: " + choiceCounter);
         //console.log("Current page: " + this.page);
-        console.log("Showing choice menu: " + choiceMenuShowing);
+        //console.log("Showing choice menu: " + choiceMenuShowing);
 
         //console.log("Selected choice: " + selectedChoice);
         //console.log("Choice cursor: " + choiceCursor);
@@ -148,7 +148,7 @@ function Dialogue() {
                 choiceMenuShowing = false;
                 for (var d = 0; d < conversation.length; d++) {
                     if (conversation[d].scene == nextChoiceLabel) {
-                        this.page = d; // found the index where .scene was "True End"!
+                        this.page = d; // found the index where .scene 
                         break; // bail from for loop, quit searching
                     }
                 }

@@ -20,8 +20,8 @@ function Dialogue() {
     var speakerY = 80;
     var speaker2Y = speakerY;
 
-    var tweenPosSpeed = 20;
-    var tweenNegSpeed = 40;
+    var tweenInSpeed = 20;
+    var tweenOutSpeed = 40;
 
     //change dialogue pics here
     var dialogueImage = dialogueBoxPic;
@@ -108,16 +108,6 @@ function Dialogue() {
         this.makeAChoice(playerChoices);
     }
 
-    this.makeAChoice = function (choiceList) {
-        var nextBranch = [];
-        if (selectedChoice != -1 && choiceCursor != -1 && choiceList[this.page] != null) {
-            nextChoiceLabel = choiceList[this.page][selectedChoice][1];
-            choiceMenuShowing = false;
-            chose = true;
-            console.log( choiceList[this.page][selectedChoice][1]);
-        }
-    }
-
     this.showSpeakerFadeIn = function (speakerPicList) {
         if (speakerPicList[this.page] != null) this.setupSpeakerFadeIn(speakerPicList);
     }
@@ -126,17 +116,12 @@ function Dialogue() {
         if (leftPicList[this.page] != null) this.setupSpeakerTween(leftPicList, leftPicLeaveList);
         if (rightPicList[this.page] != null) this.setupSpeaker2Tween(rightPicList, rightPicLeaveList);
     }
-
-    this.getSceneLength = function (conversation) {
-        var sceneLength = [];
-        if (nextChoiceLabel != -1) {
-            for (var d = 0; d < conversation.length; d++) {
-                if (conversation[d].scene == nextChoiceLabel) {
-                   sceneLength.push(conversation[d].text);
-                }
-            }
+    
+    this.showBoxElements = function (dialogueBoxImg, nameBoxImg) {
+        if (this.isShowing) {
+            canvasContext.drawImage(dialogueBoxImg, dialogueBoxX, dialogueBoxY);
+            canvasContext.drawImage(nameBoxImg, nameBoxX, nameBoxY);
         }
-        return sceneLength;
     }
 
     this.showTextElements = function (conversation, dialogueList, choiceList, sceneList, voiceList, nameList) {
@@ -173,11 +158,24 @@ function Dialogue() {
         }
     }
 
-    this.showBoxElements = function (dialogueBoxImg, nameBoxImg) {
-        if (this.isShowing) {
-            canvasContext.drawImage(dialogueBoxImg, dialogueBoxX, dialogueBoxY);
-            canvasContext.drawImage(nameBoxImg, nameBoxX, nameBoxY);
+    
+    this.makeAChoice = function (choiceList) {
+        if (selectedChoice != -1 && choiceCursor != -1 && choiceList[this.page] != null) {
+            chose = true;
+            nextChoiceLabel = choiceList[this.page][selectedChoice][1];
         }
+    }
+    
+    this.getSceneLength = function (conversation) {
+        var sceneLength = [];
+        if (nextChoiceLabel != -1) {
+            for (var d = 0; d < conversation.length; d++) {
+                if (conversation[d].scene == nextChoiceLabel) {
+                   sceneLength.push(conversation[d].text);
+                }
+            }
+        }
+        return sceneLength;
     }
 
     this.showChoices = function (choiceList, dialogueList) {
@@ -217,10 +215,10 @@ function Dialogue() {
         }
         if (choiceMenuShowing) {
             if (pressed_space) {
-                console.log("choose this one!");
-                choiceMenuShowing = false;
-                selectSound.play();
+                //choiceMenuShowing = false;
                 selectedChoice = choiceCursor;
+                selectSound.play();
+                console.log("choose this one!");
             }
             if (cursorUp) {
                 if (cursorKeyPresses === 1) {
@@ -265,22 +263,22 @@ function Dialogue() {
     this.setupSpeakerTween = function (speakerImgList, leaveScreenList) {
         canvasContext.drawImage(speakerImgList[this.page], this.speakerX, speakerY);
         if (leaveScreenList[this.page] && this.speakerX >= this.speakerStartX) {
-            this.speakerX -= tweenNegSpeed;
+            this.speakerX -= tweenOutSpeed;
         } else if (!this.isShowing && this.speakerX > this.speakerStartX) {
-            this.speakerX -= tweenNegSpeed;
+            this.speakerX -= tweenOutSpeed;
         } else if (this.isShowing && this.speakerX < speakerFinalX) {
-            this.speakerX += tweenPosSpeed;
+            this.speakerX += tweenInSpeed;
         }
     }
 
     this.setupSpeaker2Tween = function (speaker2ImgList, leaveScreenList) {
         canvasContext.drawImage(speaker2ImgList[this.page], this.speaker2X, speaker2Y);
         if (leaveScreenList[this.page] && this.speaker2X <= this.speaker2StartX) {
-            this.speaker2X += tweenNegSpeed;
+            this.speaker2X += tweenOutSpeed;
         } else if (!this.isShowing && this.speaker2X < this.speaker2StartX) {
-            this.speaker2X += tweenNegSpeed;
+            this.speaker2X += tweenOutSpeed;
         } else if (this.isShowing && this.speaker2X > speaker2FinalX) {
-            this.speaker2X -= tweenPosSpeed;
+            this.speaker2X -= tweenInSpeed;
         }
     }
 
@@ -356,16 +354,18 @@ function Dialogue() {
             this.letterCounter = 0;
             this.page++;
             if (nextChoiceLabel != -1) choiceCounter++;
-            /*if (choiceCounter >= sceneText.length && this.page < dialogue.length - 1) nextChoiceLabel = -1;*/
             console.log("increment");
         } else if (this.page >= dialogue.length - 1 || nextChoiceLabel != -1 && choiceCounter >= sceneText.length) {
-            if (this.page < dialogue.length - 1) this.page = dialogue.length - 1
+            if (this.page < dialogue.length - 1) this.page = dialogue.length - 1;
             this.isShowing = false;
             this.letterCounter = 0;
+            //selectedChoice = -1;
+            //nextChoiceLabel = -1;
             choiceCounter = 0;
             console.log("end conversation");
         }
     }
+    
     this.start = function () { //could use this for vn style games?
         this.page = 0;
         this.isShowing = true;

@@ -107,8 +107,8 @@ var johnAndRoseConvo = [
         rightPicLeave: false,
 
         choices: null
-    },
-    {
+    }
+    /*{
         scene: "Tortle end",
         who: "Bob",
         voice: voiceHigh2,
@@ -254,7 +254,7 @@ var johnAndRoseConvo = [
 
         choices: null
     },
-
+*/
 
 ];
 

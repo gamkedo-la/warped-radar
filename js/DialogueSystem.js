@@ -277,7 +277,7 @@ function Dialogue() {
                 if (cursorKeyPresses === 1) {
                     selectedChoice = choiceCursor;
                     selectSound.play();
-                    console.log("choose this one!");
+                    //console.log("choose this one!");
                 }
             }
             if (cursorUp && selectedChoice == -1) {
@@ -379,25 +379,24 @@ function Dialogue() {
         } else if (this.page < dialogue.length - 1 && !choiceMenuShowing || nextChoiceLabel != -1 && choiceCounter < sceneText.length) {
             this.letterCounter = 0;
             this.page++;
-            console.log("increment");
+            //console.log("increment");
             
             if (choiceCounter < sceneText.length) { //increases the index for branching text
                 choiceCounter++;
             } else if (choiceCounter != 0 && choiceCounter == sceneText.length) {
                 //end conversation once branching dialogue has been all read, but not at the end of the array
                 this.isShowing = false;
-                if (!this.isShowing) this.page = this.page - 1; //to prevent portrait incrementing once text is over
+                //to prevent portrait incrementing once text is over
+                if (!this.isShowing) this.page = this.page - 1; 
                 this.resetBranchingDialogueVars();
-                console.log("end conversation");
+                //console.log("end conversation");
             }
         } else if (this.page >= dialogue.length - 1) {
             this.isShowing = false;
             this.letterCounter = 0;
-            selectedChoice = -1;
-            nextChoiceLabel = -1;
             //if branching dialogue finishes at the end of the array, reset variables
             this.resetBranchingDialogueVars();
-            console.log("end conversation");
+            //console.log("end conversation");
         }
     }
 

@@ -71,7 +71,7 @@ john.chatEvents = function (createElseIncrement) {
     if (this.pressedX) {
         john.eventText(createElseIncrement, omigoshJohn);
     } else { //regular text
-        john.text(createElseIncrement,[johnAndRoseConvo, johnAndRoseConvo2]);
+        john.text(createElseIncrement,[johnAndRoseConvo]);
     }
 }
 
@@ -89,7 +89,7 @@ bob.chatEvents = function (createElseIncrement) {
     if (this.pressedZ) {
         bob.eventText(createElseIncrement, omigoshBob);
     } else { //regular text
-        bob.text(createElseIncrement, [bobConvo, omigoshBob]);
+        bob.text(createElseIncrement, [bobConvo]);
     }
 }
 

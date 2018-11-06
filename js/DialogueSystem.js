@@ -1,4 +1,4 @@
-//wip dialogue system by Kise, for Gamkedo! <3 Feel free to make changes and improve the code base!! 
+//kinda messy dialogue system by Kise, for Gamkedo! <3 Feel free to make changes and improve the code base!! 
 function Dialogue() {
     this.isShowing = false;
     this.letterCounter = 0;
@@ -363,6 +363,7 @@ function Dialogue() {
 
     this.resetBranchingDialogueVars = function () {
         nextChoiceLabel = -1;
+        selectedChoice = -1;
         choiceCounter = 0;
     }
 
@@ -384,14 +385,16 @@ function Dialogue() {
                 choiceCounter++;
             } else if (choiceCounter != 0 && choiceCounter == sceneText.length) {
                 //end conversation once branching dialogue has been all read, but not at the end of the array
-                this.page = this.page - 1; //to prevent portrait incrementing once text is over
                 this.isShowing = false;
+                if (!this.isShowing) this.page = this.page - 1; //to prevent portrait incrementing once text is over
                 this.resetBranchingDialogueVars();
                 console.log("end conversation");
             }
         } else if (this.page >= dialogue.length - 1) {
             this.isShowing = false;
             this.letterCounter = 0;
+            selectedChoice = -1;
+            nextChoiceLabel = -1;
             //if branching dialogue finishes at the end of the array, reset variables
             this.resetBranchingDialogueVars();
             console.log("end conversation");

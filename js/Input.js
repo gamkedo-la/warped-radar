@@ -34,6 +34,7 @@ function keyPressed(evt) {
         case KEY_SPACE:
             pressed_space = true;
             incrementTextPages();
+            cursorKeyPresses++;
             break;
         case KEY_X:
             john.pressedX = true;
@@ -59,12 +60,15 @@ function keyReleased(evt) {
     switch (evt.keyCode) {
         case KEY_SPACE:
             pressed_space = false;
+            cursorKeyPresses = 0;
             break;
         case KEY_UP:
             cursorUp = false;
+            cursorKeyPresses = 0;
             break;
         case KEY_DOWN:
             cursorDown = false;
+            cursorKeyPresses = 0;
             break;
     }
     keySet(evt, player, false);

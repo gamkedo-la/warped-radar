@@ -32,6 +32,7 @@ function updateAll() {
 function moveAll() {
     player.move();
     triggerNPCDialogue();
+    //console.log(cursorKeyPresses);
 }
 
 function drawAll() {

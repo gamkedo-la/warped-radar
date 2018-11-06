@@ -109,6 +109,7 @@ function Dialogue() {
 
         //console.log("Selected choice: " + selectedChoice);
         //console.log("Choice cursor: " + choiceCursor);
+        //console.log("Chose an option: " + chose);
 
         this.showSpeakers(leftPics, s1PicLeave, rightPics, s2PicLeave);
         this.showBoxElements(dialogueImage, nameBoxImage);
@@ -170,7 +171,9 @@ function Dialogue() {
 
     this.makeAChoice = function (choiceList) {
         if (selectedChoice != -1 && choiceList[this.page] != null) {
-            chose = true;
+            setTimeout(function () { //small pause when choice selected
+                chose = true;
+            }, 335);
             choiceCounter = 1;
             nextChoiceLabel = choiceList[this.page][selectedChoice][1];
         }
@@ -194,7 +197,7 @@ function Dialogue() {
         if (conversation[this.page].text == "" && choiceList[this.page] != null) {
             this.setupChoices(conversation, choiceList[this.page]);
             canvasContext.drawImage(choiceCursorPic, choiceCursorX, choiceCursorY);
-            setTimeout(function () {
+            setTimeout(function () { //pause ability to select choice in order to increment page
                 choiceMenuShowing = true;
             }, 110);
 
@@ -227,9 +230,11 @@ function Dialogue() {
         }
         if (choiceMenuShowing) {
             if (pressed_space) {
-                selectedChoice = choiceCursor;
-                selectSound.play();
-                console.log("choose this one!");
+                if (cursorKeyPresses === 1) {
+                    selectedChoice = choiceCursor;
+                    selectSound.play();
+                    console.log("choose this one!");
+                }
             }
             if (cursorUp) {
                 if (cursorKeyPresses === 1) {
@@ -351,6 +356,11 @@ function Dialogue() {
         this.calculateLineBreak(dialogueWords, x, y, maxWidth, lineHeight);
         colorText(line, x, y, textColour, textFontFace, textAlign, 1);
     }
+    
+    this.resetBranchingDialogueVars = function() {
+        nextChoiceLabel = -1;
+        choiceCounter = 0;
+    }
 
     this.incrementPage = function (conversation) {
         var dialogue = [];
@@ -364,15 +374,20 @@ function Dialogue() {
         } else if (this.page < dialogue.length - 1 && !choiceMenuShowing || nextChoiceLabel != -1 && choiceCounter < sceneText.length) {
             this.letterCounter = 0;
             this.page++;
-            if (choiceCounter < sceneText.length) choiceCounter++;
-            //if (choiceCounter >= sceneText.length - 1) choiceMenuShowing = false;
             console.log("increment");
-        } else if (this.page >= dialogue.length - 1 || nextChoiceLabel != -1 && choiceCounter >= sceneText.length) {
-            if (this.page < dialogue.length - 1) this.page = dialogue.length - 1;
+            if (choiceCounter < sceneText.length) { //increases the index for branching text
+                choiceCounter++;
+            } else if (choiceCounter != 0 && choiceCounter <= sceneText.length) {
+                //work around for pauses between text 
+                this.isShowing = false;
+                this.resetBranchingDialogueVars();
+                console.log("end conversation");
+            }
+        } else if (this.page >= dialogue.length - 1) {
             this.isShowing = false;
             this.letterCounter = 0;
-            nextChoiceLabel = -1;
-            choiceCounter = 0;
+            //if branching dialogue finishes at the end of the array, reset variables
+            this.resetBranchingDialogueVars();
             console.log("end conversation");
         }
     }
@@ -382,5 +397,4 @@ function Dialogue() {
         this.isShowing = true;
         this.letterCounter = 0;
     }
-
 }

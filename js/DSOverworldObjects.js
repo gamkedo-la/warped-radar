@@ -110,11 +110,6 @@ function dialogueNotShowing() {
     return !bob.dialogue.isShowing && !john.dialogue.isShowing;
 }
 
-/*function increaseCursorKeys() { //for dialogue choices
-    if (bob.dialogue.isShowing || john.dialogue.isShowing)
-    cursorKeyPresses++;
-}*/
-
 function triggerNPCDialogue() {
     for (var i = 0; i < allNPCs.length; i++) {
         allNPCs[i].onTrigger(allNPCs[i].dialogue);

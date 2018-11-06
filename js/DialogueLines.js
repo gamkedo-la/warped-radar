@@ -5,7 +5,7 @@ var johnAndRoseConvo = [
         voice: voiceLow1,
         text: "Hello, how are you",
         leftPic: johnPic,
-        rightPic: rosePic,
+        rightPic: null,
 
         leftPicLeave: false,
         rightPicLeave: false,
@@ -34,7 +34,7 @@ var johnAndRoseConvo = [
         scene: "Good end",
         who: "Rose",
         voice: voiceHigh2,
-        text: "Wow, this has been really fun.",
+        text: "Great, thanks for asking!",
         leftPic: johnPic,
         rightPic: rosePic,
 
@@ -47,9 +47,9 @@ var johnAndRoseConvo = [
         scene: "Good end",
         who: "Rose",
         voice: voiceHigh2,
-        text: "Call me sometime.",
+        text: "Welp, gotta go, bye.",
         leftPic: johnPic,
-        rightPic: rosePic,
+        rightPic: rosePic2,
 
         leftPicLeave: false,
         rightPicLeave: false,
@@ -108,152 +108,6 @@ var johnAndRoseConvo = [
 
         choices: null
     }
-    /*,{
-        scene: "Tortle end",
-        who: "Bob",
-        voice: voiceHigh2,
-        text: "",
-        leftPic: johnPic,
-        rightPic: rosePic,
-
-        leftPicLeave: false,
-        rightPicLeave: false,
-
-        choices: 
-         [
-         ["I LIKE TURTLES", "Worst end"], ["I LIKE TORTLES?", "True end"]]
-    },
-    {
-        scene: "True end",
-        who: "Rose",
-        voice: voiceHigh2,
-        text: "I LOVE YOU",
-        leftPic: johnPic,
-        rightPic: rosePic,
-
-        leftPicLeave: false,
-        rightPicLeave: false,
-
-        choices: null
-    },
-    {
-        scene: "Worst end",
-        who: "Rose",
-        voice: voiceHigh2,
-        text: "WOW YOU FAKE FAN, YOU RUINED MY LIFE",
-        leftPic: johnPic,
-        rightPic: rosePic,
-
-        leftPicLeave: false,
-        rightPicLeave: false,
-
-        choices: null
-    },
-    {
-        scene: "Worst end",
-        who: "Rose",
-        voice: voiceHigh2,
-        text: "This is a test",
-        leftPic: johnPic,
-        rightPic: rosePic,
-
-        leftPicLeave: false,
-        rightPicLeave: false,
-
-        choices: null
-    },
-     {
-        scene: "Worst end",
-        who: "Rose",
-        voice: voiceHigh2,
-        text: "test2",
-        leftPic: johnPic,
-        rightPic: rosePic,
-
-        leftPicLeave: false,
-        rightPicLeave: false,
-
-        choices: null
-    },
-     {
-        scene: "Worst end",
-        who: "Rose",
-        voice: voiceHigh2,
-        text: "",
-        leftPic: johnPic,
-        rightPic: rosePic,
-
-        leftPicLeave: false,
-        rightPicLeave: false,
-
-        choices: [["meep", "meep end"], 
-                  ["moop", "moop end"]]
-    },
-     {
-        scene: "meep end",
-        who: "Rose",
-        voice: voiceHigh2,
-        text: "I like to meep all day",
-        leftPic: johnPic,
-        rightPic: rosePic,
-
-        leftPicLeave: false,
-        rightPicLeave: false,
-
-        choices: null
-    },
-    {
-        scene: "meep end",
-        who: "Rose",
-        voice: voiceHigh2,
-        text: "yas meep4life son",
-        leftPic: johnPic,
-        rightPic: rosePic,
-
-        leftPicLeave: false,
-        rightPicLeave: false,
-
-        choices: null
-    },
-    {
-        scene: "moop end",
-        who: "Rose",
-        voice: voiceHigh2,
-        text: "k this doesnt sound as cool",
-        leftPic: johnPic,
-        rightPic: rosePic,
-
-        leftPicLeave: false,
-        rightPicLeave: false,
-
-        choices: null
-    },
-    {
-        scene: "moop end",
-        who: "Rose",
-        voice: voiceHigh2,
-        text: "oh well",
-        leftPic: johnPic,
-        rightPic: rosePic,
-
-        leftPicLeave: false,
-        rightPicLeave: false,
-
-        choices: null
-    },
-    {
-        scene: "moop end",
-        who: "Rose",
-        voice: voiceHigh2,
-        text: "BYE THEN",
-        leftPic: johnPic,
-        rightPic: rosePic,
-
-        leftPicLeave: false,
-        rightPicLeave: false,
-
-        choices: null
-    }*/
 ];
 
 /*

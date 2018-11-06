@@ -38,7 +38,7 @@ function Dialogue() {
     var textAlign = "left";
 
     var line;
-    var letterSpeed = 0.8;
+    var letterSpeed = 0.6;
     var maxWidth = 270;
     var lineHeight = 30;
     var paused = false;
@@ -101,9 +101,9 @@ function Dialogue() {
             if ("rightPicLeave" in chatEvent) s2PicLeave.push(chatEvent.rightPicLeave);
         }
         //var l = this.getSceneLength(conversation);
-        //console.log("Next choice label: " + nextChoiceLabel);
+        console.log("Next choice label: " + nextChoiceLabel);
         //console.log(l.length);
-        //console.log("Choice counter: " + choiceCounter);
+        console.log("Choice counter: " + choiceCounter);
         //console.log("Current page: " + this.page);
         //console.log("Showing choice menu: " + choiceMenuShowing);
 
@@ -194,7 +194,7 @@ function Dialogue() {
     this.showChoices = function (conversation, choiceList, dialogueList) {
         var sceneText = this.getSceneLength(conversation);
         if (!choiceMenuShowing) choiceCursor = 0;
-        if (conversation[this.page].text == "" && choiceList[this.page] != null) {
+        if (conversation[this.page].text == "" && choiceList[this.page] != null && this.isShowing) {
             this.setupChoices(conversation, choiceList[this.page]);
             canvasContext.drawImage(choiceCursorPic, choiceCursorX, choiceCursorY);
             setTimeout(function () { //pause ability to select choice in order to increment page
@@ -280,7 +280,7 @@ function Dialogue() {
                     console.log("choose this one!");
                 }
             }
-            if (cursorUp) {
+            if (cursorUp && selectedChoice == -1) {
                 if (cursorKeyPresses === 1) {
                     choiceCursor--;
                     choiceSound.play();
@@ -289,7 +289,7 @@ function Dialogue() {
                     }
                 }
             }
-            if (cursorDown) {
+            if (cursorDown && selectedChoice == -1) {
                 if (cursorKeyPresses === 1) {
                     choiceCursor = (choiceCursor + 1) % choiceList.length;
                     choiceSound.play();

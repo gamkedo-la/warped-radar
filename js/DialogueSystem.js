@@ -228,34 +228,7 @@ function Dialogue() {
             }
             colorText(choiceList[i][0], 15 + textX, textY + itemSpace * i, choiceColour, textFontFace, textAlign, 1);
         }
-        if (choiceMenuShowing) {
-            if (pressed_space) {
-                if (cursorKeyPresses === 1) {
-                    selectedChoice = choiceCursor;
-                    selectSound.play();
-                    console.log("choose this one!");
-                }
-            }
-            if (cursorUp) {
-                if (cursorKeyPresses === 1) {
-                    choiceCursor--;
-                    choiceSound.play();
-                    if (choiceCursor < 0) {
-                        choiceCursor += choiceList.length;
-                    }
-                }
-            }
-            if (cursorDown) {
-                if (cursorKeyPresses === 1) {
-                    choiceCursor = (choiceCursor + 1) % choiceList.length;
-                    choiceSound.play();
-                    if (choiceCursor > choiceList.length - 1) {
-                        choiceCursor = 0;
-                    }
-                }
-            }
-            cursorKeyPresses = 0;
-        }
+        this.updateChoiceCursor(choiceList);
     }
 
     this.setupSpeakerFadeIn = function (speakerImgList) {
@@ -295,6 +268,37 @@ function Dialogue() {
             this.speaker2X += tweenOutSpeed;
         } else if (this.isShowing && this.speaker2X > speaker2FinalX) {
             this.speaker2X -= tweenInSpeed;
+        }
+    }
+    
+    this.updateChoiceCursor = function (choiceList) {
+        if (choiceMenuShowing) {
+            if (pressed_space) {
+                if (cursorKeyPresses === 1) {
+                    selectedChoice = choiceCursor;
+                    selectSound.play();
+                    console.log("choose this one!");
+                }
+            }
+            if (cursorUp) {
+                if (cursorKeyPresses === 1) {
+                    choiceCursor--;
+                    choiceSound.play();
+                    if (choiceCursor < 0) {
+                        choiceCursor += choiceList.length;
+                    }
+                }
+            }
+            if (cursorDown) {
+                if (cursorKeyPresses === 1) {
+                    choiceCursor = (choiceCursor + 1) % choiceList.length;
+                    choiceSound.play();
+                    if (choiceCursor > choiceList.length - 1) {
+                        choiceCursor = 0;
+                    }
+                }
+            }
+            cursorKeyPresses = 0;
         }
     }
 
@@ -356,8 +360,8 @@ function Dialogue() {
         this.calculateLineBreak(dialogueWords, x, y, maxWidth, lineHeight);
         colorText(line, x, y, textColour, textFontFace, textAlign, 1);
     }
-    
-    this.resetBranchingDialogueVars = function() {
+
+    this.resetBranchingDialogueVars = function () {
         nextChoiceLabel = -1;
         choiceCounter = 0;
     }
@@ -378,7 +382,7 @@ function Dialogue() {
             if (choiceCounter < sceneText.length) { //increases the index for branching text
                 choiceCounter++;
             } else if (choiceCounter != 0 && choiceCounter <= sceneText.length) {
-                //work around for pauses between text 
+                //end conversation once branching dialogue has been all read, but not at the end of the array
                 this.isShowing = false;
                 this.resetBranchingDialogueVars();
                 console.log("end conversation");

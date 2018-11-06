@@ -27,7 +27,7 @@ function Dialogue() {
     var dialogueImage = dialogueBoxPic;
     var nameBoxImage = nameBoxPic;
     var dialogueBoxX = 35;
-    var dialogueBoxY = 425;
+    var dialogueBoxY = 435;
 
     var textXBuffer = 30;
     var textYBuffer = 45;
@@ -57,7 +57,7 @@ function Dialogue() {
     var nameBoxTextAlign = textAlign;
 
     var arrowEffectBufferX = 95;
-    var arrowEffectBufferY = 118;
+    var arrowEffectBufferY = 114;
     var arrowEffectX = (dialogueBoxX * dialogueBoxX / 2) + arrowEffectBufferX;
     var arrowEffectY = dialogueBoxY + arrowEffectBufferY;
 
@@ -81,7 +81,7 @@ function Dialogue() {
             playerChoices = [],
             speakerNames = [],
             voices = [],
-            speakerPics = [],
+            //speakerPics = [], for fade in transition
             leftPics = [],
             rightPics = [],
             s1PicLeave = [],
@@ -94,13 +94,13 @@ function Dialogue() {
             if ("scene" in chatEvent) scenes.push(chatEvent.scene);
             if ("voice" in chatEvent) voices.push(chatEvent.voice);
             if ("choices" in chatEvent) playerChoices.push(chatEvent.choices);
-            if ("speakerPic" in chatEvent) speakerPics.push(chatEvent.speakerPic);
+            //if ("speakerPic" in chatEvent) speakerPics.push(chatEvent.speakerPic);
             if ("leftPic" in chatEvent) leftPics.push(chatEvent.leftPic);
             if ("rightPic" in chatEvent) rightPics.push(chatEvent.rightPic);
             if ("leftPicLeave" in chatEvent) s1PicLeave.push(chatEvent.leftPicLeave);
             if ("rightPicLeave" in chatEvent) s2PicLeave.push(chatEvent.rightPicLeave);
         }
-        var l = this.getSceneLength(conversation);
+        //var l = this.getSceneLength(conversation);
         //console.log("Next choice label: " + nextChoiceLabel);
         //console.log(l.length);
         //console.log("Choice counter: " + choiceCounter);
@@ -215,9 +215,8 @@ function Dialogue() {
                 var cursorYOffset = 17;
                 choiceCursorX = textX - cursorXOffset;
                 choiceCursorY = (textY + itemSpace * i) - cursorYOffset;
-                if (selectedChoice != -1) {
+                if (pressed_space && choiceMenuShowing) {
                     choiceColour = selectedTextColour;
-                    console.log("change colour gosh darnit");
                 } else {
                     choiceColour = cursorTextColour;
                 }
@@ -372,6 +371,7 @@ function Dialogue() {
             if (this.page < dialogue.length - 1) this.page = dialogue.length - 1;
             this.isShowing = false;
             this.letterCounter = 0;
+            nextChoiceLabel = -1;
             choiceCounter = 0;
             console.log("end conversation");
         }

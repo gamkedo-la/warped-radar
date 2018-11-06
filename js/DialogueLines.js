@@ -5,7 +5,7 @@ var johnAndRoseConvo = [
         voice: voiceLow1,
         text: "Hello, how are you",
         leftPic: johnPic,
-        rightPic: null,
+        rightPic: rosePic,
 
         leftPicLeave: false,
         rightPicLeave: false,
@@ -108,7 +108,7 @@ var johnAndRoseConvo = [
 
         choices: null
     }
-    /*{
+    /*,{
         scene: "Tortle end",
         who: "Bob",
         voice: voiceHigh2,
@@ -253,9 +253,7 @@ var johnAndRoseConvo = [
         rightPicLeave: false,
 
         choices: null
-    },
-*/
-
+    }*/
 ];
 
 /*
@@ -385,6 +383,7 @@ var johnAndRoseConvo2 = [
 
 var bobConvo = [
     {
+        scene: "Bob is sad",
         who: "Bob(s)",
         voice: voiceLow2,
         text: "Hi I'm bobs.",
@@ -397,6 +396,7 @@ var bobConvo = [
         choices: null
     },
     {
+        scene: "Bob is sad",
         who: "Bob(s)",
         voice: voiceLow2,
         text: "Oh that s was a typo I've had since birth. The accurate pronounciation is bob though.",
@@ -409,6 +409,7 @@ var bobConvo = [
         choices: null
     },
     {
+        scene: "Bob is sad",
         who: "Bob(s)",
         voice: voiceLow2,
         text: "Sighs",
@@ -419,7 +420,98 @@ var bobConvo = [
         rightPicLeave: false,
 
         choices: null
-    }
+    },
+    {
+        scene: "Bob is sad",
+        who: "Bob(s)",
+        voice: voiceLow2,
+        text: "Do you like my name?",
+        leftPic: johnPic2,
+        rightPic: null,
+
+        leftPicLeave: false,
+        rightPicLeave: false,
+
+        choices: null
+    },
+    {
+        scene: "Bob is sad",
+        who: "Bob(s)",
+        voice: voiceLow2,
+        text: "",
+        leftPic: johnPic2,
+        rightPic: null,
+
+        leftPicLeave: false,
+        rightPicLeave: false,
+
+        choices: [["Yeah, of course", "happy"], ["no not really", "sad"]]
+    },
+    {
+        scene: "happy",
+        who: "Bob(s)",
+        voice: voiceLow2,
+        text: "Yeah me, t-",
+        leftPic: johnPic2,
+        rightPic: null,
+
+        leftPicLeave: false,
+        rightPicLeave: false,
+
+        choices: null
+    },
+    {
+        scene: "happy",
+        who: "Bob(s)",
+        voice: voiceLow2,
+        text: "Wait...",
+        leftPic: johnPic2,
+        rightPic: null,
+
+        leftPicLeave: false,
+        rightPicLeave: false,
+
+        choices: null
+    },
+    {
+        scene: "happy",
+        who: "Bob(s)",
+        voice: voiceLow2,
+        text: "You really like it?? That's the nicest thing anyone's ever told me",
+        leftPic: johnPic2,
+        rightPic: null,
+
+        leftPicLeave: false,
+        rightPicLeave: false,
+
+        choices: null
+    },
+    {
+        scene: "sad",
+        who: "Bob(s)",
+        voice: voiceLow2,
+        text: "Oh....",
+        leftPic: johnPic2,
+        rightPic: null,
+
+        leftPicLeave: false,
+        rightPicLeave: false,
+
+        choices: null
+    },
+    {
+        scene: "sad",
+        who: "Bob(s)",
+        voice: voiceLow2,
+        text: "I guess I should've expected that",
+        leftPic: johnPic2,
+        rightPic: null,
+
+        leftPicLeave: false,
+        rightPicLeave: false,
+
+        choices: null
+    },
 ];
 
 var omigoshJohn = [

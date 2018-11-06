@@ -3,7 +3,7 @@ function PlayerClass() {
     this.y = 80;
     this.w = 30;
     this.h = 30;
-    this.walkSpeed = 5.5;
+    this.walkSpeed = 4;
 
     this.keyHeld_walkUp = false;
     this.keyHeld_walkDown = false;

@@ -49,18 +49,15 @@ function updateAll() {
 function moveAll() {
     player.move();
     triggerNPCDialogue();
-    //console.log(cursorKeyPresses);
 }
 
 function drawAll() {
     clearScreen();
     player.draw();
     drawAndInitNPCs();
-    canvasContext.drawImage(scaledCanvas, 0, 0, scaledCanvas.width, scaledCanvas.height,
-                           0, 0, canvas.width, canvas.height);
+    
     drawDebugText();
-   
-    createDialogueEvents(); //make sure this is last
+    createDialogueEvents();
 }
 
 function drawDebugText() {
@@ -70,5 +67,7 @@ function drawDebugText() {
 }
 
 function clearScreen() {
+    canvasContext.drawImage(scaledCanvas, 0, 0, scaledCanvas.width, scaledCanvas.height,
+                           0, 0, canvas.width, canvas.height);
     drawRectToContext(scaledContext, 0, 0, scaledCanvas.width, scaledCanvas.height, "#92B6B1");
 }

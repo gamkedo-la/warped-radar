@@ -1,5 +1,6 @@
 const CANVAS_WIDTH = 800;
 const CANVAS_HEIGHT = 600;
+const PIXELS_PER_SCALE = 2.0;
 
 var scaledCanvas, scaledContext;
 var canvas, canvasContext;
@@ -13,6 +14,22 @@ window.onload = function () {
     document.body.appendChild(canvas);
     canvas.width = CANVAS_WIDTH;
     canvas.height = CANVAS_HEIGHT;
+    
+    scaledCanvas = document.createElement("canvas");
+    scaledContext = scaledCanvas.getContext("2d");
+    scaledCanvas.width = CANVAS_WIDTH/PIXELS_PER_SCALE;
+    scaledCanvas.height = CANVAS_HEIGHT/PIXELS_PER_SCALE;
+    //document.body.appendChild(scaledCanvas);
+    
+    canvasContext.mozImageSmoothingEnabled = false;
+    canvasContext.imageSmoothingEnabled = false;
+    canvasContext.msImageSmoothingEnabled = false;
+    canvasContext.imageSmoothingEnabled = false;
+    scaledContext.mozImageSmoothingEnabled = false;
+    scaledContext.imageSmoothingEnabled = false;
+    scaledContext.msImageSmoothingEnabled = false;
+    scaledContext.imageSmoothingEnabled = false;
+    
     loadImages();
 
     makeAnimatedSprites();
@@ -39,6 +56,8 @@ function drawAll() {
     clearScreen();
     player.draw();
     drawAndInitNPCs();
+    canvasContext.drawImage(scaledCanvas, 0, 0, scaledCanvas.width, scaledCanvas.height,
+                           0, 0, canvas.width, canvas.height);
     drawDebugText();
    
     createDialogueEvents(); //make sure this is last
@@ -51,5 +70,5 @@ function drawDebugText() {
 }
 
 function clearScreen() {
-    colorRect(0, 0, canvas.width, canvas.height, "#92B6B1");
+    drawRectToContext(scaledContext, 0, 0, scaledCanvas.width, scaledCanvas.height, "#92B6B1");
 }

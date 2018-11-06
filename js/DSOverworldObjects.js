@@ -1,13 +1,13 @@
 function OverworldObject() {
-    this.x = 400;
-    this.y = 200;
-    this.w = 60;
-    this.h = 60;
+    this.x = 200;
+    this.y = 100;
+    this.w = 30;
+    this.h = 30;
     this.colour = "#6B6570";
     this.messageCounter = 0;
 
     this.draw = function () {
-        drawRect(this.x, this.y, this.w, this.h, this.colour, 1);
+        drawRectToContext(scaledContext, this.x, this.y, this.w, this.h, this.colour, 1);
     }
 
     this.collidingWithPlayer = function () {
@@ -82,7 +82,7 @@ bob.dialogue = new Dialogue();
 bob.pressedZ = false;
 
 bob.colour = "#3D5467";
-bob.x = 200;
+bob.x = 100;
 bob.y = 100;
 
 bob.chatEvents = function (createElseIncrement) {

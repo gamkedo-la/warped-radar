@@ -1,8 +1,12 @@
 //Graphics Common
 function drawRect(x, y, w, h, color,opacity = 1) {
-	canvasContext.fillStyle = color;
-	canvasContext.globalAlpha = opacity;
-	canvasContext.fillRect(x, y, w, h);
+	drawRectToContext(canvasContext, x, y, w, h, color,opacity);
+}
+
+function drawRectToContext(whichContext, x, y, w, h, color,opacity = 1) {
+	whichContext.fillStyle = color;
+	whichContext.globalAlpha = opacity;
+	whichContext.fillRect(x, y, w, h);
 	//canvasContext.globalAlpha = 1.0; // Needs to be reset back to 1, or the whole canvas will use the same opacity
 }
 

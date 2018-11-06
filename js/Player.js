@@ -1,8 +1,8 @@
 function PlayerClass() {
-    this.x = 400;
-    this.y = 300;
-    this.w = 60;
-    this.h = 60;
+    this.x = 80;
+    this.y = 80;
+    this.w = 30;
+    this.h = 30;
     this.walkSpeed = 5.5;
 
     this.keyHeld_walkUp = false;
@@ -40,7 +40,7 @@ function PlayerClass() {
     }
 
     this.draw = function () {
-        drawRect(this.x, this.y, this.w, this.h, "#6B6570", 1);
+        drawRectToContext(scaledContext, this.x, this.y, this.w, this.h, "#6B6570", 1);
     }
 
 }

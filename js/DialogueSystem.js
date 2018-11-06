@@ -101,9 +101,9 @@ function Dialogue() {
             if ("rightPicLeave" in chatEvent) s2PicLeave.push(chatEvent.rightPicLeave);
         }
         //var l = this.getSceneLength(conversation);
-        console.log("Next choice label: " + nextChoiceLabel);
+        //console.log("Next choice label: " + nextChoiceLabel);
         //console.log(l.length);
-        console.log("Choice counter: " + choiceCounter);
+        //console.log("Choice counter: " + choiceCounter);
         //console.log("Current page: " + this.page);
         //console.log("Showing choice menu: " + choiceMenuShowing);
 
@@ -379,10 +379,12 @@ function Dialogue() {
             this.letterCounter = 0;
             this.page++;
             console.log("increment");
+            
             if (choiceCounter < sceneText.length) { //increases the index for branching text
                 choiceCounter++;
-            } else if (choiceCounter != 0 && choiceCounter <= sceneText.length) {
+            } else if (choiceCounter != 0 && choiceCounter == sceneText.length) {
                 //end conversation once branching dialogue has been all read, but not at the end of the array
+                this.page = this.page - 1; //to prevent portrait incrementing once text is over
                 this.isShowing = false;
                 this.resetBranchingDialogueVars();
                 console.log("end conversation");

@@ -34,7 +34,7 @@ var johnAndRoseConvo = [
         scene: "Good end",
         who: "Rose",
         voice: voiceHigh2,
-        text: "Great, thanks for asking!",
+        text: "I'm fine, how about you?",
         leftPic: johnPic,
         rightPic: rosePic,
 
@@ -45,22 +45,79 @@ var johnAndRoseConvo = [
     },
     {
         scene: "Good end",
+        who: "John",
+        voice: voiceLow1,
+        text: "This is horrible example dialogue. Also, I'm doing great, thanks for asking.",
+        leftPic: johnPic2,
+        rightPic: rosePic,
+
+        leftPicLeave: false,
+        rightPicLeave: false,
+        
+        hasChoices: false,
+        choices: null
+    },
+    {
+        scene: "Good end",
         who: "Rose",
         voice: voiceHigh2,
-        text: "Welp, gotta go, bye.",
+        text: "OK, see ya",
         leftPic: johnPic,
         rightPic: rosePic2,
 
         leftPicLeave: false,
         rightPicLeave: false,
+        
+        hasChoices: false,
+        choices: null
+    },
+    {
+        scene: "Good end",
+        who: "John",
+        voice: voiceLow1,
+        text: "Hey, wait!",
+        leftPic: johnPic2,
+        rightPic: rosePic2,
 
+        leftPicLeave: false,
+        rightPicLeave: true,
+        
+        hasChoices: false,
+        choices: null
+    },
+    {
+        scene: "Good end",
+        who: "John",
+        voice: voiceLow1,
+        text: "...",
+        leftPic: johnPic2,
+        rightPic: null,
+
+        leftPicLeave: false,
+        rightPicLeave: false,
+        
+        hasChoices: false,
+        choices: null
+    },
+    {
+        scene: "Good end",
+        who: "Rose",
+        voice: voiceHigh2,
+        text: "Just kidding!",
+        leftPic: johnPic,
+        rightPic: rosePic,
+
+        leftPicLeave: false,
+        rightPicLeave: false,
+        
+        hasChoices: false,
         choices: null
     },
     {
         scene: "Bad end",
         who: "Rose",
         voice: voiceHigh2,
-        text: "Wow, ew.",
+        text: "Yeah, I feel you.",
         leftPic: johnPic,
         rightPic: rosePic,
 
@@ -73,9 +130,9 @@ var johnAndRoseConvo = [
         scene: "Bad end",
         who: "Rose",
         voice: voiceHigh2,
-        text: "How could you even make that sound while I'm around",
+        text: "Welp, gotta go!",
         leftPic: johnPic,
-        rightPic: rosePic,
+        rightPic: rosePic2,
 
         leftPicLeave: false,
         rightPicLeave: false,
@@ -109,103 +166,6 @@ var johnAndRoseConvo = [
         choices: null
     }
 ];
-
-/*
-var johnAndRoseConvo = [
-    {
-        who: "John",
-        voice: voiceLow1,
-        text: "Hello, how are you",
-        leftPic: johnPic,
-        rightPic: null,
-
-        leftPicLeave: false,
-        rightPicLeave: false,
-        
-        hasChoices: false,
-        choices: null
-    },
-    {
-        who: "Rose",
-        voice: voiceHigh2,
-        text: "I'm fine, how about you?",
-        leftPic: johnPic,
-        rightPic: rosePic,
-
-        leftPicLeave: false,
-        rightPicLeave: false,
-        
-        hasChoices: false,
-        choices: null
-    },
-    {
-        who: "John",
-        voice: voiceLow1,
-        text: "This is horrible example dialogue. Also, I'm doing great, thanks for asking.",
-        leftPic: johnPic2,
-        rightPic: rosePic,
-
-        leftPicLeave: false,
-        rightPicLeave: false,
-        
-        hasChoices: false,
-        choices: null
-    },
-    {
-        who: "Rose",
-        voice: voiceHigh2,
-        text: "OK, see ya",
-        leftPic: johnPic,
-        rightPic: rosePic2,
-
-        leftPicLeave: false,
-        rightPicLeave: false,
-        
-        hasChoices: false,
-        choices: null
-    },
-    {
-        who: "John",
-        voice: voiceLow1,
-        text: "Hey, wait!",
-        leftPic: johnPic2,
-        rightPic: rosePic2,
-
-        leftPicLeave: false,
-        rightPicLeave: true,
-        
-        hasChoices: false,
-        choices: null
-    },
-    {
-        who: "John",
-        voice: voiceLow1,
-        text: "...",
-        leftPic: johnPic2,
-        rightPic: null,
-
-        leftPicLeave: false,
-        rightPicLeave: false,
-        
-        hasChoices: false,
-        choices: null
-    },
-    {
-        who: "Rose",
-        voice: voiceHigh2,
-        text: "Just kidding!",
-        leftPic: johnPic,
-        rightPic: rosePic,
-
-        leftPicLeave: false,
-        rightPicLeave: false,
-        
-        hasChoices: false,
-        choices: null
-    }
-
-];
-*/
 
 var johnAndRoseConvo2 = [
     {
@@ -280,7 +240,7 @@ var bobConvo = [
         who: "Bob(s)",
         voice: voiceLow2,
         text: "Do you like my name?",
-        leftPic: johnPic2,
+        leftPic: johnPic,
         rightPic: null,
 
         leftPicLeave: false,
@@ -293,7 +253,7 @@ var bobConvo = [
         who: "Bob(s)",
         voice: voiceLow2,
         text: "",
-        leftPic: johnPic2,
+        leftPic: johnPic,
         rightPic: null,
 
         leftPicLeave: false,
@@ -332,7 +292,7 @@ var bobConvo = [
         who: "Bob(s)",
         voice: voiceLow2,
         text: "You really like it?? That's the nicest thing anyone's ever told me",
-        leftPic: johnPic2,
+        leftPic: johnPic,
         rightPic: null,
 
         leftPicLeave: false,

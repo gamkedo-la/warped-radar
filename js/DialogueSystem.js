@@ -103,7 +103,7 @@ function Dialogue() {
         //var l = this.getSceneLength(conversation);
         //console.log("Next choice label: " + nextChoiceLabel);
         //console.log(l.length);
-        console.log("Choice counter: " + choiceCounter);
+        //console.log("Choice counter: " + choiceCounter);
         //console.log("Current page: " + this.page);
         //console.log("Showing choice menu: " + choiceMenuShowing);
 

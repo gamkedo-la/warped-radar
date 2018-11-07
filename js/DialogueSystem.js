@@ -38,7 +38,7 @@ function Dialogue() {
     var textAlign = "left";
 
     var line;
-    var letterSpeed = 0.6;
+    var letterSpeed = 1;
     var maxWidth = 270;
     var lineHeight = 30;
     var paused = false;
@@ -103,7 +103,7 @@ function Dialogue() {
         //var l = this.getSceneLength(conversation);
         //console.log("Next choice label: " + nextChoiceLabel);
         //console.log(l.length);
-        //console.log("Choice counter: " + choiceCounter);
+        console.log("Choice counter: " + choiceCounter);
         //console.log("Current page: " + this.page);
         //console.log("Showing choice menu: " + choiceMenuShowing);
 
@@ -173,7 +173,7 @@ function Dialogue() {
         if (selectedChoice != -1 && choiceList[this.page] != null) {
             setTimeout(function () { //small pause when choice selected
                 chose = true;
-            }, 335);
+            }, 320);
             choiceCounter = 1;
             nextChoiceLabel = choiceList[this.page][selectedChoice][1];
         }
@@ -199,7 +199,7 @@ function Dialogue() {
             canvasContext.drawImage(choiceCursorPic, choiceCursorX, choiceCursorY);
             setTimeout(function () { //pause ability to select choice in order to increment page
                 choiceMenuShowing = true;
-            }, 110);
+            }, 150);
 
         } else {
             if (selectedChoice != -1 && choiceMenuShowing && this.page >= dialogueList.length - 1) {

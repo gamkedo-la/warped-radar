@@ -1,11 +1,11 @@
-var dialogueBoxPic = new Image();
-var nameBoxPic = new Image();
-var johnPic = new Image();
-var johnPic2 = new Image();
-var rosePic = new Image();
-var rosePic2 = new Image();
-var textArrowSheet = new Image();
-var choiceCursorPic = new Image();
+var dialogueBoxPic = document.createElement("img");
+var nameBoxPic = document.createElement("img");
+var johnPic = document.createElement("img");
+var johnPic2 = document.createElement("img");
+var rosePic = document.createElement("img");
+var rosePic2 = document.createElement("img");
+var textArrowSheet = document.createElement("img");
+var choiceCursorPic = document.createElement("img");
 
 var picsToLoad = 0;
 

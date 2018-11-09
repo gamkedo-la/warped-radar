@@ -1,4 +1,4 @@
-function PlayerClass() {
+var player = new(function () {
     this.x = 80;
     this.y = 80;
     this.w = 30;
@@ -43,5 +43,4 @@ function PlayerClass() {
         drawRectToContext(scaledContext, this.x, this.y, this.w, this.h, "#6B6570", 1);
     }
 
-}
-var player = new PlayerClass();
+})();

@@ -26,20 +26,25 @@ function Dialogue() {
     //change dialogue pics here
     var dialogueImage = dialogueBoxPic;
     var nameBoxImage = nameBoxPic;
-    var dialogueBoxX = 35;
-    var dialogueBoxY = 435;
+
+    //var dialogueBoxX = 35;
+    //var dialogueBoxY = 435;
+    var dialogueBoxX = 0;
+    var dialogueBoxY = 470;
 
     var textXBuffer = 30;
-    var textYBuffer = 45;
+    var textYBuffer = 40;
     var textX = dialogueBoxX + textXBuffer;
     var textY = dialogueBoxY + textYBuffer;
-    var textColour = "#373F51";
-    var textFontFace = "25px Arial";
+    //var nameColour = "#373F51";
+    var textColour = "white";
+    var textFontFace = "25px consolas";
     var textAlign = "left";
 
     var line;
     var letterSpeed = 1;
-    var maxWidth = 270;
+    //var maxWidth = 270;
+    var maxWidth = 210;
     var lineHeight = 30;
     var paused = false;
 
@@ -52,16 +57,21 @@ function Dialogue() {
     var nameBoxTextYBuffer = 32;
     var nameBoxTextX = nameBoxX + nameBoxTextXBuffer;
     var nameBoxTextY = nameBoxY + nameBoxTextYBuffer;
-    var nameBoxTextColour = textColour;
+    //var nameBoxTextColour = nameColour;
     var nameBoxTextFontFace = "20px Arial";
     var nameBoxTextAlign = textAlign;
 
-    var arrowEffectBufferX = 95;
-    var arrowEffectBufferY = 114;
+    //var arrowEffectBufferX = 95;
+    //var arrowEffectBufferY = 114;
+    //var arrowEffectX = (dialogueBoxX * dialogueBoxX / 2) + arrowEffectBufferX;
+    //var arrowEffectY = dialogueBoxY + arrowEffectBufferY;
+    var arrowEffectBufferX = 760;
+    var arrowEffectBufferY = 100;
     var arrowEffectX = (dialogueBoxX * dialogueBoxX / 2) + arrowEffectBufferX;
     var arrowEffectY = dialogueBoxY + arrowEffectBufferY;
 
     var choiceColour;
+    var choiceTextAlign = textAlign;
     var chose = false;
     var showingChoiceMenu = false;
     var nextChoiceLabel = -1;
@@ -72,8 +82,8 @@ function Dialogue() {
     var choiceCursor = 0;
     var choiceSound = voiceHigh1;
     var selectSound = selected;
-    var cursorTextColour = "#536991";
-    var selectedTextColour = "white";
+    var cursorTextColour = "yellow";
+    var selectedTextColour = "orange";
 
     this.create = function (conversation) {
         var dialogue = [],
@@ -81,7 +91,8 @@ function Dialogue() {
             playerChoices = [],
             speakerNames = [],
             voices = [],
-            //speakerPics = [], for fade in transition
+            speakerPics = [], //for fade in transition
+            nameCols = [],
             leftPics = [],
             rightPics = [],
             s1PicLeave = [],
@@ -94,12 +105,15 @@ function Dialogue() {
             if ("scene" in chatEvent) scenes.push(chatEvent.scene);
             if ("voice" in chatEvent) voices.push(chatEvent.voice);
             if ("choices" in chatEvent) playerChoices.push(chatEvent.choices);
-            //if ("speakerPic" in chatEvent) speakerPics.push(chatEvent.speakerPic);
+            if ("speakerPic" in chatEvent) speakerPics.push(chatEvent.speakerPic);
+            if ("nameCol" in chatEvent) nameCols.push(chatEvent.nameCol);
+
             if ("leftPic" in chatEvent) leftPics.push(chatEvent.leftPic);
             if ("rightPic" in chatEvent) rightPics.push(chatEvent.rightPic);
             if ("leftPicLeave" in chatEvent) s1PicLeave.push(chatEvent.leftPicLeave);
             if ("rightPicLeave" in chatEvent) s2PicLeave.push(chatEvent.rightPicLeave);
         }
+
         //var l = this.getSceneLength(conversation);
         //console.log("Next choice label: " + nextChoiceLabel);
         //console.log(l.length);
@@ -111,9 +125,11 @@ function Dialogue() {
         //console.log("Choice cursor: " + choiceCursor);
         //console.log("Chose an option: " + chose);
 
-        this.showSpeakers(leftPics, s1PicLeave, rightPics, s2PicLeave);
+        //this.showSpeakers(leftPics, s1PicLeave, rightPics, s2PicLeave);
+        //this.showSpeakerFadeIn(speakerPics);
+        this.showSpeakers(leftPics, s1PicLeave, rightPics, s2PicLeave)
         this.showBoxElements(dialogueImage, nameBoxImage);
-        this.showTextElements(conversation, dialogue, playerChoices, scenes, voices, speakerNames);
+        this.showTextElements(conversation, dialogue, playerChoices, scenes, voices, nameCols, speakerNames);
         this.showChoices(conversation, playerChoices, dialogue);
         this.makeAChoice(playerChoices);
     }
@@ -130,12 +146,31 @@ function Dialogue() {
     this.showBoxElements = function (dialogueBoxImg, nameBoxImg) {
         if (this.isShowing) {
             canvasContext.drawImage(dialogueBoxImg, dialogueBoxX, dialogueBoxY);
-            canvasContext.drawImage(nameBoxImg, nameBoxX, nameBoxY);
+            //canvasContext.drawImage(nameBoxImg, nameBoxX, nameBoxY);
         }
     }
 
-    this.showTextElements = function (conversation, dialogueList, choiceList, sceneList, voiceList, nameList) {
+    this.changeScene = function (conversation) {
+        if (nextChoiceLabel != -1 && chose) {
+            if (chose) chose = false;
+            showingChoiceMenu = false;
+            for (var d = 0; d < conversation.length; d++) {
+                if (conversation[d].scene == nextChoiceLabel) {
+                    this.page = d; // found the index where .scene 
+                    break; // bail from for loop, quit searching
+                }
+            }
+        }
+        if (this.page == -1) { // means we didn't find a scene label match in the list
+            console.log("Error: no scene found matching target label " + nextChoiceLabel);
+        }
+    }
+
+    this.showTextElements = function (conversation, dialogueList, choiceList, sceneList, voiceList, nameColList, nameList) {
         var typewriterText;
+        var textPad = 60;
+        var measureText = canvasContext.measureText(nameList[this.page]);
+        var nameWidth = measureText.width + textPad;
         if (this.isShowing) {
             if (this.letterCounter < dialogueList[this.page].length && !paused) {
                 this.letterCounter += letterSpeed;
@@ -144,26 +179,18 @@ function Dialogue() {
                     voiceList[this.page].play();
                 }
             }
-            if (nextChoiceLabel != -1 && chose) {
-                if (chose) chose = false;
-                showingChoiceMenu = false;
-                for (var d = 0; d < conversation.length; d++) {
-                    if (conversation[d].scene == nextChoiceLabel) {
-                        this.page = d; // found the index where .scene 
-                        break; // bail from for loop, quit searching
-                    }
-                }
+            this.changeScene(conversation);
+
+            if (choiceList[this.page] == null) {
+                colorText(nameList[this.page] + ":", textX, textY, nameColList[this.page], textFontFace, textAlign, 1);
             }
-            if (this.page == -1) { // means we didn't find a scene label match in the list
-                console.log("Error: no scene found matching target label " + nextChoiceLabel);
-            }
+
             typewriterText = dialogueList[this.page].substr(0, this.letterCounter);
-            colorText(nameList[this.page], nameBoxTextX, nameBoxTextY, nameBoxTextColour, nameBoxTextFontFace, nameBoxTextAlign, 1);
             this.findPunctuation(typewriterText);
-            this.wrapText(typewriterText, textX, textY, maxWidth, lineHeight);
+            this.wrapText(typewriterText, textX + nameWidth, textY, maxWidth, lineHeight);
             if (this.letterCounter >= dialogueList[this.page].length && dialogueList[this.page] != "") {
                 //uses AnimatedSprites.js 
-                textArrowEffect.draw(arrowEffectX, arrowEffectY, 1);
+                //textArrowEffect.draw(arrowEffectX, arrowEffectY, 1);
             }
         }
     }
@@ -226,9 +253,39 @@ function Dialogue() {
             } else {
                 choiceColour = textColour;
             }
-            colorText(choiceList[i][0], 15 + textX, textY + itemSpace * i, choiceColour, textFontFace, textAlign, 1);
+            colorText(choiceList[i][0], 15 + textX, textY + itemSpace * i, choiceColour, textFontFace, choiceTextAlign, 1);
         }
         this.updateChoiceCursor(choiceList);
+    }
+
+    this.updateChoiceCursor = function (choiceList) {
+        if (showingChoiceMenu) {
+            if (pressed_space) {
+                if (cursorKeyPresses === 1) {
+                    selectedChoice = choiceCursor;
+                    selectSound.play();
+                }
+            }
+            if (cursorUp && selectedChoice == -1) {
+                if (cursorKeyPresses === 1) {
+                    choiceCursor--;
+                    choiceSound.play();
+                    if (choiceCursor < 0) {
+                        choiceCursor += choiceList.length;
+                    }
+                }
+            }
+            if (cursorDown && selectedChoice == -1) {
+                if (cursorKeyPresses === 1) {
+                    choiceCursor = (choiceCursor + 1) % choiceList.length;
+                    choiceSound.play();
+                    if (choiceCursor > choiceList.length - 1) {
+                        choiceCursor = 0;
+                    }
+                }
+            }
+            cursorKeyPresses = 0;
+        }
     }
 
     this.setupSpeakerFadeIn = function (speakerImgList) {
@@ -268,36 +325,6 @@ function Dialogue() {
             this.speaker2X += tweenOutSpeed;
         } else if (this.isShowing && this.speaker2X > speaker2FinalX) {
             this.speaker2X -= tweenInSpeed;
-        }
-    }
-    
-    this.updateChoiceCursor = function (choiceList) {
-        if (showingChoiceMenu) {
-            if (pressed_space) {
-                if (cursorKeyPresses === 1) {
-                    selectedChoice = choiceCursor;
-                    selectSound.play();
-                }
-            }
-            if (cursorUp && selectedChoice == -1) {
-                if (cursorKeyPresses === 1) {
-                    choiceCursor--;
-                    choiceSound.play();
-                    if (choiceCursor < 0) {
-                        choiceCursor += choiceList.length;
-                    }
-                }
-            }
-            if (cursorDown && selectedChoice == -1) {
-                if (cursorKeyPresses === 1) {
-                    choiceCursor = (choiceCursor + 1) % choiceList.length;
-                    choiceSound.play();
-                    if (choiceCursor > choiceList.length - 1) {
-                        choiceCursor = 0;
-                    }
-                }
-            }
-            cursorKeyPresses = 0;
         }
     }
 
@@ -378,14 +405,14 @@ function Dialogue() {
         } else if (this.page < dialogue.length - 1 && !showingChoiceMenu || (!chose && nextChoiceLabel != -1) && (choiceCounter < sceneText.length)) {
             this.letterCounter = 0;
             this.page++;
-            
+
             if (choiceCounter < sceneText.length) { //increases the index for branching text
                 choiceCounter++;
             } else if (choiceCounter != 0 && choiceCounter == sceneText.length) {
                 //end conversation once branching dialogue has been all read, but not at the end of the array
                 this.isShowing = false;
                 //to prevent portrait incrementing once text is over
-                if (!this.isShowing) this.page = this.page - 1; 
+                if (!this.isShowing) this.page = this.page - 1;
                 this.resetBranchingDialogueVars();
             }
         } else if (this.page >= dialogue.length - 1) {

@@ -14,13 +14,13 @@ window.onload = function () {
     document.body.appendChild(canvas);
     canvas.width = CANVAS_WIDTH;
     canvas.height = CANVAS_HEIGHT;
-    
+
     scaledCanvas = document.createElement("canvas");
     scaledContext = scaledCanvas.getContext("2d");
-    scaledCanvas.width = CANVAS_WIDTH/PIXELS_PER_SCALE;
-    scaledCanvas.height = CANVAS_HEIGHT/PIXELS_PER_SCALE;
+    scaledCanvas.width = CANVAS_WIDTH / PIXELS_PER_SCALE;
+    scaledCanvas.height = CANVAS_HEIGHT / PIXELS_PER_SCALE;
     //document.body.appendChild(scaledCanvas);
-    
+
     canvasContext.mozImageSmoothingEnabled = false;
     canvasContext.imageSmoothingEnabled = false;
     canvasContext.msImageSmoothingEnabled = false;
@@ -29,7 +29,7 @@ window.onload = function () {
     scaledContext.imageSmoothingEnabled = false;
     scaledContext.msImageSmoothingEnabled = false;
     scaledContext.imageSmoothingEnabled = false;
-    
+
     loadImages();
 
     makeAnimatedSprites();
@@ -55,9 +55,10 @@ function drawAll() {
     clearScreen();
     player.draw();
     drawAndInitNPCs();
-    
+    canvasContext.drawImage(gameBorderPic, 0, 0);
     drawDebugText();
     createDialogueEvents();
+    inventory.draw();
 }
 
 function drawDebugText() {
@@ -68,6 +69,6 @@ function drawDebugText() {
 
 function clearScreen() {
     canvasContext.drawImage(scaledCanvas, 0, 0, scaledCanvas.width, scaledCanvas.height,
-                           0, 0, canvas.width, canvas.height);
-    drawRectToContext(scaledContext, 0, 0, scaledCanvas.width, scaledCanvas.height, "#92B6B1");
+        0, 0, canvas.width, canvas.height);
+    drawRectToContext(scaledContext, 0, 0, scaledCanvas.width, scaledCanvas.height, "#223344");
 }

@@ -1,11 +1,16 @@
 var dialogueBoxPic = document.createElement("img");
 var nameBoxPic = document.createElement("img");
+var textArrowSheet = document.createElement("img");
+var choiceCursorPic = document.createElement("img");
+
+var inventoryPic = document.createElement("img");
+
+var gameBorderPic = document.createElement("img");
+
 var johnPic = document.createElement("img");
 var johnPic2 = document.createElement("img");
 var rosePic = document.createElement("img");
 var rosePic2 = document.createElement("img");
-var textArrowSheet = document.createElement("img");
-var choiceCursorPic = document.createElement("img");
 
 var picsToLoad = 0;
 
@@ -30,7 +35,9 @@ function loadImages() {
         {varName: rosePic, theFile: "img/rose.png"},
         {varName: rosePic2, theFile: "img/rose2.png"},
         {varName: textArrowSheet, theFile: "img/textArrow.png"},
-        {varName: choiceCursorPic, theFile: "img/choicecursor.png"}
+        {varName: choiceCursorPic, theFile: "img/choicecursor.png"},
+        {varName: gameBorderPic, theFile: "img/gameBorder.png"},
+        {varName: inventoryPic, theFile: "img/inventory.png"}
     ];
     
     picsToLoad = imageList.length;

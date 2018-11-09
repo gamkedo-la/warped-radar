@@ -63,7 +63,7 @@ function Dialogue() {
 
     var choiceColour;
     var chose = false;
-    var choiceMenuShowing = false;
+    var showingChoiceMenu = false;
     var nextChoiceLabel = -1;
     var selectedChoice = -1;
     var choiceCounter = 1;
@@ -105,7 +105,7 @@ function Dialogue() {
         //console.log(l.length);
         //console.log("Choice counter: " + choiceCounter);
         //console.log("Current page: " + this.page);
-        //console.log("Showing choice menu: " + choiceMenuShowing);
+        //console.log("Showing choice menu: " + showingChoiceMenu);
 
         //console.log("Selected choice: " + selectedChoice);
         //console.log("Choice cursor: " + choiceCursor);
@@ -146,7 +146,7 @@ function Dialogue() {
             }
             if (nextChoiceLabel != -1 && chose) {
                 if (chose) chose = false;
-                choiceMenuShowing = false;
+                showingChoiceMenu = false;
                 for (var d = 0; d < conversation.length; d++) {
                     if (conversation[d].scene == nextChoiceLabel) {
                         this.page = d; // found the index where .scene 
@@ -193,17 +193,17 @@ function Dialogue() {
 
     this.showChoices = function (conversation, choiceList, dialogueList) {
         var sceneText = this.getSceneLength(conversation);
-        if (!choiceMenuShowing) choiceCursor = 0;
+        if (!showingChoiceMenu) choiceCursor = 0;
         if (conversation[this.page].text == "" && choiceList[this.page] != null && this.isShowing) {
             this.setupChoices(conversation, choiceList[this.page]);
             canvasContext.drawImage(choiceCursorPic, choiceCursorX, choiceCursorY);
             setTimeout(function () { //pause ability to select choice in order to increment page
-                choiceMenuShowing = true;
+                showingChoiceMenu = true;
             }, 150);
 
         } else {
-            if (selectedChoice != -1 && choiceMenuShowing && this.page >= dialogueList.length - 1) {
-                choiceMenuShowing = false;
+            if (selectedChoice != -1 && showingChoiceMenu && this.page >= dialogueList.length - 1) {
+                showingChoiceMenu = false;
                 console.log("default bool switch");
             }
         }
@@ -218,7 +218,7 @@ function Dialogue() {
                 var cursorYOffset = 17;
                 choiceCursorX = textX - cursorXOffset;
                 choiceCursorY = (textY + itemSpace * i) - cursorYOffset;
-                if (pressed_space && choiceMenuShowing) {
+                if (pressed_space && showingChoiceMenu) {
                     choiceColour = selectedTextColour;
                 } else {
                     choiceColour = cursorTextColour;
@@ -272,12 +272,11 @@ function Dialogue() {
     }
     
     this.updateChoiceCursor = function (choiceList) {
-        if (choiceMenuShowing) {
+        if (showingChoiceMenu) {
             if (pressed_space) {
                 if (cursorKeyPresses === 1) {
                     selectedChoice = choiceCursor;
                     selectSound.play();
-                    //console.log("choose this one!");
                 }
             }
             if (cursorUp && selectedChoice == -1) {
@@ -364,7 +363,7 @@ function Dialogue() {
     this.resetBranchingDialogueVars = function () {
         nextChoiceLabel = -1;
         selectedChoice = -1;
-        choiceCounter = 0;
+        choiceCounter = 1;
     }
 
     this.incrementPage = function (conversation) {
@@ -376,10 +375,9 @@ function Dialogue() {
         }
         if (this.letterCounter < dialogue[this.page].length) {
             this.letterCounter = dialogue[this.page].length;
-        } else if (this.page < dialogue.length - 1 && !choiceMenuShowing || nextChoiceLabel != -1 && choiceCounter < sceneText.length) {
+        } else if (this.page < dialogue.length - 1 && !showingChoiceMenu || (!chose && nextChoiceLabel != -1) && (choiceCounter < sceneText.length)) {
             this.letterCounter = 0;
             this.page++;
-            //console.log("increment");
             
             if (choiceCounter < sceneText.length) { //increases the index for branching text
                 choiceCounter++;
@@ -389,14 +387,12 @@ function Dialogue() {
                 //to prevent portrait incrementing once text is over
                 if (!this.isShowing) this.page = this.page - 1; 
                 this.resetBranchingDialogueVars();
-                //console.log("end conversation");
             }
         } else if (this.page >= dialogue.length - 1) {
             this.isShowing = false;
             this.letterCounter = 0;
             //if branching dialogue finishes at the end of the array, reset variables
             this.resetBranchingDialogueVars();
-            //console.log("end conversation");
         }
     }
 

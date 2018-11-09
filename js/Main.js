@@ -1,6 +1,6 @@
 const CANVAS_WIDTH = 800;
 const CANVAS_HEIGHT = 600;
-const PIXELS_PER_SCALE = 2.0;
+const PIXELS_PER_SCALE = 2.25;
 
 var scaledCanvas, scaledContext;
 var canvas, canvasContext;

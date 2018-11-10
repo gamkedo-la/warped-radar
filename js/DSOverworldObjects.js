@@ -1,8 +1,8 @@
 function OverworldObject() {
     this.x = 200;
     this.y = 100;
-    this.w = 30;
-    this.h = 30;
+    this.w = 32;
+    this.h = 32;
     this.colour = "#6B6570";
     this.messageCounter = 0;
 

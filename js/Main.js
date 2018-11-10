@@ -1,6 +1,6 @@
 const CANVAS_WIDTH = 800;
 const CANVAS_HEIGHT = 600;
-const PIXELS_PER_SCALE = 2.5;
+const PIXELS_PER_SCALE = 2.0;
 
 var scaledCanvas, scaledContext;
 var canvas, canvasContext;
@@ -59,21 +59,26 @@ function drawAll() {
     drawWorld();
     player.draw();
     drawAndInitNPCs();
-    canvasContext.drawImage(gameBorderPic, 0, 0);
+    drawGameBorder();
     drawDebugText();
     createDialogueEvents();
-    inventory.draw();
+    
+    inventory.drawUI();
     
     endPan();
+}
+
+function clearScreen() {
+    canvasContext.drawImage(scaledCanvas, 0, 0, scaledCanvas.width, scaledCanvas.height,
+        0, 0, canvas.width, canvas.height);
+}
+
+function drawGameBorder() {
+    canvasContext.drawImage(gameBorderPic, 0, 0);
 }
 
 function drawDebugText() {
     colorText("Pressed Space: " + pressed_space, 20, 30, "white", "20px Arial", "left", 1);
     colorText("Colliding with John: " + john.collidingWithPlayer(), 20, 50, "white", "20px Arial", "left", 1);
     colorText("Colliding with Bob: " + bob.collidingWithPlayer(), 20, 70, "white", "20px Arial", "left", 1);
-}
-
-function clearScreen() {
-    canvasContext.drawImage(scaledCanvas, 0, 0, scaledCanvas.width, scaledCanvas.height,
-        0, 0, canvas.width, canvas.height);
 }

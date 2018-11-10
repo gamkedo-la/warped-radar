@@ -1,8 +1,8 @@
 var player = new (function () {
     this.x = 80;
     this.y = 80;
-    this.w = 30;
-    this.h = 30;
+    this.w = 32;
+    this.h = 32;
     this.walkSpeed = 4;
 
     this.keyHeld_walkUp = false;

@@ -53,12 +53,14 @@ function moveAll() {
 
 function drawAll() {
     clearScreen();
+    
     drawWorld();
     
     player.draw();
     drawAndInitNPCs();
     canvasContext.drawImage(gameBorderPic, 0, 0);
     drawDebugText();
+  
     createDialogueEvents();
     
     inventory.draw();

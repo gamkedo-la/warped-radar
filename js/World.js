@@ -1,5 +1,5 @@
-const TILE_W = 32;
-const TILE_H = 32;
+const WORLD_W = 32;
+const WORLD_H = 32;
 const WORLD_COLS = 20;
 const WORLD_ROWS = 15;
 
@@ -40,10 +40,10 @@ function drawWorld() {
             var useImg = worldPics[tileKindHere];
 
             scaledContext.drawImage(useImg, drawTileX, drawTileY);
-            drawTileX += TILE_W;
+            drawTileX += WORLD_W;
             arrayIndex++;
         } // end of for each col
-        drawTileY += TILE_H;
+        drawTileY += WORLD_H;
         drawTileX = 0;
     } // end of for each row
 

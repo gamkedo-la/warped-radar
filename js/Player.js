@@ -1,4 +1,4 @@
-var player = new(function () {
+var player = new (function () {
     this.x = 80;
     this.y = 80;
     this.w = 30;

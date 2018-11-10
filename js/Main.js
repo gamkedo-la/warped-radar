@@ -53,9 +53,8 @@ function moveAll() {
 }
 
 function drawAll() {
-    scaledContext.save();
-    scaledContext.translate(-camPanX, -camPanY);
-
+    beginPan();
+    
     clearScreen();
     drawWorld();
     player.draw();
@@ -64,8 +63,8 @@ function drawAll() {
     drawDebugText();
     createDialogueEvents();
     inventory.draw();
-
-    scaledContext.restore();
+    
+    endPan();
 }
 
 function drawDebugText() {

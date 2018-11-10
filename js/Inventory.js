@@ -14,24 +14,36 @@ var inventory = new(function () {
 
    /* var inventoryItems = [
         {
-            name: ,
-            description: ,
-            isObtained:
+            name: "Broken sunglasses",
+            description: "Oh man, are these brand?! I can't tell. I wonder which would cost more, fixing these, or buying some new sunnies?",
+            isObtained: ,
+            giveTo:,
+            canUseWith:,
+            examine: 
         },
         {
-            name: ,
+            name: "Dog collar",
             description: ,
-            isObtained:
+            isObtained: ,
+            giveTo: ,
+            canUseWith:,
+            examine: 
         },
         {
-            name: ,
+            name: "Monthly club pass",
             description: ,
-            isObtained:
+            isObtained: ,
+            giveTo: ,
+            canUseWith:,
+            examine: 
         },
         {
-            name: ,
+            name: "Half eaten sandwich",
             description: ,
-            isObtained:
+            isObtained: ,
+            giveTo: ,
+            canUseWith:,
+            examine: 
         }
     ];*/
 

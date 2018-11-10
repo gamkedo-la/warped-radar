@@ -45,7 +45,8 @@ function loadImages() {
         {varName: gameBorderPic, theFile: "gameBorder.png"},
         {varName: inventoryPic, theFile: "inventory.png"},
         
-        {worldType: TILE_GROUND, theFile: "ground.png"}
+        {worldType: TILE_GROUND, theFile: "ground.png"},
+        {worldType: TILE_RANDOM, theFile: "random.png"}
     ];
     
     picsToLoad = imageList.length;

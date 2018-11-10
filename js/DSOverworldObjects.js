@@ -81,9 +81,9 @@ var bob = new OverworldObject();
 bob.dialogue = new Dialogue();
 bob.pressedZ = false;
 
-bob.colour = "#3D5467";
-bob.x = 100;
-bob.y = 100;
+bob.colour = "green";
+bob.x = 300;
+bob.y = 400;
 
 bob.chatEvents = function (createElseIncrement) {
     if (this.pressedZ) {

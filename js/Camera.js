@@ -2,7 +2,7 @@ const CAM_SPEED = 10;
 
 var camPanX = 0.0;
 var camPanY = 0.0;
-const PLAYER_DIST_FROM_CENTER_BEFORE_CAMERA_PAN_X = 180;
+const PLAYER_DIST_FROM_CENTER_BEFORE_CAMERA_PAN_X = 200;
 const PLAYER_DIST_FROM_CENTER_BEFORE_CAMERA_PAN_Y = 100;
 
 function instantCamFollow() {
@@ -35,7 +35,6 @@ function cameraFollow() {
      instantCamFollow();
 
     // this next code blocks the game from showing out of bounds
-    // (this isn't required, if you don't mind seeing beyond edges)
     if (camPanX < 0) {
         camPanX = 0;
     }
@@ -50,4 +49,13 @@ function cameraFollow() {
     if (camPanY > maxPanTop) {
         camPanY = maxPanTop;
     }
+}
+
+function beginPan() {
+    scaledContext.save();
+    scaledContext.translate(-camPanX, -camPanY);
+}
+
+function endPan() {
+    scaledContext.restore();
 }

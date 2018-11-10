@@ -9,10 +9,10 @@ var inventory = new(function () {
     var textColour = "white";
     var textAlign = "left";
 
-    var titleTextX = 300;
+    var titleTextX = 320;
     var titleTextY = this.y + 40;
 
-    var inventoryItems = [
+   /* var inventoryItems = [
         {
             name: ,
             description: ,
@@ -33,12 +33,12 @@ var inventory = new(function () {
             description: ,
             isObtained:
         }
-    ];
+    ];*/
 
     this.draw = function () {
         if (this.isShowing) {
             canvasContext.drawImage(inventoryImg, this.x, this.y);
-            //colorText("Inventory", titleTextX, titleTextY, textColour, textFontFace, textAlign, 1);
+            colorText("Inventory", titleTextX, titleTextY, textColour, textFontFace, textAlign, 1);
         }
     }
 

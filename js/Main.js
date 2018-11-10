@@ -53,11 +53,14 @@ function moveAll() {
 
 function drawAll() {
     clearScreen();
+    drawWorld();
+    
     player.draw();
     drawAndInitNPCs();
     canvasContext.drawImage(gameBorderPic, 0, 0);
     drawDebugText();
     createDialogueEvents();
+    
     inventory.draw();
 }
 
@@ -70,5 +73,4 @@ function drawDebugText() {
 function clearScreen() {
     canvasContext.drawImage(scaledCanvas, 0, 0, scaledCanvas.width, scaledCanvas.height,
         0, 0, canvas.width, canvas.height);
-    drawRectToContext(scaledContext, 0, 0, scaledCanvas.width, scaledCanvas.height, "#223344");
 }

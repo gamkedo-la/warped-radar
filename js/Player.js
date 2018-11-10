@@ -23,7 +23,7 @@ var player = new(function () {
     }
 
     this.move = function () {
-        if (dialogueNotShowing()) {
+        if (dialogueNotShowing() && !inventory.isShowing) {
             if (this.keyHeld_walkUp) {
                 this.y -= this.walkSpeed;
             }

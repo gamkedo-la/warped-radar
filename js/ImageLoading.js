@@ -13,6 +13,7 @@ var rosePic = document.createElement("img");
 var rosePic2 = document.createElement("img");
 
 var picsToLoad = 0;
+var worldPics = [];
 
 function countLoadedImages() {
     picsToLoad--;
@@ -23,25 +24,39 @@ function countLoadedImages() {
 
 function beginLoadingImage(imageVar, fileName) {
     imageVar.onload = countLoadedImages;
-    imageVar.src = fileName;
+    imageVar.src = "img/" + fileName;
+}
+
+function loadImageForWorldCode(worldCode, fileName) {
+    worldPics[worldCode] = document.createElement("img");
+	beginLoadingImage(worldPics[worldCode], fileName);
 }
 
 function loadImages() {
     var imageList = [
-        {varName: dialogueBoxPic, theFile: "img/dialoguebox.png"},
-        {varName: nameBoxPic, theFile: "img/namebox.png"},
-        {varName: johnPic, theFile: "img/john.png"},
-        {varName: johnPic2, theFile: "img/john2.png"},
-        {varName: rosePic, theFile: "img/rose.png"},
-        {varName: rosePic2, theFile: "img/rose2.png"},
-        {varName: textArrowSheet, theFile: "img/textArrow.png"},
-        {varName: choiceCursorPic, theFile: "img/choicecursor.png"},
-        {varName: gameBorderPic, theFile: "img/gameBorder.png"},
-        {varName: inventoryPic, theFile: "img/inventory.png"}
+        {varName: dialogueBoxPic, theFile: "dialoguebox.png"},
+        {varName: nameBoxPic, theFile: "namebox.png"},
+        {varName: johnPic, theFile: "john.png"},
+        {varName: johnPic2, theFile: "john2.png"},
+        {varName: rosePic, theFile: "rose.png"},
+        {varName: rosePic2, theFile: "rose2.png"},
+        {varName: textArrowSheet, theFile: "textArrow.png"},
+        {varName: choiceCursorPic, theFile: "choicecursor.png"},
+        {varName: gameBorderPic, theFile: "gameBorder.png"},
+        {varName: inventoryPic, theFile: "inventory.png"},
+        
+        {worldType: TILE_RANDOM, theFile: "random.png"},
+        {worldType: TILE_GROUND, theFile: "ground.png"}
     ];
     
     picsToLoad = imageList.length;
-    for (var i = 0; i < imageList.length; i++) {
-        beginLoadingImage(imageList[i].varName, imageList[i].theFile);
-    }
+    
+    for(var i=0;i<imageList.length;i++) {
+		if(imageList[i].varName != undefined) {
+			beginLoadingImage(imageList[i].varName, imageList[i].theFile);
+		} else {
+			loadImageForWorldCode(imageList[i].worldType, imageList[i].theFile);
+		}
+	}
 }
+

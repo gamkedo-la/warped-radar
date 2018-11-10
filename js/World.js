@@ -4,7 +4,6 @@ const WORLD_COLS = 20;
 const WORLD_ROWS = 15;
 
 const TILE_GROUND = 0;
-const TILE_RANDOM = 1;
 
 var worldGrid = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,

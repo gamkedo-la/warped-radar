@@ -351,22 +351,29 @@ function Dialogue() {
         var breaks = dialogueWords.split("\n"),
             newLines = "";
         for (var i = 0; i < breaks.length; i++) {
-            newLines = newLines + breaks[i] + "  Gamkedo  ";
+            newLines = newLines + breaks[i] + "GAMKEDOCLUB";
         }
         var words = newLines.split(" ");
         return words;
     }
 
     this.calculateLineBreak = function (dialogueWords, x, y, maxWidth, lineHeight) {
-        var words = this.getWordsAndBreaksFromString(dialogueWords),
+        var breaks = dialogueWords.split("\n"),
+            newLines = "";
+        for (var i = 0; i < breaks.length; i++) {
+            newLines = newLines + breaks[i] + " GAMKEDOCLUB ";
+        }
+        var words = newLines.split(" "),
+        /*return words;
+        var words = this.getWordsAndBreaksFromString(dialogueWords),*/
             checkEndOfLine, checkTextWidth, textWidth;
         line = "";
         for (var i = 0; i < words.length; i++) {
-            if (words[i] != "Gamkedo") {
+            if (words[i] != "GAMKEDOCLUB") {
                 checkEndOfLine = line + words[i] + " ";
                 checkTextWidth = canvasContext.measureText(checkEndOfLine);
                 textWidth = checkTextWidth.width;
-                if (textWidth > maxWidth && i > 0) {
+                if (textWidth > maxWidth  && i > 0) {
                     colorText(line, x, y, textColour, textFontFace, textAlign, 1);
                     line = words[i] + " ";
                     y += lineHeight;
@@ -376,7 +383,7 @@ function Dialogue() {
             } else {
                 colorText(line, x, y, textColour, textFontFace, textAlign, 1);
                 line = "";
-                y += lineHeight;
+                y += lineHeight + "GAMKEDOCLUB";
             }
         }
     }

@@ -1,6 +1,6 @@
 const CANVAS_WIDTH = 800;
 const CANVAS_HEIGHT = 600;
-const PIXELS_PER_SCALE = 2.25;
+const PIXELS_PER_SCALE = 2.5;
 
 var scaledCanvas, scaledContext;
 var canvas, canvasContext;
@@ -49,21 +49,23 @@ function updateAll() {
 function moveAll() {
     player.move();
     triggerNPCDialogue();
+    cameraFollow();
 }
 
 function drawAll() {
+    scaledContext.save();
+    scaledContext.translate(-camPanX, -camPanY);
+
     clearScreen();
-    
     drawWorld();
-    
     player.draw();
     drawAndInitNPCs();
     canvasContext.drawImage(gameBorderPic, 0, 0);
     drawDebugText();
-  
     createDialogueEvents();
-    
     inventory.draw();
+
+    scaledContext.restore();
 }
 
 function drawDebugText() {

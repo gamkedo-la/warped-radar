@@ -16,7 +16,7 @@ function OverworldObject() {
 
     this.onTrigger = function (dialogue) {
         if (this.collidingWithPlayer() && !dialogue.isShowing) {
-            if (pressed_space /*|| pressed_mbLeft*/) {
+            if (pressed_space) {
                 if (dialogue.page <= 0) {
                     dialogue.isShowing = true;
                     dialogue.letterCounter = 0;
@@ -25,9 +25,6 @@ function OverworldObject() {
                 if ((dialogue.speakerX <= dialogue.speakerStartX) && (dialogue.speaker2X >= dialogue.speaker2StartX)) {
                     dialogue.page = 0;
                 }
-               /*if (dialogue.speakerAlpha <= 0.0) { 
-                    dialogue.page = 0;
-                }*/
             }
         } else if (!this.collidingWithPlayer()) {
             dialogue.isShowing = false;

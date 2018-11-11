@@ -4,11 +4,6 @@ function Dialogue() {
     this.letterCounter = 0;
     this.page = -1;
 
-    //speaker fade in vars
-    this.speakerCentredX = 220;
-    this.speakerAlpha = 0.0;
-    this.alphaChange = 0.1;
-
     //speaker tweening vars
     this.speakerStartX = -265;
     this.speakerX = this.speakerStartX;
@@ -23,12 +18,8 @@ function Dialogue() {
     var tweenInSpeed = 20;
     var tweenOutSpeed = 40;
 
-    //change dialogue pics here
     var dialogueImage = dialogueBoxPic;
-    var nameBoxImage = nameBoxPic;
 
-    //var dialogueBoxX = 35;
-    //var dialogueBoxY = 435;
     var dialogueBoxX = 0;
     var dialogueBoxY = 470;
 
@@ -36,39 +27,15 @@ function Dialogue() {
     var textYBuffer = 40;
     var textX = dialogueBoxX + textXBuffer;
     var textY = dialogueBoxY + textYBuffer;
-    //var nameColour = "#373F51";
     var textColour = "white";
     var textFontFace = "25px consolas";
     var textAlign = "left";
 
     var line;
     var letterSpeed = 1;
-    //var maxWidth = 270;
     var maxWidth = 210;
     var lineHeight = 30;
     var paused = false;
-
-    var nameBoxXBuffer;
-    var nameBoxYBuffer = 45;
-    var nameBoxX = dialogueBoxX;
-    var nameBoxY = dialogueBoxY - nameBoxYBuffer;
-
-    var nameBoxTextXBuffer = 60;
-    var nameBoxTextYBuffer = 32;
-    var nameBoxTextX = nameBoxX + nameBoxTextXBuffer;
-    var nameBoxTextY = nameBoxY + nameBoxTextYBuffer;
-    //var nameBoxTextColour = nameColour;
-    var nameBoxTextFontFace = "20px Arial";
-    var nameBoxTextAlign = textAlign;
-
-    //var arrowEffectBufferX = 95;
-    //var arrowEffectBufferY = 114;
-    //var arrowEffectX = (dialogueBoxX * dialogueBoxX / 2) + arrowEffectBufferX;
-    //var arrowEffectY = dialogueBoxY + arrowEffectBufferY;
-    var arrowEffectBufferX = 760;
-    var arrowEffectBufferY = 100;
-    var arrowEffectX = (dialogueBoxX * dialogueBoxX / 2) + arrowEffectBufferX;
-    var arrowEffectY = dialogueBoxY + arrowEffectBufferY;
 
     var choiceColour;
     var choiceTextAlign = textAlign;
@@ -91,7 +58,6 @@ function Dialogue() {
             playerChoices = [],
             speakerNames = [],
             voices = [],
-            speakerPics = [], //for fade in transition
             nameCols = [],
             leftPics = [],
             rightPics = [],
@@ -105,37 +71,18 @@ function Dialogue() {
             if ("scene" in chatEvent) scenes.push(chatEvent.scene);
             if ("voice" in chatEvent) voices.push(chatEvent.voice);
             if ("choices" in chatEvent) playerChoices.push(chatEvent.choices);
-            if ("speakerPic" in chatEvent) speakerPics.push(chatEvent.speakerPic);
             if ("nameCol" in chatEvent) nameCols.push(chatEvent.nameCol);
-
             if ("leftPic" in chatEvent) leftPics.push(chatEvent.leftPic);
             if ("rightPic" in chatEvent) rightPics.push(chatEvent.rightPic);
             if ("leftPicLeave" in chatEvent) s1PicLeave.push(chatEvent.leftPicLeave);
             if ("rightPicLeave" in chatEvent) s2PicLeave.push(chatEvent.rightPicLeave);
         }
 
-        //var l = this.getSceneLength(conversation);
-        //console.log("Next choice label: " + nextChoiceLabel);
-        //console.log(l.length);
-        //console.log("Choice counter: " + choiceCounter);
-        //console.log("Current page: " + this.page);
-        //console.log("Showing choice menu: " + showingChoiceMenu);
-
-        //console.log("Selected choice: " + selectedChoice);
-        //console.log("Choice cursor: " + choiceCursor);
-        //console.log("Chose an option: " + chose);
-
-        //this.showSpeakers(leftPics, s1PicLeave, rightPics, s2PicLeave);
-        //this.showSpeakerFadeIn(speakerPics);
         this.showSpeakers(leftPics, s1PicLeave, rightPics, s2PicLeave)
-        this.showBoxElements(dialogueImage, nameBoxImage);
+        this.showBoxElements(dialogueImage);
         this.showTextElements(conversation, dialogue, playerChoices, scenes, voices, nameCols, speakerNames);
         this.showChoices(conversation, playerChoices, dialogue);
         this.makeAChoice(playerChoices);
-    }
-
-    this.showSpeakerFadeIn = function (speakerPicList) {
-        if (speakerPicList[this.page] != null) this.setupSpeakerFadeIn(speakerPicList);
     }
 
     this.showSpeakers = function (leftPicList, leftPicLeaveList, rightPicList, rightPicLeaveList) {
@@ -143,10 +90,9 @@ function Dialogue() {
         if (rightPicList[this.page] != null) this.setupSpeaker2Tween(rightPicList, rightPicLeaveList);
     }
 
-    this.showBoxElements = function (dialogueBoxImg, nameBoxImg) {
+    this.showBoxElements = function (dialogueBoxImg) {
         if (this.isShowing) {
             canvasContext.drawImage(dialogueBoxImg, dialogueBoxX, dialogueBoxY);
-            //canvasContext.drawImage(nameBoxImg, nameBoxX, nameBoxY);
         }
     }
 
@@ -189,12 +135,10 @@ function Dialogue() {
             this.findPunctuation(typewriterText);
             this.wrapText(typewriterText, textX + nameWidth, textY, maxWidth, lineHeight);
             if (this.letterCounter >= dialogueList[this.page].length && dialogueList[this.page] != "") {
-                //uses AnimatedSprites.js 
-                //textArrowEffect.draw(arrowEffectX, arrowEffectY, 1);
+               //finished effect here
             }
         }
     }
-
 
     this.makeAChoice = function (choiceList) {
         if (selectedChoice != -1 && choiceList[this.page] != null) {
@@ -288,24 +232,6 @@ function Dialogue() {
         }
     }
 
-    this.setupSpeakerFadeIn = function (speakerImgList) {
-        if (this.isShowing) {
-            this.speakerAlpha += this.alphaChange;
-            if (this.speakerAlpha >= 1.0) {
-                this.speakerAlpha = 1.0;
-            }
-        }
-        if (!this.isShowing) {
-            this.speakerAlpha -= this.alphaChange;
-            if (this.speakerAlpha <= 0.0) {
-                this.speakerAlpha = 0.0;
-            }
-        }
-        canvasContext.globalAlpha = this.speakerAlpha;
-        canvasContext.drawImage(speakerImgList[this.page], this.speakerCentredX, speakerY);
-        canvasContext.globalAlpha = 1;
-    }
-
     this.setupSpeakerTween = function (speakerImgList, leaveScreenList) {
         canvasContext.drawImage(speakerImgList[this.page], this.speakerX, speakerY);
         if (leaveScreenList[this.page] && this.speakerX >= this.speakerStartX) {
@@ -351,29 +277,22 @@ function Dialogue() {
         var breaks = dialogueWords.split("\n"),
             newLines = "";
         for (var i = 0; i < breaks.length; i++) {
-            newLines = newLines + breaks[i] + "GAMKEDOCLUB";
+            newLines = newLines + breaks[i] + "  Gamkedo  ";
         }
         var words = newLines.split(" ");
         return words;
     }
 
     this.calculateLineBreak = function (dialogueWords, x, y, maxWidth, lineHeight) {
-        var breaks = dialogueWords.split("\n"),
-            newLines = "";
-        for (var i = 0; i < breaks.length; i++) {
-            newLines = newLines + breaks[i] + " GAMKEDOCLUB ";
-        }
-        var words = newLines.split(" "),
-        /*return words;
-        var words = this.getWordsAndBreaksFromString(dialogueWords),*/
+        var words = this.getWordsAndBreaksFromString(dialogueWords),
             checkEndOfLine, checkTextWidth, textWidth;
         line = "";
         for (var i = 0; i < words.length; i++) {
-            if (words[i] != "GAMKEDOCLUB") {
+            if (words[i] != "Gamkedo") {
                 checkEndOfLine = line + words[i] + " ";
                 checkTextWidth = canvasContext.measureText(checkEndOfLine);
                 textWidth = checkTextWidth.width;
-                if (textWidth > maxWidth  && i > 0) {
+                if (textWidth > maxWidth && i > 0) {
                     colorText(line, x, y, textColour, textFontFace, textAlign, 1);
                     line = words[i] + " ";
                     y += lineHeight;
@@ -383,7 +302,7 @@ function Dialogue() {
             } else {
                 colorText(line, x, y, textColour, textFontFace, textAlign, 1);
                 line = "";
-                y += lineHeight + "GAMKEDOCLUB";
+                y += lineHeight;
             }
         }
     }

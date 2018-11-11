@@ -1,5 +1,4 @@
 var dialogueBoxPic = document.createElement("img");
-var nameBoxPic = document.createElement("img");
 var textArrowSheet = document.createElement("img");
 var choiceCursorPic = document.createElement("img");
 
@@ -35,12 +34,10 @@ function loadImageForWorldCode(worldCode, fileName) {
 function loadImages() {
     var imageList = [
         {varName: dialogueBoxPic, theFile: "dialoguebox.png"},
-        {varName: nameBoxPic, theFile: "namebox.png"},
         {varName: johnPic, theFile: "john.png"},
         {varName: johnPic2, theFile: "john2.png"},
         {varName: rosePic, theFile: "rose.png"},
         {varName: rosePic2, theFile: "rose2.png"},
-        {varName: textArrowSheet, theFile: "textArrow.png"},
         {varName: choiceCursorPic, theFile: "choicecursor.png"},
         {varName: gameBorderPic, theFile: "gameBorder.png"},
         {varName: inventoryPic, theFile: "inventory.png"},

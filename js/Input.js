@@ -24,8 +24,6 @@ var cursorKeyPresses = 0;
 function setupInput() {
     document.addEventListener("keydown", keyPressed);
     document.addEventListener("keyup", keyReleased);
-    document.addEventListener("mousedown", mousePressed);
-    document.addEventListener("mouseup", mouseReleased);
     player.setupInput(KEY_UP, KEY_RIGHT, KEY_DOWN, KEY_LEFT);
 }
 
@@ -72,15 +70,6 @@ function keyReleased(evt) {
             break;
     }
     keySet(evt, player, false);
-}
-
-function mousePressed(evt) {
-    //incrementTextPages();
-    pressed_mbLeft = true;
-}
-
-function mouseReleased(evt) {
-    pressed_mbLeft = false;
 }
 
 function keySet(keyEvent, whichEntity, setTo) {

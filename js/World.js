@@ -2,6 +2,8 @@ const WORLD_W = 32;
 const WORLD_H = 32;
 const WORLD_COLS = 20;
 const WORLD_ROWS = 15;
+/*const WORLD_COLS = 50;
+const WORLD_ROWS = 35;*/
 
 const TILE_GROUND = 0;
 const TILE_RANDOM = 1;

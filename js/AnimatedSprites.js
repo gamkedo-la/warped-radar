@@ -1,12 +1,14 @@
-var textArrowEffect;
+//var textArrowEffect;
 
 function makeAnimatedSprites() {
-	textArrowEffect = new AnimatedSpriteClass({
+    //create animated sprites here:
+    
+	/*textArrowEffect = new AnimatedSpriteClass({
 		name: "textArrow",
 		spriteSheet: textArrowSheet,
 		animationColFrames: 14,
 		framesUntilNext: 4,
-	});
+	});*/
 };
 
 function AnimatedSpriteClass(data) {

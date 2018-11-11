@@ -124,13 +124,10 @@ function Dialogue() {
                     voiceList[this.page].play();
                 }
             }
-
             this.changeScene(conversation);
-
             if (choiceList[this.page] == null) {
                 colorText(nameList[this.page] + ":", textX, textY, nameColList[this.page], textFontFace, textAlign, 1);
             }
-
             typewriterText = dialogueList[this.page].substr(0, this.letterCounter);
             this.findPunctuation(typewriterText);
             this.wrapText(typewriterText, textX + nameWidth, textY, maxWidth, lineHeight);
@@ -236,13 +233,9 @@ function Dialogue() {
         if (nameList[this.page] == NPCName) {
             if (this.isShowing && this.letterCounter < dialogueList[this.page].length) {
                 if (leftPicElseRightPic) {
-                    if (this.speakerX >= speakerFinalX) {
-                        animatedSheetVar.draw(this.speakerX + xOffset, speakerY + yOffset, 1);
-                    }
+                    animatedSheetVar.draw(this.speakerX + xOffset, speakerY + yOffset, 1);
                 } else {
-                    if (this.speaker2X <= speaker2FinalX) {
-                        animatedSheetVar.draw(this.speaker2X + xOffset, speaker2Y + yOffset, 1);
-                    }
+                     animatedSheetVar.draw(this.speaker2X + xOffset, speaker2Y + yOffset, 1);
                 }
             }
         }
@@ -256,12 +249,18 @@ function Dialogue() {
             this.speakerX -= tweenOutSpeed;
         } else if (this.isShowing && this.speakerX < speakerFinalX) {
             this.speakerX += tweenInSpeed;
+            
+            //speaker specific anims
+            this.setupAnimatedMouths(dialogueList, nameList, "John", true, johnMouthMove, 130, 300);
+            this.setupAnimatedMouths(dialogueList, nameList, "Bob", true, johnMouthMove, 130, 300);
+        } else if (this.speakerX >= speakerFinalX) {
+            this.speakerX = speakerFinalX;
+            
+            //speaker specific anims
+            this.setupAnimatedMouths(dialogueList, nameList, "John", true, johnMouthMove, 150, 300);
+            this.setupAnimatedMouths(dialogueList, nameList, "Bob", true, johnMouthMove, 150, 300);
         }
         
-        //speaker specific animations
-        //john
-        this.setupAnimatedMouths(dialogueList, nameList, "John", true, johnMouthMove, 150, 300);
-        this.setupAnimatedMouths(dialogueList, nameList, "Bob", true, johnMouthMove, 150, 300);
     }
 
     this.setupSpeaker2Tween = function (dialogueList, nameList, speaker2ImgList, leaveScreenList) {
@@ -272,11 +271,18 @@ function Dialogue() {
             this.speaker2X += tweenOutSpeed;
         } else if (this.isShowing && this.speaker2X > speaker2FinalX) {
             this.speaker2X -= tweenInSpeed;
+            
+            
+            //speaker specific animations
+            this.setupAnimatedMouths(dialogueList, nameList, "Rose", false, roseMouthMove, 170, 300);
+        } else if (this.speaker2X <= speaker2FinalX) {
+            this.speaker2X = speaker2FinalX;
+            
+            
+            //speaker specific animations
+            this.setupAnimatedMouths(dialogueList, nameList, "Rose", false, roseMouthMove, 150, 300);
         }
         
-         //speaker specific animations
-        //rose
-        this.setupAnimatedMouths(dialogueList, nameList, "Rose", false, roseMouthMove, 150, 300);
     }
 
     this.findPunctuation = function (str) {

@@ -5,14 +5,14 @@ function makeAnimatedSprites() {
     johnMouthMove = new AnimatedSpriteClass({
 		name: "johnAnimatedMouth",
 		spriteSheet: johnMouthAnimatedSheet,
-		animationColFrames: 9,
+		animationColFrames: 18,
 		framesUntilNext: 4,
 	});
     
       roseMouthMove = new AnimatedSpriteClass({
 		name: "roseAnimatedMouth",
 		spriteSheet: roseMouthAnimatedSheet,
-		animationColFrames: 9,
+		animationColFrames: 18,
 		framesUntilNext: 4,
 	});
 };

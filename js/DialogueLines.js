@@ -4,7 +4,7 @@ var johnAndRoseConvo = [
         who: "John",
         nameCol: "lightblue",
         voice: voiceLow1,
-        text: "Hello, how are you",
+        text: "Hello, how are you?",
         leftPic: johnPic,
         rightPic: null,
 

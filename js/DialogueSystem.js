@@ -1,4 +1,4 @@
-//dialogue system by Kise, for Gamkedo! <3 Feel free to make changes and improve the code base!! Full code on my github (in development) - for future project use/reference
+//dialogue system by Kise, for Gamkedo! <3 Feel free to make changes and improve the code base!! Extensive code on my github (in development) - for future project use/reference
 function Dialogue() {
     this.isShowing = false;
     this.letterCounter = 0;

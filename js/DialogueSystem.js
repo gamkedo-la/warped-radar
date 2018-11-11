@@ -1,4 +1,4 @@
-//kinda messy dialogue system by Kise, for Gamkedo! <3 Feel free to make changes and improve the code base!! 
+//dialogue system by Kise, for Gamkedo! <3 Feel free to make changes and improve the code base!! Full code on my github (in development) - for future project use/reference
 function Dialogue() {
     this.isShowing = false;
     this.letterCounter = 0;
@@ -125,8 +125,9 @@ function Dialogue() {
                     voiceList[this.page].play();
                 }
             }
+            
             this.changeScene(conversation);
-
+            
             if (choiceList[this.page] == null) {
                 colorText(nameList[this.page] + ":", textX, textY, nameColList[this.page], textFontFace, textAlign, 1);
             }

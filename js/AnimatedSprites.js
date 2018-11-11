@@ -1,14 +1,20 @@
-//var textArrowEffect;
+var johnMouthMove;
+var roseMouthMove;
 
 function makeAnimatedSprites() {
-    //create animated sprites here:
-    
-	/*textArrowEffect = new AnimatedSpriteClass({
-		name: "textArrow",
-		spriteSheet: textArrowSheet,
-		animationColFrames: 14,
+    johnMouthMove = new AnimatedSpriteClass({
+		name: "johnAnimatedMouth",
+		spriteSheet: johnMouthAnimatedSheet,
+		animationColFrames: 9,
 		framesUntilNext: 4,
-	});*/
+	});
+    
+      roseMouthMove = new AnimatedSpriteClass({
+		name: "roseAnimatedMouth",
+		spriteSheet: roseMouthAnimatedSheet,
+		animationColFrames: 9,
+		framesUntilNext: 4,
+	});
 };
 
 function AnimatedSpriteClass(data) {

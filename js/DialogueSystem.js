@@ -1,10 +1,9 @@
-//dialogue system by Kise, for Gamkedo! <3 Feel free to make changes and improve the code base!! Extensive code on my github (in development) - for future project use/reference
+//dialogue system by Kise, for Gamkedo! <3 Feel free to make changes and improve the code base!! Extensive code on my github (in development) - free to use for future project use/reference
 function Dialogue() {
     this.isShowing = false;
     this.letterCounter = 0;
     this.page = -1;
 
-    //speaker tweening vars
     this.speakerStartX = -265;
     this.speakerX = this.speakerStartX;
     this.speaker2StartX = 800;
@@ -38,7 +37,6 @@ function Dialogue() {
     var paused = false;
 
     var choiceColour;
-    var choiceTextAlign = textAlign;
     var chose = false;
     var showingChoiceMenu = false;
     var nextChoiceLabel = -1;
@@ -49,6 +47,7 @@ function Dialogue() {
     var choiceCursor = 0;
     var choiceSound = voiceHigh1;
     var selectSound = selected;
+    var choiceTextAlign = textAlign;
     var cursorTextColour = "yellow";
     var selectedTextColour = "orange";
 
@@ -78,16 +77,16 @@ function Dialogue() {
             if ("rightPicLeave" in chatEvent) s2PicLeave.push(chatEvent.rightPicLeave);
         }
 
-        this.showSpeakers(leftPics, s1PicLeave, rightPics, s2PicLeave)
+        this.showSpeakers(dialogue, speakerNames, leftPics, s1PicLeave, rightPics, s2PicLeave)
         this.showBoxElements(dialogueImage);
         this.showTextElements(conversation, dialogue, playerChoices, scenes, voices, nameCols, speakerNames);
         this.showChoices(conversation, playerChoices, dialogue);
         this.makeAChoice(playerChoices);
     }
 
-    this.showSpeakers = function (leftPicList, leftPicLeaveList, rightPicList, rightPicLeaveList) {
-        if (leftPicList[this.page] != null) this.setupSpeakerTween(leftPicList, leftPicLeaveList);
-        if (rightPicList[this.page] != null) this.setupSpeaker2Tween(rightPicList, rightPicLeaveList);
+    this.showSpeakers = function (dialogueList, nameList, leftPicList, leftPicLeaveList, rightPicList, rightPicLeaveList) {
+        if (leftPicList[this.page] != null) this.setupSpeakerTween(dialogueList, nameList, leftPicList, leftPicLeaveList);
+        if (rightPicList[this.page] != null) this.setupSpeaker2Tween(dialogueList, nameList, rightPicList, rightPicLeaveList);
     }
 
     this.showBoxElements = function (dialogueBoxImg) {
@@ -125,9 +124,9 @@ function Dialogue() {
                     voiceList[this.page].play();
                 }
             }
-            
+
             this.changeScene(conversation);
-            
+
             if (choiceList[this.page] == null) {
                 colorText(nameList[this.page] + ":", textX, textY, nameColList[this.page], textFontFace, textAlign, 1);
             }
@@ -136,7 +135,7 @@ function Dialogue() {
             this.findPunctuation(typewriterText);
             this.wrapText(typewriterText, textX + nameWidth, textY, maxWidth, lineHeight);
             if (this.letterCounter >= dialogueList[this.page].length && dialogueList[this.page] != "") {
-               //finished effect here
+                //finished effect here
             }
         }
     }
@@ -233,7 +232,23 @@ function Dialogue() {
         }
     }
 
-    this.setupSpeakerTween = function (speakerImgList, leaveScreenList) {
+    this.setupAnimatedMouths = function (dialogueList, nameList, NPCName, leftPicElseRightPic, animatedSheetVar, xOffset, yOffset) {
+        if (nameList[this.page] == NPCName) {
+            if (this.isShowing && this.letterCounter < dialogueList[this.page].length) {
+                if (leftPicElseRightPic) {
+                    if (this.speakerX >= speakerFinalX) {
+                        animatedSheetVar.draw(this.speakerX + xOffset, speakerY + yOffset, 1);
+                    }
+                } else {
+                    if (this.speaker2X <= speaker2FinalX) {
+                        animatedSheetVar.draw(this.speaker2X + xOffset, speaker2Y + yOffset, 1);
+                    }
+                }
+            }
+        }
+    }
+
+    this.setupSpeakerTween = function (dialogueList, nameList, speakerImgList, leaveScreenList) {
         canvasContext.drawImage(speakerImgList[this.page], this.speakerX, speakerY);
         if (leaveScreenList[this.page] && this.speakerX >= this.speakerStartX) {
             this.speakerX -= tweenOutSpeed;
@@ -242,9 +257,14 @@ function Dialogue() {
         } else if (this.isShowing && this.speakerX < speakerFinalX) {
             this.speakerX += tweenInSpeed;
         }
+        
+        //speaker specific animations
+        //john
+        this.setupAnimatedMouths(dialogueList, nameList, "John", true, johnMouthMove, 150, 300);
+        this.setupAnimatedMouths(dialogueList, nameList, "Bob", true, johnMouthMove, 150, 300);
     }
 
-    this.setupSpeaker2Tween = function (speaker2ImgList, leaveScreenList) {
+    this.setupSpeaker2Tween = function (dialogueList, nameList, speaker2ImgList, leaveScreenList) {
         canvasContext.drawImage(speaker2ImgList[this.page], this.speaker2X, speaker2Y);
         if (leaveScreenList[this.page] && this.speaker2X <= this.speaker2StartX) {
             this.speaker2X += tweenOutSpeed;
@@ -253,6 +273,10 @@ function Dialogue() {
         } else if (this.isShowing && this.speaker2X > speaker2FinalX) {
             this.speaker2X -= tweenInSpeed;
         }
+        
+         //speaker specific animations
+        //rose
+        this.setupAnimatedMouths(dialogueList, nameList, "Rose", false, roseMouthMove, 150, 300);
     }
 
     this.findPunctuation = function (str) {

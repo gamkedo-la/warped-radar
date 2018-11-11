@@ -11,6 +11,10 @@ var johnPic2 = document.createElement("img");
 var rosePic = document.createElement("img");
 var rosePic2 = document.createElement("img");
 
+var johnMouthAnimatedSheet = document.createElement("img");
+var roseMouthAnimatedSheet = document.createElement("img");
+
+
 var picsToLoad = 0;
 var worldPics = [];
 
@@ -41,7 +45,9 @@ function loadImages() {
         {varName: choiceCursorPic, theFile: "choicecursor.png"},
         {varName: gameBorderPic, theFile: "gameBorder.png"},
         {varName: inventoryPic, theFile: "inventory.png"},
-        
+        {varName: johnMouthAnimatedSheet, theFile: "johnmouthmove.png"},
+        {varName: roseMouthAnimatedSheet, theFile: "rosemouthmove.png"},
+
         {worldType: TILE_GROUND, theFile: "ground.png"},
         {worldType: TILE_RANDOM, theFile: "random.png"}
     ];

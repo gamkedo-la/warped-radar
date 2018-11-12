@@ -64,6 +64,7 @@ function drawAll() {
     createDialogueEvents();
     
     inventory.drawUI();
+    inventory.drawSlots();
     
     endPan();
 }

@@ -7,25 +7,25 @@ var inventory = new(function () {
     var width = 624;
     var height = 390;
 
-    var numCols = 4;
+    var slots = new Array(8);
 
-    var itemCellX = this.x + 50;
-    var itemCellY = this.y + 50;
+    var slotX = this.x + 50;
+    var slotY = this.y + 60;
+    var slotWidth = 90;
+    var slotHeight = 85;
+    var slotBetweenX = 55;
+    var slotBetweenY = 100;
 
-    var itemCellWidth = 100;
-    var itemCellHeight = 100;
-
-    var itemCellBetweenX = 140;
-    var itemCellBetweenY = 100;
+    var inventoryIndex = 0;
 
     var inventoryImg = inventoryPic;
-
     var textFontFace = "30px consolas";
     var textColour = "white";
     var textAlign = "left";
 
     var titleTextX = 320;
     var titleTextY = this.y + 40;
+
 
     var inventoryItems = [
         {
@@ -58,17 +58,62 @@ var inventory = new(function () {
         }
     ];
 
+    this.initSlots = (function () {
+        for (var i = 0; i < slots.length; i++) {
+            slots[i] = -1;
+        }
+    })();
+
+    this.update = function (keyCode) {
+        switch (keyCode) {
+            case KEY_RIGHT:
+                inventoryIndex++;
+                break;
+            case KEY_LEFT:
+                inventoryIndex--;
+                break;
+            case KEY_UP:
+                inventoryIndex -= 4;
+                break;
+            case KEY_DOWN:
+                inventoryIndex += 4;
+                break;
+            case KEY_SPACE:
+                //action - use item? give item?
+                break;
+        }
+        if (inventoryIndex >= slots.length) {
+            inventoryIndex = inventoryIndex - slots.length;
+        } else if (inventoryIndex < 0) {
+            inventoryIndex = inventoryIndex + slots.length;
+        }
+    }
+
+    this.drawSlots = function () {
+        if (this.isShowing) {
+            for (var i = 0; i < slots.length; i++) {
+                var itemCellX = slotX + ((slotWidth + slotBetweenX) * (i % slots.length));
+
+
+                canvasContext.save();
+                if (i === inventoryIndex) {
+                    canvasContext.fillStyle = 'yellow';
+                } else {
+                    canvasContext.globalAlpha = 0.5;
+                    canvasContext.fillStyle = 'white';
+                    canvasContext.globalAlpha = 1.0;
+                }
+                canvasContext.fillRect(itemCellX, slotY, slotWidth, slotHeight);
+                canvasContext.restore();
+            }
+        }
+    }
+
 
     this.drawUI = function () {
         if (this.isShowing) {
             canvasContext.drawImage(inventoryImg, this.x, this.y);
             colorText("Inventory", titleTextX, titleTextY, textColour, textFontFace, textAlign, 1);
-
-            for (var i = 0; i < inventoryItems.length; i++) {
-                if (inventoryItems[i].isObtained) {
-                    canvasContext.drawImage(inventoryItems[i].uiSprite, itemCellX + i * itemCellBetweenX, itemCellY);
-                }
-            }
         }
     }
 

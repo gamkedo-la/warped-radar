@@ -9,12 +9,15 @@ var inventory = new(function () {
 
     var slots = new Array(8);
 
+    var slotCols = 4;
+    var slotRows = 2;
+
     var slotX = this.x + 50;
     var slotY = this.y + 60;
     var slotWidth = 90;
     var slotHeight = 85;
     var slotBetweenX = 55;
-    var slotBetweenY = 100;
+    var slotBetweenY = 25;
 
     var inventoryIndex = 0;
 
@@ -65,35 +68,40 @@ var inventory = new(function () {
     })();
 
     this.update = function (keyCode) {
-        switch (keyCode) {
-            case KEY_RIGHT:
-                inventoryIndex++;
-                break;
-            case KEY_LEFT:
-                inventoryIndex--;
-                break;
-            case KEY_UP:
-                inventoryIndex -= 4;
-                break;
-            case KEY_DOWN:
-                inventoryIndex += 4;
-                break;
-            case KEY_SPACE:
-                //action - use item? give item?
-                break;
-        }
-        if (inventoryIndex >= slots.length) {
-            inventoryIndex = inventoryIndex - slots.length;
-        } else if (inventoryIndex < 0) {
-            inventoryIndex = inventoryIndex + slots.length;
+        if (this.isShowing) {
+            switch (keyCode) {
+                case KEY_RIGHT:
+                    inventoryIndex++;
+                    break;
+                case KEY_LEFT:
+                    inventoryIndex--;
+                    break;
+                case KEY_UP:
+                    inventoryIndex -= 4;
+                    break;
+                case KEY_DOWN:
+                    inventoryIndex += 4;
+                    break;
+                case KEY_SPACE:
+                    //action - use item? give item?
+                    break;
+            }
+            if (inventoryIndex >= slots.length) {
+                inventoryIndex = inventoryIndex - slots.length;
+            } else if (inventoryIndex < 0) {
+                inventoryIndex = inventoryIndex + slots.length;
+            }
         }
     }
 
     this.drawSlots = function () {
         if (this.isShowing) {
-            for (var i = 0; i < slots.length; i++) {
-                var itemCellX = slotX + ((slotWidth + slotBetweenX) * (i % slots.length));
+            var drawInvX = 0;
+            var drawInvY = 0;
 
+            for (var i = 0; i < slots.length; i++) {
+                var itemCellX = slotX + ((slotWidth + slotBetweenX) * (i % slotCols));
+                var itemCellY = slotY + ((slotHeight + slotBetweenY) * Math.floor(i / slotCols));
 
                 canvasContext.save();
                 if (i === inventoryIndex) {
@@ -103,7 +111,7 @@ var inventory = new(function () {
                     canvasContext.fillStyle = 'white';
                     canvasContext.globalAlpha = 1.0;
                 }
-                canvasContext.fillRect(itemCellX, slotY, slotWidth, slotHeight);
+                canvasContext.fillRect(itemCellX, itemCellY, slotWidth, slotHeight);
                 canvasContext.restore();
             }
         }

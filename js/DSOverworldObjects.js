@@ -59,16 +59,16 @@ function OverworldObject() {
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
 var john = new OverworldObject();
+john.showHappyRoseText = false;
 john.dialogue = new Dialogue();
-john.pressedX = false;
 
 john.colour = "#8789C0";
 
 john.chatEvents = function (createElseIncrement) {
-    if (this.pressedX) {
-        john.eventText(createElseIncrement, omigoshJohn);
+    if (this.showHappyRoseText) {
+        this.eventText(createElseIncrement, johnAndRoseConvo2);
     } else { //regular text
-        john.text(createElseIncrement,[johnAndRoseConvo]);
+        this.text(createElseIncrement,[johnAndRoseConvo]);
     }
 }
 
@@ -84,9 +84,9 @@ bob.y = 400;
 
 bob.chatEvents = function (createElseIncrement) {
     if (this.pressedZ) {
-        bob.eventText(createElseIncrement, omigoshBob);
+        this.eventText(createElseIncrement, omigoshBob);
     } else { //regular text
-        bob.text(createElseIncrement, [bobConvo]);
+        this.text(createElseIncrement, [bobConvo]);
     }
 }
 

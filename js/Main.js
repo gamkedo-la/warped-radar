@@ -54,7 +54,6 @@ function moveAll() {
 
 function drawAll() {
     beginPan();
-    
     clearScreen();
     drawWorld();
     player.draw();

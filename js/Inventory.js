@@ -1,10 +1,22 @@
 var inventory = new(function () {
+    //adapted from Dan Dela Rosa's code from GINT!
     this.isShowing = false;
     this.x = 95;
     this.y = 110;
-    
-    this.foundAddress = false;
-    this.foundName = false;
+
+    var width = 624;
+    var height = 390;
+
+    var numCols = 4;
+
+    var itemCellX = this.x + 50;
+    var itemCellY = this.y + 50;
+
+    var itemCellWidth = 100;
+    var itemCellHeight = 100;
+
+    var itemCellBetweenX = 140;
+    var itemCellBetweenY = 100;
 
     var inventoryImg = inventoryPic;
 
@@ -20,57 +32,43 @@ var inventory = new(function () {
             name: "Broken sunglasses",
             description: "Sunglasses... But we barely get any sun?",
             isObtained: false,
-            giveTo: null,
-            canUseWith: "Monthly club pass",
-            
-            examining: false,
-            observations: ["Oh man, are these brand?! I can't tell. I wonder which would cost more, fixing these, or buying some new sunnies?", "Some cool sunglasses", "Hey.. Looks like there's something attached to it"],
-            
-            //0 index is a bark from player, second is the variable it changes - maybe it'll change in the code?
-            newInformation: ["There's an address...", this.foundAddress]
+            pickupImg: TILE_ITEM_SUNGLASSES,
+            uiSprite: UIItem_sunglasses
         },
         {
             name: "Dog collar",
             description: "Wow, this looks like an antique",
             isObtained: false,
-            giveTo: null,
-            canUseWith: null,
-            
-            examining: false,
-            observations: ["Hmm, whose borker does this belong to?", "I don't think I can do much with this..."],
-            
-            newInformation: null
+            pickupImg: TILE_ITEM_DOGCOLLAR,
+            uiSprite: UIItem_dogCollar
         },
         {
             name: "Monthly club pass",
-            description: "For the most lit club in town",
+            description: "Oooh, one more until I can get a scratch and win",
             isObtained: false,
-            giveTo: null,
-            canUseWith: null,
-            
-            examining: false,
-            observations: ["Almost all the days have stickers on them... Looks like someone likes to have fun", "Huh. What's this chicken scratch on the back?"],
-            
-            newInformation: ["There's a name...", this.foundName]
+            pickupImg: TILE_ITEM_MEMBERSHIPCARD,
+            uiSprite: UIItem_membershipCard
         },
         {
             name: "Half eaten sandwich",
             description: "A coolio sammich",
             isObtained: false,
-            giveTo: null,
-            canUseWith: null,
-            
-            examining: false,
-            observations: ["Oh, that's mine.", "That was a good sandwich"],
-            
-            newInformation: null
+            pickupImg: TILE_ITEM_SANDWICH,
+            uiSprite: UIItem_sandwich
         }
     ];
+
 
     this.drawUI = function () {
         if (this.isShowing) {
             canvasContext.drawImage(inventoryImg, this.x, this.y);
             colorText("Inventory", titleTextX, titleTextY, textColour, textFontFace, textAlign, 1);
+
+            for (var i = 0; i < inventoryItems.length; i++) {
+                if (inventoryItems[i].isObtained) {
+                    canvasContext.drawImage(inventoryItems[i].uiSprite, itemCellX + i * itemCellBetweenX, itemCellY);
+                }
+            }
         }
     }
 

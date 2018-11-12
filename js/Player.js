@@ -42,5 +42,7 @@ var player = new (function () {
     this.draw = function () {
         drawRectToContext(scaledContext, this.x, this.y, this.w, this.h, "#6B6570", 1);
     }
+    
+    
 
 })();

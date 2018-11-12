@@ -7,7 +7,7 @@ var inventory = new(function () {
     var width = 624;
     var height = 390;
 
-    var slots = new Array(8);
+    var slots = [-1, -1, -1, -1, -1, -1, -1, -1];
 
     var slotCols = 4;
     var slotRows = 2;
@@ -29,12 +29,16 @@ var inventory = new(function () {
     var titleTextX = 320;
     var titleTextY = this.y + 40;
 
+    var descFontFace = "20px consolas";
+    var descX = this.x + width / 2;
+    var descY = this.y + 200;
+
 
     var inventoryItems = [
         {
             name: "Broken sunglasses",
             description: "Sunglasses... But we barely get any sun?",
-            isObtained: false,
+            isObtained: true,
             pickupImg: TILE_ITEM_SUNGLASSES,
             uiSprite: UIItem_sunglasses
         },
@@ -48,7 +52,7 @@ var inventory = new(function () {
         {
             name: "Monthly club pass",
             description: "Oooh, one more until I can get a scratch and win",
-            isObtained: false,
+            isObtained: true,
             pickupImg: TILE_ITEM_MEMBERSHIPCARD,
             uiSprite: UIItem_membershipCard
         },
@@ -61,13 +65,7 @@ var inventory = new(function () {
         }
     ];
 
-    this.initSlots = (function () {
-        for (var i = 0; i < slots.length; i++) {
-            slots[i] = -1;
-        }
-    })();
-
-    this.update = function (keyCode) {
+    this.updateCursor = function (keyCode) {
         if (this.isShowing) {
             switch (keyCode) {
                 case KEY_RIGHT:
@@ -105,11 +103,9 @@ var inventory = new(function () {
 
                 canvasContext.save();
                 if (i === inventoryIndex) {
-                    canvasContext.fillStyle = 'yellow';
+                    canvasContext.fillStyle = 'purple';
                 } else {
-                    canvasContext.globalAlpha = 0.5;
-                    canvasContext.fillStyle = 'white';
-                    canvasContext.globalAlpha = 1.0;
+                    canvasContext.fillStyle = 'darkblue';
                 }
                 canvasContext.fillRect(itemCellX, itemCellY, slotWidth, slotHeight);
                 canvasContext.restore();
@@ -117,12 +113,26 @@ var inventory = new(function () {
         }
     }
 
+    this.drawItems = function () {
+        if (this.isShowing) {
+            for (var i = 0; i < inventoryItems.length; i++) {
+                if (inventoryItems[i].isObtained) {
+                    var itemCellX = slotX + ((slotWidth + slotBetweenX) * (i % slotCols));
+                    var itemCellY = slotY + ((slotHeight + slotBetweenY) * Math.floor(i / slotCols));
+                    canvasContext.drawImage(inventoryItems[i].uiSprite, itemCellX, itemCellY);
+                }
+            }
+        }
+    }
 
     this.drawUI = function () {
         if (this.isShowing) {
             canvasContext.drawImage(inventoryImg, this.x, this.y);
             colorText("Inventory", titleTextX, titleTextY, textColour, textFontFace, textAlign, 1);
+        } else {
+            inventoryIndex = 0;
         }
+        //console.log(slots)
     }
 
 })();

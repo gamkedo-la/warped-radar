@@ -64,6 +64,7 @@ function drawAll() {
     
     inventory.drawUI();
     inventory.drawSlots();
+    inventory.drawItems();
     
     endPan();
 }

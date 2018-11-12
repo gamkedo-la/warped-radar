@@ -50,7 +50,7 @@ function keyPressed(evt) {
             break;
     }
     keySet(evt, player, true);
-    inventory.update(evt.keyCode);
+    inventory.updateCursor(evt.keyCode);
     evt.preventDefault();
 
 }

@@ -1,4 +1,4 @@
-//dialogue system by Kise, for Gamkedo! <3 Feel free to make changes and improve the code base!! Extensive code on my github (in development) - free to use for future project use/reference
+//dialogue system by Kise, for Gamkedo! <3 Feel free to make changes and improve the code base!! 
 function Dialogue() {
     this.isShowing = false;
     this.letterCounter = 0;
@@ -278,7 +278,7 @@ function Dialogue() {
         } else if (this.speaker2X <= speaker2FinalX) {
             this.speaker2X = speaker2FinalX;
             
-            
+        
             //speaker specific animations
             this.setupAnimatedMouths(dialogueList, nameList, "Rose", false, roseMouthMove, 150, 300);
         }

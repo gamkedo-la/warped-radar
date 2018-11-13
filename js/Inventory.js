@@ -1,8 +1,9 @@
 var inventory = new(function () {
-    //adapted from Dan Dela Rosa's code from GINT!
     this.isShowing = false;
     this.x = 95;
     this.y = 110;
+
+    var navigationSound = voiceHigh2;
 
     var width = 624;
     var height = 390;
@@ -34,51 +35,33 @@ var inventory = new(function () {
     var descY = this.y + 200;
 
 
-    var inventoryItems = [
+    /*var inventoryItems = [
         {
-            name: "Broken sunglasses",
-            description: "Sunglasses... But we barely get any sun?",
-            isObtained: true,
-            pickupImg: TILE_ITEM_SUNGLASSES,
-            uiSprite: UIItem_sunglasses
-        },
-        {
-            name: "Dog collar",
-            description: "Wow, this looks like an antique",
-            isObtained: false,
-            pickupImg: TILE_ITEM_DOGCOLLAR,
-            uiSprite: UIItem_dogCollar
-        },
-        {
-            name: "Monthly club pass",
-            description: "Oooh, one more until I can get a scratch and win",
-            isObtained: true,
-            pickupImg: TILE_ITEM_MEMBERSHIPCARD,
-            uiSprite: UIItem_membershipCard
-        },
-        {
-            name: "Half eaten sandwich",
-            description: "A coolio sammich",
-            isObtained: false,
-            pickupImg: TILE_ITEM_SANDWICH,
-            uiSprite: UIItem_sandwich
+            name:,
+            description: ,
+            isObtained: ,
+            uiSprite: 
         }
-    ];
+    ];*/
 
-    this.updateCursor = function (keyCode) {
+    this.navigate = function (keyCode) {
         if (this.isShowing) {
             switch (keyCode) {
                 case KEY_RIGHT:
                     inventoryIndex++;
+                    navigationSound.play();
                     break;
                 case KEY_LEFT:
                     inventoryIndex--;
+                    navigationSound.play();
                     break;
                 case KEY_UP:
                     inventoryIndex -= 4;
+                    navigationSound.play();
                     break;
                 case KEY_DOWN:
                     inventoryIndex += 4;
+                    navigationSound.play();
                     break;
                 case KEY_SPACE:
                     //action - use item? give item?
@@ -129,10 +112,13 @@ var inventory = new(function () {
         if (this.isShowing) {
             canvasContext.drawImage(inventoryImg, this.x, this.y);
             colorText("Inventory", titleTextX, titleTextY, textColour, textFontFace, textAlign, 1);
+            
+            this.drawSlots();
+            //this.drawItems();
+            
         } else {
             inventoryIndex = 0;
         }
-        //console.log(slots)
     }
 
 })();

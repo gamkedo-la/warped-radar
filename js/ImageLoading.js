@@ -11,14 +11,8 @@ var johnPic2 = document.createElement("img");
 var rosePic = document.createElement("img");
 var rosePic2 = document.createElement("img");
 
-var UIItem_dogCollar = document.createElement("img");
-var UIItem_membershipCard = document.createElement("img");
-var UIItem_sandwich = document.createElement("img");
-var UIItem_sunglasses = document.createElement("img");
-
 var johnMouthAnimatedSheet = document.createElement("img");
 var roseMouthAnimatedSheet = document.createElement("img");
-
 
 var picsToLoad = 0;
 var worldPics = [];
@@ -50,21 +44,12 @@ function loadImages() {
         {varName: choiceCursorPic, theFile: "choicecursor.png"},
         {varName: gameBorderPic, theFile: "gameBorder.png"},
         {varName: inventoryPic, theFile: "inventory.png"},
+        
         {varName: johnMouthAnimatedSheet, theFile: "johnmouthmove.png"},
         {varName: roseMouthAnimatedSheet, theFile: "rosemouthmove.png"},
-        
-        {varName: UIItem_dogCollar, theFile: "uiitem_dogcollar.png"},
-        {varName: UIItem_membershipCard, theFile: "uiitem_monthlycard.png"},
-        {varName: UIItem_sandwich, theFile: "uiitem_sandwich.png"},
-        {varName: UIItem_sunglasses, theFile: "uiitem_sunglasses.png"},
 
         {worldType: TILE_GROUND, theFile: "ground.png"},
-        {worldType: TILE_RANDOM, theFile: "random.png"},
-        
-        {worldType: TILE_ITEM_DOGCOLLAR, theFile: "itempickup_dogcollar.png"},
-        {worldType: TILE_ITEM_MEMBERSHIPCARD, theFile: "itempickup_monthlycard.png"},
-        {worldType: TILE_ITEM_SANDWICH, theFile: "itempickup_sandwich.png"},
-        {worldType: TILE_ITEM_SUNGLASSES, theFile: "itempickup_sunglasses.png"}
+        {worldType: TILE_RANDOM, theFile: "random.png"}
     ];
     
     picsToLoad = imageList.length;

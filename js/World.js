@@ -2,15 +2,9 @@ const WORLD_W = 32;
 const WORLD_H = 32;
 const WORLD_COLS = 20;
 const WORLD_ROWS = 15;
-/*const WORLD_COLS = 50;
-const WORLD_ROWS = 35;*/
 
 const TILE_GROUND = 0;
-const TILE_RANDOM = 1;
-const TILE_ITEM_DOGCOLLAR = 2;
-const TILE_ITEM_MEMBERSHIPCARD = 3;
-const TILE_ITEM_SANDWICH = 4;
-const TILE_ITEM_SUNGLASSES = 5;
+const TILE_RANDOM = 1; //can remove, just here for prototype
 
 var worldGrid = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
                  1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
@@ -34,11 +28,8 @@ function rowColToArrayIndex(col, row) {
 }
 
 function tileTypeHasTransparency(checkTileType) {
-	return (checkTileType == TILE_ITEM_DOGCOLLAR ||
-			checkTileType == TILE_ITEM_MEMBERSHIPCARD ||
-			checkTileType == TILE_ITEM_SANDWICH ||
-            checkTileType == TILE_ITEM_SUNGLASSES
-           );
+	//to check: (checkTileType == TILE_WITH_TRANSPARENCY)
+    return;
 }
 
 function drawWorld() {
@@ -50,9 +41,11 @@ function drawWorld() {
             var arrayIndex = rowColToArrayIndex(eachCol, eachRow);
             var tileKindHere = worldGrid[arrayIndex];
             var useImg = worldPics[tileKindHere];
-            if( tileTypeHasTransparency(tileKindHere) ) {
+            
+            /*if( tileTypeHasTransparency(tileKindHere) ) {
 				scaledContext.drawImage(worldPics[TILE_GROUND], drawTileX, drawTileY);
-			}
+			}*/
+            
             scaledContext.drawImage(useImg, drawTileX, drawTileY);
             drawTileX += WORLD_W;
             arrayIndex++;

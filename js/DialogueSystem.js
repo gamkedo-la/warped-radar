@@ -1,4 +1,4 @@
-//dialogue system by Kise, for Gamkedo! <3 Feel free to make changes and improve the code base!! 
+//dialogue code base by Kise, for Gamkedo! <3 Feel free to make changes and improve the code base!! 
 function Dialogue() {
     this.isShowing = false;
     this.letterCounter = 0;
@@ -17,7 +17,7 @@ function Dialogue() {
     var tweenInSpeed = 20;
     var tweenOutSpeed = 40;
 
-    var dialogueImage = dialogueBoxPic;
+    var dialogueBoxImage = dialogueBoxPic;
 
     var dialogueBoxX = 0;
     var dialogueBoxY = 470;
@@ -78,7 +78,7 @@ function Dialogue() {
         }
 
         this.showSpeakers(dialogue, speakerNames, leftPics, s1PicLeave, rightPics, s2PicLeave)
-        this.showBoxElements(dialogueImage);
+        this.showBoxElements(dialogueBoxImage);
         this.showTextElements(conversation, dialogue, playerChoices, scenes, voices, nameCols, speakerNames);
         this.showChoices(conversation, playerChoices, dialogue);
         this.makeAChoice(playerChoices);
@@ -250,13 +250,13 @@ function Dialogue() {
         } else if (this.isShowing && this.speakerX < speakerFinalX) {
             this.speakerX += tweenInSpeed;
             
-            //speaker specific anims
+            //speaker specific mouth anims
             this.setupAnimatedMouths(dialogueList, nameList, "John", true, johnMouthMove, 130, 300);
             this.setupAnimatedMouths(dialogueList, nameList, "Bob", true, johnMouthMove, 130, 300);
         } else if (this.speakerX >= speakerFinalX) {
             this.speakerX = speakerFinalX;
             
-            //speaker specific anims
+            //speaker specific mouth anims
             this.setupAnimatedMouths(dialogueList, nameList, "John", true, johnMouthMove, 150, 300);
             this.setupAnimatedMouths(dialogueList, nameList, "Bob", true, johnMouthMove, 150, 300);
         }
@@ -273,13 +273,13 @@ function Dialogue() {
             this.speaker2X -= tweenInSpeed;
             
             
-            //speaker specific animations
+            //speaker specific mouth animations
             this.setupAnimatedMouths(dialogueList, nameList, "Rose", false, roseMouthMove, 170, 300);
         } else if (this.speaker2X <= speaker2FinalX) {
             this.speaker2X = speaker2FinalX;
             
         
-            //speaker specific animations
+            //speaker specific mouth animations
             this.setupAnimatedMouths(dialogueList, nameList, "Rose", false, roseMouthMove, 150, 300);
         }
         

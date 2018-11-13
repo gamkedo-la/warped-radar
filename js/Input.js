@@ -35,7 +35,7 @@ function keyPressed(evt) {
             cursorKeyPresses++;
             break;
         case KEY_X:
-            //john.pressedX = true;
+            bob.pressedX = true;
             break;
        case KEY_Z:
             inventory.isShowing = !inventory.isShowing;

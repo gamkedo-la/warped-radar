@@ -31,7 +31,7 @@ function OverworldObject() {
             dialogue.page = 0;
         }
     }
-    
+
     this.eventText = function (createElseIncrement, dialogue) {
         if (createElseIncrement) {
             this.dialogue.create(dialogue);
@@ -48,7 +48,7 @@ function OverworldObject() {
         } else if (chatLine < 0) {
             return;
         }
-        chat = dialogueList[chatLine]; 
+        chat = dialogueList[chatLine];
         this.eventText(createElseIncrement, chat);
     }
 
@@ -59,31 +59,26 @@ function OverworldObject() {
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
 var john = new OverworldObject();
-john.showHappyRoseText = false;
 john.dialogue = new Dialogue();
-
 john.colour = "#8789C0";
 
 john.chatEvents = function (createElseIncrement) {
-    if (this.showHappyRoseText) {
-        this.eventText(createElseIncrement, johnAndRoseConvo2);
-    } else { //regular text
-        this.text(createElseIncrement,[johnAndRoseConvo]);
-    }
+    this.text(createElseIncrement, [johnAndRoseConvo, johnAndRoseConvo2]);
+
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
 var bob = new OverworldObject();
 bob.dialogue = new Dialogue();
-bob.pressedZ = false;
+bob.pressedX = false;
 
 bob.colour = "green";
 bob.x = 300;
 bob.y = 400;
 
 bob.chatEvents = function (createElseIncrement) {
-    if (this.pressedZ) {
+    if (this.pressedX) {
         this.eventText(createElseIncrement, omigoshBob);
     } else { //regular text
         this.text(createElseIncrement, [bobConvo]);
@@ -103,7 +98,7 @@ function incrementTextPages() {
     bob.chatEvents(false);
 }
 
-function dialogueNotShowing() { 
+function dialogueNotShowing() {
     return !bob.dialogue.isShowing && !john.dialogue.isShowing;
 }
 

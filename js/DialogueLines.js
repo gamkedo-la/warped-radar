@@ -182,7 +182,7 @@ var johnAndRoseConvo = [
 var johnAndRoseConvo2 = [
     {
         who: "Rose",
-        nameCol: "blue",
+        nameCol: "pink",
         voice: voiceHigh2,
         text: "By the way, you're cool.",
         leftPic: null,
@@ -195,7 +195,7 @@ var johnAndRoseConvo2 = [
     },
     {
         who: "John",
-        nameCol: "blue",
+        nameCol: "lightblue",
         voice: voiceLow1,
         text: "Thanks Rose, couldn't have said it better myself.",
         leftPic: johnPic,
@@ -213,7 +213,7 @@ var bobConvo = [
     {
         scene: "Bob is sad",
         who: "Bob",
-        nameCol: "lightblue",
+        nameCol: "lightgreen",
         voice: voiceLow2,
         text: "Hi I'm bobs.",
         leftPic: johnPic,
@@ -227,7 +227,7 @@ var bobConvo = [
     {
         scene: "Bob is sad",
         who: "Bob",
-        nameCol: "lightblue",
+        nameCol: "lightgreen",
         voice: voiceLow2,
         text: "Oh that s was a typo I've had since birth. The accurate pronounciation is bob though.",
         leftPic: johnPic,
@@ -241,7 +241,7 @@ var bobConvo = [
     {
         scene: "Bob is sad",
         who: "Bob",
-        nameCol: "lightblue",
+        nameCol: "lightgreen",
         voice: voiceLow2,
         text: "Sighs",
         leftPic: johnPic2,
@@ -255,7 +255,7 @@ var bobConvo = [
     {
         scene: "Bob is sad",
         who: "Bob",
-        nameCol: "lightblue",
+        nameCol: "lightgreen",
         voice: voiceLow2,
         text: "Do you like my name?",
         leftPic: johnPic,
@@ -269,7 +269,7 @@ var bobConvo = [
     {
         scene: "Bob is sad",
         who: "Bob",
-        nameCol: "lightblue",
+        nameCol: "lightgreen",
         voice: voiceLow2,
         text: "",
         leftPic: johnPic,
@@ -283,7 +283,7 @@ var bobConvo = [
     {
         scene: "happy",
         who: "Bob",
-        nameCol: "lightblue",
+        nameCol: "lightgreen",
         voice: voiceLow2,
         text: "Yeah me, t-",
         leftPic: johnPic2,
@@ -297,7 +297,7 @@ var bobConvo = [
     {
         scene: "happy",
         who: "Bob",
-        nameCol: "lightblue",
+        nameCol: "lightgreen",
         voice: voiceLow2,
         text: "Wait...",
         leftPic: johnPic2,
@@ -311,7 +311,7 @@ var bobConvo = [
     {
         scene: "happy",
         who: "Bob",
-        nameCol: "lightblue",
+        nameCol: "lightgreen",
         voice: voiceLow2,
         text: "You really like it?? That's the nicest thing anyone's ever told me",
         leftPic: johnPic,
@@ -325,7 +325,7 @@ var bobConvo = [
     {
         scene: "sad",
         who: "Bob",
-        nameCol: "lightblue",
+        nameCol: "lightgreen",
         voice: voiceLow2,
         text: "Oh....",
         leftPic: johnPic2,
@@ -339,7 +339,7 @@ var bobConvo = [
     {
         scene: "sad",
         who: "Bob",
-        nameCol: "lightblue",
+        nameCol: "lightgreen",
         voice: voiceLow2,
         text: "I guess I should've expected that",
         leftPic: johnPic2,
@@ -352,12 +352,12 @@ var bobConvo = [
     },
 ];
 
-var omigoshJohn = [
+var omigoshBob = [
     {
-        who: "John",
-        voice: voiceLow1,
-        nameCol: "blue",
-        text: "ayeyo you done did it again",
+        who: "Bob",
+        voice: voiceLow2,
+        nameCol: "lightgreen",
+        text: "Hi!",
         leftPic: johnPic,
         rightPic: null,
 
@@ -367,10 +367,23 @@ var omigoshJohn = [
         choices: null
     },
     {
-        who: "John",
-        voice: voiceLow1,
-        nameCol: "blue",
-        text: "u srs bro",
+        who: "Bob",
+        voice: voiceLow2,
+        nameCol: "lightgreen",
+        text: "You called?",
+        leftPic: johnPic,
+        rightPic: null,
+
+        leftPicLeave: false,
+        rightPicLeave: false,
+
+         choices: null
+    },
+    {
+        who: "Bob",
+        voice: voiceLow2,
+        nameCol: "lightgreen",
+        text: "But you pressed X..?",
         leftPic: johnPic,
         rightPic: null,
 
@@ -378,15 +391,12 @@ var omigoshJohn = [
         rightPicLeave: false,
 
         choices: null
-    }
-];
-
-var omigoshBob = [
+    },
     {
-        who: "Bob(s)",
+        who: "Bob",
         voice: voiceLow2,
-        nameCol: "blue",
-        text: "AAAAAAAAA",
+        nameCol: "lightgreen",
+        text: "Oh, so it was an accident?",
         leftPic: johnPic2,
         rightPic: null,
 
@@ -398,35 +408,9 @@ var omigoshBob = [
     {
         who: "Bob",
         voice: voiceLow2,
-        nameCol: "blue",
-        text: "M-my name.....",
-        leftPic: johnPic,
-        rightPic: null,
-
-        leftPicLeave: false,
-        rightPicLeave: false,
-
-        choices: null
-    },
-    {
-        who: "Bob",
-        voice: voiceLow2,
-        nameCol: "blue",
-        text: "The s is gone?!?!?!",
-        leftPic: johnPic,
-        rightPic: null,
-
-        leftPicLeave: false,
-        rightPicLeave: false,
-
-        choices: null
-    },
-    {
-        who: "Bob",
-        voice: voiceLow2,
-        nameCol: "blue",
-        text: "I... I don't know what to feel.",
-        leftPic: johnPic,
+        nameCol: "lightgreen",
+        text: "Mmmmhm, yeah, sure.",
+        leftPic: johnPic2,
         rightPic: null,
 
         leftPicLeave: false,

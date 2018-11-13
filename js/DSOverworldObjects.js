@@ -32,11 +32,20 @@ function OverworldObject() {
         }
     }
 
-    this.eventText = function (createElseIncrement, dialogue) {
+    this.initText = function (createElseIncrement, dialogue) {
         if (createElseIncrement) {
             this.dialogue.create(dialogue);
         } else {
             this.dialogue.incrementPage(dialogue);
+        }
+    }
+    
+    this.eventText = function(createElseIncrement, dialogue) {
+         try {
+           this.initText(createElseIncrement, dialogue); 
+        }
+        catch {
+            console.log("Error Fix! You triggered a special event without un-colliding/re-colliding with NPC");    
         }
     }
 
@@ -49,7 +58,7 @@ function OverworldObject() {
             return;
         }
         chat = dialogueList[chatLine];
-        this.eventText(createElseIncrement, chat);
+        this.initText(createElseIncrement, chat);
     }
 
     this.chatEvents = function (createElseIncrement) {
@@ -63,7 +72,7 @@ john.dialogue = new Dialogue();
 john.colour = "#8789C0";
 
 john.chatEvents = function (createElseIncrement) {
-    this.text(createElseIncrement, [johnAndRoseConvo, johnAndRoseConvo2]);
+    this.text(createElseIncrement, [johnAndRoseConvo/*, johnAndRoseConvo2*/]);
 
 }
 
@@ -79,7 +88,7 @@ bob.y = 400;
 
 bob.chatEvents = function (createElseIncrement) {
     if (this.pressedX) {
-        this.eventText(createElseIncrement, omigoshBob);
+       this.eventText(createElseIncrement, omigoshBob);
     } else { //regular text
         this.text(createElseIncrement, [bobConvo]);
     }

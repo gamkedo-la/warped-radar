@@ -16,7 +16,10 @@ var roseMouthAnimatedSheet = document.createElement("img");
 
 var bobSprite = document.createElement("img");
 var bobAnimation = document.createElement("img");
+
 var bobSideAnimation = document.createElement("img");
+var bobSide45Animation = document.createElement("img");
+
 var bobIdleAnimation = document.createElement("img");
 
 var picsToLoad = 0;
@@ -54,6 +57,7 @@ function loadImages() {
         {varName: bobAnimation, theFile: "bobsprite-sheet.png"},
         {varName: bobIdleAnimation, theFile: "bobspriteidle-sheet.png"},
         {varName: bobSideAnimation, theFile: "bobspriteside-sheet.png"},
+        {varName: bobSide45Animation, theFile: "bobspriteside45-sheet.png"},
         
         {varName: johnMouthAnimatedSheet, theFile: "johnmouthmove.png"},
         {varName: roseMouthAnimatedSheet, theFile: "rosemouthmove.png"},

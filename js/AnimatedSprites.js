@@ -2,6 +2,7 @@ var johnMouthMove;
 var roseMouthMove;
 var bobWalk;
 var bobWalkSide;
+var bobWalkSide45Deg;
 var bobIdle;
 
 function makeAnimatedSprites() {
@@ -37,6 +38,13 @@ function makeAnimatedSprites() {
 		name: "bobWalkSideAnimaton",
 		spriteSheet: bobSideAnimation,
 		animationColFrames: 10,
+		framesUntilNext: 4,
+	});
+    
+    bobWalkSide45Deg = new AnimatedSpriteClass({
+		name: "bobWalkSide45DegAnimaton",
+		spriteSheet: bobSide45Animation,
+		animationColFrames: 22,
 		framesUntilNext: 4,
 	});
 };

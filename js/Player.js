@@ -1,8 +1,8 @@
 var player = new (function () {
     this.x = 100;
     this.y = 100;
-    this.w = 32;
-    this.h = 32;
+    this.w = 64;
+    this.h = 64;
     this.walkSpeed = 4;
 
     this.keyHeld_walkUp = false;
@@ -62,13 +62,24 @@ var player = new (function () {
     }
 
     this.draw = function () {
-        //drawRectToContext(scaledContext, this.x, this.y, this.w, this.h, "#6B6570", 1);
-        //scaledContext.drawImage(bobSprite, this.x, this.y);
         if (this.states.walking) {
-            if (this.keyHeld_walkLeft || (this.keyHeld_walkLeft && this.keyHeld_walkUp) || (this.keyHeld_walkLeft && this.keyHeld_walkDown)) {
-                bobWalkSide.draw(scaledContext, this.x, this.y);
-            } else if (this.keyHeld_walkRight || (this.keyHeld_walkRight && this.keyHeld_walkUp) || (this.keyHeld_walkRight && this.keyHeld_walkDown)) {
-                bobWalkSide.draw(scaledContext, this.x, this.y, 1, true);
+            if (this.keyHeld_walkLeft) {
+                
+                if (this.keyHeld_walkUp || this.keyHeld_walkDown) {//45 degree turn
+                    bobWalkSide45Deg.draw(scaledContext, this.x, this.y);
+                } else {//90 degree turn
+                      bobWalkSide.draw(scaledContext, this.x, this.y);
+                }
+                
+            } else if (this.keyHeld_walkRight) {
+                
+                if ((this.keyHeld_walkRight && this.keyHeld_walkUp) || (this.keyHeld_walkRight && this.keyHeld_walkDown)) {//45 degree turn
+                    bobWalkSide45Deg.draw(scaledContext, this.x, this.y, 1, true);
+                } else {//90 degree turn
+                    bobWalkSide.draw(scaledContext, this.x, this.y, 1, true);
+                }
+                
+                
             } else if (this.keyHeld_walkDown || this.keyHeld_walkUp) {
                  bobWalk.draw(scaledContext, this.x, this.y);
             }

@@ -232,9 +232,9 @@ function Dialogue() {
         if (nameList[this.page] == NPCName) {
             if (this.isShowing && this.letterCounter < dialogueList[this.page].length) {
                 if (leftPicElseRightPic) {
-                    animatedSheetVar.draw(this.speakerX + xOffset, speakerY + yOffset, 1);
+                    animatedSheetVar.draw(canvasContext, this.speakerX + xOffset, speakerY + yOffset, 1);
                 } else {
-                     animatedSheetVar.draw(this.speaker2X + xOffset, speaker2Y + yOffset, 1);
+                     animatedSheetVar.draw(canvasContext, this.speaker2X + xOffset, speaker2Y + yOffset, 1);
                 }
             }
         }

@@ -1,5 +1,6 @@
 var johnMouthMove;
 var roseMouthMove;
+var bobWalk;
 
 function makeAnimatedSprites() {
     johnMouthMove = new AnimatedSpriteClass({
@@ -13,6 +14,13 @@ function makeAnimatedSprites() {
 		name: "roseAnimatedMouth",
 		spriteSheet: roseMouthAnimatedSheet,
 		animationColFrames: 18,
+		framesUntilNext: 4,
+	});
+    
+     bobWalk = new AnimatedSpriteClass({
+		name: "bobWalkAnimation",
+		spriteSheet: bobAnimation,
+		animationColFrames: 12,
 		framesUntilNext: 4,
 	});
 };
@@ -47,25 +55,25 @@ function AnimatedSpriteClass(data) {
 		return this.currentFrameIndex;
 	}
 
-	this.draw = function (x,y, currentAxisIndexOfAnimation = 1,
+	this.draw = function (whichContext, x,y, currentAxisIndexOfAnimation = 1,
 							flipped = false, rotated = false, degrees,
 							offsetInRelationToRotationX,offsetInRelationToRotationY,
-	 						opacity = canvasContext.globalAlpha, streched = false, strechX = 1, strechY = 1,
+	 						opacity = whichContext.globalAlpha, streched = false, strechX = 1, strechY = 1,
 	 						loopsToEndAndBack = false) {
 		let additionalWidth;
 		let additionalHeight;
-		canvasContext.save();
-        canvasContext.globalAlpha = opacity;
+		whichContext.save();
+        whichContext.globalAlpha = opacity;
         if (rotated) {
-			canvasContext.translate(x, y);
-			canvasContext.rotate(degrees*DEGREES_TO_RADIANS);
+			whichContext.translate(x, y);
+			whichContext.rotate(degrees*DEGREES_TO_RADIANS);
 		}
 		if (flipped) {
 			if (rotated) {
-				canvasContext.scale(-1,1);
+				whichContext.scale(-1,1);
 			} else {
-			canvasContext.translate(x + (this.spriteSheet.width / this.animationColFrames), y);
-			canvasContext.scale(-1,1);
+			whichContext.translate(x + (this.spriteSheet.width / this.animationColFrames), y);
+			whichContext.scale(-1,1);
 			}
 		}
 		if (this.loops) {
@@ -117,7 +125,7 @@ function AnimatedSpriteClass(data) {
 		}
 		if (this.framesMoveSideways) { //The frames in the source image are arranged left to right, all using the same height
 			if (rotated) {
-				canvasContext.drawImage(this.spriteSheet,
+				whichContext.drawImage(this.spriteSheet,
 									this.currentFrameIndex * this.spriteSheet.width/this.animationColFrames,
 									(currentAxisIndexOfAnimation - 1) * this.spriteSheet.height/this.animationRowFrames,
 									this.spriteSheet.width/this.animationColFrames, 
@@ -126,7 +134,7 @@ function AnimatedSpriteClass(data) {
 									(this.spriteSheet.width/this.animationColFrames), 
 									this.spriteSheet.height/this.animationRowFrames);
 			} else if (flipped) {
-				canvasContext.drawImage(this.spriteSheet,
+				whichContext.drawImage(this.spriteSheet,
 									this.currentFrameIndex * this.spriteSheet.width/this.animationColFrames,
 									(currentAxisIndexOfAnimation - 1) * this.spriteSheet.height/this.animationRowFrames,
 									this.spriteSheet.width/this.animationColFrames, 
@@ -136,7 +144,7 @@ function AnimatedSpriteClass(data) {
 									this.spriteSheet.width/this.animationColFrames + (additionalWidth * strechX),
 									this.spriteSheet.height/this.animationRowFrames * strechY);
 			} else {
-				canvasContext.drawImage(this.spriteSheet,
+				whichContext.drawImage(this.spriteSheet,
 									this.currentFrameIndex * this.spriteSheet.width/this.animationColFrames,
 									(currentAxisIndexOfAnimation - 1) * this.spriteSheet.height/this.animationRowFrames,
 									this.spriteSheet.width/this.animationColFrames, 
@@ -148,14 +156,14 @@ function AnimatedSpriteClass(data) {
 			}
 		} else {
 			if (rotated) { //The frames in the source image are arranged top to bottom, all using the same width
-				canvasContext.drawImage(this.spriteSheet,
+				whichContext.drawImage(this.spriteSheet,
 									(currentAxisIndexOfAnimation - 1) * this.spriteSheet.width/this.animationColFrames,
 									this.currentFrameIndex * this.spriteSheet.width/this.animationRowFrames,
 									this.spriteSheet.width, this.spriteSheet.height/this.animationRowFrames,
 									offsetInRelationToRotationX, offsetInRelationToRotationY,
 									this.spriteSheet.width, this.spriteSheet.height/this.animationRowFrames);
 			} else if (flipped) {
-				canvasContext.drawImage(this.spriteSheet,
+				whichContext.drawImage(this.spriteSheet,
 									(currentAxisIndexOfAnimation - 1) * this.spriteSheet.width/this.animationColFrames,
 									this.currentFrameIndex * this.spriteSheet.height/this.animationRowFrames,
 									this.spriteSheet.width, this.spriteSheet.height/this.animationRowFrames,
@@ -163,7 +171,7 @@ function AnimatedSpriteClass(data) {
 									this.spriteSheet.width * strechX,
 									this.spriteSheet.height/this.animationRowFrames + (additionalHeight * strechY));
 			} else {
-				canvasContext.drawImage(this.spriteSheet,
+				whichContext.drawImage(this.spriteSheet,
 									(currentAxisIndexOfAnimation - 1) * this.spriteSheet.width/this.animationColFrames,
 									this.currentFrameIndex * this.spriteSheet.height/this.animationRowFrames,
 									this.spriteSheet.width, this.spriteSheet.height/this.animationRowFrames,
@@ -173,6 +181,6 @@ function AnimatedSpriteClass(data) {
 									this.spriteSheet.height/this.animationRowFrames + (additionalHeight * strechY));
 			}
 		}
-	canvasContext.restore();
+	whichContext.restore();
 	} // end of draw function
 }; //end of Animated Sprite Class

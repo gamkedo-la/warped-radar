@@ -40,6 +40,8 @@ var player = new (function () {
     }
 
     this.draw = function () {
-        drawRectToContext(scaledContext, this.x, this.y, this.w, this.h, "#6B6570", 1);
+        //drawRectToContext(scaledContext, this.x, this.y, this.w, this.h, "#6B6570", 1);
+        //scaledContext.drawImage(bobSprite, this.x, this.y);
+        bobWalk.draw(scaledContext, this.x, this.y);
     }
 })();

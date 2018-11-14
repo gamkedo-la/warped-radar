@@ -14,6 +14,9 @@ var rosePic2 = document.createElement("img");
 var johnMouthAnimatedSheet = document.createElement("img");
 var roseMouthAnimatedSheet = document.createElement("img");
 
+var bobSprite = document.createElement("img");
+var bobAnimation = document.createElement("img");
+
 var picsToLoad = 0;
 var worldPics = [];
 
@@ -44,6 +47,9 @@ function loadImages() {
         {varName: choiceCursorPic, theFile: "choicecursor.png"},
         {varName: gameBorderPic, theFile: "gameBorder.png"},
         {varName: inventoryPic, theFile: "inventory.png"},
+        {varName: bobSprite, theFile: "bobsprite.png"},
+        
+        {varName: bobAnimation, theFile: "bobsprite-sheet.png"},
         
         {varName: johnMouthAnimatedSheet, theFile: "johnmouthmove.png"},
         {varName: roseMouthAnimatedSheet, theFile: "rosemouthmove.png"},

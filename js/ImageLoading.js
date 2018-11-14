@@ -62,7 +62,11 @@ function loadImages() {
         {varName: roseMouthAnimatedSheet, theFile: "rosemouthmove.png"},
 
         {worldType: TILE_GROUND, theFile: "ground.png"},
-        {worldType: TILE_RANDOM, theFile: "random.png"}
+        {worldType: TILE_RANDOM, theFile: "random.png"},
+        {worldType: TILE_SIDEWLAK, theFile: "sidewalk.png"},
+        {worldType: TILE_SIDEWALK_RIGHTCORNER, theFile: "sidewalk-cornerpiece-right.png"},
+        {worldType: TILE_SIDEWALK_VERTICAL, theFile: "sidewalk-vertical.png"}
+
     ];
     
     picsToLoad = imageList.length;

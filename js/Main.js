@@ -61,10 +61,7 @@ function drawAll() {
     drawGameBorder();
     drawDebugText();
     createDialogueEvents();
-    
-    inventory.drawUI();
-    //inventory.drawItems();
-    
+    inventory.draw();
     endPan();
 }
 

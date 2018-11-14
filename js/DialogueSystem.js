@@ -168,7 +168,6 @@ function Dialogue() {
             setTimeout(function () { //pause ability to select choice in order to increment page
                 showingChoiceMenu = true;
             }, 150);
-
         } else {
             if (selectedChoice != -1 && showingChoiceMenu && this.page >= dialogueList.length - 1) {
                 showingChoiceMenu = false;
@@ -260,7 +259,6 @@ function Dialogue() {
             this.setupAnimatedMouths(dialogueList, nameList, "John", true, johnMouthMove, 150, 300);
             this.setupAnimatedMouths(dialogueList, nameList, "Bob", true, johnMouthMove, 150, 300);
         }
-        
     }
 
     this.setupSpeaker2Tween = function (dialogueList, nameList, speaker2ImgList, leaveScreenList) {
@@ -272,13 +270,11 @@ function Dialogue() {
         } else if (this.isShowing && this.speaker2X > speaker2FinalX) {
             this.speaker2X -= tweenInSpeed;
             
-            
             //speaker specific mouth animations
             this.setupAnimatedMouths(dialogueList, nameList, "Rose", false, roseMouthMove, 170, 300);
         } else if (this.speaker2X <= speaker2FinalX) {
             this.speaker2X = speaker2FinalX;
             
-        
             //speaker specific mouth animations
             this.setupAnimatedMouths(dialogueList, nameList, "Rose", false, roseMouthMove, 150, 300);
         }
@@ -378,11 +374,5 @@ function Dialogue() {
             //if branching dialogue finishes at the end of the array, reset variables
             this.resetBranchingDialogueVars();
         }
-    }
-
-    this.start = function () { //could use this for vn style games?
-        this.page = 0;
-        this.isShowing = true;
-        this.letterCounter = 0;
     }
 }

@@ -8,7 +8,6 @@ var selected = new SoundOverlapsClass("./audio/selected");
 
 //how to add music: var bgMusic = "./audio/bgMusic";
 
-
 var musicVolume = localStorage.getItem("musicVolume");
 var effectsVolume = localStorage.getItem("effectsVolume");
 

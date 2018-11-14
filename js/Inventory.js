@@ -8,7 +8,7 @@ var inventory = new(function () {
     var width = 624;
     var height = 390;
 
-    var slots = [-1, -1, -1, -1, -1, -1, -1, -1];
+    var slots = new Array(8);
 
     var slotCols = 4;
     var slotRows = 2;
@@ -108,14 +108,13 @@ var inventory = new(function () {
         }
     }
 
-    this.drawUI = function () {
+    this.draw = function () {
         if (this.isShowing) {
             canvasContext.drawImage(inventoryImg, this.x, this.y);
             colorText("Inventory", titleTextX, titleTextY, textColour, textFontFace, textAlign, 1);
             
             this.drawSlots();
-            //this.drawItems();
-            
+            //this.drawItems(); 
         } else {
             inventoryIndex = 0;
         }

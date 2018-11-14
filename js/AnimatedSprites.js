@@ -23,7 +23,7 @@ function makeAnimatedSprites() {
      bobWalk = new AnimatedSpriteClass({
 		name: "bobWalkAnimation",
 		spriteSheet: bobAnimation,
-		animationColFrames: 16,
+		animationColFrames: 20,
 		framesUntilNext: 4,
 	});
     

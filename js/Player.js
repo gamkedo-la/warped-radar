@@ -15,7 +15,7 @@ var player = new(function () {
     this.controlKeyDown;
     this.controlKeyLeft;
 
-    this.states = {
+    var states = {
         walking: false
     }
 
@@ -37,7 +37,7 @@ var player = new(function () {
             for (var eachCol = 0; eachCol < WORLD_ROWS; eachCol++) {
                 var arrayIndex = rowColToArrayIndex(eachCol, eachRow);
                 if (worldGrid[arrayIndex] == TILE_PLAYER_START) {
-                    worldGrid[arrayIndex] = TILE_SIDEWLAK;
+                    worldGrid[arrayIndex] = TILE_SIDEWLAK; //for prototype only
                     this.x = eachCol * WORLD_W + WORLD_W / 2;
                     this.y = eachRow * WORLD_H - WORLD_H / 2;
                     return;
@@ -51,32 +51,31 @@ var player = new(function () {
             if (this.keyHeld_walkUp) {
                 this.y -= this.walkSpeed;
 
-                this.states.walking = true;
+                states.walking = true;
             }
             if (this.keyHeld_walkDown) {
                 this.y += this.walkSpeed;
 
-                this.states.walking = true;
+                states.walking = true;
             }
             if (this.keyHeld_walkLeft) {
                 this.x -= this.walkSpeed;
 
-                this.states.walking = true;
+                states.walking = true;
             }
             if (this.keyHeld_walkRight) {
                 this.x += this.walkSpeed;
 
-                this.states.walking = true;
+                states.walking = true;
             }
             if (!this.keyHeld_walkUp && !this.keyHeld_walkDown && !this.keyHeld_walkLeft && !this.keyHeld_walkRight) {
-                this.states.walking = false;
-                //facing.down = true;
+                states.walking = false;
             }
         }
     }
 
     this.draw = function () {
-        if (this.states.walking) {
+        if (states.walking) {
             if (this.keyHeld_walkLeft) {
 
                 if (this.keyHeld_walkUp || this.keyHeld_walkDown) { //45 degree turn

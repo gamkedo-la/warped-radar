@@ -67,48 +67,28 @@ function OverworldObject() {
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
-var john = new OverworldObject();
-john.dialogue = new Dialogue();
-john.colour = "#8789C0";
+var rose = new OverworldObject();
+rose.dialogue = new Dialogue();
+rose.colour = "#8789C0";
 
-john.chatEvents = function (createElseIncrement) {
-    this.text(createElseIncrement, [johnAndRoseConvo/*, johnAndRoseConvo2*/]);
+rose.chatEvents = function (createElseIncrement) {
+    this.text(createElseIncrement, [johnAndRoseConvo, johnAndRoseConvo2, johnAndRoseConvo3]);
 
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
-
-var bob = new OverworldObject();
-bob.dialogue = new Dialogue();
-bob.pressedX = false;
-
-bob.colour = "green";
-bob.x = 300;
-bob.y = 400;
-
-bob.chatEvents = function (createElseIncrement) {
-    if (this.pressedX) {
-       this.eventText(createElseIncrement, omigoshBob);
-    } else { //regular text
-        this.text(createElseIncrement, [bobConvo]);
-    }
-}
-
-////////////////////////////////////////////////////////////////////////////////////////////////
-var allNPCs = [john];
+var allNPCs = [rose];
 
 function createDialogueEvents() {
-    john.chatEvents(true);
-    bob.chatEvents(true);
+    rose.chatEvents(true);
 }
 
 function incrementTextPages() {
-    john.chatEvents(false);
-    bob.chatEvents(false);
+    rose.chatEvents(false);
 }
 
 function dialogueNotShowing() {
-    return !bob.dialogue.isShowing && !john.dialogue.isShowing;
+    return !rose.dialogue.isShowing;
 }
 
 function triggerNPCDialogue() {

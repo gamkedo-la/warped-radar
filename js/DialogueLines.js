@@ -4,7 +4,7 @@ var johnAndRoseConvo = [
         who: "John",
         nameCol: "lightblue",
         voice: voiceLow1,
-        text: "Hello, how are you?",
+        text: "Hi there.",
         leftPic: johnPic,
         rightPic: null,
 
@@ -15,9 +15,23 @@ var johnAndRoseConvo = [
     },
     {
         scene: "neutral",
+        who: "Rose",
+        nameCol: "pink",
+        voice: voiceHigh2,
+        text: "Hi! How are you?",
+        leftPic: johnPic,
+        rightPic: rosePic,
+
+        leftPicLeave: false,
+        rightPicLeave: false,
+
+        choices: null
+    },
+    {
+        scene: "neutral",
         who: "John",
         nameCol: "lightblue",
-        voice: voiceHigh2,
+        voice: voiceLow1,
         text: "",
         leftPic: johnPic,
         rightPic: rosePic,
@@ -26,7 +40,7 @@ var johnAndRoseConvo = [
         rightPicLeave: false,
 
         choices: [
-        ["Good, how are you?", "Good end"],
+        ["Good, how about you?", "Good end"],
         ["Meh", "Bad end"],
         ["I like tortles", "Tortle end"]
         ]
@@ -34,10 +48,24 @@ var johnAndRoseConvo = [
     },
     {
         scene: "Good end",
+        who: "John",
+        nameCol: "lightblue",
+        voice: voiceLow1,
+        text: "I'm good. So how've you been?",
+        leftPic: johnPic,
+        rightPic: rosePic,
+
+        leftPicLeave: false,
+        rightPicLeave: false,
+
+        choices: null
+    },
+    {
+        scene: "Good end",
         who: "Rose",
         nameCol: "pink",
         voice: voiceHigh2,
-        text: "I'm fine, how about you?",
+        text: "I'm fine.",
         leftPic: johnPic,
         rightPic: rosePic,
 
@@ -51,13 +79,43 @@ var johnAndRoseConvo = [
         who: "John",
         nameCol: "lightblue",
         voice: voiceLow1,
-        text: "This is horrible example dialogue. Also, I'm doing great, thanks for asking.",
+        text: "Oh that's great.",
+        leftPic: johnPic,
+        rightPic: rosePic,
+
+        leftPicLeave: false,
+        rightPicLeave: false,
+
+        hasChoices: false,
+        choices: null
+    },
+    {
+        scene: "Good end",
+        who: "John",
+        nameCol: "lightblue",
+        voice: voiceLow1,
+        text: "Hold on, let me just show the player that I also have an angry face portrait.",
         leftPic: johnPic2,
         rightPic: rosePic,
 
         leftPicLeave: false,
         rightPicLeave: false,
-        
+
+        hasChoices: false,
+        choices: null
+    },
+    {
+        scene: "Good end",
+        who: "John",
+        nameCol: "lightblue",
+        voice: voiceLow1,
+        text: "GRRR",
+        leftPic: johnPic2,
+        rightPic: rosePic,
+
+        leftPicLeave: false,
+        rightPicLeave: false,
+
         hasChoices: false,
         choices: null
     },
@@ -66,13 +124,13 @@ var johnAndRoseConvo = [
         who: "Rose",
         nameCol: "pink",
         voice: voiceHigh2,
-        text: "OK, see ya",
+        text: "Uhh, oK, see ya",
         leftPic: johnPic,
         rightPic: rosePic2,
 
         leftPicLeave: false,
         rightPicLeave: false,
-        
+
         hasChoices: false,
         choices: null
     },
@@ -87,7 +145,7 @@ var johnAndRoseConvo = [
 
         leftPicLeave: false,
         rightPicLeave: true,
-        
+
         hasChoices: false,
         choices: null
     },
@@ -102,7 +160,7 @@ var johnAndRoseConvo = [
 
         leftPicLeave: false,
         rightPicLeave: false,
-        
+
         hasChoices: false,
         choices: null
     },
@@ -117,7 +175,7 @@ var johnAndRoseConvo = [
 
         leftPicLeave: false,
         rightPicLeave: false,
-        
+
         hasChoices: false,
         choices: null
     },
@@ -181,11 +239,24 @@ var johnAndRoseConvo = [
 
 var johnAndRoseConvo2 = [
     {
+        who: "John",
+        nameCol: "lightblue",
+        voice: voiceLow1,
+        text: "Hello!",
+        leftPic: johnPic,
+        rightPic: null,
+
+        leftPicLeave: false,
+        rightPicLeave: false,
+
+        choices: null
+    },
+    {
         who: "Rose",
         nameCol: "pink",
         voice: voiceHigh2,
-        text: "By the way, you're cool.",
-        leftPic: null,
+        text: "Oh, it's you again!",
+        leftPic: johnPic,
         rightPic: rosePic,
 
         leftPicLeave: false,
@@ -197,7 +268,20 @@ var johnAndRoseConvo2 = [
         who: "John",
         nameCol: "lightblue",
         voice: voiceLow1,
-        text: "Thanks Rose, couldn't have said it better myself.",
+        text: "Okay I'm gonna go now",
+        leftPic: johnPic,
+        rightPic: rosePic,
+
+        leftPicLeave: false,
+        rightPicLeave: false,
+
+        choices: null
+    },
+    {
+        who: "Rose",
+        nameCol: "pink",
+        voice: voiceHigh2,
+        text: "Ok",
         leftPic: johnPic,
         rightPic: rosePic,
 
@@ -206,16 +290,14 @@ var johnAndRoseConvo2 = [
 
         choices: null
     }
-
 ];
 
-var bobConvo = [
+var johnAndRoseConvo3 = [
     {
-        scene: "Bob is sad",
-        who: "Bob",
-        nameCol: "lightgreen",
-        voice: voiceLow2,
-        text: "Hi I'm bobs.",
+        who: "John",
+        nameCol: "lightblue",
+        voice: voiceLow1,
+        text: "Sorry I forgot to tell you somethi-",
         leftPic: johnPic,
         rightPic: null,
 
@@ -225,13 +307,12 @@ var bobConvo = [
         choices: null
     },
     {
-        scene: "Bob is sad",
-        who: "Bob",
-        nameCol: "lightgreen",
-        voice: voiceLow2,
-        text: "Oh that s was a typo I've had since birth. The accurate pronounciation is bob though.",
+        who: "Rose",
+        nameCol: "pink",
+        voice: voiceHigh2,
+        text: "Please, just go",
         leftPic: johnPic,
-        rightPic: null,
+        rightPic: rosePic2,
 
         leftPicLeave: false,
         rightPicLeave: false,
@@ -239,13 +320,12 @@ var bobConvo = [
         choices: null
     },
     {
-        scene: "Bob is sad",
-        who: "Bob",
-        nameCol: "lightgreen",
-        voice: voiceLow2,
-        text: "Sighs",
+        who: "John",
+        nameCol: "lightblue",
+        voice: voiceLow1,
+        text: "Ok...",
         leftPic: johnPic2,
-        rightPic: null,
+        rightPic: rosePic2,
 
         leftPicLeave: false,
         rightPicLeave: false,
@@ -253,167 +333,27 @@ var bobConvo = [
         choices: null
     },
     {
-        scene: "Bob is sad",
-        who: "Bob",
-        nameCol: "lightgreen",
-        voice: voiceLow2,
-        text: "Do you like my name?",
-        leftPic: johnPic,
-        rightPic: null,
-
-        leftPicLeave: false,
-        rightPicLeave: false,
-
-        choices: null
-    },
-    {
-        scene: "Bob is sad",
-        who: "Bob",
-        nameCol: "lightgreen",
-        voice: voiceLow2,
-        text: "",
-        leftPic: johnPic,
-        rightPic: null,
-
-        leftPicLeave: false,
-        rightPicLeave: false,
-
-        choices: [["Yeah, of course", "happy"], ["no not really", "sad"]]
-    },
-    {
-        scene: "happy",
-        who: "Bob",
-        nameCol: "lightgreen",
-        voice: voiceLow2,
-        text: "Yeah me, t-",
+        who: "John",
+        nameCol: "lightblue",
+        voice: voiceLow1,
+        text: "...",
         leftPic: johnPic2,
-        rightPic: null,
+        rightPic: rosePic2,
 
-        leftPicLeave: false,
+        leftPicLeave: true,
         rightPicLeave: false,
 
         choices: null
     },
     {
-        scene: "happy",
-        who: "Bob",
-        nameCol: "lightgreen",
-        voice: voiceLow2,
-        text: "Wait...",
-        leftPic: johnPic2,
-        rightPic: null,
+        who: "Rose",
+        nameCol: "pink",
+        voice: voiceHigh2,
+        text: "That's better",
+        leftPic: null,
+        rightPic: rosePic2,
 
-        leftPicLeave: false,
-        rightPicLeave: false,
-
-        choices: null
-    },
-    {
-        scene: "happy",
-        who: "Bob",
-        nameCol: "lightgreen",
-        voice: voiceLow2,
-        text: "You really like it?? That's the nicest thing anyone's ever told me",
-        leftPic: johnPic,
-        rightPic: null,
-
-        leftPicLeave: false,
-        rightPicLeave: false,
-
-        choices: null
-    },
-    {
-        scene: "sad",
-        who: "Bob",
-        nameCol: "lightgreen",
-        voice: voiceLow2,
-        text: "Oh....",
-        leftPic: johnPic2,
-        rightPic: null,
-
-        leftPicLeave: false,
-        rightPicLeave: false,
-
-        choices: null
-    },
-    {
-        scene: "sad",
-        who: "Bob",
-        nameCol: "lightgreen",
-        voice: voiceLow2,
-        text: "I guess I should've expected that",
-        leftPic: johnPic2,
-        rightPic: null,
-
-        leftPicLeave: false,
-        rightPicLeave: false,
-
-        choices: null
-    },
-];
-
-var omigoshBob = [
-    {
-        who: "Bob",
-        voice: voiceLow2,
-        nameCol: "lightgreen",
-        text: "Hi!",
-        leftPic: johnPic,
-        rightPic: null,
-
-        leftPicLeave: false,
-        rightPicLeave: false,
-
-        choices: null
-    },
-    {
-        who: "Bob",
-        voice: voiceLow2,
-        nameCol: "lightgreen",
-        text: "You called?",
-        leftPic: johnPic,
-        rightPic: null,
-
-        leftPicLeave: false,
-        rightPicLeave: false,
-
-         choices: null
-    },
-    {
-        who: "Bob",
-        voice: voiceLow2,
-        nameCol: "lightgreen",
-        text: "But you pressed X..?",
-        leftPic: johnPic,
-        rightPic: null,
-
-        leftPicLeave: false,
-        rightPicLeave: false,
-
-        choices: null
-    },
-    {
-        who: "Bob",
-        voice: voiceLow2,
-        nameCol: "lightgreen",
-        text: "Oh, so it was an accident?",
-        leftPic: johnPic2,
-        rightPic: null,
-
-        leftPicLeave: false,
-        rightPicLeave: false,
-
-        choices: null
-    },
-    {
-        who: "Bob",
-        voice: voiceLow2,
-        nameCol: "lightgreen",
-        text: "Mmmmhm, yeah, sure.",
-        leftPic: johnPic2,
-        rightPic: null,
-
-        leftPicLeave: false,
+        leftPicLeave: true,
         rightPicLeave: false,
 
         choices: null

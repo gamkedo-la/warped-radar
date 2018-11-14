@@ -4,7 +4,7 @@ function Dialogue() {
     this.letterCounter = 0;
     this.page = -1;
 
-    this.speakerStartX = -265;
+    this.speakerStartX = -280;
     this.speakerX = this.speakerStartX;
     this.speaker2StartX = 800;
     this.speaker2X = this.speaker2StartX;
@@ -234,7 +234,7 @@ function Dialogue() {
                 if (leftPicElseRightPic) {
                     animatedSheetVar.draw(canvasContext, this.speakerX + xOffset, speakerY + yOffset, 1);
                 } else {
-                     animatedSheetVar.draw(canvasContext, this.speaker2X + xOffset, speaker2Y + yOffset, 1);
+                    animatedSheetVar.draw(canvasContext, this.speaker2X + xOffset, speaker2Y + yOffset, 1);
                 }
             }
         }
@@ -243,17 +243,23 @@ function Dialogue() {
     this.setupSpeakerTween = function (dialogueList, nameList, speakerImgList, leaveScreenList) {
         canvasContext.drawImage(speakerImgList[this.page], this.speakerX, speakerY);
         if (leaveScreenList[this.page] && this.speakerX >= this.speakerStartX) {
-            this.speakerX -= tweenOutSpeed;
+
+            if (this.speakerX <= this.speakerStartX) {
+                this.speakerX = this.speakerStartX;
+            } else {
+                this.speakerX -= tweenOutSpeed;
+            }
+
         } else if (!this.isShowing && this.speakerX > this.speakerStartX) {
             this.speakerX -= tweenOutSpeed;
         } else if (this.isShowing && this.speakerX < speakerFinalX) {
             this.speakerX += tweenInSpeed;
-            
+
             //speaker specific mouth anims
             this.setupAnimatedMouths(dialogueList, nameList, "John", true, johnMouthMove, 130, 300);
         } else if (this.speakerX >= speakerFinalX) {
             this.speakerX = speakerFinalX;
-            
+
             //speaker specific mouth anims
             this.setupAnimatedMouths(dialogueList, nameList, "John", true, johnMouthMove, 150, 300);
         }
@@ -262,21 +268,27 @@ function Dialogue() {
     this.setupSpeaker2Tween = function (dialogueList, nameList, speaker2ImgList, leaveScreenList) {
         canvasContext.drawImage(speaker2ImgList[this.page], this.speaker2X, speaker2Y);
         if (leaveScreenList[this.page] && this.speaker2X <= this.speaker2StartX) {
-            this.speaker2X += tweenOutSpeed;
+
+            if (this.speaker2X >= this.speaker2StartX) {
+                this.speaker2X = this.speaker2StartX;
+            } else {
+                this.speaker2X += tweenOutSpeed;
+            }
+
         } else if (!this.isShowing && this.speaker2X < this.speaker2StartX) {
             this.speaker2X += tweenOutSpeed;
         } else if (this.isShowing && this.speaker2X > speaker2FinalX) {
             this.speaker2X -= tweenInSpeed;
-            
+
             //speaker specific mouth animations
             this.setupAnimatedMouths(dialogueList, nameList, "Rose", false, roseMouthMove, 170, 300);
         } else if (this.speaker2X <= speaker2FinalX) {
             this.speaker2X = speaker2FinalX;
-            
+
             //speaker specific mouth animations
             this.setupAnimatedMouths(dialogueList, nameList, "Rose", false, roseMouthMove, 150, 300);
         }
-        
+
     }
 
     this.findPunctuation = function (str) {
@@ -346,7 +358,6 @@ function Dialogue() {
 
     this.incrementPage = function (conversation) {
         var dialogue = [];
-        var playerChoices = [];
         var sceneText = this.getSceneLength(conversation);
         for (var i = 0; i < conversation.length; i++) {
             if ("text" in conversation[i]) dialogue.push(conversation[i].text);

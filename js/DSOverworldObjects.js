@@ -1,6 +1,6 @@
 function OverworldObject() {
-    this.x = 500;
-    this.y = 250;
+    this.x = 380;
+    this.y = 225;
     this.w = 32;
     this.h = 32;
     this.colour = "#6B6570";

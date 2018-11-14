@@ -38,6 +38,7 @@ window.onload = function () {
 function startGame() {
     var framesPerSecond = 30;
     setInterval(updateAll, 1000 / framesPerSecond);
+    player.reset();
     setupInput();
 }
 

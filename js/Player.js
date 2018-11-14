@@ -56,7 +56,7 @@ var player = new (function () {
             }
             if (!this.keyHeld_walkUp && !this.keyHeld_walkDown && !this.keyHeld_walkLeft && !this.keyHeld_walkRight) {
                 this.states.walking = false;
-                facing.down = true;
+                //facing.down = true;
             }
         }
     }
@@ -66,25 +66,24 @@ var player = new (function () {
             if (this.keyHeld_walkLeft) {
                 
                 if (this.keyHeld_walkUp || this.keyHeld_walkDown) {//45 degree turn
-                    bobWalkSide45Deg.draw(scaledContext, this.x, this.y);
+                    johnWalkSide45Deg.draw(scaledContext, this.x, this.y);
                 } else {//90 degree turn
-                      bobWalkSide.draw(scaledContext, this.x, this.y);
+                      johnWalkSide.draw(scaledContext, this.x, this.y);
                 }
                 
             } else if (this.keyHeld_walkRight) {
-                
+            
                 if ((this.keyHeld_walkRight && this.keyHeld_walkUp) || (this.keyHeld_walkRight && this.keyHeld_walkDown)) {//45 degree turn
-                    bobWalkSide45Deg.draw(scaledContext, this.x, this.y, 1, true);
+                    johnWalkSide45Deg.draw(scaledContext, this.x, this.y, 1, true);
                 } else {//90 degree turn
-                    bobWalkSide.draw(scaledContext, this.x, this.y, 1, true);
+                    johnWalkSide.draw(scaledContext, this.x, this.y, 1, true);
                 }
                 
-                
             } else if (this.keyHeld_walkDown || this.keyHeld_walkUp) {
-                 bobWalk.draw(scaledContext, this.x, this.y);
+                 johnWalk.draw(scaledContext, this.x, this.y);
             }
         } else {
-            bobIdle.draw(scaledContext, this.x, this.y);
+            johnIdle.draw(scaledContext, this.x, this.y);
         }
     }
 })();

@@ -251,13 +251,11 @@ function Dialogue() {
             
             //speaker specific mouth anims
             this.setupAnimatedMouths(dialogueList, nameList, "John", true, johnMouthMove, 130, 300);
-            this.setupAnimatedMouths(dialogueList, nameList, "Bob", true, johnMouthMove, 130, 300);
         } else if (this.speakerX >= speakerFinalX) {
             this.speakerX = speakerFinalX;
             
             //speaker specific mouth anims
             this.setupAnimatedMouths(dialogueList, nameList, "John", true, johnMouthMove, 150, 300);
-            this.setupAnimatedMouths(dialogueList, nameList, "Bob", true, johnMouthMove, 150, 300);
         }
     }
 

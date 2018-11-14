@@ -1,6 +1,6 @@
 function OverworldObject() {
-    this.x = 200;
-    this.y = 100;
+    this.x = 500;
+    this.y = 250;
     this.w = 32;
     this.h = 32;
     this.colour = "#6B6570";
@@ -95,7 +95,7 @@ bob.chatEvents = function (createElseIncrement) {
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
-var allNPCs = [john, bob];
+var allNPCs = [john];
 
 function createDialogueEvents() {
     john.chatEvents(true);

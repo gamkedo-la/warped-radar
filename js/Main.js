@@ -77,6 +77,6 @@ function drawGameBorder() {
 function drawDebugText() {
     colorText("Pressed Space: " + pressed_space, 20, 30, "white", "20px Arial", "left", 1);
     colorText("Pressed X: " + bob.pressedX, 20, 50, "white", "20px Arial", "left", 1);
-    colorText("Colliding with John: " + john.collidingWithPlayer(), 20, 80, "white", "20px Arial", "left", 1);
+    colorText("Colliding with Rose: " + john.collidingWithPlayer(), 20, 80, "white", "20px Arial", "left", 1);
     colorText("Colliding with Bob: " + bob.collidingWithPlayer(), 20, 100, "white", "20px Arial", "left", 1);
 }

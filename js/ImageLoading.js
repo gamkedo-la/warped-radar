@@ -14,13 +14,12 @@ var rosePic2 = document.createElement("img");
 var johnMouthAnimatedSheet = document.createElement("img");
 var roseMouthAnimatedSheet = document.createElement("img");
 
-var bobSprite = document.createElement("img");
-var bobAnimation = document.createElement("img");
+var johnAnimation = document.createElement("img");
 
-var bobSideAnimation = document.createElement("img");
-var bobSide45Animation = document.createElement("img");
+var johnSideAnimation = document.createElement("img");
+var johnSide45Animation = document.createElement("img");
 
-var bobIdleAnimation = document.createElement("img");
+var johnIdleAnimation = document.createElement("img");
 
 var picsToLoad = 0;
 var worldPics = [];
@@ -49,15 +48,15 @@ function loadImages() {
         {varName: johnPic2, theFile: "john2.png"},
         {varName: rosePic, theFile: "rose.png"},
         {varName: rosePic2, theFile: "rose2.png"},
+        
         {varName: choiceCursorPic, theFile: "choicecursor.png"},
         {varName: gameBorderPic, theFile: "gameBorder.png"},
         {varName: inventoryPic, theFile: "inventory.png"},
-        {varName: bobSprite, theFile: "bobsprite.png"},
         
-        {varName: bobAnimation, theFile: "bobsprite-sheet.png"},
-        {varName: bobIdleAnimation, theFile: "bobspriteidle-sheet.png"},
-        {varName: bobSideAnimation, theFile: "bobspriteside-sheet.png"},
-        {varName: bobSide45Animation, theFile: "bobspriteside45-sheet.png"},
+        {varName: johnAnimation, theFile: "johnsprite-sheet.png"},
+        {varName: johnIdleAnimation, theFile: "johnspriteidle-sheet.png"},
+        {varName: johnSideAnimation, theFile: "johnspriteside-sheet.png"},
+        {varName: johnSide45Animation, theFile: "johnspriteside45-sheet.png"},
         
         {varName: johnMouthAnimatedSheet, theFile: "johnmouthmove.png"},
         {varName: roseMouthAnimatedSheet, theFile: "rosemouthmove.png"},

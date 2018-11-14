@@ -1,6 +1,6 @@
 var player = new (function () {
-    this.x = 80;
-    this.y = 80;
+    this.x = 100;
+    this.y = 100;
     this.w = 32;
     this.h = 32;
     this.walkSpeed = 4;
@@ -14,6 +14,16 @@ var player = new (function () {
     this.controlKeyRight;
     this.controlKeyDown;
     this.controlKeyLeft;
+    
+    this.states = {
+        walking: false
+    }
+    
+    var facing = {
+        down: true,
+        left: false,
+        right: false
+    }
 
     this.setupInput = function (upKey, rightKey, downKey, leftKey) {
         this.controlKeyUp = upKey;
@@ -26,15 +36,27 @@ var player = new (function () {
         if (dialogueNotShowing() && !inventory.isShowing) {
             if (this.keyHeld_walkUp) {
                 this.y -= this.walkSpeed;
+                
+                this.states.walking = true;
             }
-            if (this.keyHeld_walkDown) {
+             if (this.keyHeld_walkDown) {
                 this.y += this.walkSpeed;
+                
+                this.states.walking = true;
             }
-            if (this.keyHeld_walkLeft) {
+             if (this.keyHeld_walkLeft) {
                 this.x -= this.walkSpeed;
+                
+                this.states.walking = true;
             }
-            if (this.keyHeld_walkRight) {
+             if (this.keyHeld_walkRight) {
                 this.x += this.walkSpeed;
+                
+                this.states.walking = true;
+            }
+            if (!this.keyHeld_walkUp && !this.keyHeld_walkDown && !this.keyHeld_walkLeft && !this.keyHeld_walkRight) {
+                this.states.walking = false;
+                facing.down = true;
             }
         }
     }
@@ -42,6 +64,16 @@ var player = new (function () {
     this.draw = function () {
         //drawRectToContext(scaledContext, this.x, this.y, this.w, this.h, "#6B6570", 1);
         //scaledContext.drawImage(bobSprite, this.x, this.y);
-        bobWalk.draw(scaledContext, this.x, this.y);
+        if (this.states.walking) {
+            if (this.keyHeld_walkLeft || (this.keyHeld_walkLeft && this.keyHeld_walkUp) || (this.keyHeld_walkLeft && this.keyHeld_walkDown)) {
+                bobWalkSide.draw(scaledContext, this.x, this.y);
+            } else if (this.keyHeld_walkRight || (this.keyHeld_walkRight && this.keyHeld_walkUp) || (this.keyHeld_walkRight && this.keyHeld_walkDown)) {
+                bobWalkSide.draw(scaledContext, this.x, this.y, 1, true);
+            } else if (this.keyHeld_walkDown || this.keyHeld_walkUp) {
+                 bobWalk.draw(scaledContext, this.x, this.y);
+            }
+        } else {
+            bobIdle.draw(scaledContext, this.x, this.y);
+        }
     }
 })();

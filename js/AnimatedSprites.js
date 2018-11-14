@@ -1,6 +1,8 @@
 var johnMouthMove;
 var roseMouthMove;
 var bobWalk;
+var bobWalkSide;
+var bobIdle;
 
 function makeAnimatedSprites() {
     johnMouthMove = new AnimatedSpriteClass({
@@ -20,7 +22,21 @@ function makeAnimatedSprites() {
      bobWalk = new AnimatedSpriteClass({
 		name: "bobWalkAnimation",
 		spriteSheet: bobAnimation,
-		animationColFrames: 12,
+		animationColFrames: 16,
+		framesUntilNext: 4,
+	});
+    
+     bobIdle = new AnimatedSpriteClass({
+		name: "bobIdleAnimaton",
+		spriteSheet: bobIdleAnimation,
+		animationColFrames: 80,
+		framesUntilNext: 1,
+	});
+    
+     bobWalkSide = new AnimatedSpriteClass({
+		name: "bobWalkSideAnimaton",
+		spriteSheet: bobSideAnimation,
+		animationColFrames: 10,
 		framesUntilNext: 4,
 	});
 };

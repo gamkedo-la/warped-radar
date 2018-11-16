@@ -1,10 +1,11 @@
 const CANVAS_WIDTH = 800;
 const CANVAS_HEIGHT = 600;
-const PIXELS_PER_SCALE = 2.5;
+const PIXELS_PER_SCALE = 2.0;
 
 var scaledCanvas, scaledContext;
 var canvas, canvasContext;
 
+var debugMode = false;
 var framesFromGameStart = 0;
 
 window.onload = function () {

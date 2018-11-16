@@ -1,24 +1,44 @@
-var debugMode = false;
-
 var levelEditor = new(function () {
     var tileUnderMouse = null;
     var levelCol = 0;
     var levelRow = 0;
-    var roomTileGroup = 0;
+    var defaultSet = [TILE_GROUND, TILE_RANDOM];
 
-    /*var nothingSet = [TILE_TERRAIN, TILE_MOON_TERRAIN, TILE_MOON_TERRAIN_2, TILE_NEXT_LEVEL];
-    var groundSet = arrayWithRange(100, startAt = 100); // 100 to 199
-    var treeSet = arrayWithRange(100, startAt = 200); // 200 to 299
-    var cliffSet = arrayWithRange(100, startAt = 300); // 300 to 399
-    var waterSet = arrayWithRange(100, startAt = 400); // 400 to 499
-    var pathSet = arrayWithRange(100, startAt = 500); // 500 to 599
-    var moonSet = arrayWithRange(100, startAt = 700); // 700 to 799
-    var animalSet = arrayWithRange(100, startAt = 800); // 800 to 899
-*/
-    //var currentlySelectedSet = nothingSet;
+    var tileSets = [
+        [TILE_SIDEWLAK, TILE_SIDEWALK_VERTICAL, TILE_SIDEWALK_RIGHTCORNER],
+        [TILE_TESTBUILDING_LEFT, TILE_TESTBUILDING_RIGHT, TILE_TESTBUILDING_BOTTOMLEFT, TILE_TESTBUILDING_BOTTOMRIGHT]
+    ]
+    var currentlySelectedSet = defaultSet;
+    var currentTileIndex = 0;
 
-    this.editorKeyHandle = function () {
+    this.pickASet = function (set) {
+        currentlySelectedSet = set;
+        currentTileIndex = 0;
+    }
 
+    this.editorKeyHandle = function (keyCode) {
+        if (debugMode) {
+            switch (keyCode) {
+                case KEY_Q:
+                    currentTileIndex--;
+                    if (currentTileIndex <= 0) currentTileIndex = 0;
+                    break;
+                case KEY_W:
+                    currentTileIndex++;
+                    if (currentTileIndex >= currentlySelectedSet.length)
+                        currentTileIndex = currentlySelectedSet.length - 1;
+                    break;
+                case KEY_ONE:
+                    this.pickASet(defaultSet);
+                    break;
+                case KEY_TWO:
+                    this.pickASet(tileSets[0]);
+                    break;
+                case KEY_THREE:
+                    this.pickASet(tileSets[1]);
+                    break;
+            }
+        }
     }
 
     this.roomTileCoordinate = function () {
@@ -35,6 +55,19 @@ var levelEditor = new(function () {
             colorText("X: " + levelCol + "," + " Y: " + levelRow, mouseX, mouseY, "yellow", "15px Arial", "left", 1);
 
             drawStrokeRect(scaledContext, tileX, tileY, WORLD_W, WORLD_H, 'red');
+            canvasContext.drawImage(worldPics[currentlySelectedSet[currentTileIndex]], mouseX, mouseY, WORLD_W, WORLD_H);
+        }
+    }
+
+    this.editTileOnMouseClick = function () {
+        if (debugMode) {
+            var tileKindHere = worldGrid[tileUnderMouse];
+            if (currentlySelectedSet[currentTileIndex] == undefined) {
+                console.log("undefined");
+                return;
+            }
+            worldGrid[tileUnderMouse] = currentlySelectedSet[currentTileIndex];
+            //allLevels[currentLevelIndex].layout[tileUnderMouse] = currentlySelectedSet[currentSetIndex];
         }
     }
 

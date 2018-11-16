@@ -8,8 +8,14 @@ const KEY_A = 65;
 const KEY_S = 83;
 const KEY_D = 68;
 
+const KEY_Q = 81;
+
 const KEY_Z = 90;
 const KEY_X = 88;
+
+const KEY_ONE = 49;
+const KEY_TWO = 50;
+const KEY_THREE = 51;
 
 const KEY_TILDE = 192;
 
@@ -27,6 +33,7 @@ var cursorKeyPresses = 0;
 
 function setupInput() {
     canvas.addEventListener("mousemove", updateMousePos);
+    canvas.addEventListener("mouseup", mouseReleased);
     document.addEventListener("keydown", keyPressed);
     document.addEventListener("keyup", keyReleased);
     player.setupInput(KEY_UP, KEY_RIGHT, KEY_DOWN, KEY_LEFT);
@@ -38,6 +45,10 @@ function updateMousePos(evt) {
 
 	mouseX = evt.clientX - rect.left - root.scrollLeft;
 	mouseY = evt.clientY - rect.top - root.scrollTop;
+}
+
+function mouseReleased(evt) {
+    levelEditor.editTileOnMouseClick();
 }
 
 function keyPressed(evt) {
@@ -65,6 +76,7 @@ function keyPressed(evt) {
             break;
     }
     keySet(evt, player, true);
+    levelEditor.editorKeyHandle(evt.keyCode);
     inventory.navigate(evt.keyCode);
     evt.preventDefault();
 

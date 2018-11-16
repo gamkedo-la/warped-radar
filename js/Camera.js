@@ -32,7 +32,7 @@ function findEdgesOfScreen() {
 function cameraFollow() {
     var cameraFocusCenterX = camPanX + scaledCanvas.width / 2;
     var cameraFocusCenterY = camPanY + scaledCanvas.height / 2;
-    if (debugMode) {
+    if (editorMode) {
         var canvasRightBoundary = scaledCanvas.width + camPanX;
         var canvasBottomBoundary = scaledCanvas.height + camPanY;
         if ((mouseX / PIXELS_PER_SCALE) > scaledCanvas.width - WORLD_W) {

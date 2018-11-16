@@ -5,7 +5,6 @@ const PIXELS_PER_SCALE = 2.0;
 var scaledCanvas, scaledContext;
 var canvas, canvasContext;
 
-var debugMode = false;
 var framesFromGameStart = 0;
 
 window.onload = function () {
@@ -52,6 +51,7 @@ function moveAll() {
     player.move();
     triggerNPCDialogue();
     cameraFollow();
+    levelEditor.showNewGrid();
 }
 
 function drawAll() {

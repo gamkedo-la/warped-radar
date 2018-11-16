@@ -9,6 +9,7 @@ const KEY_S = 83;
 const KEY_D = 68;
 
 const KEY_Q = 81;
+const KEY_R = 82;
 
 const KEY_Z = 90;
 const KEY_X = 88;
@@ -72,7 +73,7 @@ function keyPressed(evt) {
             cursorKeyPresses++;
             break;
         case KEY_TILDE:
-            debugMode = !debugMode;
+            editorMode = !editorMode;
             break;
     }
     keySet(evt, player, true);

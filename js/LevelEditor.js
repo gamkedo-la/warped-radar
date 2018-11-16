@@ -1,13 +1,16 @@
+var editorMode = false;
 var levelEditor = new(function () {
+    var showNewGrid = false;
     var tileUnderMouse = null;
     var levelCol = 0;
     var levelRow = 0;
     var defaultSet = [TILE_GROUND, TILE_RANDOM];
-
-    var tileSets = [
-        [TILE_SIDEWLAK, TILE_SIDEWALK_VERTICAL, TILE_SIDEWALK_RIGHTCORNER],
-        [TILE_TESTBUILDING_LEFT, TILE_TESTBUILDING_RIGHT, TILE_TESTBUILDING_BOTTOMLEFT, TILE_TESTBUILDING_BOTTOMRIGHT]
-    ]
+    
+    var tileSets = {
+        sideWalks: [TILE_SIDEWLAK, TILE_SIDEWALK_VERTICAL, TILE_SIDEWALK_RIGHTCORNER],
+        buildings:  [TILE_TESTBUILDING_LEFT, TILE_TESTBUILDING_RIGHT, TILE_TESTBUILDING_BOTTOMLEFT, TILE_TESTBUILDING_BOTTOMRIGHT]
+    }
+        
     var currentlySelectedSet = defaultSet;
     var currentTileIndex = 0;
 
@@ -17,7 +20,7 @@ var levelEditor = new(function () {
     }
 
     this.editorKeyHandle = function (keyCode) {
-        if (debugMode) {
+        if (editorMode) {
             switch (keyCode) {
                 case KEY_Q:
                     currentTileIndex--;
@@ -32,17 +35,20 @@ var levelEditor = new(function () {
                     this.pickASet(defaultSet);
                     break;
                 case KEY_TWO:
-                    this.pickASet(tileSets[0]);
+                    this.pickASet(tileSets.sideWalks);
                     break;
                 case KEY_THREE:
-                    this.pickASet(tileSets[1]);
+                    this.pickASet(tileSets.buildings);
+                    break;
+                case KEY_R:
+                        showNewGrid = true;
                     break;
             }
         }
     }
 
     this.roomTileCoordinate = function () {
-        if (debugMode) {
+        if (editorMode) {
             tileUnderMouse = getTileIndexAtPixelCoord(mouseX / PIXELS_PER_SCALE + camPanX, mouseY / PIXELS_PER_SCALE + camPanY);
 
             var levelCol = arrayIndexToCol(tileUnderMouse);
@@ -60,7 +66,7 @@ var levelEditor = new(function () {
     }
 
     this.editTileOnMouseClick = function () {
-        if (debugMode) {
+        if (editorMode) {
             var tileKindHere = worldGrid[tileUnderMouse];
             if (currentlySelectedSet[currentTileIndex] == undefined) {
                 console.log("undefined");
@@ -68,6 +74,15 @@ var levelEditor = new(function () {
             }
             worldGrid[tileUnderMouse] = currentlySelectedSet[currentTileIndex];
             //allLevels[currentLevelIndex].layout[tileUnderMouse] = currentlySelectedSet[currentSetIndex];
+        }
+    }
+    
+    this.showNewGrid = function() {
+        if (showNewGrid) {
+            var newGrid = prompt("What do you name this grid?")
+            console.log( "var " + newGrid + " = \n[ \n" + worldGrid + "\n];");
+            showNewGrid = false;
+            editorMode = false;
         }
     }
 

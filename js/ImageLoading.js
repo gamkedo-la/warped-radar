@@ -6,10 +6,10 @@ var inventoryPic = document.createElement("img");
 
 var gameBorderPic = document.createElement("img");
 
-var johnPic = document.createElement("img");
-var johnPic2 = document.createElement("img");
-var rosePic = document.createElement("img");
-var rosePic2 = document.createElement("img");
+var johnHappyPic = document.createElement("img");
+var johnMadPic = document.createElement("img");
+var roseHappyPic = document.createElement("img");
+var roseAnnoyedPic = document.createElement("img");
 
 var johnMouthAnimatedSheet = document.createElement("img");
 var roseMouthAnimatedSheet = document.createElement("img");
@@ -20,6 +20,9 @@ var johnSideAnimation = document.createElement("img");
 var johnSide45Animation = document.createElement("img");
 
 var johnIdleAnimation = document.createElement("img");
+
+
+var building = document.createElement("img");
 
 var picsToLoad = 0;
 var worldPics = [];
@@ -43,29 +46,40 @@ function loadImageForWorldCode(worldCode, fileName) {
 
 function loadImages() {
     var imageList = [
+        //GAME UI
         {varName: dialogueBoxPic, theFile: "dialoguebox.png"},
-        {varName: johnPic, theFile: "john.png"},
-        {varName: johnPic2, theFile: "john2.png"},
-        {varName: rosePic, theFile: "rose.png"},
-        {varName: rosePic2, theFile: "rose2.png"},
-        
         {varName: choiceCursorPic, theFile: "choicecursor.png"},
         {varName: gameBorderPic, theFile: "gameBorder.png"},
         {varName: inventoryPic, theFile: "inventory.png"},
         
+        //PORTRAITS
+        {varName: johnHappyPic, theFile: "john.png"},
+        {varName: johnMadPic, theFile: "john2.png"},
+        {varName: roseHappyPic, theFile: "rose.png"},
+        {varName: roseAnnoyedPic, theFile: "rose2.png"},
+        
+        //PORTRAIT ANIMS
+        {varName: johnMouthAnimatedSheet, theFile: "johnmouthmove.png"},
+        {varName: roseMouthAnimatedSheet, theFile: "rosemouthmove.png"},
+        
+        //OVERWORLD CHARACTER ANIMS
         {varName: johnAnimation, theFile: "johnsprite-sheet.png"},
         {varName: johnIdleAnimation, theFile: "johnspriteidle-sheet.png"},
         {varName: johnSideAnimation, theFile: "johnspriteside-sheet.png"},
         {varName: johnSide45Animation, theFile: "johnspriteside45-sheet.png"},
         
-        {varName: johnMouthAnimatedSheet, theFile: "johnmouthmove.png"},
-        {varName: roseMouthAnimatedSheet, theFile: "rosemouthmove.png"},
-
+        //TILES
         {worldType: TILE_GROUND, theFile: "ground.png"},
         {worldType: TILE_RANDOM, theFile: "random.png"},
         {worldType: TILE_SIDEWLAK, theFile: "sidewalk.png"},
         {worldType: TILE_SIDEWALK_RIGHTCORNER, theFile: "sidewalk-cornerpiece-right.png"},
-        {worldType: TILE_SIDEWALK_VERTICAL, theFile: "sidewalk-vertical.png"}
+        {worldType: TILE_SIDEWALK_VERTICAL, theFile: "sidewalk-vertical.png"},
+        
+        //BUILDINGS
+        {worldType: TILE_TESTBUILDING_LEFT, theFile: "testbuilding-leftcorner.png"},
+        {worldType: TILE_TESTBUILDING_RIGHT, theFile: "testbuilding-rightcorner.png"},
+        {worldType: TILE_TESTBUILDING_BOTTOMLEFT, theFile: "testbuilding-bottomleftcorner.png"},
+        {worldType: TILE_TESTBUILDING_BOTTOMRIGHT, theFile: "testbuilding-bottomrightcorner.png"},
 
     ];
     

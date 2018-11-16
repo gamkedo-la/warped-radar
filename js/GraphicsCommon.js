@@ -40,3 +40,8 @@ function drawBitmapCenteredWithRotation(useBitmap, atX,atY, withAng) {
 	canvasContext.drawImage(useBitmap, -useBitmap.width/2, -useBitmap.height/2);
 	canvasContext.restore();
 }
+
+function drawStrokeRect(whichContext, topLeftX, topLeftY, boxWidth, boxHeight, strokeColor) {
+  whichContext.strokeStyle = strokeColor;
+  whichContext.strokeRect(topLeftX, topLeftY, boxWidth, boxHeight);
+}

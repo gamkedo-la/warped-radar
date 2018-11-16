@@ -18,11 +18,14 @@ var player = new(function () {
     var states = {
         walking: false
     }
-
+    
     var facing = {
-        down: true,
-        left: false,
-        right: false
+        north: false,
+        south: false,
+        east: false,
+        west: false,
+        southEast: false,
+        southWest: false
     }
 
     this.setupInput = function (upKey, rightKey, downKey, leftKey) {
@@ -50,22 +53,18 @@ var player = new(function () {
         if (dialogueNotShowing() && !inventory.isShowing) {
             if (this.keyHeld_walkUp) {
                 this.y -= this.walkSpeed;
-
                 states.walking = true;
             }
             if (this.keyHeld_walkDown) {
                 this.y += this.walkSpeed;
-
                 states.walking = true;
             }
             if (this.keyHeld_walkLeft) {
                 this.x -= this.walkSpeed;
-
                 states.walking = true;
             }
             if (this.keyHeld_walkRight) {
                 this.x += this.walkSpeed;
-
                 states.walking = true;
             }
             if (!this.keyHeld_walkUp && !this.keyHeld_walkDown && !this.keyHeld_walkLeft && !this.keyHeld_walkRight) {
@@ -77,26 +76,22 @@ var player = new(function () {
     this.draw = function () {
         if (states.walking) {
             if (this.keyHeld_walkLeft) {
-
                 if (this.keyHeld_walkUp || this.keyHeld_walkDown) { //45 degree turn
                     johnWalkSide45Deg.draw(scaledContext, this.x, this.y);
                 } else { //90 degree turn
                     johnWalkSide.draw(scaledContext, this.x, this.y);
                 }
-
             } else if (this.keyHeld_walkRight) {
-
                 if ((this.keyHeld_walkRight && this.keyHeld_walkUp) || (this.keyHeld_walkRight && this.keyHeld_walkDown)) { //45 degree turn
                     johnWalkSide45Deg.draw(scaledContext, this.x, this.y, 1, true);
                 } else { //90 degree turn
                     johnWalkSide.draw(scaledContext, this.x, this.y, 1, true);
                 }
-
             } else if (this.keyHeld_walkDown || this.keyHeld_walkUp) {
                 johnWalk.draw(scaledContext, this.x, this.y);
             }
         } else {
             johnIdle.draw(scaledContext, this.x, this.y);
-        }
+        } 
     }
 })();

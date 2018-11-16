@@ -255,13 +255,15 @@ function Dialogue() {
         } else if (this.isShowing && this.speakerX < speakerFinalX) {
             this.speakerX += tweenInSpeed;
 
-            //speaker specific mouth anims
+            //speaker specific mouth anims for when tweening in
             this.setupAnimatedMouths(dialogueList, nameList, "John", true, johnMouthMove, 130, 300);
+            
         } else if (this.speakerX >= speakerFinalX) {
             this.speakerX = speakerFinalX;
 
-            //speaker specific mouth anims
+            //speaker specific mouth anims when at final pos
             this.setupAnimatedMouths(dialogueList, nameList, "John", true, johnMouthMove, 150, 300);
+            
         }
     }
 
@@ -280,13 +282,15 @@ function Dialogue() {
         } else if (this.isShowing && this.speaker2X > speaker2FinalX) {
             this.speaker2X -= tweenInSpeed;
 
-            //speaker specific mouth animations
+            //speaker specific mouth anims for when tweening in
             this.setupAnimatedMouths(dialogueList, nameList, "Rose", false, roseMouthMove, 170, 300);
+            
         } else if (this.speaker2X <= speaker2FinalX) {
             this.speaker2X = speaker2FinalX;
 
-            //speaker specific mouth animations
+            //speaker specific mouth anims when at final pos
             this.setupAnimatedMouths(dialogueList, nameList, "Rose", false, roseMouthMove, 150, 300);
+            
         }
 
     }

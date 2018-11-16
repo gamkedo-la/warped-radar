@@ -11,8 +11,12 @@ const KEY_D = 68;
 const KEY_Z = 90;
 const KEY_X = 88;
 
+const KEY_TILDE = 192;
+
 const KEY_SPACE = 32;
 const KEY_ENTER = 13;
+
+var mouseX, mouseY;
 
 var pressed_space = false;
 var pressed_mbLeft = false;
@@ -22,9 +26,18 @@ var cursorDown = false;
 var cursorKeyPresses = 0;
 
 function setupInput() {
+    scaledCanvas.addEventListener("mousemove", updateMousePos);
     document.addEventListener("keydown", keyPressed);
     document.addEventListener("keyup", keyReleased);
     player.setupInput(KEY_UP, KEY_RIGHT, KEY_DOWN, KEY_LEFT);
+}
+
+function updateMousePos(evt) {
+	var rect = scaledCanvas.getBoundingClientRect();
+	var root = document.documentElement;
+
+	mouseX = evt.clientX - rect.left - root.scrollLeft;
+	mouseY = evt.clientY - rect.top - root.scrollTop;
 }
 
 function keyPressed(evt) {
@@ -35,7 +48,6 @@ function keyPressed(evt) {
             cursorKeyPresses++;
             break;
         case KEY_X:
-            bob.pressedX = !bob.pressedX;
             break;
        case KEY_Z:
             inventory.isShowing = !inventory.isShowing;
@@ -47,6 +59,9 @@ function keyPressed(evt) {
         case KEY_DOWN:
             cursorDown = true;
             cursorKeyPresses++;
+            break;
+        case KEY_TILDE:
+            debugMode = !debugMode;
             break;
     }
     keySet(evt, player, true);

@@ -40,7 +40,7 @@ function OverworldObject() {
         }
     }
     
-    this.eventText = function(createElseIncrement, dialogue) {
+    this.eventText = function(createElseIncrement, dialogue) {//use if it's an "unlocked" dialogue
          try {
            this.initText(createElseIncrement, dialogue); 
         }

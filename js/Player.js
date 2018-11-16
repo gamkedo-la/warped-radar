@@ -39,8 +39,8 @@ var player = new(function () {
         for (var eachRow = 0; eachRow < WORLD_COLS; eachRow++) {
             for (var eachCol = 0; eachCol < WORLD_ROWS; eachCol++) {
                 var arrayIndex = rowColToArrayIndex(eachCol, eachRow);
-                if (worldGrid[arrayIndex] == TILE_PLAYER_START) {
-                    worldGrid[arrayIndex] = TILE_SIDEWLAK; //for prototype only
+                if (worldGrid[arrayIndex] == TILE_PLAYER_START || worldGrid[arrayIndex] == TILE_PLAYERS_TILE) {
+                    worldGrid[arrayIndex] = TILE_PLAYERS_TILE; //workaround for level editor? currently set to ground
                     this.x = eachCol * WORLD_W + WORLD_W / 2;
                     this.y = eachRow * WORLD_H - WORLD_H / 2;
                     return;

@@ -8,8 +8,7 @@ const KEY_A = 65;
 const KEY_S = 83;
 const KEY_D = 68;
 
-const KEY_Q = 81;
-const KEY_R = 82;
+const KEY_O = 79;
 
 const KEY_Z = 90;
 const KEY_X = 88;
@@ -17,6 +16,13 @@ const KEY_X = 88;
 const KEY_ONE = 49;
 const KEY_TWO = 50;
 const KEY_THREE = 51;
+const KEY_FOUR = 52;
+const KEY_FIVE = 53;
+const KEY_SIX = 54;
+const KEY_SEVEN = 55;
+const KEY_EIGHT = 56;
+const KEY_NINE = 57;
+const KEY_ZERO = 48;
 
 const KEY_TILDE = 192;
 
@@ -72,8 +78,9 @@ function keyPressed(evt) {
             cursorDown = true;
             cursorKeyPresses++;
             break;
-        case KEY_TILDE:
+        case KEY_O:
             editorMode = !editorMode;
+            levelEditor.showInstructions();
             break;
     }
     keySet(evt, player, true);

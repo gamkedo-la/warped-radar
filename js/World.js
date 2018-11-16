@@ -4,23 +4,24 @@ const WORLD_COLS = 18;
 const WORLD_ROWS = 16;
 
 const TILE_GROUND = 0;
-const TILE_RANDOM = 1; //replace with a wall
+const TILE_WALL = 1; 
 const TILE_PLAYER_START = 2;
-const TILE_SIDEWLAK = 3;
-const TILE_SIDEWALK_RIGHTCORNER = 4;
-const TILE_SIDEWALK_VERTICAL = 5;
+const TILE_PLAYERS_TILE = 3; 
+const TILE_SIDEWLAK = 4;
+const TILE_SIDEWALK_RIGHTCORNER = 5;
+const TILE_SIDEWALK_VERTICAL = 6;
 
-const TILE_TESTBUILDING_LEFT = 6;
-const TILE_TESTBUILDING_RIGHT = 7;
-const TILE_TESTBUILDING_BOTTOMLEFT = 8;
-const TILE_TESTBUILDING_BOTTOMRIGHT = 9;
+const TILE_TESTBUILDING_LEFT = 7;
+const TILE_TESTBUILDING_RIGHT = 8;
+const TILE_TESTBUILDING_BOTTOMLEFT = 9;
+const TILE_TESTBUILDING_BOTTOMRIGHT = 10;
 
 var worldGrid = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-                 1, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
-                 1, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
-                 1, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
-                 1, 2, 3, 3, 3, 3, 3, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
-                 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
+                 1, 0, 0, 0, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
+                 1, 0, 0, 0, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
+                 1, 0, 0, 0, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
+                 1, 4, 4, 4, 4, 4, 4, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
+                 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
                  1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
                  1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
                  1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,

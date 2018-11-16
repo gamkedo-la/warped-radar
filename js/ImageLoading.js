@@ -70,7 +70,8 @@ function loadImages() {
         
         //TILES
         {worldType: TILE_GROUND, theFile: "ground.png"},
-        {worldType: TILE_RANDOM, theFile: "random.png"},
+        {worldType: TILE_PLAYERS_TILE, theFile: "playerstarttile.png"},
+        {worldType: TILE_WALL, theFile: "random.png"},
         {worldType: TILE_SIDEWLAK, theFile: "sidewalk.png"},
         {worldType: TILE_SIDEWALK_RIGHTCORNER, theFile: "sidewalk-cornerpiece-right.png"},
         {worldType: TILE_SIDEWALK_VERTICAL, theFile: "sidewalk-vertical.png"},

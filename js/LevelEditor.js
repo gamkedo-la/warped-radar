@@ -7,7 +7,7 @@ var levelEditor = new(function () {
 
     this.roomTileCoordinate = function () {
         if (debugMode) {
-            tileUnderMouse = getTileIndexAtPixelCoord(mouseX + camPanX, mouseY + camPanY);
+            tileUnderMouse = getTileIndexAtPixelCoord(mouseX/PIXELS_PER_SCALE + camPanX, mouseY/PIXELS_PER_SCALE + camPanY);
 
             var levelCol = arrayIndexToCol(tileUnderMouse);
             var levelRow = arrayIndexToRow(tileUnderMouse);

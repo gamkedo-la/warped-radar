@@ -26,7 +26,7 @@ var cursorDown = false;
 var cursorKeyPresses = 0;
 
 function setupInput() {
-    scaledCanvas.addEventListener("mousemove", updateMousePos);
+    canvas.addEventListener("mousemove", updateMousePos);
     document.addEventListener("keydown", keyPressed);
     document.addEventListener("keyup", keyReleased);
     player.setupInput(KEY_UP, KEY_RIGHT, KEY_DOWN, KEY_LEFT);

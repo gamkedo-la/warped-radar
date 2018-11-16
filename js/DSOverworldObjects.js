@@ -39,13 +39,12 @@ function OverworldObject() {
             this.dialogue.incrementPage(dialogue);
         }
     }
-    
-    this.eventText = function(createElseIncrement, dialogue) {//use if it's an "unlocked" dialogue
-         try {
-           this.initText(createElseIncrement, dialogue); 
-        }
-        catch {
-            console.log("Error Fix! You triggered a special event without un-colliding/re-colliding with NPC");    
+
+    this.eventText = function (createElseIncrement, dialogue) { //use if it's an "unlocked" dialogue
+        try {
+            this.initText(createElseIncrement, dialogue);
+        } catch {
+            console.log("Error Fix! You triggered a special event without un-colliding/re-colliding with NPC");
         }
     }
 

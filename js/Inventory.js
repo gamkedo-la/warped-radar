@@ -119,5 +119,11 @@ var inventory = new(function () {
             inventoryIndex = 0;
         }
     }
+    
+    this.toggle = function() {
+        if (!levelEditor.isOn) {
+            this.isShowing = !this.isShowing;
+        }
+    }
 
 })();

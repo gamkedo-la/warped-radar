@@ -1,5 +1,6 @@
-var editorMode = false;
 var levelEditor = new(function () {
+    this.isOn = false;
+
     var showNewGrid = false;
     var tileUnderMouse = null;
     var levelCol = 0;
@@ -18,7 +19,7 @@ var levelEditor = new(function () {
     }
 
     this.editorKeyHandle = function (keyCode) {
-        if (editorMode) {
+        if (this.isOn) {
             switch (keyCode) {
                 case KEY_A:
                     currentTileIndex--;
@@ -48,7 +49,7 @@ var levelEditor = new(function () {
     }
 
     this.roomTileCoordinate = function () {
-        if (editorMode) {
+        if (this.isOn) {
             tileUnderMouse = getTileIndexAtPixelCoord(mouseX / PIXELS_PER_SCALE + camPanX, mouseY / PIXELS_PER_SCALE + camPanY);
 
             var levelCol = arrayIndexToCol(tileUnderMouse);
@@ -57,9 +58,6 @@ var levelEditor = new(function () {
             var tileY = (levelRow * WORLD_H) - camPanY;
 
             mouseOverTileIdx = rowColToArrayIndex(levelCol, levelRow);
-
-            colorText("X: " + levelCol + "," + " Y: " + levelRow, mouseX, mouseY, "yellow", "15px Arial", "left", 1);
-            
             scaledContext.strokeRect(tileX, tileY, WORLD_W, WORLD_H);
             scaledContext.strokeStyle = "orange";
             scaledContext.lineWidth = 2;
@@ -68,7 +66,7 @@ var levelEditor = new(function () {
     }
 
     this.editTileOnMouseClick = function () {
-        if (editorMode) {
+        if (this.isOn) {
             scaledContext.lineWidth = 7;
             var tileKindHere = worldGrid[tileUnderMouse];
             if (currentlySelectedSet[currentTileIndex] == undefined) {
@@ -82,22 +80,34 @@ var levelEditor = new(function () {
     this.showNewGrid = function () {
         if (showNewGrid) {
             var newGridName = prompt("What do you name this grid?");
+            if (newGridName == null) {
+                showNewGrid = false;
+                return;
+            }
             if (newGridName == "") newGridName = "worldGrid";
             console.log("var " + newGridName + " = \n[ \n" + worldGrid + "\n];");
             showNewGrid = false;
-            editorMode = false;
+            this.isOn = false;
         }
     }
 
     this.showInstructions = function () {
-        if (editorMode) {
+        if (this.isOn) {
             console.log("Welcome to the editor!");
             console.log("[A] and [D] to change tile");
             console.log("[SPACE] to output the new grid");
+            console.log("Note: replacing the tile under the player will change his start point");
             console.log("---------------------------")
             console.log("[1] Sidewalk Tiles");
             console.log("[2] Building Tiles");
             console.log("[0] Default Tiles");
+        }
+    }
+
+    this.toggle = function () {
+        if (dialogueNotShowing() && !inventory.isShowing) {
+            this.isOn = !this.isOn;
+            this.showInstructions();
         }
     }
 

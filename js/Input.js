@@ -47,11 +47,11 @@ function setupInput() {
 }
 
 function updateMousePos(evt) {
-	var rect = scaledCanvas.getBoundingClientRect();
-	var root = document.documentElement;
+    var rect = scaledCanvas.getBoundingClientRect();
+    var root = document.documentElement;
 
-	mouseX = evt.clientX - rect.left - root.scrollLeft;
-	mouseY = evt.clientY - rect.top - root.scrollTop;
+    mouseX = evt.clientX - rect.left - root.scrollLeft;
+    mouseY = evt.clientY - rect.top - root.scrollTop;
 }
 
 function mouseReleased(evt) {
@@ -61,14 +61,16 @@ function mouseReleased(evt) {
 function keyPressed(evt) {
     switch (evt.keyCode) {
         case KEY_SPACE:
-            pressed_space = true;
-            incrementTextPages();
-            cursorKeyPresses++;
+            if (!levelEditor.isOn) {
+                pressed_space = true;
+                incrementTextPages();
+                cursorKeyPresses++;
+            }
             break;
         case KEY_X:
             break;
-       case KEY_Z:
-            inventory.isShowing = !inventory.isShowing;
+        case KEY_Z:
+            inventory.toggle();
             break;
         case KEY_UP:
             cursorUp = true;
@@ -79,8 +81,7 @@ function keyPressed(evt) {
             cursorKeyPresses++;
             break;
         case KEY_O:
-            editorMode = !editorMode;
-            levelEditor.showInstructions();
+            levelEditor.toggle();
             break;
     }
     keySet(evt, player, true);

@@ -34,7 +34,6 @@ var inventory = new(function () {
     var descX = this.x + width / 2;
     var descY = this.y + 200;
 
-
     /*var inventoryItems = [
         {
             name:,

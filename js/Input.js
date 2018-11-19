@@ -47,11 +47,13 @@ function setupInput() {
 }
 
 function updateMousePos(evt) {
-    var rect = scaledCanvas.getBoundingClientRect();
     var root = document.documentElement;
 
-    mouseX = evt.clientX - rect.left - root.scrollLeft;
-    mouseY = evt.clientY - rect.top - root.scrollTop;
+    mouseX = evt.clientX - canvas.offsetLeft - root.scrollLeft;
+    mouseY = evt.clientY - canvas.offsetTop - root.scrollTop;
+
+    mouseX *= canvas.width / canvas.clientWidth;
+    mouseY *= canvas.height / canvas.clientHeight;
 }
 
 function mouseReleased(evt) {

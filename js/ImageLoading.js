@@ -81,6 +81,13 @@ function loadImages() {
         {worldType: TILE_TESTBUILDING_RIGHT, theFile: "testbuilding-rightcorner.png"},
         {worldType: TILE_TESTBUILDING_BOTTOMLEFT, theFile: "testbuilding-bottomleftcorner.png"},
         {worldType: TILE_TESTBUILDING_BOTTOMRIGHT, theFile: "testbuilding-bottomrightcorner.png"},
+        
+        {worldType: TILE_TEST_CONVENIENCE_STORELEFT, theFile: "test-convenience-leftcorner.png"},
+        {worldType: TILE_TEST_CONVENIENCE_STOREMIDDLE, theFile: "test-convenience-middle.png"},
+        {worldType: TILE_TEST_CONVENIENCE_STORERIGHT, theFile: "test-convenience-rightcorner.png"},
+        {worldType: TILE_TEST_CONVENIENCE_STOREBOTTOMLEFT, theFile: "test-convenience-leftbottomcorner.png"},
+        {worldType: TILE_TEST_CONVENIENCE_STOREBOTTOMMIDDLE, theFile: "test-convenience-middlebottom.png"},
+        {worldType: TILE_TEST_CONVENIENCE_STOREBOTTOMRIGHT, theFile: "test-convenience-rightbottomcorner.png"}
 
     ];
     

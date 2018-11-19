@@ -38,11 +38,13 @@ var cursorUp = false;
 var cursorDown = false;
 var cursorKeyPresses = 0;
 
+var keydownMap = {};
+
 function setupInput() {
     canvas.addEventListener("mousemove", updateMousePos);
     canvas.addEventListener("mouseup", mouseReleased);
-    document.addEventListener("keydown", keyPressed);
-    document.addEventListener("keyup", keyReleased);
+    document.addEventListener("keydown", keydownHandler);
+    document.addEventListener("keyup", keydownHandler);
     player.setupInput(KEY_UP, KEY_RIGHT, KEY_DOWN, KEY_LEFT);
 }
 
@@ -60,55 +62,66 @@ function mouseReleased(evt) {
     levelEditor.editTileOnMouseClick();
 }
 
-function keyPressed(evt) {
-    switch (evt.keyCode) {
-        case KEY_SPACE:
-            if (!levelEditor.isOn) {
-                pressed_space = true;
-                incrementTextPages();
-                cursorKeyPresses++;
-            }
-            break;
-        case KEY_X:
-            break;
-        case KEY_Z:
-            inventory.toggle();
-            break;
-        case KEY_UP:
-            cursorUp = true;
-            cursorKeyPresses++;
-            break;
-        case KEY_DOWN:
-            cursorDown = true;
-            cursorKeyPresses++;
-            break;
-        case KEY_O:
-            levelEditor.toggle();
-            break;
-    }
-    keySet(evt, player, true);
-    levelEditor.editorKeyHandle(evt.keyCode);
-    inventory.navigate(evt.keyCode);
+function keydownHandler(evt) {
+    keydownMap[evt.keyCode] = evt.type == "keydown";
     evt.preventDefault();
-
+    keydownControl(evt, keydownMap);
 }
 
-function keyReleased(evt) {
-    switch (evt.keyCode) {
-        case KEY_SPACE:
-            pressed_space = false;
-            cursorKeyPresses = 0;
-            break;
-        case KEY_UP:
-            cursorUp = false;
-            cursorKeyPresses = 0;
-            break;
-        case KEY_DOWN:
-            cursorDown = false;
-            cursorKeyPresses = 0;
-            break;
+function keysPressed() {
+    let keysToPress = arguments;
+		
+    for(let i = 0; i < keysToPress.length; i++) {
+        if(!keydownMap[keysToPress[i]]) { // if any key in arguments is not pressed
+            return false;		
+        }
+    }			
+    
+    return true;
+}
+
+function keydownControl(evt, keydownMap) {
+    var isKeyPressed = evt.type == "keydown";
+
+    keySet(evt, player, isKeyPressed);
+
+    if (isKeyPressed) {
+        levelEditor.editorKeyHandle(evt.keyCode);
+        inventory.navigate(evt.keyCode);
     }
-    keySet(evt, player, false);
+
+    if (!levelEditor.isOn) {
+        pressed_space = keysPressed(KEY_SPACE) && isKeyPressed;
+    }
+
+    cursorUp = keysPressed(KEY_UP) && isKeyPressed;
+    cursorDown = keysPressed(KEY_DOWN) && isKeyPressed;
+
+    // Supports multiple simultaneous key presses:
+    //      e.g. Shift + I: if (keysPressed(KEY_SHIFT, KEY_I)) { do_something(); }
+    //      e.g. Ctrl + S: if (keysPressed(KEY_CTRL, KEY_S)) { save_file(); }
+    //
+    // When using a key is both used on its own and in a combination, check the combination first:
+    //      e.g. If Shift does something and Shift + I does something,
+    //           check for Shift + I first:
+    //              if (keysPressed(KEY_SHIFT, KEY_I)) { do_something(); }
+    //              else if (keysPressed(KEY_SHIFT)) { do_something_else(); }
+    //
+    if (keysPressed(KEY_SPACE)) {
+        if (!levelEditor.isOn) {
+            incrementTextPages();
+            cursorKeyPresses = isKeyPressed ? cursorKeyPresses + 1 : 0;
+        }
+    } else if (keysPressed(KEY_X)) {
+    } else if (keysPressed(KEY_Z)) {
+        inventory.toggle();
+    } else if (keysPressed(KEY_UP)) {                
+        cursorKeyPresses = isKeyPressed ? cursorKeyPresses + 1 : 0;
+    } else if (keysPressed(KEY_DOWN)) {                
+        cursorKeyPresses = isKeyPressed ? cursorKeyPresses + 1 : 0;
+    } else if (keysPressed(KEY_O)) {
+        levelEditor.toggle();
+    }
 }
 
 function keySet(keyEvent, whichEntity, setTo) {

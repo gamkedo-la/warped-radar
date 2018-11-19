@@ -1,4 +1,4 @@
-var johnAndRoseConvo = [
+let johnAndRoseConvo = [
     {
         scene: "neutral",
         who: "John",
@@ -237,7 +237,7 @@ var johnAndRoseConvo = [
     }
 ];
 
-var johnAndRoseConvo2 = [
+let johnAndRoseConvo2 = [
     {
         who: "John",
         nameCol: "lightblue",
@@ -292,7 +292,7 @@ var johnAndRoseConvo2 = [
     }
 ];
 
-var johnAndRoseConvo3 = [
+let johnAndRoseConvo3 = [
     {
         who: "John",
         nameCol: "lightblue",

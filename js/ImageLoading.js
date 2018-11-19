@@ -1,31 +1,31 @@
-var dialogueBoxPic = document.createElement("img");
-var textArrowSheet = document.createElement("img");
-var choiceCursorPic = document.createElement("img");
+let dialogueBoxPic = document.createElement("img");
+let textArrowSheet = document.createElement("img");
+let choiceCursorPic = document.createElement("img");
 
-var inventoryPic = document.createElement("img");
+let inventoryPic = document.createElement("img");
 
-var gameBorderPic = document.createElement("img");
+let gameBorderPic = document.createElement("img");
 
-var johnHappyPic = document.createElement("img");
-var johnMadPic = document.createElement("img");
-var roseHappyPic = document.createElement("img");
-var roseAnnoyedPic = document.createElement("img");
+let johnHappyPic = document.createElement("img");
+let johnMadPic = document.createElement("img");
+let roseHappyPic = document.createElement("img");
+let roseAnnoyedPic = document.createElement("img");
 
-var johnMouthAnimatedSheet = document.createElement("img");
-var roseMouthAnimatedSheet = document.createElement("img");
+let johnMouthAnimatedSheet = document.createElement("img");
+let roseMouthAnimatedSheet = document.createElement("img");
 
-var johnAnimation = document.createElement("img");
+let johnAnimation = document.createElement("img");
 
-var johnSideAnimation = document.createElement("img");
-var johnSide45Animation = document.createElement("img");
+let johnSideAnimation = document.createElement("img");
+let johnSide45Animation = document.createElement("img");
 
-var johnIdleAnimation = document.createElement("img");
+let johnIdleAnimation = document.createElement("img");
 
 
-var building = document.createElement("img");
+let building = document.createElement("img");
 
-var picsToLoad = 0;
-var worldPics = [];
+let picsToLoad = 0;
+let worldPics = [];
 
 function countLoadedImages() {
     picsToLoad--;
@@ -34,9 +34,9 @@ function countLoadedImages() {
     }
 }
 
-function beginLoadingImage(imageVar, fileName) {
-    imageVar.onload = countLoadedImages;
-    imageVar.src = "img/" + fileName;
+function beginLoadingImage(imagelet, fileName) {
+    imagelet.onload = countLoadedImages;
+    imagelet.src = "img/" + fileName;
 }
 
 function loadImageForWorldCode(worldCode, fileName) {
@@ -45,28 +45,28 @@ function loadImageForWorldCode(worldCode, fileName) {
 }
 
 function loadImages() {
-    var imageList = [
+    let imageList = [
         //GAME UI
-        {varName: dialogueBoxPic, theFile: "dialoguebox.png"},
-        {varName: choiceCursorPic, theFile: "choicecursor.png"},
-        {varName: gameBorderPic, theFile: "gameBorder.png"},
-        {varName: inventoryPic, theFile: "inventory.png"},
+        {letName: dialogueBoxPic, theFile: "dialoguebox.png"},
+        {letName: choiceCursorPic, theFile: "choicecursor.png"},
+        {letName: gameBorderPic, theFile: "gameBorder.png"},
+        {letName: inventoryPic, theFile: "inventory.png"},
         
         //PORTRAITS
-        {varName: johnHappyPic, theFile: "john.png"},
-        {varName: johnMadPic, theFile: "john2.png"},
-        {varName: roseHappyPic, theFile: "rose.png"},
-        {varName: roseAnnoyedPic, theFile: "rose2.png"},
+        {letName: johnHappyPic, theFile: "john.png"},
+        {letName: johnMadPic, theFile: "john2.png"},
+        {letName: roseHappyPic, theFile: "rose.png"},
+        {letName: roseAnnoyedPic, theFile: "rose2.png"},
         
         //PORTRAIT ANIMS
-        {varName: johnMouthAnimatedSheet, theFile: "johnmouthmove.png"},
-        {varName: roseMouthAnimatedSheet, theFile: "rosemouthmove.png"},
+        {letName: johnMouthAnimatedSheet, theFile: "johnmouthmove.png"},
+        {letName: roseMouthAnimatedSheet, theFile: "rosemouthmove.png"},
         
         //OVERWORLD CHARACTER ANIMS
-        {varName: johnAnimation, theFile: "johnsprite-sheet.png"},
-        {varName: johnIdleAnimation, theFile: "johnspriteidle-sheet.png"},
-        {varName: johnSideAnimation, theFile: "johnspriteside-sheet.png"},
-        {varName: johnSide45Animation, theFile: "johnspriteside45-sheet.png"},
+        {letName: johnAnimation, theFile: "johnsprite-sheet.png"},
+        {letName: johnIdleAnimation, theFile: "johnspriteidle-sheet.png"},
+        {letName: johnSideAnimation, theFile: "johnspriteside-sheet.png"},
+        {letName: johnSide45Animation, theFile: "johnspriteside45-sheet.png"},
         
         //TILES
         {worldType: TILE_GROUND, theFile: "ground.png"},
@@ -93,9 +93,9 @@ function loadImages() {
     
     picsToLoad = imageList.length;
     
-    for(var i=0;i<imageList.length;i++) {
-		if(imageList[i].varName != undefined) {
-			beginLoadingImage(imageList[i].varName, imageList[i].theFile);
+    for(let i=0;i<imageList.length;i++) {
+		if(imageList[i].letName != undefined) {
+			beginLoadingImage(imageList[i].letName, imageList[i].theFile);
 		} else {
 			loadImageForWorldCode(imageList[i].worldType, imageList[i].theFile);
 		}

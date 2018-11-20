@@ -66,7 +66,7 @@ let player = new(function () {
     }
 
     this.move = function () {
-        if (dialogueNotShowing() && !inventory.isShowing) {
+        if (dialogueNotShowing() && !inventory.isShowing && !levelEditor.isOn) {
             if (this.keyHeld_walkUp) {
                 this.y -= this.walkSpeed;
             }

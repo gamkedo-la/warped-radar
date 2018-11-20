@@ -10,17 +10,24 @@ let player = new(function () {
     this.keyHeld_walkLeft = false;
     this.keyHeld_walkRight = false;
 
+    // ARROWS
     this.controlKeyUp;
     this.controlKeyRight;
     this.controlKeyDown;
     this.controlKeyLeft;
+
+    // WASD
+    this.controlKeyUp2;
+    this.controlKeyRight2;
+    this.controlKeyDown2;
+    this.controlKeyLeft2;
 
     this.collider = new colliderClass(this.x, this.y, this.w, this.h, 0,0);
 
     let states = {
         walking: false
     }
-    
+
     let facing = {
         north: false,
         south: false,
@@ -30,11 +37,17 @@ let player = new(function () {
         southWest: false
     }
 
-    this.setupInput = function (upKey, rightKey, downKey, leftKey) {
+    this.setupInput = function (upKey, rightKey, downKey, leftKey, upKey2, rightKey2, downKey2, leftKey2) {
+        // ARROWS
         this.controlKeyUp = upKey;
         this.controlKeyRight = rightKey;
         this.controlKeyDown = downKey;
         this.controlKeyLeft = leftKey;
+        // WASD
+        this.controlKeyUp2 = upKey2;
+        this.controlKeyRight2 = rightKey2;
+        this.controlKeyDown2 = downKey2;
+        this.controlKeyLeft2 = leftKey2;
     }
 
     this.reset = function () {
@@ -47,9 +60,9 @@ let player = new(function () {
                     this.y = eachRow * WORLD_H - WORLD_H / 2;
                     this.collider.setCollider(this.x,this.y);
                     return;
-                } 
-            } 
-        } 
+                }
+            }
+        }
     }
 
     this.move = function () {
@@ -97,6 +110,6 @@ let player = new(function () {
             }
         } else {
             johnIdle.draw(scaledContext, this.x, this.y);
-        } 
+        }
     }
 })();

@@ -39,25 +39,29 @@ let inventory = new(function () {
             name:,
             description: ,
             isObtained: ,
-            uiSprite: 
+            uiSprite:
         }
     ];*/
 
     this.navigate = function (keyCode) {
         if (this.isShowing) {
             switch (keyCode) {
+                case KEY_D:
                 case KEY_RIGHT:
                     inventoryIndex++;
                     navigationSound.play();
                     break;
+                case KEY_A:
                 case KEY_LEFT:
                     inventoryIndex--;
                     navigationSound.play();
                     break;
+                case KEY_W:
                 case KEY_UP:
                     inventoryIndex -= 4;
                     navigationSound.play();
                     break;
+                case KEY_S:
                 case KEY_DOWN:
                     inventoryIndex += 4;
                     navigationSound.play();
@@ -111,14 +115,14 @@ let inventory = new(function () {
         if (this.isShowing) {
             canvasContext.drawImage(inventoryImg, this.x, this.y);
             colorText("Inventory", titleTextX, titleTextY, textColour, textFontFace, textAlign, 1);
-            
+
             this.drawSlots();
-            //this.drawItems(); 
+            //this.drawItems();
         } else {
             inventoryIndex = 0;
         }
     }
-    
+
     this.toggle = function() {
         if (!levelEditor.isOn) {
             this.isShowing = !this.isShowing;

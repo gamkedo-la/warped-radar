@@ -45,7 +45,7 @@ function setupInput() {
     canvas.addEventListener("mouseup", mouseReleased);
     document.addEventListener("keydown", keydownHandler);
     document.addEventListener("keyup", keydownHandler);
-    player.setupInput(KEY_UP, KEY_RIGHT, KEY_DOWN, KEY_LEFT);
+    player.setupInput(KEY_UP, KEY_RIGHT, KEY_DOWN, KEY_LEFT, KEY_W, KEY_D, KEY_S, KEY_A);
 }
 
 function updateMousePos(evt) {
@@ -70,13 +70,13 @@ function keydownHandler(evt) {
 
 function keysPressed() {
     let keysToPress = arguments;
-		
+
     for(let i = 0; i < keysToPress.length; i++) {
         if(!keydownMap[keysToPress[i]]) { // if any key in arguments is not pressed
-            return false;		
+            return false;
         }
-    }			
-    
+    }
+
     return true;
 }
 
@@ -94,8 +94,8 @@ function keydownControl(evt, keydownMap) {
         pressed_space = keysPressed(KEY_SPACE) && isKeyPressed;
     }
 
-    cursorUp = keysPressed(KEY_UP) && isKeyPressed;
-    cursorDown = keysPressed(KEY_DOWN) && isKeyPressed;
+    cursorUp = (keysPressed(KEY_UP)||keysPressed(KEY_W)) && isKeyPressed;
+    cursorDown = (keysPressed(KEY_DOWN)||keysPressed(KEY_S)) && isKeyPressed;
 
     // Supports multiple simultaneous key presses:
     //      e.g. Shift + I: if (keysPressed(KEY_SHIFT, KEY_I)) { do_something(); }
@@ -115,9 +115,9 @@ function keydownControl(evt, keydownMap) {
     } else if (keysPressed(KEY_X)) {
     } else if (keysPressed(KEY_Z)) {
         inventory.toggle();
-    } else if (keysPressed(KEY_UP)) {                
+    } else if (keysPressed(KEY_UP)) {
         cursorKeyPresses = isKeyPressed ? cursorKeyPresses + 1 : 0;
-    } else if (keysPressed(KEY_DOWN)) {                
+    } else if (keysPressed(KEY_DOWN)) {
         cursorKeyPresses = isKeyPressed ? cursorKeyPresses + 1 : 0;
     } else if (keysPressed(KEY_O)) {
         levelEditor.toggle();
@@ -127,15 +127,19 @@ function keydownControl(evt, keydownMap) {
 function keySet(keyEvent, whichEntity, setTo) {
     switch (keyEvent.keyCode) {
         case whichEntity.controlKeyLeft:
+        case whichEntity.controlKeyLeft2:
             whichEntity.keyHeld_walkLeft = setTo;
             break;
         case whichEntity.controlKeyRight:
+        case whichEntity.controlKeyRight2:
             whichEntity.keyHeld_walkRight = setTo;
             break;
         case whichEntity.controlKeyUp:
+        case whichEntity.controlKeyUp2:
             whichEntity.keyHeld_walkUp = setTo;
             break;
         case whichEntity.controlKeyDown:
+        case whichEntity.controlKeyDown2:
             whichEntity.keyHeld_walkDown = setTo;
             break;
     }

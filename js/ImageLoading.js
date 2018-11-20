@@ -29,19 +29,18 @@ let worldPics = [];
 
 function countLoadedImages() {
     picsToLoad--;
-    if (picsToLoad == 0) {
-        startGame();
-    }
+    return picsToLoad == 0;
 }
 
 function beginLoadingImage(imageVar, fileName) {
     imageVar.onload = countLoadedImages;
     imageVar.src = "img/" + fileName;
+    return countLoadedImages;
 }
 
 function loadImageForWorldCode(worldCode, fileName) {
     worldPics[worldCode] = document.createElement("img");
-	beginLoadingImage(worldPics[worldCode], fileName);
+	return beginLoadingImage(worldPics[worldCode], fileName);
 }
 
 function loadImages() {
@@ -88,17 +87,19 @@ function loadImages() {
         {worldType: TILE_TEST_CONVENIENCE_STOREBOTTOMLEFT, theFile: "test-convenience-leftbottomcorner.png"},
         {worldType: TILE_TEST_CONVENIENCE_STOREBOTTOMMIDDLE, theFile: "test-convenience-middlebottom.png"},
         {worldType: TILE_TEST_CONVENIENCE_STOREBOTTOMRIGHT, theFile: "test-convenience-rightbottomcorner.png"}
-
     ];
     
     picsToLoad = imageList.length;
     
+    let loadResult = false;
     for(let i=0;i<imageList.length;i++) {
 		if(imageList[i].varName != undefined) {
-			beginLoadingImage(imageList[i].varName, imageList[i].theFile);
+			loadResult = beginLoadingImage(imageList[i].varName, imageList[i].theFile);
 		} else {
-			loadImageForWorldCode(imageList[i].worldType, imageList[i].theFile);
+			loadResult = loadImageForWorldCode(imageList[i].worldType, imageList[i].theFile);
 		}
-	}
+    }
+    
+    return loadResult;
 }
 

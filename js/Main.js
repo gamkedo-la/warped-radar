@@ -30,7 +30,9 @@ window.onload = function () {
     scaledContext.msImageSmoothingEnabled = false;
     scaledContext.imageSmoothingEnabled = false;
 
-    loadImages();
+    if (loadImages()) {
+        startGame();
+    }
 
     makeAnimatedSprites();
 }

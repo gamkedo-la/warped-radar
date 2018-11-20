@@ -29,16 +29,16 @@ const KEY_TILDE = 192;
 const KEY_SPACE = 32;
 const KEY_ENTER = 13;
 
-var mouseX, mouseY;
+let mouseX, mouseY;
 
-var pressed_space = false;
-var pressed_mbLeft = false;
+let pressed_space = false;
+let pressed_mbLeft = false;
 
-var cursorUp = false;
-var cursorDown = false;
-var cursorKeyPresses = 0;
+let cursorUp = false;
+let cursorDown = false;
+let cursorKeyPresses = 0;
 
-var keydownMap = {};
+let keydownMap = {};
 
 function setupInput() {
     canvas.addEventListener("mousemove", updateMousePos);
@@ -49,7 +49,7 @@ function setupInput() {
 }
 
 function updateMousePos(evt) {
-    var root = document.documentElement;
+    let root = document.documentElement;
 
     mouseX = evt.clientX - canvas.offsetLeft - root.scrollLeft;
     mouseY = evt.clientY - canvas.offsetTop - root.scrollTop;
@@ -81,7 +81,7 @@ function keysPressed() {
 }
 
 function keydownControl(evt, keydownMap) {
-    var isKeyPressed = evt.type == "keydown";
+    let isKeyPressed = evt.type == "keydown";
 
     keySet(evt, player, isKeyPressed);
 

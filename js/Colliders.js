@@ -19,14 +19,14 @@ function colliderClass(x, y, width, height, offsetX, offsetY) {
     this.setCollider(x, y);
 
 	this.isCollidingWith = function(otherCollider) {
-	    var myLeft = this.box.left;
-	    var myRight = this.box.right;
-	    var myBottom = this.box.bottom;
-	    var myTop = this.box.top;
-	    var theirLeft = otherCollider.box.left;
-	    var theirRight = otherCollider.box.right;
-	    var theirBottom = otherCollider.box.bottom;
-	    var theirTop = otherCollider.box.top;
+	    let myLeft = this.box.left;
+	    let myRight = this.box.right;
+	    let myBottom = this.box.bottom;
+	    let myTop = this.box.top;
+	    let theirLeft = otherCollider.box.left;
+	    let theirRight = otherCollider.box.right;
+	    let theirBottom = otherCollider.box.bottom;
+	    let theirTop = otherCollider.box.top;
 	    return ((myLeft > theirRight || // I'm right of them
 	            myRight < theirLeft  || // I'm left of them
 	            myTop > theirBottom  || // I'm below them
@@ -41,8 +41,8 @@ function colliderClass(x, y, width, height, offsetX, offsetY) {
 	this.draw = function(color) {
         canvasContext.strokeStyle = color;
         canvasContext.lineWidth = 1;
-        var x = Math.floor(this.box.left) + .5;
-        var y = Math.floor(this.box.top) + .5;
+        let x = Math.floor(this.box.left) + .5;
+        let y = Math.floor(this.box.top) + .5;
         canvasContext.strokeRect(x, y, this.width, this.height);
     }
 };

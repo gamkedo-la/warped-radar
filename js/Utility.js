@@ -20,7 +20,7 @@ function getTextWidth(txt, font) {
 	canvasContext.save();
 	canvasContext.font = font;
 
-	var width = canvasContext.measureText(txt).width;
+	let width = canvasContext.measureText(txt).width;
 
 	canvasContext.restore();
 
@@ -32,15 +32,15 @@ function rowColToArrayIndex(col, row) {
 }
 
 function getTileTypeAtPixelCoord(x, y) {
-	var arrayIndex = getTileIndexAtPixelCoord(x, y);
-	var tileKindHere = worldGrid[arrayIndex];
+	let arrayIndex = getTileIndexAtPixelCoord(x, y);
+	let tileKindHere = worldGrid[arrayIndex];
 	return tileKindHere;
 }
 
 function getTileIndexAtPixelCoord(x, y) {
-	var colFromX = Math.floor(x / WORLD_W);
-	var rowFromY = Math.floor(y / WORLD_H);
-	var arrayIndex = rowColToArrayIndex(colFromX, rowFromY);
+	let colFromX = Math.floor(x / WORLD_W);
+	let rowFromY = Math.floor(y / WORLD_H);
+	let arrayIndex = rowColToArrayIndex(colFromX, rowFromY);
 	return arrayIndex;
 }
 
@@ -61,8 +61,8 @@ function rowToCenteredY(row) {
 }
 
 function indexToCenteredXY(index) {
-	var colIndex = arrayIndexToCol(index);
-	var rowIndex = arrayIndexToRow(index);
+	let colIndex = arrayIndexToCol(index);
+	let rowIndex = arrayIndexToRow(index);
 	return {
 			x: colToCenteredX(colIndex),
 			y: rowToCenteredY(rowIndex)

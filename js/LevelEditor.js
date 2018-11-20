@@ -1,18 +1,18 @@
-var levelEditor = new(function () {
+let levelEditor = new(function () {
     this.isOn = false;
 
-    var showNewGrid = false;
-    var tileUnderMouse = null;
-    var levelCol = 0;
-    var levelRow = 0;
-    var defaultSet = [TILE_GROUND, TILE_WALL]; //will switch out for different tiles later
-    var tileSets = {
+    let showNewGrid = false;
+    let tileUnderMouse = null;
+    let levelCol = 0;
+    let levelRow = 0;
+    let defaultSet = [TILE_GROUND, TILE_WALL]; //will switch out for different tiles later
+    let tileSets = {
         sideWalks: [TILE_SIDEWLAK, TILE_SIDEWALK_VERTICAL, TILE_SIDEWALK_RIGHTCORNER],
         buildings: [TILE_TESTBUILDING_LEFT, TILE_TESTBUILDING_RIGHT, TILE_TESTBUILDING_BOTTOMLEFT, TILE_TESTBUILDING_BOTTOMRIGHT, TILE_TEST_CONVENIENCE_STORELEFT, TILE_TEST_CONVENIENCE_STOREMIDDLE, TILE_TEST_CONVENIENCE_STORERIGHT, TILE_TEST_CONVENIENCE_STOREBOTTOMLEFT, TILE_TEST_CONVENIENCE_STOREBOTTOMMIDDLE, TILE_TEST_CONVENIENCE_STOREBOTTOMRIGHT]
     }
     
-    var currentlySelectedSet = defaultSet;
-    var currentTileIndex = 0;
+    let currentlySelectedSet = defaultSet;
+    let currentTileIndex = 0;
 
     this.pickASet = function (set) {
         currentlySelectedSet = set;
@@ -53,10 +53,10 @@ var levelEditor = new(function () {
         if (this.isOn) {
             tileUnderMouse = getTileIndexAtPixelCoord(mouseX / PIXELS_PER_SCALE + camPanX, mouseY / PIXELS_PER_SCALE + camPanY);
 
-            var levelCol = arrayIndexToCol(tileUnderMouse);
-            var levelRow = arrayIndexToRow(tileUnderMouse);
-            var tileX = (levelCol * WORLD_W) - camPanX;
-            var tileY = (levelRow * WORLD_H) - camPanY;
+            let levelCol = arrayIndexToCol(tileUnderMouse);
+            let levelRow = arrayIndexToRow(tileUnderMouse);
+            let tileX = (levelCol * WORLD_W) - camPanX;
+            let tileY = (levelRow * WORLD_H) - camPanY;
 
             mouseOverTileIdx = rowColToArrayIndex(levelCol, levelRow);
             scaledContext.strokeRect(tileX, tileY, WORLD_W, WORLD_H);
@@ -69,7 +69,7 @@ var levelEditor = new(function () {
     this.editTileOnMouseClick = function () {
         if (this.isOn) {
             scaledContext.lineWidth = 7;
-            var tileKindHere = worldGrid[tileUnderMouse];
+            let tileKindHere = worldGrid[tileUnderMouse];
             if (currentlySelectedSet[currentTileIndex] == undefined) {
                 console.log("undefined");
                 return;
@@ -80,13 +80,13 @@ var levelEditor = new(function () {
 
     this.showNewGrid = function () {
         if (showNewGrid) {
-            var newGridName = prompt("What do you name this grid?");
+            let newGridName = prompt("What do you name this grid?");
             if (newGridName == null) {
                 showNewGrid = false;
                 return;
             }
             if (newGridName == "") newGridName = "worldGrid";
-            console.log("var " + newGridName + " = \n[ \n" + worldGrid + "\n];");
+            console.log("let " + newGridName + " = \n[ \n" + worldGrid + "\n];");
             showNewGrid = false;
             this.isOn = false;
         }

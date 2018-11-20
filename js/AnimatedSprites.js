@@ -1,9 +1,9 @@
-var johnMouthMove;
-var roseMouthMove;
-var johnWalk;
-var johnWalkSide;
-var johnWalkSide45Deg;
-var johnIdle;
+let johnMouthMove;
+let roseMouthMove;
+let johnWalk;
+let johnWalkSide;
+let johnWalkSide45Deg;
+let johnIdle;
 
 function makeAnimatedSprites() {
     johnMouthMove = new AnimatedSpriteClass({

@@ -1,15 +1,15 @@
-var audioFormat;
+let audioFormat;
 
-var voiceHigh1 = new SoundOverlapsClass("./audio/snd_voice1");
-var voiceHigh2 = new SoundOverlapsClass("./audio/snd_voice2");
-var voiceLow1 = new SoundOverlapsClass("./audio/snd_voice3");
-var voiceLow2 = new SoundOverlapsClass("./audio/snd_voice4");
-var selected = new SoundOverlapsClass("./audio/selected");
+let voiceHigh1 = new SoundOverlapsClass("./audio/snd_voice1");
+let voiceHigh2 = new SoundOverlapsClass("./audio/snd_voice2");
+let voiceLow1 = new SoundOverlapsClass("./audio/snd_voice3");
+let voiceLow2 = new SoundOverlapsClass("./audio/snd_voice4");
+let selected = new SoundOverlapsClass("./audio/selected");
 
-//how to add music: var bgMusic = "./audio/bgMusic";
+//how to add music: let bgMusic = "./audio/bgMusic";
 
-var musicVolume = localStorage.getItem("musicVolume");
-var effectsVolume = localStorage.getItem("effectsVolume");
+let musicVolume = localStorage.getItem("musicVolume");
+let effectsVolume = localStorage.getItem("effectsVolume");
 
 if(musicVolume === null){
 	musicVolume = 1;
@@ -18,11 +18,11 @@ if(effectsVolume === null){
 	effectsVolume = 1;
 }
 
-var isMuted = false;
+let isMuted = false;
 const VOLUME_INCREMENT = 0.05;
 
 function setFormat() {
-    var audio = new Audio();
+    let audio = new Audio();
     if (audio.canPlayType("audio/mp3")) {
         audioFormat = ".mp3";
     } else {
@@ -77,9 +77,9 @@ function backgroundMusicClass() {
 function SoundOverlapsClass(filenameWithPath) {
     setFormat();
 
-    var fullFilename = filenameWithPath;
-		var soundIndex = 0;
-    var sounds = [new Audio(fullFilename + audioFormat), new Audio(fullFilename + audioFormat)];
+    let fullFilename = filenameWithPath;
+		let soundIndex = 0;
+    let sounds = [new Audio(fullFilename + audioFormat), new Audio(fullFilename + audioFormat)];
 
     this.play = function() {
 				if(!sounds[soundIndex].paused) {
@@ -94,9 +94,9 @@ function SoundOverlapsClass(filenameWithPath) {
 }
 
 function getRandomVolume(){
-	var min = 0.9;
-	var max = 1;
-	var randomVolume = Math.random() * (max - min) + min;
+	let min = 0.9;
+	let max = 1;
+	let randomVolume = Math.random() * (max - min) + min;
 	return randomVolume.toFixed(2);
 }
 

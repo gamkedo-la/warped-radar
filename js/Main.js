@@ -2,10 +2,10 @@ const CANVAS_WIDTH = 800;
 const CANVAS_HEIGHT = 600;
 const PIXELS_PER_SCALE = 2.0;
 
-var scaledCanvas, scaledContext;
-var canvas, canvasContext;
+let scaledCanvas, scaledContext;
+let canvas, canvasContext;
 
-var framesFromGameStart = 0;
+let framesFromGameStart = 0;
 
 window.onload = function () {
     canvas = document.createElement("canvas");
@@ -36,7 +36,7 @@ window.onload = function () {
 }
 
 function startGame() {
-    var framesPerSecond = 30;
+    let framesPerSecond = 30;
     setInterval(updateAll, 1000 / framesPerSecond);
     player.reset();
     setupInput();

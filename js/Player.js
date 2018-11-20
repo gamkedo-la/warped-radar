@@ -1,4 +1,4 @@
-var player = new(function () {
+let player = new(function () {
     this.x = 100;
     this.y = 100;
     this.w = 64;
@@ -15,11 +15,11 @@ var player = new(function () {
     this.controlKeyDown;
     this.controlKeyLeft;
 
-    var states = {
+    let states = {
         walking: false
     }
     
-    var facing = {
+    let facing = {
         north: false,
         south: false,
         east: false,
@@ -36,9 +36,9 @@ var player = new(function () {
     }
 
     this.reset = function () {
-        for (var eachRow = 0; eachRow < WORLD_COLS; eachRow++) {
-            for (var eachCol = 0; eachCol < WORLD_ROWS; eachCol++) {
-                var arrayIndex = rowColToArrayIndex(eachCol, eachRow);
+        for (let eachRow = 0; eachRow < WORLD_COLS; eachRow++) {
+            for (let eachCol = 0; eachCol < WORLD_ROWS; eachCol++) {
+                let arrayIndex = rowColToArrayIndex(eachCol, eachRow);
                 if (worldGrid[arrayIndex] == TILE_PLAYER_START || worldGrid[arrayIndex] == TILE_PLAYERS_TILE) {
                     worldGrid[arrayIndex] = TILE_PLAYERS_TILE; //workaround for level editor? currently set to ground
                     this.x = eachCol * WORLD_W + WORLD_W / 2;

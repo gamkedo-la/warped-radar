@@ -9,50 +9,50 @@ function Dialogue() {
     this.speaker2StartX = 800;
     this.speaker2X = this.speaker2StartX;
 
-    var speakerFinalX = 50;
-    var speaker2FinalX = 480;
-    var speakerY = 80;
-    var speaker2Y = speakerY;
+    let speakerFinalX = 50;
+    let speaker2FinalX = 480;
+    let speakerY = 80;
+    let speaker2Y = speakerY;
 
-    var tweenInSpeed = 20;
-    var tweenOutSpeed = 40;
+    let tweenInSpeed = 20;
+    let tweenOutSpeed = 40;
 
-    var dialogueBoxImage = dialogueBoxPic;
+    let dialogueBoxImage = dialogueBoxPic;
 
-    var dialogueBoxX = 0;
-    var dialogueBoxY = 470;
+    let dialogueBoxX = 0;
+    let dialogueBoxY = 470;
 
-    var textXBuffer = 30;
-    var textYBuffer = 40;
-    var textX = dialogueBoxX + textXBuffer;
-    var textY = dialogueBoxY + textYBuffer;
-    var textColour = "white";
-    var textFontFace = "25px consolas";
-    var textAlign = "left";
+    let textXBuffer = 30;
+    let textYBuffer = 40;
+    let textX = dialogueBoxX + textXBuffer;
+    let textY = dialogueBoxY + textYBuffer;
+    let textColour = "white";
+    let textFontFace = "25px consolas";
+    let textAlign = "left";
 
-    var line;
-    var letterSpeed = 1;
-    var maxWidth = 210;
-    var lineHeight = 30;
-    var paused = false;
+    let line;
+    let letterSpeed = 1;
+    let maxWidth = 210;
+    let lineHeight = 30;
+    let paused = false;
 
-    var choiceColour;
-    var chose = false;
-    var showingChoiceMenu = false;
-    var nextChoiceLabel = -1;
-    var selectedChoice = -1;
-    var choiceCounter = 1;
-    var choiceCursorX = 0;
-    var choiceCursorY = 0;
-    var choiceCursor = 0;
-    var choiceSound = voiceHigh1;
-    var selectSound = selected;
-    var choiceTextAlign = textAlign;
-    var cursorTextColour = "yellow";
-    var selectedTextColour = "orange";
+    let choiceColour;
+    let chose = false;
+    let showingChoiceMenu = false;
+    let nextChoiceLabel = -1;
+    let selectedChoice = -1;
+    let choiceCounter = 1;
+    let choiceCursorX = 0;
+    let choiceCursorY = 0;
+    let choiceCursor = 0;
+    let choiceSound = voiceHigh1;
+    let selectSound = selected;
+    let choiceTextAlign = textAlign;
+    let cursorTextColour = "yellow";
+    let selectedTextColour = "orange";
 
     this.create = function (conversation) {
-        var dialogue = [],
+        let dialogue = [],
             scenes = [],
             playerChoices = [],
             speakerNames = [],
@@ -63,8 +63,8 @@ function Dialogue() {
             s1PicLeave = [],
             s2PicLeave = [];
 
-        for (var i = 0; i < conversation.length; i++) {
-            var chatEvent = conversation[i];
+        for (let i = 0; i < conversation.length; i++) {
+            let chatEvent = conversation[i];
             if ("text" in chatEvent) dialogue.push(chatEvent.text);
             if ("who" in chatEvent) speakerNames.push(chatEvent.who);
             if ("scene" in chatEvent) scenes.push(chatEvent.scene);
@@ -99,7 +99,7 @@ function Dialogue() {
         if (nextChoiceLabel != -1 && chose) {
             if (chose) chose = false;
             showingChoiceMenu = false;
-            for (var d = 0; d < conversation.length; d++) {
+            for (let d = 0; d < conversation.length; d++) {
                 if (conversation[d].scene == nextChoiceLabel) {
                     this.page = d; // found the index where .scene 
                     break; // bail from for loop, quit searching
@@ -112,10 +112,10 @@ function Dialogue() {
     }
 
     this.showTextElements = function (conversation, dialogueList, choiceList, sceneList, voiceList, nameColList, nameList) {
-        var typewriterText;
-        var textPad = 60;
-        var measureText = canvasContext.measureText(nameList[this.page]);
-        var nameWidth = measureText.width + textPad;
+        let typewriterText;
+        let textPad = 60;
+        let measureText = canvasContext.measureText(nameList[this.page]);
+        let nameWidth = measureText.width + textPad;
         if (this.isShowing) {
             if (this.letterCounter < dialogueList[this.page].length && !paused) {
                 this.letterCounter += letterSpeed;
@@ -148,9 +148,9 @@ function Dialogue() {
     }
 
     this.getSceneLength = function (conversation) {
-        var sceneLength = [];
+        let sceneLength = [];
         if (nextChoiceLabel != -1) {
-            for (var d = 0; d < conversation.length; d++) {
+            for (let d = 0; d < conversation.length; d++) {
                 if (conversation[d].scene == nextChoiceLabel) {
                     sceneLength.push(conversation[d].text);
                 }
@@ -160,7 +160,7 @@ function Dialogue() {
     }
 
     this.showChoices = function (conversation, choiceList, dialogueList) {
-        var sceneText = this.getSceneLength(conversation);
+        let sceneText = this.getSceneLength(conversation);
         if (!showingChoiceMenu) choiceCursor = 0;
         if (conversation[this.page].text == "" && choiceList[this.page] != null && this.isShowing) {
             this.setupChoices(conversation, choiceList[this.page]);
@@ -177,12 +177,12 @@ function Dialogue() {
     }
 
     this.setupChoices = function (conversation, choiceList) {
-        var itemSpace = 30;
-        var sceneText = this.getSceneLength(conversation);
-        for (var i = 0; i < choiceList.length; i++) {
+        let itemSpace = 30;
+        let sceneText = this.getSceneLength(conversation);
+        for (let i = 0; i < choiceList.length; i++) {
             if (choiceCursor == i) {
-                var cursorXOffset = 12;
-                var cursorYOffset = 17;
+                let cursorXOffset = 12;
+                let cursorYOffset = 17;
                 choiceCursorX = textX - cursorXOffset;
                 choiceCursorY = (textY + itemSpace * i) - cursorYOffset;
                 if (pressed_space && showingChoiceMenu) {
@@ -315,20 +315,20 @@ function Dialogue() {
     }
 
     this.getWordsAndBreaksFromString = function (dialogueWords) {
-        var breaks = dialogueWords.split("\n"),
+        let breaks = dialogueWords.split("\n"),
             newLines = "";
-        for (var i = 0; i < breaks.length; i++) {
+        for (let i = 0; i < breaks.length; i++) {
             newLines = newLines + breaks[i] + "  Gamkedo  ";
         }
-        var words = newLines.split(" ");
+        let words = newLines.split(" ");
         return words;
     }
 
     this.calculateLineBreak = function (dialogueWords, x, y, maxWidth, lineHeight) {
-        var words = this.getWordsAndBreaksFromString(dialogueWords),
+        let words = this.getWordsAndBreaksFromString(dialogueWords),
             checkEndOfLine, checkTextWidth, textWidth;
         line = "";
-        for (var i = 0; i < words.length; i++) {
+        for (let i = 0; i < words.length; i++) {
             if (words[i] != "Gamkedo") {
                 checkEndOfLine = line + words[i] + " ";
                 checkTextWidth = canvasContext.measureText(checkEndOfLine);
@@ -361,9 +361,9 @@ function Dialogue() {
     }
 
     this.incrementPage = function (conversation) {
-        var dialogue = [];
-        var sceneText = this.getSceneLength(conversation);
-        for (var i = 0; i < conversation.length; i++) {
+        let dialogue = [];
+        let sceneText = this.getSceneLength(conversation);
+        for (let i = 0; i < conversation.length; i++) {
             if ("text" in conversation[i]) dialogue.push(conversation[i].text);
         }
         if (this.letterCounter < dialogue[this.page].length) {

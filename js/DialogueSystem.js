@@ -1,4 +1,3 @@
-//dialogue code base by Kise, for Gamkedo! <3 Feel free to make changes and improve the code base!! 
 function Dialogue() {
     this.isShowing = false;
     this.letterCounter = 0;
@@ -132,7 +131,7 @@ function Dialogue() {
             this.findPunctuation(typewriterText);
             this.wrapText(typewriterText, textX + nameWidth, textY, maxWidth, lineHeight);
             if (this.letterCounter >= dialogueList[this.page].length && dialogueList[this.page] != "") {
-                //finished effect here
+                //finished effect here (to show that text is done spelling out)
             }
         }
     }
@@ -185,7 +184,7 @@ function Dialogue() {
                 let cursorYOffset = 17;
                 choiceCursorX = textX - cursorXOffset;
                 choiceCursorY = (textY + itemSpace * i) - cursorYOffset;
-                if (pressed_space && showingChoiceMenu) {
+                if ((pressed_space || pressed_enter) && showingChoiceMenu) {
                     choiceColour = selectedTextColour;
                 } else {
                     choiceColour = cursorTextColour;
@@ -200,7 +199,7 @@ function Dialogue() {
 
     this.updateChoiceCursor = function (choiceList) {
         if (showingChoiceMenu) {
-            if (pressed_space) {
+            if (pressed_space || pressed_enter) {
                 if (cursorKeyPresses === 1) {
                     selectedChoice = choiceCursor;
                     selectSound.play();
@@ -311,7 +310,7 @@ function Dialogue() {
     this.unPauseWords = function () {
         setTimeout(function () {
             paused = false;
-        }, 190);
+        }, 200);
     }
 
     this.getWordsAndBreaksFromString = function (dialogueWords) {

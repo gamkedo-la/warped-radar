@@ -32,6 +32,7 @@ const KEY_ENTER = 13;
 let mouseX, mouseY;
 
 let pressed_space = false;
+let pressed_enter = false;
 let pressed_mbLeft = false;
 
 let cursorUp = false;
@@ -93,9 +94,10 @@ function keydownControl(evt, keydownMap) {
     if (!levelEditor.isOn) {
         pressed_space = keysPressed(KEY_SPACE) && isKeyPressed;
     }
-
+    
     cursorUp = (keysPressed(KEY_UP)||keysPressed(KEY_W)) && isKeyPressed;
     cursorDown = (keysPressed(KEY_DOWN)||keysPressed(KEY_S)) && isKeyPressed;
+    pressed_enter = keysPressed(KEY_ENTER) && isKeyPressed;
 
     // Supports multiple simultaneous key presses:
     //      e.g. Shift + I: if (keysPressed(KEY_SHIFT, KEY_I)) { do_something(); }
@@ -107,7 +109,8 @@ function keydownControl(evt, keydownMap) {
     //              if (keysPressed(KEY_SHIFT, KEY_I)) { do_something(); }
     //              else if (keysPressed(KEY_SHIFT)) { do_something_else(); }
     //
-    if (keysPressed(KEY_SPACE)) {
+    
+    if (keysPressed(KEY_SPACE) || keysPressed(KEY_ENTER)) {
         if (!levelEditor.isOn) {
             incrementTextPages();
             cursorKeyPresses = isKeyPressed ? cursorKeyPresses + 1 : 0;

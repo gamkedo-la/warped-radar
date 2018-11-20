@@ -1,40 +1,40 @@
-let inventory = new(function () {
+var inventory = new(function () {
     this.isShowing = false;
     this.x = 95;
     this.y = 110;
 
-    let navigationSound = voiceHigh2;
+    var navigationSound = voiceHigh2;
 
-    let width = 624;
-    let height = 390;
+    var width = 624;
+    var height = 390;
 
-    let slots = new Array(8);
+    var slots = new Array(8);
 
-    let slotCols = 4;
-    let slotRows = 2;
+    var slotCols = 4;
+    var slotRows = 2;
 
-    let slotX = this.x + 50;
-    let slotY = this.y + 60;
-    let slotWidth = 90;
-    let slotHeight = 85;
-    let slotBetweenX = 55;
-    let slotBetweenY = 25;
+    var slotX = this.x + 50;
+    var slotY = this.y + 60;
+    var slotWidth = 90;
+    var slotHeight = 85;
+    var slotBetweenX = 55;
+    var slotBetweenY = 25;
 
-    let inventoryIndex = 0;
+    var inventoryIndex = 0;
 
-    let inventoryImg = inventoryPic;
-    let textFontFace = "30px consolas";
-    let textColour = "white";
-    let textAlign = "left";
+    var inventoryImg = inventoryPic;
+    var textFontFace = "30px consolas";
+    var textColour = "white";
+    var textAlign = "left";
 
-    let titleTextX = 320;
-    let titleTextY = this.y + 40;
+    var titleTextX = 320;
+    var titleTextY = this.y + 40;
 
-    let descFontFace = "20px consolas";
-    let descX = this.x + width / 2;
-    let descY = this.y + 200;
+    var descFontFace = "20px consolas";
+    var descX = this.x + width / 2;
+    var descY = this.y + 200;
 
-    /*let inventoryItems = [
+    /*var inventoryItems = [
         {
             name:,
             description: ,
@@ -76,12 +76,12 @@ let inventory = new(function () {
 
     this.drawSlots = function () {
         if (this.isShowing) {
-            let drawInvX = 0;
-            let drawInvY = 0;
+            var drawInvX = 0;
+            var drawInvY = 0;
 
-            for (let i = 0; i < slots.length; i++) {
-                let itemCellX = slotX + ((slotWidth + slotBetweenX) * (i % slotCols));
-                let itemCellY = slotY + ((slotHeight + slotBetweenY) * Math.floor(i / slotCols));
+            for (var i = 0; i < slots.length; i++) {
+                var itemCellX = slotX + ((slotWidth + slotBetweenX) * (i % slotCols));
+                var itemCellY = slotY + ((slotHeight + slotBetweenY) * Math.floor(i / slotCols));
 
                 canvasContext.save();
                 if (i === inventoryIndex) {
@@ -97,10 +97,10 @@ let inventory = new(function () {
 
     this.drawItems = function () {
         if (this.isShowing) {
-            for (let i = 0; i < inventoryItems.length; i++) {
+            for (var i = 0; i < inventoryItems.length; i++) {
                 if (inventoryItems[i].isObtained) {
-                    let itemCellX = slotX + ((slotWidth + slotBetweenX) * (i % slotCols));
-                    let itemCellY = slotY + ((slotHeight + slotBetweenY) * Math.floor(i / slotCols));
+                    var itemCellX = slotX + ((slotWidth + slotBetweenX) * (i % slotCols));
+                    var itemCellY = slotY + ((slotHeight + slotBetweenY) * Math.floor(i / slotCols));
                     canvasContext.drawImage(inventoryItems[i].uiSprite, itemCellX, itemCellY);
                 }
             }

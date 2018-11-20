@@ -49,8 +49,8 @@ function OverworldObject() {
     }
 
     this.text = function (createElseIncrement, dialogueList) {
-        let chat = null;
-        let chatLine = this.messageCounter - 1; //already 1 when dialogue starts
+        var chat = null;
+        var chatLine = this.messageCounter - 1; //already 1 when dialogue starts
         if (chatLine >= dialogueList.length) {
             chatLine = dialogueList.length - 1;
         } else if (chatLine < 0) {
@@ -66,7 +66,7 @@ function OverworldObject() {
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
-let rose = new OverworldObject();
+var rose = new OverworldObject();
 rose.dialogue = new Dialogue();
 rose.colour = "#8789C0";
 
@@ -76,7 +76,7 @@ rose.chatEvents = function (createElseIncrement) {
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
-let allNPCs = [rose];
+var allNPCs = [rose];
 
 function createDialogueEvents() {
     rose.chatEvents(true);
@@ -91,13 +91,13 @@ function dialogueNotShowing() {
 }
 
 function triggerNPCDialogue() {
-    for (let i = 0; i < allNPCs.length; i++) {
+    for (var i = 0; i < allNPCs.length; i++) {
         allNPCs[i].onTrigger(allNPCs[i].dialogue);
     }
 }
 
 function drawAndInitNPCs() { //here for prototype purposes
-    for (let i = 0; i < allNPCs.length; i++) {
+    for (var i = 0; i < allNPCs.length; i++) {
         allNPCs[i].draw();
         allNPCs[i].collidingWithPlayer();
     }

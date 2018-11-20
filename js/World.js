@@ -22,7 +22,7 @@ const TILE_TEST_CONVENIENCE_STOREBOTTOMLEFT = 14;
 const TILE_TEST_CONVENIENCE_STOREBOTTOMMIDDLE = 15;
 const TILE_TEST_CONVENIENCE_STOREBOTTOMRIGHT = 16;
 
-let worldGrid = 
+var worldGrid = 
 [ 
 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,6,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,6,11,12,13,0,0,0,0,0,0,1,1,0,0,0,0,0,0,6,14,15,16,0,0,0,0,0,0,1,1,4,4,4,4,4,4,5,0,0,0,0,0,0,0,0,0,1,1,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
 ];
@@ -35,14 +35,14 @@ function tileTypeHasTransparency(checkTileType) {
 }
 
 function drawWorld() {
-    let arrayIndex = 0;
-    let drawTileX = 0;
-    let drawTileY = 0;
-    for (let eachRow = 0; eachRow < WORLD_ROWS; eachRow++) {
-        for (let eachCol = 0; eachCol < WORLD_COLS; eachCol++) {
-            let arrayIndex = rowColToArrayIndex(eachCol, eachRow);
-            let tileKindHere = worldGrid[arrayIndex];
-            let useImg = worldPics[tileKindHere];
+    var arrayIndex = 0;
+    var drawTileX = 0;
+    var drawTileY = 0;
+    for (var eachRow = 0; eachRow < WORLD_ROWS; eachRow++) {
+        for (var eachCol = 0; eachCol < WORLD_COLS; eachCol++) {
+            var arrayIndex = rowColToArrayIndex(eachCol, eachRow);
+            var tileKindHere = worldGrid[arrayIndex];
+            var useImg = worldPics[tileKindHere];
             
             /*if( tileTypeHasTransparency(tileKindHere) ) {
 				scaledContext.drawImage(worldPics[TILE_GROUND], drawTileX, drawTileY);

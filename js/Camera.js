@@ -1,8 +1,8 @@
 const CAM_SPEED = 10;
 const EDITOR_SPEED = 5;
 
-let camPanX = 0.0;
-let camPanY = 0.0;
+var camPanX = 0.0;
+var camPanY = 0.0;
 const PLAYER_DIST_FROM_CENTER_BEFORE_CAMERA_PAN_X = 200;
 const PLAYER_DIST_FROM_CENTER_BEFORE_CAMERA_PAN_Y = 100;
 
@@ -19,8 +19,8 @@ function findEdgesOfScreen() {
     if (camPanY < 0) {
         camPanY = 0;
     }
-    let maxPanRight = WORLD_COLS * WORLD_W - scaledCanvas.width;
-    let maxPanTop = WORLD_ROWS * WORLD_H - scaledCanvas.height;
+    var maxPanRight = WORLD_COLS * WORLD_W - scaledCanvas.width;
+    var maxPanTop = WORLD_ROWS * WORLD_H - scaledCanvas.height;
     if (camPanX > maxPanRight) {
         camPanX = maxPanRight;
     }
@@ -30,11 +30,11 @@ function findEdgesOfScreen() {
 }
 
 function cameraFollow() {
-    let cameraFocusCenterX = camPanX + scaledCanvas.width / 2;
-    let cameraFocusCenterY = camPanY + scaledCanvas.height / 2;
+    var cameraFocusCenterX = camPanX + scaledCanvas.width / 2;
+    var cameraFocusCenterY = camPanY + scaledCanvas.height / 2;
     if (levelEditor.isOn) {
-        let canvasRightBoundary = scaledCanvas.width + camPanX;
-        let canvasBottomBoundary = scaledCanvas.height + camPanY;
+        var canvasRightBoundary = scaledCanvas.width + camPanX;
+        var canvasBottomBoundary = scaledCanvas.height + camPanY;
         if ((mouseX / PIXELS_PER_SCALE) > scaledCanvas.width - WORLD_W) {
             camPanX += EDITOR_SPEED;
         }
@@ -49,11 +49,11 @@ function cameraFollow() {
         }
         findEdgesOfScreen();
     } else {
-        let cameraFocusCenterX = camPanX + scaledCanvas.width / 2;
-        let cameraFocusCenterY = camPanY + scaledCanvas.height / 2;
+        var cameraFocusCenterX = camPanX + scaledCanvas.width / 2;
+        var cameraFocusCenterY = camPanY + scaledCanvas.height / 2;
 
-        let playerDistFromCameraFocusX = Math.abs(player.x - cameraFocusCenterX);
-        let playerDistFromCameraFocusY = Math.abs(player.y - cameraFocusCenterY);
+        var playerDistFromCameraFocusX = Math.abs(player.x - cameraFocusCenterX);
+        var playerDistFromCameraFocusY = Math.abs(player.y - cameraFocusCenterY);
 
         if (playerDistFromCameraFocusX > PLAYER_DIST_FROM_CENTER_BEFORE_CAMERA_PAN_X) {
             if (cameraFocusCenterX < player.x) {

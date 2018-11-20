@@ -15,6 +15,8 @@ let player = new(function () {
     this.controlKeyDown;
     this.controlKeyLeft;
 
+    this.collider = new colliderClass(this.x, this.y, this.w, this.h, 0,0);
+
     let states = {
         walking: false
     }
@@ -43,6 +45,7 @@ let player = new(function () {
                     worldGrid[arrayIndex] = TILE_PLAYERS_TILE; //workaround for level editor? currently set to ground
                     this.x = eachCol * WORLD_W + WORLD_W / 2;
                     this.y = eachRow * WORLD_H - WORLD_H / 2;
+                    this.collider.setCollider(this.x,this.y);
                     return;
                 } 
             } 
@@ -71,6 +74,8 @@ let player = new(function () {
                 states.walking = false;
             }
         }
+        this.collider.setCollider(this.x,this.y);
+        // console.log(this.collider.box.left,this.collider.box.right,this.collider.box.top,this.collider.box.bottom);
     }
 
     this.draw = function () {

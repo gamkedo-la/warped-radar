@@ -22,7 +22,7 @@ let player = new(function () {
     this.controlKeyDown2;
     this.controlKeyLeft2;
 
-    this.collider = new colliderClass(this.x, this.y, this.w, this.h, 0,0);
+    this.collider = new colliderClass(this.x, this.y, this.w, this.h, 0, 0);
 
     let states = {
         walking: false
@@ -58,7 +58,7 @@ let player = new(function () {
                     worldGrid[arrayIndex] = TILE_PLAYERS_TILE; //workaround for level editor? currently set to ground
                     this.x = eachCol * WORLD_W + WORLD_W / 2;
                     this.y = eachRow * WORLD_H - WORLD_H / 2;
-                    this.collider.setCollider(this.x,this.y);
+                    this.collider.setCollider(this.x, this.y);
                     return;
                 }
             }
@@ -69,25 +69,23 @@ let player = new(function () {
         if (dialogueNotShowing() && !inventory.isShowing) {
             if (this.keyHeld_walkUp) {
                 this.y -= this.walkSpeed;
-                states.walking = true;
             }
             if (this.keyHeld_walkDown) {
                 this.y += this.walkSpeed;
-                states.walking = true;
             }
             if (this.keyHeld_walkLeft) {
                 this.x -= this.walkSpeed;
-                states.walking = true;
             }
             if (this.keyHeld_walkRight) {
                 this.x += this.walkSpeed;
-                states.walking = true;
             }
             if (!this.keyHeld_walkUp && !this.keyHeld_walkDown && !this.keyHeld_walkLeft && !this.keyHeld_walkRight) {
                 states.walking = false;
+            } else {
+                states.walking = true;
             }
         }
-        this.collider.setCollider(this.x,this.y);
+        this.collider.setCollider(this.x, this.y);
         // console.log(this.collider.box.left,this.collider.box.right,this.collider.box.top,this.collider.box.bottom);
     }
 

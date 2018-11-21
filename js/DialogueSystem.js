@@ -35,7 +35,6 @@ function Dialogue() {
     let lineHeight = 30;
     let paused = false;
 
-    let pauseForChoices;
     let choiceColour;
     let chose = false;
     let showingChoiceMenu = false;
@@ -140,7 +139,7 @@ function Dialogue() {
     this.makeAChoice = function (choiceList) {
         if (selectedChoice != -1 && choiceList[this.page] != null) {
             if (choiceCounter == 1 && nextChoiceLabel != -1) {
-                pauseForChoices = setTimeout(function () {
+                setTimeout(function () {
                     chose = true;
                 }, 320);
             }

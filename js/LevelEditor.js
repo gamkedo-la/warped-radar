@@ -32,7 +32,7 @@ let levelEditor = new(function () {
 
     this.editorKeyHandle = function (keyCode) {
         if (this.isOn) {
-            if (keysPressed(KEY_A) {
+            if (keysPressed(KEY_A)) {
                 currentTileIndex--;
                 if (currentTileIndex <= 0) currentTileIndex = 0;
             } else if (keysPressed(KEY_D)) {

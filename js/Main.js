@@ -80,6 +80,6 @@ function drawGameBorder() {
 }
 
 function drawDebugText() {
-    colorText("Pressed Space: " + pressed_space, 20, 30, "white", "20px Arial", "left", 1);
+    colorText("Pressed Space: " + interact_key, 20, 30, "white", "20px Arial", "left", 1);
     colorText("Colliding with Rose: " + rose.collidingWithPlayer(), 20, 50, "white", "20px Arial", "left", 1);
 }

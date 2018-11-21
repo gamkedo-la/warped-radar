@@ -184,7 +184,7 @@ function Dialogue() {
                 let cursorYOffset = 17;
                 choiceCursorX = textX - cursorXOffset;
                 choiceCursorY = (textY + itemSpace * i) - cursorYOffset;
-                if ((pressed_space || pressed_enter) && showingChoiceMenu) {
+                if (interact_key && showingChoiceMenu) {
                     choiceColour = selectedTextColour;
                 } else {
                     choiceColour = cursorTextColour;
@@ -199,7 +199,7 @@ function Dialogue() {
 
     this.updateChoiceCursor = function (choiceList) {
         if (showingChoiceMenu) {
-            if (pressed_space || pressed_enter) {
+            if (interact_key) {
                 if (cursorKeyPresses === 1) {
                     selectedChoice = choiceCursor;
                     selectSound.play();

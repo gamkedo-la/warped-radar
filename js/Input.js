@@ -31,8 +31,7 @@ const KEY_ENTER = 13;
 
 let mouseX, mouseY;
 
-let pressed_space = false;
-let pressed_enter = false;
+let interact_key = false;
 let pressed_mbLeft = false;
 
 let cursorUp = false;
@@ -92,12 +91,11 @@ function keydownControl(evt, keydownMap) {
     }
 
     if (!levelEditor.isOn) {
-        pressed_space = keysPressed(KEY_SPACE) && isKeyPressed;
+        interact_key = (keysPressed(KEY_SPACE) || keysPressed(KEY_ENTER)) && isKeyPressed;
     }
     
-    cursorUp = (keysPressed(KEY_UP)||keysPressed(KEY_W)) && isKeyPressed;
-    cursorDown = (keysPressed(KEY_DOWN)||keysPressed(KEY_S)) && isKeyPressed;
-    pressed_enter = keysPressed(KEY_ENTER) && isKeyPressed;
+    cursorUp = (keysPressed(KEY_UP) || keysPressed(KEY_W)) && isKeyPressed;
+    cursorDown = (keysPressed(KEY_DOWN) || keysPressed(KEY_S)) && isKeyPressed;
 
     // Supports multiple simultaneous key presses:
     //      e.g. Shift + I: if (keysPressed(KEY_SHIFT, KEY_I)) { do_something(); }
@@ -118,9 +116,9 @@ function keydownControl(evt, keydownMap) {
     } else if (keysPressed(KEY_X)) {
     } else if (keysPressed(KEY_Z)) {
         inventory.toggle();
-    } else if (keysPressed(KEY_UP)) {
+    } else if (keysPressed(KEY_UP) || keysPressed(KEY_W)) {
         cursorKeyPresses = isKeyPressed ? cursorKeyPresses + 1 : 0;
-    } else if (keysPressed(KEY_DOWN)) {
+    } else if (keysPressed(KEY_DOWN) || keysPressed(KEY_S)) {
         cursorKeyPresses = isKeyPressed ? cursorKeyPresses + 1 : 0;
     } else if (keysPressed(KEY_O)) {
         levelEditor.toggle();

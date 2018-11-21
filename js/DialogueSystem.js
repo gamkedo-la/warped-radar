@@ -35,12 +35,13 @@ function Dialogue() {
     let lineHeight = 30;
     let paused = false;
 
+    let pauseForChoices;
     let choiceColour;
     let chose = false;
     let showingChoiceMenu = false;
     let nextChoiceLabel = -1;
     let selectedChoice = -1;
-    let choiceCounter = 1;
+    let choiceCounter = 0;
     let choiceCursorX = 0;
     let choiceCursorY = 0;
     let choiceCursor = 0;
@@ -80,7 +81,6 @@ function Dialogue() {
         this.showBoxElements(dialogueBoxImage);
         this.showTextElements(conversation, dialogue, playerChoices, scenes, voices, nameCols, speakerNames);
         this.showChoices(conversation, playerChoices, dialogue);
-        this.makeAChoice(playerChoices);
     }
 
     this.showSpeakers = function (dialogueList, nameList, leftPicList, leftPicLeaveList, rightPicList, rightPicLeaveList) {
@@ -133,16 +133,21 @@ function Dialogue() {
             if (this.letterCounter >= dialogueList[this.page].length && dialogueList[this.page] != "") {
                 //finished effect here (to show that text is done spelling out)
             }
+            this.makeAChoice(choiceList);
         }
     }
 
     this.makeAChoice = function (choiceList) {
         if (selectedChoice != -1 && choiceList[this.page] != null) {
-            setTimeout(function () { //small pause when choice selected
-                chose = true;
-            }, 320);
-            choiceCounter = 1;
-            nextChoiceLabel = choiceList[this.page][selectedChoice][1];
+            if (choiceCounter == 1 && nextChoiceLabel != -1) {
+                pauseForChoices = setTimeout(function () {
+                    chose = true;
+                }, 320);
+            }
+            if (showingChoiceMenu && interact_key) {
+                choiceCounter = 1;
+                nextChoiceLabel = choiceList[this.page][selectedChoice][1];
+            }
         }
     }
 
@@ -205,7 +210,7 @@ function Dialogue() {
                     selectSound.play();
                 }
             }
-            if (cursorUp && selectedChoice == -1) {
+            if (cursorUp) {
                 if (cursorKeyPresses === 1) {
                     choiceCursor--;
                     choiceSound.play();
@@ -214,7 +219,7 @@ function Dialogue() {
                     }
                 }
             }
-            if (cursorDown && selectedChoice == -1) {
+            if (cursorDown) {
                 if (cursorKeyPresses === 1) {
                     choiceCursor = (choiceCursor + 1) % choiceList.length;
                     choiceSound.play();
@@ -256,13 +261,13 @@ function Dialogue() {
 
             //speaker specific mouth anims for when tweening in
             this.setupAnimatedMouths(dialogueList, nameList, "John", true, johnMouthMove, 130, 300);
-            
+
         } else if (this.speakerX >= speakerFinalX) {
             this.speakerX = speakerFinalX;
 
             //speaker specific mouth anims when at final pos
             this.setupAnimatedMouths(dialogueList, nameList, "John", true, johnMouthMove, 150, 300);
-            
+
         }
     }
 
@@ -283,13 +288,13 @@ function Dialogue() {
 
             //speaker specific mouth anims for when tweening in
             this.setupAnimatedMouths(dialogueList, nameList, "Rose", false, roseMouthMove, 170, 300);
-            
+
         } else if (this.speaker2X <= speaker2FinalX) {
             this.speaker2X = speaker2FinalX;
 
             //speaker specific mouth anims when at final pos
             this.setupAnimatedMouths(dialogueList, nameList, "Rose", false, roseMouthMove, 150, 300);
-            
+
         }
 
     }
@@ -367,15 +372,19 @@ function Dialogue() {
         }
         if (this.letterCounter < dialogue[this.page].length) {
             this.letterCounter = dialogue[this.page].length;
-        } else if (this.page < dialogue.length - 1 && !showingChoiceMenu || (!chose && nextChoiceLabel != -1) && (choiceCounter < sceneText.length)) {
+        } else if (this.page < dialogue.length - 1 && !showingChoiceMenu || nextChoiceLabel != -1 && (choiceCounter < sceneText.length)) {
             this.letterCounter = 0;
             this.page++;
 
             if (choiceCounter < sceneText.length) { //increases the index for branching text
                 choiceCounter++;
-            } else if (choiceCounter != 0 && choiceCounter == sceneText.length) {
+            } else if (choiceCounter != 0 && choiceCounter == sceneText.length && nextChoiceLabel != -1) {
                 //end conversation once branching dialogue has been all read, but not at the end of the array
-                this.isShowing = false;
+                if (dialogue[this.page] == "") {
+                    this.resetBranchingDialogueVars();
+                } else {
+                    this.isShowing = false;
+                }
                 //to prevent portrait incrementing once text is over
                 if (!this.isShowing) this.page = this.page - 1;
                 this.resetBranchingDialogueVars();

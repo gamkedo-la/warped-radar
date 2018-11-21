@@ -180,6 +180,96 @@ let johnAndRoseConvo = [
         choices: null
     },
     {
+        scene: "Good end",
+        who: "Rose",
+        nameCol: "pink",
+        voice: voiceHigh2,
+        text: "Do you want to talk some more?",
+        leftPic: johnHappyPic,
+        rightPic: roseHappyPic,
+
+        leftPicLeave: false,
+        rightPicLeave: false,
+
+        hasChoices: false,
+        choices: null
+    },
+    {
+        scene: "Good end",
+        who: "Rose",
+        nameCol: "pink",
+        voice: voiceHigh2,
+        text: "",
+        leftPic: johnHappyPic,
+        rightPic: roseHappyPic,
+
+        leftPicLeave: false,
+        rightPicLeave: false,
+
+        hasChoices: false,
+        choices: [["Yes", "Talk more"], ["No", "Really?"]]
+    },
+    {
+        scene: "Talk more",
+        who: "Rose",
+        nameCol: "pink",
+        voice: voiceHigh2,
+        text: "Yay! Too bad, I have to go though",
+        leftPic: johnHappyPic,
+        rightPic: roseHappyPic,
+
+        leftPicLeave: false,
+        rightPicLeave: false,
+
+        hasChoices: false,
+        choices: null
+    },
+    {
+        scene: "Talk more",
+        who: "Rose",
+        nameCol: "pink",
+        voice: voiceHigh2,
+        text: "Let's talk later!",
+        leftPic: johnHappyPic,
+        rightPic: roseHappyPic,
+
+        leftPicLeave: false,
+        rightPicLeave: false,
+
+        hasChoices: false,
+        choices: null
+    },
+      {
+        scene: "Really?",
+        who: "Rose",
+        nameCol: "pink",
+        voice: voiceHigh2,
+        text: "Really, are you sure?",
+        leftPic: johnHappyPic,
+        rightPic: roseHappyPic,
+
+        leftPicLeave: false,
+        rightPicLeave: false,
+
+        hasChoices: false,
+        choices: null
+    },
+    {
+        scene: "Really?",
+        who: "Rose",
+        nameCol: "pink",
+        voice: voiceHigh2,
+        text: "",
+        leftPic: johnHappyPic,
+        rightPic: roseHappyPic,
+
+        leftPicLeave: false,
+        rightPicLeave: false,
+
+        hasChoices: false,
+        choices: [["no", "Bad end"], ["actually, yes", "Talk more"]]
+    },
+    {
         scene: "Bad end",
         who: "Rose",
         nameCol: "pink",

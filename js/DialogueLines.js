@@ -85,8 +85,7 @@ let johnAndRoseConvo = [
 
         leftPicLeave: false,
         rightPicLeave: false,
-
-        hasChoices: false,
+        
         choices: null
     },
     {
@@ -101,7 +100,6 @@ let johnAndRoseConvo = [
         leftPicLeave: false,
         rightPicLeave: false,
 
-        hasChoices: false,
         choices: null
     },
     {
@@ -116,7 +114,6 @@ let johnAndRoseConvo = [
         leftPicLeave: false,
         rightPicLeave: false,
 
-        hasChoices: false,
         choices: null
     },
     {
@@ -131,7 +128,6 @@ let johnAndRoseConvo = [
         leftPicLeave: false,
         rightPicLeave: false,
 
-        hasChoices: false,
         choices: null
     },
     {
@@ -146,7 +142,6 @@ let johnAndRoseConvo = [
         leftPicLeave: false,
         rightPicLeave: true,
 
-        hasChoices: false,
         choices: null
     },
     {
@@ -161,7 +156,6 @@ let johnAndRoseConvo = [
         leftPicLeave: false,
         rightPicLeave: false,
 
-        hasChoices: false,
         choices: null
     },
     {
@@ -176,7 +170,6 @@ let johnAndRoseConvo = [
         leftPicLeave: false,
         rightPicLeave: false,
 
-        hasChoices: false,
         choices: null
     },
     {
@@ -191,7 +184,6 @@ let johnAndRoseConvo = [
         leftPicLeave: false,
         rightPicLeave: false,
 
-        hasChoices: false,
         choices: null
     },
     {
@@ -206,7 +198,6 @@ let johnAndRoseConvo = [
         leftPicLeave: false,
         rightPicLeave: false,
 
-        hasChoices: false,
         choices: [["Yes", "Talk more"], ["No", "Really?"]]
     },
     {
@@ -221,7 +212,6 @@ let johnAndRoseConvo = [
         leftPicLeave: false,
         rightPicLeave: false,
 
-        hasChoices: false,
         choices: null
     },
     {
@@ -236,7 +226,6 @@ let johnAndRoseConvo = [
         leftPicLeave: false,
         rightPicLeave: false,
 
-        hasChoices: false,
         choices: null
     },
       {
@@ -251,7 +240,6 @@ let johnAndRoseConvo = [
         leftPicLeave: false,
         rightPicLeave: false,
 
-        hasChoices: false,
         choices: null
     },
     {
@@ -266,7 +254,6 @@ let johnAndRoseConvo = [
         leftPicLeave: false,
         rightPicLeave: false,
 
-        hasChoices: false,
         choices: [["no", "Bad end"], ["actually, yes", "Talk more"]]
     },
     {

@@ -379,9 +379,7 @@ let johnAndRoseConvo3 = [
         rightPic: null,
 
         leftPicLeave: false,
-        rightPicLeave: false,
-
-        choices: null
+        rightPicLeave: false
     },
     {
         who: "Rose",
@@ -392,9 +390,7 @@ let johnAndRoseConvo3 = [
         rightPic: roseAnnoyedPic,
 
         leftPicLeave: false,
-        rightPicLeave: false,
-
-        choices: null
+        rightPicLeave: false
     },
     {
         who: "John",
@@ -406,8 +402,6 @@ let johnAndRoseConvo3 = [
 
         leftPicLeave: false,
         rightPicLeave: false,
-
-        choices: null
     },
     {
         who: "John",
@@ -418,9 +412,7 @@ let johnAndRoseConvo3 = [
         rightPic: roseAnnoyedPic,
 
         leftPicLeave: true,
-        rightPicLeave: false,
-
-        choices: null
+        rightPicLeave: false
     },
     {
         who: "Rose",
@@ -431,8 +423,6 @@ let johnAndRoseConvo3 = [
         rightPic: roseAnnoyedPic,
 
         leftPicLeave: true,
-        rightPicLeave: false,
-
-        choices: null
+        rightPicLeave: false
     }
 ];

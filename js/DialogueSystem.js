@@ -127,7 +127,7 @@ function Dialogue() {
                 colorText(nameList[this.page] + ":", textX, textY, nameColList[this.page], textFontFace, textAlign, 1);
             }
             typewriterText = dialogueList[this.page].substr(0, this.letterCounter);
-            this.findPunctuation(typewriterText);
+            //this.findPunctuation(typewriterText);
             this.wrapText(typewriterText, textX + nameWidth, textY, maxWidth, lineHeight);
             if (this.letterCounter >= dialogueList[this.page].length && dialogueList[this.page] != "") {
                 //finished effect here (to show that text is done spelling out)
@@ -233,7 +233,7 @@ function Dialogue() {
 
     this.setupAnimatedMouths = function (dialogueList, nameList, NPCName, leftPicElseRightPic, animatedSheetVar, xOffset, yOffset) {
         if (nameList[this.page] == NPCName) {
-            if (this.isShowing && this.letterCounter < dialogueList[this.page].length) {
+            if (this.isShowing && this.letterCounter < dialogueList[this.page].length && !paused) {
                 if (leftPicElseRightPic) {
                     animatedSheetVar.draw(canvasContext, this.speakerX + xOffset, speakerY + yOffset, 1);
                 } else {
@@ -299,13 +299,7 @@ function Dialogue() {
     }
 
     this.findPunctuation = function (str) {
-        if (str.includes(".")) {
-            paused = true;
-            this.unPauseWords();
-        } else if (str.includes("!")) {
-            paused = true;
-            this.unPauseWords();
-        } else if (str.includes(",")) {
+        if (str.includes(".") || str.includes("!") || str.includes(",")) {
             paused = true;
             this.unPauseWords();
         }
@@ -378,10 +372,12 @@ function Dialogue() {
             if (choiceCounter < sceneText.length) { //increases the index for branching text
                 choiceCounter++;
             } else if (choiceCounter != 0 && choiceCounter == sceneText.length && nextChoiceLabel != -1) {
-                //end conversation once branching dialogue has been all read, but not at the end of the array
+
                 if (dialogue[this.page] == "") {
+                    //choices in branching text? Reset variables
                     this.resetBranchingDialogueVars();
                 } else {
+                    //end conversation once branching dialogue has been all read, but not at the end of the array
                     this.isShowing = false;
                 }
                 //to prevent portrait incrementing once text is over

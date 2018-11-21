@@ -32,7 +32,7 @@ let johnAndRoseConvo = [
         who: "John",
         nameCol: "lightblue",
         voice: voiceLow1,
-        text: "",
+        text: "", 
         leftPic: johnHappyPic,
         rightPic: roseHappyPic,
 

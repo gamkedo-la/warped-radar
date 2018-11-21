@@ -145,7 +145,6 @@ function Dialogue() {
             if (showingChoiceMenu && interact_key) {
                 choiceCounter = 1;
                 nextChoiceLabel = choiceList[this.page][selectedChoice][1];
-                selectSound.play();
             }
         }
     }
@@ -206,6 +205,7 @@ function Dialogue() {
             if (interact_key) {
                 if (cursorKeyPresses === 1) {
                     selectedChoice = choiceCursor;
+                    selectSound.play();
                 }
             }
             if (cursorUp) {

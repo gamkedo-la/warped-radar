@@ -28,15 +28,6 @@ let player = new(function () {
         walking: false
     }
 
-    let facing = {
-        north: false,
-        south: false,
-        east: false,
-        west: false,
-        southEast: false,
-        southWest: false
-    }
-
     this.setupInput = function (upKey, rightKey, downKey, leftKey, upKey2, rightKey2, downKey2, leftKey2) {
         // ARROWS
         this.controlKeyUp = upKey;

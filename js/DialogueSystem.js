@@ -75,7 +75,6 @@ function Dialogue() {
             if ("leftPicLeave" in chatEvent) s1PicLeave.push(chatEvent.leftPicLeave);
             if ("rightPicLeave" in chatEvent) s2PicLeave.push(chatEvent.rightPicLeave);
         }
-
         this.showSpeakers(dialogue, speakerNames, leftPics, s1PicLeave, rightPics, s2PicLeave)
         this.showBoxElements(dialogueBoxImage);
         this.showTextElements(conversation, dialogue, playerChoices, scenes, voices, nameCols, speakerNames);
@@ -141,11 +140,12 @@ function Dialogue() {
             if (choiceCounter == 1 && nextChoiceLabel != -1) {
                 setTimeout(function () {
                     chose = true;
-                }, 320);
+                }, 360);
             }
             if (showingChoiceMenu && interact_key) {
                 choiceCounter = 1;
                 nextChoiceLabel = choiceList[this.page][selectedChoice][1];
+                selectSound.play();
             }
         }
     }
@@ -170,7 +170,7 @@ function Dialogue() {
             canvasContext.drawImage(choiceCursorPic, choiceCursorX, choiceCursorY);
             setTimeout(function () { //pause ability to select choice in order to increment page
                 showingChoiceMenu = true;
-            }, 150);
+            }, 80);
         } else {
             if (selectedChoice != -1 && showingChoiceMenu && this.page >= dialogueList.length - 1) {
                 showingChoiceMenu = false;
@@ -188,7 +188,7 @@ function Dialogue() {
                 let cursorYOffset = 17;
                 choiceCursorX = textX - cursorXOffset;
                 choiceCursorY = (textY + itemSpace * i) - cursorYOffset;
-                if (interact_key && showingChoiceMenu) {
+                if (interact_key && showingChoiceMenu && nextChoiceLabel != -1) {
                     choiceColour = selectedTextColour;
                 } else {
                     choiceColour = cursorTextColour;
@@ -206,7 +206,6 @@ function Dialogue() {
             if (interact_key) {
                 if (cursorKeyPresses === 1) {
                     selectedChoice = choiceCursor;
-                    selectSound.play();
                 }
             }
             if (cursorUp) {

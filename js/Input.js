@@ -9,6 +9,7 @@ const KEY_S = 83;
 const KEY_D = 68;
 
 const KEY_O = 79;
+const KEY_E = 69;
 
 const KEY_Z = 90;
 const KEY_X = 88;
@@ -28,6 +29,8 @@ const KEY_TILDE = 192;
 
 const KEY_SPACE = 32;
 const KEY_ENTER = 13;
+const KEY_SHIFT = 16;
+const KEY_CTRL = 17;
 
 let mouseX, mouseY;
 
@@ -120,7 +123,7 @@ function keydownControl(evt, keydownMap) {
         cursorKeyPresses = isKeyPressed ? cursorKeyPresses + 1 : 0;
     } else if (keysPressed(KEY_DOWN) || keysPressed(KEY_S)) {
         cursorKeyPresses = isKeyPressed ? cursorKeyPresses + 1 : 0;
-    } else if (keysPressed(KEY_O)) {
+    } else if (keysPressed(KEY_CTRL, KEY_E)) {
         levelEditor.toggle();
     }
 }

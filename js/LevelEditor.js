@@ -19,32 +19,36 @@ let levelEditor = new(function () {
         currentTileIndex = 0;
     }
 
+    // Supports multiple simultaneous key presses:
+    //      e.g. Shift + I: if (keysPressed(KEY_SHIFT, KEY_I)) { do_something(); }
+    //      e.g. Ctrl + S: if (keysPressed(KEY_CTRL, KEY_S)) { save_file(); }
+    //
+    // When a key is both used on its own and in a combination, check the combination first:
+    //      e.g. If Shift does something and Shift + I does something,
+    //           check for Shift + I first:
+    //              if (keysPressed(KEY_SHIFT, KEY_I)) { do_something(); }
+    //              else if (keysPressed(KEY_SHIFT)) { do_something_else(); }
+    //
+
     this.editorKeyHandle = function (keyCode) {
         if (this.isOn) {
-            switch (keyCode) {
-                case KEY_A:
-                    currentTileIndex--;
-                    if (currentTileIndex <= 0) currentTileIndex = 0;
-                    break;
-                case KEY_D:
-                    currentTileIndex++;
-                    if (currentTileIndex >= currentlySelectedSet.length)
-                        currentTileIndex = currentlySelectedSet.length - 1;
-                    break;
-                case KEY_ZERO:
-                    this.pickASet(defaultSet);
-                    break;
-                case KEY_ONE:
-                    this.pickASet(tileSets.sideWalks);
-                    break;
-                case KEY_TWO:
-                    this.pickASet(tileSets.buildings);
-                    break;
-                case KEY_THREE:
-                    break;
-                case KEY_SPACE:
-                    showNewGrid = true;
-                    break;
+            if (keysPressed(KEY_A) {
+                currentTileIndex--;
+                if (currentTileIndex <= 0) currentTileIndex = 0;
+            } else if (keysPressed(KEY_D)) {
+                currentTileIndex++;
+                if (currentTileIndex >= currentlySelectedSet.length)
+                    currentTileIndex = currentlySelectedSet.length - 1;
+            } else if (keysPressed(KEY_ZERO)) {
+                this.pickASet(defaultSet);
+            } else if (keysPressed(KEY_ONE)) {
+                this.pickASet(tileSets.sideWalks);
+            } else if (keysPressed(KEY_TWO)) {
+                this.pickASet(tileSets.buildings);
+            } else if (keysPressed(KEY_THREE)) {
+
+            } else if (keysPressed(KEY_SPACE)) {
+                showNewGrid = true;
             }
         }
     }

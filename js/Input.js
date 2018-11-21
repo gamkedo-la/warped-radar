@@ -104,7 +104,7 @@ function keydownControl(evt, keydownMap) {
     //      e.g. Shift + I: if (keysPressed(KEY_SHIFT, KEY_I)) { do_something(); }
     //      e.g. Ctrl + S: if (keysPressed(KEY_CTRL, KEY_S)) { save_file(); }
     //
-    // When using a key is both used on its own and in a combination, check the combination first:
+    // When a key is both used on its own and in a combination, check the combination first:
     //      e.g. If Shift does something and Shift + I does something,
     //           check for Shift + I first:
     //              if (keysPressed(KEY_SHIFT, KEY_I)) { do_something(); }

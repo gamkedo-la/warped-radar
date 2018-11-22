@@ -76,7 +76,7 @@ function loadImages() {
         {varName: johnSide45Animation, theFile: "johnspriteside45-sheet.png"},
 
         //INVENTORY ITEMS
-        {worldType: }
+        //{worldType: }
         //TILES
         {worldType: TILE_GROUND, theFile: "ground.png"},
         {worldType: TILE_PLAYERS_TILE, theFile: "playerstarttile.png"},

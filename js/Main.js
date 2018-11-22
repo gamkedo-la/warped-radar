@@ -21,11 +21,9 @@ window.onload = function () {
     scaledCanvas.height = CANVAS_HEIGHT / PIXELS_PER_SCALE;
     //document.body.appendChild(scaledCanvas);
 
-    canvasContext.mozImageSmoothingEnabled = false;
     canvasContext.imageSmoothingEnabled = false;
     canvasContext.msImageSmoothingEnabled = false;
     canvasContext.imageSmoothingEnabled = false;
-    scaledContext.mozImageSmoothingEnabled = false;
     scaledContext.imageSmoothingEnabled = false;
     scaledContext.msImageSmoothingEnabled = false;
     scaledContext.imageSmoothingEnabled = false;

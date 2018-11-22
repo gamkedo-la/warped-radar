@@ -169,7 +169,7 @@ function Dialogue() {
             canvasContext.drawImage(choiceCursorPic, choiceCursorX, choiceCursorY);
             setTimeout(function () { //pause ability to select choice in order to increment page
                 showingChoiceMenu = true;
-            }, 80);
+            }, 180);
         } else {
             if (selectedChoice != -1 && showingChoiceMenu && this.page >= dialogueList.length - 1) {
                 showingChoiceMenu = false;

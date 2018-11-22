@@ -20,12 +20,12 @@ function colorText(showWords, textX, textY, fillColor, fontface, textAlign = 'le
     canvasContext.restore();
 }
 
-function outlineCircle(centerX, centerY, radius, strokeColor, lineWidth = 1) {
-    canvasContext.strokeStyle = strokeColor;
-    canvasContext.beginPath();
-    canvasContext.arc(centerX, centerY, radius, 0, Math.PI * 2, true);
-    canvasContext.lineWidth = lineWidth;
-    canvasContext.stroke();
+function outlineCircle(whichContext,centerX, centerY, radius, strokeColor, lineWidth = 1) {
+    whichContext.strokeStyle = strokeColor;
+    whichContext.beginPath();
+    whichContext.arc(centerX, centerY, radius, 0, Math.PI * 2, true);
+    whichContext.lineWidth = lineWidth;
+    whichContext.stroke();
 }
 
 function colorRect(topLeftX, topLeftY, boxWidth, boxHeight, fillColor) {

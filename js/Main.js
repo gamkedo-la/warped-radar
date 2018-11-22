@@ -7,6 +7,8 @@ let canvas, canvasContext;
 
 let framesFromGameStart = 0;
 
+let debug = true;
+
 window.onload = function () {
     canvas = document.createElement("canvas");
     canvas.setAttribute("id", "gameCanvas");
@@ -59,6 +61,9 @@ function drawAll() {
     clearScreen();
     drawWorld();
     player.draw();
+    if (debug) {
+    	player.collider.draw("red");
+    }
     drawAndInitNPCs();
     drawGameBorder();
     drawDebugText();

@@ -100,5 +100,6 @@ let player = new(function () {
         } else {
             johnIdle.draw(scaledContext, this.x, this.y);
         }
+        outlineCircle(scaledContext,this.x, this.y, 2, "green", lineWidth = 1)
     }
 })();

@@ -39,10 +39,10 @@ function colliderClass(x, y, width, height, offsetX, offsetY) {
 	}
 
 	this.draw = function(color) {
-        canvasContext.strokeStyle = color;
-        canvasContext.lineWidth = 1;
+        scaledContext.strokeStyle = color;
+        scaledContext.lineWidth = 1;
         let x = Math.floor(this.box.left) + .5;
         let y = Math.floor(this.box.top) + .5;
-        canvasContext.strokeRect(x, y, this.width, this.height);
+        scaledContext.strokeRect(x, y, this.width, this.height);
     }
 };

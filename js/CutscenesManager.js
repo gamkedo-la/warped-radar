@@ -69,6 +69,7 @@ var convo3 = [
 testScene.scenes = [
    [testScene.showDialogue, convo],
    [testScene.wait, 1],
+   [testScene.moveChar, player, 500, 30, 5],
    [testScene.showDialogue, convo2],
    [testScene.wait, 2],
    [testScene.showDialogue, convo3],
@@ -82,7 +83,7 @@ function showCutsceneDialogue() {
     //also remember to pass in the scene's step/dialogue here for multiple dialogues in one scene... fix please
     if (playingScene != null) {
         if (sceneStep == 1) testScene.showDialogue(convo);
-        if (sceneStep == 3) testScene.showDialogue(convo2);
-        if (sceneStep == 5) testScene.showDialogue(convo3);
+        if (sceneStep == 4) testScene.showDialogue(convo2);
+        if (sceneStep == 6) testScene.showDialogue(convo3);
     }
 }

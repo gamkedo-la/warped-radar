@@ -2,17 +2,13 @@ const MAX_SECONDS = 1000;
 let timer = new(function () {
     this.secondsRemaining = MAX_SECONDS;
     this.timeTick = function () {
-        /*if (this.secondsRemaining == 0) {
-            this.secondsRemaining = MAX_SECONDS;
-        }
-        this.secondsRemaining--;*/
         if (cutscenePause && this.secondsRemaining > 0 || showNextSceneText && this.secondsRemaining > 0) {
             this.secondsRemaining--;
         } else if (this.secondsRemaining == 0) {
             endScenePause();
         }
     }
-
+    
     this.setupTimer = function () {
         let t = this;
         setInterval(function () {

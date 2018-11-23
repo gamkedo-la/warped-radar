@@ -126,6 +126,10 @@ function keydownControl(evt, keydownMap) {
     } else if (keysPressed(KEY_CTRL, KEY_E)) {
         levelEditor.toggle();
     }
+    
+    if (keysPressed(KEY_X)) {
+        
+    }
 }
 
 function keySet(keyEvent, whichEntity, setTo) {

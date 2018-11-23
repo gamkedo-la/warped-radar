@@ -2,11 +2,10 @@ let sceneStep = 0;
 let sceneStepWaitingToBeFinished = false;
 let playingScene = null;
 let cutscenePause = false;
+let nextCutsceneText = false;
 
 function cutscene() {
     this.isPlaying = true;
-    this.timespan = 4000; // bubble disappears after this many MS
-    this.animLength = 1500; // how long it animates in MS
 
     let dialogueBoxImage = dialogueBoxPic;
     let dialogueBoxX = 0;
@@ -31,7 +30,7 @@ function cutscene() {
         console.log("Pause scene for " + num + " seconds")
     }
 
-    this.showDialogue = function (dialogueList, num) {
+    this.showDialogue = function (dialogueList) {
         let dialogue = [],
             speakerNames = [],
             voices = [],
@@ -41,7 +40,7 @@ function cutscene() {
             measureText,
             nameWidth,
             chatTime = 0;
-        
+
         for (let i = 0; i < dialogueList.length; i++) {
             let chatEvent = dialogueList[i];
             if ("text" in chatEvent) dialogue.push(chatEvent.text);
@@ -49,15 +48,35 @@ function cutscene() {
             if ("voice" in chatEvent) voices.push(chatEvent.voice);
             if ("nameCol" in chatEvent) nameCols.push(chatEvent.nameCol);
         }
-        
+
         measureText = canvasContext.measureText(speakerNames[page]),
         nameWidth = measureText.width + textPad;
 
         if (letterCounter < dialogue[page].length) {
             letterCounter += letterSpeed;
         }
-
-        console.log(dialogue[page]);
+        
+        //current workaround for dialogue scenes - like the rest of the system, based on a second based timer
+        
+        //to avoid ending the scene, set timer to 1 (without counting down) while text is spelling out
+        if (letterCounter < dialogue[page].length && page < dialogue.length) timer.secondsRemaining = 1;
+        
+        if (!nextCutsceneText) {
+            //once text is all spelt out, set timer to 3, and prepare for the next page by switching nextCutsceneText to true
+            if (page < dialogue.length && letterCounter >= dialogue[page].length) {
+                timer.secondsRemaining = 2;
+                nextCutsceneText = true;
+            } 
+        }
+        if (nextCutsceneText) {
+            //once timer hits 0, reset letters/show next set of text, then make sure the timer isn't reset immediately by flipping the bool back to false
+            if (timer.secondsRemaining == 0 && page < dialogue.length - 1) {
+                letterCounter = 0;
+                page++;
+                nextCutsceneText = false;
+            } 
+        }
+        
         typewriterText = dialogue[page].substr(0, letterCounter);
         canvasContext.drawImage(dialogueBoxPic, dialogueBoxX, dialogueBoxY);
         colorText(speakerNames[page] + ":", textX, textY, nameCols[page], textFontFace, textAlign, 1);
@@ -75,6 +94,7 @@ function updateSceneTick() {
     if (playingScene != null) {
         if (sceneStep < playingScene.scenes.length) {
             if (!sceneStepWaitingToBeFinished) {
+                console.log("next scene");
                 nextSceneCall(playingScene);
             }
         } else if (timer.secondsRemaining == 0) {
@@ -90,7 +110,7 @@ function endScenePause() {
     sceneStepWaitingToBeFinished = false;
 }
 
-function createScene(sceneList) {
+function createCutscene(sceneList) {
     this.playing = true;
     playingScene = sceneList;
 }

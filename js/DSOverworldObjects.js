@@ -11,7 +11,22 @@ function OverworldObject() {
     }
 
     this.collidingWithPlayer = function () {
-        return (this.x > player.x && this.x < player.x + player.w) && (this.y > player.y && this.y < player.y + player.h);
+        // Find middle point on the bottom - feet
+        let playerX = player.x + player.w/2;
+        let playerY = player.y + player.h;
+        let objX = this.x + this.w/2;
+        let objY = this.y + this.h;
+        // Calculate the distance between player and NPC from that point
+        let x = Math.abs(playerX - objX);
+        let y = Math.abs(playerY - objY);
+        let distance = Math.sqrt(x*x +y*y);
+
+        let radius = 100;
+        if(distance <= radius) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     this.onTrigger = function (dialogue) {

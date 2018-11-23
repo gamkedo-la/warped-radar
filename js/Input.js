@@ -159,6 +159,10 @@ function keydownControl(evt, keydownMap) {
           visibleGrid = true;
         }
     }
+    
+    if (keysPressed(KEY_X)) {
+        
+    }
 }
 
 function keySet(keyEvent, whichEntity, setTo) {

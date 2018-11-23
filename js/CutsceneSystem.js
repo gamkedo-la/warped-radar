@@ -7,17 +7,15 @@ var sceneTextPage = 0;
 let sceneLetterCount = 0;
 
 function cutscene() {
-    this.isPlaying = true;
-    
     let dialogueBoxX = 0,
-    dialogueBoxY = 470,
-    textX = dialogueBoxX + 30,
-    textY = dialogueBoxY + 40,
-    textColour = "white",
-    textFontFace = "25px consolas",
-    textAlign = "left",
-    letterSpeed = 1,
-    pauseBetweenPages = 2; //in seconds
+        dialogueBoxY = 470,
+        textX = dialogueBoxX + 30,
+        textY = dialogueBoxY + 40,
+        textColour = "white",
+        textFontFace = "25px consolas",
+        textAlign = "left",
+        letterSpeed = 1,
+        pauseBetweenPages = 2; //in seconds
 
     this.wait = function (num) {
         timer.secondsRemaining = num;
@@ -25,9 +23,27 @@ function cutscene() {
         console.log("Pause scene for " + num + " seconds")
     }
 
-    this.moveChar = function (charX, charY, xDist, yDist, speed) {
-        console.log("called moveChar with args: ", xDist, yDist, speed);
-        sceneStepWaitingToBeFinished = false;
+    this.moveChar = function (object, xDist, yDist, speed) {
+        var xDest = object.x + xDist;
+        var yDest = object.y + yDist;
+
+        with(object) {
+            //point_distance formula - returns length of a vector? 
+            var point_distance = Math.sqrt(Math.pow(xDest, 2) + Math.pow(yDest, 2));
+            if (point_distance >= speed) {
+                var point_direction = (xDest - object.x) + (yDest - object.y); //returns direction of a vector
+                var lengthDirx = speed * Math.cos(point_direction); //if given a length and a direction, returns number of pixels to move on the x axis  
+                var lengthDiry = speed * Math.sin(point_direction); //if given a length and a direction, returns number of pixels to move on the y axis  
+
+                x += lengthDirx;
+                y += lengthDiry;
+            } else {
+                x = xDest;
+                y = yDest;
+                console.log("called moveChar with args: ", xDist, yDist, speed);
+                sceneStepWaitingToBeFinished = false;
+            }
+        }
     }
 
     this.showDialogue = function (dialogueList) {
@@ -48,7 +64,7 @@ function cutscene() {
             if ("nameCol" in chatEvent) nameCols.push(chatEvent.nameCol);
         }
         measureText = canvasContext.measureText(speakerNames[sceneTextPage]),
-        nameWidth = measureText.width + textPad;
+            nameWidth = measureText.width + textPad;
         if (sceneLetterCount < dialogue[sceneTextPage].length) {
             sceneLetterCount += letterSpeed;
             //voices[sceneTextPage].play();
@@ -84,7 +100,6 @@ function updateSceneTick() {
             }
         } else if (timer.secondsRemaining == 0) {
             console.log("finished; all cutscene functions were called in order");
-            this.playing = false;
         }
     }
 }
@@ -96,7 +111,6 @@ function endScenePause() {
 }
 
 function createCutscene(sceneList) {
-    this.playing = true;
     playingScene = sceneList;
 }
 

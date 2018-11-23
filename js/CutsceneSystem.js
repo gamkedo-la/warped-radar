@@ -56,7 +56,7 @@ function cutscene() {
             letterCounter += letterSpeed;
         }
         
-        //current workaround for dialogue scenes - like the rest of the system, based on a second based timer
+        //current workaround for dialogue scenes - reliant on a second based timer
         
         //to avoid ending the scene, set timer to 1 (without counting down) while text is spelling out
         if (letterCounter < dialogue[page].length && page < dialogue.length) timer.secondsRemaining = 1;

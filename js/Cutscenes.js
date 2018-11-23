@@ -1,0 +1,14 @@
+////////////////////////////////////////////////////////////////////////////////////////////////
+var testScene = new cutscene();
+this.xFinal = 100,
+this.yFinal = 20,
+this.speed = 7;
+
+testScene.scenes = [
+   [testScene.moveChar, player.x, player.y, this.xFinal, this.yFinal, this.speed], 
+   [testScene.wait, 5], 
+   [testScene.showDialogue, 5, "word"],
+   [testScene.wait, 10]
+];
+////////////////////////////////////////////////////////////////////////////////////////////////
+

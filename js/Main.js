@@ -42,8 +42,11 @@ function startGame() {
     setInterval(updateAll, 1000 / framesPerSecond);
     player.reset();
     setupInput();
-    assignXAndYCoordinatesOfItems();
-    console.log(arrayOfObtainableItems);
+    timer.setupTimer();
+    //assignXAndYCoordinatesOfItems();
+    //console.log(arrayOfObtainableItems);
+    
+    //createScene(testScene);
 }
 
 function updateAll() {
@@ -54,11 +57,12 @@ function updateAll() {
 function moveAll() {
     player.move();
     //for (let obtainableItemsIndex = 0; obtainableItemsIndex < arrayOfObtainableItems.length; obtainableItemsIndex++) {
-    if (player.collider.isCollidingWith(arrayOfObtainableItems[3])) {
+    /*if (player.collider.isCollidingWith(arrayOfObtainableItems[3])) {
       console.log("item obtained!");
-    }
-
+    }*/
+    
     triggerNPCDialogue();
+    updateSceneTick();
     cameraFollow();
     levelEditor.showNewGrid();
 }
@@ -78,6 +82,7 @@ function drawAll() {
     drawDebugText();
     createDialogueEvents();
     inventory.draw();
+    //timer.drawTimer();
     endPan();
     levelEditor.roomTileCoordinate();
 }

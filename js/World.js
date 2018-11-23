@@ -92,7 +92,7 @@ function drawWorld() {
               //scaledContext.drawImage(useImg, 45,45, 1,1);
             } //else {//draw tile without inventory item
               scaledContext.drawImage(useImg, drawTileX, drawTileY);
-              assignXAndYCoordinatesOfItems(tileKindHere, drawTileX,drawTileY);
+              //assignXAndYCoordinatesOfItems(tileKindHere, drawTileX,drawTileY);
               drawTileX += WORLD_W;
               arrayIndex++;
             //}

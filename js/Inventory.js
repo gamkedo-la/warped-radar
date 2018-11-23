@@ -34,14 +34,9 @@ let inventory = new(function () {
     let descX = this.x + width / 2;
     let descY = this.y + 200;
 
-    /*let inventoryItems = [
-        {
-            name:,
-            description: ,
-            isObtained: ,
-            uiSprite:
-        }
-    ];*/
+    this.inventoryItems = [
+
+    ];
 
     this.navigate = function (keyCode) {
         if (this.isShowing) {
@@ -101,11 +96,12 @@ let inventory = new(function () {
 
     this.drawItems = function () {
         if (this.isShowing) {
-            for (let i = 0; i < inventoryItems.length; i++) {
-                if (inventoryItems[i].isObtained) {
+            for (let i = 0; i < inventory.inventoryItems.length; i++) {
+                if (inventory.inventoryItems[i]) {
                     let itemCellX = slotX + ((slotWidth + slotBetweenX) * (i % slotCols));
                     let itemCellY = slotY + ((slotHeight + slotBetweenY) * Math.floor(i / slotCols));
-                    canvasContext.drawImage(inventoryItems[i].uiSprite, itemCellX, itemCellY);
+                    canvasContext.fillStyle = "white";
+                    canvasContext.drawImage(inventory.inventoryItems[i].image, itemCellX,itemCellY, slotWidth,slotHeight);
                 }
             }
         }
@@ -114,10 +110,13 @@ let inventory = new(function () {
     this.draw = function () {
         if (this.isShowing) {
             canvasContext.drawImage(inventoryImg, this.x, this.y);
-            colorText("Inventory", titleTextX, titleTextY, textColour, textFontFace, textAlign, 1);
+            colorText("Inventory", titleTextX, titleTextY, textColour, textFontFace, 'center', 1);
 
             this.drawSlots();
-            //this.drawItems();
+            if (inventory.inventoryItems) {
+              colorText(inventory.inventoryItems[inventoryIndex].description, descX - 125,descY + 125, textFontFace, textFontFace, textAlign, 1);
+            }
+            this.drawItems();
         } else {
             inventoryIndex = 0;
         }

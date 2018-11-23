@@ -89,15 +89,29 @@ function drawWorld() {
 
             if( tileTypeHasTransparency(tileKindHere) ) {//draw tile with inventory item
       				scaledContext.drawImage(worldPics[TILE_GROUND], drawTileX, drawTileY);
-              //scaledContext.drawImage(useImg, 45,45, 1,1);
-            } //else {//draw tile without inventory item
+            } //draw tile without inventory item
               scaledContext.drawImage(useImg, drawTileX, drawTileY);
               //assignXAndYCoordinatesOfItems(tileKindHere, drawTileX,drawTileY);
+              drawGrid(drawTileX,drawTileY);
+
               drawTileX += WORLD_W;
               arrayIndex++;
-            //}
+
         }//end of inner part of nested for loop (columns)
         drawTileY += WORLD_H;
         drawTileX = 0;
     }//end of outer part of nested for loop (rows)
 }//end of draw world
+
+let visibleGrid = false;
+
+function drawGrid(drawTileX,drawTileY) {
+  if (visibleGrid) {
+    let currentRightSideX = drawTileX + WORLD_W;
+    let currentBottomSideY = drawTileY + WORLD_H;
+    scaledContext.strokeStyle = 'white';
+    scaledContext.strokeRect(drawTileX,drawTileY, WORLD_W,WORLD_H)
+    scaledContext.fillText(drawTileX + "," + drawTileY, drawTileX,drawTileY + 10);
+    scaledContext.fillText(currentRightSideX + "," + currentBottomSideY ,drawTileX + 40,drawTileY + 78);
+  }
+}

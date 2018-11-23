@@ -1,4 +1,4 @@
-function assignXAndYCoordinatesOfItems() {
+function initializeObtainableItems() {
   let arrayIndex = 0;
   let tileX = 0;
   let tileY = 0;
@@ -8,36 +8,76 @@ function assignXAndYCoordinatesOfItems() {
           let tileKindHere = worldGrid[arrayIndex];
            switch (tileKindHere) {
                case TILE_BROKEN_SKATEBOARD:
-                   brokenSkateBoard.x = tileX;
-                   brokenSkateBoard.y = tileY;
+                   brokenSkateBoard.drawTileX = tileX;
+                   brokenSkateBoard.drawTileY = tileY;
+                   brokenSkateBoard.leftEdge = brokenSkateBoard.drawTileX;
+                   brokenSkateBoard.rightEdge = brokenSkateBoard.drawTileX + WORLD_W;
+                   brokenSkateBoard.topEdge = brokenSkateBoard.drawTileY;
+                   brokenSkateBoard.bottomEdge = brokenSkateBoard.drawTileY + WORLD_H;
+                   brokenSkateBoard.image = worldPics[17];
                    break;
                case TILE_BURNER_PHONE:
-                   burnerPhone.x = tileX;
-                   burnerPhone.y = tileY;
+                   burnerPhone.drawTileX = tileX;
+                   burnerPhone.drawTileY = tileY;
+                   burnerPhone.leftEdge = burnerPhone.drawTileX;
+                   burnerPhone.rightEdge = burnerPhone.drawTileX + WORLD_W;
+                   burnerPhone.topEdge = burnerPhone.drawTileY;
+                   burnerPhone.bottomEdge = burnerPhone.drawTileY + WORLD_H;
+                   burnerPhone.image = worldPics[18];
                    break;
                case TILE_CROWBAR:
-                   crowbar.x = tileX;
-                   crowbar.y = tileY;
+                   crowbar.drawTileX = tileX;
+                   crowbar.drawTileY = tileY;
+                   crowbar.leftEdge = crowbar.drawTileX;
+                   crowbar.rightEdge = crowbar.drawTileX + WORLD_W;
+                   crowbar.topEdge = crowbar.drawTileY;
+                   crowbar.bottomEdge = crowbar.drawTileY + WORLD_H;
+                   crowbar.image = worldPics[19];
                    break;
                case TILE_HOODIE:
-                   hoodie.x = tileX;
-                   hoodie.y = tileY;
+                   hoodie.drawTileX = tileX;
+                   hoodie.drawTileY = tileY;
+                   hoodie.leftEdge = hoodie.drawTileX;
+                   hoodie.rightEdge = hoodie.drawTileX + WORLD_W;
+                   hoodie.topEdge = hoodie.drawTileY;
+                   hoodie.bottomEdge = hoodie.drawTileY + WORLD_H;
+                   hoodie.image = worldPics[20];
                    break;
                case TILE_MEDICAL_NOTEBOOK:
-                   medicalNotebook.x = tileX;
-                   medicalNotebook.y = tileY;
+                   medicalNotebook.drawTileX = tileX;
+                   medicalNotebook.drawTileY = tileY;
+                   medicalNotebook.leftEdge = medicalNotebook.drawTileX;
+                   medicalNotebook.rightEdge = medicalNotebook.drawTileX + WORLD_W;
+                   medicalNotebook.topEdge = medicalNotebook.drawTileY;
+                   medicalNotebook.bottomEdge = medicalNotebook.drawTileY + WORLD_H;
+                   medicalNotebook.image = worldPics[21];
                    break;
                case TILE_SEALED_TUBE:
-                   sealedTube.x = tileX;
-                   sealedTube.y = tileY;
+                   sealedTube.drawTileX = tileX;
+                   sealedTube.drawTileY = tileY;
+                   sealedTube.leftEdge = sealedTube.drawTileX;
+                   sealedTube.rightEdge = sealedTube.drawTileX + WORLD_W;
+                   sealedTube.topEdge = sealedTube.drawTileY;
+                   sealedTube.bottomEdge = sealedTube.drawTileY + WORLD_H;
+                   sealedTube.image = worldPics[22];
                    break;
                case TILE_THUMB_DRIVE:
-                   thumbDrive.x = tileX;
-                   thumbDrive.y = tileY;
+                   thumbDrive.drawTileX = tileX;
+                   thumbDrive.drawTileY = tileY;
+                   thumbDrive.leftEdge = thumbDrive.drawTileX;
+                   thumbDrive.rightEdge = thumbDrive.drawTileX + WORLD_W;
+                   thumbDrive.topEdge = thumbDrive.drawTileY;
+                   thumbDrive.bottomEdge = thumbDrive.drawTileY + WORLD_H;
+                   thumbDrive.image = worldPics[23];
                    break;
                case TILE_TRAIN_TICKET:
-                   trainTicket.x = tileX;
-                   trainTicket.y = tileY;
+                   trainTicket.drawTileX = tileX;
+                   trainTicket.drawTileY = tileY;
+                   trainTicket.leftEdge = trainTicket.drawTileX;
+                   trainTicket.rightEdge = trainTicket.drawTileX + WORLD_W;
+                   trainTicket.topEdge = trainTicket.drawTileY;
+                   trainTicket.bottomEdge = trainTicket.drawTileY + WORLD_H;
+                   trainTicket.image = worldPics[24];
                    break;
           }
           tileX += WORLD_W;
@@ -47,13 +87,31 @@ function assignXAndYCoordinatesOfItems() {
  }
 }
 
-let brokenSkateBoard = new colliderClass(undefined,undefined, WORLD_W,WORLD_H, 0,0);
-let burnerPhone = new colliderClass(undefined,undefined, WORLD_W,WORLD_H, 0,0);
-let crowbar = new colliderClass(undefined,undefined, WORLD_W,WORLD_H, 0,0);
-let hoodie = new colliderClass(undefined,undefined, WORLD_W,WORLD_H, 0,0);
-let medicalNotebook = new colliderClass(undefined,undefined, WORLD_W,WORLD_H, 0,0);
-let sealedTube = new colliderClass(undefined,undefined, WORLD_W,WORLD_H, 0,0);
-let thumbDrive = new colliderClass(undefined,undefined, WORLD_W,WORLD_H, 0,0);
-let trainTicket = new colliderClass(undefined,undefined, WORLD_W,WORLD_H, 0,0);
+function obtainableItemClass(drawTileX,drawTileY, tileWidth,tileHeight, name, description, image, tileType) {
+  this.drawTileX = drawTileX;
+  this.drawTileY = drawTileY;
+  this.tileWidth = tileWidth;
+  this.tileHeight = tileHeight;
+  this.leftEdge = drawTileX;
+  this.rightEdge = drawTileX + WORLD_W;
+  this.topEdge = drawTileY;
+  this.bottomEdge = drawTileY + WORLD_H;
+
+  this.obtainable = false;
+
+  this.name = name;
+  this.description = description;
+  this.image = image;
+  this.tileType = tileType;
+}
+
+let brokenSkateBoard = new obtainableItemClass(undefined,undefined, WORLD_W,WORLD_H, "brokenSkateBoard", "Broken Skateboard", worldPics[17], TILE_BROKEN_SKATEBOARD);
+let burnerPhone = new obtainableItemClass(undefined,undefined, WORLD_W,WORLD_H, "burnerPhone", "Burner Phone",worldPics[18], TILE_BURNER_PHONE);
+let crowbar = new obtainableItemClass(undefined,undefined, WORLD_W,WORLD_H, "crowbar", "Crowbar",worldPics[19], TILE_CROWBAR);
+let hoodie = new obtainableItemClass(undefined,undefined, WORLD_W,WORLD_H, "hoodie", "Hoodie",worldPics[20], TILE_HOODIE);
+let medicalNotebook = new obtainableItemClass(undefined,undefined, WORLD_W,WORLD_H, "medicalNotebook", "Medical Notebook",worldPics[21], TILE_MEDICAL_NOTEBOOK);
+let sealedTube = new obtainableItemClass(undefined,undefined, WORLD_W,WORLD_H, "sealedTube", "Sealed Tube",worldPics[22], TILE_SEALED_TUBE);
+let thumbDrive = new obtainableItemClass(undefined,undefined, WORLD_W,WORLD_H, "thumbDrive", "Thumb Drive",worldPics[23], TILE_THUMB_DRIVE);
+let trainTicket = new obtainableItemClass(undefined,undefined, WORLD_W,WORLD_H, "trainTicket", "Train Ticket",worldPics[24], TILE_TRAIN_TICKET);
 
 let arrayOfObtainableItems = [brokenSkateBoard, burnerPhone, crowbar, hoodie, medicalNotebook, sealedTube, thumbDrive, trainTicket];

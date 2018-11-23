@@ -43,8 +43,8 @@ function startGame() {
     player.reset();
     setupInput();
     timer.setupTimer();
-    //assignXAndYCoordinatesOfItems();
-    //console.log(arrayOfObtainableItems);
+    initializeObtainableItems();
+    console.log(arrayOfObtainableItems);
     setInterval(updateSceneTick,1000/30);
     //createCutscene(testScene);
 }
@@ -56,11 +56,16 @@ function updateAll() {
 
 function moveAll() {
     player.move();
-    //for (let obtainableItemsIndex = 0; obtainableItemsIndex < arrayOfObtainableItems.length; obtainableItemsIndex++) {
-    /*if (player.collider.isCollidingWith(arrayOfObtainableItems[3])) {
-      console.log("item obtained!");
-    }*/
-    
+    for (let obtainableItemsIndex = 0; obtainableItemsIndex < arrayOfObtainableItems.length; obtainableItemsIndex++) {
+      let itemTile = arrayOfObtainableItems[obtainableItemsIndex];
+      if (player.x > itemTile.leftEdge && player.x < itemTile.rightEdge &&  player.y + 30 > itemTile.topEdge && player.y < itemTile.bottomEdge) {
+        itemTile.obtainable = true;
+        console.log(itemTile.name + " obtainable");
+      } else {
+        itemTile.obtainable = false;
+      }
+    }
+
     triggerNPCDialogue();
     cameraFollow();
     levelEditor.showNewGrid();

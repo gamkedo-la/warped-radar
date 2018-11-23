@@ -8,21 +8,16 @@ let sceneLetterCount = 0;
 
 function cutscene() {
     this.isPlaying = true;
-
-    let dialogueBoxImage = dialogueBoxPic;
-    let dialogueBoxX = 0;
-    let dialogueBoxY = 470;
-    let textXBuffer = 30;
-    let textYBuffer = 40;
-    let textX = dialogueBoxX + textXBuffer;
-    let textY = dialogueBoxY + textYBuffer;
-    let textColour = "white";
-    let textFontFace = "25px consolas";
-    let textAlign = "left";
-    let maxWidth = 210;
-    let lineHeight = 30;
-
-    let letterSpeed = 1;
+    
+    let dialogueBoxX = 0,
+    dialogueBoxY = 470,
+    textX = dialogueBoxX + 30,
+    textY = dialogueBoxY + 40,
+    textColour = "white",
+    textFontFace = "25px consolas",
+    textAlign = "left",
+    letterSpeed = 1,
+    pauseBetweenPages = 3;
 
     this.wait = function (num) {
         timer.secondsRemaining = num;
@@ -59,12 +54,14 @@ function cutscene() {
         if (sceneLetterCount < dialogue[sceneTextPage].length) {
             sceneLetterCount += letterSpeed;
             //voices[sceneTextPage].play();
-            if (sceneTextPage < dialogue.length) timer.secondsRemaining = 1;
+            if (sceneTextPage < dialogue.length) {
+                timer.secondsRemaining = pauseBetweenPages + 1;
+            }
         }
 
         if (!showNextSceneText) {
             if (sceneTextPage < dialogue.length && sceneLetterCount >= dialogue[sceneTextPage].length) {
-                timer.secondsRemaining = 2;
+                timer.secondsRemaining = pauseBetweenPages;
                 showNextSceneText = true;
             }
         } else {
@@ -79,6 +76,10 @@ function cutscene() {
         canvasContext.drawImage(dialogueBoxPic, dialogueBoxX, dialogueBoxY);
         colorText(speakerNames[sceneTextPage] + ":", textX, textY, nameCols[sceneTextPage], textFontFace, textAlign, 1);
         colorText(typewriterText, textX + nameWidth, textY, textColour, textFontFace, textAlign, 1);
+        
+        if (sceneTextPage >= dialogue.length - 1 && sceneLetterCount >= dialogue[sceneTextPage].length) {
+            sceneLetterCount >= dialogue[sceneTextPage].length
+        }
     }
 
 }

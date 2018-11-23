@@ -9,13 +9,13 @@ function colliderClass(x, y, width, height, offsetX, offsetY) {
     this.box = {};
 
     this.setCollider = function(posX, posY) {
-		this.box.left = posX - this.width/2 + this.offsetX;
-		this.box.right = posX + this.width/2 + this.offsetX;
-		this.box.bottom = posY + this.height/2 + this.offsetY;
-		this.box.top = posY - this.height/2 + this.offsetY;
-        this.x = posX + this.offsetX;
-        this.y = posY + this.offsetY;
-	}
+  		this.box.left = posX - this.width/2 + this.offsetX;
+  		this.box.right = posX + this.width/2 + this.offsetX;
+  		this.box.bottom = posY + this.height/2 + this.offsetY;
+  		this.box.top = posY - this.height/2 + this.offsetY;
+      this.x = posX + this.offsetX;
+      this.y = posY + this.offsetY;
+	  }
     this.setCollider(x, y);
 
 	this.isCollidingWith = function(otherCollider) {

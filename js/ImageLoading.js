@@ -76,7 +76,15 @@ function loadImages() {
         {varName: johnSide45Animation, theFile: "johnspriteside45-sheet.png"},
 
         //INVENTORY ITEMS
-        {worldType: }
+        {worldType: TILE_BROKEN_SKATEBOARD, theFile: "broken_skateboard.png"},
+        {worldType: TILE_BURNER_PHONE, theFile: "burner_phone.png"},
+        {worldType: TILE_CROWBAR, theFile: "crowbar.png"},
+        {worldType: TILE_HOODIE, theFile: "hoodie.png"},
+        {worldType: TILE_MEDICAL_NOTEBOOK, theFile: "medical_notebook.png"},
+        {worldType: TILE_SEALED_TUBE, theFile: "sealed_tube.png"},
+        {worldType: TILE_THUMB_DRIVE, theFile: "thumb_drive.png"},
+        {worldType: TILE_TRAIN_TICKET, theFile: "train_ticket.png"},
+
         //TILES
         {worldType: TILE_GROUND, theFile: "ground.png"},
         {worldType: TILE_PLAYERS_TILE, theFile: "playerstarttile.png"},
@@ -101,15 +109,18 @@ function loadImages() {
 
     ];
 
+    console.log(imageList);
+
     picsToLoad = imageList.length;
 
     let loadResult = false;
+
     for(let i=0;i<imageList.length;i++) {
-		if(imageList[i].varName != undefined) {
-			loadResult = beginLoadingImage(imageList[i].varName, imageList[i].theFile);
-		} else {
-			loadResult = loadImageForWorldCode(imageList[i].worldType, imageList[i].theFile);
-		}
+  		if(imageList[i].varName != undefined) {
+  			loadResult = beginLoadingImage(imageList[i].varName, imageList[i].theFile);
+  		} else {
+  			loadResult = loadImageForWorldCode(imageList[i].worldType, imageList[i].theFile);
+  		}
     }
 
     return loadResult;

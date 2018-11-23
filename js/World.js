@@ -58,7 +58,7 @@ function rowColToArrayIndex(col, row) {
 function tileTypeHasTransparency(tileToCheck) {
     let hasTransparency;
 
-    if (tileToCheck === (
+    if (tileToCheck ===
 
       TILE_BROKEN_SKATEBOARD ||
 			TILE_BURNER_PHONE ||
@@ -69,7 +69,7 @@ function tileTypeHasTransparency(tileToCheck) {
 			TILE_THUMB_DRIVE ||
 			TILE_TRAIN_TICKET
 
-    ) ) {
+     ) {
        hasTransparency = true
      } else {
        hasTransparency = false

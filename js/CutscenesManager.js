@@ -33,6 +33,8 @@ var convo = [
 
 testScene.scenes = [
    [testScene.showDialogue, convo],
+   [testScene.wait, 1],
+   [testScene.showDialogue, convo],
    [testScene.wait, 3]
 ];
 ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -41,6 +43,6 @@ function showCutsceneDialogue() {
     //scene step starts at 1?
     //end dialogue scenes with wait
     if (playingScene != null) {
-        if (sceneStep == 1) testScene.showDialogue(convo);
+        if (sceneStep == 1 || sceneStep == 3) testScene.showDialogue(convo);
     }
 }

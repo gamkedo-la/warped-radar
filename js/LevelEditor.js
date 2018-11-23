@@ -19,17 +19,6 @@ let levelEditor = new(function () {
         currentTileIndex = 0;
     }
 
-    // Supports multiple simultaneous key presses:
-    //      e.g. Shift + I: if (keysPressed(KEY_SHIFT, KEY_I)) { do_something(); }
-    //      e.g. Ctrl + S: if (keysPressed(KEY_CTRL, KEY_S)) { save_file(); }
-    //
-    // When a key is both used on its own and in a combination, check the combination first:
-    //      e.g. If Shift does something and Shift + I does something,
-    //           check for Shift + I first:
-    //              if (keysPressed(KEY_SHIFT, KEY_I)) { do_something(); }
-    //              else if (keysPressed(KEY_SHIFT)) { do_something_else(); }
-    //
-
     this.editorKeyHandle = function (keyCode) {
         if (this.isOn) {
             if (keysPressed(KEY_A)) {

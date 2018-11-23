@@ -1,8 +1,10 @@
 let sceneStep = 0;
 let sceneStepWaitingToBeFinished = false;
 let playingScene = null;
+
 let cutscenePause = false;
 let showNextSceneText = false;
+let atDestination = false;
 var sceneTextPage = 0;
 let sceneLetterCount = 0;
 
@@ -20,29 +22,28 @@ function cutscene() {
     this.wait = function (num) {
         timer.secondsRemaining = num;
         cutscenePause = true;
-        console.log("Pause scene for " + num + " seconds")
+        console.log("Pause scene for " + num + " seconds");
     }
 
     this.moveChar = function (object, xDist, yDist, speed) {
+        timer.secondsRemaining = 2;
+        showNextSceneText = false;
         var xDest = object.x + xDist;
         var yDest = object.y + yDist;
 
-        with(object) {
-            //point_distance formula - returns length of a vector? 
-            var point_distance = Math.sqrt(Math.pow(xDest, 2) + Math.pow(yDest, 2));
-            if (point_distance >= speed) {
-                var point_direction = (xDest - object.x) + (yDest - object.y); //returns direction of a vector
-                var lengthDirx = speed * Math.cos(point_direction); //if given a length and a direction, returns number of pixels to move on the x axis  
-                var lengthDiry = speed * Math.sin(point_direction); //if given a length and a direction, returns number of pixels to move on the y axis  
-
-                x += lengthDirx;
-                y += lengthDiry;
-            } else {
-                x = xDest;
-                y = yDest;
-                console.log("called moveChar with args: ", xDist, yDist, speed);
-                sceneStepWaitingToBeFinished = false;
-            }
+        var point_direction = Math.atan2(yDest - object.y, xDest - object.x);
+        var lengthDirx = speed * Math.cos(point_direction);
+        var lengthDiry = speed * Math.sin(point_direction);
+        object.x += Math.floor(lengthDirx);
+        object.y += Math.floor(lengthDiry);
+        
+        var point_distance = Math.sqrt(Math.pow(xDest, 2) + Math.pow(yDest, 2));
+        if (point_distance >= speed) {
+            object.x = xDest;
+            object.y = yDest;
+            atDestination = true;
+            sceneStepWaitingToBeFinished = false;
+            console.log("called moveChar with args: ", xDist, yDist, speed);
         }
     }
 
@@ -97,6 +98,7 @@ function updateSceneTick() {
                 nextSceneCall(playingScene);
                 sceneTextPage = 0;
                 sceneLetterCount = 0;
+                //atDestination = false;
             }
         } else if (timer.secondsRemaining == 0) {
             console.log("finished; all cutscene functions were called in order");

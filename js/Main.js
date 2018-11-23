@@ -56,16 +56,7 @@ function updateAll() {
 
 function moveAll() {
     player.move();
-    for (let obtainableItemsIndex = 0; obtainableItemsIndex < arrayOfObtainableItems.length; obtainableItemsIndex++) {
-      let itemTile = arrayOfObtainableItems[obtainableItemsIndex];
-      if (player.x > itemTile.leftEdge && player.x < itemTile.rightEdge &&  player.y + 30 > itemTile.topEdge && player.y < itemTile.bottomEdge) {
-        itemTile.obtainable = true;
-        console.log(itemTile.name + " obtainable");
-      } else {
-        itemTile.obtainable = false;
-      }
-    }
-
+    checkForObtainableItems();//in obtainableItems.js
     triggerNPCDialogue();
     cameraFollow();
     levelEditor.showNewGrid();

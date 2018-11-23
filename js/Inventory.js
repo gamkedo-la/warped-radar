@@ -107,15 +107,18 @@ let inventory = new(function () {
         }
     }
 
+    this.drawItemDescription = function () {
+      if (inventory.inventoryItems[inventoryIndex]) {
+        colorText(inventory.inventoryItems[inventoryIndex].description, descX - 125,descY + 125, textFontFace, textFontFace, textAlign, 1);
+      }
+    }
+
     this.draw = function () {
         if (this.isShowing) {
             canvasContext.drawImage(inventoryImg, this.x, this.y);
             colorText("Inventory", titleTextX, titleTextY, textColour, textFontFace, 'center', 1);
-
             this.drawSlots();
-            if (inventory.inventoryItems) {
-              colorText(inventory.inventoryItems[inventoryIndex].description, descX - 125,descY + 125, textFontFace, textFontFace, textAlign, 1);
-            }
+            this.drawItemDescription();
             this.drawItems();
         } else {
             inventoryIndex = 0;

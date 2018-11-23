@@ -105,7 +105,7 @@ function drawWorld() {
 
 let visibleGrid = false;
 
-function drawGrid(drawTileX,drawTileY) {
+function drawGrid(drawTileX,drawTileY) {//placed in drawWorld(); above this
   if (visibleGrid) {
     let currentRightSideX = drawTileX + WORLD_W;
     let currentBottomSideY = drawTileY + WORLD_H;
@@ -113,5 +113,13 @@ function drawGrid(drawTileX,drawTileY) {
     scaledContext.strokeRect(drawTileX,drawTileY, WORLD_W,WORLD_H)
     scaledContext.fillText(drawTileX + "," + drawTileY, drawTileX,drawTileY + 10);
     scaledContext.fillText(currentRightSideX + "," + currentBottomSideY ,drawTileX + 40,drawTileY + 78);
+  }
+}
+
+function toggleGrid() {//placed in input.js
+  if (visibleGrid === true) {
+    visibleGrid = false;
+  } else {
+    visibleGrid = true;
   }
 }

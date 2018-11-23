@@ -115,31 +115,7 @@ function keydownControl(evt, keydownMap) {
 
     if (keysPressed(KEY_SPACE) || keysPressed(KEY_ENTER)) {
         if (!levelEditor.isOn) {
-          for (let i = 0; i < arrayOfObtainableItems.length; i++) {
-            if (arrayOfObtainableItems[i].obtainable) {
-              console.log(arrayOfObtainableItems[i].name + " obtained");
-              arrayOfObtainableItems[i].leftEdge = undefined;
-              arrayOfObtainableItems[i].rightEdge = undefined;
-              arrayOfObtainableItems[i].topEdge = undefined;
-              arrayOfObtainableItems[i].bottomEdge = undefined;
-              for (let eachRow = 0; eachRow < WORLD_ROWS; eachRow++) {//replace item tile with ground tile
-                  for (let eachCol = 0; eachCol < WORLD_COLS; eachCol++) {
-                      let arrayIndex = rowColToArrayIndex(eachCol, eachRow);
-                      if (worldGrid[arrayIndex] === arrayOfObtainableItems[i].tileType) {
-                        worldGrid[arrayIndex] = TILE_GROUND;
-                      }
-                    }
-                  }
-
-              inventory.inventoryItems.push(
-                {
-                  name: arrayOfObtainableItems[i].name,
-                  description: arrayOfObtainableItems[i].description,
-                  image: arrayOfObtainableItems[i].image
-                }
-              )
-            }
-          }
+            obtainItemIfApplicable();//in obtainableItems.js
             incrementTextPages();
             cursorKeyPresses = isKeyPressed ? cursorKeyPresses + 1 : 0;
         }
@@ -153,15 +129,11 @@ function keydownControl(evt, keydownMap) {
     } else if (keysPressed(KEY_CTRL, KEY_E)) {
         levelEditor.toggle();
     } else if (keysPressed(KEY_G)) {
-        if (visibleGrid === true) {
-          visibleGrid = false;
-        } else {
-          visibleGrid = true;
-        }
+        toggleGrid();
     }
-    
+
     if (keysPressed(KEY_X)) {
-        
+
     }
 }
 

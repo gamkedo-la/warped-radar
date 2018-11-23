@@ -115,3 +115,43 @@ let thumbDrive = new obtainableItemClass(undefined,undefined, WORLD_W,WORLD_H, "
 let trainTicket = new obtainableItemClass(undefined,undefined, WORLD_W,WORLD_H, "trainTicket", "Train Ticket",worldPics[24], TILE_TRAIN_TICKET);
 
 let arrayOfObtainableItems = [brokenSkateBoard, burnerPhone, crowbar, hoodie, medicalNotebook, sealedTube, thumbDrive, trainTicket];
+
+function checkForObtainableItems() {
+  for (let obtainableItemsIndex = 0; obtainableItemsIndex < arrayOfObtainableItems.length; obtainableItemsIndex++) {
+    let itemTile = arrayOfObtainableItems[obtainableItemsIndex];
+    if (player.x > itemTile.leftEdge && player.x < itemTile.rightEdge &&  player.y + 30 > itemTile.topEdge && player.y < itemTile.bottomEdge) {
+      itemTile.obtainable = true;
+      console.log(itemTile.name + " obtainable");
+    } else {
+      itemTile.obtainable = false;
+    }
+  }
+}
+
+function obtainItemIfApplicable() {
+  for (let i = 0; i < arrayOfObtainableItems.length; i++) {
+    if (arrayOfObtainableItems[i].obtainable) {
+      console.log(arrayOfObtainableItems[i].name + " obtained");
+      arrayOfObtainableItems[i].leftEdge = undefined;
+      arrayOfObtainableItems[i].rightEdge = undefined;
+      arrayOfObtainableItems[i].topEdge = undefined;
+      arrayOfObtainableItems[i].bottomEdge = undefined;
+      for (let eachRow = 0; eachRow < WORLD_ROWS; eachRow++) {//replace item tile with ground tile
+          for (let eachCol = 0; eachCol < WORLD_COLS; eachCol++) {
+              let arrayIndex = rowColToArrayIndex(eachCol, eachRow);
+              if (worldGrid[arrayIndex] === arrayOfObtainableItems[i].tileType) {
+                worldGrid[arrayIndex] = TILE_GROUND;
+              }//end of change item tile to ground tile
+            }//end of column loop
+          }//end of row loop
+
+      inventory.inventoryItems.push(
+        {
+          name: arrayOfObtainableItems[i].name,
+          description: arrayOfObtainableItems[i].description,
+          image: arrayOfObtainableItems[i].image
+        }
+      )//end of push item to inventory.inventoryItems
+    }//end of if itemIsObtainable
+  }//end of loop through arrayOfObtainableItems
+}//end of obtainItemIfApplicable()

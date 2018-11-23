@@ -81,7 +81,7 @@ function drawAll() {
     drawDebugText();
     createDialogueEvents();
     inventory.draw();
-    timer.drawTimer();
+    //timer.drawTimer();
     endPan();
     if (playingScene != null && sceneStep == 3) testScene.showDialogue(convo);
     //console.log(cutscenePause);

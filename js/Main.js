@@ -46,7 +46,7 @@ function startGame() {
     //assignXAndYCoordinatesOfItems();
     //console.log(arrayOfObtainableItems);
     setInterval(updateSceneTick,1000/30);
-    //createCutscene(testScene);
+    createCutscene(testScene);
 }
 
 function updateAll() {

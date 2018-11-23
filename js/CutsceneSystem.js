@@ -17,7 +17,7 @@ function cutscene() {
     textFontFace = "25px consolas",
     textAlign = "left",
     letterSpeed = 1,
-    pauseBetweenPages = 3;
+    pauseBetweenPages = 2; //in seconds
 
     this.wait = function (num) {
         timer.secondsRemaining = num;
@@ -47,18 +47,13 @@ function cutscene() {
             if ("voice" in chatEvent) voices.push(chatEvent.voice);
             if ("nameCol" in chatEvent) nameCols.push(chatEvent.nameCol);
         }
-
         measureText = canvasContext.measureText(speakerNames[sceneTextPage]),
         nameWidth = measureText.width + textPad;
-
         if (sceneLetterCount < dialogue[sceneTextPage].length) {
             sceneLetterCount += letterSpeed;
             //voices[sceneTextPage].play();
-            if (sceneTextPage < dialogue.length) {
-                timer.secondsRemaining = pauseBetweenPages + 1;
-            }
+            timer.secondsRemaining = pauseBetweenPages + 1;
         }
-
         if (!showNextSceneText) {
             if (sceneTextPage < dialogue.length && sceneLetterCount >= dialogue[sceneTextPage].length) {
                 timer.secondsRemaining = pauseBetweenPages;
@@ -71,17 +66,11 @@ function cutscene() {
                 showNextSceneText = false;
             }
         }
-
         typewriterText = dialogue[sceneTextPage].substr(0, sceneLetterCount);
         canvasContext.drawImage(dialogueBoxPic, dialogueBoxX, dialogueBoxY);
         colorText(speakerNames[sceneTextPage] + ":", textX, textY, nameCols[sceneTextPage], textFontFace, textAlign, 1);
         colorText(typewriterText, textX + nameWidth, textY, textColour, textFontFace, textAlign, 1);
-        
-        if (sceneTextPage >= dialogue.length - 1 && sceneLetterCount >= dialogue[sceneTextPage].length) {
-            sceneLetterCount >= dialogue[sceneTextPage].length
-        }
     }
-
 }
 
 function updateSceneTick() {

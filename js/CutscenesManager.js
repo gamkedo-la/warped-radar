@@ -79,7 +79,7 @@ testScene.scenes = [
 function showCutsceneDialogue() {
     //scene step starts at 1?
     //end dialogue scenes with wait
-    //also remember to pass in the scene's step/dialogue here for multiple dialogues in one scene
+    //also remember to pass in the scene's step/dialogue here for multiple dialogues in one scene... fix please
     if (playingScene != null) {
         if (sceneStep == 1) testScene.showDialogue(convo);
         if (sceneStep == 3) testScene.showDialogue(convo2);

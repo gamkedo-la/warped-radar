@@ -45,7 +45,7 @@ function startGame() {
     timer.setupTimer();
     //assignXAndYCoordinatesOfItems();
     //console.log(arrayOfObtainableItems);
-    
+    setInterval(updateSceneTick,1000/30);
     //createScene(testScene);
 }
 
@@ -62,7 +62,6 @@ function moveAll() {
     }*/
     
     triggerNPCDialogue();
-    updateSceneTick();
     cameraFollow();
     levelEditor.showNewGrid();
 }
@@ -82,8 +81,10 @@ function drawAll() {
     drawDebugText();
     createDialogueEvents();
     inventory.draw();
-    //timer.drawTimer();
+    timer.drawTimer();
     endPan();
+    if (playingScene != null && sceneStep == 3) testScene.showDialogue(convo);
+    //console.log(cutscenePause);
     levelEditor.roomTileCoordinate();
 }
 

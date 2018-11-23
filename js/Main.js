@@ -7,6 +7,8 @@ let canvas, canvasContext;
 
 let framesFromGameStart = 0;
 
+let debug = true;
+
 window.onload = function () {
     canvas = document.createElement("canvas");
     canvas.setAttribute("id", "gameCanvas");
@@ -21,11 +23,9 @@ window.onload = function () {
     scaledCanvas.height = CANVAS_HEIGHT / PIXELS_PER_SCALE;
     //document.body.appendChild(scaledCanvas);
 
-    canvasContext.mozImageSmoothingEnabled = false;
     canvasContext.imageSmoothingEnabled = false;
     canvasContext.msImageSmoothingEnabled = false;
     canvasContext.imageSmoothingEnabled = false;
-    scaledContext.mozImageSmoothingEnabled = false;
     scaledContext.imageSmoothingEnabled = false;
     scaledContext.msImageSmoothingEnabled = false;
     scaledContext.imageSmoothingEnabled = false;
@@ -70,6 +70,9 @@ function drawAll() {
     clearScreen();
     drawWorld();
     player.draw();
+    if (debug) {
+    	player.collider.draw("red");
+    }
     drawAndInitNPCs();
     drawGameBorder();
     drawDebugText();

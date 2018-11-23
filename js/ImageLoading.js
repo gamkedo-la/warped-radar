@@ -85,6 +85,8 @@ function loadImages() {
         {worldType: TILE_THUMB_DRIVE, theFile: "thumb_drive.png"},
         {worldType: TILE_TRAIN_TICKET, theFile: "train_ticket.png"},
 
+
+
         //TILES
         {worldType: TILE_GROUND, theFile: "ground.png"},
         {worldType: TILE_PLAYERS_TILE, theFile: "playerstarttile.png"},

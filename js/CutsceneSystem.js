@@ -8,6 +8,9 @@ let atDestination = false;
 var sceneTextPage = 0;
 let sceneLetterCount = 0;
 
+let whoMoving = null;
+let movingToX,movingToY,movingSpeed;
+
 function cutscene() {
     let dialogueBoxX = 0,
         dialogueBoxY = 470,
@@ -28,23 +31,12 @@ function cutscene() {
     this.moveChar = function (object, xDist, yDist, speed) {
         timer.secondsRemaining = 2; //timer won't count down until atDestination is true
         showNextSceneText = false;
-        var xDest = object.x + xDist;
-        var yDest = object.y + yDist;
 
-        var pointDirection = Math.atan2(yDest - object.y, xDest - object.x);
-        var lengthDirx = speed * Math.cos(pointDirection);
-        var lengthDiry = speed * Math.sin(pointDirection);
-        object.x += lengthDirx;
-        object.y += lengthDiry;
-        
-        var pointDistance = Math.sqrt(Math.pow(xDest, 2) + Math.pow(yDest, 2));
-        if (pointDistance < speed) {
-            object.x = xDest;
-            object.y = yDest;
-            atDestination = true;
-            sceneStepWaitingToBeFinished = false;
-            console.log("called moveChar with args: ", xDist, yDist, speed);
-        }
+        console.log("called moveChar with args: ", xDist, yDist, speed);
+        whoMoving = object;
+        movingToX = whoMoving.x + xDist;
+        movingToY = whoMoving.y + yDist;
+        movingSpeed = speed;
     }
 
     this.showDialogue = function (dialogueList) {
@@ -92,6 +84,23 @@ function cutscene() {
 
 function updateSceneTick() {
     if (playingScene != null) {
+        if(whoMoving != null) {
+            var xDiff = movingToX - whoMoving.x;
+            var yDiff = movingToY - whoMoving.y;
+            var pointDirection = Math.atan2(yDiff, xDiff);
+            whoMoving.x += movingSpeed * Math.cos(pointDirection);
+            whoMoving.y += movingSpeed * Math.sin(pointDirection);
+            
+            var pointDistance = Math.sqrt(xDiff*xDiff + yDiff*yDiff);
+            if (pointDistance < speed) {
+                whoMoving.x = movingToX;
+                whoMoving.y = movingToY;
+                whoMoving = null;
+                atDestination = true;
+                sceneStepWaitingToBeFinished = false;
+            }
+        }
+
         if (sceneStep < playingScene.scenes.length) {
             if (!sceneStepWaitingToBeFinished) {
                 console.log("next scene");

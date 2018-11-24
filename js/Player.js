@@ -81,7 +81,7 @@ let player = new(function () {
 
             var nextTileType = getTileTypeAtPixelCoord(nextX,nextY);
             
-            console.log(nextTileType);
+            // console.log(nextTileType);
             //if tile type is not solid this.x and this.y are equal to nextX and nextY
             if(moveCharIfAble(nextTileType))
             {

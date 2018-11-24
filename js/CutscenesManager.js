@@ -5,7 +5,7 @@ var testScene = new cutscene();
     this.speed = 7;
 
 var convo = [
-    {
+    /*{
         who: "John",
         nameCol: "lightblue",
         voice: voiceLow1,
@@ -22,7 +22,7 @@ var convo = [
         nameCol: "lightblue",
         voice: voiceLow1,
         text: "But then, someone came and took it...",
-    },
+    },*/
     {
         who: "Rose",
         nameCol: "pink",
@@ -69,7 +69,7 @@ var convo3 = [
 testScene.scenes = [
    [testScene.showDialogue, convo],
    [testScene.wait, 1],
-   [testScene.moveChar, player, 50, 0, 5],
+   [testScene.moveChar, player, 250, -30, 3],
    [testScene.showDialogue, convo2],
    [testScene.wait, 2],
    [testScene.showDialogue, convo3],

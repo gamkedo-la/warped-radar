@@ -74,37 +74,21 @@ let player = new(function () {
             var nextY = this.y;
             var facing = this.facing;
 
-            if (this.keyHeld_walkUp) {
-                // this.y -= this.walkSpeed;
-                nextY -= this.walkSpeed;
-                if (whoMoving != null) facing.north = true;
-            }
-            if (this.keyHeld_walkDown) {
-                // this.y += this.walkSpeed;
-                nextY += this.walkSpeed;
-                if (whoMoving != null) facing.south = true;
-            }
-            if (this.keyHeld_walkLeft) {
-                // this.x -= this.walkSpeed;
-                nextX -= this.walkSpeed;
-                if (whoMoving != null) facing.west = true;
-
-            }
-            if (this.keyHeld_walkRight) {
-                // this.x += this.walkSpeed;
-                nextX += this.walkSpeed;
-                if (whoMoving != null) facing.east = true;
-
+            if (playingScene == null) {
+                if (this.keyHeld_walkUp) {
+                    nextY -= this.walkSpeed;
+                }
+                if (this.keyHeld_walkDown) {
+                    nextY += this.walkSpeed;
+                }
+                if (this.keyHeld_walkLeft) {
+                    nextX -= this.walkSpeed;
+                }
+                if (this.keyHeld_walkRight) {
+                    nextX += this.walkSpeed;
+                }
             }
 
-            var nextTileType = getTileTypeAtPixelCoord(nextX, nextY);
-
-            // console.log(nextTileType);
-            //if tile type is not solid this.x and this.y are equal to nextX and nextY
-            if (moveCharIfAble(nextTileType)) {
-                this.x = nextX;
-                this.y = nextY;
-            }
             if (whoMoving == null) {
                 if (this.keyHeld_walkLeft || this.keyHeld_walkRight || this.keyHeld_walkUp || this.keyHeld_walkDown) {
                     this.states.walking = true;
@@ -112,28 +96,51 @@ let player = new(function () {
                     this.states.walking = false;
                 }
             }
+
+            var nextTileType = getTileTypeAtPixelCoord(nextX, nextY);
+            // console.log(nextTileType);
+            //if tile type is not solid this.x and this.y are equal to nextX and nextY
+            if (moveCharIfAble(nextTileType)) {
+                this.x = nextX;
+                this.y = nextY;
+            }
+
             this.collider.setCollider(this.x, this.y);
         }
     }
 
     this.draw = function () {
         var facing = this.facing;
-        if (this.states.walking || (this.states.walking && !atDestination && whoMoving != null)) {
-            if (this.facing.west || this.keyHeld_walkLeft) {
+        if (this.states.walking && !atDestination && whoMoving != null) {
+            if (this.facing.west) {
+                johnWalkSide.draw(scaledContext, this.x, this.y);
+            }
+            if (this.facing.southWest || this.facing.northWest) {
+                johnWalkSide45Deg.draw(scaledContext, this.x, this.y);
+            }
+            if (this.facing.east) {
+                johnWalkSide.draw(scaledContext, this.x, this.y, 1, true);
+            }
+            if (this.facing.southEast || this.facing.northEast) {
+                johnWalkSide45Deg.draw(scaledContext, this.x, this.y, 1, true);
+            }
+            if (this.facing.north || this.facing.south) {
+                johnWalk.draw(scaledContext, this.x, this.y);
+            }
+        } else if (this.states.walking && playingScene == null) {
+            if (this.keyHeld_walkLeft) {
                 if ((this.keyHeld_walkUp || this.keyHeld_walkDown)) {
-                    //45 degree turn
                     johnWalkSide45Deg.draw(scaledContext, this.x, this.y);
-                } else { //90 degree turn
+                } else { 
                     johnWalkSide.draw(scaledContext, this.x, this.y);
                 }
-            } else if (this.facing.east || this.keyHeld_walkRight) {
+            } else if (this.keyHeld_walkRight) {
                 if ((this.keyHeld_walkRight && this.keyHeld_walkUp) || (this.keyHeld_walkRight && this.keyHeld_walkDown)) {
-                    //45 degree turn
                     johnWalkSide45Deg.draw(scaledContext, this.x, this.y, 1, true);
-                } else { //90 degree turn
+                } else { 
                     johnWalkSide.draw(scaledContext, this.x, this.y, 1, true);
                 }
-            } else if ((this.keyHeld_walkUp || this.keyHeld_walkDown) || (this.facing.north || this.facing.south)) {
+            } else if (this.keyHeld_walkUp || this.keyHeld_walkDown) {
                 johnWalk.draw(scaledContext, this.x, this.y);
             }
         } else {

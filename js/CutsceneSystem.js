@@ -125,7 +125,7 @@ function updateSceneTick() {
                 atDestination = true;
                 sceneStepWaitingToBeFinished = false;
             }
-             if (whoMoving != null && !atDestination) {
+             if (!atDestination) {
                 whoMoving.states.walking = true;
                 facingAnim = true;
             } 
@@ -141,6 +141,7 @@ function updateSceneTick() {
             }
         } else if (timer.secondsRemaining == 0) {
             console.log("finished; all cutscene functions were called in order");
+            playingScene = null;
         }
     }
 }

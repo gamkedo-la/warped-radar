@@ -75,7 +75,6 @@ function drawAll() {
     drawDebugText();
     createDialogueEvents();
     inventory.draw();
-    //timer.drawTimer();
     endPan();
     showCutsceneDialogue();
     levelEditor.roomTileCoordinate();

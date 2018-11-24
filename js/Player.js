@@ -111,22 +111,23 @@ let player = new(function () {
 
     this.draw = function () {
         var facing = this.facing;
-        if (this.states.walking && !atDestination && whoMoving != null) {
-            if (this.facing.west) {
+        if (this.states.walking && whoMoving != null) {
+            if (facing.west) {
                 johnWalkSide.draw(scaledContext, this.x, this.y);
             }
-            if (this.facing.southWest || this.facing.northWest) {
+            if (facing.southWest || facing.northWest) {
                 johnWalkSide45Deg.draw(scaledContext, this.x, this.y);
             }
-            if (this.facing.east) {
+            if (facing.east) {
                 johnWalkSide.draw(scaledContext, this.x, this.y, 1, true);
             }
-            if (this.facing.southEast || this.facing.northEast) {
+            if (facing.southEast || facing.northEast) {
                 johnWalkSide45Deg.draw(scaledContext, this.x, this.y, 1, true);
             }
-            if (this.facing.north || this.facing.south) {
+            if (facing.north || facing.south) {
                 johnWalk.draw(scaledContext, this.x, this.y);
             }
+            
         } else if (this.states.walking && playingScene == null) {
             if (this.keyHeld_walkLeft) {
                 if ((this.keyHeld_walkUp || this.keyHeld_walkDown)) {
@@ -145,7 +146,8 @@ let player = new(function () {
             }
         } else {
             johnIdle.draw(scaledContext, this.x, this.y);
-            if (atDestination) {
+            if (playingScene == null) {
+                this.states.walking = false;
                 facing.north = false;
                 facing.south = false;
                 facing.west = false;

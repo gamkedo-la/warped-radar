@@ -68,22 +68,30 @@ var convo3 = [
 
 testScene.scenes = [
    [testScene.showDialogue, convo],
-   [testScene.wait, 1],
    [testScene.moveChar, player, 250, -30, "southeast", 3],
+   [testScene.moveChar, player, 0, 100, "south", 3],
    [testScene.showDialogue, convo2],
-   [testScene.wait, 2],
+   [testScene.wait, 1],
+   [testScene.moveChar, player, -100, -30, "west", 3],
    [testScene.showDialogue, convo3],
-   [testScene.wait, 3]
+   [testScene.wait, 1]
 ];
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
 function showCutsceneDialogue() {
-    //scene step starts at 1?
-    //end dialogue scenes with wait
-    //also remember to pass in the scene's step/dialogue here for multiple dialogues in one scene... fix please
+    //
+    /* Notes: 
+    - scene step starts at 1
+    fix:
+    - end dialogue scene with wait:
+        - if another dialogue event follows it
+        - it is the last in the scene
+    
+    - Pass in the scene's step/dialogue here for multiple dialogues in one scene... 
+    */
     if (playingScene != null) {
         if (sceneStep == 1) testScene.showDialogue(convo);
         if (sceneStep == 4) testScene.showDialogue(convo2);
-        if (sceneStep == 6) testScene.showDialogue(convo3);
+        if (sceneStep == 7) testScene.showDialogue(convo3);
     }
 }

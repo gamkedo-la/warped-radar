@@ -22,7 +22,7 @@ let player = new(function () {
     this.controlKeyDown2;
     this.controlKeyLeft2;
 
-    this.collider = new colliderClass(this.x, this.y, this.w, this.h, 0, 0);
+    this.collider = new colliderClass(this.x, this.y, this.w - 24, this.h, 0, 0);
 
     let states = {
         walking: false
@@ -78,12 +78,17 @@ let player = new(function () {
                 // this.x += this.walkSpeed;
                 nextX += this.walkSpeed;
             }
+            this.collider.setCollider(nextX,nextY);
 
-            var nextTileType = getTileTypeAtPixelCoord(nextX,nextY);
-            
-            // console.log(nextTileType);
-            //if tile type is not solid this.x and this.y are equal to nextX and nextY
-            if(moveCharIfAble(nextTileType))
+            var nextTileTypeLeftTop = getTileTypeAtPixelCoord(this.collider.box.left,this.collider.box.top);
+            var nextTileTypeRightTop = getTileTypeAtPixelCoord(this.collider.box.right,this.collider.box.top);
+            var nextTileTypeRightBottom = getTileTypeAtPixelCoord(this.collider.box.right,this.collider.box.bottom);
+            var nextTileTypeLeftBottom = getTileTypeAtPixelCoord(this.collider.box.left,this.collider.box.bottom);
+
+            if(moveCharIfAble(nextTileTypeLeftTop) &&
+                moveCharIfAble(nextTileTypeRightTop) &&
+                moveCharIfAble(nextTileTypeRightBottom) &&
+                moveCharIfAble(nextTileTypeLeftBottom))
             {
                 this.x = nextX;
                 this.y = nextY;

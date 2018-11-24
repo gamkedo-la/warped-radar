@@ -45,7 +45,7 @@ function startGame() {
     timer.setupTimer();
     initializeObtainableItems();
     console.log(arrayOfObtainableItems);
-    // createCutscene(testScene);
+    //createCutscene(testScene);
 }
 
 function updateAll() {
@@ -62,8 +62,6 @@ function moveAll() {
     levelEditor.showNewGrid();
 }
 
-
-
 function drawAll() {
     beginPan();
     clearScreen();
@@ -77,7 +75,7 @@ function drawAll() {
     drawDebugText();
     createDialogueEvents();
     inventory.draw();
-    // timer.drawTimer();
+    //timer.drawTimer();
     endPan();
     showCutsceneDialogue();
     levelEditor.roomTileCoordinate();

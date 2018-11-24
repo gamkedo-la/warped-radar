@@ -5,7 +5,22 @@ function OverworldObject() {
     this.h = 32;
     this.colour = "#6B6570";
     this.messageCounter = 0;
-
+    
+    this.states = {
+        walking: false
+    }
+    
+   this.facing = {
+        north: false,
+        south: true,
+        east: false,
+        west: false,
+        northEast: false,
+        northWest: false,
+        southEast: false,
+        southWest: false
+    }
+    
     this.draw = function () {
         drawRectToContext(scaledContext, this.x, this.y, this.w, this.h, this.colour, 1);
     }

@@ -9,7 +9,7 @@ var sceneTextPage = 0;
 let sceneLetterCount = 0;
 
 let whoMoving = null;
-let movingToX,movingToY,movingSpeed;
+let movingToX, movingToY, facingAnim, movingSpeed;
 
 function cutscene() {
     let dialogueBoxX = 0,
@@ -28,7 +28,7 @@ function cutscene() {
         console.log("Pause scene for " + num + " seconds");
     }
 
-    this.moveChar = function (object, xDist, yDist, speed) {
+    this.moveChar = function (object, xDist, yDist, facingDir, speed) {
         timer.secondsRemaining = 2; //timer won't count down until atDestination is true
         showNextSceneText = false;
 
@@ -37,6 +37,33 @@ function cutscene() {
         movingToX = whoMoving.x + xDist;
         movingToY = whoMoving.y + yDist;
         movingSpeed = speed;
+
+        switch (facingDir) {
+            case "north":
+                facingAnim = whoMoving.facing.north = true;
+                break;
+            case "south":
+                facingAnim = whoMoving.facing.south = true;
+                break;
+            case "east":
+                facingAnim = whoMoving.facing.east = true;
+                break;
+            case "west":
+                facingAnim = whoMoving.facing.west = true;
+                break;
+            case "northeast":
+                facingAnim = whoMoving.facing.northEast = true;
+                break;
+            case "northwest":
+                facingAnim = whoMoving.facing.northWest = true;
+                break;
+            case "southeast":
+                facingAnim = whoMoving.facing.southEast = true;
+                break;
+            case "southwest":
+                facingAnim = whoMoving.facing.southWest = true;
+                break;
+        }
     }
 
     this.showDialogue = function (dialogueList) {
@@ -84,14 +111,13 @@ function cutscene() {
 
 function updateSceneTick() {
     if (playingScene != null) {
-        if(whoMoving != null) {
+        if (whoMoving != null) {
             var xDiff = movingToX - whoMoving.x;
             var yDiff = movingToY - whoMoving.y;
             var pointDirection = Math.atan2(yDiff, xDiff);
             whoMoving.x += movingSpeed * Math.cos(pointDirection);
             whoMoving.y += movingSpeed * Math.sin(pointDirection);
-            
-            var pointDistance = Math.sqrt(xDiff*xDiff + yDiff*yDiff);
+            var pointDistance = Math.sqrt(xDiff * xDiff + yDiff * yDiff);
             if (pointDistance < speed) {
                 whoMoving.x = movingToX;
                 whoMoving.y = movingToY;
@@ -99,6 +125,10 @@ function updateSceneTick() {
                 atDestination = true;
                 sceneStepWaitingToBeFinished = false;
             }
+             if (whoMoving != null && !atDestination) {
+                whoMoving.states.walking = true;
+                facingAnim = true;
+            } 
         }
 
         if (sceneStep < playingScene.scenes.length) {

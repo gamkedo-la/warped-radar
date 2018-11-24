@@ -69,7 +69,7 @@ var convo3 = [
 testScene.scenes = [
    [testScene.showDialogue, convo],
    [testScene.wait, 1],
-   [testScene.moveChar, player, 250, -30, 3],
+   [testScene.moveChar, player, 250, -30, "east", 3],
    [testScene.showDialogue, convo2],
    [testScene.wait, 2],
    [testScene.showDialogue, convo3],

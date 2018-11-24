@@ -22,10 +22,21 @@ let player = new(function () {
     this.controlKeyDown2;
     this.controlKeyLeft2;
 
-    this.collider = new colliderClass(this.x, this.y, this.w - 24, this.h, 0, 0);
+    this.collider = new colliderClass(this.x, this.y, this.w, this.h, 0, 0);
 
-    let states = {
+    this.states = {
         walking: false
+    }
+
+    this.facing = {
+        north: false,
+        south: false,
+        east: false,
+        west: false,
+        northEast: false,
+        northWest: false,
+        southEast: false,
+        southWest: false
     }
 
     this.setupInput = function (upKey, rightKey, downKey, leftKey, upKey2, rightKey2, downKey2, leftKey2) {
@@ -61,69 +72,83 @@ let player = new(function () {
         if (dialogueNotShowing() && !inventory.isShowing && !levelEditor.isOn) {
             var nextX = this.x;
             var nextY = this.y;
+            var facing = this.facing;
 
             if (this.keyHeld_walkUp) {
                 // this.y -= this.walkSpeed;
                 nextY -= this.walkSpeed;
+                if (whoMoving != null) facing.north = true;
             }
             if (this.keyHeld_walkDown) {
                 // this.y += this.walkSpeed;
                 nextY += this.walkSpeed;
+                if (whoMoving != null) facing.south = true;
             }
             if (this.keyHeld_walkLeft) {
                 // this.x -= this.walkSpeed;
                 nextX -= this.walkSpeed;
+                if (whoMoving != null) facing.west = true;
+
             }
             if (this.keyHeld_walkRight) {
                 // this.x += this.walkSpeed;
                 nextX += this.walkSpeed;
+                if (whoMoving != null) facing.east = true;
+
             }
-            this.collider.setCollider(nextX,nextY);
 
-            var nextTileTypeLeftTop = getTileTypeAtPixelCoord(this.collider.box.left,this.collider.box.top);
-            var nextTileTypeRightTop = getTileTypeAtPixelCoord(this.collider.box.right,this.collider.box.top);
-            var nextTileTypeRightBottom = getTileTypeAtPixelCoord(this.collider.box.right,this.collider.box.bottom);
-            var nextTileTypeLeftBottom = getTileTypeAtPixelCoord(this.collider.box.left,this.collider.box.bottom);
+            var nextTileType = getTileTypeAtPixelCoord(nextX, nextY);
 
-            if(moveCharIfAble(nextTileTypeLeftTop) &&
-                moveCharIfAble(nextTileTypeRightTop) &&
-                moveCharIfAble(nextTileTypeRightBottom) &&
-                moveCharIfAble(nextTileTypeLeftBottom))
-            {
+            // console.log(nextTileType);
+            //if tile type is not solid this.x and this.y are equal to nextX and nextY
+            if (moveCharIfAble(nextTileType)) {
                 this.x = nextX;
                 this.y = nextY;
             }
-
-            if (!this.keyHeld_walkUp && !this.keyHeld_walkDown && !this.keyHeld_walkLeft && !this.keyHeld_walkRight) {
-                states.walking = false;
-            } else {
-                states.walking = true;
+            if (whoMoving == null) {
+                if (this.keyHeld_walkLeft || this.keyHeld_walkRight || this.keyHeld_walkUp || this.keyHeld_walkDown) {
+                    this.states.walking = true;
+                } else if (!this.keyHeld_walkLeft && !this.keyHeld_walkRight && !this.keyHeld_walkUp && !this.keyHeld_walkDown) {
+                    this.states.walking = false;
+                }
             }
-
             this.collider.setCollider(this.x, this.y);
         }
     }
 
     this.draw = function () {
-        if (states.walking) {
-            if (this.keyHeld_walkLeft) {
-                if (this.keyHeld_walkUp || this.keyHeld_walkDown) { //45 degree turn
+        var facing = this.facing;
+        if (this.states.walking || (this.states.walking && !atDestination && whoMoving != null)) {
+            if (this.facing.west || this.keyHeld_walkLeft) {
+                if ((this.keyHeld_walkUp || this.keyHeld_walkDown)) {
+                    //45 degree turn
                     johnWalkSide45Deg.draw(scaledContext, this.x, this.y);
                 } else { //90 degree turn
                     johnWalkSide.draw(scaledContext, this.x, this.y);
                 }
-            } else if (this.keyHeld_walkRight) {
-                if ((this.keyHeld_walkRight && this.keyHeld_walkUp) || (this.keyHeld_walkRight && this.keyHeld_walkDown)) { //45 degree turn
+            } else if (this.facing.east || this.keyHeld_walkRight) {
+                if ((this.keyHeld_walkRight && this.keyHeld_walkUp) || (this.keyHeld_walkRight && this.keyHeld_walkDown)) {
+                    //45 degree turn
                     johnWalkSide45Deg.draw(scaledContext, this.x, this.y, 1, true);
                 } else { //90 degree turn
                     johnWalkSide.draw(scaledContext, this.x, this.y, 1, true);
                 }
-            } else if (this.keyHeld_walkDown || this.keyHeld_walkUp) {
+            } else if ((this.keyHeld_walkUp || this.keyHeld_walkDown) || (this.facing.north || this.facing.south)) {
                 johnWalk.draw(scaledContext, this.x, this.y);
             }
         } else {
             johnIdle.draw(scaledContext, this.x, this.y);
+            if (atDestination) {
+                facing.north = false;
+                facing.south = false;
+                facing.west = false;
+                facing.east = false;
+                facing.northWest = false;
+                facing.northWest = false;
+                facing.southEast = false;
+                facing.southWest = false;
+            }
         }
-        outlineCircle(scaledContext,this.x, this.y, 2, "green", lineWidth = 1)
+        outlineCircle(scaledContext, this.x, this.y, 2, "green", lineWidth = 1)
     }
 })();

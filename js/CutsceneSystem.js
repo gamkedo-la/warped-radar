@@ -26,19 +26,19 @@ function cutscene() {
     }
 
     this.moveChar = function (object, xDist, yDist, speed) {
-        timer.secondsRemaining = 2;
+        timer.secondsRemaining = 2; //timer won't count down until atDestination is true
         showNextSceneText = false;
         var xDest = object.x + xDist;
         var yDest = object.y + yDist;
 
-        var point_direction = Math.atan2(yDest - object.y, xDest - object.x);
-        var lengthDirx = speed * Math.cos(point_direction);
-        var lengthDiry = speed * Math.sin(point_direction);
-        object.x += Math.floor(lengthDirx);
-        object.y += Math.floor(lengthDiry);
+        var pointDirection = Math.atan2(yDest - object.y, xDest - object.x);
+        var lengthDirx = speed * Math.cos(pointDirection);
+        var lengthDiry = speed * Math.sin(pointDirection);
+        object.x += lengthDirx;
+        object.y += lengthDiry;
         
-        var point_distance = Math.sqrt(Math.pow(xDest, 2) + Math.pow(yDest, 2));
-        if (point_distance >= speed) {
+        var pointDistance = Math.sqrt(Math.pow(xDest, 2) + Math.pow(yDest, 2));
+        if (pointDistance < speed) {
             object.x = xDest;
             object.y = yDest;
             atDestination = true;

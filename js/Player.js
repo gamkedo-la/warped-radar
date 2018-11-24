@@ -57,27 +57,46 @@ let player = new(function () {
     }
 
     this.move = function () {
+
         if (dialogueNotShowing() && !inventory.isShowing && !levelEditor.isOn) {
+            var nextX = this.x;
+            var nextY = this.y;
+
             if (this.keyHeld_walkUp) {
-                this.y -= this.walkSpeed;
+                // this.y -= this.walkSpeed;
+                nextY -= this.walkSpeed;
             }
             if (this.keyHeld_walkDown) {
-                this.y += this.walkSpeed;
+                // this.y += this.walkSpeed;
+                nextY += this.walkSpeed;
             }
             if (this.keyHeld_walkLeft) {
-                this.x -= this.walkSpeed;
+                // this.x -= this.walkSpeed;
+                nextX -= this.walkSpeed;
             }
             if (this.keyHeld_walkRight) {
-                this.x += this.walkSpeed;
+                // this.x += this.walkSpeed;
+                nextX += this.walkSpeed;
             }
+
+            var nextTileType = getTileTypeAtPixelCoord(nextX,nextY);
+            
+            console.log(nextTileType);
+            //if tile type is not solid this.x and this.y are equal to nextX and nextY
+            if(moveCharIfAble(nextTileType))
+            {
+                this.x = nextX;
+                this.y = nextY;
+            }
+
             if (!this.keyHeld_walkUp && !this.keyHeld_walkDown && !this.keyHeld_walkLeft && !this.keyHeld_walkRight) {
                 states.walking = false;
             } else {
                 states.walking = true;
             }
+
+            this.collider.setCollider(this.x, this.y);
         }
-        this.collider.setCollider(this.x, this.y);
-        // console.log(this.collider.box.left,this.collider.box.right,this.collider.box.top,this.collider.box.bottom);
     }
 
     this.draw = function () {

@@ -68,3 +68,15 @@ function indexToCenteredXY(index) {
 			y: rowToCenteredY(rowIndex)
 		};
 }
+
+function moveCharIfAble(tileType)
+{
+	for(var i = 0; i < solidTiles.length; i++)
+	{
+		if(tileType === solidTiles[i])
+			return false;
+		else
+			return true;
+	}
+	return false;
+}

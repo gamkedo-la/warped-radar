@@ -32,6 +32,8 @@ const TILE_SEALED_TUBE = 22;
 const TILE_THUMB_DRIVE = 23;
 const TILE_TRAIN_TICKET = 24;
 
+let solidTiles = [1,7,8,9,10,11,12,13,14,15,16];
+
 let worldGrid =
 [
 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,

@@ -131,7 +131,11 @@ function keydownControl(evt, keydownMap) {
     } else if (keysPressed(KEY_G)) {
         toggleGrid();
     }
-
+    if (keysPressed(KEY_SHIFT, KEY_D) && debug) {
+       debug = false; 
+    } else if (keysPressed(KEY_SHIFT, KEY_D) && !debug) {
+       debug = true;
+    }
     if (keysPressed(KEY_X)) {
         playTheScene = !playTheScene;
     }

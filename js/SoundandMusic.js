@@ -30,10 +30,16 @@ function setFormat() {
     }
 }
 
+let stebs_warped_radar_song = new backgroundMusicClass();
+stebs_warped_radar_song.loopSong("audio/stebs_warped_radar_song");
+let currentBackgroundMusic = stebs_warped_radar_song;
+setMusicVolume(0.4);
+
+
 function backgroundMusicClass() {
 
     let musicSound = null;
-	
+
     this.loopSong = function(filenameWithPath) {
         setFormat(); // calling this to ensure that audioFormat is set before needed
 
@@ -61,11 +67,11 @@ function backgroundMusicClass() {
             musicSound.pause();
         }
     }
-	
+
 	this.setVolume = function(volume) {
 		// Multipliction by a boolean serves as 1 for true and 0 for false
 		musicSound.volume = Math.pow(volume * !isMuted, 2);
-		
+
 		if(musicSound.volume == 0) {
 			musicSound.pause();
 		} else if (musicSound.paused) {

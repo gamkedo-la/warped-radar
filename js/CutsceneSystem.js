@@ -30,7 +30,7 @@ function cutscene() {
 
     this.moveChar = function (object, xDist, yDist, facingDir, speed) {
         atDestination = false;
-        timer.secondsRemaining = pauseBetweenPages; 
+        timer.secondsRemaining = pauseBetweenPages;
         showNextSceneText = false;
 
         console.log("called moveChar with args: ", xDist, yDist, speed);
@@ -91,7 +91,7 @@ function cutscene() {
             if (sceneLetterCount < dialogue[sceneTextPage].length) {
                 sceneLetterCount += letterSpeed;
                 //voices[sceneTextPage].play();
-                //timer.secondsRemaining = pauseBetweenPages + 1;
+                if (sceneTextPage < dialogue.length - 1) timer.secondsRemaining = pauseBetweenPages + 1;
             }
             if (!showNextSceneText) {
                 if (sceneTextPage < dialogue.length && sceneLetterCount >= dialogue[sceneTextPage].length) {
@@ -111,7 +111,6 @@ function cutscene() {
             colorText(typewriterText, textX + nameWidth, textY, textColour, textFontFace, textAlign, 1);
         }
     }
-
 }
 
 function updateSceneTick() {

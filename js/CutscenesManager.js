@@ -1,11 +1,12 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////
 var testScene = new cutscene();
-    this.xFinal = 100,
+var playTheScene = false;
+this.xFinal = 100,
     this.yFinal = 20,
     this.speed = 7;
 
 var convo = [
-    /*{
+    {
         who: "John",
         nameCol: "lightblue",
         voice: voiceLow1,
@@ -22,13 +23,13 @@ var convo = [
         nameCol: "lightblue",
         voice: voiceLow1,
         text: "But then, someone came and took it...",
-    },*/
+    },
     {
         who: "Rose",
         nameCol: "pink",
         voice: voiceHigh2,
         text: "Oh no!",
-    },
+    }
 ];
 
 var convo2 = [
@@ -71,11 +72,16 @@ testScene.scenes = [
    [testScene.moveChar, player, 250, -30, "southeast", 3],
    [testScene.moveChar, player, 0, 100, "south", 3],
    [testScene.showDialogue, convo2],
-   [testScene.wait, 1],
    [testScene.moveChar, player, -100, -30, "west", 3],
    [testScene.showDialogue, convo3],
    [testScene.wait, 1]
 ];
+
+function triggerTestScene() {
+    if (playTheScene) {
+        createCutscene(testScene);
+    }
+}
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
 function showCutsceneDialogue() {
@@ -87,11 +93,11 @@ function showCutsceneDialogue() {
         - if another dialogue event follows it
         - it is the last in the scene
     
-    - Pass in the scene's step/dialogue here for multiple dialogues in one scene... 
+    - Pass in the scene's step/dialogue here to show it on screen.. 
     */
     if (playingScene != null) {
         if (sceneStep == 1) testScene.showDialogue(convo);
         if (sceneStep == 4) testScene.showDialogue(convo2);
-        if (sceneStep == 7) testScene.showDialogue(convo3);
+        if (sceneStep == 6) testScene.showDialogue(convo3);
     }
 }

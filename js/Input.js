@@ -133,7 +133,7 @@ function keydownControl(evt, keydownMap) {
     }
 
     if (keysPressed(KEY_X)) {
-
+        playTheScene = !playTheScene;
     }
 }
 

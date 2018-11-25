@@ -30,10 +30,12 @@ function setFormat() {
     }
 }
 
+/*
 let stebs_warped_radar_song = new backgroundMusicClass();
 stebs_warped_radar_song.loopSong("audio/stebs_warped_radar_song");
 let currentBackgroundMusic = stebs_warped_radar_song;
 setMusicVolume(0.4);
+*/
 
 
 function backgroundMusicClass() {

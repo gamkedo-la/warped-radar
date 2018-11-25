@@ -45,8 +45,7 @@ function startGame() {
     timer.setupTimer();
     initializeObtainableItems();
     console.log(arrayOfObtainableItems);
-    stebs_warped_radar_song.resumeSound();
-    //createCutscene(testScene);
+    //stebs_warped_radar_song.resumeSound();
 }
 
 function updateAll() {
@@ -78,6 +77,7 @@ function drawAll() {
     inventory.draw();
     endPan();
     showCutsceneDialogue();
+    //triggerTestScene();
     levelEditor.roomTileCoordinate();
 }
 

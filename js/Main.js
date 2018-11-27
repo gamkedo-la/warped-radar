@@ -43,6 +43,8 @@ function startGame() {
     player.reset();
     setupInput();
     timer.setupTimer();
+    initializeDefaultItems();
+    console.log(note);
     initializeObtainableItems();
     console.log(arrayOfObtainableItems);
     //stebs_warped_radar_song.resumeSound();

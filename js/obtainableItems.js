@@ -155,3 +155,29 @@ function obtainItemIfApplicable() {
     }//end of if itemIsObtainable
   }//end of loop through arrayOfObtainableItems
 }//end of obtainItemIfApplicable()
+
+let note, motherboard, memoryChip;
+
+function initializeDefaultItems() {
+  note = {
+    name: "Note",
+    description: "Uncle Dave's Note",
+    image: notePic
+  };
+
+  inventory.inventoryItems.push(note);
+
+  motherboard = {
+    name: "Motherboard",
+    description: "Motherboard"
+    //image: "img/note.png"
+  }
+
+  memoryChip = {
+    name: "Memory Chip",
+    description: "Memory Chip",
+    image: memoryChipPic
+  }
+
+  inventory.inventoryItems.push(memoryChip);
+}

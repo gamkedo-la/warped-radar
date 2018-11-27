@@ -2,6 +2,10 @@ let dialogueBoxPic = document.createElement("img");
 let textArrowSheet = document.createElement("img");
 let choiceCursorPic = document.createElement("img");
 
+let notePic = document.createElement("img");
+let motherboardPic = document.createElement("img");
+let memoryChipPic = document.createElement("img");
+
 let inventoryPic = document.createElement("img");
 let brokenSkateboardPic = document.createElement("img");
 let burnerPhonePic = document.createElement("img");
@@ -75,7 +79,12 @@ function loadImages() {
         {varName: johnSideAnimation, theFile: "johnspriteside-sheet.png"},
         {varName: johnSide45Animation, theFile: "johnspriteside45-sheet.png"},
 
-        //INVENTORY ITEMS
+        //DEFAULT GAMESTART ITEMS
+        {varName: notePic, theFile: "note.png"},
+        //{varName: motherboardPic, theFile: "motherboard.png" },
+        {varName: memoryChipPic, theFile: "memory_chip.png"},
+
+        //PLACEHOLDER OBTAINABLE ITEMS
         {worldType: TILE_BROKEN_SKATEBOARD, theFile: "broken_skateboard.png"},
         {worldType: TILE_BURNER_PHONE, theFile: "burner_phone.png"},
         {worldType: TILE_CROWBAR, theFile: "crowbar.png"},
@@ -84,7 +93,6 @@ function loadImages() {
         {worldType: TILE_SEALED_TUBE, theFile: "sealed_tube.png"},
         {worldType: TILE_THUMB_DRIVE, theFile: "thumb_drive.png"},
         {worldType: TILE_TRAIN_TICKET, theFile: "train_ticket.png"},
-
 
         //TILES
         {worldType: TILE_GROUND, theFile: "ground.png"},

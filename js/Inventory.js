@@ -34,9 +34,7 @@ let inventory = new(function () {
     let descX = this.x + width / 2;
     let descY = this.y + 200;
 
-    this.inventoryItems = [
-
-    ];
+    this.inventoryItems = [];
 
     this.navigate = function (keyCode) {
         if (this.isShowing) {
@@ -101,7 +99,7 @@ let inventory = new(function () {
                     let itemCellX = slotX + ((slotWidth + slotBetweenX) * (i % slotCols));
                     let itemCellY = slotY + ((slotHeight + slotBetweenY) * Math.floor(i / slotCols));
                     canvasContext.fillStyle = "white";
-                    canvasContext.drawImage(inventory.inventoryItems[i].image, itemCellX,itemCellY, slotWidth,slotHeight);
+                    canvasContext.drawImage(inventory.inventoryItems[i].image, itemCellX + 15,itemCellY + 15, slotWidth*0.66,slotHeight*0.66);
                 }
             }
         }

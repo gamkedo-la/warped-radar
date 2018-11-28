@@ -81,7 +81,7 @@ function loadImages() {
 
         //DEFAULT GAMESTART ITEMS
         {varName: notePic, theFile: "note.png"},
-        //{varName: motherboardPic, theFile: "motherboard.png" },
+        {varName: motherboardPic, theFile: "motherboard.png" },
         {varName: memoryChipPic, theFile: "memory_chip.png"},
 
         //PLACEHOLDER OBTAINABLE ITEMS

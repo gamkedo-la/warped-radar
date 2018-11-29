@@ -169,9 +169,11 @@ function initializeDefaultItems() {
 
   motherboard = {
     name: "Motherboard",
-    description: "Motherboard"
-    //image: "img/note.png"
+    description: "Motherboard",
+    image: motherboardPic
   }
+
+  inventory.inventoryItems.push(motherboard);
 
   memoryChip = {
     name: "Memory Chip",

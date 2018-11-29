@@ -27,11 +27,12 @@ let johnMouthAnimatedSheet = document.createElement("img");
 let roseMouthAnimatedSheet = document.createElement("img");
 
 let johnAnimation = document.createElement("img");
-
 let johnSideAnimation = document.createElement("img");
 let johnSide45Animation = document.createElement("img");
-
 let johnIdleAnimation = document.createElement("img");
+
+let rainEffectImage = document.createElement("img");
+let fogEffectImage = document.createElement("img");
 
 
 let building = document.createElement("img");
@@ -81,7 +82,7 @@ function loadImages() {
 
         //DEFAULT GAMESTART ITEMS
         {varName: notePic, theFile: "note.png"},
-        //{varName: motherboardPic, theFile: "motherboard.png" },
+        {varName: motherboardPic, theFile: "motherboard.png" },
         {varName: memoryChipPic, theFile: "memory_chip.png"},
 
         //PLACEHOLDER OBTAINABLE ITEMS
@@ -113,8 +114,11 @@ function loadImages() {
         {worldType: TILE_TEST_CONVENIENCE_STORERIGHT, theFile: "test-convenience-rightcorner.png"},
         {worldType: TILE_TEST_CONVENIENCE_STOREBOTTOMLEFT, theFile: "test-convenience-leftbottomcorner.png"},
         {worldType: TILE_TEST_CONVENIENCE_STOREBOTTOMMIDDLE, theFile: "test-convenience-middlebottom.png"},
-        {worldType: TILE_TEST_CONVENIENCE_STOREBOTTOMRIGHT, theFile: "test-convenience-rightbottomcorner.png"}
+        {worldType: TILE_TEST_CONVENIENCE_STOREBOTTOMRIGHT, theFile: "test-convenience-rightbottomcorner.png"},
 
+        // SPECIAL EFFECTS
+        {varName: rainEffectImage, theFile: "rain.png"},
+        {varName: fogEffectImage, theFile: "fog.png"}
 
     ];
 

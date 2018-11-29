@@ -73,7 +73,7 @@ function drawAll() {
     	player.collider.draw("red");
     }
     drawAndInitNPCs();
-    drawRainEffects();
+    drawWeatherEffects();
     drawGameBorder();
     drawDebugText();
     createDialogueEvents();

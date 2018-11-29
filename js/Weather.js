@@ -1,8 +1,8 @@
 
-var isRainy = true;
+var isRainy = false;
 var isFoggy = true;
 var rainCounter = 0;
-function drawRainEffects() {
+function drawWeatherEffects() {
     rainCounter++;
     var sx = 0;
     var sy = CANVAS_HEIGHT - ((rainCounter*8) % CANVAS_HEIGHT);
@@ -26,6 +26,15 @@ function drawRainEffects() {
         ((-camPanX+rainCounter/2)%fogEffectImage.width)-fogEffectImage.width,CANVAS_HEIGHT-fogEffectImage.height);
         canvasContext.drawImage(fogEffectImage,
         ((-camPanX+rainCounter/2)%fogEffectImage.width)+fogEffectImage.width,CANVAS_HEIGHT-fogEffectImage.height);
+
+        //canvasContext.globalAlpha = 0.5;
+        canvasContext.drawImage(fogEffectImage,
+            ((-camPanX-rainCounter)%fogEffectImage.width),CANVAS_HEIGHT-fogEffectImage.height+32);
+            canvasContext.drawImage(fogEffectImage,
+            ((-camPanX-rainCounter)%fogEffectImage.width)-fogEffectImage.width,CANVAS_HEIGHT-fogEffectImage.height+32);
+            canvasContext.drawImage(fogEffectImage,
+            ((-camPanX-rainCounter)%fogEffectImage.width)+fogEffectImage.width,CANVAS_HEIGHT-fogEffectImage.height+32);
+        //canvasContext.globalAlpha = 1;
     }
 
 }

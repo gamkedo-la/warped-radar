@@ -99,7 +99,7 @@ let inventory = new(function () {
                     let itemCellX = slotX + ((slotWidth + slotBetweenX) * (i % slotCols));
                     let itemCellY = slotY + ((slotHeight + slotBetweenY) * Math.floor(i / slotCols));
                     canvasContext.fillStyle = "white";
-                    canvasContext.drawImage(inventory.inventoryItems[i].image, itemCellX + 15,itemCellY + 15, slotWidth*0.66,slotHeight*0.66);
+                    canvasContext.drawImage(inventory.inventoryItems[i].image, itemCellX+5,itemCellY+5, slotWidth*0.9,slotHeight*0.9);
                 }
             }
         }

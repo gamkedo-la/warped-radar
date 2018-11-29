@@ -32,9 +32,30 @@ const TILE_SEALED_TUBE = 22;
 const TILE_THUMB_DRIVE = 23;
 const TILE_TRAIN_TICKET = 24;
 
-let solidTiles = [1,7,8,9,10,11,12,13,14,15,16];
+const TILE_SWITCH_LOCATION = 25;
 
-let worldGrid =
+let solidTiles = [1, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
+
+let johnsHouse = [
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,1,1,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
+];
+
+let theCity =
 [
 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
 1,0,0,0,0,0,0,6,0,0,0,0,0,0,0,0,0,1,
@@ -53,6 +74,15 @@ let worldGrid =
 0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
 ];
+
+
+var locationList = [theCity, johnsHouse];
+var locationNow = 0;
+var worldGrid = [];
+
+let visibleGrid = false;
+
+
 function rowColToArrayIndex(col, row) {
     return col + WORLD_COLS * row;
 }
@@ -62,20 +92,20 @@ function tileTypeHasTransparency(tileToCheck) {
 
     if (tileToCheck ===
 
-      TILE_BROKEN_SKATEBOARD ||
-			TILE_BURNER_PHONE ||
-			TILE_CROWBAR ||
-			TILE_HOODIE ||
-			TILE_MEDICAL_NOTEBOOK ||
-			TILE_SEALED_TUBE ||
-			TILE_THUMB_DRIVE ||
-			TILE_TRAIN_TICKET
+        TILE_BROKEN_SKATEBOARD ||
+        TILE_BURNER_PHONE ||
+        TILE_CROWBAR ||
+        TILE_HOODIE ||
+        TILE_MEDICAL_NOTEBOOK ||
+        TILE_SEALED_TUBE ||
+        TILE_THUMB_DRIVE ||
+        TILE_TRAIN_TICKET
 
-     ) {
-       hasTransparency = true
-     } else {
-       hasTransparency = false
-     }
+    ) {
+        hasTransparency = true
+    } else {
+        hasTransparency = false
+    }
     return hasTransparency;
 }
 
@@ -89,39 +119,63 @@ function drawWorld() {
             let tileKindHere = worldGrid[arrayIndex];
             let useImg = worldPics[tileKindHere];
 
-            if( tileTypeHasTransparency(tileKindHere) ) {//draw tile with inventory item
-      				scaledContext.drawImage(worldPics[TILE_GROUND], drawTileX, drawTileY);
+            if (tileTypeHasTransparency(tileKindHere)) { //draw tile with inventory item
+                scaledContext.drawImage(worldPics[TILE_GROUND], drawTileX, drawTileY);
             } //draw tile without inventory item
-              scaledContext.drawImage(useImg, drawTileX, drawTileY);
-              //assignXAndYCoordinatesOfItems(tileKindHere, drawTileX,drawTileY);
-              drawGrid(drawTileX,drawTileY);
+            scaledContext.drawImage(useImg, drawTileX, drawTileY);
+            //assignXAndYCoordinatesOfItems(tileKindHere, drawTileX,drawTileY);
+            drawGrid(drawTileX, drawTileY);
 
-              drawTileX += WORLD_W;
-              arrayIndex++;
+            drawTileX += WORLD_W;
+            arrayIndex++;
 
-        }//end of inner part of nested for loop (columns)
+        } //end of inner part of nested for loop (columns)
         drawTileY += WORLD_H;
         drawTileX = 0;
-    }//end of outer part of nested for loop (rows)
-}//end of draw world
+    } //end of outer part of nested for loop (rows)
+} //end of draw world
 
-let visibleGrid = false;
 
-function drawGrid(drawTileX,drawTileY) {//placed in drawWorld(); above this
-  if (visibleGrid) {
-    let currentRightSideX = drawTileX + WORLD_W;
-    let currentBottomSideY = drawTileY + WORLD_H;
-    scaledContext.strokeStyle = 'white';
-    scaledContext.strokeRect(drawTileX,drawTileY, WORLD_W,WORLD_H)
-    scaledContext.fillText(drawTileX + "," + drawTileY, drawTileX,drawTileY + 10);
-    scaledContext.fillText(currentRightSideX + "," + currentBottomSideY ,drawTileX + 40,drawTileY + 78);
-  }
+function returnTileTypeAtColRow(col, row) {
+    if (col >= 0 && col < WORLD_COLS &&
+        row >= 0 && row < WORLD_ROWS) {
+        var worldIndexUnderCoord = rowColToArrayIndex(col, row);
+        return worldGrid[worldIndexUnderCoord];
+    } else {
+        return TILE_WALL;
+    }
 }
 
-function toggleGrid() {//placed in input.js
-  if (visibleGrid === true) {
-    visibleGrid = false;
-  } else {
-    visibleGrid = true;
-  }
+function playerWorldHandling(whichEntity) {
+    var playerWorldCol = Math.floor(whichEntity.x / WORLD_H);
+    var playerWorldRow = Math.floor(whichEntity.y / WORLD_H);
+    var trackIndexUnderCar = rowColToArrayIndex(playerWorldCol, playerWorldRow);
+
+    if (playerWorldCol >= 0 && playerWorldCol < WORLD_COLS &&
+        playerWorldRow >= 0 && playerWorldRow < WORLD_ROWS) {
+        var tileHere = returnTileTypeAtColRow(playerWorldCol, playerWorldRow);
+
+        if (tileHere == TILE_SWITCH_LOCATION) {
+            nextLevel();
+        }
+    }
+}
+
+function drawGrid(drawTileX, drawTileY) { //placed in drawWorld(); above this
+    if (visibleGrid) {
+        let currentRightSideX = drawTileX + WORLD_W;
+        let currentBottomSideY = drawTileY + WORLD_H;
+        scaledContext.strokeStyle = 'white';
+        scaledContext.strokeRect(drawTileX, drawTileY, WORLD_W, WORLD_H)
+        scaledContext.fillText(drawTileX + "," + drawTileY, drawTileX, drawTileY + 10);
+        scaledContext.fillText(currentRightSideX + "," + currentBottomSideY, drawTileX + 40, drawTileY + 78);
+    }
+}
+
+function toggleGrid() { //placed in input.js
+    if (visibleGrid === true) {
+        visibleGrid = false;
+    } else {
+        visibleGrid = true;
+    }
 }

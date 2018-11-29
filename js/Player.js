@@ -106,6 +106,8 @@ let player = new(function () {
             }
 
             this.collider.setCollider(this.x, this.y);
+            
+            playerWorldHandling(this);
         }
     }
 

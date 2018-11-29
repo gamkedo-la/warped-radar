@@ -102,6 +102,8 @@ function loadImages() {
         {worldType: TILE_SIDEWLAK, theFile: "sidewalk.png"},
         {worldType: TILE_SIDEWALK_RIGHTCORNER, theFile: "sidewalk-cornerpiece-right.png"},
         {worldType: TILE_SIDEWALK_VERTICAL, theFile: "sidewalk-vertical.png"},
+        
+        {worldType: TILE_SWITCH_LOCATION, theFile: "change_location.png"},
 
         //BUILDINGS
         {worldType: TILE_TESTBUILDING_LEFT, theFile: "testbuilding-leftcorner.png"},

@@ -7,7 +7,7 @@ let canvas, canvasContext;
 
 let framesFromGameStart = 0;
 
-let debug = true;
+let debug = false;
 
 window.onload = function () {
     canvas = document.createElement("canvas");
@@ -40,14 +40,28 @@ window.onload = function () {
 function startGame() {
     let framesPerSecond = 30;
     setInterval(updateAll, 1000 / framesPerSecond);
-    player.reset();
     setupInput();
+    //player.reset();
     timer.setupTimer();
     initializeDefaultItems();
     console.log(note);
     initializeObtainableItems();
     console.log(arrayOfObtainableItems);
     //stebs_warped_radar_song.resumeSound();
+    loadLevel(locationList[locationNow]);
+}
+
+function nextLevel() {
+	locationNow++;
+	if(locationNow >= locationList.length) {
+		locationNow = 0;
+	}
+	loadLevel(locationList[locationNow]);
+}
+
+function loadLevel(whichLevel) {
+	worldGrid = whichLevel.slice();
+    player.reset();
 }
 
 function updateAll() {

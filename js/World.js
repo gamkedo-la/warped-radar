@@ -53,7 +53,7 @@ function rowColToArrayIndex(col, row) {
 }
 
 function tileTypeHasTransparency(tileToCheck) {
-    let hasTransparency;
+    /*let hasTransparency;
 
     if (tileToCheck ===
 
@@ -71,7 +71,9 @@ function tileTypeHasTransparency(tileToCheck) {
     } else {
         hasTransparency = false
     }
-    return hasTransparency;
+    return hasTransparency;*/
+    
+    return (tileToCheck == TILE_BROKEN_SKATEBOARD || tileToCheck == TILE_BURNER_PHONE || tileToCheck == TILE_CROWBAR || tileToCheck == TILE_HOODIE || tileToCheck == TILE_MEDICAL_NOTEBOOK || tileToCheck == TILE_SEALED_TUBE || tileToCheck == TILE_THUMB_DRIVE || tileToCheck == TILE_TRAIN_TICKET);
 }
 
 function drawWorld() {
@@ -83,27 +85,24 @@ function drawWorld() {
 
     for (let eachRow = 0; eachRow < minRowSize; eachRow++) {
         for (let eachCol = 0; eachCol < minColSize; eachCol++) {
-            let arrayIndex = rowColToArrayIndex(eachCol, eachRow);
-            let tileKindHere = worldGrid[arrayIndex];
+            let tileKindHere;
+            if (eachCol < worldCols && eachRow < worldRows) {
+                let arrayIndex = rowColToArrayIndex(eachCol, eachRow);
+                tileKindHere = worldGrid[arrayIndex];
+            } else {
+                tileKindHere = 0; // or whatever default/black to fill in with
+            }
             let useImg = worldPics[tileKindHere];
             if (tileTypeHasTransparency(tileKindHere)) { //draw tile with inventory item
                 scaledContext.drawImage(worldPics[TILE_GROUND], drawTileX, drawTileY);
             } //draw tile without inventory item
 
-            if (eachCol < worldCols && eachRow < worldRows && locationList[locationNow] == theCity) {
-                scaledContext.drawImage(useImg, drawTileX, drawTileY);
-            } else {
-                if (eachCol < 6 && eachRow < 8) {
-                    scaledContext.drawImage(useImg, drawTileX, drawTileY);
-                } else {
-                    drawRectToContext(scaledContext, drawTileX, drawTileY, WORLD_W, WORLD_H, "black", 1);
-                }
-            }
+            scaledContext.drawImage(useImg, drawTileX, drawTileY);
+
             //assignXAndYCoordinatesOfItems(tileKindHere, drawTileX,drawTileY);
             drawGrid(drawTileX, drawTileY);
 
             drawTileX += WORLD_W;
-            arrayIndex++;
 
         } //end of inner part of nested for loop (columns)
         drawTileY += WORLD_H;

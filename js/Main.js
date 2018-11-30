@@ -52,17 +52,23 @@ function startGame() {
 }
 
 function nextLevel() {
-	locationNow++;
-	if(locationNow >= locationList.length) {
-		locationNow = 0;
-	}
-	loadLevel(locationList[locationNow].layout);
+    locationNow++;
+    if (locationNow >= locationList.length) {
+        locationNow = 0;
+    }
+
+    loadLevel(locationList[locationNow]);
 }
 
 function loadLevel(whichLevel) {
-	worldGrid = whichLevel.slice();
+    worldGrid = whichLevel.layout.slice();
+    // these need to be updated to reflect the new location
+    worldCols = whichLevel.columns;
+    worldRows = whichLevel.rows;
+
     player.reset();
 }
+
 
 function updateAll() {
     updateSceneTick();
@@ -72,7 +78,7 @@ function updateAll() {
 
 function moveAll() {
     player.move();
-    checkForObtainableItems();//in obtainableItems.js
+    checkForObtainableItems(); //in obtainableItems.js
     triggerNPCDialogue();
     cameraFollow();
     levelEditor.showNewGrid();
@@ -84,7 +90,7 @@ function drawAll() {
     drawWorld();
     player.draw();
     if (debug) {
-    	player.collider.draw("red");
+        player.collider.draw("red");
     }
     drawAndInitNPCs();
     drawWeatherEffects();
@@ -95,7 +101,6 @@ function drawAll() {
     endPan();
     showCutsceneDialogue();
     //triggerTestScene();
-    console.log(locationList[locationNow].name + ": " + worldCols);
     levelEditor.roomTileCoordinate();
 }
 

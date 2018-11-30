@@ -99,6 +99,7 @@ function drawAll() {
     drawDebugText();
     createDialogueEvents();
     inventory.draw();
+    inventory.interactWithItems();
     endPan();
     showCutsceneDialogue();
     //triggerTestScene();

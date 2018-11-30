@@ -53,7 +53,7 @@ function rowColToArrayIndex(col, row) {
 }
 
 function tileTypeHasTransparency(tileToCheck) {
-    /*let hasTransparency;
+    let hasTransparency;
 
     if (tileToCheck ===
 
@@ -71,9 +71,8 @@ function tileTypeHasTransparency(tileToCheck) {
     } else {
         hasTransparency = false
     }
-    return hasTransparency;*/
+    return hasTransparency;
     
-    return (tileToCheck == TILE_BROKEN_SKATEBOARD || tileToCheck == TILE_BURNER_PHONE || tileToCheck == TILE_CROWBAR || tileToCheck == TILE_HOODIE || tileToCheck == TILE_MEDICAL_NOTEBOOK || tileToCheck == TILE_SEALED_TUBE || tileToCheck == TILE_THUMB_DRIVE || tileToCheck == TILE_TRAIN_TICKET);
 }
 
 function drawWorld() {

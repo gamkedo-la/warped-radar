@@ -2,6 +2,9 @@ let inventory = new(function () {
     this.isShowing = false;
     this.x = 95;
     this.y = 110;
+    this.showActions = false;
+    this.selectAction = false;
+    this.index = 0;
 
     let navigationSound = voiceHigh2;
 
@@ -20,53 +23,57 @@ let inventory = new(function () {
     let slotBetweenX = 55;
     let slotBetweenY = 25;
 
-    let inventoryIndex = 0;
-
     let inventoryImg = inventoryPic;
     let textFontFace = "30px consolas";
     let textColour = "white";
     let textAlign = "left";
 
-    let titleTextX = 320;
+    let titleTextX = 320 + 80;
     let titleTextY = this.y + 40;
 
     let descFontFace = "20px consolas";
-    let descX = this.x + width / 2;
+    let descX = this.x + 60;
     let descY = this.y + 200;
 
-    this.inventoryItems = [];
+    let itemActionCursorX = 0;
+    let itemActionCursorY = 0;
+
+    let actionCursor = 0;
+    let selectedAction = -1;
+
+    this.items = [];
 
     this.navigate = function (keyCode) {
-        if (this.isShowing) {
+        if (this.isShowing && !this.showActions && !this.selectAction) {
             switch (keyCode) {
                 case KEY_D:
                 case KEY_RIGHT:
-                    inventoryIndex++;
+                    this.index++;
                     navigationSound.play();
                     break;
                 case KEY_A:
                 case KEY_LEFT:
-                    inventoryIndex--;
+                    this.index--;
                     navigationSound.play();
                     break;
                 case KEY_W:
                 case KEY_UP:
-                    inventoryIndex -= 4;
+                    this.index -= 4;
                     navigationSound.play();
                     break;
                 case KEY_S:
                 case KEY_DOWN:
-                    inventoryIndex += 4;
+                    this.index += 4;
                     navigationSound.play();
                     break;
                 case KEY_SPACE:
                     //action - use item? give item?
                     break;
             }
-            if (inventoryIndex >= slots.length) {
-                inventoryIndex = inventoryIndex - slots.length;
-            } else if (inventoryIndex < 0) {
-                inventoryIndex = inventoryIndex + slots.length;
+            if (this.index >= slots.length) {
+                this.index = this.index - slots.length;
+            } else if (this.index < 0) {
+                this.index = this.index + slots.length;
             }
         }
     }
@@ -81,7 +88,7 @@ let inventory = new(function () {
                 let itemCellY = slotY + ((slotHeight + slotBetweenY) * Math.floor(i / slotCols));
 
                 canvasContext.save();
-                if (i === inventoryIndex) {
+                if (i === this.index) {
                     canvasContext.fillStyle = 'purple';
                 } else {
                     canvasContext.fillStyle = 'darkblue';
@@ -94,21 +101,26 @@ let inventory = new(function () {
 
     this.drawItems = function () {
         if (this.isShowing) {
-            for (let i = 0; i < inventory.inventoryItems.length; i++) {
-                if (inventory.inventoryItems[i]) {
+            for (let i = 0; i < this.items.length; i++) {
+                if (this.items[i]) {
                     let itemCellX = slotX + ((slotWidth + slotBetweenX) * (i % slotCols));
                     let itemCellY = slotY + ((slotHeight + slotBetweenY) * Math.floor(i / slotCols));
                     canvasContext.fillStyle = "white";
-                    canvasContext.drawImage(inventory.inventoryItems[i].image, itemCellX+5,itemCellY+5, slotWidth*0.9,slotHeight*0.9);
+                    canvasContext.drawImage(inventory.items[i].image, itemCellX + 5, itemCellY + 5, slotWidth * 0.9, slotHeight * 0.9);
                 }
             }
         }
     }
 
+
     this.drawItemDescription = function () {
-      if (inventory.inventoryItems[inventoryIndex]) {
-        colorText(inventory.inventoryItems[inventoryIndex].description, descX - 125,descY + 125, textFontFace, textFontFace, textAlign, 1);
-      }
+        let descFontFace = "20px Consolas"
+        if (!this.showActions && !this.selectAction) {
+            if (this.items[this.index]) {
+                colorText(this.items[this.index].name + ": ", descX, descY + 90, "yellow", descFontFace, textAlign, 1);
+                colorText(this.items[this.index].description, descX, descY + 120, "white", descFontFace, textAlign, 1);
+            }
+        }
     }
 
     this.draw = function () {
@@ -119,11 +131,76 @@ let inventory = new(function () {
             this.drawItemDescription();
             this.drawItems();
         } else {
-            inventoryIndex = 0;
+            this.index = 0;
         }
     }
 
-    this.toggle = function() {
+    this.interactWithItems = function () {
+        var choiceColour;
+        var actionfontFace = "20px Consolas";
+        var textColour = "white";
+        var selectedTextColour = "orange";
+        var cursorTextColour = "yellow";
+        var itemSpace = 30;
+        if (this.isShowing) {
+            if (this.showActions) {
+                for (let i = 0; i < this.items[this.index].actions.length; i++) {
+                    if (actionCursor == i) {
+                        let cursorXOffset = 12;
+                        let cursorYOffset = 17;
+                        itemActionCursorX = descX - cursorXOffset;
+                        itemActionCursorY = (descY + itemSpace * i) - cursorYOffset;
+                        if (interact_key) {
+                            choiceColour = selectedTextColour;
+                        } else {
+                            choiceColour = cursorTextColour;
+                        }
+                    } else {
+                        choiceColour = textColour;
+                    }
+                    colorText(inventory.items[inventory.index].actions[i][0], 15 + descX, (descY + 95) + itemSpace * i, choiceColour, actionfontFace, textAlign, 1);
+                }
+            }
+            if (this.selectAction && !this.showActions) {
+                let letterCounter = 0;
+                colorText(inventory.items[inventory.index].actions[actionCursor][1], 15 + descX, (descY + 95), choiceColour, actionfontFace, textAlign, 1);
+            }
+            this.updateActionCursor();
+        }
+    }
+
+    this.updateActionCursor = function () {
+        if (interact_key) {
+            if (cursorKeyPresses === 1) {
+                if (this.showActions) {
+                    selectedAction = actionCursor;
+                    this.showActions = false;
+                    this.selectAction = true;
+                }
+            }
+        }
+        if (cursorUp && (this.showActions || this.selectAction)) {
+            if (cursorKeyPresses === 1) {
+                actionCursor--;
+                navigationSound.play();
+                if (actionCursor < 0) {
+                    actionCursor += inventory.items[inventory.index].actions.length;
+                }
+            }
+        }
+        if (cursorDown && (this.showActions || this.selectAction)) {
+            if (cursorKeyPresses === 1) {
+                actionCursor = (actionCursor + 1) % inventory.items[inventory.index].actions.length;
+                navigationSound.play();
+                if (actionCursor > inventory.items[inventory.index].actions.length - 1) {
+                    actionCursor = 0;
+                }
+            }
+        }
+        cursorKeyPresses = 0;
+    }
+
+    this.toggle = function () {
         if (!levelEditor.isOn) {
             this.isShowing = !this.isShowing;
         }

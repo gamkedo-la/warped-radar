@@ -145,13 +145,13 @@ function obtainItemIfApplicable() {
             }//end of column loop
           }//end of row loop
 
-      inventory.inventoryItems.push(
+      inventory.items.push(
         {
           name: arrayOfObtainableItems[i].name,
           description: arrayOfObtainableItems[i].description,
           image: arrayOfObtainableItems[i].image
         }
-      )//end of push item to inventory.inventoryItems
+      )//end of push item to inventory.items
     }//end of if itemIsObtainable
   }//end of loop through arrayOfObtainableItems
 }//end of obtainItemIfApplicable()
@@ -161,25 +161,28 @@ let note, motherboard, memoryChip;
 function initializeDefaultItems() {
   note = {
     name: "Note",
-    description: "Uncle Dave's Note",
-    image: notePic
+    description: "It's Uncle Dave's Note",
+    image: notePic,
+    actions: [["Read", "It's missing a piece"], ["Talk to", "Hello note. You're the only one that understands me"], ["Give to", "Give to who?"]]
   };
 
-  inventory.inventoryItems.push(note);
+  inventory.items.push(note);
 
   motherboard = {
     name: "Motherboard",
-    description: "Motherboard",
-    image: motherboardPic
+    description: "It's a Motherboard",
+    image: motherboardPic,
+    actions: [["Look at", "Looks like it was ripped out of something"], ["Throw away", "No, I can't litter!"], ["Eat", "I'm hungry, but I'll refrain the urges this time"]]
   }
 
-  inventory.inventoryItems.push(motherboard);
+  inventory.items.push(motherboard);
 
   memoryChip = {
     name: "Memory Chip",
-    description: "Memory Chip",
-    image: memoryChipPic
+    description: "It's a Memory Chip",
+    image: memoryChipPic,
+    actions: [["Use", "Can I use it with the motherboard I have? ... Nope"], ["Install into self", "Sadly, this chip is outdated by at least a millenia."]]
   }
 
-  inventory.inventoryItems.push(memoryChip);
+  inventory.items.push(memoryChip);
 }

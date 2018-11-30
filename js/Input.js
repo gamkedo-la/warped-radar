@@ -76,8 +76,8 @@ function keydownHandler(evt) {
 function keysPressed() {
     let keysToPress = arguments;
 
-    for(let i = 0; i < keysToPress.length; i++) {
-        if(!keydownMap[keysToPress[i]]) { // if any key in arguments is not pressed
+    for (let i = 0; i < keysToPress.length; i++) {
+        if (!keydownMap[keysToPress[i]]) { // if any key in arguments is not pressed
             return false;
         }
     }
@@ -115,12 +115,11 @@ function keydownControl(evt, keydownMap) {
 
     if (keysPressed(KEY_SPACE) || keysPressed(KEY_ENTER)) {
         if (!levelEditor.isOn) {
-            obtainItemIfApplicable();//in obtainableItems.js
+            obtainItemIfApplicable(); //in obtainableItems.js
             incrementTextPages();
             cursorKeyPresses = isKeyPressed ? cursorKeyPresses + 1 : 0;
         }
-    } else if (keysPressed(KEY_X)) {
-    } else if (keysPressed(KEY_Z)) {
+    } else if (keysPressed(KEY_X)) {} else if (keysPressed(KEY_Z)) {
         inventory.toggle();
     } else if (keysPressed(KEY_UP) || keysPressed(KEY_W)) {
         cursorKeyPresses = isKeyPressed ? cursorKeyPresses + 1 : 0;
@@ -132,12 +131,21 @@ function keydownControl(evt, keydownMap) {
         toggleGrid();
     }
     if (keysPressed(KEY_SHIFT, KEY_D) && debug) {
-       debug = false; 
+        debug = false;
     } else if (keysPressed(KEY_SHIFT, KEY_D) && !debug) {
-       debug = true;
+        debug = true;
     }
     if (keysPressed(KEY_X)) {
         playTheScene = !playTheScene;
+    }
+    if (keysPressed(KEY_SPACE)) {
+        if (inventory.isShowing && !inventory.selectAction) {
+            if (!inventory.showActions && !inventory.returnToMenu) {
+                setTimeout(function () {
+                    inventory.showActions = true;
+                }, 40);
+            }
+        }
     }
 }
 

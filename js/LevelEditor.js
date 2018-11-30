@@ -73,13 +73,7 @@ let levelEditor = new(function () {
 
     this.showNewGrid = function () {
         if (showNewGrid) {
-            let newGridName = prompt("What do you name this grid?");
-            if (newGridName == null) {
-                showNewGrid = false;
-                return;
-            }
-            if (newGridName == "") newGridName = "worldGrid";
-            console.log("let " + newGridName + " = \n{ \n" + "layout: [" + worldGrid + "]\n};");
+            console.log("let " + locationList[locationNow].name + " = \n{ \n" + "layout: [" + worldGrid + "],\n" + "columns: " + locationList[locationNow].columns + ",\n" + "rows: " + locationList[locationNow].rows + ",\n" + "name: " + "\"" + locationList[locationNow].name + "\"" + "\n}");
             showNewGrid = false;
             this.isOn = false;
         }

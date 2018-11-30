@@ -2,8 +2,8 @@ function initializeObtainableItems() {
   let arrayIndex = 0;
   let tileX = 0;
   let tileY = 0;
-  for (let eachRow = 0; eachRow < WORLD_ROWS; eachRow++) {
-      for (let eachCol = 0; eachCol < WORLD_COLS; eachCol++) {
+  for (let eachRow = 0; eachRow < worldRows; eachRow++) {
+      for (let eachCol = 0; eachCol < worldCols; eachCol++) {
           let arrayIndex = rowColToArrayIndex(eachCol, eachRow);
           let tileKindHere = worldGrid[arrayIndex];
            switch (tileKindHere) {
@@ -136,8 +136,8 @@ function obtainItemIfApplicable() {
       arrayOfObtainableItems[i].rightEdge = undefined;
       arrayOfObtainableItems[i].topEdge = undefined;
       arrayOfObtainableItems[i].bottomEdge = undefined;
-      for (let eachRow = 0; eachRow < WORLD_ROWS; eachRow++) {//replace item tile with ground tile
-          for (let eachCol = 0; eachCol < WORLD_COLS; eachCol++) {
+      for (let eachRow = 0; eachRow < worldRows; eachRow++) {//replace item tile with ground tile
+          for (let eachCol = 0; eachCol < worldCols; eachCol++) {
               let arrayIndex = rowColToArrayIndex(eachCol, eachRow);
               if (worldGrid[arrayIndex] === arrayOfObtainableItems[i].tileType) {
                 worldGrid[arrayIndex] = TILE_GROUND;

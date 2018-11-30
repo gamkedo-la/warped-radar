@@ -28,7 +28,7 @@ function getTextWidth(txt, font) {
 }
 
 function rowColToArrayIndex(col, row) {
-    return col + WORLD_COLS * row;
+    return col + worldCols * row;
 }
 
 function getTileTypeAtPixelCoord(x, y) {
@@ -45,11 +45,11 @@ function getTileIndexAtPixelCoord(x, y) {
 }
 
 function arrayIndexToCol(index) {
-	return index % WORLD_COLS;
+	return index % worldCols;
 }
 
 function arrayIndexToRow(index) {
-	return Math.floor(index / WORLD_COLS);
+	return Math.floor(index / worldCols);
 }
 
 function colToCenteredX(col) {

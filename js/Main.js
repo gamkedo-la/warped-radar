@@ -39,16 +39,16 @@ window.onload = function () {
 
 function startGame() {
     let framesPerSecond = 30;
+    worldGrid = Array.from(locationList[locationNow].layout);
     setInterval(updateAll, 1000 / framesPerSecond);
     setupInput();
-    //player.reset();
+    player.reset();
     timer.setupTimer();
     initializeDefaultItems();
     console.log(note);
     initializeObtainableItems();
     console.log(arrayOfObtainableItems);
     //stebs_warped_radar_song.resumeSound();
-    loadLevel(locationList[locationNow]);
 }
 
 function nextLevel() {
@@ -56,7 +56,7 @@ function nextLevel() {
 	if(locationNow >= locationList.length) {
 		locationNow = 0;
 	}
-	loadLevel(locationList[locationNow]);
+	loadLevel(locationList[locationNow].layout);
 }
 
 function loadLevel(whichLevel) {

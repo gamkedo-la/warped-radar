@@ -1,7 +1,5 @@
 const WORLD_W = 80;
 const WORLD_H = 80;
-const WORLD_COLS = 18;
-const WORLD_ROWS = 16;
 
 const TILE_GROUND = 0;
 const TILE_WALL = 1;
@@ -36,55 +34,24 @@ const TILE_SWITCH_LOCATION = 25;
 
 let solidTiles = [1, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
 
-let johnsHouse = [
-1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
-1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
-1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,1,1,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
-];
-
-let theCity =
-[
-1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
-1,0,0,0,0,0,0,6,0,0,0,0,0,0,0,0,0,1,
-1,0,0,0,0,0,0,6,11,12,13,0,0,0,0,0,0,
-1,1,0,0,0,0,0,0,6,14,15,16,0,0,0,0,0,
-0,1,1,4,4,4,4,4,4,5,0,0,0,0,0,0,0,0,
-0,1,1,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,1,1,0,0,0,0,0,0,0,0,0,18,0,0,0,0,0,
-0,1,1,0,17,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,1,1,0,0,0,0,19,0,0,0,0,20,0,0,0,0,0,
-0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,1,1,0,0,0,0,21,0,0,0,0,22,0,0,0,0,0,
-0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,1,1,0,0,0,0,23,0,0,0,0,0,24,0,0,0,0,
-0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
-];
-
 
 var locationList = [theCity, johnsHouse];
 var locationNow = 0;
+
+var worldCols = locationList[locationNow].columns; // both of these depend on level,
+var worldRows = locationList[locationNow].rows; // these numbers are for level 1
+
 var worldGrid = [];
+
+console.log("Current level: " + locationNow + " size: " + worldCols + 'x' + worldRows); 
+
+worldGrid = Array.from(locationList[locationNow].layout);
 
 let visibleGrid = false;
 
 
 function rowColToArrayIndex(col, row) {
-    return col + WORLD_COLS * row;
+    return col + worldCols * row;
 }
 
 function tileTypeHasTransparency(tileToCheck) {
@@ -113,8 +80,8 @@ function drawWorld() {
     let arrayIndex = 0;
     let drawTileX = 0;
     let drawTileY = 0;
-    for (let eachRow = 0; eachRow < WORLD_ROWS; eachRow++) {
-        for (let eachCol = 0; eachCol < WORLD_COLS; eachCol++) {
+    for (let eachRow = 0; eachRow < worldRows; eachRow++) {
+        for (let eachCol = 0; eachCol < worldCols; eachCol++) {
             let arrayIndex = rowColToArrayIndex(eachCol, eachRow);
             let tileKindHere = worldGrid[arrayIndex];
             let useImg = worldPics[tileKindHere];
@@ -137,8 +104,8 @@ function drawWorld() {
 
 
 function returnTileTypeAtColRow(col, row) {
-    if (col >= 0 && col < WORLD_COLS &&
-        row >= 0 && row < WORLD_ROWS) {
+    if (col >= 0 && col < worldCols &&
+        row >= 0 && row < worldRows) {
         var worldIndexUnderCoord = rowColToArrayIndex(col, row);
         return worldGrid[worldIndexUnderCoord];
     } else {
@@ -151,8 +118,8 @@ function playerWorldHandling(whichEntity) {
     var playerWorldRow = Math.floor(whichEntity.y / WORLD_H);
     var trackIndexUnderCar = rowColToArrayIndex(playerWorldCol, playerWorldRow);
 
-    if (playerWorldCol >= 0 && playerWorldCol < WORLD_COLS &&
-        playerWorldRow >= 0 && playerWorldRow < WORLD_ROWS) {
+    if (playerWorldCol >= 0 && playerWorldCol < worldCols &&
+        playerWorldRow >= 0 && playerWorldRow < worldRows) {
         var tileHere = returnTileTypeAtColRow(playerWorldCol, playerWorldRow);
 
         if (tileHere == TILE_SWITCH_LOCATION) {

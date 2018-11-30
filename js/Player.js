@@ -53,8 +53,8 @@ let player = new(function () {
     }
 
     this.reset = function () {
-        for (let eachRow = 0; eachRow < WORLD_COLS; eachRow++) {
-            for (let eachCol = 0; eachCol < WORLD_ROWS; eachCol++) {
+        for (let eachRow = 0; eachRow < worldCols; eachRow++) {
+            for (let eachCol = 0; eachCol < worldRows; eachCol++) {
                 let arrayIndex = rowColToArrayIndex(eachCol, eachRow);
                 if (worldGrid[arrayIndex] == TILE_PLAYER_START || worldGrid[arrayIndex] == TILE_PLAYERS_TILE) {
                     worldGrid[arrayIndex] = TILE_PLAYERS_TILE; //workaround for level editor? currently set to ground

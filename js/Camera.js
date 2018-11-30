@@ -19,8 +19,8 @@ function findEdgesOfScreen() {
     if (camPanY < 0) {
         camPanY = 0;
     }
-    let maxPanRight = WORLD_COLS * WORLD_W - scaledCanvas.width;
-    let maxPanTop = WORLD_ROWS * WORLD_H - scaledCanvas.height;
+    let maxPanRight = worldCols * WORLD_W - scaledCanvas.width;
+    let maxPanTop = worldRows * WORLD_H - scaledCanvas.height;
     if (camPanX > maxPanRight) {
         camPanX = maxPanRight;
     }

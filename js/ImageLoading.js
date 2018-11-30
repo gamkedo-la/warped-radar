@@ -34,7 +34,6 @@ let johnIdleAnimation = document.createElement("img");
 let rainEffectImage = document.createElement("img");
 let fogEffectImage = document.createElement("img");
 
-
 let building = document.createElement("img");
 
 let picsToLoad = 0;
@@ -94,6 +93,9 @@ function loadImages() {
         {worldType: TILE_SEALED_TUBE, theFile: "sealed_tube.png"},
         {worldType: TILE_THUMB_DRIVE, theFile: "thumb_drive.png"},
         {worldType: TILE_TRAIN_TICKET, theFile: "train_ticket.png"},
+        
+        //VEHICLES
+    
 
         //TILES
         {worldType: TILE_GROUND, theFile: "ground.png"},

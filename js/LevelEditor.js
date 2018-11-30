@@ -79,7 +79,7 @@ let levelEditor = new(function () {
                 return;
             }
             if (newGridName == "") newGridName = "worldGrid";
-            console.log("let " + newGridName + " = \n[ \n" + worldGrid + "\n];");
+            console.log("let " + newGridName + " = \n{ \n" + "layout: [" + worldGrid + "]\n};");
             showNewGrid = false;
             this.isOn = false;
         }

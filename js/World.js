@@ -34,21 +34,19 @@ const TILE_SWITCH_LOCATION = 25;
 
 let solidTiles = [1, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
 
-
 var locationList = [theCity, johnsHouse];
 var locationNow = 0;
 
-var worldCols = locationList[locationNow].columns; // both of these depend on level,
-var worldRows = locationList[locationNow].rows; // these numbers are for level 1
+var worldCols = locationList[locationNow].columns;
+var worldRows = locationList[locationNow].rows;
 
 var worldGrid = [];
 
-console.log("Current level: " + locationNow + " size: " + worldCols + 'x' + worldRows); 
+console.log("Current location: " + locationNow + " size: " + worldCols + 'x' + worldRows);
 
 worldGrid = Array.from(locationList[locationNow].layout);
 
 let visibleGrid = false;
-
 
 function rowColToArrayIndex(col, row) {
     return col + worldCols * row;
@@ -80,16 +78,24 @@ function drawWorld() {
     let arrayIndex = 0;
     let drawTileX = 0;
     let drawTileY = 0;
-    for (let eachRow = 0; eachRow < worldRows; eachRow++) {
-        for (let eachCol = 0; eachCol < worldCols; eachCol++) {
+    let minColSize = 18;
+    let minRowSize = 16;
+
+    for (let eachRow = 0; eachRow < minRowSize; eachRow++) {
+        for (let eachCol = 0; eachCol < minColSize; eachCol++) {
             let arrayIndex = rowColToArrayIndex(eachCol, eachRow);
             let tileKindHere = worldGrid[arrayIndex];
             let useImg = worldPics[tileKindHere];
-
             if (tileTypeHasTransparency(tileKindHere)) { //draw tile with inventory item
                 scaledContext.drawImage(worldPics[TILE_GROUND], drawTileX, drawTileY);
             } //draw tile without inventory item
-            scaledContext.drawImage(useImg, drawTileX, drawTileY);
+
+            if (eachCol <= worldCols && eachRow <= worldRows && worldCols) {
+                scaledContext.drawImage(useImg, drawTileX, drawTileY);
+            } else {
+                drawRectToContext(scaledContext, drawTileX, drawTileY, WORLD_W, WORLD_H, "black", 1);
+            }
+
             //assignXAndYCoordinatesOfItems(tileKindHere, drawTileX,drawTileY);
             drawGrid(drawTileX, drawTileY);
 
@@ -100,6 +106,7 @@ function drawWorld() {
         drawTileY += WORLD_H;
         drawTileX = 0;
     } //end of outer part of nested for loop (rows)
+
 } //end of draw world
 
 

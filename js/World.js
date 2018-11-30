@@ -34,7 +34,7 @@ const TILE_SWITCH_LOCATION = 25;
 
 let solidTiles = [1, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
 
-var locationList = [theCity, johnsHouse];
+var locationList = [theCity, johnsRoom];
 var locationNow = 0;
 
 var worldCols = locationList[locationNow].columns;
@@ -90,12 +90,15 @@ function drawWorld() {
                 scaledContext.drawImage(worldPics[TILE_GROUND], drawTileX, drawTileY);
             } //draw tile without inventory item
 
-            if (eachCol <= worldCols && eachRow <= worldRows && worldCols) {
+            if (eachCol < worldCols && eachRow < worldRows && locationList[locationNow] == theCity) {
                 scaledContext.drawImage(useImg, drawTileX, drawTileY);
             } else {
-                drawRectToContext(scaledContext, drawTileX, drawTileY, WORLD_W, WORLD_H, "black", 1);
+                if (eachCol < 6 && eachRow < 8) {
+                    scaledContext.drawImage(useImg, drawTileX, drawTileY);
+                } else {
+                    drawRectToContext(scaledContext, drawTileX, drawTileY, WORLD_W, WORLD_H, "black", 1);
+                }
             }
-
             //assignXAndYCoordinatesOfItems(tileKindHere, drawTileX,drawTileY);
             drawGrid(drawTileX, drawTileY);
 

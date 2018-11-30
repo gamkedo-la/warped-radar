@@ -5,12 +5,12 @@ function OverworldObject() {
     this.h = 32;
     this.colour = "#6B6570";
     this.messageCounter = 0;
-    
+
     this.states = {
         walking: false
     }
-    
-   this.facing = {
+
+    this.facing = {
         north: false,
         south: true,
         east: false,
@@ -20,28 +20,27 @@ function OverworldObject() {
         southEast: false,
         southWest: false
     }
-    
+
     this.draw = function () {
         drawRectToContext(scaledContext, this.x, this.y, this.w, this.h, this.colour, 1);
     }
 
     this.collidingWithPlayer = function () {
         // Find middle point on the bottom - feet
-        let playerX = player.x + johnSprite.width/2; 
-        let playerY = player.y + johnSprite.height/2;
-        let objX = this.x + this.w/2;
+        let playerX = player.x + johnSprite.width / 2;
+        let playerY = player.y + johnSprite.height / 2;
+        let objX = this.x + this.w / 2;
         let objY = this.y + this.h;
         // Calculate the distance between player and NPC from that point
         let x = Math.abs(playerX - objX);
         let y = Math.abs(playerY - objY);
-        let distance = Math.sqrt(x*x +y*y);
+        let distance = Math.sqrt(x * x + y * y);
 
-        let radius = 80;
-        if(distance <= radius) {
+        let radius = 60;
+        if (distance <= radius) {
             return true;
-        } else {
-            return false;
         }
+        return false;
     }
 
     this.onTrigger = function (dialogue) {

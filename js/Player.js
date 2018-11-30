@@ -1,8 +1,8 @@
 let player = new(function () {
     this.x = 100;
     this.y = 100;
-    this.w = 64;
-    this.h = 64;
+    //this.w = 64;
+    //this.h = 64;
     this.walkSpeed = 4;
 
     this.keyHeld_walkUp = false;

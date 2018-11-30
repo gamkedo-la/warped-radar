@@ -95,6 +95,7 @@ function drawAll() {
     endPan();
     showCutsceneDialogue();
     //triggerTestScene();
+    console.log(locationList[locationNow].name + ": " + worldCols);
     levelEditor.roomTileCoordinate();
 }
 

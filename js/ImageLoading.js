@@ -2,6 +2,8 @@ let dialogueBoxPic = document.createElement("img");
 let textArrowSheet = document.createElement("img");
 let choiceCursorPic = document.createElement("img");
 
+let johnSprite = new Image();
+
 let notePic = document.createElement("img");
 let motherboardPic = document.createElement("img");
 let memoryChipPic = document.createElement("img");
@@ -74,6 +76,7 @@ function loadImages() {
         {varName: roseMouthAnimatedSheet, theFile: "rosemouthmove.png"},
 
         //OVERWORLD CHARACTER ANIMS
+        {varName: johnSprite, theFile: "johnside.png"},
         {varName: johnAnimation, theFile: "johnsprite-sheet.png"},
         {varName: johnIdleAnimation, theFile: "johnspriteidle-sheet.png"},
         {varName: johnSideAnimation, theFile: "johnspriteside-sheet.png"},

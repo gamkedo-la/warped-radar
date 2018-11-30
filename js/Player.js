@@ -59,7 +59,7 @@ let player = new(function () {
                 if (worldGrid[arrayIndex] == TILE_PLAYER_START || worldGrid[arrayIndex] == TILE_PLAYERS_TILE) {
                     worldGrid[arrayIndex] = TILE_PLAYERS_TILE; 
                     this.x = eachCol * WORLD_W + WORLD_W / 2;
-                    this.y = eachRow * WORLD_H - WORLD_H / 2;
+                    this.y = eachRow * WORLD_H + ((WORLD_H / 2) - 20);
                     this.collider.setCollider(this.x, this.y);
                     return;
                 }

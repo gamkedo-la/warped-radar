@@ -65,7 +65,8 @@ function loadLevel(whichLevel) {
     // these need to be updated to reflect the new location
     worldCols = whichLevel.columns;
     worldRows = whichLevel.rows;
-
+    camPanX = 0;
+    camPanY = 0;
     player.reset();
 }
 

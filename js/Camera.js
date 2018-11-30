@@ -49,32 +49,29 @@ function cameraFollow() {
         }
         findEdgesOfScreen();
     } else {
-        if (worldCols > 8 && worldRows > 8) {
-            let cameraFocusCenterX = camPanX + scaledCanvas.width / 2;
-            let cameraFocusCenterY = camPanY + scaledCanvas.height / 2;
+        let cameraFocusCenterX = camPanX + scaledCanvas.width / 2;
+        let cameraFocusCenterY = camPanY + scaledCanvas.height / 2;
 
-            let playerDistFromCameraFocusX = Math.abs(player.x - cameraFocusCenterX);
-            let playerDistFromCameraFocusY = Math.abs(player.y - cameraFocusCenterY);
+        let playerDistFromCameraFocusX = Math.abs(player.x - cameraFocusCenterX);
+        let playerDistFromCameraFocusY = Math.abs(player.y - cameraFocusCenterY);
 
-            if (playerDistFromCameraFocusX > PLAYER_DIST_FROM_CENTER_BEFORE_CAMERA_PAN_X) {
-                if (cameraFocusCenterX < player.x) {
-                    camPanX += CAM_SPEED;
-                } else {
-                    camPanX -= CAM_SPEED;
-                }
+        if (playerDistFromCameraFocusX > PLAYER_DIST_FROM_CENTER_BEFORE_CAMERA_PAN_X) {
+            if (cameraFocusCenterX < player.x) {
+                camPanX += CAM_SPEED;
+            } else {
+                camPanX -= CAM_SPEED;
             }
-            if (playerDistFromCameraFocusY > PLAYER_DIST_FROM_CENTER_BEFORE_CAMERA_PAN_Y) {
-                if (cameraFocusCenterY < player.y) {
-                    camPanY += CAM_SPEED;
-                } else {
-                    camPanY -= CAM_SPEED;
-                }
-            }
-            instantCamFollow();
-            findEdgesOfScreen();
         }
+        if (playerDistFromCameraFocusY > PLAYER_DIST_FROM_CENTER_BEFORE_CAMERA_PAN_Y) {
+            if (cameraFocusCenterY < player.y) {
+                camPanY += CAM_SPEED;
+            } else {
+                camPanY -= CAM_SPEED;
+            }
+        }
+        instantCamFollow();
+        findEdgesOfScreen();
     }
-
 }
 
 function beginPan() {

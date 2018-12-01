@@ -161,9 +161,9 @@ let note, motherboard, memoryChip;
 function initializeDefaultItems() {
   note = {
     name: "Note",
-    description: "It's Uncle Dave's Note",
+    description: "It's missing a piece",
     image: notePic,
-    actions: [["Read", "It's missing a piece"], ["Talk to", "Hello note. You're the only one that understands me"], ["Give to", "Give to who?"]]
+    actions: [["Read", "I can't read it just yet"], ["Talk to", "Hello note. You're the only one that understands me"], ["Give to", "Give to who?"]]
   };
 
   inventory.items.push(note);
@@ -172,7 +172,7 @@ function initializeDefaultItems() {
     name: "Motherboard",
     description: "It's a Motherboard",
     image: motherboardPic,
-    actions: [["Look at", "Looks like it was ripped out of something"], ["Throw away", "No, I can't litter!"], ["Eat", "I'm hungry, but I'll refrain the urges this time"]]
+    actions: [["Look at", "...I feel like I should be doing something more important"], ["Throw away", "No, I can't litter!"], ["Eat", "I'm hungry, but not THAT hungry!"]]
   }
 
   inventory.items.push(motherboard);
@@ -181,7 +181,7 @@ function initializeDefaultItems() {
     name: "Memory Chip",
     description: "It's a Memory Chip",
     image: memoryChipPic,
-    actions: [["Use", "Can I use it with the motherboard I have? ... Nope"], ["Install into self", "Sadly, this chip is outdated by at least a millenia."]]
+    actions: [["Use", "It's too old to use anywhere"], ["Install into self", "Sadly, this chip is outdated by at least a millenia."]]
   }
 
   inventory.items.push(memoryChip);

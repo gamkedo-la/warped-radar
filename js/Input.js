@@ -119,8 +119,12 @@ function keydownControl(evt, keydownMap) {
             incrementTextPages();
             cursorKeyPresses = isKeyPressed ? cursorKeyPresses + 1 : 0;
         }
-    } else if (keysPressed(KEY_X)) {} else if (keysPressed(KEY_Z)) {
-        inventory.toggle();
+    } else if (keysPressed(KEY_X)) {
+
+    } else if (keysPressed(KEY_Z)) {
+        if (!inventory.showActions && !inventory.selectAction) {
+            inventory.toggle();
+        }
     } else if (keysPressed(KEY_UP) || keysPressed(KEY_W)) {
         cursorKeyPresses = isKeyPressed ? cursorKeyPresses + 1 : 0;
     } else if (keysPressed(KEY_DOWN) || keysPressed(KEY_S)) {
@@ -139,8 +143,8 @@ function keydownControl(evt, keydownMap) {
         playTheScene = !playTheScene;
     }
     if (keysPressed(KEY_SPACE)) {
-        if (inventory.isShowing && !inventory.selectAction) {
-            if (!inventory.showActions && !inventory.returnToMenu) {
+        if (inventory.items[inventory.index] != undefined && inventory.isShowing) {
+            if (!inventory.showActions && !inventory.selectAction) {
                 setTimeout(function () {
                     inventory.showActions = true;
                 }, 40);

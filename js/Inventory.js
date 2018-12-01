@@ -40,6 +40,7 @@ let inventory = new(function () {
 
     let actionCursor = 0;
     let selectedAction = -1;
+    let letterCounter = 0;
 
     this.items = [];
 
@@ -142,14 +143,11 @@ let inventory = new(function () {
         var selectedTextColour = "orange";
         var cursorTextColour = "yellow";
         var itemSpace = 30;
+        
         if (this.isShowing) {
             if (this.showActions) {
                 for (let i = 0; i < this.items[this.index].actions.length; i++) {
                     if (actionCursor == i) {
-                        let cursorXOffset = 12;
-                        let cursorYOffset = 17;
-                        itemActionCursorX = descX - cursorXOffset;
-                        itemActionCursorY = (descY + itemSpace * i) - cursorYOffset;
                         if (interact_key) {
                             choiceColour = selectedTextColour;
                         } else {
@@ -158,12 +156,25 @@ let inventory = new(function () {
                     } else {
                         choiceColour = textColour;
                     }
-                    colorText(inventory.items[inventory.index].actions[i][0], 15 + descX, (descY + 95) + itemSpace * i, choiceColour, actionfontFace, textAlign, 1);
+                    colorText(inventory.items[inventory.index].actions[i][0], 10 + descX, (descY + 95) + itemSpace * i, choiceColour, actionfontFace, textAlign, 1);
                 }
             }
             if (this.selectAction && !this.showActions) {
-                let letterCounter = 0;
-                colorText(inventory.items[inventory.index].actions[actionCursor][1], 15 + descX, (descY + 95), choiceColour, actionfontFace, textAlign, 1);
+                if (letterCounter < inventory.items[inventory.index].actions[actionCursor][1].length) {
+                    letterCounter += 1;
+                    voiceLow1.play();
+                } else {
+                    if (interact_key) {
+                        this.selectAction = false;
+                        this.showActions = false;
+                        letterCounter = 0;
+                        selectedAction = -1;
+                        actionCursor = 0;
+                    }
+                }
+                
+                let typewriterText = inventory.items[inventory.index].actions[actionCursor][1].substr(0, letterCounter)
+                colorText(typewriterText, descX, (descY + 95), choiceColour, actionfontFace, textAlign, 1);
             }
             this.updateActionCursor();
         }
@@ -172,7 +183,7 @@ let inventory = new(function () {
     this.updateActionCursor = function () {
         if (interact_key) {
             if (cursorKeyPresses === 1) {
-                if (this.showActions) {
+                if (this.showActions && !this.selectAction) {
                     selectedAction = actionCursor;
                     this.showActions = false;
                     this.selectAction = true;

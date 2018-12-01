@@ -190,7 +190,7 @@ let inventory = new(function () {
                 }
             }
         }
-        if (cursorUp && (this.showActions || this.selectAction)) {
+        if (cursorUp && (this.showActions && !this.selectAction)) {
             if (cursorKeyPresses === 1) {
                 actionCursor--;
                 navigationSound.play();
@@ -199,7 +199,7 @@ let inventory = new(function () {
                 }
             }
         }
-        if (cursorDown && (this.showActions || this.selectAction)) {
+        if (cursorDown && (this.showActions && !this.selectAction)) {
             if (cursorKeyPresses === 1) {
                 actionCursor = (actionCursor + 1) % inventory.items[inventory.index].actions.length;
                 navigationSound.play();

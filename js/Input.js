@@ -144,7 +144,7 @@ function keydownControl(evt, keydownMap) {
     }
     if (keysPressed(KEY_SPACE)) {
         if (inventory.items[inventory.index] != undefined && inventory.isShowing) {
-            if (!inventory.showActions && !inventory.selectAction) {
+            if (inventory.items[inventory.index].actions != undefined && (!inventory.showActions && !inventory.selectAction)) {
                 setTimeout(function () {
                     inventory.showActions = true;
                 }, 40);

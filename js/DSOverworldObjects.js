@@ -44,7 +44,7 @@ function OverworldObject() {
     }
 
     this.onTrigger = function (dialogue) {
-        if (this.collidingWithPlayer() && !dialogue.isShowing) {
+        if (this.collidingWithPlayer() && !dialogue.isShowing && !inventory.isShowing) {
             if (keysPressed(KEY_SPACE) || keysPressed(KEY_ENTER)) {
                 if (dialogue.page <= 0) {
                     dialogue.isShowing = true;

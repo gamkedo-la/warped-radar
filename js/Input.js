@@ -122,7 +122,7 @@ function keydownControl(evt, keydownMap) {
     } else if (keysPressed(KEY_X)) {
 
     } else if (keysPressed(KEY_Z)) {
-        if (!inventory.showActions && !inventory.selectAction) {
+        if (!inventory.showActions && !inventory.selectAction && playingScene == null) {
             inventory.toggle();
         }
     } else if (keysPressed(KEY_UP) || keysPressed(KEY_W)) {
@@ -143,7 +143,7 @@ function keydownControl(evt, keydownMap) {
         playTheScene = !playTheScene;
     }
     if (keysPressed(KEY_SPACE)) {
-        if (inventory.items[inventory.index] != undefined && inventory.isShowing) {
+        if (inventory.items[inventory.index] != undefined && inventory.isShowing && dialogueNotShowing()) {
             if (inventory.items[inventory.index].actions != undefined && (!inventory.showActions && !inventory.selectAction)) {
                 setTimeout(function () {
                     inventory.showActions = true;

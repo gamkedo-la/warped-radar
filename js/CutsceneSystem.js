@@ -90,7 +90,9 @@ function cutscene() {
                 nameWidth = measureText.width + textPad;
             if (sceneLetterCount < dialogue[sceneTextPage].length) {
                 sceneLetterCount += letterSpeed;
-                //voices[sceneTextPage].play();
+                if ((Math.floor(sceneLetterCount) % 2) == 0) {
+                    //voices[sceneTextPage].play();
+                }
                 if (sceneTextPage < dialogue.length - 1) timer.secondsRemaining = pauseBetweenPages + 1;
             }
             if (!showNextSceneText) {

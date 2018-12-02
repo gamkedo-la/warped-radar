@@ -46,31 +46,22 @@ let inventory = new(function () {
 
     this.navigate = function (keyCode) {
         if (this.isShowing && !this.showActions && !this.selectAction) {
-            switch (keyCode) {
-                case KEY_D:
-                case KEY_RIGHT:
-                    this.index++;
-                    navigationSound.play();
-                    break;
-                case KEY_A:
-                case KEY_LEFT:
-                    this.index--;
-                    navigationSound.play();
-                    break;
-                case KEY_W:
-                case KEY_UP:
-                    this.index -= 4;
-                    navigationSound.play();
-                    break;
-                case KEY_S:
-                case KEY_DOWN:
-                    this.index += 4;
-                    navigationSound.play();
-                    break;
-                case KEY_SPACE:
-                    //action - use item? give item?
-                    break;
+            if (keysPressed(KEY_D) || keysPressed(KEY_RIGHT)) {
+                this.index++;
+                navigationSound.play();
+            } else if (keysPressed(KEY_A) || keysPressed(KEY_LEFT)) {
+                this.index--;
+                navigationSound.play();
+            } else if (keysPressed(KEY_W) || keysPressed(KEY_UP)) {
+                this.index -= 4;
+                navigationSound.play();
+            } else if (keysPressed(KEY_S) || keysPressed(KEY_DOWN)) {
+                this.index += 4;
+                navigationSound.play();
+            } else if (keysPressed(KEY_SPACE)) {
+                //action - use item? give item?
             }
+
             if (this.index >= slots.length) {
                 this.index = this.index - slots.length;
             } else if (this.index < 0) {

@@ -9,7 +9,9 @@ const KEY_S = 83;
 const KEY_D = 68;
 
 const KEY_O = 79;
+const KEY_P = 80;
 const KEY_E = 69;
+const KEY_F = 70;
 
 const KEY_Z = 90;
 const KEY_X = 88;
@@ -133,6 +135,10 @@ function keydownControl(evt, keydownMap) {
         levelEditor.toggle();
     } else if (keysPressed(KEY_G)) {
         toggleGrid();
+    }else if (this.keysPressed(KEY_P)) {
+        //pauseRadar();       
+    }else if (this.keysPressed(KEY_SHIFT, KEY_F)) {
+        fastRadar();       
     }
     if (keysPressed(KEY_SHIFT, KEY_D) && debug) {
         debug = false;

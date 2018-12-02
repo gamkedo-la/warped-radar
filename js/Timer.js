@@ -16,6 +16,14 @@ let timer = new(function () {
         }, 1000);
     }
 
+    this.startTime = function () {
+            window.setInterval(updateAll, 1000/30)
+        }      
+
+    this.stopTime = function () {
+            window.clearInterval(updateAll, 1000/30)
+        }   
+
     this.drawTimer = function () {
         colorText('Time remaining: ' + this.secondsRemaining + ' seconds', canvas.width / 2, 80, 'white', "20px Arial", "center", 1);
     }

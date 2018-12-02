@@ -8,7 +8,7 @@ let canvas, canvasContext;
 let framesFromGameStart = 0;
 
 let debug = false;
-
+let paused = false;
 window.onload = function () {
     canvas = document.createElement("canvas");
     canvas.setAttribute("id", "gameCanvas");
@@ -129,3 +129,12 @@ function drawDebugText() {
 
     if (levelEditor.isOn) colorText("Note: replacing the tile under the player will change his start point ", 20, 530, "yellow", "12px Arial", "left", 1);
 }
+
+function fastRadar() { 
+    timer.startTime();
+    timer.stopTime();
+  }
+
+function pauseRadar(){
+
+  }

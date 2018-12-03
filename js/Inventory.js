@@ -32,6 +32,7 @@ let inventory = new(function () {
     let titleTextY = this.y + 40;
 
     let descFontFace = "20px consolas";
+	let lineHeight = 25;
     let descX = this.x + 60;
     let descY = this.y + 200;
 
@@ -106,11 +107,10 @@ let inventory = new(function () {
 
 
     this.drawItemDescription = function () {
-        let descFontFace = "20px Consolas"
         if (!this.showActions && !this.selectAction) {
             if (this.items[this.index]) {
                 colorText(this.items[this.index].name + ": ", descX, descY + 90, "yellow", descFontFace, textAlign, 1);
-                colorText(this.items[this.index].description, descX, descY + 120, "white", descFontFace, textAlign, 1);
+ 				this.wrapText(this.items[this.index].description, descX, descY + 120, width - 110, lineHeight, descFontFace, 'white');
             }
         }
     }
@@ -164,8 +164,8 @@ let inventory = new(function () {
                     }
                 }
                 
-                let typewriterText = inventory.items[inventory.index].actions[actionCursor][1].substr(0, letterCounter)
-                colorText(typewriterText, descX, (descY + 95), choiceColour, actionfontFace, textAlign, 1);
+                let typewriterText = inventory.items[inventory.index].actions[actionCursor][1].substr(0, letterCounter);
+				this.wrapText(typewriterText, descX, (descY + 95), width - 110, lineHeight, actionfontFace, choiceColour);
             }
             this.updateActionCursor();
         }
@@ -206,6 +206,45 @@ let inventory = new(function () {
         if (!levelEditor.isOn) {
             this.isShowing = !this.isShowing;
         }
+    }
+	
+	
+    this.getWordsAndBreaksFromString = function (dialogueWords) {
+    	let breaks = dialogueWords.split("\n"),
+    		newLines = "";
+   		 for (let i = 0; i < breaks.length; i++) {
+    		newLines = newLines + breaks[i] + "  Gamkedo  ";
+   		 }
+		 let words = newLines.split(" ");
+		 return words;
+    }
+	
+    this.wrapText = function (dialogueWords, x, y, maxWidth, lineHeight, font, colour) {
+        let words = this.getWordsAndBreaksFromString(dialogueWords),
+            checkEndOfLine, checkTextWidth, textWidth;
+        let line = "";
+		
+		let oldFont = canvasContext.font;
+		canvasContext.font = descFontFace; // to correctly measure text
+        for (let i = 0; i < words.length; i++) {
+            if (words[i] != "Gamkedo") {
+                checkEndOfLine = line + words[i] + " ";
+                checkTextWidth = canvasContext.measureText(checkEndOfLine);
+                textWidth = checkTextWidth.width;
+                if (textWidth > maxWidth && i > 0) {
+                    colorText(line, x, y, colour, descFontFace, textAlign, 1);
+                    line = words[i] + " ";
+                    y += lineHeight;
+                } else {
+                    line = checkEndOfLine;
+                }
+            } else {
+                colorText(line, x, y, colour, descFontFace, textAlign, 1);
+                line = "";
+                y += lineHeight;
+            }
+        }
+		canvasContext.font = oldFont; // reset so it doesn't mess with other code
     }
 
 })();

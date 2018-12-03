@@ -153,7 +153,10 @@ let inventory = new(function () {
             if (this.selectAction && !this.showActions) {
                 if (letterCounter < inventory.items[inventory.index].actions[actionCursor][1].length) {
                     letterCounter += 1;
-                    voiceLow1.play();
+	                //floored in case letter speed is changed
+	                if ((Math.floor(letterCounter) % 2) == 0) {
+						voiceLow1.play();
+	                }
                 } else {
                     if (interact_key) {
                         this.selectAction = false;

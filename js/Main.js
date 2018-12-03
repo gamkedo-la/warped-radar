@@ -6,7 +6,7 @@ let scaledCanvas, scaledContext;
 let canvas, canvasContext;
 
 let framesFromGameStart = 0;
-
+var interval;
 let debug = false;
 let paused = false;
 window.onload = function () {
@@ -38,9 +38,8 @@ window.onload = function () {
 }
 
 function startGame() {
-    let framesPerSecond = 30;
     worldGrid = Array.from(locationList[locationNow].layout);
-    setInterval(updateAll, 1000 / framesPerSecond);
+    gameLoop();
     setupInput();
     player.reset();
     timer.setupTimer();
@@ -50,6 +49,11 @@ function startGame() {
     console.log(arrayOfObtainableItems);
     //stebs_warped_radar_song.resumeSound();
 }
+
+function gameLoop() {
+interval = setInterval(updateAll, 1000/framesPerSecond);
+ 
+}   
 
 function nextLevel() {
     locationNow++;
@@ -131,10 +135,16 @@ function drawDebugText() {
 }
 
 function fastRadar() { 
-    timer.startTime();
-    timer.stopTime();
+    gameLoop(interval);
   }
 
 function pauseRadar(){
-
+    if (!paused){
+        colorText("PAUSE", 400, 300, "red", "30px Arial", "center", 10);
+        clearInterval(interval);
+        paused = true;
+    }else {
+        gameLoop();    
+        paused = false;
+    }
   }

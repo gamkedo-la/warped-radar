@@ -136,7 +136,7 @@ function keydownControl(evt, keydownMap) {
     } else if (keysPressed(KEY_G)) {
         toggleGrid();
     }else if (this.keysPressed(KEY_P)) {
-        //pauseRadar();       
+        pauseRadar();       
     }else if (this.keysPressed(KEY_SHIFT, KEY_F)) {
         fastRadar();       
     }

@@ -8,8 +8,18 @@ let selected = new SoundOverlapsClass("./audio/selected");
 
 //how to add music: let bgMusic = "./audio/bgMusic";
 
-let musicVolume = localStorage.getItem("musicVolume");
-let effectsVolume = localStorage.getItem("effectsVolume");
+let musicVolume;
+let effectsVolume;
+try {
+	musicVolume = localStorage.getItem("musicVolume");
+	effectsVolume = localStorage.getItem("effectsVolume");
+	console.log(musicVolume + ", ", + effectsVolume);
+}
+catch {
+	// default volumes
+	musicVolume = 1;
+	effectsVolume = 1;
+}
 
 if(musicVolume === null){
 	musicVolume = 1;

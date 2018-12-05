@@ -22,7 +22,9 @@ function OverworldObject() {
     }
 
     this.draw = function () {
-        drawRectToContext(scaledContext, this.x, this.y, this.w, this.h, this.colour, 1);
+        if (locationList[locationNow] == theCity) { //quick temporary fix
+            drawRectToContext(scaledContext, this.x, this.y, this.w, this.h, this.colour, 1);
+        }
     }
 
     this.collidingWithPlayer = function () {

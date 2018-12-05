@@ -123,7 +123,9 @@ function drawDebugText() {
     colorText("Pressed Space: " + interact_key, 20, 30, "white", "20px Arial", "left", 1);
     colorText("Colliding with Rose: " + rose.collidingWithPlayer(), 20, 50, "white", "20px Arial", "left", 1);
     colorText("[CTRL+E] Level Editor: " + (levelEditor.isOn ? "ON" : "OFF"), 800, 30, "white", "20px Arial", "right", 1);
-
+    
+    colorText(locationList[locationNow].name, canvas.width/2, 80, "white", "20px Arial", "center", 1);
+    
     let editorInstructionsTextYStart = 420;
     if (levelEditor.isOn) colorText("[A] and [D] to change tile", 20, editorInstructionsTextYStart, "yellow", "14px Arial", "left", 1);
     if (levelEditor.isOn) colorText("[SPACE] New Grid", 20, editorInstructionsTextYStart + 20, "yellow", "14px Arial", "left", 1);

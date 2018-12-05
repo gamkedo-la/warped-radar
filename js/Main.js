@@ -10,6 +10,9 @@ var interval;
 let debug = false;
 let paused = false;
 window.onload = function () {
+    window.addEventListener('focus', windowOnFocus);
+    window.addEventListener('blur', windowOnBlur);
+
     canvas = document.createElement("canvas");
     canvas.setAttribute("id", "gameCanvas");
     canvasContext = canvas.getContext("2d");
@@ -37,6 +40,16 @@ window.onload = function () {
     makeAnimatedSprites();
 }
 
+function windowOnFocus() {
+    paused = true;
+    pauseRadar();
+}
+
+function windowOnBlur() {
+    paused = false;
+    pauseRadar();
+}
+
 function startGame() {
     worldGrid = Array.from(locationList[locationNow].layout);
     gameLoop();
@@ -52,7 +65,7 @@ function startGame() {
 
 function gameLoop() {
 interval = setInterval(updateAll, 1000/framesPerSecond);
- 
+
 }   
 
 function nextLevel() {

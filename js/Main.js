@@ -185,15 +185,27 @@ function drawDebugText () {
 
 function fastRadar() { 
     if (useRequestAnimationFrame) {
-        if (deltaMultiplier == 1) {
+        if (!isFastInterval) {
             deltaMultiplier = 2;
+            isFastInterval = true;
             console.log("fastRadar(): Sped up!");
         } else {
             deltaMultiplier = 1;
-            console.log("fastRadar(): Slowed down!");
+            isFastInterval = false;
+            console.log("fastRadar(): Normal speed!");
         }
     } else {
-        interval = setInterval(gameLoop, 1000/framesPerSecond);
+        if (!isFastInterval) {
+            interval = setInterval(gameLoop, 1000/framesPerSecond);
+            isFastInterval = true;
+            console.log("fastRadar(): Sped up!");
+        } else {
+            clearInterval(interval);
+            console.log(interval);
+            isFastInterval = false;
+            console.log("fastRadar(): Normal speed!");
+        }
+        console.log(isFastInterval);
     }
 }
 

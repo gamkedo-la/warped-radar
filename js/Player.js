@@ -1,4 +1,4 @@
-let player = new(function () {
+function Player () {
     this.x = 100;
     this.y = 100;
     //this.w = 64;
@@ -162,4 +162,4 @@ let player = new(function () {
         }
         outlineCircle(scaledContext, this.x, this.y, 2, "green", lineWidth = 1)
     }
-})();
+}

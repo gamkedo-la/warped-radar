@@ -92,11 +92,14 @@ function drawWorld() {
                 tileKindHere = 0; // or whatever default/black to fill in with
             }
             let useImg = worldPics[tileKindHere];
-            if (tileTypeHasTransparency(tileKindHere)) { //draw tile with inventory item
+            
+            if (tileTypeHasTransparency(tileKindHere)) { //draw tile with inventory item                
                 scaledContext.drawImage(worldPics[TILE_GROUND], drawTileX, drawTileY);
             } //draw tile without inventory item
-
-            scaledContext.drawImage(useImg, drawTileX, drawTileY);
+            
+            if (useImg != undefined) {
+                scaledContext.drawImage(useImg, drawTileX, drawTileY);
+            }
 
             //assignXAndYCoordinatesOfItems(tileKindHere, drawTileX,drawTileY);
             drawGrid(drawTileX, drawTileY);
@@ -131,7 +134,7 @@ function playerWorldHandling(whichEntity) {
         let tileHere = returnTileTypeAtColRow(playerWorldCol, playerWorldRow);
 
         if (tileHere == TILE_SWITCH_LOCATION) {
-            nextLevel();
+            goToNextLevel();
         }
     }
 }

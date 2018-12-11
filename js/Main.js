@@ -6,10 +6,43 @@ let scaledCanvas, scaledContext;
 let canvas, canvasContext;
 
 let framesFromGameStart = 0;
-let interval;
+let then = Date.now();
 let debug = false;
 let paused = false;
-window.onload = function () {
+
+let levelEditor;
+let player;
+
+let testScene = new CutScene();
+let playTheScene = false;
+
+// TO-DO: reorganize cutscene manager
+
+function showCutsceneDialogue() {
+    //
+    /* Notes: 
+    - scene step starts at 1
+    fix:
+    - end dialogue scene with wait:
+        - if another dialogue event follows it
+        - it is the last in the scene
+    
+    - Pass in the scene's step/dialogue here to show it on screen.. 
+    */
+    if (playingScene != null) {
+        if (sceneStep == 1) testScene.showDialogue(convo);
+        if (sceneStep == 4) testScene.showDialogue(convo2);
+        if (sceneStep == 6) testScene.showDialogue(convo3);
+    }
+}
+
+function triggerTestScene() {
+    if (playTheScene) {
+        createCutscene(testScene);
+    }
+}
+
+function start () {
     window.addEventListener('focus', windowOnFocus);
     window.addEventListener('blur', windowOnBlur);
 
@@ -33,68 +66,43 @@ window.onload = function () {
     scaledContext.msImageSmoothingEnabled = false;
     scaledContext.imageSmoothingEnabled = false;
 
-    if (loadImages()) {
-        startGame();
-    }
-
     makeAnimatedSprites();
+    
+    if (loadImages()) {
+        levelEditor = new LevelEditor();
+        player = new Player();
+        worldGrid = Array.from(locationList[locationNow].layout);
+        gameLoop();
+        setupInput();
+        player.reset();
+        timer.setupTimer();
+        initializeDefaultItems();
+        console.log(note);
+        initializeObtainableItems();
+        console.log(arrayOfObtainableItems);
+        //stebs_warped_radar_song.resumeSound();
+    }
 }
 
-function windowOnFocus() {
-    paused = true;
-    pauseRadar();
+function reset () {
+
 }
 
-function windowOnBlur() {
-    paused = false;
-    pauseRadar();
-}
-
-function startGame() {
-    worldGrid = Array.from(locationList[locationNow].layout);
-    gameLoop();
-    setupInput();
-    player.reset();
-    timer.setupTimer();
-    initializeDefaultItems();
-    console.log(note);
-    initializeObtainableItems();
-    console.log(arrayOfObtainableItems);
-    //stebs_warped_radar_song.resumeSound();
-}
-
-function gameLoop() {
-interval = setInterval(updateAll, 1000/framesPerSecond);
-
-}   
-
-function nextLevel() {
-    locationNow++;
-    if (locationNow >= locationList.length) {
-        locationNow = 0;
+function gameLoop () {
+    let now = Date.now();
+    let delta = now - then;
+    
+    if (!paused) {
+        update(delta / 1000);
+        render();
     }
 
-    loadLevel(locationList[locationNow]);
+    then = now;
+    requestAnimationFrame(gameLoop);
 }
 
-function loadLevel(whichLevel) {
-    worldGrid = whichLevel.layout.slice();
-    // these need to be updated to reflect the new location
-    worldCols = whichLevel.columns;
-    worldRows = whichLevel.rows;
-    camPanX = 0;
-    camPanY = 0;
-    player.reset();
-}
-
-
-function updateAll() {
+function update (dt) {
     updateSceneTick();
-    moveAll();
-    drawAll();
-}
-
-function moveAll() {
     player.move();
     checkForObtainableItems(); //in obtainableItems.js
     triggerNPCDialogue();
@@ -102,7 +110,7 @@ function moveAll() {
     levelEditor.showNewGrid();
 }
 
-function drawAll() {
+function render () {
     beginPan();
     clearScreen();
     drawWorld();
@@ -119,20 +127,52 @@ function drawAll() {
     inventory.interactWithItems();
     endPan();
     showCutsceneDialogue();
-    //triggerTestScene();
+    triggerTestScene();
     levelEditor.roomTileCoordinate();
 }
 
-function clearScreen() {
+reset();
+start();
+
+function windowOnFocus () {
+    paused = true;
+    pauseRadar();
+}
+
+function windowOnBlur () {
+    paused = false;
+    pauseRadar();
+}
+
+function goToNextLevel () {
+    locationNow++;
+    if (locationNow >= locationList.length) {
+        locationNow = 0;
+    }
+
+    loadLevel(locationList[locationNow]);
+}
+
+function loadLevel (whichLevel) {
+    worldGrid = whichLevel.layout.slice();
+    // these need to be updated to reflect the new location
+    worldCols = whichLevel.columns;
+    worldRows = whichLevel.rows;
+    camPanX = 0;
+    camPanY = 0;
+    player.reset();
+}
+
+function clearScreen () {
     canvasContext.drawImage(scaledCanvas, 0, 0, scaledCanvas.width, scaledCanvas.height,
         0, 0, canvas.width, canvas.height);
 }
 
-function drawGameBorder() {
+function drawGameBorder () {
     canvasContext.drawImage(gameBorderPic, 0, 0);
 }
 
-function drawDebugText() {
+function drawDebugText () {
     colorText("Pressed Space: " + interact_key, 20, 30, "white", "20px Arial", "left", 1);
     colorText("Colliding with Rose: " + rose.collidingWithPlayer(), 20, 50, "white", "20px Arial", "left", 1);
     colorText("[CTRL+E] Level Editor: " + (levelEditor.isOn ? "ON" : "OFF"), 800, 30, "white", "20px Arial", "right", 1);
@@ -150,16 +190,14 @@ function drawDebugText() {
 }
 
 function fastRadar() { 
-    gameLoop(interval);
-  }
+    // TO-DO: SPEED UP dt;
+}
 
 function pauseRadar(){
     if (!paused){
         colorText("PAUSE", 400, 300, "red", "30px Arial", "center", 10);
-        clearInterval(interval);
         paused = true;
-    }else {
-        gameLoop();    
+    } else {        
         paused = false;
     }
   }

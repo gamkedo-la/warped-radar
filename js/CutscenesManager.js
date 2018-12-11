@@ -1,6 +1,6 @@
+// TO-DO: reorganize cutscene manager
+
 ////////////////////////////////////////////////////////////////////////////////////////////////
-let testScene = new CutScene();
-let playTheScene = false;
 this.xFinal = 100,
     this.yFinal = 20,
     this.speed = 7;
@@ -77,27 +77,7 @@ testScene.scenes = [
    [testScene.wait, 1]
 ];
 
-function triggerTestScene() {
-    if (playTheScene) {
-        createCutscene(testScene);
-    }
-}
+
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
-function showCutsceneDialogue() {
-    //
-    /* Notes: 
-    - scene step starts at 1
-    fix:
-    - end dialogue scene with wait:
-        - if another dialogue event follows it
-        - it is the last in the scene
-    
-    - Pass in the scene's step/dialogue here to show it on screen.. 
-    */
-    if (playingScene != null) {
-        if (sceneStep == 1) testScene.showDialogue(convo);
-        if (sceneStep == 4) testScene.showDialogue(convo2);
-        if (sceneStep == 6) testScene.showDialogue(convo3);
-    }
-}
+

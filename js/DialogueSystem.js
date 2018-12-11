@@ -30,7 +30,7 @@ function Dialogue() {
     let textAlign = "left";
 
     let line;
-    let letterSpeed = 1;
+    let letterSpeed = 0.5;
     let maxWidth = 210;
     let lineHeight = 30;
     let paused = false;

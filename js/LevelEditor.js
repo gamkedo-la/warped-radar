@@ -1,4 +1,4 @@
-let levelEditor = new(function () {
+function LevelEditor () {
     this.isOn = false;
 
     let showNewGrid = false;
@@ -98,5 +98,5 @@ let levelEditor = new(function () {
             this.showInstructions();
         }
     }
-
-})();
+    
+}

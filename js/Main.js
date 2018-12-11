@@ -196,7 +196,13 @@ function drawDebugText () {
 }
 
 function fastRadar() { 
-    // TO-DO: SPEED UP dt;
+    if (deltaMultiplier == 1) {
+        deltaMultiplier = 2;
+        console.log("fastRadar(): Sped up!");
+    } else {
+        deltaMultiplier = 1;
+        console.log("fastRadar(): Slowed down!");
+    }
 }
 
 function pauseRadar(){

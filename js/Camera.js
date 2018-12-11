@@ -1,8 +1,9 @@
-const CAM_SPEED = 10;
-const EDITOR_SPEED = 5;
-const PLAYER_DIST_FROM_CENTER_BEFORE_CAMERA_PAN = { x: 200, y: 200};
-
 function Camera () {
+    this.speed = 10;
+    this.editorSpeed = 5;
+    
+    this.targetDistFromCenterBeforePan = { x: 200, y: 200 };
+
     this.camPanX = 0.0;
     this.camPanY = 0.0;
 
@@ -11,7 +12,7 @@ function Camera () {
         this.camPanY = target.y - scaledCanvas.height / 2;
     };
 
-    this.follow = function (target, targetDistBeforePan = PLAYER_DIST_FROM_CENTER_BEFORE_CAMERA_PAN, speed = CAM_SPEED, editorSpeed = EDITOR_SPEED) {
+    this.follow = function (target, targetDistBeforePan = this.targetDistFromCenterBeforePan, speed = this.speed, editorSpeed = this.editorSpeed) {
         let cameraFocusCenterX = this.camPanX + scaledCanvas.width / 2;
         let cameraFocusCenterY = this.camPanY + scaledCanvas.height / 2;
         if (levelEditor.isOn) {

@@ -1,5 +1,14 @@
 const MAX_SECONDS = 1000;
+
+let deltaMultiplier = 1;
+let then = Date.now();
+let delta = (Date.now() - then) * deltaMultiplier;
+let interval;
+
+let useRequestAnimationFrame = false;
+
 let framesPerSecond = 30;
+
 let timer = new(function () {
     this.secondsRemaining = MAX_SECONDS;
     this.timeTick = function () {

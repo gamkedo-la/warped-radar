@@ -3,7 +3,7 @@ function Player () {
     this.y = 100;
     //this.w = 64;
     //this.h = 64;
-    this.walkSpeed = 140;
+    this.walkSpeed = useRequestAnimationFrame ? 140 : 4;
 
     this.keyHeld_walkUp = false;
     this.keyHeld_walkDown = false;
@@ -75,17 +75,19 @@ function Player () {
             let facing = this.facing;
 
             if (currentlyPlayingCutscene == null) {
+                moveSpeed *= useRequestAnimationFrame ? delta : 1;
+
                 if (this.keyHeld_walkUp) {
-                    nextY -= moveSpeed * delta;
+                    nextY -= moveSpeed;
                 }
                 if (this.keyHeld_walkDown) {
-                    nextY += moveSpeed * delta;
+                    nextY += moveSpeed;
                 }
                 if (this.keyHeld_walkLeft) {
-                    nextX -= moveSpeed * delta;
+                    nextX -= moveSpeed;
                 }
                 if (this.keyHeld_walkRight) {
-                    nextX += moveSpeed * delta;
+                    nextX += moveSpeed;
                 }
             }
 

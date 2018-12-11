@@ -12,6 +12,7 @@ const KEY_O = 79;
 const KEY_P = 80;
 const KEY_E = 69;
 const KEY_F = 70;
+const KEY_I = 73;
 
 const KEY_Z = 90;
 const KEY_X = 88;
@@ -114,8 +115,7 @@ function keydownControl(evt, keydownMap) {
     //              if (keysPressed(KEY_SHIFT, KEY_I)) { do_something(); }
     //              else if (keysPressed(KEY_SHIFT)) { do_something_else(); }
     //
-
-    if (keysPressed(KEY_SPACE) || keysPressed(KEY_ENTER)) {
+   if (keysPressed(KEY_SPACE) || keysPressed(KEY_ENTER)) {
         if (!levelEditor.isOn) {
             obtainItemIfApplicable(); //in obtainableItems.js
             incrementTextPages();

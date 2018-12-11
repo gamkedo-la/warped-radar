@@ -7,10 +7,6 @@ let canvas, canvasContext;
 
 let framesFromGameStart = 0;
 
-let deltaMultiplier = 1;
-let then = Date.now();
-let delta = (Date.now() - then) * deltaMultiplier;
-
 let debug = false;
 let paused = false;
 
@@ -20,6 +16,7 @@ let player;
 
 let testScene = new Cutscene();
 let playTheScene = false;
+
 
 // Things that are set once for the entire run of the game here
 (function start () {
@@ -59,7 +56,13 @@ let playTheScene = false;
         levelEditor = new LevelEditor();
         player = new Player();
         worldGrid = Array.from(locationList[locationNow].layout);
-        gameLoop();
+
+        if (useRequestAnimationFrame) {
+            gameLoop();
+        } else {
+            interval = setInterval(gameLoop, 1000/framesPerSecond);
+        }
+        
         setupInput();
         player.reset();
         timer.setupTimer();
@@ -82,7 +85,10 @@ function gameLoop () {
     }
 
     then = now;
-    requestAnimationFrame(gameLoop);
+
+    if (useRequestAnimationFrame) {
+        requestAnimationFrame(gameLoop);
+    }
 }
 
 // All game logic to update every frame here
@@ -178,20 +184,30 @@ function drawDebugText () {
 }
 
 function fastRadar() { 
-    if (deltaMultiplier == 1) {
-        deltaMultiplier = 2;
-        console.log("fastRadar(): Sped up!");
+    if (useRequestAnimationFrame) {
+        if (deltaMultiplier == 1) {
+            deltaMultiplier = 2;
+            console.log("fastRadar(): Sped up!");
+        } else {
+            deltaMultiplier = 1;
+            console.log("fastRadar(): Slowed down!");
+        }
     } else {
-        deltaMultiplier = 1;
-        console.log("fastRadar(): Slowed down!");
+        interval = setInterval(gameLoop, 1000/framesPerSecond);
     }
 }
 
 function pauseRadar(){
     if (!paused){
         colorText("PAUSE", 400, 300, "red", "30px Arial", "center", 10);
+        if (!useRequestAnimationFrame) {
+            clearInterval(interval);
+        }
         paused = true;
     } else {        
+        if (!useRequestAnimationFrame) {
+            interval = setInterval(gameLoop, 1000/framesPerSecond);
+        }
         paused = false;
     }
   }

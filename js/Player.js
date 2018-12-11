@@ -70,9 +70,9 @@ let player = new(function () {
     this.move = function () {
 
         if (dialogueNotShowing() && !inventory.isShowing && !levelEditor.isOn) {
-            var nextX = this.x;
-            var nextY = this.y;
-            var facing = this.facing;
+            let nextX = this.x;
+            let nextY = this.y;
+            let facing = this.facing;
 
             if (playingScene == null) {
                 if (this.keyHeld_walkUp) {
@@ -97,7 +97,7 @@ let player = new(function () {
                 }
             }
 
-            var nextTileType = getTileTypeAtPixelCoord(nextX, nextY);
+            let nextTileType = getTileTypeAtPixelCoord(nextX, nextY);
             // console.log(nextTileType);
             //if tile type is not solid this.x and this.y are equal to nextX and nextY
             if (moveCharIfAble(nextTileType)) {
@@ -112,7 +112,7 @@ let player = new(function () {
     }
 
     this.draw = function () {
-        var facing = this.facing;
+        let facing = this.facing;
         if (this.states.walking && whoMoving != null) {
             if (facing.west) {
                 johnWalkSide.draw(scaledContext, this.x, this.y);

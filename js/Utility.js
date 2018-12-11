@@ -71,7 +71,7 @@ function indexToCenteredXY(index) {
 
 function moveCharIfAble(tileType)
 {
-	for(var i = 0; i < solidTiles.length; i++)
+	for(let i = 0; i < solidTiles.length; i++)
 	{
 		if(tileType == solidTiles[i])
 			return false;

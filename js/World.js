@@ -34,13 +34,13 @@ const TILE_SWITCH_LOCATION = 25;
 
 let solidTiles = [1, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
 
-var locationList = [johnsRoom, johnsHallway, johnsKitchen, theCity];
-var locationNow = 0;
+let locationList = [johnsRoom, johnsHallway, johnsKitchen, theCity];
+let locationNow = 0;
 
-var worldCols = locationList[locationNow].columns;
-var worldRows = locationList[locationNow].rows;
+let worldCols = locationList[locationNow].columns;
+let worldRows = locationList[locationNow].rows;
 
-var worldGrid = [];
+let worldGrid = [];
 
 console.log("Current location: " + locationNow + " size: " + worldCols + 'x' + worldRows);
 
@@ -114,7 +114,7 @@ function drawWorld() {
 function returnTileTypeAtColRow(col, row) {
     if (col >= 0 && col < worldCols &&
         row >= 0 && row < worldRows) {
-        var worldIndexUnderCoord = rowColToArrayIndex(col, row);
+        let worldIndexUnderCoord = rowColToArrayIndex(col, row);
         return worldGrid[worldIndexUnderCoord];
     } else {
         return TILE_WALL;
@@ -122,13 +122,13 @@ function returnTileTypeAtColRow(col, row) {
 }
 
 function playerWorldHandling(whichEntity) {
-    var playerWorldCol = Math.floor(whichEntity.x / WORLD_H);
-    var playerWorldRow = Math.floor(whichEntity.y / WORLD_H);
-    var trackIndexUnderCar = rowColToArrayIndex(playerWorldCol, playerWorldRow);
+    let playerWorldCol = Math.floor(whichEntity.x / WORLD_H);
+    let playerWorldRow = Math.floor(whichEntity.y / WORLD_H);
+    let trackIndexUnderCar = rowColToArrayIndex(playerWorldCol, playerWorldRow);
 
     if (playerWorldCol >= 0 && playerWorldCol < worldCols &&
         playerWorldRow >= 0 && playerWorldRow < worldRows) {
-        var tileHere = returnTileTypeAtColRow(playerWorldCol, playerWorldRow);
+        let tileHere = returnTileTypeAtColRow(playerWorldCol, playerWorldRow);
 
         if (tileHere == TILE_SWITCH_LOCATION) {
             nextLevel();

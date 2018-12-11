@@ -1,11 +1,11 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////
-var testScene = new cutscene();
-var playTheScene = false;
+let testScene = new cutscene();
+let playTheScene = false;
 this.xFinal = 100,
     this.yFinal = 20,
     this.speed = 7;
 
-var convo = [
+let convo = [
     {
         who: "John",
         nameCol: "lightblue",
@@ -32,7 +32,7 @@ var convo = [
     }
 ];
 
-var convo2 = [
+let convo2 = [
     {
         who: "Rose",
         nameCol: "pink",
@@ -47,7 +47,7 @@ var convo2 = [
     }
 ];
 
-var convo3 = [
+let convo3 = [
     {
         who: "John",
         nameCol: "lightblue",

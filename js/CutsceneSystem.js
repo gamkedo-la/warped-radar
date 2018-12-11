@@ -5,7 +5,7 @@ let playingScene = null;
 let cutscenePause = false;
 let showNextSceneText = false;
 let atDestination = false;
-var sceneTextPage = 0;
+let sceneTextPage = 0;
 let sceneLetterCount = 0;
 
 let whoMoving = null;
@@ -118,10 +118,10 @@ function cutscene() {
 function updateSceneTick() {
     if (playingScene != null) {
         if (whoMoving != null) {
-            var xDiff = movingToX - whoMoving.x;
-            var yDiff = movingToY - whoMoving.y;
-            var pointDirection = Math.atan2(yDiff, xDiff);
-            var pointDistance = Math.sqrt(xDiff * xDiff + yDiff * yDiff);
+            let xDiff = movingToX - whoMoving.x;
+            let yDiff = movingToY - whoMoving.y;
+            let pointDirection = Math.atan2(yDiff, xDiff);
+            let pointDistance = Math.sqrt(xDiff * xDiff + yDiff * yDiff);
             whoMoving.x += movingSpeed * Math.cos(pointDirection);
             whoMoving.y += movingSpeed * Math.sin(pointDirection);
             if (pointDistance < speed) {

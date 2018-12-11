@@ -1,11 +1,11 @@
 
-var isRainy = false;
-var isFoggy = true;
-var rainCounter = 0;
+let isRainy = false;
+let isFoggy = true;
+let rainCounter = 0;
 function drawWeatherEffects() {
     rainCounter++;
-    var sx = 0;
-    var sy = CANVAS_HEIGHT - ((rainCounter*8) % CANVAS_HEIGHT);
+    let sx = 0;
+    let sy = CANVAS_HEIGHT - ((rainCounter*8) % CANVAS_HEIGHT);
 
     if (isRainy) {
         canvasContext.drawImage(rainEffectImage,

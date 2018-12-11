@@ -6,7 +6,7 @@ let scaledCanvas, scaledContext;
 let canvas, canvasContext;
 
 let framesFromGameStart = 0;
-var interval;
+let interval;
 let debug = false;
 let paused = false;
 window.onload = function () {

@@ -128,12 +128,12 @@ let inventory = new(function () {
     }
 
     this.interactWithItems = function () {
-        var choiceColour;
-        var actionfontFace = "20px Consolas";
-        var textColour = "white";
-        var selectedTextColour = "orange";
-        var cursorTextColour = "yellow";
-        var itemSpace = 30;
+        let choiceColour;
+        let actionfontFace = "20px Consolas";
+        let textColour = "white";
+        let selectedTextColour = "orange";
+        let cursorTextColour = "yellow";
+        let itemSpace = 30;
         
         if (this.isShowing) {
             if (this.showActions) {

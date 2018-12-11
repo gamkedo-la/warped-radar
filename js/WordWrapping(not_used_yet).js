@@ -24,7 +24,7 @@ No actual typing effect yet!
 If you wanna help extending this module, send me a message! :D
 */
 
-var messageActive = false;
+let messageActive = false;
 
 function MessageBox (x, y, options) {
 
@@ -69,7 +69,7 @@ function MessageBox (x, y, options) {
     let spliceIndex = 0;
     let standbyForInput = false;
     let messageDone = false;
-    //var playerInput = holdEnter;
+    //let playerInput = holdEnter;
     
     let delayBetweenPresses = 5;
     let delayPressesTick = 5; //frames of waiting that prevent the player from multi skipping when hitting the button
@@ -185,13 +185,13 @@ function MessageBox (x, y, options) {
         currentx = padx + x; //start at edge of box + padding
         currentLine = 1;
 
-        var lastWord = false;
-        var fits = false;
+        let lastWord = false;
+        let fits = false;
 
-        var spaceWidth = canvasContext.measureText(" ").width;
+        let spaceWidth = canvasContext.measureText(" ").width;
 
         for (i = 0; i < words.length; i++) {
-            var wordWidth = canvasContext.measureText(words[i]).width;
+            let wordWidth = canvasContext.measureText(words[i]).width;
 
             //catches the end of the message
             if (i === words.length - 1) {
@@ -246,13 +246,13 @@ function MessageBox (x, y, options) {
         return;
     }
 
-    var newLine = function () {
+    let newLine = function () {
         currentx = padx + x;
         currentLine++;
     }
 
 
-    var stopDrawing = function (i) {
+    let stopDrawing = function (i) {
         standbyForInput = true;
         spliceIndex = i;
     }

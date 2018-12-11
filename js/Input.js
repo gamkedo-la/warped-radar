@@ -124,7 +124,7 @@ function keydownControl(evt, keydownMap) {
     } else if (keysPressed(KEY_X)) {
 
     } else if (keysPressed(KEY_Z)) {
-        if (!inventory.showActions && !inventory.selectAction && playingScene == null) {
+        if (!inventory.showActions && !inventory.selectAction && currentlyPlayingCutscene == null) {
             inventory.toggle();
         }
     } else if (keysPressed(KEY_UP) || keysPressed(KEY_W)) {
@@ -147,6 +147,7 @@ function keydownControl(evt, keydownMap) {
     }
     if (keysPressed(KEY_X)) {
         playTheScene = !playTheScene;
+        console.log("Play cutscene? " + playTheScene);
     }
     if (keysPressed(KEY_SPACE)) {
         if (inventory.items[inventory.index] != undefined && inventory.isShowing && dialogueNotShowing()) {

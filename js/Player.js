@@ -74,7 +74,7 @@ function Player () {
             let nextY = this.y;
             let facing = this.facing;
 
-            if (playingScene == null) {
+            if (currentlyPlayingCutscene == null) {
                 if (this.keyHeld_walkUp) {
                     nextY -= moveSpeed * delta;
                 }
@@ -130,7 +130,7 @@ function Player () {
                 johnWalk.draw(scaledContext, this.x, this.y);
             }
             
-        } else if (this.states.walking && playingScene == null) {
+        } else if (this.states.walking && currentlyPlayingCutscene == null) {
             if (this.keyHeld_walkLeft) {
                 if ((this.keyHeld_walkUp || this.keyHeld_walkDown)) {
                     johnWalkSide45Deg.draw(scaledContext, this.x, this.y);
@@ -148,7 +148,7 @@ function Player () {
             }
         } else {
             johnIdle.draw(scaledContext, this.x, this.y);
-            if (playingScene == null) {
+            if (currentlyPlayingCutscene == null) {
                 this.states.walking = false;
                 facing.north = false;
                 facing.south = false;

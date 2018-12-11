@@ -67,13 +67,13 @@ let convo3 = [
     }
 ];
 
-testScene.scenes = [
-   [testScene.showDialogue, convo],
+testScene.sequence = [
+   [1, testScene.playDialogue, convo], // [sceneStep, function, convo]
    [testScene.moveChar, player, 250, -30, "southeast", 3],
    [testScene.moveChar, player, 0, 100, "south", 3],
-   [testScene.showDialogue, convo2],
+   [4, testScene.playDialogue, convo2],
    [testScene.moveChar, player, -100, -30, "west", 3],
-   [testScene.showDialogue, convo3],
+   [6, testScene.playDialogue, convo3],
    [testScene.wait, 1]
 ];
 

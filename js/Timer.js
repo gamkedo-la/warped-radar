@@ -6,7 +6,7 @@ let timer = new(function () {
         if (cutscenePause && this.secondsRemaining > 0 || showNextSceneText && this.secondsRemaining > 0 || atDestination && this.secondsRemaining > 0) {
             this.secondsRemaining--;
         } else if (this.secondsRemaining == 0) {
-            endScenePause();
+            testScene.endScenePause();
         }
     }
     

@@ -18,38 +18,19 @@ let mainCamera;
 let levelEditor;
 let player;
 
-let testScene = new CutScene();
+let testScene = new Cutscene();
 let playTheScene = false;
 
-// TO-DO: reorganize cutscene manager
-
-function showCutsceneDialogue() {
-    //
-    /* Notes: 
-    - scene step starts at 1
-    fix:
-    - end dialogue scene with wait:
-        - if another dialogue event follows it
-        - it is the last in the scene
-    
-    - Pass in the scene's step/dialogue here to show it on screen.. 
-    */
-    if (playingScene != null) {
-        if (sceneStep == 1) testScene.showDialogue(convo);
-        if (sceneStep == 4) testScene.showDialogue(convo2);
-        if (sceneStep == 6) testScene.showDialogue(convo3);
-    }
-}
-
-function triggerTestScene() {
-    if (playTheScene) {
-        createCutscene(testScene);
-    }
-}
-
-function start () {
-    window.addEventListener('focus', windowOnFocus);
-    window.addEventListener('blur', windowOnBlur);
+// Things that are set once for the entire run of the game here
+(function start () {
+    window.addEventListener('focus', () => {
+        paused = true;
+        pauseRadar();
+    });
+    window.addEventListener('blur', () => {
+        paused = false;
+        pauseRadar();
+    });
 
     canvas = document.createElement("canvas");
     canvas.setAttribute("id", "gameCanvas");
@@ -88,12 +69,9 @@ function start () {
         console.log(arrayOfObtainableItems);
         //stebs_warped_radar_song.resumeSound();
     }
-}
+})();
 
-function reset () {
-
-}
-
+// Called from start(), keeps the game loop and delta in check
 function gameLoop () {
     let now = Date.now();
     delta = (now - then) * deltaMultiplier;
@@ -107,8 +85,8 @@ function gameLoop () {
     requestAnimationFrame(gameLoop);
 }
 
-function update (delta) {
-    updateSceneTick();
+// All game logic to update every frame here
+function update (delta) {    
     player.move(delta);
     checkForObtainableItems(); //in obtainableItems.js
     triggerNPCDialogue();
@@ -116,6 +94,7 @@ function update (delta) {
     levelEditor.showNewGrid();
 }
 
+// All things drawn to screen every frame here
 function render () {
     mainCamera.beginPan();
     clearScreen();
@@ -132,22 +111,25 @@ function render () {
     inventory.draw();
     inventory.interactWithItems();
     mainCamera.endPan();
-    showCutsceneDialogue();
-    triggerTestScene();
     levelEditor.roomTileCoordinate();
-}
+    
 
-reset();
-start();
-
-function windowOnFocus () {
-    paused = true;
-    pauseRadar();
-}
-
-function windowOnBlur () {
-    paused = false;
-    pauseRadar();
+    // TO-DO START: reorganize cutscene system/manager
+    //
+    /* Notes: 
+    - scene step starts at 1
+    fix:
+    - end dialogue scene with wait:
+        - if another dialogue event follows it
+        - it is the last in the scene
+    
+    - Pass in the scene's step/dialogue here to show it on screen.. 
+    */        
+    testScene.updateSceneTick();
+    if (playTheScene) {        
+        currentlyPlayingCutscene = testScene;        
+    }
+    // TO-DO END: reorganize cutscene system/manager
 }
 
 function goToNextLevel () {

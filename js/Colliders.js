@@ -1,4 +1,4 @@
-function colliderClass(x, y, width, height, offsetX, offsetY) {
+function Collider(x, y, width, height, offsetX, offsetY) {
     this.offsetX = offsetX;
     this.offsetY = offsetY;
 

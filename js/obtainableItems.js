@@ -87,7 +87,7 @@ function initializeObtainableItems() {
  }
 }
 
-function obtainableItemClass(drawTileX,drawTileY, tileWidth,tileHeight, name, description, image, tileType) {
+function ObtainableItem(drawTileX,drawTileY, tileWidth,tileHeight, name, description, image, tileType) {
   this.drawTileX = drawTileX;
   this.drawTileY = drawTileY;
   this.tileWidth = tileWidth;
@@ -105,14 +105,14 @@ function obtainableItemClass(drawTileX,drawTileY, tileWidth,tileHeight, name, de
   this.tileType = tileType;
 }
 
-let brokenSkateBoard = new obtainableItemClass(undefined,undefined, WORLD_W,WORLD_H, "brokenSkateBoard", "Broken Skateboard", worldPics[17], TILE_BROKEN_SKATEBOARD);
-let burnerPhone = new obtainableItemClass(undefined,undefined, WORLD_W,WORLD_H, "burnerPhone", "Burner Phone",worldPics[18], TILE_BURNER_PHONE);
-let crowbar = new obtainableItemClass(undefined,undefined, WORLD_W,WORLD_H, "crowbar", "Crowbar",worldPics[19], TILE_CROWBAR);
-let hoodie = new obtainableItemClass(undefined,undefined, WORLD_W,WORLD_H, "hoodie", "Hoodie",worldPics[20], TILE_HOODIE);
-let medicalNotebook = new obtainableItemClass(undefined,undefined, WORLD_W,WORLD_H, "medicalNotebook", "Medical Notebook",worldPics[21], TILE_MEDICAL_NOTEBOOK);
-let sealedTube = new obtainableItemClass(undefined,undefined, WORLD_W,WORLD_H, "sealedTube", "Sealed Tube",worldPics[22], TILE_SEALED_TUBE);
-let thumbDrive = new obtainableItemClass(undefined,undefined, WORLD_W,WORLD_H, "thumbDrive", "Thumb Drive",worldPics[23], TILE_THUMB_DRIVE);
-let trainTicket = new obtainableItemClass(undefined,undefined, WORLD_W,WORLD_H, "trainTicket", "Train Ticket",worldPics[24], TILE_TRAIN_TICKET);
+let brokenSkateBoard = new ObtainableItem(undefined,undefined, WORLD_W,WORLD_H, "brokenSkateBoard", "Broken Skateboard", worldPics[17], TILE_BROKEN_SKATEBOARD);
+let burnerPhone = new ObtainableItem(undefined,undefined, WORLD_W,WORLD_H, "burnerPhone", "Burner Phone",worldPics[18], TILE_BURNER_PHONE);
+let crowbar = new ObtainableItem(undefined,undefined, WORLD_W,WORLD_H, "crowbar", "Crowbar",worldPics[19], TILE_CROWBAR);
+let hoodie = new ObtainableItem(undefined,undefined, WORLD_W,WORLD_H, "hoodie", "Hoodie",worldPics[20], TILE_HOODIE);
+let medicalNotebook = new ObtainableItem(undefined,undefined, WORLD_W,WORLD_H, "medicalNotebook", "Medical Notebook",worldPics[21], TILE_MEDICAL_NOTEBOOK);
+let sealedTube = new ObtainableItem(undefined,undefined, WORLD_W,WORLD_H, "sealedTube", "Sealed Tube",worldPics[22], TILE_SEALED_TUBE);
+let thumbDrive = new ObtainableItem(undefined,undefined, WORLD_W,WORLD_H, "thumbDrive", "Thumb Drive",worldPics[23], TILE_THUMB_DRIVE);
+let trainTicket = new ObtainableItem(undefined,undefined, WORLD_W,WORLD_H, "trainTicket", "Train Ticket",worldPics[24], TILE_TRAIN_TICKET);
 
 let arrayOfObtainableItems = [brokenSkateBoard, burnerPhone, crowbar, hoodie, medicalNotebook, sealedTube, thumbDrive, trainTicket];
 

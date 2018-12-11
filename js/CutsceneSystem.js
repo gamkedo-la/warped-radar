@@ -11,7 +11,7 @@ let sceneLetterCount = 0;
 let whoMoving = null;
 let movingToX, movingToY, movingSpeed;
 
-function cutscene() {
+function CutScene() {
     let dialogueBoxX = 0,
         dialogueBoxY = 470,
         textX = dialogueBoxX + 30,

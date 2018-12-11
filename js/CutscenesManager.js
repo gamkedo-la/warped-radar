@@ -1,5 +1,5 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////
-let testScene = new cutscene();
+let testScene = new CutScene();
 let playTheScene = false;
 this.xFinal = 100,
     this.yFinal = 20,

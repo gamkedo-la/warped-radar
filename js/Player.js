@@ -22,7 +22,7 @@ let player = new(function () {
     this.controlKeyDown2;
     this.controlKeyLeft2;
 
-    this.collider = new colliderClass(this.x, this.y, this.w, this.h, 0, 0);
+    this.collider = new Collider(this.x, this.y, this.w, this.h, 0, 0);
 
     this.states = {
         walking: false

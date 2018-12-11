@@ -3,7 +3,7 @@ function Player () {
     this.y = 100;
     //this.w = 64;
     //this.h = 64;
-    this.walkSpeed = 4;
+    this.walkSpeed = 200;
 
     this.keyHeld_walkUp = false;
     this.keyHeld_walkDown = false;
@@ -67,7 +67,7 @@ function Player () {
         }
     }
 
-    this.move = function () {
+    this.move = function (delta) {
 
         if (dialogueNotShowing() && !inventory.isShowing && !levelEditor.isOn) {
             let nextX = this.x;
@@ -76,16 +76,16 @@ function Player () {
 
             if (playingScene == null) {
                 if (this.keyHeld_walkUp) {
-                    nextY -= this.walkSpeed;
+                    nextY -= this.walkSpeed * delta;
                 }
                 if (this.keyHeld_walkDown) {
-                    nextY += this.walkSpeed;
+                    nextY += this.walkSpeed * delta;
                 }
                 if (this.keyHeld_walkLeft) {
-                    nextX -= this.walkSpeed;
+                    nextX -= this.walkSpeed * delta;
                 }
                 if (this.keyHeld_walkRight) {
-                    nextX += this.walkSpeed;
+                    nextX += this.walkSpeed * delta;
                 }
             }
 

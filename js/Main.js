@@ -6,7 +6,11 @@ let scaledCanvas, scaledContext;
 let canvas, canvasContext;
 
 let framesFromGameStart = 0;
+
+let deltaMultiplier = 1;
 let then = Date.now();
+let delta = (Date.now() - then) * deltaMultiplier;
+
 let debug = false;
 let paused = false;
 
@@ -92,7 +96,7 @@ function reset () {
 
 function gameLoop () {
     let now = Date.now();
-    let delta = now - then;
+    delta = (now - then) * deltaMultiplier;
     
     if (!paused) {
         update(delta / 1000);
@@ -103,9 +107,9 @@ function gameLoop () {
     requestAnimationFrame(gameLoop);
 }
 
-function update (dt) {
+function update (delta) {
     updateSceneTick();
-    player.move();
+    player.move(delta);
     checkForObtainableItems(); //in obtainableItems.js
     triggerNPCDialogue();
     mainCamera.follow(player);

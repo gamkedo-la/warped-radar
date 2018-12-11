@@ -44,12 +44,12 @@ function LevelEditor () {
 
     this.roomTileCoordinate = function () {
         if (this.isOn) {
-            tileUnderMouse = getTileIndexAtPixelCoord(mouseX / PIXELS_PER_SCALE + camPanX, mouseY / PIXELS_PER_SCALE + camPanY);
+            tileUnderMouse = getTileIndexAtPixelCoord(mouseX / PIXELS_PER_SCALE + mainCamera.camPanX, mouseY / PIXELS_PER_SCALE + mainCamera.camPanY);
 
             let levelCol = arrayIndexToCol(tileUnderMouse);
             let levelRow = arrayIndexToRow(tileUnderMouse);
-            let tileX = (levelCol * WORLD_W) - camPanX;
-            let tileY = (levelRow * WORLD_H) - camPanY;
+            let tileX = (levelCol * WORLD_W) - mainCamera.camPanX;
+            let tileY = (levelRow * WORLD_H) - mainCamera.camPanY;
 
             mouseOverTileIdx = rowColToArrayIndex(levelCol, levelRow);
             scaledContext.strokeRect(tileX, tileY, WORLD_W, WORLD_H);
@@ -98,5 +98,5 @@ function LevelEditor () {
             this.showInstructions();
         }
     }
-    
+
 }

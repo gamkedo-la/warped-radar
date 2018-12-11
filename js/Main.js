@@ -10,6 +10,7 @@ let then = Date.now();
 let debug = false;
 let paused = false;
 
+let mainCamera;
 let levelEditor;
 let player;
 
@@ -69,6 +70,7 @@ function start () {
     makeAnimatedSprites();
     
     if (loadImages()) {
+        mainCamera = new Camera();
         levelEditor = new LevelEditor();
         player = new Player();
         worldGrid = Array.from(locationList[locationNow].layout);
@@ -106,12 +108,12 @@ function update (dt) {
     player.move();
     checkForObtainableItems(); //in obtainableItems.js
     triggerNPCDialogue();
-    cameraFollow();
+    mainCamera.follow(player);
     levelEditor.showNewGrid();
 }
 
 function render () {
-    beginPan();
+    mainCamera.beginPan();
     clearScreen();
     drawWorld();
     player.draw();
@@ -125,7 +127,7 @@ function render () {
     createDialogueEvents();
     inventory.draw();
     inventory.interactWithItems();
-    endPan();
+    mainCamera.endPan();
     showCutsceneDialogue();
     triggerTestScene();
     levelEditor.roomTileCoordinate();
@@ -158,8 +160,8 @@ function loadLevel (whichLevel) {
     // these need to be updated to reflect the new location
     worldCols = whichLevel.columns;
     worldRows = whichLevel.rows;
-    camPanX = 0;
-    camPanY = 0;
+    mainCamera.camPanX = 0;
+    mainCamera.camPanY = 0;
     player.reset();
 }
 

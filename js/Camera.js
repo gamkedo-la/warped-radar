@@ -1,84 +1,85 @@
 const CAM_SPEED = 10;
 const EDITOR_SPEED = 5;
+const PLAYER_DIST_FROM_CENTER_BEFORE_CAMERA_PAN = { x: 200, y: 200};
 
-let camPanX = 0.0;
-let camPanY = 0.0;
-const PLAYER_DIST_FROM_CENTER_BEFORE_CAMERA_PAN_X = 200;
-const PLAYER_DIST_FROM_CENTER_BEFORE_CAMERA_PAN_Y = 100;
+function Camera () {
+    this.camPanX = 0.0;
+    this.camPanY = 0.0;
 
-function instantCamFollow() {
-    camPanX = player.x - scaledCanvas.width / 2;
-    camPanY = player.y - scaledCanvas.height / 2;
-}
+    this.instantFollow = function (target) {
+        this.camPanX = target.x - scaledCanvas.width / 2;
+        this.camPanY = target.y - scaledCanvas.height / 2;
+    };
 
-function findEdgesOfScreen() {
-    // this next code blocks the game from showing out of bounds
-    if (camPanX < 0) {
-        camPanX = 0;
-    }
-    if (camPanY < 0) {
-        camPanY = 0;
-    }
-    let maxPanRight = worldCols * WORLD_W - scaledCanvas.width;
-    let maxPanTop = worldRows * WORLD_H - scaledCanvas.height;
-    if (camPanX > maxPanRight) {
-        camPanX = maxPanRight;
-    }
-    if (camPanY > maxPanTop) {
-        camPanY = maxPanTop;
-    }
-}
-
-function cameraFollow() {
-    let cameraFocusCenterX = camPanX + scaledCanvas.width / 2;
-    let cameraFocusCenterY = camPanY + scaledCanvas.height / 2;
-    if (levelEditor.isOn) {
-        let canvasRightBoundary = scaledCanvas.width + camPanX;
-        let canvasBottomBoundary = scaledCanvas.height + camPanY;
-        if ((mouseX / PIXELS_PER_SCALE) > scaledCanvas.width - WORLD_W) {
-            camPanX += EDITOR_SPEED;
-        }
-        if ((mouseX / PIXELS_PER_SCALE) < WORLD_W) {
-            camPanX -= EDITOR_SPEED;
-        }
-        if ((mouseY / PIXELS_PER_SCALE) > scaledCanvas.height - WORLD_H) {
-            camPanY += EDITOR_SPEED;
-        }
-        if ((mouseY / PIXELS_PER_SCALE) < WORLD_H) {
-            camPanY -= EDITOR_SPEED;
-        }
-        findEdgesOfScreen();
-    } else {
-        let cameraFocusCenterX = camPanX + scaledCanvas.width / 2;
-        let cameraFocusCenterY = camPanY + scaledCanvas.height / 2;
-
-        let playerDistFromCameraFocusX = Math.abs(player.x - cameraFocusCenterX);
-        let playerDistFromCameraFocusY = Math.abs(player.y - cameraFocusCenterY);
-
-        if (playerDistFromCameraFocusX > PLAYER_DIST_FROM_CENTER_BEFORE_CAMERA_PAN_X) {
-            if (cameraFocusCenterX < player.x) {
-                camPanX += CAM_SPEED;
-            } else {
-                camPanX -= CAM_SPEED;
+    this.follow = function (target, targetDistBeforePan = PLAYER_DIST_FROM_CENTER_BEFORE_CAMERA_PAN, speed = CAM_SPEED, editorSpeed = EDITOR_SPEED) {
+        let cameraFocusCenterX = this.camPanX + scaledCanvas.width / 2;
+        let cameraFocusCenterY = this.camPanY + scaledCanvas.height / 2;
+        if (levelEditor.isOn) {
+            let canvasRightBoundary = scaledCanvas.width + this.camPanX;
+            let canvasBottomBoundary = scaledCanvas.height + this.camPanY;
+            if ((mouseX / PIXELS_PER_SCALE) > scaledCanvas.width - WORLD_W) {
+                this.camPanX += editorSpeed;
             }
-        }
-        if (playerDistFromCameraFocusY > PLAYER_DIST_FROM_CENTER_BEFORE_CAMERA_PAN_Y) {
-            if (cameraFocusCenterY < player.y) {
-                camPanY += CAM_SPEED;
-            } else {
-                camPanY -= CAM_SPEED;
+            if ((mouseX / PIXELS_PER_SCALE) < WORLD_W) {
+                this.camPanX -= editorSpeed;
             }
+            if ((mouseY / PIXELS_PER_SCALE) > scaledCanvas.height - WORLD_H) {
+                this.camPanY += editorSpeed;
+            }
+            if ((mouseY / PIXELS_PER_SCALE) < WORLD_H) {
+                this.camPanY -= editorSpeed;
+            }
+            this.findEdgesOfScreen();
+        } else {
+            let cameraFocusCenterX = this.camPanX + scaledCanvas.width / 2;
+            let cameraFocusCenterY = this.camPanY + scaledCanvas.height / 2;
+    
+            let targetDistFromCameraFocusX = Math.abs(target.x - cameraFocusCenterX);
+            let targetDistFromCameraFocusY = Math.abs(target.y - cameraFocusCenterY);
+    
+            if (targetDistFromCameraFocusX > targetDistBeforePan.x) {
+                if (cameraFocusCenterX < target.x) {
+                    this.camPanX += speed;
+                } else {
+                    this.camPanX -= speed;
+                }
+            }
+            if (targetDistFromCameraFocusY > targetDistBeforePan.y) {
+                if (cameraFocusCenterY < target.y) {
+                    this.camPanY += speed;
+                } else {
+                    this.camPanY -= speed;
+                }
+            }
+            this.instantFollow(target);
+            this.findEdgesOfScreen();
         }
-        instantCamFollow();
-        findEdgesOfScreen();
+    };
+
+    this.findEdgesOfScreen = function () {
+        // this next code blocks the game from showing out of bounds
+        if (this.camPanX < 0) {
+            this.camPanX = 0;
+        }
+        if (this.camPanY < 0) {
+            this.camPanY = 0;
+        }
+        let maxPanRight = worldCols * WORLD_W - scaledCanvas.width;
+        let maxPanTop = worldRows * WORLD_H - scaledCanvas.height;
+        if (this.camPanX > maxPanRight) {
+            this.camPanX = maxPanRight;
+        }
+        if (this.camPanY > maxPanTop) {
+            this.camPanY = maxPanTop;
+        }
+    };
+
+    this.beginPan = function() {
+        scaledContext.save();
+        scaledContext.translate(-this.camPanX, -this.camPanY);
+    };
+
+    this.endPan = function () {
+        scaledContext.restore();
     }
-}
-
-function beginPan() {
-    scaledContext.save();
-    scaledContext.translate(-camPanX, -camPanY);
-}
-
-function endPan() {
-    scaledContext.restore();
 }

@@ -67,7 +67,7 @@ function Player () {
         }
     }
 
-    this.move = function (delta) {
+    this.move = function (delta, moveSpeed = this.walkSpeed) {
 
         if (dialogueNotShowing() && !inventory.isShowing && !levelEditor.isOn) {
             let nextX = this.x;
@@ -76,16 +76,16 @@ function Player () {
 
             if (playingScene == null) {
                 if (this.keyHeld_walkUp) {
-                    nextY -= this.walkSpeed * delta;
+                    nextY -= moveSpeed * delta;
                 }
                 if (this.keyHeld_walkDown) {
-                    nextY += this.walkSpeed * delta;
+                    nextY += moveSpeed * delta;
                 }
                 if (this.keyHeld_walkLeft) {
-                    nextX -= this.walkSpeed * delta;
+                    nextX -= moveSpeed * delta;
                 }
                 if (this.keyHeld_walkRight) {
-                    nextX += this.walkSpeed * delta;
+                    nextX += moveSpeed * delta;
                 }
             }
 

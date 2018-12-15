@@ -33,7 +33,9 @@ const ChildType = {
 	DialogLabel:"dialog label",
 	DialogDropDown:"dialog drop down",
 	DialogTextBox:"dialog text box",
-	DialogImage:"dialog image"
+	DialogImage:"dialog image",
+	DialogTransitionOrigin:"dialog transition origin",
+	DialogTransitionDestination:"dialog transition destination"
 };
 const LineWidth = {
 	Normal:4,

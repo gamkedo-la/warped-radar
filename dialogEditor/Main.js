@@ -92,6 +92,16 @@ function positionToCenterStringInFrame(context, font, string, frame) {
 	return position;
 }
 
+function strokeLine(context, originX, originY, destX, destY, strokeColor, lineWidth = 1) {
+	context.save();
+	context.strokeStyle = strokeColor;
+	context.beginPath();
+	context.moveTo(originX, originY);
+	context.lineTo(destX, destY);
+	context.stroke();
+	context.restore();
+}
+
 function outlineCircle(context, centerX, centerY, radius, strokeColor, lineWidth = 1) {
 	context.save();
     context.strokeStyle = strokeColor;

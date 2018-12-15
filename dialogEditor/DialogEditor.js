@@ -5,6 +5,8 @@ function DialogEditor() {
 	
 	let newLineButton;
 	const newLineSize = {width: 125, height: 30};
+	const newLinePadding = 50;
+	let transitionInProgress = null;
 	
 	this.initialize = function() {
 		addNewLineButton();
@@ -73,7 +75,18 @@ function DialogEditor() {
 	
 		//Temp for testing
 		const newLineAction = function() {
-			const newDialogLine = new DialogLine({x:110, y:110});
+			let newLineX = 110;
+			let newLineY = 110;
+			
+			for(let i = children.length - 1; i >= 0; i--) {
+				if(children[i].type != ChildType.DialogLine) {continue;}
+				
+				newLineX = children[i].frame.x;
+				newLineY = children[i].frame.y + children[i].frame.height + newLinePadding;
+				break;
+			}
+			
+			const newDialogLine = new DialogLine({x:newLineX, y:newLineY});
 			newDialogLine.initialize();
 			children.push(newDialogLine);
 		}
@@ -95,6 +108,77 @@ function DialogEditor() {
 				childWithFocus.textBoxGrew(deltaY);
 			}
 		}
+	};
+	
+	this.createTransition = function(child, position) {
+		if((transitionInProgress != null) && (child.type === ChildType.DialogLine)) {
+			const destPosition = this.findDestPosWithPos(child.frame, position);
+			let newDestination = new DialogTransitionDestination(destPosition, childWithFocus, transitionInProgress);
+			childWithFocus.addDestinationChild(newDestination);
+			
+			transitionInProgress = null;
+		} else if(child.type === ChildType.DialogTextBox) {
+			const originPosition = this.findOriginPosWithPos(child.frame, position);
+			let newOrigin = new DialogTransitionOrigin(originPosition, child);
+			
+			childWithFocus.addOriginChild(newOrigin);
+			
+			transitionInProgress = newOrigin;
+		}
+	};
+	
+	this.findDestPosWithPos = function(frame, position) {
+		let result = {x:0, y:0};
+		
+		const deltaX1 = Math.abs(position.x - frame.x);
+		const deltaX2 = Math.abs(position.x - (frame.x + (frame.width / 2)));
+		const deltaX3 = Math.abs(position.x - (frame.x + frame.width));
+
+		const minX = Math.min(deltaX1, deltaX2, deltaX3);
+
+		const deltaY1 = Math.abs(position.y - frame.y);
+		const deltaY2 = Math.abs(position.y - (frame.y + (frame.height/2)));
+		const deltaY3 = Math.abs(position.y - (frame.y + frame.height));
+		
+		const minY = Math.min(deltaY1, deltaY2, deltaY3);
+		
+		if((minX === deltaX2) && (minY === deltaY2)) {
+			result.x = frame.x + frame.width/2;
+			result.y = frame.y;
+		} else {
+			if(minX === deltaX1) {
+				result.x = frame.x;
+			} else if(minX === deltaX2) {
+				result.x = frame.x + frame.width/2;
+			} else {
+				result.x = frame.x + frame.width;
+			}
+			
+			if(minY === deltaY1) {
+				result.y = frame.y;
+			} else if(minY === deltaY2) {
+				result.y = frame.y + frame.height/2;
+			} else {
+				result.y = frame.y + frame.height;
+			}
+		}
+		
+		return result;
+	};
+	
+	this.findOriginPosWithPos = function(frame, position) {
+		let result = {x:0, y:frame.getMidY()};
+		
+		const deltaX1 = Math.abs(position.x - frame.x);
+		const deltaX2 = Math.abs(position.x - (frame.x + frame.width));
+		
+		if(deltaX1 <= deltaX2) {
+			result.x = frame.x + 12;
+		} else {
+			result.x = frame.x + frame.width - 12;
+		}
+		
+		return result;
 	};
 }
 

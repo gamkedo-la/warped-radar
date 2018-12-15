@@ -3,7 +3,9 @@ function DialogLine(position) {
 	this.type = ChildType.DialogLine;
 	this.frame = new DialogFrame(position.x, position.y, 350, 250);
 	this.inFocus = false;
-	let children = [];
+	this.sceneName = null;
+	const children = [];
+	const transitions = [];
 	let childWithFocus = null;
 	const CORNER_RADIUS = 15;
 	const LINE_SPACING = 12;
@@ -21,37 +23,63 @@ function DialogLine(position) {
 	let speakerDropDown;
 	
 	this.initialize = function() {
-		const speakerLabel = this.buildSpeakerLabel();
-		const speakerDropDown = this.buildSpeakerDropDown(speakerLabel);
+		const sceneNameLabel = this.buildSceneNameLabel();
+		this.sceneName = this.buildSceneNameTextBox(sceneNameLabel);
 		
-		const leftImageDropDown = this.buildLeftImageDropDown(speakerLabel);
-		const rightImageDropDown = this.buildRightImageDropDown(speakerLabel);
+		const leftImageDropDown = this.buildLeftImageDropDown(sceneNameLabel);
+		const rightImageDropDown = this.buildRightImageDropDown(sceneNameLabel);
+
+		const speakerLabel = this.buildSpeakerLabel(leftImageDropDown);
+		const speakerDropDown = this.buildSpeakerDropDown(speakerLabel);
 
 		const textLabel = this.buildTextLabel(leftImageDropDown);		
 		const textBox = this.buildDialogTextBox(textLabel);
-		const choicesButton = this.buildChoicesButton(textLabel);		
+		const choicesButton = this.buildChoicesButton(textLabel, textBox);
+		
+		console.log("Choices Length: " + choices.length);	
 	};
 	
-	this.buildSpeakerLabel = function() {
-		const speakerLabel = new DialogLabel({x:this.frame.x + LINE_SPACING + CHILD_PADDING, 
+	this.buildSceneNameLabel = function() {
+		const sceneNameLabel = new DialogLabel({x:this.frame.x + LINE_SPACING + CHILD_PADDING, 
 											  y:this.frame.y + LINE_SPACING + CHILD_PADDING}, 
 											 LabelFont.Medium, 
-											 "Speaker: ");
+											 "Scene: ");
+		children.push(sceneNameLabel);
+		return sceneNameLabel
+	};
+	
+	this.buildSceneNameTextBox = function(previousChild) {
+		const sceneNameTextBox = new DialogTextBox(new DialogFrame(previousChild.frame.x + previousChild.frame.width - CHILD_PADDING, 
+										   				  previousChild.frame.y + 2, //+2 fudge to center on label
+										   				  this.frame.width - (2 * (LINE_SPACING + CHILD_PADDING)) - previousChild.frame.width,
+										   				  25), LabelFont.Medium);//25 is height
+		children.push(sceneNameTextBox);
+		
+		return sceneNameTextBox;
+	};
+	
+	this.buildSpeakerLabel = function(previousChild) {
+		const speakerString = "Speaker: ";
+		const labelSize = sizeOfString(canvasContext, LabelFont.Medium, speakerString);
+		const speakerLabel = new DialogLabel({x:this.frame.getMidX() - (labelSize.width/2), 
+											  y:previousChild.frame.y}, 
+											  LabelFont.Medium, 
+											  speakerString);
 		children.push(speakerLabel);
 		return speakerLabel
 	};
 	
 	this.buildSpeakerDropDown = function(previousChild) {
-		const speakerDropDownFrame = new DialogFrame(previousChild.frame.x + previousChild.frame.width,
-													 this.frame.y + LINE_SPACING + CHILD_PADDING + 4, //+4 fudge to center on Label 
+		const speakerDropDownFrame = new DialogFrame(previousChild.frame.x,
+													 previousChild.frame.y + previousChild.frame.height,
 													 previousChild.frame.width, 
 													 previousChild.frame.height);
 		
-		const johnLabel = new DialogLabel({x:previousChild.frame.x + previousChild.frame.width + CHILD_PADDING, 
-										   y:this.frame.y + LINE_SPACING + CHILD_PADDING}, 
+		const johnLabel = new DialogLabel({x:speakerDropDownFrame.x, 
+										   y:speakerDropDownFrame.y}, 
 										   LabelFont.Medium, 
 										   Speaker.John);
-		const roseLabel = new DialogLabel({x:previousChild.frame.x + previousChild.frame.width + CHILD_PADDING, 
+		const roseLabel = new DialogLabel({x:speakerDropDownFrame.x, 
 										   y:johnLabel.frame.y + johnLabel.frame.height}, 
 										   LabelFont.Medium, 
 										   Speaker.Rose);
@@ -126,17 +154,17 @@ function DialogLine(position) {
 		return textBox;
 	};
 	
-	this.buildChoicesButton = function(previousChild) {
+	this.buildChoicesButton = function(previousChild, firstTextBox) {
 		const choicesButtonFrame = new DialogFrame(previousChild.frame.x + previousChild.frame.width,
-												   previousChild.frame.y + CHILD_PADDING / 2,
+												   previousChild.frame.y,
 												   previousChild.frame.width / 2,
 												   previousChild.frame.height);
 		const choicesButtonAction = function() {
 			const lastFrame = choices[choices.length - 1].frame;
-			const thisFrame = new DialogFrame(choices[0].frame.x, 
-										   	  lastFrame.y + lastFrame.height + CHILD_PADDING,
-										   	  choices[0].frame.width,
-										   	  25);//25 is height
+			const thisFrame = new DialogFrame(firstTextBox.frame.x, 
+										   	  firstTextBox.frame.y + ((choices.length) * (firstTextBox.frame.height + CHILD_PADDING)),
+										   	  firstTextBox.frame.width,
+										   	  firstTextBox.frame.height);
 										   	  
 			const anotherTextBox = new DialogTextBox(thisFrame, LabelFont.Medium);
 			children.push(anotherTextBox);
@@ -198,11 +226,16 @@ function DialogLine(position) {
 		for(let i = 0; i < children.length; i++) {
 			child = children[i];
 			if(child === childWithFocus) {continue;}
+			if((child.type === ChildType.DialogTransitionOrigin) || (child.type === ChildType.DialogTransitionDestination)) {continue;}
 			child.draw();
 		}
 		
 		if(childWithFocus != null) {
 			childWithFocus.draw();
+		}
+		
+		for(let i = 0; i < transitions.length; i++) {
+			transitions[i].draw();
 		}
 				
 		if((childWithFocus === speakerDropDown) && (childWithFocus.childToDraw != null)) {
@@ -244,7 +277,27 @@ function DialogLine(position) {
 				if(mouseInside(child.frame)) {
 					childWithFocus = child;
 					child.setFocus(x, y);
+					
+					if((childWithFocus.type === ChildType.DialogTextBox) && (choices.length > 1)) {
+						for(let j = 0; j < choices.length; j++) {
+							if(choices[j] === childWithFocus) {
+								dialogEditor.createTransition(childWithFocus, {x:x, y:y});
+							}
+						}
+					}
 				}
+			}
+			
+			let shouldCreateTransition = true;
+			for(let i = 0; i < transitions.length; i++) {
+				if((transitions[i].type === ChildType.DialogTransitionOrigin) && (transitions[i].mate === null)) {
+					//want to do nothing
+					shouldCreateTransition = false;
+				}
+			}
+
+			if(shouldCreateTransition) {
+				dialogEditor.createTransition(this, {x:x, y:y});
 			}
 		}
 		
@@ -282,7 +335,6 @@ function DialogLine(position) {
 	};
 	
 	this.textBoxGrew = function(deltaY) {
-		console.log("DeltaY: " + deltaY);
 		if(childWithFocus != null) {
 			if((childWithFocus.type === ChildType.DialogTextBox) || 
 			   (childWithFocus.type === ChildType.DialogButton) ||
@@ -290,5 +342,15 @@ function DialogLine(position) {
 				this.frame.height += deltaY;
 			}
 		}
+	};
+	
+	this.addDestinationChild = function(newDestination) {
+		transitions.push(newDestination);
+		children.push(newDestination);
+	};
+	
+	this.addOriginChild = function(newOrigin) {
+		transitions.push(newOrigin);
+		children.push(newOrigin);
 	};
 }

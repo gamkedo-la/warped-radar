@@ -28,6 +28,10 @@ function DialogTextBox(frame, font) {
 		this.frame.y += deltaY;
 	};
 	
+	this.getText = function() {
+		return text;
+	};
+	
 	this.draw = function() {
 		let totalThickness = BORDER_THICKNESS;
 		if(this.inFocus) {

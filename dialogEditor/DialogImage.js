@@ -71,5 +71,9 @@ function DialogImage(frame, image, speaker) {
 		} else {
 			this.setState(ChildState.Normal);
 		}
-	};	
+	};
+	
+	this.textBoxGrew = function(deltaY) {
+		this.frame.y += deltaY;
+	};
 }

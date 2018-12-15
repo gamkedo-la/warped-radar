@@ -42,8 +42,6 @@ function DialogTextBox(frame, font) {
 		}
 		fillRectangle(canvasContext, this.frame.x, this.frame.y, this.frame.width, this.frame.height, this.bkgd);
 		strokeRectangle(canvasContext, this.frame.x, this.frame.y, this.frame.width, this.frame.height, this.color, totalThickness);
-		//add titleSize.height to the 'y' draw position because text is drawn at lower left corner vice upper left
-//		colorText(canvasContext, text[currentIndex], this.frame.x + PADDING, this.frame.y + titleSize.height - PADDING, this.color, font, 'left');
 		
 		const currentSize = sizeOfString(canvasContext, font, text[currentIndex]);
 		let currentYPos = this.frame.y + titleSize.height - PADDING;
@@ -67,7 +65,6 @@ function DialogTextBox(frame, font) {
 		
 		if(shouldDrawCursor) {
 			colorText(canvasContext, "|", this.frame.x + PADDING + currentSize.width, 
-//										  this.frame.y + titleSize.height - (2 * PADDING), 
 										  currentYPos - titleSize.height - (2 * PADDING),
 										  this.color, font, 'left');
 		}
@@ -87,6 +84,7 @@ function DialogTextBox(frame, font) {
 	
 	this.lostFocus = function() {
 		this.inFocus = false;
+		shouldDrawCursor = false;
 	};
 	
 	this.setColors = function(bkgd, line) {
@@ -124,5 +122,9 @@ function DialogTextBox(frame, font) {
 				}
 			}
 		}
+	};
+	
+	this.textBoxGrew = function(deltaY) {
+		this.frame.y += deltaY;
 	};
 }

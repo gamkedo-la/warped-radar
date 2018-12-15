@@ -65,6 +65,10 @@ function DialogTransitionOrigin(position, owner) {
 			this.setState(ChildState.Normal);
 		}
 	};
+	
+	this.textBoxGrew = function(deltaY) {
+		this.frame.y += deltaY;
+	};
 }
 
 //Dialog Transition Destination
@@ -142,5 +146,10 @@ function DialogTransitionDestination(position, owner, origin) {
 		} else {
 			this.setState(ChildState.Normal);
 		}
+	};
+	
+	this.textBoxGrew = function(deltaY) {
+//		this.frame.y += deltaY;
+		//do nothing?
 	};
 }

@@ -1,7 +1,7 @@
 //Dialog Line
 function DialogLine(position) {
 	this.type = ChildType.DialogLine;
-	this.frame = new DialogFrame(position.x, position.y, 350, 250);
+	this.frame = new DialogFrame(position.x, position.y, 380, 250);
 	this.inFocus = false;
 	this.sceneName = null;
 	const children = [];
@@ -13,6 +13,11 @@ function DialogLine(position) {
 	const INWARD = true;
 	let state = ChildState.Normal;
 	let lineWidth = LineWidth.Normal;
+	
+	this.leftImageDropDown;
+	this.rightImageDropDown;
+	this.leftLeaveDropDown;
+	this.rightLeaveDropDown;
 	
 	let speaker = null;
 	let bkgdColor = NeutralColor.Fill;
@@ -26,17 +31,19 @@ function DialogLine(position) {
 		const sceneNameLabel = this.buildSceneNameLabel();
 		this.sceneName = this.buildSceneNameTextBox(sceneNameLabel);
 		
-		const leftImageDropDown = this.buildLeftImageDropDown(sceneNameLabel);
-		const rightImageDropDown = this.buildRightImageDropDown(sceneNameLabel);
+		this.leftImageDropDown = this.buildLeftImageDropDown(sceneNameLabel);
+		this.rightImageDropDown = this.buildRightImageDropDown(sceneNameLabel);
 
-		const speakerLabel = this.buildSpeakerLabel(leftImageDropDown);
+		const speakerLabel = this.buildSpeakerLabel(this.leftImageDropDown);
 		const speakerDropDown = this.buildSpeakerDropDown(speakerLabel);
+		
+		const leaveLabel = this.buildLeaveLabel(speakerDropDown);
+		this.leftLeaveDropDown = this.buildLeftLeaveDropDown(leaveLabel, this.leftImageDropDown);
+		this.rightLeaveDropDown = this.buildRightLeaveDropDown(leaveLabel, this.rightImageDropDown);
 
-		const textLabel = this.buildTextLabel(leftImageDropDown);		
+		const textLabel = this.buildTextLabel(this.leftImageDropDown);		
 		const textBox = this.buildDialogTextBox(textLabel);
 		const choicesButton = this.buildChoicesButton(textLabel, textBox);
-		
-		console.log("Choices Length: " + choices.length);	
 	};
 	
 	this.buildSceneNameLabel = function() {
@@ -89,8 +96,61 @@ function DialogLine(position) {
 		return speakerDropDown;
 	};
 	
+	this.buildLeaveLabel = function(previousChild) {
+		const leaveString = "Leave:";
+		const labelSize = sizeOfString(canvasContext, LabelFont.Medium, leaveString);
+		const leaveLabel = new DialogLabel({x:this.frame.getMidX() - (labelSize.width/2), 
+											y:previousChild.frame.y + previousChild.frame.height + CHILD_PADDING}, 
+											LabelFont.Medium, 
+											leaveString);
+		children.push(leaveLabel);
+		return leaveLabel
+	};
+	
+	this.buildLeftLeaveDropDown = function(previousChild, leftChild) {
+		const labelSize = sizeOfString(canvasContext, LabelFont.Medium, "Yes ");
+		const leftLeaveDropDownFrame = new DialogFrame(leftChild.frame.x + leftChild.frame.width + CHILD_PADDING,
+													 previousChild.frame.y,
+													 labelSize.width, 
+													 previousChild.frame.height);
+		
+		const noLabel = new DialogLabel({x:leftLeaveDropDownFrame.x, 
+										   y:leftLeaveDropDownFrame.y}, 
+										   LabelFont.Medium, 
+										   "No");
+		const yesLabel = new DialogLabel({x:leftLeaveDropDownFrame.x, 
+										   y:noLabel.frame.y + noLabel.frame.height}, 
+										   LabelFont.Medium, 
+										   "Yes");
+		const leftLeaveDropDown = new DialogDropDown(leftLeaveDropDownFrame,[noLabel, yesLabel]);
+		children.push(leftLeaveDropDown);
+		
+		return leftLeaveDropDown;
+	};
+	
+	this.buildRightLeaveDropDown = function(previousChild, rightChild) {
+		const labelSize = sizeOfString(canvasContext, LabelFont.Medium, "Yes ");
+		const rightLeaveDropDownFrame = new DialogFrame(rightChild.frame.x - labelSize.width - CHILD_PADDING,
+													 previousChild.frame.y,
+													 labelSize.width, 
+													 previousChild.frame.height);
+		
+		const noLabel = new DialogLabel({x:rightLeaveDropDownFrame.x, 
+										   y:rightLeaveDropDownFrame.y}, 
+										   LabelFont.Medium, 
+										   "No");
+		const yesLabel = new DialogLabel({x:rightLeaveDropDownFrame.x, 
+										   y:noLabel.frame.y + noLabel.frame.height}, 
+										   LabelFont.Medium, 
+										   "Yes");
+		const rightLeaveDropDown = new DialogDropDown(rightLeaveDropDownFrame,[noLabel, yesLabel]);
+		children.push(rightLeaveDropDown);
+		
+		return rightLeaveDropDown;
+	};
+	
 	this.buildLeftImageDropDown = function(previousChild) {
-		const leftImageDropDownFrame = new DialogFrame(this.frame.x + LINE_SPACING + (2 * CHILD_PADDING),
+		const leftImageDropDownFrame = new DialogFrame(this.frame.x + LINE_SPACING + (1.5 * CHILD_PADDING),
 											   previousChild.frame.y + previousChild.frame.height + (2 * CHILD_PADDING),
 											   this.frame.width/4, this.frame.height/2);
 		
@@ -112,7 +172,7 @@ function DialogLine(position) {
 	};
 	
 	this.buildRightImageDropDown = function(previousChild) {
-		const rightImageDropDownFrame = new DialogFrame(this.frame.x + this.frame.width - LINE_SPACING - (2 * CHILD_PADDING) - (this.frame.width/4),
+		const rightImageDropDownFrame = new DialogFrame(this.frame.x + this.frame.width - LINE_SPACING - (1.5 * CHILD_PADDING) - (this.frame.width/4),
 											   previousChild.frame.y + previousChild.frame.height + (2 * CHILD_PADDING),
 											   this.frame.width/4, this.frame.height/2);
 		
@@ -274,6 +334,7 @@ function DialogLine(position) {
 		if(children.length > 0) {
 			for(let i = 0; i < children.length; i++) {
 				child = children[i];
+				if(child.type === ChildType.DialogLabel) {continue;}
 				if(mouseInside(child.frame)) {
 					childWithFocus = child;
 					child.setFocus(x, y);
@@ -339,6 +400,12 @@ function DialogLine(position) {
 			if((childWithFocus.type === ChildType.DialogTextBox) || 
 			   (childWithFocus.type === ChildType.DialogButton) ||
 			   (childWithFocus.type === ChildType.DialogDropDown)) {
+				   if(childWithFocus === this.sceneName) {
+					   for(let i = 0; i < children.length; i++) {
+						   if(children[i] === this.sceneName) {continue;}
+						   children[i].textBoxGrew(deltaY);
+					   }
+				   }
 				this.frame.height += deltaY;
 			}
 		}
@@ -352,5 +419,168 @@ function DialogLine(position) {
 	this.addOriginChild = function(newOrigin) {
 		transitions.push(newOrigin);
 		children.push(newOrigin);
+	};
+	
+	this.getSaveData = function() {
+		let saveString = "scene: \"";
+		if(this.sceneName != null) {
+			const sceneText = this.sceneName.getText();
+			for(let i = 0; i < sceneText.length; i++) {
+				saveString += this.sceneName.getText()[i];
+			}
+		} else {
+			saveString += "null"
+		}
+		
+		saveString += "\",\n        ";
+		
+		saveString += "who: ";
+		if(speaker != null) {
+			saveString += "\"" + speaker + "\"";
+		} else {
+			saveString += "null";
+		}
+		
+		saveString += ",\n        ";
+		
+		saveString += "nameCol: ";
+		if(speaker != null) {
+			saveString += "\"" + bkgdColor + "\""
+		} else {
+			saveString += "null";
+		}
+
+		saveString += ",\n        ";
+		
+		saveString += "voice: ";
+		if(speaker != null) {
+			saveString += this.voiceForSpeaker(speaker);
+		} else {
+			saveString += "null";
+		}
+		
+		saveString += ",\n        ";
+		
+		saveString += "text: ";
+		if(choices.length === 1) {
+			const choice0TextArray = choices[0].getText();
+			saveString += "\"";
+			for(let i = 0; i < choice0TextArray.length; i++) {
+				saveString += choice0TextArray[i];
+			}
+			saveString += "\"";
+		} else {
+			saveString += "null";
+		}
+		
+		saveString += ",\n        ";		
+		
+		saveString += "leftPic: ";
+		if(this.leftImageDropDown.childToDraw != null) {
+			const imageName = this.imageNameStringForImage(this.leftImageDropDown.childToDraw.image);
+			saveString += imageName;
+		} else {
+			saveString += "null";
+		}
+		
+		saveString += ",\n        ";
+		
+		saveString += "rightPic: ";
+		if(this.rightImageDropDown.childToDraw != null) {
+			const imageName = this.imageNameStringForImage(this.rightImageDropDown.childToDraw.image);
+			saveString += imageName;
+		} else {
+			saveString += "null";
+		}
+		
+		saveString += ",\n\n        ";
+		
+		saveString += "leftPicLeave: ";
+		if(this.leftLeaveDropDown.childToDraw != null) {
+			const willLeave = this.leftLeaveDropDown.childToDraw.title;
+			if(willLeave === "Yes") {
+				saveString += "true";
+			} else {
+				saveString += "false";
+			}
+		} else {
+			saveString += "null";
+		}
+		
+		saveString += ",\n        ";
+
+		saveString += "rightPicLeave: ";
+		if(this.rightLeaveDropDown.childToDraw != null) {
+			const willLeave = this.rightLeaveDropDown.childToDraw.title;
+			if(willLeave === "Yes") {
+				saveString += "true";
+			} else {
+				saveString += "false";
+			}
+		} else {
+			saveString += "null";
+		}
+		
+		saveString += ",\n\n        ";
+
+		saveString += "choices: ";
+		if(choices.length > 1) {
+			saveString += "[[\"";
+			for(let i = 0; i < choices.length; i++) {
+				const thisChoice = choices[i];
+				const choiceText = thisChoice.getText();
+				for(let j = 0; j < choiceText.length; j++) {
+					saveString += choiceText[j];
+				}
+				saveString += "\", ";
+				
+				//add a destination here
+				for(let k = 0; k < transitions.length; k++) {
+					if(transitions[k].type === ChildType.DialogTransitionOrigin) {
+						if(transitions[k].owner === thisChoice) {
+							if(transitions[k].destinationName != null) {
+								saveString += "\"" + transitions[k].destinationName + "\"";
+							} else {
+								saveString += null;
+							}
+						}
+					}
+				}
+				
+				if(i < choices.length - 1) {
+					saveString += "], [\"";
+				} else {
+					saveString += "]]\n    },";
+				}
+			}
+		} else {
+			saveString += "null\n    },";
+		}
+		
+		saveString += "\n        ";
+
+		return saveString;
+	};
+	
+	this.voiceForSpeaker = function(speaker) {
+		switch(speaker) {
+			case Speaker.John:
+				return "voiceLow1";
+			case Speaker.Rose:
+				return "voiceHigh2";
+		}
+	}
+	
+	this.imageNameStringForImage = function(image) {
+		switch(image) {
+			case johnHappyPic:
+				return "johnHappyPic";
+			case johnMadPic:
+				return "johnMadPic";
+			case roseHappyPic:
+				return "roseHappyPic";
+			case roseAnnoyedPic:
+				return "roseAnnoyedPic";
+		}
 	};
 }

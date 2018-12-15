@@ -152,4 +152,11 @@ function DialogButton(frame, title, action, style) {
 			childWithFocus.keyboardEvent(newKey, oldKeys);
 		}
 	};
+	
+	this.textBoxGrew = function(deltaY) {
+		this.frame.y += deltaY;
+		for(let i = 0; i < children.length; i++) {
+			children[i].textBoxGrew(deltaY);
+		}
+	};
 }

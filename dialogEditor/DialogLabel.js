@@ -52,5 +52,9 @@ function DialogLabel(position, font, title) {
 		} else {
 			this.setState(ChildState.Normal);
 		}
-	};	
+	};
+
+	this.textBoxGrew = function(deltaY) {
+		this.frame.y += deltaY;
+	};
 }

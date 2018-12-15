@@ -4,12 +4,19 @@ function DialogEditor() {
 	let childWithFocus = null;
 	
 	let newLineButton;
+	let saveButton;
+	let conversationNameLabel;
+	let conversationNameTextBox;
+	const PADDING = 20;
 	const newLineSize = {width: 125, height: 30};
 	const newLinePadding = 50;
 	let transitionInProgress = null;
 	
 	this.initialize = function() {
 		addNewLineButton();
+		addSaveButton();
+		addConversationNameLabel();
+		addConversationNameTextBox();
 	};
 	
 	this.update = function() {
@@ -55,10 +62,16 @@ function DialogEditor() {
 	this.updateDrag = function(deltaX, deltaY) {
 		if(childWithFocus != null) {
 			if(childWithFocus === newLineButton) {return;}
+			if(childWithFocus === saveButton) {return;}
+			if(childWithFocus === conversationNameLabel) {return;}
+			if(childWithFocus === conversationNameTextBox) {return;}
 			childWithFocus.update(deltaX, deltaY);
 		} else {
 			for(let i = 0; i < children.length; i++) {
 				if(children[i] === newLineButton) {continue;}
+				if(children[i] === saveButton) {continue;}
+				if(children[i] === conversationNameLabel) {continue;}
+				if(children[i] === conversationNameTextBox) {continue;}
 				children[i].update(deltaX, deltaY);
 			}
 		}
@@ -71,7 +84,7 @@ function DialogEditor() {
 	};
 	
 	const addNewLineButton = function() {
-		const newLineFrame = new DialogFrame((canvas.width - newLineSize.width)/2, 150, newLineSize.width, newLineSize.height);
+		const newLineFrame = new DialogFrame((canvas.width - newLineSize.width)/2, 50, newLineSize.width, newLineSize.height);
 	
 		//Temp for testing
 		const newLineAction = function() {
@@ -93,6 +106,49 @@ function DialogEditor() {
 		
 		newLineButton = new DialogButton(newLineFrame, 'New Line', newLineAction, ButtonStyle.Rounded);
 		children.push(newLineButton);
+	};
+	
+	const addSaveButton = function() {
+		const saveButtonFrame = new DialogFrame(newLineButton.frame.x + newLineButton.frame.width + PADDING, newLineButton.frame.y, newLineSize.width, newLineSize.height);
+		
+		const saveAction = function() {
+			if(conversationNameTextBox.getText()[0] === "") {
+				console.error("Need to name this conversation before saving!");
+				return;
+			}
+			let saveString = "let " + conversationNameTextBox.getText()[0] + " = [\n    {\n        ";
+			
+			for(let i = 0; i < children.length; i++) {
+				if(children[i] === newLineButton) {continue;}
+				if(children[i] === saveButton) {continue;}
+				if(children[i] === conversationNameLabel) {continue;}
+				if(children[i] === conversationNameTextBox) {continue;}
+				saveString += children[i].getSaveData();
+			}
+			
+			console.log(saveString);
+		}
+		
+		saveButton = new DialogButton(saveButtonFrame, "Save", saveAction, ButtonStyle.Rounded);
+		children.push(saveButton);
+	};
+	
+	const addConversationNameLabel = function() {
+		const labelString = "Conversation Name:"
+		const labelSize = sizeOfString(canvasContext, LabelFont.Large, labelString);
+		conversationNameLabel = new DialogLabel({x:newLineButton.frame.x - labelSize.width - PADDING, 
+											     y:newLineButton.frame.y + newLineButton.frame.height}, 
+											     LabelFont.Large, 
+												 labelString);
+		children.push(conversationNameLabel);
+	};
+	
+	const addConversationNameTextBox = function() {
+		conversationNameTextBox = new DialogTextBox(new DialogFrame(newLineButton.frame.x, 
+										   				  conversationNameLabel.frame.y + 2, //+2 fudge to align it with label 
+										   				  newLineButton.frame.width + saveButton.frame.width + (PADDING),
+										   				  conversationNameLabel.frame.height), LabelFont.Large);
+		children.push(conversationNameTextBox);
 	};
 	
 	this.keyboardEvent = function(newKey, oldKeys) {

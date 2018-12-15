@@ -32,7 +32,8 @@ const ChildType = {
 	DialogLine:"dialog line",
 	DialogLabel:"dialog label",
 	DialogDropDown:"dialog drop down",
-	DialogTextBox:"dialog text box"
+	DialogTextBox:"dialog text box",
+	DialogImage:"dialog image"
 };
 const LineWidth = {
 	Normal:4,

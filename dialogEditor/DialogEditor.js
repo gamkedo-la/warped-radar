@@ -54,6 +54,11 @@ function DialogEditor() {
 		if(childWithFocus != null) {
 			if(childWithFocus === newLineButton) {return;}
 			childWithFocus.update(deltaX, deltaY);
+		} else {
+			for(let i = 0; i < children.length; i++) {
+				if(children[i] === newLineButton) {continue;}
+				children[i].update(deltaX, deltaY);
+			}
 		}
 	};
 	
@@ -84,8 +89,11 @@ function DialogEditor() {
 	};
 	
 	this.textBoxGrew = function(deltaY) {
-		if((childWithFocus != null) && (childWithFocus.type === ChildType.DialogLine)) {
-			childWithFocus.textBoxGrew(deltaY);
+		if(childWithFocus != null) {
+			if((childWithFocus.type === ChildType.DialogLine) || 
+			   (childWithFocus.type === ChildType.DialogDropDown)) {
+				childWithFocus.textBoxGrew(deltaY);
+			}
 		}
 	};
 }

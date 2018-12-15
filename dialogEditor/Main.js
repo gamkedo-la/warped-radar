@@ -1,4 +1,4 @@
-//Main for G-Type
+//Main for Dialog Editor
 window.onload = function() {
     window.addEventListener("focus", windowOnFocus);
     window.addEventListener("blur", windowOnBlur);
@@ -6,8 +6,8 @@ window.onload = function() {
     canvas = document.createElement("canvas");
     canvasContext = canvas.getContext("2d");
     document.body.appendChild(canvas);
-    canvas.width = screen.width;
-	canvas.height = screen.height;
+    canvas.width = window.innerWidth;
+	canvas.height = window.innerHeight;
 
 	initializeInput();
 
@@ -41,6 +41,22 @@ function update() {
 	dialogEditor.draw();
 }
 
+function colorsForSpeaker(speaker) {
+	let colors = {};
+	switch(speaker) {
+		case Speaker.John:
+			colors.bkgd = JohnColor.Fill;
+			colors.line = JohnColor.Line;
+		break;
+		case Speaker.Rose:
+			colors.bkgd = RoseColor.Fill;
+			colors.line = RoseColor.Line;
+		break;
+	}
+	
+	return colors;
+}
+
 //Graphics Common
 function colorText(context, showWords, textX, textY, fillColor, fontface, textAlign = 'left', opacity = 1) {
     context.save();
@@ -71,7 +87,7 @@ function positionToCenterStringInFrame(context, font, string, frame) {
 	const stringSize = sizeOfString(context, font, string);
 	
 	position.x = frame.x + (frame.width - stringSize.width) / 2;
-	position.y = frame.getMidY() + ((stringSize.height) / 2) - (0.1 * stringSize.height);//last term is fudge factor to make it look better
+	position.y = frame.getMidY() + ((stringSize.height) / 2) - (0.15 * stringSize.height);//last term is fudge factor to make it look better
 	
 	return position;
 }

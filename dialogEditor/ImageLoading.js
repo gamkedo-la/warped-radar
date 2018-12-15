@@ -1,8 +1,13 @@
 //Image Loading
-const imageList = [];
+let imageList = [];
 const billboardSprites = [];
 
 let picsToLoad = 0;
+
+const johnHappyPic = document.createElement("img");
+const johnMadPic = document.createElement("img");
+const roseHappyPic = document.createElement("img");
+const roseAnnoyedPic = document.createElement("img");
 
 function countLoadedImageAndLaunchIfReady() {
 	picsToLoad--;
@@ -16,16 +21,21 @@ function countLoadedImageAndLaunchIfReady() {
 }
 
 function beginLoadingImage(imgVar, fileName) {
-	imgVar.onload = countLoadedImageAndLaunchIfReady;
-	imgVar.src = assetPath.Image + fileName;
+	imgVar.onload = countLoadedImageAndLaunchIfReady;	
+	imgVar.src = "images/" + fileName;
 }
 
 function loadImages() {
+	imageList = [
+	   //PORTRAITS
+	    {imgName: johnHappyPic, theFile: "john.png", speaker:Speaker.John},
+	    {imgName: johnMadPic, theFile: "john2.png", speaker:Speaker.John},
+	    {imgName: roseHappyPic, theFile: "rose.png", speaker:Speaker.Rose},
+	    {imgName: roseAnnoyedPic, theFile: "rose2.png", speaker:Speaker.Rose},
+	];
 	//Temporary while there are no images
 	picsToLoad = 1;
 	countLoadedImageAndLaunchIfReady();
-	
-	
 	
 	picsToLoad = imageList.length;
 

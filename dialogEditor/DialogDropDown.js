@@ -68,12 +68,17 @@ function DialogDropDown(frame, items, initialDisplay = null) {
 			}
 		} else {
 			if(this.childToDraw != null) {
-				this.childToDraw.drawAt(this.childToDraw.frame.x, this.frame.y + this.childToDraw.frame.height - (0.1 * this.frame.height));//0.1*height is fudge to center
+				if(this.childToDraw.type === ChildType.DialogLabel) {
+					this.childToDraw.drawAt(this.childToDraw.frame.x, 
+											this.frame.y + this.childToDraw.frame.height - (0.1 * this.frame.height));//0.1*height is fudge to center
+				} else if(this.childToDraw.type === ChildType.DialogImage)
+					this.childToDraw.drawAt(this.childToDraw.frame.x, this.frame.y);
 			}
 		}
 	};
 	
 	this.action = function() {
+		const oldFrameHeight = this.frame.height;
 		if(isShowingChildren) {
 			for(let i = 0; i < children.length - 1; i++) {
 				this.frame.height -= children[i].frame.height;
@@ -83,6 +88,8 @@ function DialogDropDown(frame, items, initialDisplay = null) {
 				this.frame.height += children[i].frame.height;
 			}
 		}
+		
+		dialogEditor.textBoxGrew(this.frame.height - oldFrameHeight);
 		
 		isShowingChildren = !isShowingChildren;
 	};

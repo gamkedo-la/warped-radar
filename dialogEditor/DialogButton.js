@@ -36,7 +36,7 @@ function DialogButton(frame, title, action, style) {
 	let bkgdColor = this.color.normal;
 	let textColor = this.titleColor.normal;
 	
-	const titlePos = positionToCenterStringInFrame(canvasContext, font, this.title, this.frame);
+	let titlePos = positionToCenterStringInFrame(canvasContext, font, this.title, this.frame);
 
 	this.setState = function(newState) {
 		//some child objects will maintain State.Active as long as they have focus
@@ -80,6 +80,7 @@ function DialogButton(frame, title, action, style) {
 			strokeRoundedRectangle(canvasContext, this.frame.x, this.frame.y, this.frame.width, this.frame.height, textColor, 2, CORNER_RADIUS);
 		}
 		
+		titlePos = positionToCenterStringInFrame(canvasContext, font, this.title, this.frame);
 		colorText(canvasContext, this.title, titlePos.x, titlePos.y, textColor, font, 'left');
 		
 		let child;

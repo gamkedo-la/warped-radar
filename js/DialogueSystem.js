@@ -354,6 +354,7 @@ function Dialogue() {
         nextChoiceLabel = -1;
         selectedChoice = -1;
         choiceCounter = 1;
+		this.speakerX = this.speakerStartX;
     }
 
     this.incrementPage = function (conversation) {

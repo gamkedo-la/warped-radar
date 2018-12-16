@@ -95,6 +95,7 @@ function positionToCenterStringInFrame(context, font, string, frame) {
 function strokeLine(context, originX, originY, destX, destY, strokeColor, lineWidth = 1) {
 	context.save();
 	context.strokeStyle = strokeColor;
+	context.lineWidth = lineWidth;
 	context.beginPath();
 	context.moveTo(originX, originY);
 	context.lineTo(destX, destY);

@@ -206,7 +206,7 @@ function DialogLine(position) {
 	this.buildDialogTextBox = function(previousChild) {
 		const textBox = new DialogTextBox(new DialogFrame(this.frame.x + LINE_SPACING + 1.5 * CHILD_PADDING, 
 										   				  previousChild.frame.y + previousChild.frame.height + CHILD_PADDING,
-										   				  this.frame.width - (2 * (LINE_SPACING + (1.5 * CHILD_PADDING))),
+										   				  this.frame.width - (2 * (LINE_SPACING + (1.5 * CHILD_PADDING))) - 18, //18 makes room for transitions
 										   				  25), LabelFont.Medium);//25 is height
 		children.push(textBox);
 		choices.push(textBox);
@@ -220,8 +220,13 @@ function DialogLine(position) {
 												   previousChild.frame.width / 2,
 												   previousChild.frame.height);
 		const choicesButtonAction = function() {
+			let originOffset = 0;
+			if(firstTextBox.dialogOrigin != null) {
+				originOffset = -16;
+			}
+			
 			const lastFrame = choices[choices.length - 1].frame;
-			const thisFrame = new DialogFrame(firstTextBox.frame.x, 
+			const thisFrame = new DialogFrame(firstTextBox.frame.x + originOffset, 
 										   	  firstTextBox.frame.y + ((choices.length) * (firstTextBox.frame.height + CHILD_PADDING)),
 										   	  firstTextBox.frame.width,
 										   	  firstTextBox.frame.height);
@@ -268,6 +273,11 @@ function DialogLine(position) {
 	};
 		
 	this.update = function(deltaX, deltaY) {
+		if((childWithFocus != null) && (childWithFocus.type === ChildType.DialogTransitionOrigin)) {
+			childWithFocus.update(deltaX, deltaY);
+			return;
+		}
+		
 		this.frame.x += deltaX;
 		this.frame.y += deltaY;
 		for(let i = 0; i < children.length; i++) {
@@ -416,9 +426,39 @@ function DialogLine(position) {
 		children.push(newDestination);
 	};
 	
-	this.addOriginChild = function(newOrigin) {
-		transitions.push(newOrigin);
-		children.push(newOrigin);
+	this.addOriginChild = function(child, position) {
+		let newOrigin = null;
+		
+		if(child.dialogOrigin === null) {
+			const originPosition = this.findOriginPosWithPos(child.frame, position);
+			newOrigin = new DialogTransitionOrigin(originPosition, child);
+			
+			if(newOrigin.frame.x < child.frame.x) {
+				newOrigin.isOnRight = false;
+			}
+			
+			transitions.push(newOrigin);
+			children.push(newOrigin);
+		}
+		
+		return newOrigin;
+	};
+	
+	this.findOriginPosWithPos = function(frame, position) {
+		let result = {x:0, y:frame.getMidY()};
+		
+		const deltaX1 = Math.abs(position.x - frame.x);
+		const deltaX2 = Math.abs(position.x - (frame.x + frame.width));
+		
+		if(deltaX1 <= deltaX2) {
+			frame.x += 16;
+			result.x = frame.x - 10;
+			
+		} else {
+			result.x = frame.x + frame.width + 10;
+		}
+		
+		return result;
 	};
 	
 	this.getSaveData = function() {

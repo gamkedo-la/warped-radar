@@ -14,6 +14,7 @@ function DialogTextBox(frame, font) {
 	this.color = 'black';
 	let counts = 0;
 	let shouldDrawCursor = false;
+	this.dialogOrigin = null;
 
 	this.setState = function(newState) {
 		state = newState;

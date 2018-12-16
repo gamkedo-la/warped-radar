@@ -169,17 +169,13 @@ function DialogEditor() {
 	this.createTransition = function(child, position) {
 		if((transitionInProgress != null) && (child.type === ChildType.DialogLine)) {
 			const destPosition = this.findDestPosWithPos(child.frame, position);
-			let newDestination = new DialogTransitionDestination(destPosition, childWithFocus, transitionInProgress);
+			let newDestination = new DialogTransitionDestination(destPosition, child, transitionInProgress);
+			
 			childWithFocus.addDestinationChild(newDestination);
 			
 			transitionInProgress = null;
-		} else if(child.type === ChildType.DialogTextBox) {
-			const originPosition = this.findOriginPosWithPos(child.frame, position);
-			let newOrigin = new DialogTransitionOrigin(originPosition, child);
-			
-			childWithFocus.addOriginChild(newOrigin);
-			
-			transitionInProgress = newOrigin;
+		} else if((transitionInProgress === null) && (child.type === ChildType.DialogTextBox)) {
+			transitionInProgress = childWithFocus.addOriginChild(child, position);
 		}
 	};
 	
@@ -217,21 +213,6 @@ function DialogEditor() {
 			} else {
 				result.y = frame.y + frame.height;
 			}
-		}
-		
-		return result;
-	};
-	
-	this.findOriginPosWithPos = function(frame, position) {
-		let result = {x:0, y:frame.getMidY()};
-		
-		const deltaX1 = Math.abs(position.x - frame.x);
-		const deltaX2 = Math.abs(position.x - (frame.x + frame.width));
-		
-		if(deltaX1 <= deltaX2) {
-			result.x = frame.x + 12;
-		} else {
-			result.x = frame.x + frame.width - 12;
 		}
 		
 		return result;

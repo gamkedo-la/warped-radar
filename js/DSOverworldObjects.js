@@ -46,8 +46,8 @@ function OverworldObject() {
         return false;
     }
 
-    this.nearObjectOrNPC = function() {
-        colorText("Near interactable object/NPC", 5,70, "white", "15px Arial", "left", 1);
+    this.nearObjectOrNPC = function () {
+        colorText("Near interactable object/NPC", 5, 70, "white", "15px Arial", "left", 1);
     }
 
     this.onTrigger = function (dialogue) {

@@ -34,7 +34,7 @@ const TILE_SWITCH_LOCATION = 25;
 
 let solidTiles = [1, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
 
-let locationList = [johnsRoom, johnsHallway, johnsKitchen, theCity];
+let locationList = [theCity, johnsRoom, johnsHallway, johnsKitchen];
 let locationNow = 0;
 
 let worldCols = locationList[locationNow].columns;

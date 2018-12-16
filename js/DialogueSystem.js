@@ -256,16 +256,13 @@ function Dialogue() {
             this.speakerX -= tweenOutSpeed;
         } else if (this.isShowing && this.speakerX < speakerFinalX) {
             this.speakerX += tweenInSpeed;
-
             //speaker specific mouth anims for when tweening in
             this.setupAnimatedMouths(dialogueList, nameList, "John", true, johnMouthMove, 130, 300);
 
         } else if (this.speakerX >= speakerFinalX) {
             this.speakerX = speakerFinalX;
-
             //speaker specific mouth anims when at final pos
             this.setupAnimatedMouths(dialogueList, nameList, "John", true, johnMouthMove, 150, 300);
-
         }
     }
 
@@ -292,7 +289,6 @@ function Dialogue() {
 
             //speaker specific mouth anims when at final pos
             this.setupAnimatedMouths(dialogueList, nameList, "Rose", false, roseMouthMove, 150, 300);
-
         }
 
     }
@@ -354,7 +350,9 @@ function Dialogue() {
         nextChoiceLabel = -1;
         selectedChoice = -1;
         choiceCounter = 1;
-		this.speakerX = this.speakerStartX;
+        if (this.speakerX > this.speakerStartX && this.speakerX < speakerFinalX) {
+            this.speakerX  = this.speakerStartX;
+        }
     }
 
     this.incrementPage = function (conversation) {

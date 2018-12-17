@@ -11,6 +11,7 @@ function DialogTransitionOrigin(position, owner) {
 	this.wasDeleted = false;
 	this.THICKNESS = 2;
 	this.isOnRight = true;
+	this.shouldBeRemoved = false;
 	
 	this.setState = function(newState) {
 		state = newState;
@@ -49,13 +50,13 @@ function DialogTransitionOrigin(position, owner) {
 		this.destinationName = destinationOwner.sceneName.getText();
 	};
 	
-	this.delete = function() {
+	this.remove = function() {
 		this.wasDeleted = true;
-		if(!this.mate.wasDeleted) {
-			this.mate.delete();
+		if((this.mate != null) && (!this.mate.wasDeleted)) {
+			this.mate.shouldBeRemoved = true;
 		}
 		
-		this.owner.deleteTransition(this);
+		this.shouldBeRemoved = true;
 	};
 	
 	this.setFocus = function(x, y) {
@@ -116,13 +117,13 @@ function DialogTransitionDestination(position, owner, origin) {
 	
 	origin.addDestination(this, owner);
 	
-	this.delete = function() {
+	this.remove = function() {
 		this.wasDeleted = true;
 		if(!origin.wasDeleted) {
-			origin.delete();
+			origin.remove();
 		}
 		
-		owner.deleteTransition(this);
+		this.shouldBeRemoved = true;;
 	};
 	
 	this.draw = function() {

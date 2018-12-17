@@ -308,7 +308,7 @@ function isPunctuation(keyCode) {
 
 function isWhiteSpace(keyCode) {
 	switch(keyCode) {
-		case KEY_TAB:
+//		case KEY_TAB:
 		case KEY_ENTER:
 		case KEY_SPACE:
 			return true;
@@ -324,6 +324,8 @@ function isSpecialKey(keyCode) {
 		case KEY_SHIFT:
 		case KEY_CTRL:
 		case KEY_ALT:
+		case KEY_TAB:
+		case KEY_ESCAPE:
 			return true;
 	}
 	
@@ -426,8 +428,8 @@ function upperStringForKeyCode(keyCode) {
 			return ">";
 		case KEY_BACK_SLASH:
 			return "?";
-		case KEY_TAB:
-			return "     ";
+//		case KEY_TAB:
+//			return "     ";
 		case KEY_ENTER:
 			return "\n";
 		case KEY_SPACE:
@@ -531,8 +533,8 @@ function lowerStringForKeyCode(keyCode) {
 			return ".";
 		case KEY_BACK_SLASH:
 			return "/";
-		case KEY_TAB:
-			return "     ";
+//		case KEY_TAB:
+//			return "     ";
 		case KEY_ENTER:
 			return "\n";
 		case KEY_SPACE:

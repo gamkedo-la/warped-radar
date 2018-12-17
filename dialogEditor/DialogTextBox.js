@@ -34,6 +34,13 @@ function DialogTextBox(frame, font) {
 	};
 	
 	this.draw = function() {
+		if((this.dialogOrigin != null) && (this.dialogOrigin.shouldBeRemoved)) {
+			if(!this.dialogOrigin.isOnRight) {
+				this.frame.x -= (this.dialogOrigin.frame.width);
+			}
+			this.dialogOrigin = null;
+		}
+		
 		let totalThickness = BORDER_THICKNESS;
 		if(this.inFocus) {
 			counts++;
@@ -86,6 +93,12 @@ function DialogTextBox(frame, font) {
 	this.lostFocus = function() {
 		this.inFocus = false;
 		shouldDrawCursor = false;
+	};
+	
+	this.deleteTransition = function() {
+		if((this.dialogOrigin != null) && (this.dialogOrigin.mate === null)) {
+			this.dialogOrigin.remove()
+		}
 	};
 	
 	this.setColors = function(bkgd, line) {

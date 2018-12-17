@@ -177,7 +177,30 @@ function DialogEditor() {
 	
 	this.keyboardEvent = function(newKey, oldKeys) {
 		if(childWithFocus != null) {
-			childWithFocus.keyboardEvent(newKey, oldKeys);
+			if(newKey === KEY_ESCAPE) {
+				childWithFocus.lostFocus();
+				childWithFocus = null;
+			} else {
+				if(newKey === KEY_BACKSPACE) {
+					if(childWithFocus.type === ChildType.DialogLine) {
+						const didRemoveChild = childWithFocus.remove();
+						if(!didRemoveChild) {
+							const childRef = childWithFocus;
+							childWithFocus.lostFocus();
+							childWithFocus = null;
+							children.splice(children.indexOf(childRef), 1);
+							
+							if((transitionInProgress != null) && (transitionInProgress.shouldBeRemoved)) {
+								transitionInProgress = null;
+							}
+							
+							return;
+						}					
+					}
+				}
+				
+				childWithFocus.keyboardEvent(newKey, oldKeys);
+			}		
 		}
 	};
 	
@@ -187,6 +210,12 @@ function DialogEditor() {
 			   (childWithFocus.type === ChildType.DialogDropDown)) {
 				childWithFocus.textBoxGrew(deltaY);
 			}
+		}
+	};
+	
+	this.removingTextBox = function(textBox) {
+		if(textBox.dialogOrigin === transitionInProgress) {
+			transitionInProgress = null;
 		}
 	};
 	
@@ -220,7 +249,7 @@ function DialogEditor() {
 		
 		if((minX === deltaX2) && (minY === deltaY2)) {// +/- 8 = half frame height or width adjustment
 			result.x = frame.x + frame.width/2;
-			result.y = frame.y;
+			result.y = frame.y + 8;
 		} else {
 			if(minX === deltaX1) {
 				result.x = frame.x + 8;

@@ -20,6 +20,7 @@ function DialogLine(position) {
 	this.leftLeaveDropDown;
 	this.rightLeaveDropDown;
 	this.choicesButton;
+	this.unChoicesButton;
 	
 	let speaker = null;
 	let bkgdColor = NeutralColor.Fill;
@@ -46,6 +47,7 @@ function DialogLine(position) {
 		const textLabel = this.buildTextLabel(this.leftImageDropDown);		
 		const textBox = this.buildDialogTextBox(textLabel);
 		this.choicesButton = this.buildChoicesButton(textLabel, textBox);
+		this.unChoicesButton = this.buildUnchoicesButton(this.choicesButton);
 	};
 	
 	this.buildSceneNameLabel = function() {
@@ -250,6 +252,31 @@ function DialogLine(position) {
 		return moreChoicesButton;
 	};
 	
+	this.buildUnchoicesButton = function(previousChild) {
+		const choicesButtonFrame = new DialogFrame(previousChild.frame.x + previousChild.frame.width,
+												   previousChild.frame.y,
+												   previousChild.frame.width,
+												   previousChild.frame.height);
+		const choicesButtonAction = function() {
+			if(choices.length < 2) {return;}
+			const textBoxToRemove = choices[choices.length - 1];
+			dialogEditor.removingTextBox(textBoxToRemove);
+			dialogEditor.textBoxGrew(-textBoxToRemove.frame.height - CHILD_PADDING);
+			
+			if(textBoxToRemove.dialogOrigin != null) {
+				textBoxToRemove.dialogOrigin.remove();
+			}
+			
+			choices.splice(choices.length - 1, 1);
+			children.splice(children.indexOf(textBoxToRemove), 1);
+		};
+		
+		const fewerChoicesButton = new DialogButton(choicesButtonFrame, "-", choicesButtonAction, ButtonStyle.Rounded);
+		children.push(fewerChoicesButton);
+		
+		return fewerChoicesButton;
+	};
+	
 	this.setState = function(newState) {
 		if(this.inFocus) {
 			if(newState != ChildState.Active) {return;}
@@ -307,6 +334,12 @@ function DialogLine(position) {
 		
 		if(childWithFocus != null) {
 			childWithFocus.draw();
+		}
+
+		for(let i = transitions.length - 1; i >= 0 ; i--) {
+			if(transitions[i].shouldBeRemoved) {
+				transitions.splice(i, 1);
+			}
 		}
 		
 		for(let i = 0; i < transitions.length; i++) {
@@ -392,6 +425,19 @@ function DialogLine(position) {
 		this.setState(ChildState.Normal);
 	};
 	
+	this.remove = function() {
+		if(childWithFocus != null) {
+			//do stuff
+			return true;
+		}
+		
+		for(let i = 0; i < transitions.length; i++) {
+			transitions[i].remove();
+		}
+		
+		return false;
+	};
+	
 	this.updateHover = function(x, y) {
 		if(mouseInside(this.frame)) {
 			this.setState(ChildState.Hover);
@@ -412,7 +458,7 @@ function DialogLine(position) {
 	
 	this.textBoxGrew = function(deltaY) {
 		this.frame.height += deltaY;
-		if(childWithFocus === this.choicesButton) {return;}
+		if((childWithFocus === this.choicesButton) || (childWithFocus === this.unChoicesButton)) {return;}
 		
 		for(let i = 0; i < children.length; i++) {
 			if(children[i].frame.y > childWithFocus.frame.y) {

@@ -276,7 +276,10 @@ function DialogLine(position) {
 		if((childWithFocus != null) && (childWithFocus.type === ChildType.DialogTransitionOrigin)) {
 			childWithFocus.update(deltaX, deltaY);
 			return;
-		}
+		} /*else if((childWithFocus != null) && (childWithFocus.type === ChildType.DialogTransitionDestination)) {
+			childWithFocus.update(deltaX, deltaY);
+			return;
+		}*/
 		
 		this.frame.x += deltaX;
 		this.frame.y += deltaY;

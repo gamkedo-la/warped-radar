@@ -104,7 +104,7 @@ function DialogEditor() {
 			children.push(newDialogLine);
 		}
 		
-		newLineButton = new DialogButton(newLineFrame, 'New Line', newLineAction, ButtonStyle.Rounded);
+		newLineButton = new DialogButton(newLineFrame, 'New Card', newLineAction, ButtonStyle.Rounded);
 		children.push(newLineButton);
 	};
 	
@@ -112,11 +112,14 @@ function DialogEditor() {
 		const saveButtonFrame = new DialogFrame(newLineButton.frame.x + newLineButton.frame.width + PADDING, newLineButton.frame.y, newLineSize.width, newLineSize.height);
 		
 		const saveAction = function() {
+			let variableText;
 			if(conversationNameTextBox.getText()[0] === "") {
 				console.error("Need to name this conversation before saving!");
 				return;
-			}
-			let saveString = "let " + conversationNameTextBox.getText()[0] + " = [\n    {\n        ";
+			} 
+			
+			variableText = variablizeText(conversationNameTextBox.getText()[0]);
+			let saveString = "let " + variableText + " = [\n    {\n        ";
 			
 			for(let i = 0; i < children.length; i++) {
 				if(children[i] === newLineButton) {continue;}
@@ -131,6 +134,27 @@ function DialogEditor() {
 		
 		saveButton = new DialogButton(saveButtonFrame, "Save", saveAction, ButtonStyle.Rounded);
 		children.push(saveButton);
+	};
+	
+	const variablizeText = function(text) {
+		let outputString = "";
+		if(isLetter(text.charAt(0))) {
+			outputString += text.charAt(0);
+		} else {
+			if(text.charAt(0) != "_") {
+				outputString += "_";
+			}
+		}
+		
+		for(let i = 1; i < text.length; i++) {
+			if((isLetter(text.charAt(i))) || (isNumberString(text.charAt(i)))) {
+				outputString += text.charAt(i);
+			} else {
+				outputString += "_";
+			}
+		}
+		
+		return outputString;
 	};
 	
 	const addConversationNameLabel = function() {

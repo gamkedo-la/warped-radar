@@ -10,6 +10,7 @@ function DialogLine(position) {
 	const CORNER_RADIUS = 15;
 	const LINE_SPACING = 12;
 	const CHILD_PADDING = 6;
+	const TEXTBOX_HEIGHT = 25;
 	const INWARD = true;
 	let state = ChildState.Normal;
 	let lineWidth = LineWidth.Normal;
@@ -18,6 +19,7 @@ function DialogLine(position) {
 	this.rightImageDropDown;
 	this.leftLeaveDropDown;
 	this.rightLeaveDropDown;
+	this.choicesButton;
 	
 	let speaker = null;
 	let bkgdColor = NeutralColor.Fill;
@@ -43,7 +45,7 @@ function DialogLine(position) {
 
 		const textLabel = this.buildTextLabel(this.leftImageDropDown);		
 		const textBox = this.buildDialogTextBox(textLabel);
-		const choicesButton = this.buildChoicesButton(textLabel, textBox);
+		this.choicesButton = this.buildChoicesButton(textLabel, textBox);
 	};
 	
 	this.buildSceneNameLabel = function() {
@@ -59,7 +61,7 @@ function DialogLine(position) {
 		const sceneNameTextBox = new DialogTextBox(new DialogFrame(previousChild.frame.x + previousChild.frame.width - CHILD_PADDING, 
 										   				  previousChild.frame.y + 2, //+2 fudge to center on label
 										   				  this.frame.width - (2 * (LINE_SPACING + CHILD_PADDING)) - previousChild.frame.width,
-										   				  25), LabelFont.Medium);//25 is height
+										   				  TEXTBOX_HEIGHT), LabelFont.Medium);//25 is height
 		children.push(sceneNameTextBox);
 		
 		return sceneNameTextBox;
@@ -207,7 +209,7 @@ function DialogLine(position) {
 		const textBox = new DialogTextBox(new DialogFrame(this.frame.x + LINE_SPACING + 1.5 * CHILD_PADDING, 
 										   				  previousChild.frame.y + previousChild.frame.height + CHILD_PADDING,
 										   				  this.frame.width - (2 * (LINE_SPACING + (1.5 * CHILD_PADDING))) - 18, //18 makes room for transitions
-										   				  25), LabelFont.Medium);//25 is height
+										   				  TEXTBOX_HEIGHT), LabelFont.Medium);
 		children.push(textBox);
 		choices.push(textBox);
 		
@@ -227,9 +229,9 @@ function DialogLine(position) {
 			
 			const lastFrame = choices[choices.length - 1].frame;
 			const thisFrame = new DialogFrame(firstTextBox.frame.x + originOffset, 
-										   	  firstTextBox.frame.y + ((choices.length) * (firstTextBox.frame.height + CHILD_PADDING)),
+											  lastFrame.y + lastFrame.height + CHILD_PADDING,
 										   	  firstTextBox.frame.width,
-										   	  firstTextBox.frame.height);
+										   	  TEXTBOX_HEIGHT);
 										   	  
 			const anotherTextBox = new DialogTextBox(thisFrame, LabelFont.Medium);
 			children.push(anotherTextBox);
@@ -409,17 +411,12 @@ function DialogLine(position) {
 	};
 	
 	this.textBoxGrew = function(deltaY) {
-		if(childWithFocus != null) {
-			if((childWithFocus.type === ChildType.DialogTextBox) || 
-			   (childWithFocus.type === ChildType.DialogButton) ||
-			   (childWithFocus.type === ChildType.DialogDropDown)) {
-				   if(childWithFocus === this.sceneName) {
-					   for(let i = 0; i < children.length; i++) {
-						   if(children[i] === this.sceneName) {continue;}
-						   children[i].textBoxGrew(deltaY);
-					   }
-				   }
-				this.frame.height += deltaY;
+		this.frame.height += deltaY;
+		if(childWithFocus === this.choicesButton) {return;}
+		
+		for(let i = 0; i < children.length; i++) {
+			if(children[i].frame.y > childWithFocus.frame.y) {
+				children[i].textBoxGrew(deltaY);
 			}
 		}
 	};

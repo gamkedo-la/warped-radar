@@ -218,24 +218,24 @@ function DialogEditor() {
 		
 		const minY = Math.min(deltaY1, deltaY2, deltaY3);
 		
-		if((minX === deltaX2) && (minY === deltaY2)) {
+		if((minX === deltaX2) && (minY === deltaY2)) {// +/- 8 = half frame height or width adjustment
 			result.x = frame.x + frame.width/2;
 			result.y = frame.y;
 		} else {
 			if(minX === deltaX1) {
-				result.x = frame.x;
+				result.x = frame.x + 8;
 			} else if(minX === deltaX2) {
 				result.x = frame.x + frame.width/2;
 			} else {
-				result.x = frame.x + frame.width;
+				result.x = frame.x + frame.width - 8;
 			}
 			
 			if(minY === deltaY1) {
-				result.y = frame.y;
+				result.y = frame.y + 8;
 			} else if(minY === deltaY2) {
 				result.y = frame.y + frame.height/2;
 			} else {
-				result.y = frame.y + frame.height;
+				result.y = frame.y + frame.height - 8;
 			}
 		}
 		

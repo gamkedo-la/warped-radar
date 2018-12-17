@@ -126,6 +126,10 @@ function DialogTransitionDestination(position, owner, origin) {
 	};
 	
 	this.draw = function() {
+		if(!mouseButtonHeld) {
+			this.snapToPosition();
+		}
+		
 		canvasContext.save();
 		
 		canvasContext.strokeStyle = JohnColor.Line;
@@ -151,6 +155,47 @@ function DialogTransitionDestination(position, owner, origin) {
 		
 		canvasContext.restore();
 		
+	};
+	
+	this.snapToPosition = function() {
+		let result = {x:0, y:0};
+		const frame = owner.frame;
+		
+		const deltaX1 = Math.abs(this.frame.x - frame.x);
+		const deltaX2 = Math.abs(this.frame.x - (frame.x + (frame.width / 2)));
+		const deltaX3 = Math.abs(this.frame.x - (frame.x + frame.width));
+
+		const minX = Math.min(deltaX1, deltaX2, deltaX3);
+
+		const deltaY1 = Math.abs(this.frame.y - frame.y);
+		const deltaY2 = Math.abs(this.frame.y - (frame.y + (frame.height/2)));
+		const deltaY3 = Math.abs(this.frame.y - (frame.y + frame.height));
+		
+		const minY = Math.min(deltaY1, deltaY2, deltaY3);
+		
+		if((minX === deltaX2) && (minY === deltaY2)) {
+			result.x = frame.x + frame.width/2;
+			result.y = frame.y;
+		} else {
+			if(minX === deltaX1) {
+				result.x = frame.x;
+			} else if(minX === deltaX2) {
+				result.x = frame.x + frame.width/2 - this.frame.width/2;
+			} else {
+				result.x = frame.x + frame.width - this.frame.width;
+			}
+			
+			if(minY === deltaY1) {
+				result.y = frame.y;
+			} else if(minY === deltaY2) {
+				result.y = frame.y + frame.height/2 - this.frame.height/2;
+			} else {
+				result.y = frame.y + frame.height - this.frame.height;
+			}
+		}
+		
+		this.frame.x = result.x;
+		this.frame.y = result.y;
 	};
 	
 	this.setFocus = function(x, y) {

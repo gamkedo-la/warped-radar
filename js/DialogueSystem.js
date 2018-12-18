@@ -282,13 +282,13 @@ function Dialogue() {
             this.speakerX -= tweenOutSpeed;
         } else if (this.isShowing && this.speakerX < speakerFinalX) {
             this.speakerX += tweenInSpeed;
+            
             //speaker specific mouth anims for when tweening in
-
             if (fullAlpha) {
                 if (speakerImgList[this.page] == johnHappyPic) {
                     this.setupAnimatedMouths(dialogueList, nameList, "John", true, johnMouthMove, 130, 300);
                 } else {
-                    this.setupAnimatedMouths(dialogueList, nameList, "John", true, johnAngryMouthMove, 130, 300);
+                    this.setupAnimatedMouths(dialogueList, nameList, "John", true, johnAngryMouthMove, 130, 400);
                 }
 
             }
@@ -425,9 +425,10 @@ function Dialogue() {
         } else if (this.page < dialogue.length - 1 && !showingChoiceMenu || nextChoiceLabel != -1 && (choiceCounter < sceneText.length)) {
             this.letterCounter = 0;
             this.page++;
+            
+            //fade effect for left pic
             if (currentPic != nextPic) switchPic = true;
-
-
+            
             if (choiceCounter < sceneText.length) { //increases the index for branching text
                 choiceCounter++;
             } else if (choiceCounter != 0 && choiceCounter == sceneText.length && nextChoiceLabel != -1) {

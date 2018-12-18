@@ -249,7 +249,7 @@ function Dialogue() {
     }
 
     this.setupSpeakerTween = function (dialogueList, nameList, speakerImgList, leaveScreenList) {
-        if (this.isShowing) {
+        /*if (this.isShowing) {
             this.speakerAlpha += this.alphaChange;
             if (this.speakerAlpha >= 1.0) {
                 this.speakerAlpha = 1.0;
@@ -261,12 +261,9 @@ function Dialogue() {
             }
         }
         
-        canvasContext.globalAlpha = this.speakerAlpha;
+        canvasContext.globalAlpha = this.speakerAlpha;*/
         canvasContext.drawImage(speakerImgList[this.page], this.speakerX, speakerY);
-        canvasContext.globalAlpha = 1;
-        
-        this.fadeInEffect(this.speakerAlpha, speakerImgList, this.speakerX, speakerY);
-
+        //canvasContext.globalAlpha = 1;
 
         if (leaveScreenList[this.page] && this.speakerX >= this.speakerStartX) {
 
@@ -293,7 +290,7 @@ function Dialogue() {
     }
 
     this.setupSpeaker2Tween = function (dialogueList, nameList, speaker2ImgList, leaveScreenList) {
-        if (this.isShowing) {
+        /*if (this.isShowing) {
             this.speakerAlpha2 += this.alphaChange;
             if (this.speakerAlpha2 >= 1.0) {
                 this.speakerAlpha2 = 1.0;
@@ -304,11 +301,10 @@ function Dialogue() {
                 this.speakerAlpha2 = 0.0;
             }
         }
-
-        canvasContext.globalAlpha = this.speakerAlpha2;
+*/
+        //canvasContext.globalAlpha = this.speakerAlpha2;
         canvasContext.drawImage(speaker2ImgList[this.page], this.speaker2X, speaker2Y);
-        canvasContext.globalAlpha = 1;
-
+        //canvasContext.globalAlpha = 1;
 
         if (leaveScreenList[this.page] && this.speaker2X <= this.speaker2StartX) {
 

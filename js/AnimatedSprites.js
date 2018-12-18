@@ -1,4 +1,5 @@
 let johnMouthMove;
+let johnAngryMouthMove;
 let roseMouthMove;
 let johnWalk;
 let johnWalkSide;
@@ -9,6 +10,13 @@ function makeAnimatedSprites() {
     johnMouthMove = new AnimatedSpriteClass({
 		name: "johnAnimatedMouth",
 		spriteSheet: johnMouthAnimatedSheet,
+		animationColFrames: 18,
+		framesUntilNext: 4,
+	});
+    
+    johnAngryMouthMove = new AnimatedSpriteClass({
+		name: "johnAnimatedMouth2",
+		spriteSheet: johnMouthAnimationAngrySheet,
 		animationColFrames: 18,
 		framesUntilNext: 4,
 	});

@@ -7,7 +7,7 @@ function Dialogue() {
     this.speakerAlpha2 = 0.0;
     this.alphaChange = 0.2;
 
-    this.speakerStartX = -280;
+    this.speakerStartX = -310;
     this.speakerX = this.speakerStartX;
     this.speaker2StartX = 800;
     this.speaker2X = this.speaker2StartX;
@@ -285,7 +285,12 @@ function Dialogue() {
             //speaker specific mouth anims for when tweening in
 
             if (fullAlpha) {
-                this.setupAnimatedMouths(dialogueList, nameList, "John", true, johnMouthMove, 130, 300);
+                if (speakerImgList[this.page] == johnHappyPic) {
+                    this.setupAnimatedMouths(dialogueList, nameList, "John", true, johnMouthMove, 130, 300);
+                } else {
+                    this.setupAnimatedMouths(dialogueList, nameList, "John", true, johnAngryMouthMove, 130, 300);
+                }
+
             }
         } else if (this.speakerX >= speakerFinalX) {
             this.speakerX = speakerFinalX;
@@ -294,7 +299,11 @@ function Dialogue() {
 
             //speaker specific mouth anims when at final pos
             if (fullAlpha) {
-                this.setupAnimatedMouths(dialogueList, nameList, "John", true, johnMouthMove, 150, 300);
+                if (speakerImgList[this.page] == johnHappyPic) {
+                    this.setupAnimatedMouths(dialogueList, nameList, "John", true, johnMouthMove, 150, 300);
+                } else {
+                    this.setupAnimatedMouths(dialogueList, nameList, "John", true, johnAngryMouthMove, 150, 300);
+                }
             }
         }
     }

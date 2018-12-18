@@ -26,6 +26,7 @@ let roseHappyPic = document.createElement("img");
 let roseAnnoyedPic = document.createElement("img");
 
 let johnMouthAnimatedSheet = document.createElement("img");
+let johnMouthAnimationAngrySheet = document.createElement("img");
 let roseMouthAnimatedSheet = document.createElement("img");
 
 let johnAnimation = document.createElement("img");
@@ -73,6 +74,7 @@ function loadImages() {
 
         //PORTRAIT ANIMS
         {varName: johnMouthAnimatedSheet, theFile: "johnmouthmove.png"},
+        {varName: johnMouthAnimationAngrySheet, theFile: "johnmouthmove_angry.png"},
         {varName: roseMouthAnimatedSheet, theFile: "rosemouthmove.png"},
 
         //OVERWORLD CHARACTER ANIMS

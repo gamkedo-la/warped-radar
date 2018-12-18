@@ -3,6 +3,10 @@ function Dialogue() {
     this.letterCounter = 0;
     this.page = -1;
 
+    this.speakerAlpha = 0.0;
+    this.speakerAlpha2 = 0.0;
+    this.alphaChange = 0.1;
+
     this.speakerStartX = -280;
     this.speakerX = this.speakerStartX;
     this.speaker2StartX = 800;
@@ -49,6 +53,8 @@ function Dialogue() {
     let choiceTextAlign = textAlign;
     let cursorTextColour = "yellow";
     let selectedTextColour = "orange";
+
+    let nextPic;
 
     this.create = function (conversation) {
         let dialogue = [],
@@ -243,7 +249,25 @@ function Dialogue() {
     }
 
     this.setupSpeakerTween = function (dialogueList, nameList, speakerImgList, leaveScreenList) {
+        if (this.isShowing) {
+            this.speakerAlpha += this.alphaChange;
+            if (this.speakerAlpha >= 1.0) {
+                this.speakerAlpha = 1.0;
+            }
+        } else {
+            this.speakerAlpha -= this.alphaChange;
+            if (this.speakerAlpha <= 0.0) {
+                this.speakerAlpha = 0.0;
+            }
+        }
+        
+        canvasContext.globalAlpha = this.speakerAlpha;
         canvasContext.drawImage(speakerImgList[this.page], this.speakerX, speakerY);
+        canvasContext.globalAlpha = 1;
+        
+        this.fadeInEffect(this.speakerAlpha, speakerImgList, this.speakerX, speakerY);
+
+
         if (leaveScreenList[this.page] && this.speakerX >= this.speakerStartX) {
 
             if (this.speakerX <= this.speakerStartX) {
@@ -261,13 +285,31 @@ function Dialogue() {
 
         } else if (this.speakerX >= speakerFinalX) {
             this.speakerX = speakerFinalX;
+            //nextPic = speakerImgList[this.page + 1];
+
             //speaker specific mouth anims when at final pos
             this.setupAnimatedMouths(dialogueList, nameList, "John", true, johnMouthMove, 150, 300);
         }
     }
 
     this.setupSpeaker2Tween = function (dialogueList, nameList, speaker2ImgList, leaveScreenList) {
+        if (this.isShowing) {
+            this.speakerAlpha2 += this.alphaChange;
+            if (this.speakerAlpha2 >= 1.0) {
+                this.speakerAlpha2 = 1.0;
+            }
+        } else {
+            this.speakerAlpha2 -= this.alphaChange;
+            if (this.speakerAlpha2 <= 0.0) {
+                this.speakerAlpha2 = 0.0;
+            }
+        }
+
+        canvasContext.globalAlpha = this.speakerAlpha2;
         canvasContext.drawImage(speaker2ImgList[this.page], this.speaker2X, speaker2Y);
+        canvasContext.globalAlpha = 1;
+
+
         if (leaveScreenList[this.page] && this.speaker2X <= this.speaker2StartX) {
 
             if (this.speaker2X >= this.speaker2StartX) {
@@ -351,15 +393,17 @@ function Dialogue() {
         selectedChoice = -1;
         choiceCounter = 1;
         if (this.speakerX > this.speakerStartX && this.speakerX < speakerFinalX) {
-            this.speakerX  = this.speakerStartX;
+            this.speakerX = this.speakerStartX;
         }
     }
 
     this.incrementPage = function (conversation) {
         let dialogue = [];
+        let leftPics = [];
         let sceneText = this.getSceneLength(conversation);
         for (let i = 0; i < conversation.length; i++) {
             if ("text" in conversation[i]) dialogue.push(conversation[i].text);
+            if ("leftPic" in conversation[i]) leftPics.push(conversation[i].leftPic);
         }
         if (this.letterCounter < dialogue[this.page].length) {
             this.letterCounter = dialogue[this.page].length;

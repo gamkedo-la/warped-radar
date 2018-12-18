@@ -5,7 +5,7 @@ function Dialogue() {
 
     this.speakerAlpha = 0.0;
     this.speakerAlpha2 = 0.0;
-    this.alphaChange = 0.1;
+    this.alphaChange = 0.2;
 
     this.speakerStartX = -280;
     this.speakerX = this.speakerStartX;
@@ -55,6 +55,8 @@ function Dialogue() {
     let selectedTextColour = "orange";
 
     let nextPic;
+    let currentPic;
+    let switchPic = false;
 
     this.create = function (conversation) {
         let dialogue = [],
@@ -249,22 +251,25 @@ function Dialogue() {
     }
 
     this.setupSpeakerTween = function (dialogueList, nameList, speakerImgList, leaveScreenList) {
-        /*if (this.isShowing) {
-            this.speakerAlpha += this.alphaChange;
-            if (this.speakerAlpha >= 1.0) {
-                this.speakerAlpha = 1.0;
-            }
-        } else {
-            this.speakerAlpha -= this.alphaChange;
-            if (this.speakerAlpha <= 0.0) {
-                this.speakerAlpha = 0.0;
+        let fullAlpha = !switchPic && this.speakerAlpha >= 1.0
+        if (this.isShowing) {
+            if (switchPic) {
+                this.speakerAlpha -= this.alphaChange;
+                if (this.speakerAlpha <= 0.0) {
+                    this.speakerAlpha = 0.0;
+                    switchPic = false;
+                }
+            } else {
+                this.speakerAlpha += this.alphaChange;
+                if (this.speakerAlpha >= 1.0) {
+                    this.speakerAlpha = 1.0;
+                }
             }
         }
-        
-        canvasContext.globalAlpha = this.speakerAlpha;*/
-        canvasContext.drawImage(speakerImgList[this.page], this.speakerX, speakerY);
-        //canvasContext.globalAlpha = 1;
 
+        canvasContext.globalAlpha = this.speakerAlpha;
+        canvasContext.drawImage(speakerImgList[this.page], this.speakerX, speakerY);
+        canvasContext.globalAlpha = 1;
         if (leaveScreenList[this.page] && this.speakerX >= this.speakerStartX) {
 
             if (this.speakerX <= this.speakerStartX) {
@@ -278,14 +283,19 @@ function Dialogue() {
         } else if (this.isShowing && this.speakerX < speakerFinalX) {
             this.speakerX += tweenInSpeed;
             //speaker specific mouth anims for when tweening in
-            this.setupAnimatedMouths(dialogueList, nameList, "John", true, johnMouthMove, 130, 300);
 
+            if (fullAlpha) {
+                this.setupAnimatedMouths(dialogueList, nameList, "John", true, johnMouthMove, 130, 300);
+            }
         } else if (this.speakerX >= speakerFinalX) {
             this.speakerX = speakerFinalX;
-            //nextPic = speakerImgList[this.page + 1];
+            currentPic = speakerImgList[this.page];
+            nextPic = speakerImgList[this.page + 1];
 
             //speaker specific mouth anims when at final pos
-            this.setupAnimatedMouths(dialogueList, nameList, "John", true, johnMouthMove, 150, 300);
+            if (fullAlpha) {
+                this.setupAnimatedMouths(dialogueList, nameList, "John", true, johnMouthMove, 150, 300);
+            }
         }
     }
 
@@ -406,6 +416,8 @@ function Dialogue() {
         } else if (this.page < dialogue.length - 1 && !showingChoiceMenu || nextChoiceLabel != -1 && (choiceCounter < sceneText.length)) {
             this.letterCounter = 0;
             this.page++;
+            if (currentPic != nextPic) switchPic = true;
+
 
             if (choiceCounter < sceneText.length) { //increases the index for branching text
                 choiceCounter++;

@@ -251,7 +251,7 @@ function Dialogue() {
     }
 
     this.setupSpeakerTween = function (dialogueList, nameList, speakerImgList, leaveScreenList) {
-        let fullAlpha = !switchPic && this.speakerAlpha >= 1.0
+        let fullAlpha = !switchPic && this.speakerAlpha >= 1.0 && this.isShowing
         if (this.isShowing) {
             if (switchPic) {
                 this.speakerAlpha -= this.alphaChange;
@@ -266,9 +266,18 @@ function Dialogue() {
                 }
             }
         }
-
+        
         canvasContext.globalAlpha = this.speakerAlpha;
-        canvasContext.drawImage(speakerImgList[this.page], this.speakerX, speakerY);
+        
+        if (switchPic) {//fade out effect on the previous pic
+            canvasContext.drawImage(speakerImgList[this.page - 1], this.speakerX, speakerY);
+        } else {//fade in on the next (when poses switch)
+            canvasContext.drawImage(speakerImgList[this.page], this.speakerX, speakerY);
+        }
+        
+        //just drawing the portrait will show the fade effect AFTER the portraits have switched
+        //canvasContext.drawImage(speakerImgList[this.page], this.speakerX, speakerY);
+        
         canvasContext.globalAlpha = 1;
         if (leaveScreenList[this.page] && this.speakerX >= this.speakerStartX) {
 
@@ -290,21 +299,24 @@ function Dialogue() {
                 } else {
                     this.setupAnimatedMouths(dialogueList, nameList, "John", true, johnAngryMouthMove, 130, 400);
                 }
-
+                
             }
         } else if (this.speakerX >= speakerFinalX) {
             this.speakerX = speakerFinalX;
             currentPic = speakerImgList[this.page];
             nextPic = speakerImgList[this.page + 1];
-
+            
             //speaker specific mouth anims when at final pos
             if (fullAlpha) {
+                
                 if (speakerImgList[this.page] == johnHappyPic) {
                     this.setupAnimatedMouths(dialogueList, nameList, "John", true, johnMouthMove, 150, 300);
                 } else {
                     this.setupAnimatedMouths(dialogueList, nameList, "John", true, johnAngryMouthMove, 150, 300);
                 }
             }
+            
+            
         }
     }
 
@@ -414,11 +426,9 @@ function Dialogue() {
 
     this.incrementPage = function (conversation) {
         let dialogue = [];
-        let leftPics = [];
         let sceneText = this.getSceneLength(conversation);
         for (let i = 0; i < conversation.length; i++) {
             if ("text" in conversation[i]) dialogue.push(conversation[i].text);
-            if ("leftPic" in conversation[i]) leftPics.push(conversation[i].leftPic);
         }
         if (this.letterCounter < dialogue[this.page].length) {
             this.letterCounter = dialogue[this.page].length;

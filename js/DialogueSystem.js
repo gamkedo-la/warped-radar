@@ -269,13 +269,13 @@ function Dialogue() {
         
         canvasContext.globalAlpha = this.speakerAlpha;
         
-        if (switchPic) {//fade out effect on the previous pic
+        if (switchPic) {//fade out on the previous pic
             canvasContext.drawImage(speakerImgList[this.page - 1], this.speakerX, speakerY);
         } else {//fade in on the next (when poses switch)
             canvasContext.drawImage(speakerImgList[this.page], this.speakerX, speakerY);
         }
         
-        //just drawing the portrait will show the fade effect AFTER the portraits have switched
+        //just drawing the portrait will show the full fade effect AFTER the portraits have switched
         //canvasContext.drawImage(speakerImgList[this.page], this.speakerX, speakerY);
         
         canvasContext.globalAlpha = 1;

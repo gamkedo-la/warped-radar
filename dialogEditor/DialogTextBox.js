@@ -4,7 +4,6 @@ function DialogTextBox(frame, font) {
 	this.frame = frame;
 	this.inFocus = false;
 	let state = ChildState.Normal;
-	let text = [""];
 	let currentIndex = 0;
 	const BORDER_THICKNESS = 2;
 	const PADDING = 2;
@@ -13,8 +12,8 @@ function DialogTextBox(frame, font) {
 	this.bkgd = 'white';
 	this.color = 'black';
 	let counts = 0;
-	let shouldDrawCursor = false;
 	this.dialogOrigin = null;
+	this.cursor = new DialogCursor({x: this.frame.x, y: this.frame.y}, font, this.frame.width);
 
 	this.setState = function(newState) {
 		state = newState;
@@ -27,10 +26,12 @@ function DialogTextBox(frame, font) {
 	this.update = function(deltaX, deltaY) {
 		this.frame.x += deltaX;
 		this.frame.y += deltaY;
+		
+		this.cursor.update(deltaX, deltaY);
 	};
 	
 	this.getText = function() {
-		return text;
+		return this.cursor.text;
 	};
 	
 	this.draw = function() {
@@ -45,37 +46,18 @@ function DialogTextBox(frame, font) {
 		if(this.inFocus) {
 			counts++;
 			if((counts % 20) === 0) {
-				shouldDrawCursor = !shouldDrawCursor;
+				this.cursor.shouldDrawCursor = !this.cursor.shouldDrawCursor;
 			}
 		}
+		
+		this.frame.height = this.cursor.frame.height;
+		
 		fillRectangle(canvasContext, this.frame.x, this.frame.y, this.frame.width, this.frame.height, this.bkgd);
 		strokeRectangle(canvasContext, this.frame.x, this.frame.y, this.frame.width, this.frame.height, this.color, totalThickness);
 		
-		const currentSize = sizeOfString(canvasContext, font, text[currentIndex]);
-		let currentYPos = this.frame.y + titleSize.height - PADDING;
-		
-		if(currentSize.width >= this.frame.width) {
-			this.frame.height += titleSize.height;
-			
-			//Need to notify DialogLine that I grew
-			dialogEditor.textBoxGrew(titleSize.height);
-			
-			const lastIndex = text[currentIndex].lastIndexOf(" ");
-			text[currentIndex + 1] = text[currentIndex].substring(lastIndex, text[currentIndex].length);
-			text[currentIndex] = text[currentIndex].substring(0, lastIndex);
-			currentIndex++;
-		}
-		
-		for(let i = 0; i < text.length; i++) {
-			colorText(canvasContext, text[i], this.frame.x + PADDING, currentYPos, this.color, font, 'left');
-			currentYPos += titleSize.height;
-		}
-		
-		if(shouldDrawCursor) {
-			colorText(canvasContext, "|", this.frame.x + PADDING + currentSize.width, 
-										  currentYPos - titleSize.height - (2 * PADDING),
-										  this.color, font, 'left');
-		}
+		this.cursor.frame.x = this.frame.x;
+		this.cursor.frame.y = this.frame.y;
+		this.cursor.draw();
 	};
 	
 	this.drawAt = function(x, y) {
@@ -87,12 +69,12 @@ function DialogTextBox(frame, font) {
 	
 	this.setFocus = function(x, y) {
 		this.inFocus = true;
-		shouldDrawCursor = true;
+		this.cursor.shouldDrawCursor = true;
 	};
 	
 	this.lostFocus = function() {
 		this.inFocus = false;
-		shouldDrawCursor = false;
+		this.cursor.shouldDrawCursor = false;
 	};
 	
 	this.deleteTransition = function() {
@@ -116,25 +98,7 @@ function DialogTextBox(frame, font) {
 	
 	this.keyboardEvent = function(newKey, oldKeys) {
 		if(this.inFocus) {
-			if(isPrintableKey(newKey)) {
-				if(oldKeys.has(KEY_SHIFT)) {
-					text[currentIndex] += (upperStringForKeyCode(newKey));			
-				} else {
-					text[currentIndex] += (lowerStringForKeyCode(newKey));
-				}
-			} else {
-				if(newKey === KEY_BACKSPACE) {
-					text[currentIndex] = text[currentIndex].substring(0, text[currentIndex].length - 1);
-					if(text[currentIndex].length === 0) {
-						if(text.length > 1) {
-							text.pop();
-							currentIndex--;
-							this.frame.height -= titleSize.height;
-							dialogEditor.textBoxGrew(-titleSize.height);
-						}
-					}
-				}
-			}
+			this.cursor.keyboardEvent(newKey, oldKeys);
 		}
 	};
 	

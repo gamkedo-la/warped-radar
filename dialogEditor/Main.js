@@ -42,7 +42,7 @@ function update() {
 }
 
 function colorsForSpeaker(speaker) {
-	let colors = {};
+	let colors = {bkgd:NeutralColor.Fill, line:NeutralColor.Line};
 	switch(speaker) {
 		case Speaker.John:
 			colors.bkgd = JohnColor.Fill;

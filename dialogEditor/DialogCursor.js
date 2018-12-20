@@ -35,6 +35,11 @@ function DialogCursor(position, font, boxWidth) {
 		}
 	};
 	
+	this.setString = function(newString) {
+		this.string = newString;
+		this.reallocateText();
+	};
+	
 	this.reallocateText = function() {
 		this.text = [""];
 		let tempRow = 0;

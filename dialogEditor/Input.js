@@ -58,6 +58,7 @@ const KEY_W = 87;
 const KEY_X = 88;
 const KEY_Y = 89;
 const KEY_Z = 90;
+const KEY_CMD = 91;
 
 const KEY_NUMPAD_ADD = 107;
 

@@ -34,6 +34,10 @@ function DialogTextBox(frame, font) {
 		return this.cursor.text;
 	};
 	
+	this.setText = function(newText) {
+		this.cursor.setString(newText);
+	};
+	
 	this.draw = function() {
 		if((this.dialogOrigin != null) && (this.dialogOrigin.shouldBeRemoved)) {
 			if(!this.dialogOrigin.isOnRight) {

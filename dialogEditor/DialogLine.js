@@ -38,7 +38,7 @@ function DialogLine(position) {
 		this.rightImageDropDown = this.buildRightImageDropDown(sceneNameLabel);
 
 		const speakerLabel = this.buildSpeakerLabel(this.leftImageDropDown);
-		const speakerDropDown = this.buildSpeakerDropDown(speakerLabel);
+		speakerDropDown = this.buildSpeakerDropDown(speakerLabel);
 		
 		const leaveLabel = this.buildLeaveLabel(speakerDropDown);
 		this.leftLeaveDropDown = this.buildLeftLeaveDropDown(leaveLabel, this.leftImageDropDown);
@@ -48,6 +48,43 @@ function DialogLine(position) {
 		const textBox = this.buildDialogTextBox(textLabel);
 		this.choicesButton = this.buildChoicesButton(textLabel, textBox);
 		this.unChoicesButton = this.buildUnchoicesButton(this.choicesButton);
+		
+		this.setSpeaker(speaker);
+	};
+	
+	this.initializeWithData = function(data) {
+		this.initialize();
+		let newData = data.replace(/ /g, '');
+		newData = newData.replace(/\n/g, '');
+		
+		newData = newData.substring(1, newData.length);
+		newData = newData.substring(0, newData.length - 2);
+		
+		const dataArray = newData.split(",");
+		
+		for(let i = 0; i < dataArray.length; i++) {
+			let newString = dataArray[i];
+			const colonPos = newString.indexOf(":");
+			newString = newString.substring(colonPos + 1, newString.length);
+			dataArray[i] = newString.replace(/"/g, '');
+			if(dataArray[i] === "null") {dataArray[i] = null;}
+			console.log(dataArray[i]);
+		}
+		
+//		this.sceneName.setText(dataArray[0]);
+		
+		this.setSpeaker(dataArray[1]);
+		speakerDropDown.setChildToDraw(dataArray[1]);
+		
+		this.leftImageDropDown.setChildToDraw(imageForString(dataArray[5]));
+		this.rightImageDropDown.setChildToDraw(imageForString(dataArray[6]));
+		
+		this.leftLeaveDropDown.setChildToDraw(dataArray[7]);
+		this.rightLeaveDropDown.setChildToDraw(dataArray[8]);
+		
+		//Working here...Need to iterate over the text boxes to add them
+		
+//		console.log(dataArray.length);
 	};
 	
 	this.buildSceneNameLabel = function() {
@@ -361,6 +398,7 @@ function DialogLine(position) {
 	};
 	
 	this.setSpeaker = function(newSpeaker) {
+		console.log(newSpeaker);
 		speaker = newSpeaker;
 		const colors = colorsForSpeaker(newSpeaker);
 		
@@ -453,6 +491,8 @@ function DialogLine(position) {
 	this.keyboardEvent = function(newKey, oldKeys) {
 		if(childWithFocus != null) {
 			childWithFocus.keyboardEvent(newKey, oldKeys);
+		} else {
+			dialogEditor.hasNoChildWithFocus(this, newKey, oldKeys);
 		}
 	};
 	

@@ -11,6 +11,7 @@ function DialogEditor() {
 	const newLineSize = {width: 125, height: 30};
 	const newLinePadding = 50;
 	let transitionInProgress = null;
+	let clipboard = null;
 	
 	this.initialize = function() {
 		addNewLineButton();
@@ -176,6 +177,13 @@ function DialogEditor() {
 	};
 	
 	this.keyboardEvent = function(newKey, oldKeys) {
+		if(((oldKeys.has(KEY_CTRL)) || (oldKeys.has(KEY_CMD))) && (newKey === KEY_V)) {
+			if(clipboard != null) {
+				this.buildCardWithString(clipboard);
+				return;
+			}
+		}
+		
 		if(childWithFocus != null) {
 			if(newKey === KEY_ESCAPE) {
 				childWithFocus.lostFocus();
@@ -201,6 +209,33 @@ function DialogEditor() {
 				
 				childWithFocus.keyboardEvent(newKey, oldKeys);
 			}		
+		}
+	};
+	
+	this.buildCardWithString = function(data) {
+			let newLineX = 110;
+			let newLineY = 110;
+			
+			for(let i = children.length - 1; i >= 0; i--) {
+				if(children[i].type != ChildType.DialogLine) {continue;}
+				
+				newLineX = children[i].frame.x;
+				newLineY = children[i].frame.y + children[i].frame.height + newLinePadding;
+				break;
+			}
+			
+			const newDialogLine = new DialogLine({x:newLineX, y:newLineY});
+			console.log(data);
+			newDialogLine.initializeWithData(data);
+			children.push(newDialogLine);
+	};
+	
+	this.hasNoChildWithFocus = function(child, newKey, oldKeys) {
+		if((oldKeys.has(KEY_CTRL)) || (oldKeys.has(KEY_CMD))) {
+			if(newKey === KEY_C) {//Copy the dialog line
+				clipboard = child.getSaveData();
+				clipboard = "{\n        " + clipboard;
+			}
 		}
 	};
 	

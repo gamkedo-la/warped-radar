@@ -9,6 +9,19 @@ const johnMadPic = document.createElement("img");
 const roseHappyPic = document.createElement("img");
 const roseAnnoyedPic = document.createElement("img");
 
+function imageForString(string) {
+	switch(string) {
+		case "johnHappyPic":
+			return johnHappyPic;
+		case "johnMadPic":
+			return johnMadPic;
+		case "roseHappyPic":
+			return roseHappyPic;
+		case "roseAnnoyedPic":
+			return roseAnnoyedPic;
+	}
+}
+
 function countLoadedImageAndLaunchIfReady() {
 	picsToLoad--;
 	fillRectangle(canvasContext, 0, 0, canvas.width, canvas.height, 'red');

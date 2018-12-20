@@ -143,6 +143,31 @@ function DialogDropDown(frame, items, initialDisplay = null) {
 		textColor = this.titleColor.normal;
 	};
 	
+	this.setChildToDraw = function(child) {
+		let comparison = child;
+		if(child === "true") {
+			comparison = "Yes";
+		} else if(child === "false") {
+			comparison = "No";
+		}
+		
+		if(children[0].type === ChildType.DialogLabel) {
+			for(let i = 0; i < children.length; i++) {
+				if(children[i].title === comparison) {
+					this.childToDraw = children[i];
+					break;
+				}
+			}
+		} else if(children[0].type === ChildType.DialogImage) {
+			for(let i = 0; i < children.length; i++) {
+				if(children[i].image === child) {
+					this.childToDraw = children[i];
+					break;
+				}
+			}
+		}
+	};
+	
 	this.updateHover = function(x, y) {
 		if(mouseInside(this.frame)) {
 			this.setState(ChildState.Hover);

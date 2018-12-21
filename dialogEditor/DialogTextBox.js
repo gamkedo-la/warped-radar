@@ -21,7 +21,7 @@ function DialogTextBox(frame, font) {
 	
 	this.titleColor = {
 		normal:'black',
-		hover:'black',
+		hover:'white',
 		active:'white'
 	};
 	
@@ -34,17 +34,19 @@ function DialogTextBox(frame, font) {
 		switch(newState) {
 			case ChildState.Normal:
 				this.bkgd = this.colors.normal;
-				this.line = this.titleColor.normal;
+				this.color = this.titleColor.normal;
 			break;
 			case ChildState.Hover:
 				this.bkgd = this.colors.hover;
-				this.line = this.titleColor.hover;
+				this.color = this.titleColor.hover;
 			break;
 			case ChildState.Active:
 				this.bkgd = this.colors.active;
-				this.line = this.titleColor.active;
+				this.color = this.titleColor.active;
 			break;
 		}
+
+		this.cursor.color = this.color;
 	};
 	
 	this.getState = function() {
@@ -124,7 +126,7 @@ function DialogTextBox(frame, font) {
 		
 		this.titleColor.normal = line;
 		this.titleColor.hover = bkgd;
-		
+				
 		this.bkgd = this.colors.normal;
 		this.color = this.titleColor.normal;
 	};

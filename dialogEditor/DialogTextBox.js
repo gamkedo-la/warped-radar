@@ -9,14 +9,42 @@ function DialogTextBox(frame, font) {
 	const PADDING = 2;
 	let titleSize = sizeOfString(canvasContext, font, "W");
 	this.frame.height = titleSize.height;
-	this.bkgd = 'white';
-	this.color = 'black';
 	let counts = 0;
 	this.dialogOrigin = null;
 	this.cursor = new DialogCursor({x: this.frame.x, y: this.frame.y}, font, this.frame.width);
+	
+	this.colors = {
+		normal:'white',
+		hover:'gray',
+		active:'purple'
+	};
+	
+	this.titleColor = {
+		normal:'black',
+		hover:'black',
+		active:'white'
+	};
+	
+	this.bkgd = this.colors.normal;
+	this.color = this.titleColor.normal;
 
 	this.setState = function(newState) {
 		state = newState;
+		
+		switch(newState) {
+			case ChildState.Normal:
+				this.bkgd = this.colors.normal;
+				this.line = this.titleColor.normal;
+			break;
+			case ChildState.Hover:
+				this.bkgd = this.colors.hover;
+				this.line = this.titleColor.hover;
+			break;
+			case ChildState.Active:
+				this.bkgd = this.colors.active;
+				this.line = this.titleColor.active;
+			break;
+		}
 	};
 	
 	this.getState = function() {
@@ -59,7 +87,6 @@ function DialogTextBox(frame, font) {
 		}
 		
 		this.frame.height = this.cursor.frame.height;
-		
 		fillRectangle(canvasContext, this.frame.x, this.frame.y, this.frame.width, this.frame.height, this.bkgd);
 		strokeRectangle(canvasContext, this.frame.x, this.frame.y, this.frame.width, this.frame.height, this.color, totalThickness);
 		
@@ -92,8 +119,14 @@ function DialogTextBox(frame, font) {
 	};
 	
 	this.setColors = function(bkgd, line) {
-		this.bkgd = bkgd;
-		this.color = line;
+		this.colors.normal = bkgd;
+		this.colors.hover = line;
+		
+		this.titleColor.normal = line;
+		this.titleColor.hover = bkgd;
+		
+		this.bkgd = this.colors.normal;
+		this.color = this.titleColor.normal;
 	};
 	
 	this.updateHover = function(x, y) {

@@ -31,6 +31,7 @@ function DialogLine(position) {
 	const choices = [];
 	
 	let speakerDropDown;
+	let leaveLabel;
 	
 	this.initialize = function(index) {
 		this.index = index;
@@ -43,7 +44,7 @@ function DialogLine(position) {
 		const speakerLabel = this.buildSpeakerLabel(this.leftImageDropDown);
 		speakerDropDown = this.buildSpeakerDropDown(speakerLabel);
 		
-		const leaveLabel = this.buildLeaveLabel(speakerDropDown);
+		leaveLabel = this.buildLeaveLabel(speakerDropDown);
 		this.leftLeaveDropDown = this.buildLeftLeaveDropDown(leaveLabel, this.leftImageDropDown);
 		this.rightLeaveDropDown = this.buildRightLeaveDropDown(leaveLabel, this.rightImageDropDown);
 
@@ -232,7 +233,7 @@ function DialogLine(position) {
 	};
 	
 	this.buildLeaveLabel = function(previousChild) {
-		const leaveString = "Leave:";
+		const leaveString = "Stay:";
 		const labelSize = sizeOfString(canvasContext, LabelFont.Medium, leaveString);
 		const leaveLabel = new DialogLabel({x:this.frame.getMidX() - (labelSize.width/2), 
 											y:previousChild.frame.y + previousChild.frame.height + CHILD_PADDING}, 
@@ -507,17 +508,29 @@ function DialogLine(position) {
 	};
 	
 	this.setFocus = function(x, y) {
-		if(childWithFocus != null) {
-			childWithFocus.lostFocus();
-			childWithFocus = null;
-		}
-		
 		this.inFocus = true;
-		if(children.length > 0) {
+		let foundChildToFocus = false;
+		if((childWithFocus != null) && (mouseInside(childWithFocus.frame))) {
+			childWithFocus.setFocus(x, y);
+			foundChildToFocus = true;
+			
+			if((childWithFocus.type === ChildType.DialogTextBox) && (choices.length > 0)) {
+				for(let j = 0; j < choices.length; j++) {
+					if(choices[j] === childWithFocus) {
+						dialogEditor.createTransition(childWithFocus, {x:x, y:y});
+					}
+				}
+			}
+		} else if(children.length > 0) {
 			for(let i = 0; i < children.length; i++) {
 				child = children[i];
 				if(child.type === ChildType.DialogLabel) {continue;}
 				if(mouseInside(child.frame)) {
+					if((childWithFocus != null) && (childWithFocus != child)) {
+						childWithFocus.lostFocus();
+					}
+					
+					foundChildToFocus = true;
 					childWithFocus = child;
 					child.setFocus(x, y);
 					
@@ -529,6 +542,11 @@ function DialogLine(position) {
 						}
 					}
 				}
+			}
+			
+			if((!foundChildToFocus) && (childWithFocus != null)) {
+				childWithFocus.lostFocus();
+				childWithFocus = null;
 			}
 			
 			let shouldCreateTransition = true;
@@ -598,6 +616,13 @@ function DialogLine(position) {
 		if((childWithFocus === this.choicesButton) || (childWithFocus === this.unChoicesButton)) {return;}
 		
 		for(let i = 0; i < children.length; i++) {
+			if((childWithFocus === this.leftImageDropDown) || (childWithFocus === this.rightImageDropDown)) {
+				if((children[i] === speakerDropDown) ||
+				   (children[i] === this.leftLeaveDropDown) ||
+				   (children[i] === this.rightLeaveDropDown) ||
+				   (children[i] === leaveLabel)) {continue;}
+			}
+			   
 			if(children[i].frame.y > childWithFocus.frame.y) {
 				children[i].textBoxGrew(deltaY);
 			}

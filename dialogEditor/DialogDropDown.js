@@ -42,6 +42,12 @@ function DialogDropDown(frame, items, initialDisplay = null) {
 				lineColor = this.titleColor.active;
 			break;
 		}
+		
+		for(let i = 0; i < children.length; i++) {
+			if(children[i].type === ChildType.DialogLabel) {
+				children[i].setColors(bkgdColor, lineColor);
+			}
+		}
 	};
 	
 	this.getState = function() {
@@ -127,6 +133,10 @@ function DialogDropDown(frame, items, initialDisplay = null) {
 			childWithFocus = null;
 		}
 		
+		if(isShowingChildren) {
+			this.action();
+		}
+		
 		this.inFocus = false;
 		this.setState(ChildState.Normal);
 	};
@@ -138,9 +148,14 @@ function DialogDropDown(frame, items, initialDisplay = null) {
 		this.titleColor.normal = line;
 		this.titleColor.hover = bkgd;
 		
-		
 		bkgdColor = this.color.normal;
 		textColor = this.titleColor.normal;
+		
+		for(let i = 0; i < children.length; i++) {
+			if(children[i].type === ChildType.DialogLabel) {
+				children[i].setColors(line, bkgd);
+			}
+		}
 	};
 	
 	this.setChildToDraw = function(child) {

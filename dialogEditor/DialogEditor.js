@@ -45,9 +45,9 @@ function DialogEditor() {
 		for(let i = 0; i < children.length; i++) {
 			child = children[i];
 			if(mouseInside(child.frame)) {
-				if(childWithFocus != null) {
+				if((childWithFocus != null) && (childWithFocus != child)) {
 					childWithFocus.lostFocus();
-					childWithFocus = null;
+//					childWithFocus = null;
 				}
 
 				childWithFocus = child;
@@ -98,8 +98,8 @@ function DialogEditor() {
 	
 		//Temp for testing
 		const newLineAction = function() {
-			let newLineX = 110;
-			let newLineY = 110;
+			let newLineX = newLineFrame.x;
+			let newLineY = newLineFrame.y + 3 * newLineFrame.height;
 			
 			for(let i = children.length - 1; i >= 0; i--) {
 				if(children[i].type != ChildType.DialogLine) {continue;}

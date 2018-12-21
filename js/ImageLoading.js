@@ -2,6 +2,13 @@ let dialogueBoxPic = document.createElement("img");
 let textArrowSheet = document.createElement("img");
 let choiceCursorPic = document.createElement("img");
 
+let arrowPic = document.createElement("img");
+let playPic = document.createElement("img");
+let helpPic = document.createElement("img");
+let creditsPic = document.createElement("img");
+let settingsPic = document.createElement("img");
+let logoPic = document.createElement("img");
+
 let johnSprite = new Image();
 
 let notePic = document.createElement("img");
@@ -65,6 +72,12 @@ function loadImages() {
         {varName: choiceCursorPic, theFile: "choicecursor.png"},
         {varName: gameBorderPic, theFile: "gameBorder.png"},
         {varName: inventoryPic, theFile: "inventory.png"},
+        {varName: arrowPic, theFile: "UI/arrowPic.png"},
+        {varName: playPic, theFile: "UI/playPic.png"},
+        {varName: helpPic, theFile: "UI/helpPic.png"},
+        {varName: settingsPic, theFile: "UI/settingsPic.png"},
+        {varName: creditsPic, theFile: "UI/creditsPic.png"},
+        {varName: logoPic, theFile: "UI/logoPic.png"},
 
         //PORTRAITS
         {varName: johnHappyPic, theFile: "john.png"},

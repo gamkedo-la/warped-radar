@@ -38,6 +38,10 @@ function DialogTextBox(frame, font) {
 		this.cursor.setString(newText);
 	};
 	
+	this.getBaseHeight = function() {
+		return titleSize.height;
+	};
+	
 	this.draw = function() {
 		if((this.dialogOrigin != null) && (this.dialogOrigin.shouldBeRemoved)) {
 			if(!this.dialogOrigin.isOnRight) {

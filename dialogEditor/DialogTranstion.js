@@ -8,7 +8,6 @@ function DialogTransitionOrigin(position, owner) {
 	this.mate = null;
 	this.destinationOwner = null;
 	this.destinationName = null;
-	this.wasDeleted = false;
 	this.THICKNESS = 2;
 	this.isOnRight = true;
 	this.shouldBeRemoved = false;
@@ -51,12 +50,9 @@ function DialogTransitionOrigin(position, owner) {
 	};
 	
 	this.remove = function() {
-		this.wasDeleted = true;
-		if((this.mate != null) && (!this.mate.wasDeleted)) {
-			this.mate.shouldBeRemoved = true;
-		}
-		
 		this.shouldBeRemoved = true;
+		this.mate.shouldBeRemoved = true;
+		this.mate = null;
 	};
 	
 	this.setFocus = function(x, y) {
@@ -72,6 +68,8 @@ function DialogTransitionOrigin(position, owner) {
 	};
 	
 	this.draw = function() {
+		if(this.shouldBeRemoved) {return;}
+		
 		if(!mouseButtonHeld) {
 			this.snapToPosition();
 		}
@@ -94,6 +92,14 @@ function DialogTransitionOrigin(position, owner) {
 	this.textBoxGrew = function(deltaY) {
 		this.frame.y += deltaY;
 	};
+	
+	this.keyboardEvent = function(newKey, oldKeys) {
+		if(this.inFocus) {
+			if(newKey === KEY_BACKSPACE) {
+				this.remove();
+			}
+		}
+	};
 }
 
 //Dialog Transition Destination
@@ -101,6 +107,8 @@ function DialogTransitionDestination(position, owner, origin) {
 	this.type = ChildType.DialogTransitionDestination;
 	this.position = position;
 	this.frame = new DialogFrame(position.x - 8, position.y - 8, 16, 16);
+	this.shouldBeRemoved = false;
+	this.owner = owner;
 
 	this.setState = function(newState) {
 		state = newState;
@@ -115,18 +123,17 @@ function DialogTransitionDestination(position, owner, origin) {
 		this.frame.y += deltaY;
 	};
 	
-	origin.addDestination(this, owner);
+	origin.addDestination(this, this.owner);
 	
 	this.remove = function() {
-		this.wasDeleted = true;
-		if(!origin.wasDeleted) {
-			origin.remove();
-		}
-		
-		this.shouldBeRemoved = true;;
+		this.shouldBeRemoved = true;
+		origin.shouldBeRemoved = true;
+		origin = null;
 	};
 	
 	this.draw = function() {
+		if(this.shouldBeRemoved) {return;}
+		
 		if(!mouseButtonHeld) {
 			this.snapToPosition();
 		}
@@ -160,7 +167,7 @@ function DialogTransitionDestination(position, owner, origin) {
 	
 	this.snapToPosition = function() {
 		let result = {x:0, y:0};
-		const frame = owner.frame;
+		const frame = this.owner.frame;
 		
 		const deltaX1 = Math.abs(this.frame.x - frame.x);
 		const deltaX2 = Math.abs(this.frame.x - (frame.x + (frame.width / 2)));
@@ -216,6 +223,14 @@ function DialogTransitionDestination(position, owner, origin) {
 			this.setState(ChildState.Hover);
 		} else {
 			this.setState(ChildState.Normal);
+		}
+	};
+	
+	this.keyboardEvent = function(newKey, oldKeys) {
+		if(this.inFocus) {
+			if(newKey === KEY_BACKSPACE) {
+				this.remove();
+			}
 		}
 	};
 	

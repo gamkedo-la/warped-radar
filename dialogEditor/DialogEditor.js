@@ -3,19 +3,24 @@ function DialogEditor() {
 	const children = [];
 	let childWithFocus = null;
 	
-	let newLineButton;
+	let newCardButton;
 	let saveButton;
+	let openDialogButton;
+	let openTextButton;
 	let conversationNameLabel;
 	let conversationNameTextBox;
-	const PADDING = 20;
-	const newLineSize = {width: 125, height: 30};
-	const newLinePadding = 50;
+	const PADDING = 10;
+	const newCardButtonSize = {width: 150, height: 30};
+	const combinedButtonWidth = 4 * newCardButtonSize.width + 3 * PADDING;
+	const newCardPadding = 50;
 	let transitionInProgress = null;
 	let clipboard = null;
 	
 	this.initialize = function() {
-		addNewLineButton();
+		addNewCardButton();
 		addSaveButton();
+		addOpenDialogButton();
+		addOpenTextButton();
 		addConversationNameLabel();
 		addConversationNameTextBox();
 	};
@@ -62,15 +67,19 @@ function DialogEditor() {
 	
 	this.updateDrag = function(deltaX, deltaY) {
 		if(childWithFocus != null) {
-			if(childWithFocus === newLineButton) {return;}
+			if(childWithFocus === newCardButton) {return;}
 			if(childWithFocus === saveButton) {return;}
+			if(childWithFocus === openDialogButton) {return;}
+			if(childWithFocus === openTextButton) {return;}
 			if(childWithFocus === conversationNameLabel) {return;}
 			if(childWithFocus === conversationNameTextBox) {return;}
 			childWithFocus.update(deltaX, deltaY);
 		} else {
 			for(let i = 0; i < children.length; i++) {
-				if(children[i] === newLineButton) {continue;}
+				if(children[i] === newCardButton) {continue;}
 				if(children[i] === saveButton) {continue;}
+				if(children[i] === openDialogButton) {continue;}
+				if(children[i] === openTextButton) {continue;}
 				if(children[i] === conversationNameLabel) {continue;}
 				if(children[i] === conversationNameTextBox) {continue;}
 				children[i].update(deltaX, deltaY);
@@ -84,8 +93,8 @@ function DialogEditor() {
 		}
 	};
 	
-	const addNewLineButton = function() {
-		const newLineFrame = new DialogFrame((canvas.width - newLineSize.width)/2, 50, newLineSize.width, newLineSize.height);
+	const addNewCardButton = function() {
+		const newLineFrame = new DialogFrame((canvas.width - combinedButtonWidth)/2, 50, newCardButtonSize.width, newCardButtonSize.height);
 	
 		//Temp for testing
 		const newLineAction = function() {
@@ -96,21 +105,21 @@ function DialogEditor() {
 				if(children[i].type != ChildType.DialogLine) {continue;}
 				
 				newLineX = children[i].frame.x;
-				newLineY = children[i].frame.y + children[i].frame.height + newLinePadding;
+				newLineY = children[i].frame.y + children[i].frame.height + newCardPadding;
 				break;
 			}
 			
 			const newDialogLine = new DialogLine({x:newLineX, y:newLineY});
-			newDialogLine.initialize();
+			newDialogLine.initialize(children.length);
 			children.push(newDialogLine);
 		}
 		
-		newLineButton = new DialogButton(newLineFrame, 'New Card', newLineAction, ButtonStyle.Rounded);
-		children.push(newLineButton);
+		newCardButton = new DialogButton(newLineFrame, 'New Card', newLineAction, ButtonStyle.Rounded);
+		children.push(newCardButton);
 	};
 	
 	const addSaveButton = function() {
-		const saveButtonFrame = new DialogFrame(newLineButton.frame.x + newLineButton.frame.width + PADDING, newLineButton.frame.y, newLineSize.width, newLineSize.height);
+		const saveButtonFrame = new DialogFrame(newCardButton.frame.x + newCardButton.frame.width + PADDING, newCardButton.frame.y, newCardButtonSize.width, newCardButtonSize.height);
 		
 		const saveAction = function() {
 			let variableText;
@@ -120,21 +129,92 @@ function DialogEditor() {
 			} 
 			
 			variableText = variablizeText(conversationNameTextBox.getText()[0]);
-			let saveString = "let " + variableText + " = [\n    {\n        ";
+			let saveString = "let " + variableText + " = [\n    ";
 			
 			for(let i = 0; i < children.length; i++) {
-				if(children[i] === newLineButton) {continue;}
+				if(children[i] === newCardButton) {continue;}
 				if(children[i] === saveButton) {continue;}
+				if(children[i] === openDialogButton) {continue;}
+				if(children[i] === openTextButton) {continue;}
 				if(children[i] === conversationNameLabel) {continue;}
 				if(children[i] === conversationNameTextBox) {continue;}
 				saveString += children[i].getSaveData();
 			}
 			
+			//this is the magic line, need to log this to the console (don't delete!)			
 			console.log(saveString);
 		}
 		
 		saveButton = new DialogButton(saveButtonFrame, "Save", saveAction, ButtonStyle.Rounded);
 		children.push(saveButton);
+	};
+	
+	const addOpenDialogButton = function() {
+		const openDialogButtonFrame = new DialogFrame(saveButton.frame.x + saveButton.frame.width + PADDING, saveButton.frame.y, newCardButtonSize.width, newCardButtonSize.height);
+		
+		const openDialogAction = function(context) {
+			const thisConvo = CONVERSATION;
+			let transitions = {origins:[], destinations:[]};
+			for(let i = 0; i < thisConvo.length; i++) {
+				let newLineX = 110;
+				let newLineY = 110;
+				
+				for(let i = children.length - 1; i >= 0; i--) {
+					if(children[i].type != ChildType.DialogLine) {continue;}
+					
+					newLineX = children[i].frame.x;
+					newLineY = children[i].frame.y + children[i].frame.height + newCardPadding;
+					break;
+				}
+				
+				const newDialogLine = new DialogLine({x:newLineX, y:newLineY});
+				
+				const theseTransitions = newDialogLine.initializeWithData(thisConvo[i], children.length);
+				if(theseTransitions != null) {
+					transitions.origins = transitions.origins.concat(theseTransitions.origins);
+					transitions.destinations = transitions.destinations.concat(theseTransitions.destinations);
+				}
+
+				children.push(newDialogLine);
+			}
+			
+			for(let i = 0; i < transitions.origins.length; i++) {
+				transitionInProgress = transitions.origins[i];
+				for(let j = 0; j < children.length; j++) {
+					const thisCard = children[j];
+					if(thisCard.type === ChildType.DialogLine) {
+						
+						if((thisCard.sceneName != null) && (thisCard.sceneName.getText()[0] === transitions.destinations[i])) {
+							const destPosition = findDestPosWithPos(child.frame, {x:thisCard.frame.getMidX(), y:thisCard.frame.getMidY()});
+							let newDestination = new DialogTransitionDestination(destPosition, thisCard, transitionInProgress);
+							thisCard.addDestinationChild(newDestination);
+							
+							transitionInProgress = null;
+							
+							break;
+						}
+					}
+				}
+			}
+		}
+		
+		openDialogButton = new DialogButton(openDialogButtonFrame, "Open Dialog", openDialogAction, ButtonStyle.Rounded);
+		children.push(openDialogButton);
+	};
+	
+	const addOpenTextButton = function() {
+		const openTextButtonFrame = new DialogFrame(openDialogButton.frame.x + openDialogButton.frame.width + PADDING, openDialogButton.frame.y, newCardButtonSize.width, newCardButtonSize.height);
+		
+		
+		const openTextButtonAction = function() {
+			console.log("This button's action hasn't been implemented yet.");
+			//
+			//Need to implement the action function for this button
+			//			
+		}
+		
+		openTextButton = new DialogButton(openTextButtonFrame, "Open Text", openTextButtonAction, ButtonStyle.Rounded);
+		children.push(openTextButton);
 	};
 	
 	const variablizeText = function(text) {
@@ -160,19 +240,19 @@ function DialogEditor() {
 	
 	const addConversationNameLabel = function() {
 		const labelString = "Conversation Name:"
-		const labelSize = sizeOfString(canvasContext, LabelFont.Large, labelString);
-		conversationNameLabel = new DialogLabel({x:newLineButton.frame.x - labelSize.width - PADDING, 
-											     y:newLineButton.frame.y + newLineButton.frame.height}, 
-											     LabelFont.Large, 
+		const labelSize = sizeOfString(canvasContext, LabelFont.XLarge, labelString);
+		conversationNameLabel = new DialogLabel({x:newCardButton.frame.x - labelSize.width - PADDING, 
+											     y:newCardButton.frame.y + newCardButton.frame.height + PADDING/2}, 
+											     LabelFont.XLarge, 
 												 labelString);
 		children.push(conversationNameLabel);
 	};
 	
 	const addConversationNameTextBox = function() {
-		conversationNameTextBox = new DialogTextBox(new DialogFrame(newLineButton.frame.x, 
+		conversationNameTextBox = new DialogTextBox(new DialogFrame(newCardButton.frame.x, 
 										   				  conversationNameLabel.frame.y + 2, //+2 fudge to align it with label 
-										   				  newLineButton.frame.width + saveButton.frame.width + (PADDING),
-										   				  conversationNameLabel.frame.height), LabelFont.Large);
+										   				  combinedButtonWidth,
+										   				  conversationNameLabel.frame.height), LabelFont.XLarge);
 		children.push(conversationNameTextBox);
 	};
 	
@@ -212,7 +292,7 @@ function DialogEditor() {
 		}
 	};
 	
-	this.buildCardWithString = function(data) {
+	this.buildCardWithString = function(string) {
 			let newLineX = 110;
 			let newLineY = 110;
 			
@@ -220,13 +300,12 @@ function DialogEditor() {
 				if(children[i].type != ChildType.DialogLine) {continue;}
 				
 				newLineX = children[i].frame.x;
-				newLineY = children[i].frame.y + children[i].frame.height + newLinePadding;
+				newLineY = children[i].frame.y + children[i].frame.height + newCardPadding;
 				break;
 			}
 			
 			const newDialogLine = new DialogLine({x:newLineX, y:newLineY});
-			console.log(data);
-			newDialogLine.initializeWithData(data);
+			newDialogLine.initializeWithString(string, children.length);
 			children.push(newDialogLine);
 	};
 	
@@ -239,11 +318,15 @@ function DialogEditor() {
 		}
 	};
 	
-	this.textBoxGrew = function(deltaY) {
-		if(childWithFocus != null) {
-			if((childWithFocus.type === ChildType.DialogLine) || 
-			   (childWithFocus.type === ChildType.DialogDropDown)) {
-				childWithFocus.textBoxGrew(deltaY);
+	this.textBoxGrew = function(deltaY, child) {
+		if(child != undefined) {
+			child.textBoxGrew(deltaY);
+		} else {
+			if(childWithFocus != null) {
+				if((childWithFocus.type === ChildType.DialogLine) || 
+				   (childWithFocus.type === ChildType.DialogDropDown)) {
+					childWithFocus.textBoxGrew(deltaY);
+				}
 			}
 		}
 	};
@@ -256,7 +339,7 @@ function DialogEditor() {
 	
 	this.createTransition = function(child, position) {
 		if((transitionInProgress != null) && (child.type === ChildType.DialogLine)) {
-			const destPosition = this.findDestPosWithPos(child.frame, position);
+			const destPosition = findDestPosWithPos(child.frame, position);
 			let newDestination = new DialogTransitionDestination(destPosition, child, transitionInProgress);
 			
 			childWithFocus.addDestinationChild(newDestination);
@@ -265,45 +348,6 @@ function DialogEditor() {
 		} else if((transitionInProgress === null) && (child.type === ChildType.DialogTextBox)) {
 			transitionInProgress = childWithFocus.addOriginChild(child, position);
 		}
-	};
-	
-	this.findDestPosWithPos = function(frame, position) {
-		let result = {x:0, y:0};
-		
-		const deltaX1 = Math.abs(position.x - frame.x);
-		const deltaX2 = Math.abs(position.x - (frame.x + (frame.width / 2)));
-		const deltaX3 = Math.abs(position.x - (frame.x + frame.width));
-
-		const minX = Math.min(deltaX1, deltaX2, deltaX3);
-
-		const deltaY1 = Math.abs(position.y - frame.y);
-		const deltaY2 = Math.abs(position.y - (frame.y + (frame.height/2)));
-		const deltaY3 = Math.abs(position.y - (frame.y + frame.height));
-		
-		const minY = Math.min(deltaY1, deltaY2, deltaY3);
-		
-		if((minX === deltaX2) && (minY === deltaY2)) {// +/- 8 = half frame height or width adjustment
-			result.x = frame.x + frame.width/2;
-			result.y = frame.y + 8;
-		} else {
-			if(minX === deltaX1) {
-				result.x = frame.x + 8;
-			} else if(minX === deltaX2) {
-				result.x = frame.x + frame.width/2;
-			} else {
-				result.x = frame.x + frame.width - 8;
-			}
-			
-			if(minY === deltaY1) {
-				result.y = frame.y + 8;
-			} else if(minY === deltaY2) {
-				result.y = frame.y + frame.height/2;
-			} else {
-				result.y = frame.y + frame.height - 8;
-			}
-		}
-		
-		return result;
 	};
 }
 
@@ -320,3 +364,43 @@ function DialogFrame(x, y, width, height) {
 		return (this.y + (height / 2));
 	}
 }
+
+//Dialog Transition Destination Calculation
+function findDestPosWithPos(frame, position) {
+	let result = {x:0, y:0};
+	
+	const deltaX1 = Math.abs(position.x - frame.x);
+	const deltaX2 = Math.abs(position.x - (frame.x + (frame.width / 2)));
+	const deltaX3 = Math.abs(position.x - (frame.x + frame.width));
+
+	const minX = Math.min(deltaX1, deltaX2, deltaX3);
+
+	const deltaY1 = Math.abs(position.y - frame.y);
+	const deltaY2 = Math.abs(position.y - (frame.y + (frame.height/2)));
+	const deltaY3 = Math.abs(position.y - (frame.y + frame.height));
+	
+	const minY = Math.min(deltaY1, deltaY2, deltaY3);
+	
+	if((minX === deltaX2) && (minY === deltaY2)) {// +/- 8 = half frame height or width adjustment
+		result.x = frame.x + frame.width/2;
+		result.y = frame.y + 8;
+	} else {
+		if(minX === deltaX1) {
+			result.x = frame.x + 8;
+		} else if(minX === deltaX2) {
+			result.x = frame.x + frame.width/2;
+		} else {
+			result.x = frame.x + frame.width - 8;
+		}
+		
+		if(minY === deltaY1) {
+			result.y = frame.y + 8;
+		} else if(minY === deltaY2) {
+			result.y = frame.y + frame.height/2;
+		} else {
+			result.y = frame.y + frame.height - 8;
+		}
+	}
+	
+	return result;
+};

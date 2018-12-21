@@ -4,6 +4,7 @@ let canvasContext;
 let dialogEditor;
 const CLEAR_COLOR = '#350034';
 const FRAMES_PER_SECOND = 30;
+const CONVERSATION = ATestDialog;
 const ChildState = {
 	Normal:'normal',
 	Hover:'hover',

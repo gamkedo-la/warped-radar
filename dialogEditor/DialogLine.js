@@ -2,6 +2,7 @@
 function DialogLine(position) {
 	this.type = ChildType.DialogLine;
 	this.frame = new DialogFrame(position.x, position.y, 380, 250);
+	this.index = 0;
 	this.inFocus = false;
 	this.sceneName = null;
 	const children = [];
@@ -23,6 +24,7 @@ function DialogLine(position) {
 	this.unChoicesButton;
 	
 	let speaker = null;
+	let textBox;
 	let bkgdColor = NeutralColor.Fill;
 	let lineColor = NeutralColor.Line;
 	
@@ -30,7 +32,8 @@ function DialogLine(position) {
 	
 	let speakerDropDown;
 	
-	this.initialize = function() {
+	this.initialize = function(index) {
+		this.index = index;
 		const sceneNameLabel = this.buildSceneNameLabel();
 		this.sceneName = this.buildSceneNameTextBox(sceneNameLabel);
 		
@@ -45,46 +48,137 @@ function DialogLine(position) {
 		this.rightLeaveDropDown = this.buildRightLeaveDropDown(leaveLabel, this.rightImageDropDown);
 
 		const textLabel = this.buildTextLabel(this.leftImageDropDown);		
-		const textBox = this.buildDialogTextBox(textLabel);
+		textBox = this.buildDialogTextBox(textLabel);
 		this.choicesButton = this.buildChoicesButton(textLabel, textBox);
 		this.unChoicesButton = this.buildUnchoicesButton(this.choicesButton);
 		
 		this.setSpeaker(speaker);
 	};
 	
-	this.initializeWithData = function(data) {
-		this.initialize();
-		let newData = data.replace(/ /g, '');
-		newData = newData.replace(/\n/g, '');
+	this.initializeWithString = function(string, index) {
+		this.initialize(index);
+		let newString = string.replace(/ /g, '');
+		newString = newString.replace(/\n/g, '');
 		
-		newData = newData.substring(1, newData.length);
-		newData = newData.substring(0, newData.length - 2);
+		newString = newString.substring(1, newString.length);
+		newString = newString.substring(0, newString.length - 2);
 		
-		const dataArray = newData.split(",");
+		const stringArray = newString.split(",");
 		
-		for(let i = 0; i < dataArray.length; i++) {
-			let newString = dataArray[i];
-			const colonPos = newString.indexOf(":");
-			newString = newString.substring(colonPos + 1, newString.length);
-			dataArray[i] = newString.replace(/"/g, '');
-			if(dataArray[i] === "null") {dataArray[i] = null;}
-			console.log(dataArray[i]);
+		for(let i = 0; i < stringArray.length; i++) {
+			let aString = stringArray[i];
+			const colonPos = aString.indexOf(":");
+			aString = aString.substring(colonPos + 1, aString.length);
+			stringArray[i] = aString.replace(/"/g, '');
+			if(stringArray[i] === "null") {stringArray[i] = null;}
 		}
 		
-//		this.sceneName.setText(dataArray[0]);
+		this.setSpeaker(stringArray[1]);
+		speakerDropDown.setChildToDraw(stringArray[1]);
 		
-		this.setSpeaker(dataArray[1]);
-		speakerDropDown.setChildToDraw(dataArray[1]);
+		this.leftImageDropDown.setChildToDraw(imageForString(stringArray[5]));
+		this.rightImageDropDown.setChildToDraw(imageForString(stringArray[6]));
 		
-		this.leftImageDropDown.setChildToDraw(imageForString(dataArray[5]));
-		this.rightImageDropDown.setChildToDraw(imageForString(dataArray[6]));
+		this.leftLeaveDropDown.setChildToDraw(stringArray[7]);
+		this.rightLeaveDropDown.setChildToDraw(stringArray[8]);
+	};
+	
+	this.initializeWithData = function(data, index) {
+		this.initialize(index);
 		
-		this.leftLeaveDropDown.setChildToDraw(dataArray[7]);
-		this.rightLeaveDropDown.setChildToDraw(dataArray[8]);
+		this.sceneName.setText(data.scene);
 		
-		//Working here...Need to iterate over the text boxes to add them
+		this.setSpeaker(data.who);
+		speakerDropDown.setChildToDraw(data.who);
 		
-//		console.log(dataArray.length);
+		this.leftImageDropDown.setChildToDraw(data.leftPic);
+		this.rightImageDropDown.setChildToDraw(data.rightPic);
+		
+		if(data.leftPicLeave) {
+			this.leftLeaveDropDown.setChildToDraw("No");
+		} else {
+			this.leftLeaveDropDown.setChildToDraw("Yes");
+		}
+		
+		if(data.rightPicLeave) {
+			this.rightLeaveDropDown.setChildToDraw("No");
+		} else {
+			this.rightLeaveDropDown.setChildToDraw("Yes");
+		}
+		
+		if(data.text != "") {
+			textBox.setText(data.text);
+			
+			const textRows = textBox.getText().length;
+			if(textRows > 1) {
+				this.frame.height += ((textRows - 1) * textBox.getBaseHeight());
+			}
+			
+			return null;
+		} else {
+			const transitionList = {origins:[], destinations:[]};
+			
+			textBox.setText(data.choices[0][0]);
+			const textRows = textBox.getText().length;
+			if(textRows > 1) {
+				this.frame.height = (textRows * textBox.getBaseHeight());
+			}
+			
+			let thisOrigin = null;
+			if(data.choices[0][1] != null) {
+				thisOrigin = this.addOriginChild(textBox, {x:textBox.frame.x, y:textBox.frame.y});
+			} 
+			
+			transitionList.origins.push(thisOrigin);
+			transitionList.destinations.push(data.choices[0][1]);
+			
+			for(let i = 1; i < data.choices.length; i++) {
+				const text = data.choices[i][0];
+				const firstTextBox = choices[0];
+				
+				let originOffset = 0;
+				if(firstTextBox.dialogOrigin != null) {
+					originOffset = -16;
+				}
+				
+				const lastFrame = choices[choices.length - 1].frame;
+				const thisFrame = new DialogFrame(firstTextBox.frame.x + originOffset, 
+												  lastFrame.y + lastFrame.height + CHILD_PADDING,
+											   	  firstTextBox.frame.width,
+											   	  TEXTBOX_HEIGHT);
+											   	  
+				const anotherTextBox = new DialogTextBox(thisFrame, LabelFont.Medium);
+				anotherTextBox.setText(text);
+				const textRows = textBox.getText().length
+				if(textRows > 1) {
+					this.frame.height = (textRows * textBox.getBaseHeight());
+				}
+				
+				children.push(anotherTextBox);
+				choices.push(anotherTextBox);
+				
+				if(speaker != null) {
+					anotherTextBox.setColors(bkgdColor, lineColor);
+				}
+				
+				dialogEditor.textBoxGrew(anotherTextBox.frame.height + CHILD_PADDING, this);
+				
+				const anotherTextRow = anotherTextBox.getText().length;
+				if(anotherTextRow > 1) {
+					this.frame.height = (textRows * textBox.getBaseHeight());
+				}
+				
+				thisOrigin = null;
+				if(data.choices[i][1] != null) {
+					thisOrigin = this.addOriginChild(anotherTextBox, {x:anotherTextBox.frame.x, y:anotherTextBox.frame.y});
+				} 
+				
+				transitionList.origins.push(thisOrigin);
+				transitionList.destinations.push(data.choices[i][1]);
+			}
+			
+			return transitionList;
+		}		
 	};
 	
 	this.buildSceneNameLabel = function() {
@@ -375,7 +469,10 @@ function DialogLine(position) {
 
 		for(let i = transitions.length - 1; i >= 0 ; i--) {
 			if(transitions[i].shouldBeRemoved) {
-				transitions.splice(i, 1);
+				const removedTransition = transitions.splice(i, 1)[0];
+				
+				const childIndex = children.indexOf(removedTransition);
+				children.splice(childIndex, 1);
 			}
 		}
 		
@@ -398,7 +495,6 @@ function DialogLine(position) {
 	};
 	
 	this.setSpeaker = function(newSpeaker) {
-		console.log(newSpeaker);
 		speaker = newSpeaker;
 		const colors = colorsForSpeaker(newSpeaker);
 		
@@ -425,7 +521,7 @@ function DialogLine(position) {
 					childWithFocus = child;
 					child.setFocus(x, y);
 					
-					if((childWithFocus.type === ChildType.DialogTextBox) && (choices.length > 1)) {
+					if((childWithFocus.type === ChildType.DialogTextBox) && (choices.length > 0)) {
 						for(let j = 0; j < choices.length; j++) {
 							if(choices[j] === childWithFocus) {
 								dialogEditor.createTransition(childWithFocus, {x:x, y:y});
@@ -498,6 +594,7 @@ function DialogLine(position) {
 	
 	this.textBoxGrew = function(deltaY) {
 		this.frame.height += deltaY;
+		if(childWithFocus === null) {return;}
 		if((childWithFocus === this.choicesButton) || (childWithFocus === this.unChoicesButton)) {return;}
 		
 		for(let i = 0; i < children.length; i++) {
@@ -548,7 +645,7 @@ function DialogLine(position) {
 	};
 	
 	this.getSaveData = function() {
-		let saveString = "scene: \"";
+		let saveString = "{\n        scene: \"";
 		if(this.sceneName != null) {
 			const sceneText = this.sceneName.getText();
 			for(let i = 0; i < sceneText.length; i++) {
@@ -596,7 +693,7 @@ function DialogLine(position) {
 			}
 			saveString += "\"";
 		} else {
-			saveString += "null";
+			saveString += "\"\"";
 		}
 		
 		saveString += ",\n        ";		
@@ -683,7 +780,7 @@ function DialogLine(position) {
 			saveString += "null\n    },";
 		}
 		
-		saveString += "\n        ";
+		saveString += "\n    ";
 
 		return saveString;
 	};

@@ -97,8 +97,6 @@ function initializeInput() {
 function keyPress(evt) {
 	evt.preventDefault();
 	
-//	console.log("KeyCode: " + evt.keyCode);
-	
 	dialogEditor.keyboardEvent(evt.keyCode, HELD_KEYS);
 	
 	HELD_KEYS.add(evt.keyCode);

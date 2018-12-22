@@ -51,8 +51,10 @@ function DialogTransitionOrigin(position, owner) {
 	
 	this.remove = function() {
 		this.shouldBeRemoved = true;
-		this.mate.shouldBeRemoved = true;
-		this.mate = null;
+		if(this.mate != null) {
+			this.mate.shouldBeRemoved = true;
+			this.mate = null;
+		}
 	};
 	
 	this.setFocus = function(x, y) {

@@ -16,6 +16,7 @@ let ATestDialog = [
         nameCol: "lightBlue",
         voice: voiceLow1,
         text: "Hi there.",
+        nextPage: 1,
         leftPic: johnHappyPic,
         rightPic: null,
 
@@ -30,6 +31,7 @@ let ATestDialog = [
         nameCol: "pink",
         voice: voiceHigh2,
         text: "Hi! How are you?",
+        nextPage: 2,
         leftPic: johnHappyPic,
         rightPic: roseHappyPic,
 
@@ -44,6 +46,7 @@ let ATestDialog = [
         nameCol: "lightBlue",
         voice: voiceLow1,
         text: "",
+        nextPage: null,
         leftPic: johnHappyPic,
         rightPic: roseHappyPic,
 
@@ -58,6 +61,7 @@ let ATestDialog = [
         nameCol: "lightBlue",
         voice: voiceLow1,
         text: "I'm good. So how've you been?",
+        nextPage: 4,
         leftPic: johnHappyPic,
         rightPic: roseHappyPic,
 
@@ -72,6 +76,7 @@ let ATestDialog = [
         nameCol: "pink",
         voice: voiceHigh2,
         text: "I'm fine.",
+        nextPage: 5,
         leftPic: johnHappyPic,
         rightPic: roseHappyPic,
 
@@ -86,6 +91,7 @@ let ATestDialog = [
         nameCol: "lightBlue",
         voice: voiceLow1,
         text: "Oh that's great.",
+        nextPage: 6,
         leftPic: johnHappyPic,
         rightPic: roseHappyPic,
 
@@ -100,6 +106,7 @@ let ATestDialog = [
         nameCol: "lightBlue",
         voice: voiceLow1,
         text: "Hold on, let me just show the player that I also have an angry face portrait.",
+        nextPage: 7,
         leftPic: johnMadPic,
         rightPic: roseHappyPic,
 
@@ -114,6 +121,7 @@ let ATestDialog = [
         nameCol: "lightBlue",
         voice: voiceLow1,
         text: "GRRR",
+        nextPage: 8,
         leftPic: johnMadPic,
         rightPic: roseHappyPic,
 
@@ -128,6 +136,7 @@ let ATestDialog = [
         nameCol: "pink",
         voice: voiceHigh2,
         text: "Uhh, oK, see ya",
+        nextPage: 9,
         leftPic: johnHappyPic,
         rightPic: roseAnnoyedPic,
 
@@ -142,6 +151,7 @@ let ATestDialog = [
         nameCol: "lightBlue",
         voice: voiceLow1,
         text: "Hey, wait!",
+        nextPage: 10,
         leftPic: johnMadPic,
         rightPic: roseAnnoyedPic,
 
@@ -156,6 +166,7 @@ let ATestDialog = [
         nameCol: "lightBlue",
         voice: voiceLow1,
         text: "...",
+        nextPage: 11,
         leftPic: johnMadPic,
         rightPic: null,
 
@@ -170,6 +181,7 @@ let ATestDialog = [
         nameCol: "pink",
         voice: voiceHigh2,
         text: "Just kidding!",
+        nextPage: 12,
         leftPic: johnHappyPic,
         rightPic: roseHappyPic,
 
@@ -184,6 +196,7 @@ let ATestDialog = [
         nameCol: "pink",
         voice: voiceHigh2,
         text: "Do you want to talk some more?",
+        nextPage: 13,
         leftPic: johnHappyPic,
         rightPic: roseHappyPic,
 
@@ -198,6 +211,7 @@ let ATestDialog = [
         nameCol: "pink",
         voice: voiceHigh2,
         text: "",
+        nextPage: null,
         leftPic: johnHappyPic,
         rightPic: roseHappyPic,
 
@@ -212,6 +226,7 @@ let ATestDialog = [
         nameCol: "pink",
         voice: voiceHigh2,
         text: "Yay! Too bad, I have to go though",
+        nextPage: 15,
         leftPic: johnHappyPic,
         rightPic: roseHappyPic,
 
@@ -226,6 +241,7 @@ let ATestDialog = [
         nameCol: "pink",
         voice: voiceHigh2,
         text: "Let's talk later!",
+        nextPage: 16,
         leftPic: johnHappyPic,
         rightPic: roseHappyPic,
 
@@ -240,6 +256,7 @@ let ATestDialog = [
         nameCol: "pink",
         voice: voiceHigh2,
         text: "Really, are you sure?",
+        nextPage: 17,
         leftPic: johnHappyPic,
         rightPic: roseHappyPic,
 
@@ -254,6 +271,7 @@ let ATestDialog = [
         nameCol: "pink",
         voice: voiceHigh2,
         text: "",
+        nextPage: null,
         leftPic: johnHappyPic,
         rightPic: roseHappyPic,
 
@@ -268,6 +286,7 @@ let ATestDialog = [
         nameCol: "pink",
         voice: voiceHigh2,
         text: "Yeah, I feel you.",
+        nextPage: 19,
         leftPic: johnHappyPic,
         rightPic: roseHappyPic,
 
@@ -282,6 +301,7 @@ let ATestDialog = [
         nameCol: "pink",
         voice: voiceHigh2,
         text: "Welp, gotta go!",
+        nextPage: 20,
         leftPic: johnHappyPic,
         rightPic: roseAnnoyedPic,
 
@@ -296,6 +316,7 @@ let ATestDialog = [
         nameCol: "pink",
         voice: voiceHigh2,
         text: "JONATHAN IS THAT YOU",
+        nextPage: 21,
         leftPic: johnHappyPic,
         rightPic: roseHappyPic,
 
@@ -310,6 +331,7 @@ let ATestDialog = [
         nameCol: "pink",
         voice: voiceHigh2,
         text: "BOI",
+        nextPage: 22,
         leftPic: johnHappyPic,
         rightPic: roseHappyPic,
 

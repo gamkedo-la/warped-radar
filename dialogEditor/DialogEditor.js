@@ -15,6 +15,7 @@ function DialogEditor() {
 	const newCardPadding = 50;
 	let transitionInProgress = null;
 	let clipboard = null;
+	let baseChildCount = 0;
 	
 	this.initialize = function() {
 		addNewCardButton();
@@ -23,6 +24,8 @@ function DialogEditor() {
 		addOpenTextButton();
 		addConversationNameLabel();
 		addConversationNameTextBox();
+		
+		baseChildCount = children.length;
 	};
 	
 	this.update = function() {
@@ -110,7 +113,7 @@ function DialogEditor() {
 			}
 			
 			const newDialogLine = new DialogLine({x:newLineX, y:newLineY});
-			newDialogLine.initialize(children.length);
+			newDialogLine.initialize(children.length - baseChildCount); 
 			children.push(newDialogLine);
 		}
 		
@@ -156,8 +159,8 @@ function DialogEditor() {
 			const thisConvo = CONVERSATION;
 			let transitions = {origins:[], destinations:[]};
 			for(let i = 0; i < thisConvo.length; i++) {
-				let newLineX = 110;
-				let newLineY = 110;
+				let newLineX = newCardButton.frame.x;
+				let newLineY = openDialogButtonFrame.y + 3 * openDialogButtonFrame.height;
 				
 				for(let i = children.length - 1; i >= 0; i--) {
 					if(children[i].type != ChildType.DialogLine) {continue;}
@@ -169,7 +172,7 @@ function DialogEditor() {
 				
 				const newDialogLine = new DialogLine({x:newLineX, y:newLineY});
 				
-				const theseTransitions = newDialogLine.initializeWithData(thisConvo[i], children.length);
+				const theseTransitions = newDialogLine.initializeWithData(thisConvo[i], children.length - baseChildCount);
 				if(theseTransitions != null) {
 					transitions.origins = transitions.origins.concat(theseTransitions.origins);
 					transitions.destinations = transitions.destinations.concat(theseTransitions.destinations);
@@ -185,7 +188,15 @@ function DialogEditor() {
 					if(thisCard.type === ChildType.DialogLine) {
 						
 						if((thisCard.sceneName != null) && (thisCard.sceneName.getText()[0] === transitions.destinations[i])) {
-							const destPosition = findDestPosWithPos(child.frame, {x:thisCard.frame.getMidX(), y:thisCard.frame.getMidY()});
+							const destPosition = findDestPosWithPos(thisCard.frame, {x:thisCard.frame.getMidX(), y:thisCard.frame.getMidY()});
+							let newDestination = new DialogTransitionDestination(destPosition, thisCard, transitionInProgress);
+							thisCard.addDestinationChild(newDestination);
+							
+							transitionInProgress = null;
+							
+							break;
+						} else if(thisCard.index === transitions.destinations[i]) {
+							const destPosition = findDestPosWithPos(thisCard.frame, {x:thisCard.frame.x, y:thisCard.frame.y});
 							let newDestination = new DialogTransitionDestination(destPosition, thisCard, transitionInProgress);
 							thisCard.addDestinationChild(newDestination);
 							
@@ -305,7 +316,7 @@ function DialogEditor() {
 			}
 			
 			const newDialogLine = new DialogLine({x:newLineX, y:newLineY});
-			newDialogLine.initializeWithString(string, children.length);
+			newDialogLine.initializeWithString(string, children.length - baseChildCount);
 			children.push(newDialogLine);
 	};
 	

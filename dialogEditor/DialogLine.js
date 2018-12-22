@@ -108,6 +108,8 @@ function DialogLine(position) {
 		}
 		
 		if(data.text != "") {
+			const transitionList = {origins:[], destinations:[]};
+			
 			textBox.setText(data.text);
 			
 			const textRows = textBox.getText().length;
@@ -115,7 +117,15 @@ function DialogLine(position) {
 				this.frame.height += ((textRows - 1) * textBox.getBaseHeight());
 			}
 			
-			return null;
+			let thisOrigin = null;
+			if(data.nextPage != null) {
+				thisOrigin = this.addOriginChild(textBox, {x:textBox.frame.x, y:textBox.frame.y});
+			} 
+			
+			transitionList.origins.push(thisOrigin);
+			transitionList.destinations.push(data.nextPage);
+			
+			return transitionList;
 		} else {
 			const transitionList = {origins:[], destinations:[]};
 			
@@ -721,7 +731,32 @@ function DialogLine(position) {
 			saveString += "\"\"";
 		}
 		
-		saveString += ",\n        ";		
+		saveString += ",\n        ";
+		
+		saveString += "nextPage: ";
+		let transitionOrigin = null;
+		for(let i = 0; i < transitions.length; i++) {
+			if(transitions[i].type === ChildType.DialogTransitionOrigin) {
+				transitionOrigin = transitions[i];
+				break;
+			}
+		}
+		if(choices.length === 1) {
+			let nextPage = null;
+			if((transitionOrigin != null) && (transitionOrigin.mate != null)) {
+				nextPage = transitionOrigin.mate.owner.index;
+			}
+			
+			if((nextPage === null) || (nextPage === undefined)) {
+				nextPage = this.index + 1;
+			}
+			
+			saveString += nextPage;
+		} else {
+			saveString += "null";
+		}
+		
+		saveString += ",\n        ";
 		
 		saveString += "leftPic: ";
 		if(this.leftImageDropDown.childToDraw != null) {
@@ -746,7 +781,7 @@ function DialogLine(position) {
 		saveString += "leftPicLeave: ";
 		if(this.leftLeaveDropDown.childToDraw != null) {
 			const willLeave = this.leftLeaveDropDown.childToDraw.title;
-			if(willLeave === "Yes") {
+			if(willLeave === "No") {
 				saveString += "true";
 			} else {
 				saveString += "false";
@@ -760,7 +795,7 @@ function DialogLine(position) {
 		saveString += "rightPicLeave: ";
 		if(this.rightLeaveDropDown.childToDraw != null) {
 			const willLeave = this.rightLeaveDropDown.childToDraw.title;
-			if(willLeave === "Yes") {
+			if(willLeave === "No") {
 				saveString += "true";
 			} else {
 				saveString += "false";

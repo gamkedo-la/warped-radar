@@ -60,6 +60,7 @@ function Dialogue() {
 
     this.create = function (conversation) {
         let dialogue = [],
+        	pages = [];
             scenes = [],
             playerChoices = [],
             speakerNames = [],
@@ -73,6 +74,7 @@ function Dialogue() {
         for (let i = 0; i < conversation.length; i++) {
             let chatEvent = conversation[i];
             if ("text" in chatEvent) dialogue.push(chatEvent.text);
+            if ("nextPage" in chatEvent) pages.push(chatEvent.nextPage);
             if ("who" in chatEvent) speakerNames.push(chatEvent.who);
             if ("scene" in chatEvent) scenes.push(chatEvent.scene);
             if ("voice" in chatEvent) voices.push(chatEvent.voice);
@@ -426,15 +428,25 @@ function Dialogue() {
 
     this.incrementPage = function (conversation) {
         let dialogue = [];
+        let pages = [];
         let sceneText = this.getSceneLength(conversation);
         for (let i = 0; i < conversation.length; i++) {
-            if ("text" in conversation[i]) dialogue.push(conversation[i].text);
+            if ("text" in conversation[i]) {
+	            dialogue.push(conversation[i].text);
+	            pages.push(conversation[i].nextPage);
+	        }
         }
         if (this.letterCounter < dialogue[this.page].length) {
             this.letterCounter = dialogue[this.page].length;
         } else if (this.page < dialogue.length - 1 && !showingChoiceMenu || nextChoiceLabel != -1 && (choiceCounter < sceneText.length)) {
             this.letterCounter = 0;
-            this.page++;
+
+			if(pages[this.page] != undefined) {
+				this.page = pages[this.page];
+			} else {
+				this.page++;
+				console.log("Used the fall back");
+			}
             
             //fade effect for left pic
             if (currentPic != nextPic) switchPic = true;

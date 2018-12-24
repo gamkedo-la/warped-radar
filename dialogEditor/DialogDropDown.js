@@ -161,9 +161,9 @@ function DialogDropDown(frame, items, initialDisplay = null) {
 	this.setChildToDraw = function(child) {
 		let comparison = child;
 		if(child === "true") {
-			comparison = "Yes";
-		} else if(child === "false") {
 			comparison = "No";
+		} else if(child === "false") {
+			comparison = "Yes";
 		}
 		
 		if(children[0].type === ChildType.DialogLabel) {

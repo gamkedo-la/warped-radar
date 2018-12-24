@@ -53,6 +53,10 @@ function DialogLabel(position, font, title) {
 			this.setState(ChildState.Normal);
 		}
 	};
+	
+	this.keyboardEvent = function(newKey, oldKeys) {
+		return;//Labels do nothing with keyboard events
+	};
 
 	this.textBoxGrew = function(deltaY) {
 		this.frame.y += deltaY;

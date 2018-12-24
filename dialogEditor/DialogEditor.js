@@ -38,9 +38,58 @@ function DialogEditor() {
 		
 		let child;
 		for(let i = 0; i < children.length; i++) {
+			if(children[i] === newCardButton) {continue;}
+			if(children[i] === saveButton) {continue;}
+			if(children[i] === openDialogButton) {continue;}
+			if(children[i] === openTextButton) {continue;}
+			if(children[i] === conversationNameLabel) {continue;}
+			if(children[i] === conversationNameTextBox) {continue;}
+
 			child = children[i];
-			child.draw();
+			
+			if((childWithFocus != null) && (child === childWithFocus)) {
+				continue;
+			}
+			
+			if((child.frame.x > 0) && 
+			   (child.frame.x + child.frame.width < canvas.width) &&
+			   (child.frame.y > 0) &&
+			   (child.frame.y + child.frame.height < canvas.height)) {
+				   child.draw();
+			} else if((child.frame.x + child.frame.width > 0) &&
+			          (child.frame.x < canvas.width) &&
+			          (child.frame.y + child.frame.height > 0) &&
+			          (child.frame.y < canvas.height)) {
+				         canvasContext.save();
+						 canvasContext.globalAlpha = 0.4;
+						 child.draw();
+						 canvasContext.restore();
+			}
 		}
+		
+		if(childWithFocus != null) {
+			if((childWithFocus.frame.x > 0) && 
+				   (childWithFocus.frame.x + childWithFocus.frame.width < canvas.width) &&
+				   (childWithFocus.frame.y > 0) &&
+				   (childWithFocus.frame.y + childWithFocus.frame.height < canvas.height)) {
+					   childWithFocus.draw();
+			} else if((childWithFocus.frame.x + childWithFocus.frame.width > 0) &&
+			          (childWithFocus.frame.x < canvas.width) &&
+			          (childWithFocus.frame.y + childWithFocus.frame.height > 0) &&
+			          (childWithFocus.frame.y < canvas.height)) {
+				         canvasContext.save();
+						 canvasContext.globalAlpha = 0.4;
+						 childWithFocus.draw();
+						 canvasContext.restore();
+			}
+		}
+				
+		newCardButton.draw();
+		saveButton.draw();
+		openDialogButton.draw();
+		openTextButton.draw();
+		conversationNameLabel.draw();
+		conversationNameTextBox.draw();
 	};
 	
 	this.setFocus = function(x, y) {
@@ -50,7 +99,6 @@ function DialogEditor() {
 			if(mouseInside(child.frame)) {
 				if((childWithFocus != null) && (childWithFocus != child)) {
 					childWithFocus.lostFocus();
-//					childWithFocus = null;
 				}
 
 				childWithFocus = child;

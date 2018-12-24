@@ -57,6 +57,7 @@ function DialogLine(position) {
 	};
 	
 	this.initializeWithString = function(string, index) {
+		console.log(string);
 		this.initialize(index);
 		let newString = string.replace(/ /g, '');
 		newString = newString.replace(/\n/g, '');
@@ -74,14 +75,18 @@ function DialogLine(position) {
 			if(stringArray[i] === "null") {stringArray[i] = null;}
 		}
 		
+		for(let i = 0; i < stringArray.length; i++) {
+			console.log(stringArray[i]);
+		}
+		
 		this.setSpeaker(stringArray[1]);
 		speakerDropDown.setChildToDraw(stringArray[1]);
 		
-		this.leftImageDropDown.setChildToDraw(imageForString(stringArray[5]));
-		this.rightImageDropDown.setChildToDraw(imageForString(stringArray[6]));
+		this.leftImageDropDown.setChildToDraw(imageForString(stringArray[6]));
+		this.rightImageDropDown.setChildToDraw(imageForString(stringArray[7]));
 		
-		this.leftLeaveDropDown.setChildToDraw(stringArray[7]);
-		this.rightLeaveDropDown.setChildToDraw(stringArray[8]);
+		this.leftLeaveDropDown.setChildToDraw(stringArray[8]);
+		this.rightLeaveDropDown.setChildToDraw(stringArray[9]);
 	};
 	
 	this.initializeWithData = function(data, index) {
@@ -96,15 +101,15 @@ function DialogLine(position) {
 		this.rightImageDropDown.setChildToDraw(data.rightPic);
 		
 		if(data.leftPicLeave) {
-			this.leftLeaveDropDown.setChildToDraw("No");
-		} else {
 			this.leftLeaveDropDown.setChildToDraw("Yes");
+		} else {
+			this.leftLeaveDropDown.setChildToDraw("No");
 		}
 		
 		if(data.rightPicLeave) {
-			this.rightLeaveDropDown.setChildToDraw("No");
-		} else {
 			this.rightLeaveDropDown.setChildToDraw("Yes");
+		} else {
+			this.rightLeaveDropDown.setChildToDraw("No");
 		}
 		
 		if(data.text != "") {
@@ -613,10 +618,14 @@ function DialogLine(position) {
 	};
 	
 	this.keyboardEvent = function(newKey, oldKeys) {
-		if(childWithFocus != null) {
-			childWithFocus.keyboardEvent(newKey, oldKeys);
-		} else {
+		if((newKey === KEY_CMD) || 
+		   (newKey === KEY_CTRL) ||
+		   (oldKeys.has(KEY_CMD)) ||
+		   (oldKeys.has(KEY_CTRL)) ||
+		   (childWithFocus === null)) {
 			dialogEditor.hasNoChildWithFocus(this, newKey, oldKeys);
+		} else {
+			childWithFocus.keyboardEvent(newKey, oldKeys);
 		}
 	};
 	

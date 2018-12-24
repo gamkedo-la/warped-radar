@@ -72,7 +72,11 @@ function DialogImage(frame, image, speaker) {
 			this.setState(ChildState.Normal);
 		}
 	};
-	
+
+	this.keyboardEvent = function(newKey, oldKeys) {
+		return;//Images do nothing with keyboard events
+	};
+		
 	this.textBoxGrew = function(deltaY) {
 		this.frame.y += deltaY;
 	};

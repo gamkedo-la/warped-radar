@@ -483,18 +483,7 @@ function DialogLine(position) {
 			childWithFocus.draw();
 		}
 
-		for(let i = transitions.length - 1; i >= 0 ; i--) {
-			if(transitions[i].shouldBeRemoved) {
-				const removedTransition = transitions.splice(i, 1)[0];
-				
-				const childIndex = children.indexOf(removedTransition);
-				children.splice(childIndex, 1);
-			}
-		}
-		
-		for(let i = 0; i < transitions.length; i++) {
-			transitions[i].draw();
-		}
+		this.drawTransitions();
 				
 		if((childWithFocus === speakerDropDown) && (childWithFocus.childToDraw != null)) {
 			if(childWithFocus.childToDraw.title != speaker) {
@@ -507,6 +496,21 @@ function DialogLine(position) {
 					break;
 				}
 			}
+		}
+	};
+	
+	this.drawTransitions = function() {
+		for(let i = transitions.length - 1; i >= 0 ; i--) {
+			if(transitions[i].shouldBeRemoved) {
+				const removedTransition = transitions.splice(i, 1)[0];
+				
+				const childIndex = children.indexOf(removedTransition);
+				children.splice(childIndex, 1);
+			}
+		}
+		
+		for(let i = 0; i < transitions.length; i++) {
+			transitions[i].draw();
 		}
 	};
 	

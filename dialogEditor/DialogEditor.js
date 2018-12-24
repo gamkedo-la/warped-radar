@@ -64,6 +64,8 @@ function DialogEditor() {
 						 canvasContext.globalAlpha = 0.4;
 						 child.draw();
 						 canvasContext.restore();
+			} else {
+				child.drawTransitions();
 			}
 		}
 		
@@ -81,6 +83,8 @@ function DialogEditor() {
 						 canvasContext.globalAlpha = 0.4;
 						 childWithFocus.draw();
 						 canvasContext.restore();
+			} else {
+				childWithFocus.drawTransitions();
 			}
 		}
 				
@@ -254,6 +258,11 @@ function DialogEditor() {
 						}
 					}
 				}
+			}
+			
+			if(transitionInProgress != null) {
+				transitionInProgress.remove();
+				transitionInProgress = null;
 			}
 		}
 		

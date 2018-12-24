@@ -506,6 +506,7 @@ function DialogLine(position) {
 				
 				const childIndex = children.indexOf(removedTransition);
 				children.splice(childIndex, 1);
+				dialogEditor.transitionWasRemoved(removedTransition);
 			}
 		}
 		

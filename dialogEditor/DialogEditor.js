@@ -417,6 +417,12 @@ function DialogEditor() {
 			transitionInProgress = childWithFocus.addOriginChild(child, position);
 		}
 	};
+	
+	this.transitionWasRemoved = function(removedTransition) {
+		if(removedTransition === transitionInProgress) {
+			transitionInProgress = null;
+		}
+	};
 }
 
 //DialogFrame

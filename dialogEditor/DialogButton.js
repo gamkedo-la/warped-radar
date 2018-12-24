@@ -90,7 +90,7 @@ function DialogButton(frame, title, action, style) {
 		}
 	};
 	
-	this.setFocus = function(x, y) {
+	this.setFocus = function(x, y, parentFocus) {
 		if(childWithFocus != null) {
 			childWithFocus.lostFocus();
 			childWithFocus = null;
@@ -108,7 +108,7 @@ function DialogButton(frame, title, action, style) {
 		} else {
 			if(mouseInside(this.frame)) {
 				this.setState(ChildState.Active);
-				this.action();
+				this.action(parentFocus);
 			}
 		}
 	};

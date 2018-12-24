@@ -98,15 +98,18 @@ function DialogEditor() {
 	
 	this.setFocus = function(x, y) {
 		let foundNewFocus = false;
+		
 		for(let i = 0; i < children.length; i++) {
 			child = children[i];
 			if(mouseInside(child.frame)) {
+				let oldChildWithFocus = null;
 				if((childWithFocus != null) && (childWithFocus != child)) {
+					oldChildWithFocus = childWithFocus;
 					childWithFocus.lostFocus();
 				}
 
 				childWithFocus = child;
-				child.setFocus(x, y);
+				child.setFocus(x, y, oldChildWithFocus);
 				foundNewFocus = true;
 				break;
 			}
@@ -152,17 +155,22 @@ function DialogEditor() {
 		const newLineFrame = new DialogFrame((canvas.width - combinedButtonWidth)/2, 50, newCardButtonSize.width, newCardButtonSize.height);
 	
 		//Temp for testing
-		const newLineAction = function() {
+		const newLineAction = function(parentFocus = null) {
 			let newLineX = newLineFrame.x;
 			let newLineY = newLineFrame.y + 3 * newLineFrame.height;
 			
-			for(let i = children.length - 1; i >= 0; i--) {
-				if(children[i].type != ChildType.DialogLine) {continue;}
-				
-				newLineX = children[i].frame.x;
-				newLineY = children[i].frame.y + children[i].frame.height + newCardPadding;
-				break;
-			}
+			if((parentFocus != null) && (parentFocus.type === ChildType.DialogLine)) {
+				newLineX = parentFocus.frame.x;
+				newLineY = parentFocus.frame.y + parentFocus.frame.height + newCardPadding;
+			} else {
+				for(let i = children.length - 1; i >= 0; i--) {
+					if(children[i].type != ChildType.DialogLine) {continue;}
+					
+					newLineX = children[i].frame.x;
+					newLineY = children[i].frame.y + children[i].frame.height + newCardPadding;
+					break;
+				}
+			}			
 			
 			const newDialogLine = new DialogLine({x:newLineX, y:newLineY});
 			newDialogLine.initialize(children.length - baseChildCount); 
@@ -214,12 +222,17 @@ function DialogEditor() {
 				let newLineX = newCardButton.frame.x;
 				let newLineY = openDialogButtonFrame.y + 3 * openDialogButtonFrame.height;
 				
-				for(let i = children.length - 1; i >= 0; i--) {
-					if(children[i].type != ChildType.DialogLine) {continue;}
-					
-					newLineX = children[i].frame.x;
-					newLineY = children[i].frame.y + children[i].frame.height + newCardPadding;
-					break;
+				if((childWithFocus != null) && (childWithFocus.type === ChildType.DialogLine)) {
+					newLineX = childWithFocus.frame.x;
+					newLineY = childWithFocus.frame.y + childWithFocus.frame.height + newCardPadding;
+				} else {
+					for(let i = children.length - 1; i >= 0; i--) {
+						if(children[i].type != ChildType.DialogLine) {continue;}
+						
+						newLineX = children[i].frame.x;
+						newLineY = children[i].frame.y + children[i].frame.height + newCardPadding;
+						break;
+					}
 				}
 				
 				const newDialogLine = new DialogLine({x:newLineX, y:newLineY});

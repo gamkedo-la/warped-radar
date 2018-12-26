@@ -121,6 +121,7 @@ function checkForObtainableItems() {
     let itemTile = arrayOfObtainableItems[obtainableItemsIndex];
     if (player.x > itemTile.leftEdge && player.x < itemTile.rightEdge &&  player.y + 30 > itemTile.topEdge && player.y < itemTile.bottomEdge) {
       itemTile.obtainable = true;
+      player.nearObjOrNPC = this;
       console.log(itemTile.name + " obtainable");
     } else {
       itemTile.obtainable = false;

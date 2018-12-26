@@ -93,6 +93,8 @@ function gameLoop () {
 
 // All game logic to update every frame here
 function update (delta) {    
+    //Reset it every frame
+    player.nearObjOrNPC = null;
     player.move(delta);
     checkForObtainableItems(); //in obtainableItems.js
     triggerNPCDialogue();
@@ -181,6 +183,10 @@ function drawDebugText () {
     if (levelEditor.isOn) colorText("[0] Default Tiles", 20, editorInstructionsTextYStart + 80, "yellow", "14px Arial", "left", 1);
 
     if (levelEditor.isOn) colorText("Note: replacing the tile under the player will change his start point ", 20, 530, "yellow", "12px Arial", "left", 1);
+
+    if(player.nearObjOrNPC != null) {
+        colorText("Near interactable NPC or object", 5, 75, "white", "18px Arial", "left", 1);
+    }
 }
 
 function fastRadar() { 

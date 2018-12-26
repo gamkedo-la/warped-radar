@@ -39,6 +39,8 @@ function Player () {
         southWest: false
     }
 
+    this.nearObjOrNPC = null;
+
     this.setupInput = function (upKey, rightKey, downKey, leftKey, upKey2, rightKey2, downKey2, leftKey2) {
         // ARROWS
         this.controlKeyUp = upKey;

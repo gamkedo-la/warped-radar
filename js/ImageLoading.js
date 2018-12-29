@@ -36,7 +36,8 @@ let johnMouthAnimatedSheet = document.createElement("img");
 let johnMouthAnimationAngrySheet = document.createElement("img");
 let roseMouthAnimatedSheet = document.createElement("img");
 
-let johnAnimation = document.createElement("img");
+let johnAnimationUp = document.createElement("img");
+let johnAnimationDown = document.createElement("img");
 let johnSideAnimation = document.createElement("img");
 let johnSide45Animation = document.createElement("img");
 let johnIdleAnimation = document.createElement("img");
@@ -92,8 +93,9 @@ function loadImages() {
 
         //OVERWORLD CHARACTER ANIMS
         {varName: johnSprite, theFile: "johnside.png"},
-        {varName: johnAnimation, theFile: "johnsprite-sheet.png"},
-        {varName: johnIdleAnimation, theFile: "johnspriteidle-sheet.png"},
+        {varName: johnAnimationUp, theFile: "johnsprite-sheet-UP.png"},
+        {varName: johnAnimationDown, theFile: "johnsprite-sheet-DOWN.png"},
+        {varName: johnIdleAnimation, theFile: "johnsprite-sheet-IDLE.png"},
         {varName: johnSideAnimation, theFile: "johnspriteside-sheet.png"},
         {varName: johnSide45Animation, theFile: "johnspriteside45-sheet.png"},
 

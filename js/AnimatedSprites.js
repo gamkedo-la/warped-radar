@@ -1,7 +1,8 @@
 let johnMouthMove;
 let johnAngryMouthMove;
 let roseMouthMove;
-let johnWalk;
+let johnWalkUp;
+let johnWalkDown;
 let johnWalkSide;
 let johnWalkSide45Deg;
 let johnIdle;
@@ -28,11 +29,18 @@ function makeAnimatedSprites() {
 		framesUntilNext: 4,
 	});
     
-     johnWalk = new AnimatedSpriteClass({
-		name: "johnWalkAnimation",
-		spriteSheet: johnAnimation,
+     johnWalkUp = new AnimatedSpriteClass({
+		name: "johnWalkAnimationUp",
+		spriteSheet: johnAnimationUp,
 		animationColFrames: 20,
-		framesUntilNext: 4,
+		framesUntilNext: 5,
+	});
+	
+	 johnWalkDown = new AnimatedSpriteClass({
+		name: "johnWalkAnimationDown",
+		spriteSheet: johnAnimationDown,
+		animationColFrames: 20,
+		framesUntilNext: 5,
 	});
     
      johnIdle = new AnimatedSpriteClass({

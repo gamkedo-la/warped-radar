@@ -70,6 +70,7 @@ let playTheScene = false;
         console.log(note);
         initializeObtainableItems();
         console.log(arrayOfObtainableItems);
+        notificationWindow.initialize();
         //stebs_warped_radar_song.resumeSound();
     }
 })();
@@ -120,8 +121,9 @@ function render () {
     inventory.interactWithItems();
     mainCamera.endPan();
     levelEditor.roomTileCoordinate();
-    
 
+    notificationWindow.draw();
+    
     // TO-DO START: reorganize cutscene system/manager
     //
     /* Notes: 

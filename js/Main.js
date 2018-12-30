@@ -114,7 +114,7 @@ function render () {
     if(keysPressed(KEY_SPACE)) {
      gameIsStarted = true;
    }
-   drawWorld();
+    clearScreen();
     Menu.draw();
    return; // skip game logic below
  }

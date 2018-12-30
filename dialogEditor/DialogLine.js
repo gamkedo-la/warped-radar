@@ -90,6 +90,11 @@ function DialogLine(position) {
 	};
 	
 	this.initializeWithData = function(data, index) {
+		if(data.position != undefined) {
+			this.frame.x = data.position.x;
+			this.frame.y = data.position.y;
+		}
+
 		this.initialize(index);
 		
 		this.sceneName.setText(data.scene);
@@ -847,12 +852,18 @@ function DialogLine(position) {
 				if(i < choices.length - 1) {
 					saveString += "], [\"";
 				} else {
-					saveString += "]]\n    },";
+					saveString += "]]";
 				}
 			}
 		} else {
-			saveString += "null\n    },";
+			saveString += "null";
 		}
+		
+		saveString += ",\n\n        ";
+
+		saveString += ("position: {x: " + this.frame.x + ", y: " + this.frame.y + "}");
+		
+		saveString += "\n    },";
 		
 		saveString += "\n    ";
 

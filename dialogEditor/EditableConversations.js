@@ -20,10 +20,12 @@ let ATestDialog = [
         leftPic: johnHappyPic,
         rightPic: null,
 
-        leftPicLeave: true,
-        rightPicLeave: true,
+        leftPicLeave: false,
+        rightPicLeave: false,
 
-        choices: null
+        choices: null,
+
+        position: {x: 472.5, y: 133}
     },
     {
         scene: "neutral",
@@ -35,10 +37,12 @@ let ATestDialog = [
         leftPic: johnHappyPic,
         rightPic: roseHappyPic,
 
-        leftPicLeave: true,
-        rightPicLeave: true,
+        leftPicLeave: false,
+        rightPicLeave: false,
 
-        choices: null
+        choices: null,
+
+        position: {x: 472.5, y: 433}
     },
     {
         scene: "neutral",
@@ -50,10 +54,12 @@ let ATestDialog = [
         leftPic: johnHappyPic,
         rightPic: roseHappyPic,
 
-        leftPicLeave: true,
-        rightPicLeave: true,
+        leftPicLeave: false,
+        rightPicLeave: false,
 
-        choices: [["Good, how about you?", "Good end"], ["Meh", "Bad end"], ["I like tortles", "Tortle end"]]
+        choices: [["Good, how about you?", "Good end"], ["Meh", "Bad end"], ["I like tortles", "Tortle end"]],
+
+        position: {x: 472.5, y: 733}
     },
     {
         scene: "Good end",
@@ -65,10 +71,12 @@ let ATestDialog = [
         leftPic: johnHappyPic,
         rightPic: roseHappyPic,
 
-        leftPicLeave: true,
-        rightPicLeave: true,
+        leftPicLeave: false,
+        rightPicLeave: false,
 
-        choices: null
+        choices: null,
+
+        position: {x: 63.5, y: 965}
     },
     {
         scene: "Good end",
@@ -80,10 +88,12 @@ let ATestDialog = [
         leftPic: johnHappyPic,
         rightPic: roseHappyPic,
 
-        leftPicLeave: true,
-        rightPicLeave: true,
+        leftPicLeave: false,
+        rightPicLeave: false,
 
-        choices: null
+        choices: null,
+
+        position: {x: 64.5, y: 1226}
     },
     {
         scene: "Good end",
@@ -95,10 +105,12 @@ let ATestDialog = [
         leftPic: johnHappyPic,
         rightPic: roseHappyPic,
 
-        leftPicLeave: true,
-        rightPicLeave: true,
+        leftPicLeave: false,
+        rightPicLeave: false,
 
-        choices: null
+        choices: null,
+
+        position: {x: 67.5, y: 1489}
     },
     {
         scene: "Good end",
@@ -110,10 +122,12 @@ let ATestDialog = [
         leftPic: johnMadPic,
         rightPic: roseHappyPic,
 
-        leftPicLeave: true,
-        rightPicLeave: true,
+        leftPicLeave: false,
+        rightPicLeave: false,
 
-        choices: null
+        choices: null,
+
+        position: {x: 70.5, y: 1758}
     },
     {
         scene: "Good end",
@@ -125,10 +139,12 @@ let ATestDialog = [
         leftPic: johnMadPic,
         rightPic: roseHappyPic,
 
-        leftPicLeave: true,
-        rightPicLeave: true,
+        leftPicLeave: false,
+        rightPicLeave: false,
 
-        choices: null
+        choices: null,
+
+        position: {x: 78.5, y: 2067}
     },
     {
         scene: "Good end",
@@ -140,10 +156,12 @@ let ATestDialog = [
         leftPic: johnHappyPic,
         rightPic: roseAnnoyedPic,
 
-        leftPicLeave: true,
-        rightPicLeave: true,
+        leftPicLeave: false,
+        rightPicLeave: false,
 
-        choices: null
+        choices: null,
+
+        position: {x: 85.5, y: 2340}
     },
     {
         scene: "Good end",
@@ -155,10 +173,12 @@ let ATestDialog = [
         leftPic: johnMadPic,
         rightPic: roseAnnoyedPic,
 
-        leftPicLeave: true,
-        rightPicLeave: false,
+        leftPicLeave: false,
+        rightPicLeave: true,
 
-        choices: null
+        choices: null,
+
+        position: {x: 88.5, y: 2614}
     },
     {
         scene: "Good end",
@@ -170,10 +190,12 @@ let ATestDialog = [
         leftPic: johnMadPic,
         rightPic: null,
 
-        leftPicLeave: true,
-        rightPicLeave: true,
+        leftPicLeave: false,
+        rightPicLeave: false,
 
-        choices: null
+        choices: null,
+
+        position: {x: 91.5, y: 2887}
     },
     {
         scene: "Good end",
@@ -185,10 +207,12 @@ let ATestDialog = [
         leftPic: johnHappyPic,
         rightPic: roseHappyPic,
 
-        leftPicLeave: true,
-        rightPicLeave: true,
+        leftPicLeave: false,
+        rightPicLeave: false,
 
-        choices: null
+        choices: null,
+
+        position: {x: 94.5, y: 3171}
     },
     {
         scene: "Good end",
@@ -200,10 +224,12 @@ let ATestDialog = [
         leftPic: johnHappyPic,
         rightPic: roseHappyPic,
 
-        leftPicLeave: true,
-        rightPicLeave: true,
+        leftPicLeave: false,
+        rightPicLeave: false,
 
-        choices: null
+        choices: null,
+
+        position: {x: 99.5, y: 3445}
     },
     {
         scene: "Good end",
@@ -215,10 +241,12 @@ let ATestDialog = [
         leftPic: johnHappyPic,
         rightPic: roseHappyPic,
 
-        leftPicLeave: true,
-        rightPicLeave: true,
+        leftPicLeave: false,
+        rightPicLeave: false,
 
-        choices: [["Yes", "Talk more"], ["No", "Really?"]]
+        choices: [["Yes", "Talk more"], ["No", "Really?"]],
+
+        position: {x: 102.5, y: 3725}
     },
     {
         scene: "Talk more",
@@ -230,10 +258,12 @@ let ATestDialog = [
         leftPic: johnHappyPic,
         rightPic: roseHappyPic,
 
-        leftPicLeave: true,
-        rightPicLeave: true,
+        leftPicLeave: false,
+        rightPicLeave: false,
 
-        choices: null
+        choices: null,
+
+        position: {x: 542.5, y: 3862}
     },
     {
         scene: "Talk more",
@@ -245,10 +275,12 @@ let ATestDialog = [
         leftPic: johnHappyPic,
         rightPic: roseHappyPic,
 
-        leftPicLeave: true,
-        rightPicLeave: true,
+        leftPicLeave: false,
+        rightPicLeave: false,
 
-        choices: null
+        choices: null,
+
+        position: {x: 545.5, y: 4138}
     },
     {
         scene: "Really?",
@@ -260,10 +292,12 @@ let ATestDialog = [
         leftPic: johnHappyPic,
         rightPic: roseHappyPic,
 
-        leftPicLeave: true,
-        rightPicLeave: true,
+        leftPicLeave: false,
+        rightPicLeave: false,
 
-        choices: null
+        choices: null,
+
+        position: {x: 99.5, y: 4030}
     },
     {
         scene: "Really?",
@@ -275,10 +309,12 @@ let ATestDialog = [
         leftPic: johnHappyPic,
         rightPic: roseHappyPic,
 
-        leftPicLeave: true,
-        rightPicLeave: true,
+        leftPicLeave: false,
+        rightPicLeave: false,
 
-        choices: [["no", "Bad end"], ["actually, yes", "Talk more"]]
+        choices: [["no", "Bad end"], ["actually, yes", "Talk more"]],
+
+        position: {x: 536.5, y: 3554}
     },
     {
         scene: "Bad end",
@@ -290,10 +326,12 @@ let ATestDialog = [
         leftPic: johnHappyPic,
         rightPic: roseHappyPic,
 
-        leftPicLeave: true,
-        rightPicLeave: true,
+        leftPicLeave: false,
+        rightPicLeave: false,
 
-        choices: null
+        choices: null,
+
+        position: {x: 880.5, y: 3101}
     },
     {
         scene: "Bad end",
@@ -305,10 +343,12 @@ let ATestDialog = [
         leftPic: johnHappyPic,
         rightPic: roseAnnoyedPic,
 
-        leftPicLeave: true,
-        rightPicLeave: true,
+        leftPicLeave: false,
+        rightPicLeave: false,
 
-        choices: null
+        choices: null,
+
+        position: {x: 952.5, y: 3379}
     },
     {
         scene: "Tortle end",
@@ -320,10 +360,12 @@ let ATestDialog = [
         leftPic: johnHappyPic,
         rightPic: roseHappyPic,
 
-        leftPicLeave: true,
-        rightPicLeave: true,
+        leftPicLeave: false,
+        rightPicLeave: false,
 
-        choices: null
+        choices: null,
+
+        position: {x: 1299.5, y: 2876}
     },
     {
         scene: "Tortle end",
@@ -335,10 +377,12 @@ let ATestDialog = [
         leftPic: johnHappyPic,
         rightPic: roseHappyPic,
 
-        leftPicLeave: true,
-        rightPicLeave: true,
+        leftPicLeave: false,
+        rightPicLeave: false,
 
-        choices: null
+        choices: null,
+
+        position: {x: 1373.5, y: 3155}
     }
 ];
 

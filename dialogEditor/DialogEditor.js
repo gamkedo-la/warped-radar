@@ -252,16 +252,9 @@ function DialogEditor() {
 					const thisCard = children[j];
 					if(thisCard.type === ChildType.DialogLine) {
 						
-						if((thisCard.sceneName != null) && (thisCard.sceneName.getText()[0] === transitions.destinations[i])) {
+						if(((thisCard.sceneName != null) && (thisCard.sceneName.getText()[0] === transitions.destinations[i])) || 
+						    (thisCard.index === transitions.destinations[i])) {
 							const destPosition = findDestPosWithPos(thisCard.frame, {x:thisCard.frame.getMidX(), y:thisCard.frame.getMidY()});
-							let newDestination = new DialogTransitionDestination(destPosition, thisCard, transitionInProgress);
-							thisCard.addDestinationChild(newDestination);
-							
-							transitionInProgress = null;
-							
-							break;
-						} else if(thisCard.index === transitions.destinations[i]) {
-							const destPosition = findDestPosWithPos(thisCard.frame, {x:thisCard.frame.x, y:thisCard.frame.y});
 							let newDestination = new DialogTransitionDestination(destPosition, thisCard, transitionInProgress);
 							thisCard.addDestinationChild(newDestination);
 							

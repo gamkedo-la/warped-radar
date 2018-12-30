@@ -47,6 +47,47 @@ function DialogTransitionOrigin(position, owner) {
 		this.mate = mate;
 		this.destinationOwner = destinationOwner;
 		this.destinationName = destinationOwner.sceneName.getText();
+		
+		const dFrame = this.destinationOwner.frame;
+		const oFrame = this.owner.frame;
+				
+		//Set this origin to the right or left side depending on where the destination card is
+		if(dFrame.x > oFrame.x + oFrame.width / 2) {
+			this.frame.x = oFrame.x + oFrame.width;
+			this.snapToPosition();
+		} else {
+			this.frame.x = oFrame.x;
+			this.snapToPosition();
+		}
+		
+		//Set this origin's destination position based on shortest distance		
+		//Set the X-Pos at left, middle or right depending on whether this origin is on the left or right
+		let destinationXOffset = 0;
+		if(this.isOnRight) {
+			if(dFrame.x > oFrame.x + oFrame.width) {
+				this.mate.frame.x = dFrame.x;
+			} else if(dFrame.x < oFrame.x + oFrame.width / 2) {
+				this.mate.frame.x = dFrame.x + dFrame.width;
+			} else {
+				this.mate.frame.x = dFrame.x + dFrame.width / 2;
+			}
+		} else {
+			if(dFrame.x > oFrame.x - oFrame.width/4) {
+				this.mate.frame.x = dFrame.x;
+			} else if(dFrame.x < oFrame.x - dFrame.width) {
+				this.mate.frame.x = dFrame.x + dFrame.width;
+			} else {
+				this.mate.frame.x = dFrame.x + dFrame.width / 2;
+			}
+		}
+		
+		if(dFrame.y < oFrame.y - dFrame.height / 2) {
+			this.mate.frame.y = dFrame.y + dFrame.height;
+		} else if(dFrame.y > oFrame.y) {
+			this.mate.frame.y = dFrame.y;
+		} else {
+			this.mate.frame.y = dFrame.y + dFrame.height / 2;
+		}
 	};
 	
 	this.remove = function() {

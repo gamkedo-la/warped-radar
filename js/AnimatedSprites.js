@@ -47,9 +47,9 @@ function makeAnimatedSprites() {
 
      johnIdle = new AnimatedSpriteClass({
 		name: "johnIdleAnimaton",
-		spriteSheet: johnIdleAnimation,
-		animationColFrames: 80,
-		framesUntilNext: 1,
+		spriteSheet: johnAnimationIdle,
+		animationColFrames: 26,
+		framesUntilNext: 10,
 	});
 
      johnWalkSide = new AnimatedSpriteClass({
@@ -62,6 +62,13 @@ function makeAnimatedSprites() {
     johnWalkDownDiag = new AnimatedSpriteClass({
 		name: "johnWalkDownDiagAnimaton",
 		spriteSheet: johnAnimationDownDiag,
+		animationColFrames: 4,
+		framesUntilNext: 10,
+	});
+	
+	    johnWalkUpDiag = new AnimatedSpriteClass({
+		name: "johnWalkUpDiagAnimaton",
+		spriteSheet: johnAnimationUpDiag,
 		animationColFrames: 4,
 		framesUntilNext: 10,
 	});

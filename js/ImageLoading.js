@@ -36,7 +36,7 @@ let johnMouthAnimatedSheet = document.createElement("img");
 let johnMouthAnimationAngrySheet = document.createElement("img");
 let roseMouthAnimatedSheet = document.createElement("img");
 
-let johnIdleAnimation = document.createElement("img");
+let johnAnimationIdle = document.createElement("img");
 let johnAnimationUp = document.createElement("img");
 let johnAnimationUpDiag = document.createElement("img");
 let johnAnimationDown = document.createElement("img");
@@ -99,7 +99,7 @@ function loadImages() {
         {varName: johnAnimationUpDiag, theFile: "johnsprite-sheet-UP-DIAG.png"},
         {varName: johnAnimationDown, theFile: "johnsprite-sheet-DOWN.png"},
         {varName: johnAnimationDownDiag, theFile: "johnsprite-sheet-DOWN-DIAG.png"},
-        {varName: johnIdleAnimation, theFile: "johnsprite-sheet-IDLE.png"},
+        {varName: johnAnimationIdle, theFile: "johnsprite-sheet-IDLE.png"},
         {varName: johnAnimationSide, theFile: "johnsprite-sheet-SIDE.png"},
         //{varName: johnSide45Animation, theFile: "johnspriteside45-sheet.png"},//legacy diagonal animation
 

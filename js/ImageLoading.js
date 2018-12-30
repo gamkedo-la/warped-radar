@@ -36,11 +36,13 @@ let johnMouthAnimatedSheet = document.createElement("img");
 let johnMouthAnimationAngrySheet = document.createElement("img");
 let roseMouthAnimatedSheet = document.createElement("img");
 
-let johnAnimationUp = document.createElement("img");
-let johnAnimationDown = document.createElement("img");
-let johnSideAnimation = document.createElement("img");
-let johnSide45Animation = document.createElement("img");
 let johnIdleAnimation = document.createElement("img");
+let johnAnimationUp = document.createElement("img");
+let johnAnimationUpDiag = document.createElement("img");
+let johnAnimationDown = document.createElement("img");
+let johnAnimationDownDiag = document.createElement("img");
+let johnAnimationSide = document.createElement("img");
+//let johnSide45Animation = document.createElement("img");
 
 let rainEffectImage = document.createElement("img");
 let fogEffectImage = document.createElement("img");
@@ -94,10 +96,12 @@ function loadImages() {
         //OVERWORLD CHARACTER ANIMS
         {varName: johnSprite, theFile: "johnside.png"},
         {varName: johnAnimationUp, theFile: "johnsprite-sheet-UP.png"},
+        {varName: johnAnimationUpDiag, theFile: "johnsprite-sheet-UP-DIAG.png"},
         {varName: johnAnimationDown, theFile: "johnsprite-sheet-DOWN.png"},
+        {varName: johnAnimationDownDiag, theFile: "johnsprite-sheet-DOWN-DIAG.png"},
         {varName: johnIdleAnimation, theFile: "johnsprite-sheet-IDLE.png"},
-        {varName: johnSideAnimation, theFile: "johnspriteside-sheet-4-frames.png"},
-        {varName: johnSide45Animation, theFile: "johnspriteside45-sheet.png"},
+        {varName: johnAnimationSide, theFile: "johnsprite-sheet-SIDE.png"},
+        //{varName: johnSide45Animation, theFile: "johnspriteside45-sheet.png"},//legacy diagonal animation
 
         //DEFAULT GAMESTART ITEMS
         {varName: notePic, theFile: "note.png"},

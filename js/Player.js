@@ -122,13 +122,13 @@ function Player () {
                 johnWalkSide.draw(scaledContext, this.x, this.y);
             }
             if (facing.southWest || facing.northWest) {
-                johnWalkSide45Deg.draw(scaledContext, this.x, this.y);
+                johnWalkDownDiag.draw(scaledContext, this.x, this.y);
             }
             if (facing.east) {
                 johnWalkSide.draw(scaledContext, this.x, this.y, 1, true);
             }
             if (facing.southEast || facing.northEast) {
-                johnWalkSide45Deg.draw(scaledContext, this.x, this.y, 1, true);
+                johnWalkDownDiag.draw(scaledContext, this.x, this.y, 1, true);
             }
             if (facing.north) {
                 johnWalkUp.draw(scaledContext, this.x, this.y);
@@ -140,13 +140,13 @@ function Player () {
         } else if (this.states.walking && currentlyPlayingCutscene == null) {
             if (this.keyHeld_walkLeft) {
                 if ((this.keyHeld_walkUp || this.keyHeld_walkDown)) {
-                    johnWalkSide45Deg.draw(scaledContext, this.x, this.y);
+                    johnWalkDownDiag.draw(scaledContext, this.x, this.y);
                 } else { 
                     johnWalkSide.draw(scaledContext, this.x, this.y);
                 }
             } else if (this.keyHeld_walkRight) {
                 if ((this.keyHeld_walkRight && this.keyHeld_walkUp) || (this.keyHeld_walkRight && this.keyHeld_walkDown)) {
-                    johnWalkSide45Deg.draw(scaledContext, this.x, this.y, 1, true);
+                    johnWalkDownDiag.draw(scaledContext, this.x, this.y, 1, true);
                 } else { 
                     johnWalkSide.draw(scaledContext, this.x, this.y, 1, true);
                 }

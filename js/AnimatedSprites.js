@@ -1,11 +1,13 @@
 let johnMouthMove;
 let johnAngryMouthMove;
 let roseMouthMove;
-let johnWalkUp;
-let johnWalkDown;
-let johnWalkSide;
-let johnWalkSide45Deg;
 let johnIdle;
+let johnWalkUp;
+let johnWalkUpDiag;
+let johnWalkDown;
+let johnWalkDownDiag;
+let johnWalkSide;
+//let johnWalkSide45Deg;
 
 function makeAnimatedSprites() {
     johnMouthMove = new AnimatedSpriteClass({
@@ -32,15 +34,15 @@ function makeAnimatedSprites() {
      johnWalkUp = new AnimatedSpriteClass({
 		name: "johnWalkAnimationUp",
 		spriteSheet: johnAnimationUp,
-		animationColFrames: 20,
-		framesUntilNext: 5,
+		animationColFrames: 4,
+		framesUntilNext: 10,
 	});
 
 	 johnWalkDown = new AnimatedSpriteClass({
 		name: "johnWalkAnimationDown",
 		spriteSheet: johnAnimationDown,
-		animationColFrames: 20,
-		framesUntilNext: 5,
+		animationColFrames: 4,
+		framesUntilNext: 10,
 	});
 
      johnIdle = new AnimatedSpriteClass({
@@ -52,16 +54,16 @@ function makeAnimatedSprites() {
 
      johnWalkSide = new AnimatedSpriteClass({
 		name: "johnWalkSideAnimaton",
-		spriteSheet: johnSideAnimation,
+		spriteSheet: johnAnimationSide,
 		animationColFrames: 4,//24,
-		framesUntilNext: 10//4,
+		framesUntilNext: 10,//4,
 	});
 
-    johnWalkSide45Deg = new AnimatedSpriteClass({
-		name: "johnWalkSide45DegAnimaton",
-		spriteSheet: johnSide45Animation,
-		animationColFrames: 24,
-		framesUntilNext: 4,
+    johnWalkDownDiag = new AnimatedSpriteClass({
+		name: "johnWalkDownDiagAnimaton",
+		spriteSheet: johnAnimationDownDiag,
+		animationColFrames: 4,
+		framesUntilNext: 10,
 	});
 };
 

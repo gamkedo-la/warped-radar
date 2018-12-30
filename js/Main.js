@@ -16,10 +16,11 @@ let player;
 
 let testScene = new Cutscene();
 let playTheScene = false;
-
+let gameIsStarted = true;
 
 // Things that are set once for the entire run of the game here
 (function start () {
+    gameIsStarted = false;
     window.addEventListener('focus', () => {
         paused = true;
         pauseRadar();
@@ -96,6 +97,9 @@ function gameLoop () {
 // All game logic to update every frame here
 function update (delta) {
     //Reset it every frame
+    if(gameIsStarted == false){ // in menu?
+    return; // skip game logic below
+    }
     player.nearObjOrNPC = null;
     player.move(delta);
     checkForObtainableItems(); //in obtainableItems.js
@@ -106,6 +110,14 @@ function update (delta) {
 
 // All things drawn to screen every frame here
 function render () {
+    if(gameIsStarted == false){
+    if(keysPressed(KEY_SPACE)) {
+     gameIsStarted = true;
+   }
+   drawWorld();
+    Menu.draw();
+   return; // skip game logic below
+ }
     mainCamera.beginPan();
     clearScreen();
     drawWorld();

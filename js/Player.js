@@ -26,7 +26,7 @@ function Player () {
 
     this.states = {
         walking: false
-    }
+    };
 
     this.facing = {
         north: false,
@@ -37,7 +37,7 @@ function Player () {
         northWest: false,
         southEast: false,
         southWest: false
-    }
+    };
 
     this.nearObjOrNPC = null;
 
@@ -52,7 +52,7 @@ function Player () {
         this.controlKeyRight2 = rightKey2;
         this.controlKeyDown2 = downKey2;
         this.controlKeyLeft2 = leftKey2;
-    }
+    };
 
     this.reset = function () {
         for (let eachRow = 0; eachRow < worldCols; eachRow++) {
@@ -67,14 +67,12 @@ function Player () {
                 }
             }
         }
-    }
+    };
 
     this.move = function (delta, moveSpeed = this.walkSpeed) {
-
         if (dialogueNotShowing() && !inventory.isShowing && !levelEditor.isOn) {
             let nextX = this.x;
             let nextY = this.y;
-            let facing = this.facing;
 
             if (currentlyPlayingCutscene == null) {
                 moveSpeed *= useRequestAnimationFrame ? delta : 1;
@@ -91,6 +89,16 @@ function Player () {
                 if (this.keyHeld_walkRight) {
                     nextX += moveSpeed;
                 }
+
+                this.states.walking = false;
+                this.facing.north = false;
+                this.facing.south = false;
+                this.facing.west = false;
+                this.facing.east = false;
+                this.facing.northWest = false;
+                this.facing.northWest = false;
+                this.facing.southEast = false;
+                this.facing.southWest = false;
             }
 
             if (whoMoving == null) {
@@ -113,27 +121,26 @@ function Player () {
             
             playerWorldHandling(this);
         }
-    }
+    };
 
     this.draw = function () {
-        let facing = this.facing;
         if (this.states.walking && whoMoving != null) {
-            if (facing.west) {
+            if (this.facing.west) {
                 johnWalkSide.draw(scaledContext, this.x, this.y);
             }
-            if (facing.southWest || facing.northWest) {
+            if (this.facing.southWest || this.facing.northWest) {
                 johnWalkDownDiag.draw(scaledContext, this.x, this.y);
             }
-            if (facing.east) {
+            if (this.facing.east) {
                 johnWalkSide.draw(scaledContext, this.x, this.y, 1, true);
             }
-            if (facing.southEast || facing.northEast) {
+            if (this.facing.southEast || this.facing.northEast) {
                 johnWalkDownDiag.draw(scaledContext, this.x, this.y, 1, true);
             }
-            if (facing.north) {
+            if (this.facing.north) {
                 johnWalkUp.draw(scaledContext, this.x, this.y);
             }
-            if (facing.south) {
+            if (this.facing.south) {
                 johnWalkDown.draw(scaledContext, this.x, this.y);
             }
             
@@ -156,19 +163,8 @@ function Player () {
                 johnWalkDown.draw(scaledContext, this.x, this.y);
             }
         } else {
-            johnIdle.draw(scaledContext, this.x, this.y);
-            if (currentlyPlayingCutscene == null) {
-                this.states.walking = false;
-                facing.north = false;
-                facing.south = false;
-                facing.west = false;
-                facing.east = false;
-                facing.northWest = false;
-                facing.northWest = false;
-                facing.southEast = false;
-                facing.southWest = false;
-            }
+            johnIdle.draw(scaledContext, this.x, this.y);            
         }
         outlineCircle(scaledContext, this.x, this.y, 2, "green", lineWidth = 1)
-    }
+    };
 }

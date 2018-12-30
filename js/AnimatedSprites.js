@@ -14,49 +14,49 @@ function makeAnimatedSprites() {
 		animationColFrames: 18,
 		framesUntilNext: 4,
 	});
-    
+
     johnAngryMouthMove = new AnimatedSpriteClass({
 		name: "johnAnimatedMouth2",
 		spriteSheet: johnMouthAnimationAngrySheet,
 		animationColFrames: 18,
 		framesUntilNext: 4,
 	});
-    
+
       roseMouthMove = new AnimatedSpriteClass({
 		name: "roseAnimatedMouth",
 		spriteSheet: roseMouthAnimatedSheet,
 		animationColFrames: 18,
 		framesUntilNext: 4,
 	});
-    
+
      johnWalkUp = new AnimatedSpriteClass({
 		name: "johnWalkAnimationUp",
 		spriteSheet: johnAnimationUp,
 		animationColFrames: 20,
 		framesUntilNext: 5,
 	});
-	
+
 	 johnWalkDown = new AnimatedSpriteClass({
 		name: "johnWalkAnimationDown",
 		spriteSheet: johnAnimationDown,
 		animationColFrames: 20,
 		framesUntilNext: 5,
 	});
-    
+
      johnIdle = new AnimatedSpriteClass({
 		name: "johnIdleAnimaton",
 		spriteSheet: johnIdleAnimation,
 		animationColFrames: 80,
 		framesUntilNext: 1,
 	});
-    
+
      johnWalkSide = new AnimatedSpriteClass({
 		name: "johnWalkSideAnimaton",
 		spriteSheet: johnSideAnimation,
-		animationColFrames: 24,
-		framesUntilNext: 4,
+		animationColFrames: 4,//24,
+		framesUntilNext: 10//4,
 	});
-    
+
     johnWalkSide45Deg = new AnimatedSpriteClass({
 		name: "johnWalkSide45DegAnimaton",
 		spriteSheet: johnSide45Animation,
@@ -168,16 +168,16 @@ function AnimatedSpriteClass(data) {
 				whichContext.drawImage(this.spriteSheet,
 									this.currentFrameIndex * this.spriteSheet.width/this.animationColFrames,
 									(currentAxisIndexOfAnimation - 1) * this.spriteSheet.height/this.animationRowFrames,
-									this.spriteSheet.width/this.animationColFrames, 
+									this.spriteSheet.width/this.animationColFrames,
 									this.spriteSheet.height/this.animationRowFrames,
 									offsetInRelationToRotationX, offsetInRelationToRotationY,
-									(this.spriteSheet.width/this.animationColFrames), 
+									(this.spriteSheet.width/this.animationColFrames),
 									this.spriteSheet.height/this.animationRowFrames);
 			} else if (flipped) {
 				whichContext.drawImage(this.spriteSheet,
 									this.currentFrameIndex * this.spriteSheet.width/this.animationColFrames,
 									(currentAxisIndexOfAnimation - 1) * this.spriteSheet.height/this.animationRowFrames,
-									this.spriteSheet.width/this.animationColFrames, 
+									this.spriteSheet.width/this.animationColFrames,
 									this.spriteSheet.height/this.animationRowFrames,
 									(this.spriteSheet.width / this.animationColFrames) / 2,
 									-this.spriteSheet.height / 2,
@@ -187,7 +187,7 @@ function AnimatedSpriteClass(data) {
 				whichContext.drawImage(this.spriteSheet,
 									this.currentFrameIndex * this.spriteSheet.width/this.animationColFrames,
 									(currentAxisIndexOfAnimation - 1) * this.spriteSheet.height/this.animationRowFrames,
-									this.spriteSheet.width/this.animationColFrames, 
+									this.spriteSheet.width/this.animationColFrames,
 									this.spriteSheet.height/this.animationRowFrames,
 									x - (this.spriteSheet.width / this.animationColFrames) / 2,
 									y - (this.spriteSheet.height / this.animationRowFrames) / 2,

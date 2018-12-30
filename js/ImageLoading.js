@@ -96,7 +96,7 @@ function loadImages() {
         {varName: johnAnimationUp, theFile: "johnsprite-sheet-UP.png"},
         {varName: johnAnimationDown, theFile: "johnsprite-sheet-DOWN.png"},
         {varName: johnIdleAnimation, theFile: "johnsprite-sheet-IDLE.png"},
-        {varName: johnSideAnimation, theFile: "johnspriteside-sheet.png"},
+        {varName: johnSideAnimation, theFile: "johnspriteside-sheet-4-frames.png"},
         {varName: johnSide45Animation, theFile: "johnspriteside45-sheet.png"},
 
         //DEFAULT GAMESTART ITEMS
@@ -113,9 +113,9 @@ function loadImages() {
         {worldType: TILE_SEALED_TUBE, theFile: "sealed_tube.png"},
         {worldType: TILE_THUMB_DRIVE, theFile: "thumb_drive.png"},
         {worldType: TILE_TRAIN_TICKET, theFile: "train_ticket.png"},
-        
+
         //VEHICLES
-    
+
 
         //TILES
         {worldType: TILE_GROUND, theFile: "ground.png"},
@@ -124,7 +124,7 @@ function loadImages() {
         {worldType: TILE_SIDEWLAK, theFile: "sidewalk.png"},
         {worldType: TILE_SIDEWALK_RIGHTCORNER, theFile: "sidewalk-cornerpiece-right.png"},
         {worldType: TILE_SIDEWALK_VERTICAL, theFile: "sidewalk-vertical.png"},
-        
+
         {worldType: TILE_SWITCH_LOCATION, theFile: "change_location.png"},
 
         //BUILDINGS

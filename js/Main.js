@@ -50,7 +50,7 @@ let playTheScene = false;
     scaledContext.imageSmoothingEnabled = false;
 
     makeAnimatedSprites();
-    
+
     if (loadImages()) {
         mainCamera = new Camera();
         levelEditor = new LevelEditor();
@@ -62,7 +62,7 @@ let playTheScene = false;
         } else {
             interval = setInterval(gameLoop, 1000/framesPerSecond);
         }
-        
+
         setupInput();
         player.reset();
         timer.setupTimer();
@@ -79,9 +79,10 @@ let playTheScene = false;
 function gameLoop () {
     let now = Date.now();
     delta = (now - then) * deltaMultiplier;
-    
+
     if (!paused) {
         update(delta / 1000);
+        framesFromGameStart++;
         render();
     }
 
@@ -93,7 +94,7 @@ function gameLoop () {
 }
 
 // All game logic to update every frame here
-function update (delta) {    
+function update (delta) {
     //Reset it every frame
     player.nearObjOrNPC = null;
     player.move(delta);
@@ -123,21 +124,21 @@ function render () {
     levelEditor.roomTileCoordinate();
 
     notificationWindow.draw();
-    
+
     // TO-DO START: reorganize cutscene system/manager
     //
-    /* Notes: 
+    /* Notes:
     - scene step starts at 1
     fix:
     - end dialogue scene with wait:
         - if another dialogue event follows it
         - it is the last in the scene
-    
-    - Pass in the scene's step/dialogue here to show it on screen.. 
-    */        
+
+    - Pass in the scene's step/dialogue here to show it on screen..
+    */
     testScene.updateSceneTick();
-    if (playTheScene) {        
-        currentlyPlayingCutscene = testScene;        
+    if (playTheScene) {
+        currentlyPlayingCutscene = testScene;
     }
     // TO-DO END: reorganize cutscene system/manager
 }
@@ -174,9 +175,9 @@ function drawDebugText () {
     colorText("Pressed Space: " + interact_key, 20, 30, "white", "20px Arial", "left", 1);
     colorText("Colliding with Rose: " + rose.collidingWithPlayer(), 20, 50, "white", "20px Arial", "left", 1);
     colorText("[CTRL+E] Level Editor: " + (levelEditor.isOn ? "ON" : "OFF"), 800, 30, "white", "20px Arial", "right", 1);
-    
+
     colorText(locationList[locationNow].name, canvas.width/2, 80, "white", "20px Arial", "center", 1);
-    
+
     let editorInstructionsTextYStart = 420;
     if (levelEditor.isOn) colorText("[A] and [D] to change tile", 20, editorInstructionsTextYStart, "yellow", "14px Arial", "left", 1);
     if (levelEditor.isOn) colorText("[SPACE] New Grid", 20, editorInstructionsTextYStart + 20, "yellow", "14px Arial", "left", 1);
@@ -191,7 +192,7 @@ function drawDebugText () {
     }
 }
 
-function fastRadar() { 
+function fastRadar() {
     if (useRequestAnimationFrame) {
         if (!isFastInterval) {
             deltaMultiplier = 2;
@@ -224,7 +225,7 @@ function pauseRadar(){
             clearInterval(interval);
         }
         paused = true;
-    } else {        
+    } else {
         if (!useRequestAnimationFrame) {
             interval = setInterval(gameLoop, 1000/framesPerSecond);
         }

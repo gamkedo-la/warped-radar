@@ -116,6 +116,8 @@ function render () {
    }
     clearScreen();
     Menu.draw();
+    Menu.update();
+    Menu.cycle();
    return; // skip game logic below
  }
     mainCamera.beginPan();

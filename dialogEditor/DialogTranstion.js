@@ -46,7 +46,7 @@ function DialogTransitionOrigin(position, owner) {
 	this.addDestination = function(mate, destinationOwner) {
 		this.mate = mate;
 		this.destinationOwner = destinationOwner;
-		this.destinationName = destinationOwner.sceneName.getText();
+		this.destinationName = destinationOwner.sceneName.getText()[0];
 		
 		const dFrame = this.destinationOwner.frame;
 		const oFrame = this.owner.frame;

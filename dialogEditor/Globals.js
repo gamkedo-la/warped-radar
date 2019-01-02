@@ -43,14 +43,18 @@ const LineWidth = {
 	Hover:6,
 	Active: 10	
 };
+//List all characters who participate in dialog here
 const Speaker = {
 	John:'John',
 	Rose:'Rose',
+	Cat:'Cat'
 };
+//JohnColor is special, don't need to call out other colors separately
 const JohnColor = {
 	Fill:'lightBlue',
 	Line:'darkBlue'
 };
+//Provide a background (fill) and outline (line) color for each character
 function colorsForSpeaker(speaker) {
 	let colors = {bkgd:'darkGray', line:'white'};
 	switch(speaker) {
@@ -61,6 +65,10 @@ function colorsForSpeaker(speaker) {
 		case Speaker.Rose:
 			colors.bkgd = 'pink';
 			colors.line = 'red';
+		break;
+		case Speaker.Cat:
+			colors.bkgd = 'yellow';
+			colors.line = 'darkBlue';
 		break;
 	}
 	

@@ -102,19 +102,23 @@ function DialogLine(position) {
 		this.leftImageDropDown.setChildToDraw(data.leftPic);
 		this.rightImageDropDown.setChildToDraw(data.rightPic);
 		
-		if(data.leftPicLeave) {
-			this.leftLeaveDropDown.setChildToDraw("Yes");
-		} else {
-			this.leftLeaveDropDown.setChildToDraw("No");
+		if(data.leftPicLeave != null) {
+			if(data.leftPicLeave) {
+				this.leftLeaveDropDown.setChildToDraw("No");
+			} else {
+				this.leftLeaveDropDown.setChildToDraw("Yes");
+			}
 		}
-		
-		if(data.rightPicLeave) {
-			this.rightLeaveDropDown.setChildToDraw("Yes");
-		} else {
-			this.rightLeaveDropDown.setChildToDraw("No");
+
+		if(data.rightPicLeave != null) {
+			if(data.rightPicLeave) {
+				this.rightLeaveDropDown.setChildToDraw("No");
+			} else {
+				this.rightLeaveDropDown.setChildToDraw("Yes");
+			}
 		}
-		
-		if(data.text != "") {
+				
+		if(((data.text === "") && (data.choices === null)) || (data.text != "")) {
 			const transitionList = {origins:[], destinations:[]};
 			
 			textBox.setText(data.text);
@@ -125,12 +129,12 @@ function DialogLine(position) {
 			}
 			
 			let thisOrigin = null;
-			if(data.nextPage != null) {
+			if((data.nextPage != null) && (data.text != "")) {
 				thisOrigin = this.addOriginChild(textBox, {x:textBox.frame.x, y:textBox.frame.y});
+				
+				transitionList.origins.push(thisOrigin);
+				transitionList.destinations.push(data.nextPage);
 			} 
-			
-			transitionList.origins.push(thisOrigin);
-			transitionList.destinations.push(data.nextPage);
 			
 			return transitionList;
 		} else {
@@ -337,8 +341,8 @@ function DialogLine(position) {
 		
 		const imagesToShow = [];
 		for(let i = 0; i < imageList.length; i++) {
-			const imgFrame = new DialogFrame(rightImageDropDownFrame.x + rightImageDropDownFrame.width,
-											 rightImageDropDownFrame.y + (i * rightImageDropDownFrame.height),
+			const imgFrame = new DialogFrame(rightImageDropDownFrame.x + ((i % 2) * rightImageDropDownFrame.width),
+											 rightImageDropDownFrame.y + (Math.floor(i / 2) * rightImageDropDownFrame.height),
 											 rightImageDropDownFrame.width, 
 											 rightImageDropDownFrame.height);
 											 
@@ -381,7 +385,9 @@ function DialogLine(position) {
 		const choicesButtonAction = function() {
 			let originOffset = 0;
 			if(firstTextBox.dialogOrigin != null) {
-				originOffset = -16;
+				if(!firstTextBox.dialogOrigin.isOnRight) {
+					originOffset = -16;
+				}
 			}
 			
 			const lastFrame = choices[choices.length - 1].frame;
@@ -495,14 +501,6 @@ function DialogLine(position) {
 				
 		if((childWithFocus === speakerDropDown) && (childWithFocus.childToDraw != null)) {
 			if(childWithFocus.childToDraw.title != speaker) {
-/*				switch(childWithFocus.childToDraw.title) {
-					case Speaker.John:
-						this.setSpeaker(Speaker.John);
-					break;
-					case Speaker.Rose:
-						this.setSpeaker(Speaker.Rose);
-					break;
-				}*/
 				this.setSpeaker(childWithFocus.childToDraw.title);
 			}
 		}
@@ -844,11 +842,19 @@ function DialogLine(position) {
 				for(let k = 0; k < transitions.length; k++) {
 					if(transitions[k].type === ChildType.DialogTransitionOrigin) {
 						if(transitions[k].owner === thisChoice) {
-							if(transitions[k].destinationName != null) {
+							if((transitions[k].destinationName === null) || (transitions[k].destinationName === "")) {
+//								saveString += null;
+								saveString += transitions[k].destinationOwner.index;
+							} else {
+								saveString += "\"" + transitions[k].destinationName + "\"";
+							}
+							
+							
+/*							if(transitions[k].destinationName != null) {
 								saveString += "\"" + transitions[k].destinationName + "\"";
 							} else {
 								saveString += null;
-							}
+							}*/
 						}
 					}
 				}

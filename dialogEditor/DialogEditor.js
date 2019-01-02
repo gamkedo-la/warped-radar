@@ -220,6 +220,8 @@ function DialogEditor() {
 				saveString += children[i].getSaveData();
 			}
 			
+			saveString = (saveString.substring(0, saveString.length - 4) + "];");
+			
 			//this is the magic line, need to log this to the console (don't delete!)			
 			console.log(saveString);
 		}

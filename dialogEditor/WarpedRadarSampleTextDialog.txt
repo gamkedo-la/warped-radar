@@ -1,0 +1,17 @@
+John: Hello!
+Rose: Oh, hi, how are you?
+John: {I'm good}{meh}
+Rose: That's good to hear.
+Rose: I'm sorry to hear that, what can I do to help?
+John: {Nothing}{I have a few questions for you}
+Rose: Oh, well let me know if you change your mind.
+Rose: Oh, ok.  What are they?
+John: {Where were you on the day in question?}{Do you know Julie?}
+Rose: What day are you talking about?
+Rose: Never heard of her, is she famous?
+John: November 11 of last year.
+Rose: I don't remember, that was a long time ago.
+John: No, she isn't.
+Rose: I'm sorry I couldn't be of more help.
+John: That's ok.  Can I have your phone number?
+John: In case I have Questions!?!

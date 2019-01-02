@@ -540,3 +540,21 @@ function lowerStringForKeyCode(keyCode) {
 			return " ";
 	}
 }
+
+const input = document.querySelector("#input");
+
+input.addEventListener("change", () => {
+  const file = input.files.item(0);
+  fileToText(file, (text) => {
+	  editableDialogString = text;
+//	  console.log(text);
+  });
+});
+
+function fileToText(file, callback) {
+  const reader = new FileReader();
+  reader.readAsText(file);
+  reader.onload = () => {
+    callback(reader.result);
+  };
+}

@@ -57,7 +57,6 @@ function DialogLine(position) {
 	};
 	
 	this.initializeWithString = function(string, index) {
-		console.log(string);
 		this.initialize(index);
 		let newString = string.replace(/ /g, '');
 		newString = newString.replace(/\n/g, '');
@@ -75,10 +74,6 @@ function DialogLine(position) {
 			if(stringArray[i] === "null") {stringArray[i] = null;}
 		}
 		
-		for(let i = 0; i < stringArray.length; i++) {
-			console.log(stringArray[i]);
-		}
-		
 		this.setSpeaker(stringArray[1]);
 		speakerDropDown.setChildToDraw(stringArray[1]);
 		
@@ -88,7 +83,7 @@ function DialogLine(position) {
 		this.leftLeaveDropDown.setChildToDraw(stringArray[8]);
 		this.rightLeaveDropDown.setChildToDraw(stringArray[9]);
 	};
-	
+		
 	this.initializeWithData = function(data, index) {
 		if(data.position != undefined) {
 			this.frame.x = data.position.x;
@@ -142,7 +137,7 @@ function DialogLine(position) {
 			textBox.setText(data.choices[0][0]);
 			const textRows = textBox.getText().length;
 			if(textRows > 1) {
-				this.frame.height = (textRows * textBox.getBaseHeight());
+				this.frame.height += ((textRows - 1) * textBox.getBaseHeight());
 			}
 			
 			let thisOrigin = null;
@@ -162,18 +157,16 @@ function DialogLine(position) {
 					originOffset = -16;
 				}
 				
-				const lastFrame = choices[choices.length - 1].frame;
+				const lastChoice = choices[choices.length - 1];
+				const lastFrame = lastChoice.frame;
 				const thisFrame = new DialogFrame(firstTextBox.frame.x + originOffset, 
-												  lastFrame.y + lastFrame.height + CHILD_PADDING,
+												  lastFrame.y + lastChoice.cursor.frame.height + CHILD_PADDING,
 											   	  firstTextBox.frame.width,
 											   	  TEXTBOX_HEIGHT);
 											   	  
 				const anotherTextBox = new DialogTextBox(thisFrame, LabelFont.Medium);
 				anotherTextBox.setText(text);
 				const textRows = textBox.getText().length
-				if(textRows > 1) {
-					this.frame.height = (textRows * textBox.getBaseHeight());
-				}
 				
 				children.push(anotherTextBox);
 				choices.push(anotherTextBox);
@@ -186,7 +179,7 @@ function DialogLine(position) {
 				
 				const anotherTextRow = anotherTextBox.getText().length;
 				if(anotherTextRow > 1) {
-					this.frame.height = (textRows * textBox.getBaseHeight());
+					this.frame.height += ((textRows - 1) * anotherTextRow.getBaseHeight());
 				}
 				
 				thisOrigin = null;

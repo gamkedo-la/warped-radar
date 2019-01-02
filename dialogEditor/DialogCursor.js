@@ -48,7 +48,7 @@ function DialogCursor(position, font, boxWidth) {
 			const newSize = sizeOfString(canvasContext, this.font, this.text[tempRow]);
 			if(newSize.width > boxWidth) {
 				
-				const lastIndex = this.text[tempRow].lastIndexOf(" ");
+				const lastIndex = this.text[tempRow].lastIndexOf(" ") + 1;
 				this.text[tempRow + 1] = this.text[tempRow].substring(lastIndex, this.text[tempRow].length);
 				this.text[tempRow] = this.text[tempRow].substring(0, lastIndex);
 				

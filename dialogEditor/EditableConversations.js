@@ -8,6 +8,7 @@ const voiceLow1 = null;
 const voiceLow2 = null;
 //_________________
 
+let editableDialogString ="";
 
 let ATestDialog = [
     {

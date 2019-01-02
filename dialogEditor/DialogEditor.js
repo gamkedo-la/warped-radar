@@ -277,14 +277,88 @@ function DialogEditor() {
 	};
 	
 	const addOpenTextButton = function() {
-		const openTextButtonFrame = new DialogFrame(openDialogButton.frame.x + openDialogButton.frame.width + PADDING, openDialogButton.frame.y, newCardButtonSize.width, newCardButtonSize.height);
+		const openTextButtonFrame = new DialogFrame(openDialogButton.frame.x + openDialogButton.frame.width + PADDING, 
+													openDialogButton.frame.y, 
+													newCardButtonSize.width, 
+													newCardButtonSize.height);
+													
+		const chooseFileButton = document.getElementById("input");
+		chooseFileButton.style.left = openTextButtonFrame.x + "px";
+		chooseFileButton.style.top = (openTextButtonFrame.y - 30) + "px";
 		
 		
-		const openTextButtonAction = function() {
-			console.log("This button's action hasn't been implemented yet.");
-			//
-			//Need to implement the action function for this button
-			//			
+		const newLineFrame = new DialogFrame((canvas.width - combinedButtonWidth)/2, 50, newCardButtonSize.width, newCardButtonSize.height);
+		
+		const openTextButtonAction = function(parentFocus = null) {
+			let newLineX = newLineFrame.x;
+			let newLineY = newLineFrame.y + 3 * newLineFrame.height;
+			
+			const editableDialogArray = editableDialogString.split("\n");
+			editableDialogArray.pop();//There is an EOF \n which we just remove
+			
+			for(let j = 0; j < editableDialogArray.length; j++) {
+				const colonIndex = editableDialogArray[j].indexOf(":");
+				const speakerString = editableDialogArray[j].substring(0, colonIndex);
+				let statementString = editableDialogArray[j].substring(colonIndex + 1, editableDialogArray[j].length);
+				if(statementString.substring(0, 1) === " ") {
+					statementString = statementString.substring(1, statementString.length);
+				}
+				
+				const workingData = {
+					scene: "",
+					who: speakerString,
+					nameCol: null,
+					voice: null,
+					text: statementString,
+					nextPage: null,
+					leftPic: null,
+					rightPic: null,
+					
+					leftPicLeave: null,
+					rightPicLeave: null,
+					
+					choices: null
+				};
+				
+				while(statementString.indexOf("{") >= 0) {
+					const startIndex = statementString.indexOf("{") + 1;
+					const endIndex = statementString.indexOf("}");
+					
+					if(endIndex < 0) {
+						console.error("Uneven number of brackets in: " + statementString);
+						break;
+					}
+					
+					if(workingData.choices === null) {
+						workingData.text = "";
+						workingData.choices = [];
+					}
+					
+					const thisChoiceString = statementString.substring(startIndex, endIndex);
+					
+					workingData.choices.push([thisChoiceString, null]);
+					statementString = statementString.substring(endIndex + 1, statementString.length);
+				}
+			
+				if((parentFocus != null) && (parentFocus.type === ChildType.DialogLine)) {
+					newLineX = parentFocus.frame.x;
+					newLineY = parentFocus.frame.y + parentFocus.frame.height + newCardPadding;
+				} else {
+					for(let i = children.length - 1; i >= 0; i--) {
+						if(children[i].type != ChildType.DialogLine) {continue;}
+						
+						newLineX = children[i].frame.x;
+						newLineY = children[i].frame.y + children[i].frame.height + newCardPadding;
+						break;
+					}
+				}			
+				
+				const newDialogLine = new DialogLine({x:newLineX, y:newLineY});
+				newDialogLine.initializeWithData(workingData, children.length - baseChildCount);
+				children.push(newDialogLine);
+			
+				newLineY += newDialogLine.height + PADDING;
+			}
 		}
 		
 		openTextButton = new DialogButton(openTextButtonFrame, "Open Text", openTextButtonAction, ButtonStyle.Rounded);

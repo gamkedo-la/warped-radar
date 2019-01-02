@@ -29,7 +29,23 @@ function DialogEditor() {
 	};
 	
 	this.update = function() {
+		//recenter the UI
+		const oldXPos = newCardButton.frame.x;
 		
+		newCardButton.frame.x = (canvas.width - combinedButtonWidth)/2;
+		
+		const deltaX = newCardButton.frame.x - oldXPos;
+		
+		saveButton.frame.x += deltaX;
+		openDialogButton.frame.x += deltaX;
+		openTextButton.frame.x += deltaX;
+
+		const chooseFileButton = document.getElementById("input");
+		chooseFileButton.style.left = openTextButton.frame.x + "px";
+		chooseFileButton.style.top = (openTextButton.frame.y - 30) + "px";
+
+		conversationNameLabel.frame.x += deltaX;
+		conversationNameTextBox.frame.x += deltaX;
 	};
 	
 	this.draw = function() {
@@ -284,8 +300,7 @@ function DialogEditor() {
 													
 		const chooseFileButton = document.getElementById("input");
 		chooseFileButton.style.left = openTextButtonFrame.x + "px";
-		chooseFileButton.style.top = (openTextButtonFrame.y - 30) + "px";
-		
+		chooseFileButton.style.top = (openTextButtonFrame.y - 30) + "px";		
 		
 		const newLineFrame = new DialogFrame((canvas.width - combinedButtonWidth)/2, 50, newCardButtonSize.width, newCardButtonSize.height);
 		
@@ -389,7 +404,7 @@ function DialogEditor() {
 	const addConversationNameLabel = function() {
 		const labelString = "Conversation Name:"
 		const labelSize = sizeOfString(canvasContext, LabelFont.XLarge, labelString);
-		conversationNameLabel = new DialogLabel({x:newCardButton.frame.x - labelSize.width - PADDING, 
+		conversationNameLabel = new DialogLabel({x:newCardButton.frame.x, 
 											     y:newCardButton.frame.y + newCardButton.frame.height + PADDING/2}, 
 											     LabelFont.XLarge, 
 												 labelString);
@@ -397,9 +412,9 @@ function DialogEditor() {
 	};
 	
 	const addConversationNameTextBox = function() {
-		conversationNameTextBox = new DialogTextBox(new DialogFrame(newCardButton.frame.x, 
+		conversationNameTextBox = new DialogTextBox(new DialogFrame(openDialogButton.frame.x - 0.45 * newCardButton.frame.width, //0.45 to align with other elements
 										   				  conversationNameLabel.frame.y + 2, //+2 fudge to align it with label 
-										   				  combinedButtonWidth,
+										   				  combinedButtonWidth * 0.60, //0.60 to align with other elements
 										   				  conversationNameLabel.frame.height), LabelFont.XLarge);
 		children.push(conversationNameTextBox);
 	};

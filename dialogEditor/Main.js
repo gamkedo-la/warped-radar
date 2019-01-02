@@ -36,6 +36,9 @@ function loadingDoneSoStartGame() {
 function update() {
 	if(!loadingComplete) return;
 	
+	canvas.width = window.innerWidth;
+	canvas.height = window.innerHeight;
+	
 	dialogEditor.update();
 	
 	dialogEditor.draw();

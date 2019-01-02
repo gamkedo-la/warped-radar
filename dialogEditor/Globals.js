@@ -45,17 +45,24 @@ const LineWidth = {
 };
 const Speaker = {
 	John:'John',
-	Rose:'Rose'
-};
-const NeutralColor = {
-	Fill:'darkGray',
-	Line:'white'
+	Rose:'Rose',
 };
 const JohnColor = {
 	Fill:'lightBlue',
 	Line:'darkBlue'
 };
-const RoseColor = {
-	Fill:'pink',
-	Line:'red'
+function colorsForSpeaker(speaker) {
+	let colors = {bkgd:'darkGray', line:'white'};
+	switch(speaker) {
+		case Speaker.John:
+			colors.bkgd = JohnColor.Fill;
+			colors.line = JohnColor.Line;
+		break;
+		case Speaker.Rose:
+			colors.bkgd = 'pink';
+			colors.line = 'red';
+		break;
+	}
+	
+	return colors;
 };

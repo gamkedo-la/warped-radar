@@ -1,7 +1,7 @@
 //Dialog Drop Down
 function DialogDropDown(frame, items, initialDisplay = null) {
 	this.type = ChildType.DialogDropDown;
-	this.frame = frame;
+	this.frame = {x:frame.x, y:frame.y, width:frame.width, height:frame.height};
 	this.inFocus = false;
 	let children = items;
 	let childWithFocus = null;
@@ -78,23 +78,30 @@ function DialogDropDown(frame, items, initialDisplay = null) {
 					this.childToDraw.drawAt(this.childToDraw.frame.x, 
 											this.frame.y + this.childToDraw.frame.height - (0.1 * this.frame.height));//0.1*height is fudge to center
 				} else if(this.childToDraw.type === ChildType.DialogImage)
-					this.childToDraw.drawAt(this.childToDraw.frame.x, this.frame.y);
+					this.childToDraw.drawAt(this.frame.x, this.frame.y);
 			}
 		}
 	};
 	
 	this.action = function() {
 		const oldFrameHeight = this.frame.height;
-		if(isShowingChildren) {
-			for(let i = 0; i < children.length - 1; i++) {
-				this.frame.height -= children[i].frame.height;
-			}
+		if(isShowingChildren) {			
+			this.frame.width = frame.width;
+			this.frame.height = frame.height;
 		} else {
-			for(let i = 0; i < children.length - 1; i++) {
-				this.frame.height += children[i].frame.height;
+			let maxX = this.frame.x + this.frame.width;
+			let maxY = this.frame.y + this.frame.height;
+			
+			
+			for(let i = 0; i < children.length; i++) {
+				if(children[i].frame.x + children[i].frame.width > maxX) {maxX = children[i].frame.x + children[i].frame.width;}
+				if(children[i].frame.y + children[i].frame.height > maxY) {maxY = children[i].frame.y + children[i].frame.height;}
 			}
+			
+			this.frame.width = (maxX - this.frame.x);
+			this.frame.height = (maxY - this.frame.y);
 		}
-		
+				
 		dialogEditor.textBoxGrew(this.frame.height - oldFrameHeight);
 		
 		isShowingChildren = !isShowingChildren;

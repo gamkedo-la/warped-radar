@@ -44,22 +44,6 @@ function update() {
 	dialogEditor.draw();
 }
 
-function colorsForSpeaker(speaker) {
-	let colors = {bkgd:NeutralColor.Fill, line:NeutralColor.Line};
-	switch(speaker) {
-		case Speaker.John:
-			colors.bkgd = JohnColor.Fill;
-			colors.line = JohnColor.Line;
-		break;
-		case Speaker.Rose:
-			colors.bkgd = RoseColor.Fill;
-			colors.line = RoseColor.Line;
-		break;
-	}
-	
-	return colors;
-}
-
 //Graphics Common
 function colorText(context, showWords, textX, textY, fillColor, fontface, textAlign = 'left', opacity = 1) {
     context.save();

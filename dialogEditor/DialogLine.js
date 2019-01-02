@@ -1,7 +1,7 @@
 //Dialog Line
 function DialogLine(position) {
 	this.type = ChildType.DialogLine;
-	this.frame = new DialogFrame(position.x, position.y, 380, 250);
+	this.frame = new DialogFrame(position.x, position.y, 380, 220);
 	this.index = 0;
 	this.inFocus = false;
 	this.sceneName = null;
@@ -24,9 +24,11 @@ function DialogLine(position) {
 	this.unChoicesButton;
 	
 	let speaker = null;
+	const initialColors = colorsForSpeaker(speaker);
+	let bkgdColor = initialColors.bkgd;
+	let lineColor = initialColors.line;	
+	
 	let textBox;
-	let bkgdColor = NeutralColor.Fill;
-	let lineColor = NeutralColor.Line;
 	
 	const choices = [];
 	
@@ -231,15 +233,20 @@ function DialogLine(position) {
 													 previousChild.frame.width, 
 													 previousChild.frame.height);
 		
-		const johnLabel = new DialogLabel({x:speakerDropDownFrame.x, 
-										   y:speakerDropDownFrame.y}, 
-										   LabelFont.Medium, 
-										   Speaker.John);
-		const roseLabel = new DialogLabel({x:speakerDropDownFrame.x, 
-										   y:johnLabel.frame.y + johnLabel.frame.height}, 
-										   LabelFont.Medium, 
-										   Speaker.Rose);
-		speakerDropDown = new DialogDropDown(speakerDropDownFrame,[johnLabel, roseLabel]);
+		const speakerKeys = Object.keys(Speaker);
+		let nextSpeakerY = speakerDropDownFrame.y;
+		const speakerLabels = [];
+		for(let i = 0; i < speakerKeys.length; i++) {
+			const newLabel = new DialogLabel({x:speakerDropDownFrame.x, 
+										     y:nextSpeakerY}, 
+										     LabelFont.Medium, 
+										     Speaker[speakerKeys[i]]);
+			
+			speakerLabels.push(newLabel);
+			nextSpeakerY += newLabel.frame.height;
+		}
+
+		speakerDropDown = new DialogDropDown(speakerDropDownFrame,speakerLabels);
 		children.push(speakerDropDown);
 		
 		return speakerDropDown;
@@ -258,15 +265,17 @@ function DialogLine(position) {
 	
 	this.buildLeftLeaveDropDown = function(previousChild, leftChild) {
 		const labelSize = sizeOfString(canvasContext, LabelFont.Medium, "Yes ");
-		const leftLeaveDropDownFrame = new DialogFrame(leftChild.frame.x + leftChild.frame.width + CHILD_PADDING,
+		
+		const leftLeaveDropDownFrame = new DialogFrame(previousChild.frame.x - labelSize.width - CHILD_PADDING,
 													 previousChild.frame.y,
 													 labelSize.width, 
 													 previousChild.frame.height);
-		
+													 		
 		const noLabel = new DialogLabel({x:leftLeaveDropDownFrame.x, 
 										   y:leftLeaveDropDownFrame.y}, 
 										   LabelFont.Medium, 
 										   "No");
+										   
 		const yesLabel = new DialogLabel({x:leftLeaveDropDownFrame.x, 
 										   y:noLabel.frame.y + noLabel.frame.height}, 
 										   LabelFont.Medium, 
@@ -279,7 +288,7 @@ function DialogLine(position) {
 	
 	this.buildRightLeaveDropDown = function(previousChild, rightChild) {
 		const labelSize = sizeOfString(canvasContext, LabelFont.Medium, "Yes ");
-		const rightLeaveDropDownFrame = new DialogFrame(rightChild.frame.x - labelSize.width - CHILD_PADDING,
+		const rightLeaveDropDownFrame = new DialogFrame(previousChild.frame.x + previousChild.frame.width + CHILD_PADDING,
 													 previousChild.frame.y,
 													 labelSize.width, 
 													 previousChild.frame.height);
@@ -288,6 +297,7 @@ function DialogLine(position) {
 										   y:rightLeaveDropDownFrame.y}, 
 										   LabelFont.Medium, 
 										   "No");
+										   
 		const yesLabel = new DialogLabel({x:rightLeaveDropDownFrame.x, 
 										   y:noLabel.frame.y + noLabel.frame.height}, 
 										   LabelFont.Medium, 
@@ -301,12 +311,12 @@ function DialogLine(position) {
 	this.buildLeftImageDropDown = function(previousChild) {
 		const leftImageDropDownFrame = new DialogFrame(this.frame.x + LINE_SPACING + (1.5 * CHILD_PADDING),
 											   previousChild.frame.y + previousChild.frame.height + (2 * CHILD_PADDING),
-											   this.frame.width/4, this.frame.height/2);
+											   this.frame.width/8, this.frame.width/4);
 		
 		const imagesToShow = [];
 		for(let i = 0; i < imageList.length; i++) {
-			const imgFrame = new DialogFrame(leftImageDropDownFrame.x,
-											 leftImageDropDownFrame.y + (i * leftImageDropDownFrame.height),
+			const imgFrame = new DialogFrame(leftImageDropDownFrame.x + ((i % 2) * leftImageDropDownFrame.width),
+											 leftImageDropDownFrame.y + (Math.floor(i / 2) * leftImageDropDownFrame.height),
 											 leftImageDropDownFrame.width, 
 											 leftImageDropDownFrame.height);
 											 
@@ -323,11 +333,11 @@ function DialogLine(position) {
 	this.buildRightImageDropDown = function(previousChild) {
 		const rightImageDropDownFrame = new DialogFrame(this.frame.x + this.frame.width - LINE_SPACING - (1.5 * CHILD_PADDING) - (this.frame.width/4),
 											   previousChild.frame.y + previousChild.frame.height + (2 * CHILD_PADDING),
-											   this.frame.width/4, this.frame.height/2);
+											   this.frame.width/8, this.frame.width/4);
 		
 		const imagesToShow = [];
 		for(let i = 0; i < imageList.length; i++) {
-			const imgFrame = new DialogFrame(rightImageDropDownFrame.x,
+			const imgFrame = new DialogFrame(rightImageDropDownFrame.x + rightImageDropDownFrame.width,
 											 rightImageDropDownFrame.y + (i * rightImageDropDownFrame.height),
 											 rightImageDropDownFrame.width, 
 											 rightImageDropDownFrame.height);
@@ -485,14 +495,15 @@ function DialogLine(position) {
 				
 		if((childWithFocus === speakerDropDown) && (childWithFocus.childToDraw != null)) {
 			if(childWithFocus.childToDraw.title != speaker) {
-				switch(childWithFocus.childToDraw.title) {
+/*				switch(childWithFocus.childToDraw.title) {
 					case Speaker.John:
 						this.setSpeaker(Speaker.John);
 					break;
 					case Speaker.Rose:
 						this.setSpeaker(Speaker.Rose);
 					break;
-				}
+				}*/
+				this.setSpeaker(childWithFocus.childToDraw.title);
 			}
 		}
 	};

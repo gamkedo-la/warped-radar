@@ -14,6 +14,7 @@ const Menu = new (function() {
     let wobbleSpeed = 0.25;
     let cursor1 = 0;
 
+    let keyRepeatWait = 0;
 
 //-----BEGIN GLOBAL SETTINGS-----//
 let classListMenu = ["Play", "Setting", "Help" , "Credits"];
@@ -61,9 +62,22 @@ const SETTINGS_CLASS = 1;
 const HELP_CLASS = 2;
 const CREDITS_CLASS = 3;
 const LEVELS_CLASS = 4;
+
+// A super-janky menu input key repeat delay variable
+const KEY_REPEAT_FRAME_DELAY = 10;
 //-----END GLOBAL SETTINGS-----//
 
 this.draw = function() {
+        // Clear the screen
+    // Note: according to the internet, this approach is faster than using
+    // fillRect() or drawImage()
+    // see, e.g., https://dzone.com/articles/how-you-clear-your-html5
+    canvasContext.save();
+    canvasContext.setTransform(1, 0, 0, 1, 0, 0);
+    canvasContext.clearRect(0, 0, canvas.width, canvas.height);
+    canvasContext.restore();
+
+        // Draw the menu logo
     canvasContext.drawImage(logoPic, 0, 0);
 
         //Draw menu options
@@ -77,8 +91,6 @@ this.draw = function() {
         
         //Draw cursor
     canvasContext.drawImage(arrowPic,MENU_ROW1 -80 ,menuColumnPos[cursor1] - wobble - 8);
-
-    
  }
 
 this.cycle = function (inDir) {
@@ -131,26 +143,27 @@ this.update = function(){
     }
         wobble += wobbleSpeed;
 
-    if(keySet && keysPressed(KEY_UP)) {
+    if(keysPressed(KEY_UP)) {
         console.log("cursor UP", menuColumnPos[cursor1]);
-            cursor1--;
-            if (cursor1 > MENU_NUM){
-                 cursor1 = MENU_NUM--;
-                 clearScreen();
+            if (keyRepeatWait == 0) {
+                cursor1--;
+                if (cursor1 > MENU_NUM){
+                    cursor1 = MENU_NUM - 1;
+                }
+                keyRepeatWait = KEY_REPEAT_FRAME_DELAY;
             }
         }
-    if(keySet && keysPressed(KEY_DOWN)) {
+    if(keysPressed(KEY_DOWN)) {
         console.log("cursor DOWN", menuColumnPos[cursor1]);
-            cursor1++;
-            if (cursor1 < 0){
-                cursor1 = 0;
+            if (keyRepeatWait == 0) {
+                cursor1++;
+                if (cursor1 < 0){
+                    cursor1 = 0;
+                }
+                keyRepeatWait = KEY_REPEAT_FRAME_DELAY;
             }
         }
-        evt = false;
-    if (keysPressed(evt)) {
-        keySet(evt, true);
-        }else{
-            keySet(evt, false)
-        }
+
+    keyRepeatWait = Math.max(0, keyRepeatWait - 1);
 }
 })(); 

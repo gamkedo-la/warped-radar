@@ -1,9 +1,5 @@
 const Menu = new (function() {
-    textFontFace = "30px consolas";
-    let textColour = "white";
-    let textAlign = "left";
-   
-
+//-----BEGIN GLOBAL SETTINGS-----//
     const MENU_ROW0 = 200;
     const MENU_ROW1 = 350;
     const MENU_ROW2 = 550;
@@ -16,67 +12,148 @@ const Menu = new (function() {
 
     let keyRepeatWait = 0;
 
-//-----BEGIN GLOBAL SETTINGS-----//
-let classListMenu = ["Play", "Setting", "Help" , "Credits"];
-const CLASS_PLAY = 0;
-const CLASS_SETTINGS = 1;
-const CLASS_HELP= 2;
-const CLASS_CREDITS= 3;
-const MENU_NUM = 4;
+    let classListMenu = ["Play", "Settings", "Help" , "Credits"];
+    let classListGame = ["New Game", "Continue", "Select Chapter", "etc"];
+    let classListLevels = ["Chapter 1", "Chapter 2", "Chapter 3", "etc"];
+    let classListSettings = ["Volume", "Speed", "Controls", "etc"];
+    let classListHelp= ["How to play","Control layout", "Shopping", "etc"];
+    let classListCredits= ["Credits"];
 
-let classListGame = ["New Game+", "Continue", "Select Chapter"];
-const CLASS_NEWGAME = 0;
-const CLASS_CONTINUE = 1;
-const CLASS_LEVELS= 2;
-const GAME_NUM = 3;
+    const MENU_NUM = 4;
 
-let classListLevels = ["Chapter 1", "Chapter 2", "Chapter 3"];
-const CLASS_LEVEL1 = 0;
-const CLASS_LEVEL2 = 1;
-const CLASS_LEVEL3 = 2;
-const LEVELS_NUM = 3;
+    let INDEX = 0;
+    let INDEX_PAGE=0
 
-let classListSettings = ["Volume", "Speed", "Controls"];
-const CLASS_VOLUME = 0;
-const CLASS_SPEED = 1;
-const CLASS_CONTROLS = 2;
-const SETTINGS_NUM = 3;
+    let LEVELS_INDEX = 0;
 
-let classListHelp= ["Layout", "How to play", "Shopping"];
-const CLASS_LAYOUT = 0;
-const CLASS_HOWTOPLAY = 1;
-const CLASS_SHOPPING = 2;
-const HELP_NUM = 3;
-
-let classListCredits= ["Credits"];
-
-
-let MENU_CLASS_INDEX = 0;
-let SETTINGS_CLASS_INDEX = 0;
-let HELP_CLASS_INDEX = 0;
-let CREDITS_CLASS_INDEX = 0;
-let LEVELS_CLASS_INDEX = 0;
-
-const MENU_CLASS = 0;
-const SETTINGS_CLASS = 1;
-const HELP_CLASS = 2;
-const CREDITS_CLASS = 3;
-const LEVELS_CLASS = 4;
+    const MENU_PAGE = 0;
+    const SETTINGS_PAGE = 1;
+    const HELP_PAGE = 2;
+    const CREDITS_PAGE = 3;
+    const LEVELS_PAGE = 4;
+    let textColour = "blue" ;
+    let textFontFace = "20px Arial";
 
 // A super-janky menu input key repeat delay variable
-const KEY_REPEAT_FRAME_DELAY = 10;
+    const KEY_REPEAT_FRAME_DELAY = 10;
 //-----END GLOBAL SETTINGS-----//
+this.update = function(){
+      //Wobble the cursors back and forth
+    if (wobble > 13 || wobble < 9) {
+      wobbleSpeed *= -1;
+    }
+        wobble += wobbleSpeed;
 
-this.draw = function() {
-        // Clear the screen
+    if (keysPressed(KEY_SPACE) || keysPressed(KEY_ENTER)) {
+            this.cycle();
+            this.checkState();
+        }
+
+    if(keysPressed(KEY_UP)) {
+            if (keyRepeatWait == 0) {
+                cursor1--;
+                if (cursor1 >= MENU_NUM){
+                    cursor1 = MENU_NUM - 1;
+                }
+                keyRepeatWait = KEY_REPEAT_FRAME_DELAY;
+            }console.log("cursor UP", classListMenu[cursor1]);
+        }
+    if(keysPressed(KEY_DOWN)) {
+            if (keyRepeatWait == 0) {
+                cursor1++;
+                if (cursor1 < 0){
+                    cursor1 = 0;
+                }
+                keyRepeatWait = KEY_REPEAT_FRAME_DELAY;
+            }console.log("cursor DOWN", classListMenu[cursor1]);
+        }
+
+    keyRepeatWait = Math.max(0, keyRepeatWait - 1);
+}
+
+this.cycle = function (INDEX_PAGE) {
+    switch(cursor1) {
+        case MENU_PAGE:
+            INDEX=classListMenu[cursor1];
+           this.draw();
+            break;
+
+        case SETTINGS_PAGE:
+            INDEX=classListSettings[cursor1];
+            this.drawSettings();
+            break;
+
+        case HELP_PAGE:
+            INDEX=classListHelp[cursor1];
+            this.drawHelp();
+            break;
+
+        case CREDITS_PAGE:
+            INDEX=classListCredits[cursor1];
+            this.drawCredits();
+            break;
+
+        case LEVELS_PAGE:
+            INDEX=classListLevels[cursor1];
+            //this.drawLevels();
+            break;
+     }
+};
+
+this.checkState = function(){
+    if (classListMenu[cursor1] === "Play"){
+        gameIsStarted = true;
+    }  
+    if (classListMenu[cursor1] === "Settings"){
+        //INDEX_PAGE = SETTINGS_PAGE;
+    } 
+    if (classListMenu[cursor1] === "Help"){
+         //INDEX_PAGE = HELP_PAGE;
+    } 
+    if (classListMenu[cursor1] === "Credits"){
+         //INDEX_PAGE = CREDITS_PAGE;
+    } 
+
+    if (classListSettings[cursor1] === "Volume"){
+        //INDEX_PAGE = VOLUME_PAGE;
+    }  
+    if (classListSettings[cursor1] === "Speed"){
+        //INDEX_PAGE = SPEED_PAGE;
+    } 
+    if (classListSettings[cursor1] === "Controls"){
+          //INDEX_PAGE = CONTROLS_PAGE;
+    } 
+    if (classListSettings[cursor1] === "etc"){
+         //INDEX_PAGE = etc;
+    }    
+
+    if (classListHelp[cursor1] === "How to play"){
+        //INDEX_PAGE = HOWTOPLAY_PAGE;
+    }  
+    if (classListHelp[cursor1] === "Control layout"){
+        //INDEX_PAGE = CONTROLS_PAGE;
+    } 
+    if (classListHelp[cursor1] === "Shopping"){
+         //INDEX_PAGE = SHOPPING_PAGE;
+    } 
+    if (classListSettings[cursor1] === "etc"){
+         //INDEX_PAGE = etc2;
+    }    
+}
+
+this.redraw = function (){
+            // Clear the screen
     // Note: according to the internet, this approach is faster than using
     // fillRect() or drawImage()
     // see, e.g., https://dzone.com/articles/how-you-clear-your-html5
     canvasContext.save();
     canvasContext.setTransform(1, 0, 0, 1, 0, 0);
     canvasContext.clearRect(0, 0, canvas.width, canvas.height);
-    canvasContext.restore();
+    canvasContext.restore(); 
+}
 
+this.draw = function() {
+    this.redraw();
         // Draw the menu logo
     canvasContext.drawImage(logoPic, 0, 0);
 
@@ -93,77 +170,62 @@ this.draw = function() {
     canvasContext.drawImage(arrowPic,MENU_ROW1 -80 ,menuColumnPos[cursor1] - wobble - 8);
  }
 
-this.cycle = function (inDir) {
-    switch(cursor1) {
-        case MENU_CLASS:
-            MENU_CLASS_INDEX+=inDir;
-            if (MENU_CLASS_INDEX >= MENU_NUM) {
-                MENU_CLASS_INDEX = 0;
-            }
-            if (MENU_CLASS_INDEX < 0) {
-                MENU_CLASS_INDEX = MENU_NUM--;
-            }
-            break;
+this.drawSettings = function() {
+    this.redraw();
+    canvasContext.drawImage(logoPic, 0, 0);
+    colorText(260, 40,textColour, textFontFace, 'left', 'middle',"WARPED RADAR");
+    colorText(263, 40,textColour, textFontFace, 'left', 'middle',"WARPED RADAR");
 
-        case SETTINGS_CLASS:
-            SETTINGS_CLASS_INDEX+=inDir;
-            if (SETTINGS_CLASS_INDEX >= SETTINGS_NUM) {
-                SETTINGS_CLASS_INDEX = 0;
-            }
-            if (SETTINGS_CLASS_INDEX < 0) {
-                SETTINGS_CLASS_INDEX = SETTINGS_NUM--;
-            }
-            break;
+        //Draw menu options
+    colorText(MENU_ROW1, menuColumnPos[0],textColour, textFontFace, 'left', 'middle',"Volume");
+    colorText(MENU_ROW1, menuColumnPos[1],textColour, textFontFace, 'left', 'middle',"Speed");
+    colorText(MENU_ROW1, menuColumnPos[2],textColour, textFontFace, 'left', 'middle',"Controls");
+    colorText(MENU_ROW1, menuColumnPos[3],textColour, textFontFace, 'left', 'middle',"etc");
 
-        case HELP_CLASS:
-            HELP_CLASS_INDEX+=inDir;
-            if (HELP_CLASS_INDEX >= HELP_NUM) {
-                HELP_CLASS_INDEX = 0;
-            }
-            if (HELP_CLASS_INDEX < 0) {
-                HELP_CLASS_INDEX = HELP_NUM--;
-            }
-            break;
+        //Display previous score
+    colorText(MENU_ROW0, menuColumnPos[4],textColour, textFontFace, 'left', 'middle',"Score: " );
 
-        case LEVELS_CLASS:
-            LEVELS_CLASS_INDEX+=inDir;
-            if (LEVELS_CLASS_INDEX >= LEVELS_NUM) {
-                LEVELS_CLASS_INDEX = 0;
-            }
-            if (LEVELS_CLASS_INDEX < 0) {
-                LEVELS_CLASS_INDEX = LEVELS_NUM--;
-            }
-            break;
-    }
-}
-this.update = function(){
-      //Wobble the cursors back and forth
-    if (wobble > 13 || wobble < 9) {
-      wobbleSpeed *= -1;
-    }
-        wobble += wobbleSpeed;
+        //Draw cursor
+    canvasContext.drawImage(arrowPic,MENU_ROW1 -80 ,menuColumnPos[cursor1] - wobble - 8);
+ };
 
-    if(keysPressed(KEY_UP)) {
-        console.log("cursor UP", menuColumnPos[cursor1]);
-            if (keyRepeatWait == 0) {
-                cursor1--;
-                if (cursor1 > MENU_NUM){
-                    cursor1 = MENU_NUM - 1;
-                }
-                keyRepeatWait = KEY_REPEAT_FRAME_DELAY;
-            }
-        }
-    if(keysPressed(KEY_DOWN)) {
-        console.log("cursor DOWN", menuColumnPos[cursor1]);
-            if (keyRepeatWait == 0) {
-                cursor1++;
-                if (cursor1 < 0){
-                    cursor1 = 0;
-                }
-                keyRepeatWait = KEY_REPEAT_FRAME_DELAY;
-            }
+ this.drawHelp = function() {
+    this.redraw();
+    canvasContext.drawImage(logoPic, 0, 0);
+    colorText(260, 40,textColour, textFontFace, 'left', 'middle',"WARPED RADAR");
+    colorText(263, 40,textColour, textFontFace, 'left', 'middle',"WARPED RADAR");
+
+        //Draw menu options
+    colorText(MENU_ROW1, menuColumnPos[0],textColour, textFontFace, 'left', 'middle',"How to play");
+    colorText(MENU_ROW1, menuColumnPos[1],textColour, textFontFace, 'left', 'middle',"Control Layout");
+    colorText(MENU_ROW1, menuColumnPos[2],textColour, textFontFace, 'left', 'middle',"Shopping");
+    colorText(MENU_ROW1, menuColumnPos[3],textColour, textFontFace, 'left', 'middle',"etc");
+
+        //Display previous score
+    colorText(MENU_ROW0, menuColumnPos[4],textColour, textFontFace, 'left', 'middle',"Score: " );
+
+        //Draw cursor
+    canvasContext.drawImage(arrowPic,MENU_ROW1 -80 ,menuColumnPos[cursor1] - wobble - 8);
+ };
+
+
+
+
+this.drawCredits = function() {
+    this.redraw();
+    canvasContext.drawImage(logoPic, 0, 0);
+    colorText(260, 40,textColour, textFontFace, 'left', 'middle',"WARPED RADAR");
+    colorText(263, 40,textColour, textFontFace, 'left', 'middle',"WARPED RADAR");
+
+        //Draw menu options
+        for (i=0; i<classListMenu[i]; i++){
+    colorText(MENU_ROW1, menuColumnPos[i],textColour, textFontFace, 'left', 'middle',classListMenu[i]);
         }
 
-    keyRepeatWait = Math.max(0, keyRepeatWait - 1);
-}
+        //Display previous score
+    colorText(MENU_ROW0, menuColumnPos[4],textColour, textFontFace, 'left', 'middle',"Score: " );
+
+        //Draw cursor
+    canvasContext.drawImage(arrowPic,MENU_ROW1 -80 ,menuColumnPos[cursor1] - wobble - 8);
+ };
 })(); 

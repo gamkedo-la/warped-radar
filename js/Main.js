@@ -97,26 +97,21 @@ function gameLoop () {
 // All game logic to update every frame here
 function update (delta) {
     //Reset it every frame
-    if(gameIsStarted == false){ // in menu?
-    return; // skip game logic below
-    }
+    if (gameIsStarted === false) {
+    Menu.update();
+  }
+    else {
     player.nearObjOrNPC = null;
     player.move(delta);
     checkForObtainableItems(); //in obtainableItems.js
     triggerNPCDialogue();
     mainCamera.follow(player);
     levelEditor.showNewGrid();
+    }
 }
-
 // All things drawn to screen every frame here
 function render () {
-    if(gameIsStarted == false){
-    if(keysPressed(KEY_SPACE)) {
-     gameIsStarted = true;
-   }
-    clearScreen();
-    Menu.draw();
-    Menu.update();
+    if(gameIsStarted === false){
     Menu.cycle();
    return; // skip game logic below
  }

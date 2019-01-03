@@ -1,9 +1,7 @@
 const Menu = new (function() {
 //-----BEGIN GLOBAL SETTINGS-----//
-    const MENU_ROW0 = 200;
-    const MENU_ROW1 = 350;
-    const MENU_ROW2 = 550;
-
+    
+    let MENU_ROW = [340, 330, 340, 333];
     let menuColumnPos = [250, 300, 350, 400];
 
     let wobble = 10;
@@ -17,7 +15,7 @@ const Menu = new (function() {
     let classListLevels = ["Chapter 1", "Chapter 2", "Chapter 3", "etc"];
     let classListSettings = ["Volume", "Speed", "Controls", "etc"];
     let classListHelp= ["How to play","Control layout", "Shopping", "etc"];
-    let classListCredits= ["Credits"];
+    let classListCredits= [];
 
     const MENU_NUM = 4;
 
@@ -158,54 +156,54 @@ this.draw = function() {
     canvasContext.drawImage(logoPic, 0, 0);
 
         //Draw menu options
-    canvasContext.drawImage(playPic,MENU_ROW1 -10 ,menuColumnPos[0]);
-    canvasContext.drawImage(settingsPic,MENU_ROW1 -20 ,menuColumnPos[1]);
-    canvasContext.drawImage(helpPic,MENU_ROW1 -10 ,menuColumnPos[2]);
-    canvasContext.drawImage(creditsPic,MENU_ROW1 -18 ,menuColumnPos[3]);
+    canvasContext.drawImage(playPic,MENU_ROW[0] ,menuColumnPos[0]);
+    canvasContext.drawImage(settingsPic,MENU_ROW[1],menuColumnPos[1]);
+    canvasContext.drawImage(helpPic,MENU_ROW[2] ,menuColumnPos[2]);
+    canvasContext.drawImage(creditsPic,MENU_ROW[3] ,menuColumnPos[3]);
 
         //Display previous score only if  player has lost
-    colorText(MENU_ROW0, menuColumnPos[4],textColour, textFontFace, 'left', 'middle',"Score: " );
+    colorText("Score: ",MENU_ROW[0], menuColumnPos[4],textColour, textFontFace, 'left', 'middle' );
         
         //Draw cursor
-    canvasContext.drawImage(arrowPic,MENU_ROW1 -80 ,menuColumnPos[cursor1] - wobble - 8);
+    canvasContext.drawImage(arrowPic,MENU_ROW[0] -80 ,menuColumnPos[cursor1] - wobble - 8);
  }
 
 this.drawSettings = function() {
     this.redraw();
     canvasContext.drawImage(logoPic, 0, 0);
-    colorText(260, 40,textColour, textFontFace, 'left', 'middle',"WARPED RADAR");
-    colorText(263, 40,textColour, textFontFace, 'left', 'middle',"WARPED RADAR");
+    colorText("WARPED RADAR",260, 40,textColour, textFontFace, 'left', 'middle');
+    colorText("WARPED RADAR",263, 40,textColour, textFontFace, 'left', 'middle');
 
         //Draw menu options
-    colorText(MENU_ROW1, menuColumnPos[0],textColour, textFontFace, 'left', 'middle',"Volume");
-    colorText(MENU_ROW1, menuColumnPos[1],textColour, textFontFace, 'left', 'middle',"Speed");
-    colorText(MENU_ROW1, menuColumnPos[2],textColour, textFontFace, 'left', 'middle',"Controls");
-    colorText(MENU_ROW1, menuColumnPos[3],textColour, textFontFace, 'left', 'middle',"etc");
+    colorText("Volume",MENU_ROW[0], menuColumnPos[0],textColour, textFontFace, 'left', 'middle');
+    colorText("Speed",MENU_ROW[1], menuColumnPos[1],textColour, textFontFace, 'left', 'middle');
+    colorText("Controls",MENU_ROW[2], menuColumnPos[2],textColour, textFontFace, 'left', 'middle');
+    colorText("etc",MENU_ROW[3], menuColumnPos[3],textColour, textFontFace, 'left', 'middle');
 
         //Display previous score
-    colorText(MENU_ROW0, menuColumnPos[4],textColour, textFontFace, 'left', 'middle',"Score: " );
+    colorText("Score: ",MENU_ROW[0] - 150, menuColumnPos[4],textColour, textFontFace, 'left', 'middle');
 
         //Draw cursor
-    canvasContext.drawImage(arrowPic,MENU_ROW1 -80 ,menuColumnPos[cursor1] - wobble - 8);
+    canvasContext.drawImage(arrowPic,MENU_ROW[0] -80 ,menuColumnPos[cursor1] - wobble - 8);
  };
 
  this.drawHelp = function() {
     this.redraw();
     canvasContext.drawImage(logoPic, 0, 0);
-    colorText(260, 40,textColour, textFontFace, 'left', 'middle',"WARPED RADAR");
-    colorText(263, 40,textColour, textFontFace, 'left', 'middle',"WARPED RADAR");
+    colorText("WARPED RADAR",260, 40,textColour, textFontFace, 'left', 'middle');
+    colorText("WARPED RADAR",263, 40,textColour, textFontFace, 'left', 'middle');
 
         //Draw menu options
-    colorText(MENU_ROW1, menuColumnPos[0],textColour, textFontFace, 'left', 'middle',"How to play");
-    colorText(MENU_ROW1, menuColumnPos[1],textColour, textFontFace, 'left', 'middle',"Control Layout");
-    colorText(MENU_ROW1, menuColumnPos[2],textColour, textFontFace, 'left', 'middle',"Shopping");
-    colorText(MENU_ROW1, menuColumnPos[3],textColour, textFontFace, 'left', 'middle',"etc");
+    colorText("How to play",MENU_ROW[0], menuColumnPos[0],textColour, textFontFace, 'left', 'middle');
+    colorText("Control Layout",MENU_ROW[1], menuColumnPos[1],textColour, textFontFace, 'left', 'middle',);
+    colorText("Shopping",MENU_ROW[2], menuColumnPos[2],textColour, textFontFace, 'left', 'middle',);
+    colorText("etc",MENU_ROW[3], menuColumnPos[3],textColour, textFontFace, 'left', 'middle');
 
         //Display previous score
-    colorText(MENU_ROW0, menuColumnPos[4],textColour, textFontFace, 'left', 'middle',"Score: " );
+    colorText("Score: ",MENU_ROW[0] - 150, menuColumnPos[4],textColour, textFontFace, 'left', 'middle' );
 
         //Draw cursor
-    canvasContext.drawImage(arrowPic,MENU_ROW1 -80 ,menuColumnPos[cursor1] - wobble - 8);
+    canvasContext.drawImage(arrowPic,MENU_ROW[0] -80 ,menuColumnPos[cursor1] - wobble - 8);
  };
 
 
@@ -214,18 +212,20 @@ this.drawSettings = function() {
 this.drawCredits = function() {
     this.redraw();
     canvasContext.drawImage(logoPic, 0, 0);
-    colorText(260, 40,textColour, textFontFace, 'left', 'middle',"WARPED RADAR");
-    colorText(263, 40,textColour, textFontFace, 'left', 'middle',"WARPED RADAR");
-
-        //Draw menu options
-        for (i=0; i<classListMenu[i]; i++){
-    colorText(MENU_ROW1, menuColumnPos[i],textColour, textFontFace, 'left', 'middle',classListMenu[i]);
+    colorText("WARPED RADAR",260, 40,textColour, textFontFace, 'left', 'middle');
+    colorText("WARPED RADAR",263, 40,textColour, textFontFace, 'left', 'middle');
+    let credits = ["Actors ","John ","Rose "];
+        //List of people in the text file
+        for (txt=0; txt<credits[txt]; txt++){
+    colorText(classListMenu[txt],MENU_ROW[0] + 10, menuColumnPos[txt],textColour, textFontFace, 'left', 'middle');
         }
 
         //Display previous score
-    colorText(MENU_ROW0, menuColumnPos[4],textColour, textFontFace, 'left', 'middle',"Score: " );
+    colorText("Score: ",MENU_ROW[0], menuColumnPos[4],textColour, textFontFace, 'left', 'middle');
 
         //Draw cursor
-    canvasContext.drawImage(arrowPic,MENU_ROW1 -80 ,menuColumnPos[cursor1] - wobble - 8);
+    canvasContext.drawImage(arrowPic,MENU_ROW[0] -80 ,menuColumnPos[cursor1] - wobble - 8);
+     colorText("Credits Credits", 350, 550, "white", "20px Arial", "left", 1);
  };
+
 })(); 

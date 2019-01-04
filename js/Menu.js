@@ -13,7 +13,7 @@ const Menu = new (function() {
     let classListMenu = ["Play", "Settings", "Help" , "Credits"];
     let classListGame = ["New Game", "Continue", "Select Chapter", "Back"];
     let classListLevels = ["Chapter 1", "Chapter 2", "Chapter 3", "Back"];
-    let classListSettings = ["Volume", "Speed", "Controls", "Back"];
+    let classListSettings = ["Volume", "Controls", "Back"];
     let classListHelp= ["How to play","Control layout", "Shopping", "Back"];
     let classListCredits= ['Kise' , "Back"];
 
@@ -38,80 +38,68 @@ this.update = function(){
     }
         wobble += wobbleSpeed;
 
-    if (keysPressed(KEY_SPACE) || keysPressed(KEY_ENTER)) {
-            //this.cycle();
+    if (keyRepeatWait == 0){
+       if (keysPressed(KEY_SPACE) || keysPressed(KEY_ENTER)) {
             this.checkState();
-            
+             keyRepeatWait = KEY_REPEAT_FRAME_DELAY;
         }
 
-    if(keysPressed(KEY_UP)) {
-            if (keyRepeatWait == 0) {
-                cursor1--;
-               if (cursor1 < 0){
-                    cursor1 = 0;
-                }
-                keyRepeatWait = KEY_REPEAT_FRAME_DELAY;
-            }console.log("cursor UP", classListMenu[cursor1]);
+        if(keysPressed(KEY_UP)) {
+            cursor1--;
+           if (cursor1 < 0){
+                cursor1 = 0;
+            }
+            keyRepeatWait = KEY_REPEAT_FRAME_DELAY;
         }
-    if(keysPressed(KEY_DOWN)) {
-            if (keyRepeatWait == 0) {
-                cursor1++;
-                 if (cursor1 >= menuPageText[currentPage].length){
-                    cursor1 = menuPageText[currentPage].length - 1;
-                }
-                keyRepeatWait = KEY_REPEAT_FRAME_DELAY;
-            }console.log("cursor DOWN", classListMenu[cursor1]);
-        }
+        if(keysPressed(KEY_DOWN)) {
+            cursor1++;
+             if (cursor1 >= menuPageText[currentPage].length){
+                cursor1 = menuPageText[currentPage].length - 1;
+            }
+            keyRepeatWait = KEY_REPEAT_FRAME_DELAY;
+            
+        } 
+    }
+    
 
     keyRepeatWait = Math.max(0, keyRepeatWait - 1);
 }
 
 
 this.checkState = function(){
-    if (classListMenu[cursor1] === "Play"){
+    if (menuPageText[currentPage][cursor1] === "Play"){
         gameIsStarted = true;
     }  
-    if (classListMenu[cursor1] === "Settings"){
-        currentPage = SETTINGS_PAGE;
-        //INDEX_PAGE = SETTINGS_PAGE;
+    if (menuPageText[currentPage][cursor1] === "Settings"){
+        currentPage = SETTINGS_PAGE; 
     } 
-    if (classListMenu[cursor1] === "Help"){
+    if (menuPageText[currentPage][cursor1] === "Help"){
         currentPage  = HELP_PAGE;
-         //INDEX_PAGE = HELP_PAGE;;
     } 
-    if (classListMenu[cursor1] === "Credits"){
-        currentPage  = CREDITS_PAGE;
-         //INDEX_PAGE = CREDITS_PAGE;
+    if (menuPageText[currentPage][cursor1] === "Credits"){
+        currentPage  = CREDITS_PAGE;    
     } 
 
-    if (classListSettings[cursor1] === "Volume"){
-        //INDEX_PAGE = VOLUME_PAGE;
-    }  
-    if (classListSettings[cursor1] === "Speed"){
-
-        //INDEX_PAGE = SPEED_PAGE;
+    if (menuPageText[currentPage][cursor1] === "Volume"){
+        console.log("TODO implement volume change");   
     } 
-    if (classListSettings[cursor1] === "Controls"){
-          //INDEX_PAGE = CONTROLS_PAGE;
+    if (menuPageText[currentPage][cursor1] === "Controls"){ 
+        console.log("TODO Added Controls change"); 
     } 
-    if (classListSettings[cursor1] === "Back"){
-        currentPage  = MENU_PAGE;
-         //INDEX_PAGE = etc;
+    if (menuPageText[currentPage][cursor1] === "Back"){
+        currentPage  = MENU_PAGE;    
     }    
 
-    if (classListHelp[cursor1] === "How to play"){
-        //INDEX_PAGE = HOWTOPLAY_PAGE;
+    if (menuPageText[currentPage][cursor1] === "How to play"){ 
+        //Handle help screen differently;
     }  
-    if (classListHelp[cursor1] === "Control layout"){
-        //INDEX_PAGE = CONTROLS_PAGE;
-    } 
-    if (classListHelp[cursor1] === "Shopping"){
-         //INDEX_PAGE = SHOPPING_PAGE;
-    } 
-    if (classListSettings[cursor1] === "Back"){
-        currentPage  = MENU_PAGE;
-         //INDEX_PAGE = etc2;
-    }    
+    if (menuPageText[currentPage][cursor1] === "Control layout"){
+        //Handle Control layout screen differently;
+    }
+
+    if (cursor1 >= menuPageText[currentPage].length){//if we're going to shorter menu
+        cursor1 = menuPageText[currentPage].length - 1;
+    }
 }
 
 this.redraw = function (){

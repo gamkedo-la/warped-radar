@@ -112,7 +112,7 @@ function update (delta) {
 // All things drawn to screen every frame here
 function render () {
     if(gameIsStarted === false){
-    Menu.cycle();
+    Menu.draw();
    return; // skip game logic below
  }
     mainCamera.beginPan();

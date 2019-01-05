@@ -98,23 +98,23 @@ function gameLoop () {
 function update (delta) {
     //Reset it every frame
     if (gameIsStarted === false) {
-    Menu.update();
-  }
+        Menu.update();
+    }
     else {
-    player.nearObjOrNPC = null;
-    player.move(delta);
-    checkForObtainableItems(); //in obtainableItems.js
-    triggerNPCDialogue();
-    mainCamera.follow(player);
-    levelEditor.showNewGrid();
+        player.nearObjOrNPC = null;
+        player.move(delta);
+        checkForObtainableItems(); //in obtainableItems.js
+        triggerNPCDialogue();
+        mainCamera.follow(player);
+        levelEditor.showNewGrid();
     }
 }
 // All things drawn to screen every frame here
 function render () {
     if(gameIsStarted === false){
-    Menu.draw();
-   return; // skip game logic below
- }
+        Menu.draw();
+        return; // skip game logic below
+    }
     mainCamera.beginPan();
     clearScreen();
     drawWorld();

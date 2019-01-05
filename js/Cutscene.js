@@ -24,13 +24,15 @@ function Cutscene() {
     this.letterSpeed = useRequestAnimationFrame ? 0.5 : 1;
     this.pauseBetweenPages = 2; //in seconds
 
+    this.charMoveSpeed = 7;
+
     this.wait = function (num) {
         timer.secondsRemaining = num;
         cutscenePause = true;
         console.log("Pause scene for " + num + " seconds");
     };
 
-    this.moveChar = function (object, xDist, yDist, facingDir, speed) {
+    this.moveChar = function (object, xDist, yDist, facingDir, speed = this.charMoveSpeed) {
         atDestination = false;
         timer.secondsRemaining = this.pauseBetweenPages;
         showNextSceneText = false;
@@ -120,7 +122,7 @@ function Cutscene() {
     };
 
     let step, convo;
-    this.updateSceneTick = function (forScene = currentlyPlayingCutscene) {
+    this.updateSceneTick = function (speed = this.charMoveSpeed, forScene = currentlyPlayingCutscene) {
         if (forScene != null) {          
             if (this.sceneStep < forScene.sequence.length) {
                 if (typeof forScene.sequence[this.sceneStep][0] == "number") { // if first element is a number                                  

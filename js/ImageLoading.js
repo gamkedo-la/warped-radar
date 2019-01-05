@@ -143,7 +143,7 @@ function loadImages() {
         {worldType: TILE_TEST_CONVENIENCE_STOREBOTTOMLEFT, theFile: "test-convenience-leftbottomcorner.png"},
         {worldType: TILE_TEST_CONVENIENCE_STOREBOTTOMMIDDLE, theFile: "test-convenience-middlebottom.png"},
         {worldType: TILE_TEST_CONVENIENCE_STOREBOTTOMRIGHT, theFile: "test-convenience-rightbottomcorner.png"},
-        //{worldType: TILE_CITY_TILES, theFile: "CityTiles.png"},
+        {worldType: TILE_CITY_TILES, theFile: "CityTiles.png"},
         // SPECIAL EFFECTS
         {varName: rainEffectImage, theFile: "rain.png"},
         {varName: fogEffectImage, theFile: "fog.png"}

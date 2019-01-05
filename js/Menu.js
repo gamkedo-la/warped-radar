@@ -14,7 +14,7 @@ const Menu = new (function() {
     let classListGame = ["New Game", "Continue", "Select Chapter", "Back"];
     let classListLevels = ["Chapter 1", "Chapter 2", "Chapter 3", "Back"];
     let classListSettings = ["Volume", "Controls", "Back"];
-    let classListHelp= ["How to play","Control layout", "Shopping", "Back"];
+    let classListHelp= ["How to play","Control layout", "Back"];
     let classListCredits= ['Kise' , "Back"];
 
 
@@ -53,15 +53,12 @@ this.update = function(){
         }
         if(keysPressed(KEY_DOWN)) {
             cursor1++;
-             if (cursor1 >= menuPageText[currentPage].length){
+            if (cursor1 >= menuPageText[currentPage].length){
                 cursor1 = menuPageText[currentPage].length - 1;
             }
             keyRepeatWait = KEY_REPEAT_FRAME_DELAY;
-            
         } 
     }
-    
-
     keyRepeatWait = Math.max(0, keyRepeatWait - 1);
 }
 
@@ -71,12 +68,15 @@ this.checkState = function(){
         gameIsStarted = true;
     }  
     if (menuPageText[currentPage][cursor1] === "Settings"){
+        cursor1 = 0;
         currentPage = SETTINGS_PAGE; 
     } 
     if (menuPageText[currentPage][cursor1] === "Help"){
+        cursor1 = 0;
         currentPage  = HELP_PAGE;
     } 
     if (menuPageText[currentPage][cursor1] === "Credits"){
+        cursor1 = 0;
         currentPage  = CREDITS_PAGE;    
     } 
 
@@ -87,7 +87,7 @@ this.checkState = function(){
         console.log("TODO Added Controls change"); 
     } 
     if (menuPageText[currentPage][cursor1] === "Back"){
-        currentPage  = MENU_PAGE;    
+        currentPage  = MENU_PAGE;
     }    
 
     if (menuPageText[currentPage][cursor1] === "How to play"){ 
@@ -132,7 +132,7 @@ this.draw = function() {
     //colorText("Score: ",MENU_ROW[0], menuColumnPos[4],textColour, textFontFace, 'left', 'middle' );
         
         //Draw cursor
-    canvasContext.drawImage(arrowPic,MENU_ROW[0] -80 ,menuColumnPos[cursor1] - wobble - 8);
+    canvasContext.drawImage(arrowPic,MENU_ROW[0] -80 ,menuColumnPos[cursor1] - wobble - 25);
  }
 
 

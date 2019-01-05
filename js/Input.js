@@ -53,7 +53,7 @@ function setupInput() {
     canvas.addEventListener("mouseup", mouseReleased);
     document.addEventListener("keydown", keydownHandler);
     document.addEventListener("keyup", keydownHandler);
-    player.setupInput(KEY_UP, KEY_RIGHT, KEY_DOWN, KEY_LEFT, KEY_W, KEY_D, KEY_S, KEY_A);
+    player.setupInput(KEY_UP, KEY_DOWN, KEY_LEFT, KEY_RIGHT, KEY_W, KEY_S, KEY_A, KEY_D); // UP DOWN LEFT RIGHT
 }
 
 function updateMousePos(evt) {

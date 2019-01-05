@@ -2,11 +2,11 @@ let johnMouthMove;
 let johnAngryMouthMove;
 let roseMouthMove;
 let johnIdle;
-let johnWalkUp;
-let johnWalkUpDiag;
-let johnWalkDown;
-let johnWalkDownDiag;
-let johnWalkSide;
+let johnWalkUp; //North
+let johnWalkDown; //South
+let johnWalkSide; //West and East (flip)
+let johnWalkUpDiag; //NorthWest and NorthEast(flip)
+let johnWalkDownDiag; //SouthWest and SouthEast(flip)
 //let johnWalkSide45Deg;
 
 function makeAnimatedSprites() {

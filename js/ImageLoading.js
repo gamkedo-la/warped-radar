@@ -96,11 +96,11 @@ function loadImages() {
         //OVERWORLD CHARACTER ANIMS
         {varName: johnSprite, theFile: "johnside.png"},
         {varName: johnAnimationUp, theFile: "johnsprite-sheet-UP.png"},
-        {varName: johnAnimationUpDiag, theFile: "johnsprite-sheet-UP-DIAG.png"},
         {varName: johnAnimationDown, theFile: "johnsprite-sheet-DOWN.png"},
+        {varName: johnAnimationSide, theFile: "johnsprite-sheet-SIDE.png"},
+        {varName: johnAnimationUpDiag, theFile: "johnsprite-sheet-UP-DIAG.png"},
         {varName: johnAnimationDownDiag, theFile: "johnsprite-sheet-DOWN-DIAG.png"},
         {varName: johnAnimationIdle, theFile: "johnsprite-sheet-IDLE.png"},
-        {varName: johnAnimationSide, theFile: "johnsprite-sheet-SIDE.png"},
         //{varName: johnSide45Animation, theFile: "johnspriteside45-sheet.png"},//legacy diagonal animation
 
         //DEFAULT GAMESTART ITEMS

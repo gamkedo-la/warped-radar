@@ -71,7 +71,7 @@ function Cutscene() {
         }
     };
 
-    this.playDialogue = function (dialogueList) {
+    this.playDialogue = function (dialogueList, forScene = currentlyPlayingCutscene) {
         this.dialogue = [];
         this.speakerNames = [];
         this.voices = [];
@@ -81,7 +81,7 @@ function Cutscene() {
         this.measureText;
         this.nameWidth;
 
-        if (currentlyPlayingCutscene != null) {
+        if (forScene != null) {
             if (whoMoving == null) {
                 for (let i = 0; i < dialogueList.length; i++) {
                     let chatEvent = dialogueList[i];
@@ -121,7 +121,7 @@ function Cutscene() {
 
     let step, convo;
     this.updateSceneTick = function (forScene = currentlyPlayingCutscene) {
-        if (currentlyPlayingCutscene != null) {          
+        if (forScene != null) {          
             if (this.sceneStep < forScene.sequence.length) {
                 if (typeof forScene.sequence[this.sceneStep][0] == "number") { // if first element is a number                                  
                     step = forScene.sequence[this.sceneStep][0];                
@@ -168,12 +168,12 @@ function Cutscene() {
                 }
             }
     
-            if (this.sceneStep < currentlyPlayingCutscene.sequence.length) {
+            if (this.sceneStep < forScene.sequence.length) {
                 if (!this.sceneStepWaitingToBeFinished) {
                     console.log("next scene");
                     this.sceneTextPage = 0;
                     this.sceneLetterCount = 0;
-                    this.playNextScene(currentlyPlayingCutscene);
+                    this.playNextScene(forScene);
                     this.sceneStep++;
                 }
             } else if (timer.secondsRemaining == 0) {

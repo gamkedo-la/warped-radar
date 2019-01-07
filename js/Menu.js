@@ -1,43 +1,36 @@
 const Menu = new (function() {
 //-----BEGIN GLOBAL SETTINGS-----//
     
-    let MENU_ROW = [340, 330, 340, 333];
-    let menuColumnPos = [250, 300, 350, 400];
+    let MENU_ROW = [330, 320, 320, 330, 330];
+    let menuColumnPos = [250, 300, 350, 400, 450];
 
-    let wobble = 10;
-    let wobbleSpeed = 0.25;
     let cursor1 = 0;
     let currentPage = 0;
     let keyRepeatWait = 0;
 
-    let classListMenu = ["Play", "Settings", "Help" , "Credits"];
-    let classListGame = ["New Game", "Continue", "Select Chapter", "Back"];
-    let classListLevels = ["Chapter 1", "Chapter 2", "Chapter 3", "Back"];
+    let classListMenu = ["Story", "Continue", "Options", "Guide" , "Credits"];
+    let classListLevels = ["Episode 1", "Episode 2", "Episode 3", "Back"];
+    let classListContinue = ["Load", "Save", "Episodes", "Back"];
     let classListSettings = ["Volume", "Controls", "Back"];
     let classListHelp= ["How to play","Control layout", "Back"];
     let classListCredits= ['Kise' , "Back"];
 
 
     const MENU_PAGE = 0;
-    const SETTINGS_PAGE = 1;
-    const HELP_PAGE = 2;
-    const CREDITS_PAGE = 3;
-    const LEVELS_PAGE = 4;
+    //const CONTINUE_PAGE = 1;
+    const OPTIONS_PAGE = 2;
+    const GUIDE_PAGE = 3;
+    const CREDITS_PAGE = 4;
 
-    let menuPageText = [classListMenu, classListSettings, classListHelp, classListCredits, classListLevels];
-    let textColour = "blue" ;
-    let textFontFace = "20px Arial";
+    let menuPageText = [classListMenu, classListContinue, classListSettings, classListHelp, classListCredits, classListLevels];
+    let textColour = "pink" ;
+    let textFontFace = "30px Impact";
 
 // A super-janky menu input key repeat delay variable
     const KEY_REPEAT_FRAME_DELAY = 10;
 //-----END GLOBAL SETTINGS-----//
 this.update = function(){
       //Wobble the cursors back and forth
-    if (wobble > 13 || wobble < 9) {
-      wobbleSpeed *= -1;
-    }
-        wobble += wobbleSpeed;
-
     if (keyRepeatWait == 0){
        if (keysPressed(KEY_SPACE) || keysPressed(KEY_ENTER)) {
             this.checkState();
@@ -64,16 +57,16 @@ this.update = function(){
 
 
 this.checkState = function(){
-    if (menuPageText[currentPage][cursor1] === "Play"){
+    if (menuPageText[currentPage][cursor1] === "Story"){
         gameIsStarted = true;
     }  
-    if (menuPageText[currentPage][cursor1] === "Settings"){
+    if (menuPageText[currentPage][cursor1] === "Options"){
         cursor1 = 0;
-        currentPage = SETTINGS_PAGE; 
+        currentPage = OPTIONS_PAGE; 
     } 
-    if (menuPageText[currentPage][cursor1] === "Help"){
+    if (menuPageText[currentPage][cursor1] === "Guide"){
         cursor1 = 0;
-        currentPage  = HELP_PAGE;
+        currentPage  = GUIDE_PAGE;
     } 
     if (menuPageText[currentPage][cursor1] === "Credits"){
         cursor1 = 0;
@@ -132,7 +125,8 @@ this.draw = function() {
     //colorText("Score: ",MENU_ROW[0], menuColumnPos[4],textColour, textFontFace, 'left', 'middle' );
         
         //Draw cursor
-    canvasContext.drawImage(arrowPic,MENU_ROW[0] -80 ,menuColumnPos[cursor1] - wobble - 25);
+    canvasContext.drawImage(arrowPic,MENU_ROW[0] -80 ,menuColumnPos[cursor1] - 40);
+    
  }
 
 

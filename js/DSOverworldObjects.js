@@ -1,8 +1,9 @@
-function OverworldObject() {
-    this.x = 380;
-    this.y = 225;
-    this.w = 32;
-    this.h = 32;
+function OverworldObject(name, leftEdge, topEdge, width, height) {
+    this.name = name;
+    this.x = leftEdge;
+    this.y = topEdge;
+    this.w = width;
+    this.h = height;
     this.colour = "#6B6570";
     this.messageCounter = 0;
 
@@ -98,7 +99,7 @@ function OverworldObject() {
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
-let rose = new OverworldObject();
+let rose = new OverworldObject("Rose", 380, 225, 32, 32);
 rose.dialogue = new Dialogue();
 rose.colour = "#8789C0";
 

@@ -126,6 +126,7 @@ function render () {
     drawWeatherEffects();
     drawGameBorder();
     drawDebugText();
+    drawTextNearObjOrNPC();
     createDialogueEvents();
     inventory.draw();
     inventory.interactWithItems();
@@ -195,9 +196,15 @@ function drawDebugText () {
     if (levelEditor.isOn) colorText("[0] Default Tiles", 20, editorInstructionsTextYStart + 80, "yellow", "14px Arial", "left", 1);
 
     if (levelEditor.isOn) colorText("Note: replacing the tile under the player will change his start point ", 20, 530, "yellow", "12px Arial", "left", 1);
+}
 
+function drawTextNearObjOrNPC() {
     if(player.nearObjOrNPC != null) {
-        colorText("Near interactable NPC or object", 5, 75, "white", "18px Arial", "left", 1);
+        // Draw text for NPC
+        colorText(player.nearObjOrNPC.name, player.nearObjOrNPC.x*2 - mainCamera.camPanX*2, player.nearObjOrNPC.y*2 - mainCamera.camPanY*2, "white", "18px Arial", "left", 1);        
+
+        // Draw text for obtainable items
+        colorText(player.nearObjOrNPC.description, player.nearObjOrNPC.drawTileX*2 - mainCamera.camPanX*2, player.nearObjOrNPC.drawTileY*2 - mainCamera.camPanY*2, "white", "18px Arial", "left", 1);
     }
 }
 

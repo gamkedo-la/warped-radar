@@ -36,7 +36,8 @@ const KEY_SPACE = 32;
 const KEY_ENTER = 13;
 const KEY_SHIFT = 16;
 const KEY_CTRL = 17;
-
+const KEY_BACKSPACE = 8;
+const MOUSE_LEFT = 1;
 let mouseX, mouseY;
 
 let interact_key = false;

@@ -3,10 +3,6 @@ let textArrowSheet = document.createElement("img");
 let choiceCursorPic = document.createElement("img");
 
 let arrowPic = document.createElement("img");
-let playPic = document.createElement("img");
-let helpPic = document.createElement("img");
-let creditsPic = document.createElement("img");
-let settingsPic = document.createElement("img");
 let logoPic = document.createElement("img");
 
 let johnSprite = new Image();
@@ -16,14 +12,6 @@ let motherboardPic = document.createElement("img");
 let memoryChipPic = document.createElement("img");
 
 let inventoryPic = document.createElement("img");
-let brokenSkateboardPic = document.createElement("img");
-let burnerPhonePic = document.createElement("img");
-let crowbarPic = document.createElement("img");
-let hoodiePic = document.createElement("img");
-let medicalNotebookPic = document.createElement("img");
-let sealedTubePic = document.createElement("img");
-let thumbDrivePic = document.createElement("img");
-let trainTicketPic = document.createElement("img");
 
 let gameBorderPic = document.createElement("img");
 
@@ -47,13 +35,16 @@ let johnAnimationSide = document.createElement("img");
 let rainEffectImage = document.createElement("img");
 let fogEffectImage = document.createElement("img");
 
-let building = document.createElement("img");
-
 let picsToLoad = 0;
-let worldPics = [];
+let worldTiles = document.createElement("img");
 
 function countLoadedImages() {
     picsToLoad--;
+
+    if(picsToLoad == 0) {
+        start();//This function initializes the game and sets up the gameLoop()
+    }
+
     return picsToLoad == 0;
 }
 
@@ -61,11 +52,6 @@ function beginLoadingImage(imageVar, fileName) {
     imageVar.onload = countLoadedImages;
     imageVar.src = "img/" + fileName;
     return countLoadedImages;
-}
-
-function loadImageForWorldCode(worldCode, fileName) {
-    worldPics[worldCode] = document.createElement("img");
-	return beginLoadingImage(worldPics[worldCode], fileName);
 }
 
 function loadImages() {
@@ -76,10 +62,6 @@ function loadImages() {
         {varName: gameBorderPic, theFile: "gameBorder.png"},
         {varName: inventoryPic, theFile: "inventory.png"},
         {varName: arrowPic, theFile: "UI/arrowPic.png"},
-        {varName: playPic, theFile: "UI/playPic.png"},
-        {varName: helpPic, theFile: "UI/helpPic.png"},
-        {varName: settingsPic, theFile: "UI/settingsPic.png"},
-        {varName: creditsPic, theFile: "UI/creditsPic.png"},
         {varName: logoPic, theFile: "UI/logoPic.png"},
 
         //PORTRAITS
@@ -108,42 +90,11 @@ function loadImages() {
         {varName: motherboardPic, theFile: "motherboard.png" },
         {varName: memoryChipPic, theFile: "memory_chip.png"},
 
-        //PLACEHOLDER OBTAINABLE ITEMS
-        {worldType: TILE_BROKEN_SKATEBOARD, theFile: "broken_skateboard.png"},
-        {worldType: TILE_BURNER_PHONE, theFile: "burner_phone.png"},
-        {worldType: TILE_CROWBAR, theFile: "crowbar.png"},
-        {worldType: TILE_HOODIE, theFile: "hoodie.png"},
-        {worldType: TILE_MEDICAL_NOTEBOOK, theFile: "medical_notebook.png"},
-        {worldType: TILE_SEALED_TUBE, theFile: "sealed_tube.png"},
-        {worldType: TILE_THUMB_DRIVE, theFile: "thumb_drive.png"},
-        {worldType: TILE_TRAIN_TICKET, theFile: "train_ticket.png"},
+        //ALL TILES; 40px by 40px are in the "Tiles.png" file
+        {varName: worldTiles, theFile: "Tiles.png"},
 
         //VEHICLES
 
-
-        //TILES
-        {worldType: TILE_GROUND, theFile: "ground.png"},
-        {worldType: TILE_PLAYERS_TILE, theFile: "playerstarttile.png"},
-        {worldType: TILE_WALL, theFile: "random.png"},
-        {worldType: TILE_SIDEWLAK, theFile: "sidewalk.png"},
-        {worldType: TILE_SIDEWALK_RIGHTCORNER, theFile: "sidewalk-cornerpiece-right.png"},
-        {worldType: TILE_SIDEWALK_VERTICAL, theFile: "sidewalk-vertical.png"},
-
-        {worldType: TILE_SWITCH_LOCATION, theFile: "change_location.png"},
-
-        //BUILDINGS
-        {worldType: TILE_TESTBUILDING_LEFT, theFile: "testbuilding-leftcorner.png"},
-        {worldType: TILE_TESTBUILDING_RIGHT, theFile: "testbuilding-rightcorner.png"},
-        {worldType: TILE_TESTBUILDING_BOTTOMLEFT, theFile: "testbuilding-bottomleftcorner.png"},
-        {worldType: TILE_TESTBUILDING_BOTTOMRIGHT, theFile: "testbuilding-bottomrightcorner.png"},
-
-        {worldType: TILE_TEST_CONVENIENCE_STORELEFT, theFile: "test-convenience-leftcorner.png"},
-        {worldType: TILE_TEST_CONVENIENCE_STOREMIDDLE, theFile: "test-convenience-middle.png"},
-        {worldType: TILE_TEST_CONVENIENCE_STORERIGHT, theFile: "test-convenience-rightcorner.png"},
-        {worldType: TILE_TEST_CONVENIENCE_STOREBOTTOMLEFT, theFile: "test-convenience-leftbottomcorner.png"},
-        {worldType: TILE_TEST_CONVENIENCE_STOREBOTTOMMIDDLE, theFile: "test-convenience-middlebottom.png"},
-        {worldType: TILE_TEST_CONVENIENCE_STOREBOTTOMRIGHT, theFile: "test-convenience-rightbottomcorner.png"},
-        {worldType: TILE_CITY_TILES, theFile: "CityTiles.png"},
         // SPECIAL EFFECTS
         {varName: rainEffectImage, theFile: "rain.png"},
         {varName: fogEffectImage, theFile: "fog.png"}
@@ -159,8 +110,6 @@ function loadImages() {
     for(let i=0;i<imageList.length;i++) {
   		if(imageList[i].varName != undefined) {
   			loadResult = beginLoadingImage(imageList[i].varName, imageList[i].theFile);
-  		} else {
-  			loadResult = loadImageForWorldCode(imageList[i].worldType, imageList[i].theFile);
   		}
     }
 

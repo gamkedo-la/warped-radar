@@ -5,10 +5,12 @@ function LevelEditor () {
     let tileUnderMouse = null;
     let levelCol = 0;
     let levelRow = 0;
-    let defaultSet = [TILE_GROUND, TILE_WALL, TILE_SWITCH_LOCATION, TILE_BROKEN_SKATEBOARD, TILE_BURNER_PHONE, TILE_CROWBAR, TILE_HOODIE, TILE_MEDICAL_NOTEBOOK, TILE_SEALED_TUBE, TILE_THUMB_DRIVE, TILE_TRAIN_TICKET]; //will switch out for different tiles later
+    let defaultSet = Object.values(TILE);
+//    let defaultSet = [TILE.GROUND, TILE.WALL, TILE.SWITCH_LOCATION, TILE.BROKEN_SKATEBOARD, TILE.BURNER_PHONE, TILE.CROWBAR, TILE.HOODIE, TILE.MEDICAL_NOTEBOOK, TILE.SEALED_TUBE, TILE.THUMB_DRIVE, TILE.TRAIN_TICKET]; //will switch out for different tiles later
+    console.log("Default Set length: " + defaultSet.length);
     let tileSets = {
-        sideWalks: [TILE_SIDEWLAK, TILE_SIDEWALK_VERTICAL, TILE_SIDEWALK_RIGHTCORNER],
-        buildings: [TILE_TESTBUILDING_LEFT, TILE_TESTBUILDING_RIGHT, TILE_TESTBUILDING_BOTTOMLEFT, TILE_TESTBUILDING_BOTTOMRIGHT, TILE_TEST_CONVENIENCE_STORELEFT, TILE_TEST_CONVENIENCE_STOREMIDDLE, TILE_TEST_CONVENIENCE_STORERIGHT, TILE_TEST_CONVENIENCE_STOREBOTTOMLEFT, TILE_TEST_CONVENIENCE_STOREBOTTOMMIDDLE, TILE_TEST_CONVENIENCE_STOREBOTTOMRIGHT]
+        sideWalks: [TILE.SIDEWALK, TILE.SIDEWALK_VERTICAL, TILE.SIDEWALK_RIGHT_CORNER],
+        buildings: [TILE.BUILDING_LEFT, TILE.BUILDING_RIGHT, TILE.BUILDING_BOTTOM_LEFT, TILE.BUILDING_BOTTOM_RIGHT, TILE.CONVENIENCE_STORE_LEFT, TILE.CONVENIENCE_STORE_MIDDLE, TILE.CONVENIENCE_STORE_RIGHT, TILE.CONVENIENCE_STORE_BOTTOM_LEFT, TILE.CONVENIENCE_STORE_BOTTOM_MIDDLE, TILE.CONVENIENCE_STORE_BOTTOM_RIGHT]
     }
     
     let currentlySelectedSet = defaultSet;
@@ -23,11 +25,15 @@ function LevelEditor () {
         if (this.isOn) {
             if (keysPressed(KEY_A)) {
                 currentTileIndex--;
-                if (currentTileIndex <= 0) currentTileIndex = 0;
+                if (currentTileIndex <= 0) {
+                      currentTileIndex = currentlySelectedSet.length - 1;
+//                    currentTileIndex = 0;
+                }
             } else if (keysPressed(KEY_D)) {
                 currentTileIndex++;
                 if (currentTileIndex >= currentlySelectedSet.length)
-                    currentTileIndex = currentlySelectedSet.length - 1;
+                      currentTileIndex = 0;
+//                    currentTileIndex = currentlySelectedSet.length - 1;
             } else if (keysPressed(KEY_ZERO)) {
                 this.pickASet(defaultSet);
             } else if (keysPressed(KEY_ONE)) {
@@ -55,11 +61,12 @@ function LevelEditor () {
             scaledContext.strokeRect(tileX, tileY, WORLD_W, WORLD_H);
             scaledContext.strokeStyle = "orange";
             scaledContext.lineWidth = 2;
-            scaledContext.drawImage(worldPics[currentlySelectedSet[currentTileIndex]], tileX, tileY, WORLD_W, WORLD_H);
+            tileSet.drawTileAt(scaledContext, currentTileIndex, tileX, tileY, WORLD_W, WORLD_H);
         }
     }
 
     this.editTileOnMouseClick = function () {
+        console.log("Current Tile Index: " + currentTileIndex);
         if (this.isOn) {
             scaledContext.lineWidth = 7;
             let tileKindHere = worldGrid[tileUnderMouse];

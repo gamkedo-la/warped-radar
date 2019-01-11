@@ -20,7 +20,7 @@ const notificationWindow = new (function () {
 
     this.draw = function() {
         if (this.displayWindow) {
-            drawRect(this.x, this.y, this.width, this.height);
+            drawRect(this.x, this.y, this.width, this.height, 'black');
             drawStrokeRect(canvasContext, this.x, this.y, this.width, this.height, this.outlineColor, this.outlineThickness);
             colorText(this.message, this.messageX, this.messageY, this.messageColor, this.messageFont);
         }

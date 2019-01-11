@@ -99,7 +99,12 @@ let inventory = new(function () {
                     let itemCellX = slotX + ((slotWidth + slotBetweenX) * (i % slotCols));
                     let itemCellY = slotY + ((slotHeight + slotBetweenY) * Math.floor(i / slotCols));
                     canvasContext.fillStyle = "white";
-                    canvasContext.drawImage(inventory.items[i].image, itemCellX + 5, itemCellY + 5, slotWidth * 0.9, slotHeight * 0.9);
+                    if(Number.isInteger(inventory.items[i].image)) {
+                        tileSet.drawTileAt(canvasContext, inventory.items[i].image, itemCellX + 5, itemCellY + 5, slotWidth * 0.9, slotHeight * 0.9);
+                    } else {
+                        canvasContext.drawImage(inventory.items[i].image, itemCellX + 5, itemCellY + 5, slotWidth * 0.9, slotHeight * 0.9);
+                    }
+                    
                 }
             }
         }

@@ -58,8 +58,7 @@ function Player () {
         for (let eachRow = 0; eachRow < worldCols; eachRow++) {
             for (let eachCol = 0; eachCol < worldRows; eachCol++) {
                 let arrayIndex = rowColToArrayIndex(eachCol, eachRow);
-                if (worldGrid[arrayIndex] == TILE_PLAYER_START || worldGrid[arrayIndex] == TILE_PLAYERS_TILE) {
-                    worldGrid[arrayIndex] = TILE_PLAYERS_TILE; 
+                if (worldGrid[arrayIndex] == TILE.PLAYER_START) {
                     this.x = eachCol * WORLD_W + WORLD_W / 2;
                     this.y = eachRow * WORLD_H + ((WORLD_H / 2) - 20);
                     this.collider.setCollider(this.x, this.y);

@@ -19,7 +19,7 @@ let playTheScene = false;
 let gameIsStarted = true;
 
 // Things that are set once for the entire run of the game here
-(function start () {
+function start () {
     gameIsStarted = false;
     window.addEventListener('focus', () => {
         paused = true;
@@ -51,30 +51,33 @@ let gameIsStarted = true;
     scaledContext.imageSmoothingEnabled = false;
 
     makeAnimatedSprites();
+    mainCamera = new Camera();
+    levelEditor = new LevelEditor();
+    player = new Player();
+    worldGrid = Array.from(locationList[locationNow].layout);
 
-    if (loadImages()) {
-        mainCamera = new Camera();
-        levelEditor = new LevelEditor();
-        player = new Player();
-        worldGrid = Array.from(locationList[locationNow].layout);
-
-        if (useRequestAnimationFrame) {
-            gameLoop();
-        } else {
-            interval = setInterval(gameLoop, 1000/framesPerSecond);
-        }
-
-        setupInput();
-        player.reset();
-        timer.setupTimer();
-        initializeDefaultItems();
-        console.log(note);
-        initializeObtainableItems();
-        console.log(arrayOfObtainableItems);
-        notificationWindow.initialize();
-        //stebs_warped_radar_song.resumeSound();
+    if (useRequestAnimationFrame) {
+        gameLoop();
+    } else {
+        interval = setInterval(gameLoop, 1000/framesPerSecond);
     }
-})();
+
+    setupInput();
+    tileSet = new Tileset(worldTiles, 40, 40);
+    player.reset();
+    timer.setupTimer();
+    initializeDefaultItems();
+    console.log(note);
+    initializeObtainableItems();
+    console.log(arrayOfObtainableItems);
+    notificationWindow.initialize();
+    //stebs_warped_radar_song.resumeSound();
+};
+
+//This is the call that gets the game started.
+//Once loadImages results in picsToLoad == 0,
+//the start() function above is called.
+loadImages();
 
 // Called from start(), keeps the game loop and delta in check
 function gameLoop () {

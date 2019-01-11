@@ -114,13 +114,7 @@ this.draw = function() {
     for (let i=0; i<menuPageText[currentPage].length; i++){
      colorText(menuPageText[currentPage][i],MENU_ROW[i], menuColumnPos[i],textColour, textFontFace, 'left', 'middle'); 
     }
-    //Draw menu options
-    /*
-    canvasContext.drawImage(playPic,MENU_ROW[0] ,menuColumnPos[0]);
-    canvasContext.drawImage(settingsPic,MENU_ROW[1],menuColumnPos[1]);
-    canvasContext.drawImage(helpPic,MENU_ROW[2] ,menuColumnPos[2]);
-    canvasContext.drawImage(creditsPic,MENU_ROW[3] ,menuColumnPos[3]);
-    */
+ 
         //Display previous score only if  player has lost
     //colorText("Score: ",MENU_ROW[0], menuColumnPos[4],textColour, textFontFace, 'left', 'middle' );
         

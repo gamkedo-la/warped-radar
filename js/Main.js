@@ -54,7 +54,8 @@ function start () {
     mainCamera = new Camera();
     levelEditor = new LevelEditor();
     player = new Player();
-    worldGrid = Array.from(locationList[locationNow].layout);
+    
+    worldGrid = Array.from(locationList[locationNow].layout);  //importing 1-indexed tiled maps
 
     if (useRequestAnimationFrame) {
         gameLoop();

@@ -34,6 +34,8 @@ let johnAnimationSide = document.createElement("img");
 
 let rainEffectImage = document.createElement("img");
 let fogEffectImage = document.createElement("img");
+let dustEffectImage = document.createElement("img");
+let perlinNoiseImage = document.createElement("img");
 
 let picsToLoad = 0;
 let worldTiles = document.createElement("img");
@@ -97,7 +99,9 @@ function loadImages() {
 
         // SPECIAL EFFECTS
         {varName: rainEffectImage, theFile: "rain.png"},
-        {varName: fogEffectImage, theFile: "fog.png"}
+        {varName: fogEffectImage, theFile: "fog.png"},
+        {varName: dustEffectImage, theFile: "dustEffect.png"},
+        {varName: perlinNoiseImage, theFile: "perlinNoise.png"}
 
     ];
 

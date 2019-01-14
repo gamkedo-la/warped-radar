@@ -62,6 +62,7 @@ const Menu = new (function() {
         switch (menuPageText[currentPage][cursor1]) {
             case "Story":
                 gameIsStarted = true;
+                warpedRadarBackgroundMusic.loopSong("audio/stebs_warped_radar_song");
                 cursor1 = 0;
                 break;
             case "Continue":
@@ -134,5 +135,5 @@ const Menu = new (function() {
                 colorText(menuPageText[currentPage][i], itemsX,topItemY + rowHeight * i,textColour, textFontFace, 'left', 'top');
             }   
         }  
-    };       
-})(); 
+    };    
+})();

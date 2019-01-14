@@ -61,7 +61,8 @@ function backgroundMusicClass() {
         }
         musicSound = new Audio(filenameWithPath + audioFormat);
         musicSound.loop = true;
-        this.setVolume(musicVolume);
+		this.setVolume(musicVolume);
+		console.log("Now playing track: ", filenameWithPath + audioFormat);
     }
 
     this.pauseSound = function() {

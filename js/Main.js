@@ -14,6 +14,8 @@ let mainCamera;
 let levelEditor;
 let player;
 
+let warpedRadarBackgroundMusic = new backgroundMusicClass();
+
 let testScene = new Cutscene();
 let playTheScene = false;
 let gameIsStarted = true;
@@ -72,7 +74,9 @@ function start () {
     initializeObtainableItems();
     console.log(arrayOfObtainableItems);
     notificationWindow.initialize();
-    //stebs_warped_radar_song.resumeSound();
+
+    //Start background music
+    warpedRadarBackgroundMusic.loopSong("audio/MainMenu");
 };
 
 //This is the call that gets the game started.

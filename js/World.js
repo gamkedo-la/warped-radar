@@ -107,7 +107,9 @@ let locationNow = 0;
 //importing 1-indexed tiled maps, temporary hacky fix to make map data 0-indexed.
     locationList.forEach(location=>{
         location.layout.forEach( (tile, index, arr)=>{
-            arr[index] = tile-1;
+            if(arr[index] == 0) { return }
+            else { arr[index] = tile-1; }
+            
         })
     });
 

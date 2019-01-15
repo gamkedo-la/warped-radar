@@ -158,9 +158,14 @@ function drawWorld() {
     let drawTileY = 0;
     let minColSize = 60; //current largest map. 
     let minRowSize = 60;
-    //note - needs refactored to render viewport tiles only. 
     for (let eachRow = 0; eachRow < minRowSize; eachRow++) {
         for (let eachCol = 0; eachCol < minColSize; eachCol++) {
+            //do not draw if outside viewport, but still need to increment draw position
+            if(!isInViewPort(scaledCanvas, drawTileX, drawTileY)) {
+                drawTileX += WORLD_W;
+                continue;
+            }
+
             let tileKindHere;
             if (eachCol < worldCols && eachRow < worldRows) {
                 let arrayIndex = rowColToArrayIndex(eachCol, eachRow);
@@ -187,6 +192,14 @@ function drawWorld() {
 
 } //end of draw world
 
+function isInViewPort(aCanvas, x, y) {
+    if(x > mainCamera.camPanX + aCanvas.width) {return false;}
+    if(x < mainCamera.camPanX - WORLD_W) {return false;}
+    if(y > mainCamera.camPanY + aCanvas.height) {return false;}
+    if(y < mainCamera.camPanY - WORLD_H) {return false;}
+
+    return true;
+}
 
 function returnTileTypeAtColRow(col, row) {
     if (col >= 0 && col < worldCols &&

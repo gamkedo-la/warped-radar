@@ -3,7 +3,7 @@ function Player () {
     this.y = 100;
     //this.w = 64;
     //this.h = 64;
-    this.walkSpeed = useRequestAnimationFrame ? 140 : 4;
+    this.walkSpeed = useRequestAnimationFrame ? 140 : 2;
 
     this.keyHeld_walkUp = false;
     this.keyHeld_walkDown = false;

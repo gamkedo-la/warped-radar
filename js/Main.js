@@ -168,6 +168,8 @@ function goToNextLevel () {
     }
 
     loadLevel(locationList[locationNow]);
+    
+
 }
 
 function loadLevel (whichLevel) {
@@ -177,6 +179,13 @@ function loadLevel (whichLevel) {
     worldRows = whichLevel.rows;
     mainCamera.camPanX = 0;
     mainCamera.camPanY = 0;
+    
+    if (locationNow === 0) { //only render fog in the city
+    	isFoggy = true;
+    } else {
+    	isFoggy = false;
+    }
+    
     player.reset();
 }
 

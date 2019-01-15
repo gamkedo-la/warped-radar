@@ -101,7 +101,7 @@ function OverworldObject(name, leftEdge, topEdge, width, height) {
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
-let rose = new OverworldObject("Rose", 380, 225, 32, 32);
+let rose = new OverworldObject("Rose", 280, 520, 32, 32); //put her next to store
 rose.dialogue = new Dialogue();
 rose.colour = "#8789C0";
 

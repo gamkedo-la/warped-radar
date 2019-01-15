@@ -32,6 +32,8 @@ let johnAnimationDownDiag = document.createElement("img");
 let johnAnimationSide = document.createElement("img");
 //let johnSide45Animation = document.createElement("img");
 
+let roseAnimationIdle = document.createElement("img");
+
 let rainEffectImage = document.createElement("img");
 let fogEffectImage = document.createElement("img");
 let dustEffectImage = document.createElement("img");
@@ -86,6 +88,8 @@ function loadImages() {
         {varName: johnAnimationDownDiag, theFile: "johnsprite-sheet-DOWN-DIAG.png"},
         {varName: johnAnimationIdle, theFile: "johnsprite-sheet-IDLE.png"},
         //{varName: johnSide45Animation, theFile: "johnspriteside45-sheet.png"},//legacy diagonal animation
+        
+        {varName: roseAnimationIdle, theFile: "rosesprite-sheet-IDLE.png"},
 
         //DEFAULT GAMESTART ITEMS
         {varName: notePic, theFile: "note.png"},

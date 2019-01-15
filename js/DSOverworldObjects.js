@@ -24,7 +24,9 @@ function OverworldObject(name, leftEdge, topEdge, width, height) {
 
     this.draw = function () {
         if (locationList[locationNow] == theCity) { //quick temporary fix
-            drawRectToContext(scaledContext, this.x, this.y, this.w, this.h, this.colour, 1);
+            //Only works as long as Rose is the only NPC, will need a better implementation.
+            roseIdle.draw(scaledContext, this.x, this.y);
+//            drawRectToContext(scaledContext, this.x, this.y, this.w, this.h, this.colour, 1);
         }
     }
 

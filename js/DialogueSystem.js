@@ -34,7 +34,7 @@ function Dialogue() {
     let textAlign = "left";
 
     let line;
-    let letterSpeed = useRequestAnimationFrame ? 0.5 : 1;
+    let letterSpeed = useRequestAnimationFrame ? 0.5 : 0.5;
     let maxWidth = 210;
     let lineHeight = 30;
     let paused = false;

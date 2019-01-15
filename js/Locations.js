@@ -16,7 +16,7 @@ let johnsRoom = {
     columns: 10,
     rows: 10,
     name: "johnsRoom",
-    indexOffset: 0
+    
 }
 
 let johnsHallway = {
@@ -34,7 +34,7 @@ let johnsHallway = {
     columns: 16,
     rows: 10,
     name: "johnsHallway",
-    indexOffset: 0
+    
 }
 
 let johnsKitchen = {
@@ -52,7 +52,7 @@ let johnsKitchen = {
     columns: 10,
     rows: 10,
     name: "johnsKitchen",
-    indexOffset: 0
+    
 }
 
 let theCity = 
@@ -121,6 +121,6 @@ layout: [
 columns: 60,
 rows: 60,
 name: "theCity",
-indexOffset: -1
+
 }
 

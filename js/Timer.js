@@ -9,7 +9,7 @@ let isFastInterval = false;
 
 let useRequestAnimationFrame = false;
 
-let framesPerSecond = 30;
+let framesPerSecond = 60;
 
 let timer = new(function () {
     this.secondsRemaining = MAX_SECONDS;

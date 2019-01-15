@@ -74,6 +74,7 @@ function start () {
     initializeObtainableItems();
     console.log(arrayOfObtainableItems);
     notificationWindow.initialize();
+    initializeOverworldObjects();
 
     //Start background music
     warpedRadarBackgroundMusic.loopSong("audio/MainMenu");
@@ -200,7 +201,7 @@ function drawGameBorder () {
 
 function drawDebugText () {
     colorText("Pressed Space: " + interact_key, 20, 30, "white", "20px Arial", "left", 1);
-    colorText("Colliding with Rose: " + rose.collidingWithPlayer(), 20, 50, "white", "20px Arial", "left", 1);
+    colorText("Colliding with Rose: " + allNPCs[0].collidingWithPlayer(), 20, 50, "white", "20px Arial", "left", 1);//assumes Rose is the first NPC added to the allNPCs array
     colorText("[CTRL+E] Level Editor: " + (levelEditor.isOn ? "ON" : "OFF"), 800, 30, "white", "20px Arial", "right", 1);
 
     colorText(locationList[locationNow].name, canvas.width/2, 80, "white", "20px Arial", "center", 1);

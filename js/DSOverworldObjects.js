@@ -1,4 +1,4 @@
-function OverworldObject(name, leftEdge, topEdge, width, height) {
+function OverworldObject(name, leftEdge, topEdge, width, height, animations = null) {
     this.name = name;
     this.x = leftEdge;
     this.y = topEdge;
@@ -23,12 +23,34 @@ function OverworldObject(name, leftEdge, topEdge, width, height) {
     }
 
     this.draw = function () {
-        if (locationList[locationNow] == theCity) { //quick temporary fix
-            //Only works as long as Rose is the only NPC, will need a better implementation.
-            roseIdle.draw(scaledContext, this.x, this.y);
-//            drawRectToContext(scaledContext, this.x, this.y, this.w, this.h, this.colour, 1);
-        }
-    }
+        if (locationList[locationNow] == theCity) {
+            if(animations != null) {
+                if(this.states.walking) {
+                    if(this.facing.north) {
+                        animations.north.draw(scaledContext, this.x, this.y);
+                    } else if(this.facing.south) {
+                        animations.south.draw(scaledContext, this.x, this.y);                        
+                    } else if(this.facing.east) {
+                        animations.east.draw(scaledContext, this.x, this.y);
+                    } else if(this.facing.west) {
+                        animations.west.draw(scaledContext, this.x, this.y);
+                    } else if(this.facing.northEast) {
+                        animations.northEast.draw(scaledContext, this.x, this.y);
+                    } else if(this.facing.northWest) {
+                        animations.northWest.draw(scaledContext, this.x, this.y);
+                    } else if(this.facing.southEast) {
+                        animations.southEast.draw(scaledContext, this.x, this.y);
+                    } else if(this.facing.southWest) {
+                        animations.southWest.draw(scaledContext, this.x, this.y);
+                    }
+                } else {
+                    animations.idle.draw(scaledContext, this.x, this.y);
+                }
+            } else {
+                drawRectToContext(scaledContext, this.x, this.y, this.w, this.h, this.colour, 1);
+            }//end if-else animations != null
+        }//end if locationList
+    }//end this.draw()
 
     this.collidingWithPlayer = function () {
         // Find middle point on the bottom - feet
@@ -99,30 +121,55 @@ function OverworldObject(name, leftEdge, topEdge, width, height) {
         return;
     }
 }
-////////////////////////////////////////////////////////////////////////////////////////////////
 
-let rose = new OverworldObject("Rose", 280, 520, 32, 32); //put her next to store
-rose.dialogue = new Dialogue();
-rose.colour = "#8789C0";
+function initializeOverworldObjects() {
+    const roseAnimations = {
+        idle:roseIdle,
+        north:null,
+        south:null,
+        east:null,
+        west:null,
+        northEast:null,
+        northWest:null,
+        southEast:null,
+        southWest:null
+    }
 
-rose.chatEvents = function (createElseIncrement) {
-    this.text(createElseIncrement, [johnAndRoseConvo, johnAndRoseConvo2, johnAndRoseConvo3]);
+    let rose = new OverworldObject("Rose", 280, 520, 32, 32, roseAnimations); //put her next to store
+    rose.dialogue = new Dialogue();
+    rose.colour = "#8789C0";
+    
+    rose.chatEvents = function (createElseIncrement) {
+        this.text(createElseIncrement, [johnAndRoseConvo, johnAndRoseConvo2, johnAndRoseConvo3]);
+    
+    }
 
+    allNPCs.push(rose);
 }
 
-////////////////////////////////////////////////////////////////////////////////////////////////
-let allNPCs = [rose];
+let allNPCs = [];
 
 function createDialogueEvents() {
-    rose.chatEvents(true);
+    for(let i = 0; i < allNPCs.length; i++) {
+        allNPCs[i].chatEvents(true);
+    }
 }
 
 function incrementTextPages() {
-    rose.chatEvents(false);
+    for(let i = 0; i < allNPCs.length; i++) {
+        allNPCs[i].chatEvents(false);        
+    }
 }
 
 function dialogueNotShowing() {
-    return !rose.dialogue.isShowing;
+    let isShowing = false;
+    for(let i = 0; i < allNPCs.length; i++) {
+        if(allNPCs[i].dialogue.isShowing) {
+            isShowing = true;
+            break;
+        }
+    }
+    return !isShowing;
 }
 
 function triggerNPCDialogue() {

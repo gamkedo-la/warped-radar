@@ -119,8 +119,6 @@ const Menu = new (function() {
 
     this.draw = function() {
         this.redraw();
-        //Draw cursor
-        canvasContext.drawImage(arrowPic,itemsX -55 ,topItemY + (cursor1 * rowHeight) -42);
         if(currentPage == CREDITS_PAGE) {
             colorRect( 0, 0, gameCanvas.width, gameCanvas.height, "black", 0.2);
             let creditsX = 11;
@@ -133,7 +131,9 @@ const Menu = new (function() {
             canvasContext.drawImage(logoPic, 0, 0);
             for (let i=0; i<menuPageText[currentPage].length; i++){
                 colorText(menuPageText[currentPage][i], itemsX,topItemY + rowHeight * i,textColour, textFontFace, 'left', 'top');
-            }   
-        }  
+            }
+        }
+        //Draw cursor after background image
+        canvasContext.drawImage(arrowPic,itemsX -55 ,topItemY + (cursor1 * rowHeight) -42);
     };    
 })();

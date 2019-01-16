@@ -23,6 +23,14 @@ function Player () {
 	this.controlKeyRight2;
 
     this.collider = new Collider(this.x, this.y, this.w, this.h, 0, 0);
+    const idleWidth = 0.80 * johnIdle.spriteSheet.width/(4 * johnIdle.animationColFrames);
+    const idleHeight = johnIdle.spriteSheet.height;
+    this.tileCollider = {x:this.x - idleWidth / 2, y:this.y + (0.38 * idleHeight), 
+                         width: idleWidth, height:0.05 * idleHeight};
+    this.setTileCollider = function(newX, newY) {
+        this.tileCollider.x = newX - idleWidth / 2;
+        this.tileCollider.y = newY + 0.38 * idleHeight;
+    }
 
     this.states = {
         walking: false
@@ -62,6 +70,7 @@ function Player () {
                     this.x = eachCol * WORLD_W + WORLD_W / 2;
                     this.y = eachRow * WORLD_H + ((WORLD_H / 2) - 20);
                     this.collider.setCollider(this.x, this.y);
+                    this.setTileCollider(this.x, this.y);
                     return;
                 }
             }
@@ -108,21 +117,45 @@ function Player () {
                 }
             }
 
-            let nextTileType = getTileTypeAtPixelCoord(nextX, nextY);
-            // console.log(nextTileType);
-            //if tile type is not solid this.x and this.y are equal to nextX and nextY
-            if (moveCharIfAble(nextTileType)) {
-                this.x = nextX;
-                this.y = nextY;
+            let deltaX = nextX - this.x;
+            let deltaY = nextY - this.y;
+            let nextTileTypes = getNextTileTypesAtRect(this.tileCollider, deltaX, deltaY);
+            if(nextX > this.x) {//trying to move right
+                if((moveCharIfAble(nextTileTypes.upperRight)) && 
+                   (moveCharIfAble(nextTileTypes.lowerRight))) {
+                        this.x = nextX;
+                }
+            } else if(nextX < this.x) {//trying to move left
+                if((moveCharIfAble(nextTileTypes.upperLeft)) && 
+                   (moveCharIfAble(nextTileTypes.lowerLeft))) {
+                     this.x = nextX;
+                }
+            }
+
+            if(nextY > this.y) {//trying to walk down
+                if((moveCharIfAble(nextTileTypes.lowerRight)) && 
+                   (moveCharIfAble(nextTileTypes.lowerLeft))) {
+                     this.y = nextY;
+                }
+            } else if(nextY < this.y) {//trying to walk up
+                if((moveCharIfAble(nextTileTypes.upperRight)) && 
+                   (moveCharIfAble(nextTileTypes.upperLeft))) {
+                     this.y = nextY;
+                }
             }
 
             this.collider.setCollider(this.x, this.y);
+            this.setTileCollider(this.x, this.y);
             
             playerWorldHandling(this);
         }
     };
 
     this.draw = function () {
+        if(debug) {
+            scaledContext.strokeRect(this.tileCollider.x, this.tileCollider.y, 
+                this.tileCollider.width, this.tileCollider.height);
+        }
         if (this.states.walking && whoMoving != null) {
             if (this.facing.north) {
                 johnWalkUp.draw(scaledContext, this.x, this.y);

@@ -2,13 +2,15 @@ function Collider(x, y, width, height, offsetX, offsetY) {
     this.offsetX = offsetX;
     this.offsetY = offsetY;
 
-    this.width = width;
+	this.width = width;
+	console.log("width: " + this.width/2);
     this.height = height;
     this.x = x + this.offsetX;
     this.y = y + this.offsetY;
     this.box = {};
 
     this.setCollider = function(posX, posY) {
+		
   		this.box.left = posX - this.width/2 + this.offsetX;
   		this.box.right = posX + this.width/2 + this.offsetX;
   		this.box.bottom = posY + this.height/2 + this.offsetY;
@@ -41,8 +43,9 @@ function Collider(x, y, width, height, offsetX, offsetY) {
 	this.draw = function(color) {
         scaledContext.strokeStyle = color;
         scaledContext.lineWidth = 1;
-        let x = Math.floor(this.box.left) + .5;
-        let y = Math.floor(this.box.top) + .5;
-        scaledContext.strokeRect(x, y, this.width, this.height);
+        let x = Math.floor(this.box.left) + 0.5;
+        let y = Math.floor(this.box.top) + 0.5;
+//		console.log("Drawing player collider: (" + x + ", " + y + "), (" + this.width + ", " + this.height + ")");
+		scaledContext.strokeRect(x, y, this.width, this.height);
     }
 };

@@ -31,6 +31,22 @@ function rowColToArrayIndex(col, row) {
     return col + worldCols * row;
 }
 
+function getTileTypesAtRect(x, y, width, height) {
+	const upperLeft = getTileTypeAtPixelCoord(x, y);
+	const upperRight = getTileTypeAtPixelCoord(x + width, y);
+	const lowerLeft = getTileTypeAtPixelCoord(x, y + height);
+	const lowerRight = getTileTypeAtPixelCoord(x + width, y + height);
+
+	return {upperLeft:upperLeft, upperRight:upperRight, lowerLeft:lowerLeft, lowerRight:lowerRight};
+}
+
+function getNextTileTypesAtRect(rect, deltaX, deltaY) {
+	const newX = rect.x + deltaX;
+	const newY = rect.y + deltaY;
+
+	return getTileTypesAtRect(newX, newY, rect.width, rect.height);
+}
+
 function getTileTypeAtPixelCoord(x, y) {
 	let arrayIndex = getTileIndexAtPixelCoord(x, y);
 	let tileKindHere = worldGrid[arrayIndex];

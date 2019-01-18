@@ -5,7 +5,7 @@ function initializeObtainableItems() {
   for (let eachRow = 0; eachRow < worldRows; eachRow++) {
       for (let eachCol = 0; eachCol < worldCols; eachCol++) {
           let arrayIndex = rowColToArrayIndex(eachCol, eachRow);
-          let tileKindHere = worldGrid[arrayIndex];
+          let tileKindHere = locationList[locationNow].layers[Layer.Ground][arrayIndex];
 
           for(let i = 0; i < arrayOfObtainableItems.length; i++) {
             if(tileKindHere == arrayOfObtainableItems[i].tileType) {
@@ -18,81 +18,6 @@ function initializeObtainableItems() {
             }
           }
 
-/*           switch (tileKindHere) {
-               case TILE.BROKEN_SKATEBOARD:
-                   brokenSkateBoard.drawTileX = tileX;
-                   brokenSkateBoard.drawTileY = tileY;
-                   brokenSkateBoard.leftEdge = brokenSkateBoard.drawTileX;
-                   brokenSkateBoard.rightEdge = brokenSkateBoard.drawTileX + WORLD_W;
-                   brokenSkateBoard.topEdge = brokenSkateBoard.drawTileY;
-                   brokenSkateBoard.bottomEdge = brokenSkateBoard.drawTileY + WORLD_H;
-                   console.log("Yep, made it to the Switch");
-//                   brokenSkateBoard.image = worldPics[17];
-                   break;
-               case TILE.BURNER_PHONE:
-                   burnerPhone.drawTileX = tileX;
-                   burnerPhone.drawTileY = tileY;
-                   burnerPhone.leftEdge = burnerPhone.drawTileX;
-                   burnerPhone.rightEdge = burnerPhone.drawTileX + WORLD_W;
-                   burnerPhone.topEdge = burnerPhone.drawTileY;
-                   burnerPhone.bottomEdge = burnerPhone.drawTileY + WORLD_H;
-                   burnerPhone.image = worldPics[18];
-                   break;
-               case TILE.CROWBAR:
-                   crowbar.drawTileX = tileX;
-                   crowbar.drawTileY = tileY;
-                   crowbar.leftEdge = crowbar.drawTileX;
-                   crowbar.rightEdge = crowbar.drawTileX + WORLD_W;
-                   crowbar.topEdge = crowbar.drawTileY;
-                   crowbar.bottomEdge = crowbar.drawTileY + WORLD_H;
-                   crowbar.image = worldPics[19];
-                   break;
-               case TILE.HOODIE:
-                   hoodie.drawTileX = tileX;
-                   hoodie.drawTileY = tileY;
-                   hoodie.leftEdge = hoodie.drawTileX;
-                   hoodie.rightEdge = hoodie.drawTileX + WORLD_W;
-                   hoodie.topEdge = hoodie.drawTileY;
-                   hoodie.bottomEdge = hoodie.drawTileY + WORLD_H;
-                   hoodie.image = worldPics[20];
-                   break;
-               case TILE.MEDICAL_NOTEBOOK:
-                   medicalNotebook.drawTileX = tileX;
-                   medicalNotebook.drawTileY = tileY;
-                   medicalNotebook.leftEdge = medicalNotebook.drawTileX;
-                   medicalNotebook.rightEdge = medicalNotebook.drawTileX + WORLD_W;
-                   medicalNotebook.topEdge = medicalNotebook.drawTileY;
-                   medicalNotebook.bottomEdge = medicalNotebook.drawTileY + WORLD_H;
-                   medicalNotebook.image = worldPics[21];
-                   break;
-               case TILE.SEALED_TUBE:
-                   sealedTube.drawTileX = tileX;
-                   sealedTube.drawTileY = tileY;
-                   sealedTube.leftEdge = sealedTube.drawTileX;
-                   sealedTube.rightEdge = sealedTube.drawTileX + WORLD_W;
-                   sealedTube.topEdge = sealedTube.drawTileY;
-                   sealedTube.bottomEdge = sealedTube.drawTileY + WORLD_H;
-                   sealedTube.image = worldPics[22];
-                   break;
-               case TILE.THUMB_DRIVE:
-                   thumbDrive.drawTileX = tileX;
-                   thumbDrive.drawTileY = tileY;
-                   thumbDrive.leftEdge = thumbDrive.drawTileX;
-                   thumbDrive.rightEdge = thumbDrive.drawTileX + WORLD_W;
-                   thumbDrive.topEdge = thumbDrive.drawTileY;
-                   thumbDrive.bottomEdge = thumbDrive.drawTileY + WORLD_H;
-                   thumbDrive.image = worldPics[23];
-                   break;
-               case TILE.TRAIN_TICKET:
-                   trainTicket.drawTileX = tileX;
-                   trainTicket.drawTileY = tileY;
-                   trainTicket.leftEdge = trainTicket.drawTileX;
-                   trainTicket.rightEdge = trainTicket.drawTileX + WORLD_W;
-                   trainTicket.topEdge = trainTicket.drawTileY;
-                   trainTicket.bottomEdge = trainTicket.drawTileY + WORLD_H;
-                   trainTicket.image = worldPics[24];
-                   break;
-          }*/
           tileX += WORLD_W;
    }
    tileY += WORLD_H;
@@ -157,8 +82,8 @@ function obtainItemIfApplicable() {
       for (let eachRow = 0; eachRow < worldRows; eachRow++) {//replace item tile with ground tile
           for (let eachCol = 0; eachCol < worldCols; eachCol++) {
               let arrayIndex = rowColToArrayIndex(eachCol, eachRow);
-              if (worldGrid[arrayIndex] === arrayOfObtainableItems[i].tileType) {
-                worldGrid[arrayIndex] = TILE.GROUND;
+              if (locationList[locationNow].layers[Layer.Ground][arrayIndex] === arrayOfObtainableItems[i].tileType) {
+                locationList[locationNow].layers[Layer.Ground][arrayIndex] = TILE.GROUND;
               }//end of change item tile to ground tile
             }//end of column loop
           }//end of row loop

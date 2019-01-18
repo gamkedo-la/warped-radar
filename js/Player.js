@@ -65,7 +65,7 @@ function Player () {
         for (let eachRow = 0; eachRow < worldCols; eachRow++) {
             for (let eachCol = 0; eachCol < worldRows; eachCol++) {
                 let arrayIndex = rowColToArrayIndex(eachCol, eachRow);
-                if (worldGrid[arrayIndex] == TILE.PLAYER_START) {
+                if (locationList[locationNow].layers[Layer.Ground][arrayIndex] == TILE.PLAYER_START) {
                     this.x = eachCol * WORLD_W + WORLD_W / 2;
                     this.y = eachRow * WORLD_H + ((WORLD_H / 2) - 20);
                     this.collider.setCollider(this.x, this.y);
@@ -128,7 +128,7 @@ function Player () {
                 objCollisionData = doRectsIntersect(this.tileCollider, this.nearObjOrNPC.tileCollider, deltaX, deltaY);
             }
             
-            let nextTileTypes = getNextTileTypesAtRect(this.tileCollider, deltaX, deltaY);
+            let nextTileTypes = getNextTileTypesAtRectInLayer(this.tileCollider, deltaX, deltaY, locationList[locationNow].layers[Layer.Interaction]);
             if(nextX > this.x) {//trying to move right
                 if((moveOntoTileIfAble(nextTileTypes.upperRight)) && 
                    (moveOntoTileIfAble(nextTileTypes.lowerRight))) {

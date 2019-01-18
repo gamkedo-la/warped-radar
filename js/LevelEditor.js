@@ -69,18 +69,17 @@ function LevelEditor () {
         console.log("Current Tile Index: " + currentTileIndex);
         if (this.isOn) {
             scaledContext.lineWidth = 7;
-            let tileKindHere = worldGrid[tileUnderMouse];
             if (currentlySelectedSet[currentTileIndex] == undefined) {
                 console.log("undefined");
                 return;
             }
-            worldGrid[tileUnderMouse] = currentlySelectedSet[currentTileIndex];
+            locationList[locationNow].layers[Layer.Ground][tileUnderMouse] = currentlySelectedSet[currentTileIndex];
         }
     }
 
     this.showNewGrid = function () {
         if (showNewGrid) {
-            console.log("let " + locationList[locationNow].name + " = \n{ \n" + "layout: [" + worldGrid + "],\n" + "columns: " + locationList[locationNow].columns + ",\n" + "rows: " + locationList[locationNow].rows + ",\n" + "name: " + "\"" + locationList[locationNow].name + "\"" + "\n}");
+            console.log("let " + locationList[locationNow].name + " = \n{ \n" + "layer: [" + locationList[locationNow].layers[Layer.Ground] + "],\n" + "columns: " + locationList[locationNow].columns + ",\n" + "rows: " + locationList[locationNow].rows + ",\n" + "name: " + "\"" + locationList[locationNow].name + "\"" + "\n}");
             showNewGrid = false;
             this.isOn = false;
         }

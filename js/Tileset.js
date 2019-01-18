@@ -8,7 +8,8 @@ function Tileset(image, tileWidth, tileHeight) {
     const tilesPerRow = Math.floor(this.width / this.tileWidth);
 
     this.drawTileAt = function(context, index, drawX, drawY, drawWidth = this.tileWidth, drawHeight = this.tileHeight) {
-        const tilePosition = this.positionForIndex(index);
+        if(index == 0) {return;}//0 used as a transparent tile as a placeholder in the data
+        const tilePosition = this.positionForIndex(index - 1);
 
         context.drawImage(this.image, tilePosition.x, tilePosition.y, 
                                       this.tileWidth, this.tileHeight, 

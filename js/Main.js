@@ -57,7 +57,7 @@ function start () {
     levelEditor = new LevelEditor();
     player = new Player();
     
-    worldGrid = Array.from(locationList[locationNow].layout);  
+//    worldGrid = locationList[locationNow].layers[Layer.Ground];
 
     if (useRequestAnimationFrame) {
         gameLoop();
@@ -134,7 +134,7 @@ function render () {
     nonTileObjects = nonTileObjects.concat(arrayOfObtainableItems);
 
     drawWorld(nonTileObjects);
-    
+
     drawWeatherEffects();
     drawGameBorder();
     drawDebugText();
@@ -177,7 +177,7 @@ function goToNextLevel () {
 }
 
 function loadLevel (whichLevel) {
-    worldGrid = whichLevel.layout.slice();
+//    worldGrid = whichLevel.layers[Layer.Ground].slice();
     // these need to be updated to reflect the new location
     worldCols = whichLevel.columns;
     worldRows = whichLevel.rows;

@@ -31,25 +31,31 @@ function rowColToArrayIndex(col, row) {
     return col + worldCols * row;
 }
 
-function getTileTypesAtRect(x, y, width, height) {
-	const upperLeft = getTileTypeAtPixelCoord(x, y);
-	const upperRight = getTileTypeAtPixelCoord(x + width, y);
-	const lowerLeft = getTileTypeAtPixelCoord(x, y + height);
-	const lowerRight = getTileTypeAtPixelCoord(x + width, y + height);
+function getTileTypesAtRectInLayer(x, y, width, height, layer) {
+	const upperLeft = getTileTypeAtPixelCoordInLayer(x, y, layer);
+	const upperRight = getTileTypeAtPixelCoordInLayer(x + width, y, layer);
+	const lowerLeft = getTileTypeAtPixelCoordInLayer(x, y + height, layer);
+	const lowerRight = getTileTypeAtPixelCoordInLayer(x + width, y + height, layer);
 
 	return {upperLeft:upperLeft, upperRight:upperRight, lowerLeft:lowerLeft, lowerRight:lowerRight};
 }
 
-function getNextTileTypesAtRect(rect, deltaX, deltaY) {
+function getNextTileTypesAtRectInLayer(rect, deltaX, deltaY, layer) {
 	const newX = rect.x + deltaX;
 	const newY = rect.y + deltaY;
 
-	return getTileTypesAtRect(newX, newY, rect.width, rect.height);
+	return getTileTypesAtRectInLayer(newX, newY, rect.width, rect.height, layer);
 }
 
 function getTileTypeAtPixelCoord(x, y) {
 	let arrayIndex = getTileIndexAtPixelCoord(x, y);
-	let tileKindHere = worldGrid[arrayIndex];
+	let tileKindHere = locationList[locationNow].layers[Layer.Ground][arrayIndex];
+	return tileKindHere;
+}
+
+function getTileTypeAtPixelCoordInLayer(x, y, layer) {
+	let arrayIndex = getTileIndexAtPixelCoord(x, y);
+	let tileKindHere = layer[arrayIndex];
 	return tileKindHere;
 }
 
@@ -86,10 +92,8 @@ function indexToCenteredXY(index) {
 }
 
 function moveOntoTileIfAble(tileType) {
-	for(let i = 0; i < solidTiles.length; i++)
-	{
-		if(tileType == solidTiles[i])
-			return false;
+	for(let i = 0; i < solidTiles.length; i++) {
+		if(tileType == solidTiles[i]) {return false;}
 	}
 	return true;
 }

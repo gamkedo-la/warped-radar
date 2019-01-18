@@ -33,7 +33,7 @@ const Menu = new (function() {
 
     this.menuMouse = function(){
      for (let i = 0; i < menuPageText[currentPage].length; i++) {
-        if(mouseX > itemsX && mouseX < itemsX + itemsWidth 
+        if(mouseX > itemsX && mouseX < itemsX + itemsWidth
             && mouseY > topItemY + (i * rowHeight) && mouseY < topItemY + (i+1) * rowHeight) {
             this.cursor1 = i;
         }
@@ -48,7 +48,7 @@ const Menu = new (function() {
             } else if (keysPressed(KEY_BACKSPACE)) {
                 currentPage = MENU_PAGE;
                 cursor1 = 0;
-            }            
+            }
             if(keysPressed(KEY_UP)) {
                 cursor1--;
                 if (cursor1 < 0) {
@@ -60,9 +60,9 @@ const Menu = new (function() {
                 cursor1++;
                 if (cursor1 >= menuPageText[currentPage].length) {
                     cursor1 = 0;
-                }                
+                }
                 keyRepeatWait = KEY_REPEAT_FRAME_DELAY;
-            } 
+            }
         }
         keyRepeatWait = Math.max(0, keyRepeatWait - 1);
     };
@@ -73,15 +73,16 @@ const Menu = new (function() {
             case "Story":
                 gameIsStarted = true;
                 warpedRadarBackgroundMusic.loopSong("audio/stebs_warped_radar_song");
+                warpedRadarBackgroundMusic.setVolume(0.35);//trying to balance background music with dialogue volume
                 cursor1 = 0;
                 break;
             case "Continue":
                 currentPage = CONTINUE_PAGE;
                 cursor1 = 0;
                 break;
-            case "Options": 
+            case "Options":
                 cursor1 = 0;
-                currentPage = OPTIONS_PAGE; 
+                currentPage = OPTIONS_PAGE;
                 break;
             case "Guide":
                 cursor1 = 0;
@@ -89,14 +90,14 @@ const Menu = new (function() {
                 break;
             case "Credits":
                 cursor1 = 0;
-                currentPage  = CREDITS_PAGE;    
+                currentPage  = CREDITS_PAGE;
                 break;
 
             case "Volume":
-                console.log("TODO implement volume changer");   
+                console.log("TODO implement volume changer");
                 break;
             case "Controls":
-                console.log("TODO Added Controls changer");   
+                console.log("TODO Added Controls changer");
                 break;
             case "How to play":
                 console.log("TODO implement how to play");
@@ -105,12 +106,12 @@ const Menu = new (function() {
                 console.log("TODO implement control layout");
                 break;
             case "Back":
-                currentPage  = MENU_PAGE; 
+                currentPage  = MENU_PAGE;
                 cursor1 = 0;
                 break;
             case 'resume':
                  paused = false;
-                break; 
+                break;
             case 'sound':
             //muteSFXandBackground();
                 break;
@@ -120,7 +121,7 @@ const Menu = new (function() {
             default:
                 break;
             //if (cursor1 >= menuPageText[currentPage].length){//if we're going to shorter menu
-            //   cursor1 = menuPageText[currentPage].length - 1;  
+            //   cursor1 = menuPageText[currentPage].length - 1;
         }
     };
 
@@ -132,14 +133,14 @@ const Menu = new (function() {
         canvasContext.save();
         canvasContext.setTransform(1, 0, 0, 1, 0, 0);
         canvasContext.clearRect(0, 0, canvas.width, canvas.height);
-        canvasContext.restore(); 
+        canvasContext.restore();
     };
 
 
     this.draw = function() {
         if(gameIsStarted === false){
         if(currentPage == PAUSED_PAGE){
-          currentPage = MENU_PAGE;  
+          currentPage = MENU_PAGE;
         }
         this.redraw();
         }else {
@@ -154,7 +155,7 @@ const Menu = new (function() {
             let creditsLineSkipY = 55;
             for (let i = 0; i < creditsList.length; i++) {
                 colorText(creditsList[i],creditsX, creditsTopY + creditsLineSkipY * i, textColour, textFontFace, 'left', 'top');
-            }    
+            }
         } else {
             canvasContext.drawImage(logoPic, 0, 0);
             for (let i=0; i<menuPageText[currentPage].length; i++){
@@ -163,5 +164,5 @@ const Menu = new (function() {
         }
         //Draw cursor after background image
         canvasContext.drawImage(arrowPic,itemsX -55 ,topItemY + (cursor1 * rowHeight) -42);
-    };    
+    };
 })();

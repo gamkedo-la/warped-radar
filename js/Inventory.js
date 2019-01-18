@@ -104,7 +104,7 @@ let inventory = new(function () {
                     } else {
                         canvasContext.drawImage(inventory.items[i].image, itemCellX + 5, itemCellY + 5, slotWidth * 0.9, slotHeight * 0.9);
                     }
-                    
+
                 }
             }
         }
@@ -139,7 +139,7 @@ let inventory = new(function () {
         let selectedTextColour = "orange";
         let cursorTextColour = "yellow";
         let itemSpace = 30;
-        
+
         if (this.isShowing) {
             if (this.showActions) {
                 for (let i = 0; i < this.items[this.index].actions.length; i++) {
@@ -160,7 +160,7 @@ let inventory = new(function () {
                     letterCounter += 1;
 	                //floored in case letter speed is changed
 	                if ((Math.floor(letterCounter) % 2) == 0) {
-						voiceLow1.play();
+						inventoryChoiceSound.play();
 	                }
                 } else {
                     if (interact_key) {
@@ -171,7 +171,7 @@ let inventory = new(function () {
                         actionCursor = 0;
                     }
                 }
-                
+
                 let typewriterText = inventory.items[inventory.index].actions[actionCursor][1].substr(0, letterCounter);
 				this.wrapText(typewriterText, descX, (descY + 95), width - 110, lineHeight, actionfontFace, choiceColour);
             }
@@ -215,8 +215,8 @@ let inventory = new(function () {
             this.isShowing = !this.isShowing;
         }
     }
-	
-	
+
+
     this.getWordsAndBreaksFromString = function (dialogueWords) {
     	let breaks = dialogueWords.split("\n"),
     		newLines = "";
@@ -226,12 +226,12 @@ let inventory = new(function () {
 		 let words = newLines.split(" ");
 		 return words;
     }
-	
+
     this.wrapText = function (dialogueWords, x, y, maxWidth, lineHeight, font, colour) {
         let words = this.getWordsAndBreaksFromString(dialogueWords),
             checkEndOfLine, checkTextWidth, textWidth;
         let line = "";
-		
+
 		let oldFont = canvasContext.font;
 		canvasContext.font = descFontFace; // to correctly measure text
         for (let i = 0; i < words.length; i++) {

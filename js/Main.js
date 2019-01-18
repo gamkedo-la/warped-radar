@@ -56,7 +56,7 @@ function start () {
     mainCamera = new Camera();
     levelEditor = new LevelEditor();
     player = new Player();
-    
+
 //    worldGrid = locationList[locationNow].layers[Layer.Ground];
 
     if (useRequestAnimationFrame) {
@@ -78,6 +78,7 @@ function start () {
 
     //Start background music
     warpedRadarBackgroundMusic.loopSong("audio/MainMenu");
+    warpedRadarBackgroundMusic.setVolume(0.35);//trying to balance background music with dialogue volume
 };
 
 //This is the call that gets the game started.
@@ -172,7 +173,7 @@ function goToNextLevel () {
     }
 
     loadLevel(locationList[locationNow]);
-    
+
 
 }
 
@@ -183,13 +184,13 @@ function loadLevel (whichLevel) {
     worldRows = whichLevel.rows;
     mainCamera.camPanX = 0;
     mainCamera.camPanY = 0;
-    
+
     if (locationNow === 0) { //only render fog in the city
     	isFoggy = true;
     } else {
     	isFoggy = false;
     }
-    
+
     player.reset();
 }
 
@@ -222,7 +223,7 @@ function drawDebugText () {
 function drawTextNearObjOrNPC() {
     if(player.nearObjOrNPC != null) {
         // Draw text for NPC
-        colorText(player.nearObjOrNPC.name, (player.nearObjOrNPC.x*2 - mainCamera.camPanX*2) - 15, (player.nearObjOrNPC.y*2 - mainCamera.camPanY*2) + 15, "white", "14px Arial", "left", 1);        
+        colorText(player.nearObjOrNPC.name, (player.nearObjOrNPC.x*2 - mainCamera.camPanX*2) - 15, (player.nearObjOrNPC.y*2 - mainCamera.camPanY*2) + 15, "white", "14px Arial", "left", 1);
 
         // Draw text for obtainable items
         colorText(player.nearObjOrNPC.description, (player.nearObjOrNPC.drawTileX*2 - mainCamera.camPanX*2) -15, (player.nearObjOrNPC.drawTileY*2 - mainCamera.camPanY*2) + 15, "white", "14px Arial", "left", 1);

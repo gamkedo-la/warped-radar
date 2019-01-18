@@ -1,10 +1,46 @@
+//****checking to see if the browser is Firefox. Due to CORS policy and browser specifications, Firefox is apparently the only
+//browser that allows offline same origin calls in the same project folder. If the browser is Firefox, we can implement the
+//web audio api and it's more advanced audio features during development. If not, we skip over it.
+
+var use_web_audio_api = false;
+
+//actual check
+(function(){
+    if (window.navigator.userAgent.match("Firefox")) {
+      use_web_audio_api = true;
+    };
+})();
+
+//create web audio api instance
+if (use_web_audio_api) {
+	//two web audio api contexts to work around hard left and hard right panning bug
+  var web_audio_api_context1 = new (window.AudioContext || window.webkitAudioContext)();
+  var web_audio_api_context2 = new (window.AudioContext || window.webkitAudioContext)();
+
+  //the web audio api uses nodes to create a chain to connect the source audio to effects and then from the effects to the output,
+  //these are panner nodes which should come after the source and before the output (speakers)
+  var hard_left_dialogue_panner_node = web_audio_api_context1.createStereoPanner();
+  hard_left_dialogue_panner_node.connect(web_audio_api_context1.destination);
+  hard_left_dialogue_panner_node.pan.value = -1;//panning left for john's dialogue
+
+  var hard_right_dialogue_panner_node = web_audio_api_context2.createStereoPanner();
+  hard_right_dialogue_panner_node.connect(web_audio_api_context2.destination);
+  hard_right_dialogue_panner_node.pan.value = 1;//panning right for npc's
+
+  console.log("we're in Firefox and utilizing web audio api where desired");
+  console.log("use_web_audio_api", use_web_audio_api);
+  console.log("panner nodes created", hard_left_dialogue_panner_node, hard_right_dialogue_panner_node);
+}
+
 let audioFormat;
 
-let voiceHigh1 = new SoundOverlapsClass("./audio/snd_voice1");
-let voiceHigh2 = new SoundOverlapsClass("./audio/snd_voice2");
-let voiceLow1 = new SoundOverlapsClass("./audio/snd_voice3");
-let voiceLow2 = new SoundOverlapsClass("./audio/snd_voice4");
-let selected = new SoundOverlapsClass("./audio/selected");
+//second parameter is soundType for web audio API hookups, ["general", 'johns voice', 'npc voice']
+let dialogueChoiceSound = new SoundOverlapsClass("./audio/snd_voice1", 0);
+let voiceHigh2 = new SoundOverlapsClass("./audio/snd_voice2", 2);
+let inventoryChoiceSound = new SoundOverlapsClass("./audio/snd_voice3", 0);
+let voiceLow1 = new SoundOverlapsClass("./audio/snd_voice3", 1);
+let voiceLow2 = new SoundOverlapsClass("./audio/snd_voice4", 0);
+let selected = new SoundOverlapsClass("./audio/selected", 0);
 
 //how to add music: let bgMusic = "./audio/bgMusic";
 
@@ -93,17 +129,49 @@ function backgroundMusicClass() {
 	}
 }
 
-function SoundOverlapsClass(filenameWithPath) {
+function SoundOverlapsClass(filenameWithPath, soundTypeIndex) {
     setFormat();
 
+    let arrayOfSoundTypes = ["general", 'johns voice', 'npc voice'];
+    this.soundType = arrayOfSoundTypes[soundTypeIndex];
+    console.log(this.soundType);
     let fullFilename = filenameWithPath;
 		let soundIndex = 0;
     let sounds = [new Audio(fullFilename + audioFormat), new Audio(fullFilename + audioFormat)];
 
+		//if using the web audio api in Firefox, create audio buffers for the overlap sounds and connect the audio tags to the web
+		//audio api buffers to utilize the extra features of the web audio api
+		if (use_web_audio_api && this.soundType === 'johns voice') {
+				web_audio_api_source_nodes = [web_audio_api_context1.createMediaElementSource(sounds[0]),
+																		  web_audio_api_context1.createMediaElementSource(sounds[1])];
+				web_audio_api_source_nodes[0].connect(hard_left_dialogue_panner_node);
+				web_audio_api_source_nodes[1].connect(hard_left_dialogue_panner_node);
+		} else if (use_web_audio_api && this.soundType === 'npc voice') {
+				web_audio_api_source_nodes = [web_audio_api_context2.createMediaElementSource(sounds[0]),
+																		  web_audio_api_context2.createMediaElementSource(sounds[1])];
+				web_audio_api_source_nodes[0].connect(hard_right_dialogue_panner_node);
+				web_audio_api_source_nodes[1].connect(hard_right_dialogue_panner_node);
+		}
+
+		console.log("sounds in class initialization", sounds);
+
     this.play = function() {
+
 				if(!sounds[soundIndex].paused) {
-					sounds.splice(soundIndex, 0, new Audio(fullFilename + audioFormat));
+					var new_audio_tag = new Audio(fullFilename + audioFormat);
+
+					if (use_web_audio_api && this.soundType === 'johns voice') {
+
+						var new_web_audio_api_source_node = web_audio_api_context1.createMediaElementSource(new_audio_tag);
+						new_web_audio_api_source_node.connect(hard_left_dialogue_panner_node);
+						// new_audio_before_check.play();//****NOTE THIS LOGIC, playing original audio tag, NOT the new source node
+					} else if (use_web_audio_api && this.soundType === 'npc voice') {
+            var new_web_audio_api_source_node = web_audio_api_context2.createMediaElementSource(new_audio_tag);
+						new_web_audio_api_source_node.connect(hard_right_dialogue_panner_node);
+          }
+					sounds.splice(soundIndex, 0, new_audio_tag);
 				}
+				// console.log("sounds within play method", sounds);
         sounds[soundIndex].currentTime = 0;
         sounds[soundIndex].volume = Math.pow(getRandomVolume() * effectsVolume * !isMuted, 2);
         sounds[soundIndex].play();

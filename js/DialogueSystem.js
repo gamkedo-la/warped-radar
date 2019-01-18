@@ -48,7 +48,6 @@ function Dialogue() {
     let choiceCursorX = 0;
     let choiceCursorY = 0;
     let choiceCursor = 0;
-    let choiceSound = voiceHigh1;
     let selectSound = selected;
     let choiceTextAlign = textAlign;
     let cursorTextColour = "yellow";
@@ -108,7 +107,7 @@ function Dialogue() {
             showingChoiceMenu = false;
             for (let d = 0; d < conversation.length; d++) {
                 if (conversation[d].scene == nextChoiceLabel) {
-                    this.page = d; // found the index where .scene 
+                    this.page = d; // found the index where .scene
                     break; // bail from for loop, quit searching
                 }
             }
@@ -268,18 +267,18 @@ function Dialogue() {
                 }
             }
         }
-        
+
         canvasContext.globalAlpha = this.speakerAlpha;
-        
+
         if (switchPic) {//fade out on the previous pic
             canvasContext.drawImage(speakerImgList[this.page - 1], this.speakerX, speakerY);
         } else {//fade in on the next (when poses switch)
             canvasContext.drawImage(speakerImgList[this.page], this.speakerX, speakerY);
         }
-        
+
         //just drawing the portrait will show the full fade effect AFTER the portraits have switched
         //canvasContext.drawImage(speakerImgList[this.page], this.speakerX, speakerY);
-        
+
         canvasContext.globalAlpha = 1;
         if (leaveScreenList[this.page] && this.speakerX >= this.speakerStartX) {
 
@@ -293,7 +292,7 @@ function Dialogue() {
             this.speakerX -= tweenOutSpeed;
         } else if (this.isShowing && this.speakerX < speakerFinalX) {
             this.speakerX += tweenInSpeed;
-            
+
             //speaker specific mouth anims for when tweening in
             if (fullAlpha) {
                 if (speakerImgList[this.page] == johnHappyPic) {
@@ -301,24 +300,24 @@ function Dialogue() {
                 } else {
                     this.setupAnimatedMouths(dialogueList, nameList, "John", true, johnAngryMouthMove, 130, 400);
                 }
-                
+
             }
         } else if (this.speakerX >= speakerFinalX) {
             this.speakerX = speakerFinalX;
             currentPic = speakerImgList[this.page];
             nextPic = speakerImgList[this.page + 1];
-            
+
             //speaker specific mouth anims when at final pos
             if (fullAlpha) {
-                
+
                 if (speakerImgList[this.page] == johnHappyPic) {
                     this.setupAnimatedMouths(dialogueList, nameList, "John", true, johnMouthMove, 150, 300);
                 } else {
                     this.setupAnimatedMouths(dialogueList, nameList, "John", true, johnAngryMouthMove, 150, 300);
                 }
             }
-            
-            
+
+
         }
     }
 
@@ -447,10 +446,10 @@ function Dialogue() {
 				this.page++;
 				console.log("Used the fall back");
 			}
-            
+
             //fade effect for left pic
             if (currentPic != nextPic) switchPic = true;
-            
+
             if (choiceCounter < sceneText.length) { //increases the index for branching text
                 choiceCounter++;
             } else if (choiceCounter != 0 && choiceCounter == sceneText.length && nextChoiceLabel != -1) {

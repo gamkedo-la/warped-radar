@@ -33,6 +33,7 @@ let johnAnimationSide = document.createElement("img");
 //let johnSide45Animation = document.createElement("img");
 
 let roseAnimationIdle = document.createElement("img");
+let roseAnimationWorry = document.createElement("img");
 
 let rainEffectImage = document.createElement("img");
 let fogEffectImage = document.createElement("img");
@@ -90,6 +91,7 @@ function loadImages() {
         //{varName: johnSide45Animation, theFile: "johnspriteside45-sheet.png"},//legacy diagonal animation
         
         {varName: roseAnimationIdle, theFile: "rosesprite-sheet-IDLE.png"},
+        {varName: roseAnimationWorry, theFile: "rosesprite-sheet-IDLE-WORRY.png"},
 
         //DEFAULT GAMESTART ITEMS
         {varName: notePic, theFile: "note.png"},

@@ -88,6 +88,13 @@ function makeAnimatedSprites() {
 		animationColFrames: 40,
 		framesUntilNext: frameDelayWalk,
 	});
+
+	roseWorry = new AnimatedSpriteClass({
+		name: "roseAnimationWorry",
+		spriteSheet: roseAnimationWorry,
+		animationColFrames: 43,
+		framesUntilNext: frameDelayWalk,
+	});
 };
 
 function AnimatedSpriteClass(data) {

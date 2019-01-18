@@ -8,7 +8,8 @@ function OverworldObject(name, leftEdge, topEdge, width, height, animations = nu
     this.messageCounter = 0;
 
     this.states = {
-        walking: false
+        walking: false,
+        worrying: true
     }
 
     this.facing = {
@@ -43,6 +44,8 @@ function OverworldObject(name, leftEdge, topEdge, width, height, animations = nu
                     } else if(this.facing.southWest) {
                         animations.southWest.draw(scaledContext, this.x, this.y);
                     }
+                } else if(this.states.worrying) {
+                    animations.worry.draw(scaledContext, this.x, this.y);
                 } else {
                     animations.idle.draw(scaledContext, this.x, this.y);
                 }
@@ -53,17 +56,24 @@ function OverworldObject(name, leftEdge, topEdge, width, height, animations = nu
     }//end this.draw()
 
     this.collidingWithPlayer = function () {
+        //can't be colliding unless we're in the view port
+        if(!isInViewPort(scaledCanvas, this.x, this.y)) {return false;}
+
         // Find middle point on the bottom - feet
         let playerX = player.x + johnSprite.width / 2;
         let playerY = player.y + johnSprite.height / 2;
         let objX = this.x + this.w / 2;
         let objY = this.y + this.h;
         // Calculate the distance between player and NPC from that point
-        let x = Math.abs(playerX - objX);
-        let y = Math.abs(playerY - objY);
-        let distance = Math.sqrt(x * x + y * y);
+        // will be using the square of these values so don't need Math.abs()
+        let x = playerX - objX;
+        let y = playerY - objY;
 
-        let radius = 60;
+        //avoid 'expensive' Math.sqrt() function, just compare squared distances
+        let distance = (x * x + y * y);
+
+        //get radius squared to compare to distance
+        let radius = 60 * 60;
         if (distance <= radius) {
             player.nearObjOrNPC = this;
             return true;
@@ -125,6 +135,7 @@ function OverworldObject(name, leftEdge, topEdge, width, height, animations = nu
 function initializeOverworldObjects() {
     const roseAnimations = {
         idle:roseIdle,
+        worry:roseWorry,
         north:null,
         south:null,
         east:null,

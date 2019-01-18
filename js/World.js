@@ -94,8 +94,7 @@ let tileSet;// = new Tileset(worldTiles, 40, 40);
 
 let solidTiles = [
                 2, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17,
-                26, 27, 28, 29, 30, 31, 32, 33, 34, 35,
-                36 ,37, 38, 39, 40, 41, 42, 43, 44, 45,
+                 29, 30, 31, 32, 33, 34, 38, 39, 40, 41, 42, 43, 44, 45,
                 46, 47, 48, 49, 50, 51, 52, 53, 54, 55,
                 56, 57, 58, 59, 60, 61, 62, 63, 64, 65,
                 66, 67, 68, 69, 70, 71, 72, 73, 74, 75,
@@ -103,15 +102,6 @@ let solidTiles = [
 
 let locationList = [theCity, johnsRoom, johnsHallway, johnsKitchen];
 let locationNow = 0;
-
-//importing 1-indexed tiled maps, temporary hacky fix to make map data 0-indexed.
-/*    locationList.forEach(location=>{
-        location.layers[Layer.Ground].forEach( (tile, index, arr)=>{
-            if(arr[index] == 0) { return }
-            else { arr[index] = tile-1; }
-            
-        })
-    });*/
 
     window.locations = locationList
 //--------------------------------------
@@ -252,7 +242,7 @@ function drawInteractionLayer(nonTileObjs) {
 function drawWorld(nonTileObjs) {
     drawLayer(locationList[locationNow].layers[Layer.Ground]);
     drawInteractionLayer(nonTileObjs);
-//    drawLayer(locationList[locationNow].layers[Layer.Overhead]);
+    drawLayer(locationList[locationNow].layers[Layer.Overhead]);
 } //end of draw world
 
 function isInViewPort(aCanvas, x, y) {

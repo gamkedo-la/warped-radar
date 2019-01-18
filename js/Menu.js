@@ -5,6 +5,7 @@ const Menu = new (function() {
     const GUIDE_PAGE = 3;
     const CREDITS_PAGE = 4;
     const EPISODE_PAGE = 5;
+    const PAUSED_PAGE = 6;
 
     let itemsX = 340;
     let topItemY = 260;
@@ -23,12 +24,21 @@ const Menu = new (function() {
     let continueList = ["Remember", "Episodes", "Back"];
     let optionsList = ["Volume", "Controls", "Back"];
     let guideList= ["Gameplay","Gamepad", "Back"];
+    let pausedList =['resume', 'sound' , 'record'];
     let creditsList =["Kise: Project lead", "BackSpace"];
 
-    let menuPageText = [menuList, continueList, optionsList, guideList, creditsList, episodeList];
+    let menuPageText = [menuList, continueList, optionsList, guideList, creditsList, episodeList, pausedList];
     // A super-janky menu input key repeat delay variable
     const KEY_REPEAT_FRAME_DELAY = 10;
 
+    this.menuMouse = function(){
+     for (let i = 0; i < menuPageText[currentPage].length; i++) {
+        if(mouseX > itemsX && mouseX < itemsX + itemsWidth 
+            && mouseY > topItemY + (i * rowHeight) && mouseY < topItemY + (i+1) * rowHeight) {
+            this.cursor1 = i;
+        }
+      }
+    }
     this.update = function() {
         //Wobble the cursors back and forth
         if (keyRepeatWait == 0) {
@@ -98,6 +108,15 @@ const Menu = new (function() {
                 currentPage  = MENU_PAGE; 
                 cursor1 = 0;
                 break;
+            case 'resume':
+                 paused = false;
+                break; 
+            case 'sound':
+            //muteSFXandBackground();
+                break;
+            case 'record':
+            console.log('savegame');
+            break;
             default:
                 break;
             //if (cursor1 >= menuPageText[currentPage].length){//if we're going to shorter menu
@@ -118,7 +137,16 @@ const Menu = new (function() {
 
 
     this.draw = function() {
+        if(gameIsStarted === false){
+        if(currentPage == PAUSED_PAGE){
+          currentPage = MENU_PAGE;  
+        }
         this.redraw();
+        }else {
+        currentPage = PAUSED_PAGE;
+        canvasContext.clearRect(itemsX -50,topItemY - rowHeight,
+        itemsWidth, rowHeight * menuPageText[currentPage].length + rowHeight  );
+    }
         if(currentPage == CREDITS_PAGE) {
             colorRect( 0, 0, gameCanvas.width, gameCanvas.height, "black", 0.2);
             let creditsX = 11;

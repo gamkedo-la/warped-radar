@@ -37,7 +37,6 @@ const KEY_ENTER = 13;
 const KEY_SHIFT = 16;
 const KEY_CTRL = 17;
 const KEY_BACKSPACE = 8;
-const MOUSE_LEFT = 1;
 let mouseX, mouseY;
 
 let interact_key = false;
@@ -50,6 +49,9 @@ let cursorKeyPresses = 0;
 let keydownMap = {};
 
 function setupInput() {
+    document.addEventListener('click', event => {
+        Menu.checkState();
+    });
     canvas.addEventListener("mousemove", updateMousePos);
     canvas.addEventListener("mouseup", mouseReleased);
     document.addEventListener("keydown", keydownHandler);
@@ -65,6 +67,8 @@ function updateMousePos(evt) {
 
     mouseX *= canvas.width / canvas.clientWidth;
     mouseY *= canvas.height / canvas.clientHeight;
+
+    Menu.menuMouse();
 }
 
 function mouseReleased(evt) {

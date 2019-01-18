@@ -45,7 +45,6 @@ function Collider(x, y, width, height, offsetX, offsetY) {
         scaledContext.lineWidth = 1;
         let x = Math.floor(this.box.left) + 0.5;
         let y = Math.floor(this.box.top) + 0.5;
-//		console.log("Drawing player collider: (" + x + ", " + y + "), (" + this.width + ", " + this.height + ")");
 		scaledContext.strokeRect(x, y, this.width, this.height);
     }
 };

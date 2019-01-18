@@ -117,31 +117,93 @@ function Player () {
                 }
             }
 
+            let shouldMoveX = false;
+            let shouldMoveY = false;
             let deltaX = nextX - this.x;
             let deltaY = nextY - this.y;
+
+            let objCollisionData;
+            if(!((this.nearObjOrNPC == null) || 
+               (this.nearObjOrNPC.tileCollider == undefined) || 
+               (this.nearObjOrNPC.tileCollider == null))) {
+                objCollisionData = doRectsIntersect(this.tileCollider, this.nearObjOrNPC.tileCollider, deltaX, deltaY);
+            }
+            
             let nextTileTypes = getNextTileTypesAtRect(this.tileCollider, deltaX, deltaY);
             if(nextX > this.x) {//trying to move right
-                if((moveCharIfAble(nextTileTypes.upperRight)) && 
-                   (moveCharIfAble(nextTileTypes.lowerRight))) {
-                        this.x = nextX;
-                }
+                if((moveOntoTileIfAble(nextTileTypes.upperRight)) && 
+                   (moveOntoTileIfAble(nextTileTypes.lowerRight))) {
+                    if((this.nearObjOrNPC == null) || 
+                       (this.nearObjOrNPC.tileCollider == undefined) || 
+                       (this.nearObjOrNPC.tileCollider == null)) {
+                           //if there is no object or NPC near, can't collide
+                           //if there is an object/NPC near but it has no tile collider, can't collide
+                        shouldMoveX = true;
+                    } else {
+                        if((objCollisionData.topRight == false) && 
+                           (objCollisionData.bottomRight == false)) {
+                            shouldMoveX = true;
+                        }//end if objCollisionData check
+                    }//end if-else nearObjOrNPC         
+                }//end if moveOntoTileIfAble
             } else if(nextX < this.x) {//trying to move left
-                if((moveCharIfAble(nextTileTypes.upperLeft)) && 
-                   (moveCharIfAble(nextTileTypes.lowerLeft))) {
-                     this.x = nextX;
-                }
-            }
+                if((moveOntoTileIfAble(nextTileTypes.upperLeft)) && 
+                   (moveOntoTileIfAble(nextTileTypes.lowerLeft))) {
+                    if((this.nearObjOrNPC == null) || 
+                       (this.nearObjOrNPC.tileCollider == undefined) || 
+                       (this.nearObjOrNPC.tileCollider == null)) {
+                           //if there is no object or NPC near, can't collide
+                           //if there is an object/NPC near but it has no tile collider, can't collide
+                        shouldMoveX = true;
+                    } else {
+                        if((objCollisionData.topLeft == false) && 
+                           (objCollisionData.bottomLeft == false)) {
+                            shouldMoveX = true;
+                        }//end if objCollisionData check
+                    }//end if-else nearObjOrNPC 
+                }//end if moveOntoTileIfAble
+            }//end if-else nextX > this.x
 
             if(nextY > this.y) {//trying to walk down
-                if((moveCharIfAble(nextTileTypes.lowerRight)) && 
-                   (moveCharIfAble(nextTileTypes.lowerLeft))) {
-                     this.y = nextY;
-                }
+                if((moveOntoTileIfAble(nextTileTypes.lowerRight)) && 
+                   (moveOntoTileIfAble(nextTileTypes.lowerLeft))) {
+                    if((this.nearObjOrNPC == null) || 
+                       (this.nearObjOrNPC.tileCollider == undefined) || 
+                       (this.nearObjOrNPC.tileCollider == null)) {
+                           //if there is no object or NPC near, can't collide
+                           //if there is an object/NPC near but it has no tile collider, can't collide
+                        shouldMoveY = true;
+                    } else {
+                        if((objCollisionData.bottomRight == false) && 
+                           (objCollisionData.bottomLeft == false)) {
+                            shouldMoveY = true;
+                        }//end if objCollisionData check
+                    }//end if-else nearObjOrNPC 
+                }//end if moveOntoTileIfAble
             } else if(nextY < this.y) {//trying to walk up
-                if((moveCharIfAble(nextTileTypes.upperRight)) && 
-                   (moveCharIfAble(nextTileTypes.upperLeft))) {
-                     this.y = nextY;
-                }
+                if((moveOntoTileIfAble(nextTileTypes.upperRight)) && 
+                   (moveOntoTileIfAble(nextTileTypes.upperLeft))) {
+                    if((this.nearObjOrNPC == null) || 
+                       (this.nearObjOrNPC.tileCollider == undefined) || 
+                       (this.nearObjOrNPC.tileCollider == null)) {
+                           //if there is no object or NPC near, can't collide
+                           //if there is an object/NPC near but it has no tile collider, can't collide
+                        shouldMoveY = true;
+                    } else {
+                        if((objCollisionData.topRight == false) && 
+                           (objCollisionData.topLeft == false)) {
+                            shouldMoveY = true;
+                        }//end if objCollisionData check
+                    }//end if-else nearObjOrNPC 
+                }//end if moveOntoTileIfAble
+            }//end if-else nextX > this.x
+
+            if(shouldMoveX) {
+                this.x = nextX;
+            }
+
+            if(shouldMoveY) {
+                this.y = nextY;
             }
 
             this.collider.setCollider(this.x, this.y);

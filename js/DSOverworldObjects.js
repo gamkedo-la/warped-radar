@@ -23,7 +23,21 @@ function OverworldObject(name, leftEdge, topEdge, width, height, animations = nu
         southWest: false
     }
 
+    const idleWidth = 0.80 * roseIdle.spriteSheet.width/(4 * roseIdle.animationColFrames);
+    const idleHeight = roseIdle.spriteSheet.height;
+    this.tileCollider = {x:this.x - idleWidth / 2, y:this.y + (0.38 * idleHeight), 
+                         width: idleWidth, height:0.05 * idleHeight};
+    this.setTileCollider = function(newX, newY) {
+        this.tileCollider.x = newX - idleWidth / 2;
+        this.tileCollider.y = newY + 0.38 * idleHeight;
+    }
+
     this.draw = function () {
+        if(debug) {
+            scaledContext.strokeRect(this.tileCollider.x, this.tileCollider.y, 
+                this.tileCollider.width, this.tileCollider.height);
+        }
+
         if (locationList[locationNow] == theCity) {
             if(animations != null) {
                 if(this.states.walking) {
@@ -55,7 +69,7 @@ function OverworldObject(name, leftEdge, topEdge, width, height, animations = nu
         }//end if locationList
     }//end this.draw()
 
-    this.collidingWithPlayer = function () {
+    this.nearPlayer = function () {
         //can't be colliding unless we're in the view port
         if(!isInViewPort(scaledCanvas, this.x, this.y)) {return false;}
 
@@ -82,7 +96,7 @@ function OverworldObject(name, leftEdge, topEdge, width, height, animations = nu
     }
 
     this.onTrigger = function (dialogue) {
-        if (this.collidingWithPlayer() && !dialogue.isShowing && !inventory.isShowing) {
+        if (this.nearPlayer() && !dialogue.isShowing && !inventory.isShowing) {
             if (keysPressed(KEY_SPACE) || keysPressed(KEY_ENTER)) {
                 if (dialogue.page <= 0) {
                     dialogue.isShowing = true;
@@ -93,7 +107,7 @@ function OverworldObject(name, leftEdge, topEdge, width, height, animations = nu
                     dialogue.page = 0;
                 }
             }
-        } else if (!this.collidingWithPlayer()) {
+        } else if (!this.nearPlayer()) {
             dialogue.isShowing = false;
             dialogue.page = 0;
         }
@@ -189,9 +203,14 @@ function triggerNPCDialogue() {
     }
 }
 
-function drawAndInitNPCs() { //here for prototype purposes
+function drawNPCs() { //here for prototype purposes
     for (let i = 0; i < allNPCs.length; i++) {
         allNPCs[i].draw();
-        allNPCs[i].collidingWithPlayer();
+    }
+}
+
+function checkForNearbyNPCs() {
+    for (let i = 0; i < allNPCs.length; i++) {
+        allNPCs[i].nearPlayer();
     }
 }

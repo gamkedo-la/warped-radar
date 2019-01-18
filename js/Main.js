@@ -111,6 +111,7 @@ function update (delta) {
     }
     else {
         player.nearObjOrNPC = null;
+        checkForNearbyNPCs();
         player.move(delta);
         checkForObtainableItems(); //in obtainableItems.js
         triggerNPCDialogue();
@@ -131,7 +132,7 @@ function render () {
     if (debug) {
         player.collider.draw("red");
     }
-    drawAndInitNPCs();
+    drawNPCs();
     drawWeatherEffects();
     drawGameBorder();
     drawDebugText();
@@ -201,7 +202,7 @@ function drawGameBorder () {
 
 function drawDebugText () {
     colorText("Pressed Space: " + interact_key, 20, 30, "white", "20px Arial", "left", 1);
-    colorText("Colliding with Rose: " + allNPCs[0].collidingWithPlayer(), 20, 50, "white", "20px Arial", "left", 1);//assumes Rose is the first NPC added to the allNPCs array
+    colorText("Near Rose: " + allNPCs[0].nearPlayer(), 20, 50, "white", "20px Arial", "left", 1);//assumes Rose is the first NPC added to the allNPCs array
     colorText("[CTRL+E] Level Editor: " + (levelEditor.isOn ? "ON" : "OFF"), 800, 30, "white", "20px Arial", "right", 1);
 
     colorText(locationList[locationNow].name, canvas.width/2, 80, "white", "20px Arial", "center", 1);

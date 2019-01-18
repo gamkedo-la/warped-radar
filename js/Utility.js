@@ -85,12 +85,61 @@ function indexToCenteredXY(index) {
 		};
 }
 
-function moveCharIfAble(tileType)
-{
+function moveOntoTileIfAble(tileType) {
 	for(let i = 0; i < solidTiles.length; i++)
 	{
 		if(tileType == solidTiles[i])
 			return false;
 	}
 	return true;
+}
+
+function doRectsIntersect(rect1, rect2, deltaX, deltaY) {//assume axis aligned bounding boxes
+	//check each corner of rect1.  If there is an intersection at least one
+	//corner of rect1 will be inside rect2.
+
+	const result = {
+		topLeft:false,
+		topRight:false,
+		bottomLeft:false,
+		bottomRight:false
+	}
+
+	if((rect1.x + deltaX >= rect2.x) && (rect1.x + deltaX <= rect2.x + rect2.width)) {
+	//left edge of rect 1 is between the left & right edges of rect 2
+
+		if((rect1.y + deltaY >= rect2.y) && (rect1.y + deltaY <= rect2.y + rect2.height)) {
+		//top edge of rect 1 is between the top & bottom edges of rect 2
+
+			//top left corner intersects
+			result.topLeft = true;
+		}
+		
+		if((rect1.y + deltaY + rect1.height >= rect2.y) && (rect1.y + deltaY + rect1.height <= rect2.y + rect2.height)) {
+		//bottom edge of rect 1 is between the top & bottom edges of rect 2
+
+			//bottom left corner intersects
+			result.bottomLeft = true;
+		}
+	}
+	
+	if((rect1.x + deltaX + rect1.width >= rect2.x) && (rect1.x + deltaX + rect1.width <= rect2.x + rect2.width)) {
+	//right edge of rect 1 is between the left & right edges of rect 2
+
+		if((rect1.y + deltaY >= rect2.y) && (rect1.y + deltaY <= rect2.y + rect2.height)) {
+		//top edge of rect 1 is between the top & bottom edges of rect 2
+
+			//top right corner intersects
+			result.topRight = true;
+		}
+		
+		if((rect1.y + deltaY + rect1.height >= rect2.y) && (rect1.y + deltaY + rect1.height <= rect2.y + rect2.height)) {
+		//bottom edge of rect 1 is between the top & bottom edges of rect 2
+
+			//bottom right corner intersects
+			result.bottomRight = true;
+		}
+	}
+
+	return result;
 }

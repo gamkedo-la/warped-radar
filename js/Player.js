@@ -1,8 +1,8 @@
 function Player () {
     this.x = 100;
     this.y = 100;
-    //this.w = 64;
-    //this.h = 64;
+    this.w = 64;
+    this.h = johnIdle.spriteSheet.height;
     this.walkSpeed = useRequestAnimationFrame ? 140 : 4;
 
     this.keyHeld_walkUp = false;
@@ -24,12 +24,11 @@ function Player () {
 
     this.collider = new Collider(this.x, this.y, this.w, this.h, 0, 0);
     const idleWidth = 0.80 * johnIdle.spriteSheet.width/(4 * johnIdle.animationColFrames);
-    const idleHeight = johnIdle.spriteSheet.height;
-    this.tileCollider = {x:this.x - idleWidth / 2, y:this.y + (0.38 * idleHeight), 
-                         width: idleWidth, height:0.05 * idleHeight};
+    this.tileCollider = {x:this.x - idleWidth / 2, y:this.y + (0.38 * this.h), 
+                         width: idleWidth, height:0.05 * this.h};
     this.setTileCollider = function(newX, newY) {
         this.tileCollider.x = newX - idleWidth / 2;
-        this.tileCollider.y = newY + 0.38 * idleHeight;
+        this.tileCollider.y = newY + 0.38 * this.h;
     }
 
     this.states = {

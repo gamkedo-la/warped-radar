@@ -127,12 +127,14 @@ function render () {
     }
     mainCamera.beginPan();
     clearScreen();
-    drawWorld();
-    player.draw();
-    if (debug) {
-        player.collider.draw("red");
-    }
-    drawNPCs();
+
+    let nonTileObjects = [];
+    nonTileObjects.push(player);
+    nonTileObjects = nonTileObjects.concat(allNPCs);
+    nonTileObjects = nonTileObjects.concat(arrayOfObtainableItems);
+
+    drawWorld(nonTileObjects);
+    
     drawWeatherEffects();
     drawGameBorder();
     drawDebugText();

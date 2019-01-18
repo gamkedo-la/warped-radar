@@ -154,7 +154,7 @@ function tileTypeHasTransparency(tileToCheck) {
     
 }
 
-function drawWorld() {
+function drawWorld(nonTileObjs) {
     let arrayIndex = 0;
     let drawTileX = 0;
     let drawTileY = 0;
@@ -187,10 +187,35 @@ function drawWorld() {
 
             drawTileX += WORLD_W;
 
-        } //end of inner part of nested for loop (columns)
+        } //end of inner part of nested for loop (just drew an entire row, move to the next row)
         drawTileY += WORLD_H;
         drawTileX = 0;
-    } //end of outer part of nested for loop (rows)
+
+        //draw anything which appears on top of the tiles and whose Y-Pos is closer to the top
+        //of the screen than the top of the next row of tiles
+        const objectsToDraw = [];
+        for(let i = 0; i < nonTileObjs.length; i++) {
+            if(nonTileObjs[i] != null) {
+                if(nonTileObjs[i].y + nonTileObjs[i].h < drawTileY) {
+                    if(isInViewPort(scaledCanvas, nonTileObjs[i].x, nonTileObjs[i].y)) {
+                        objectsToDraw.push(nonTileObjs[i]);
+                    }
+
+                    nonTileObjs[i] = null;
+                }//end of if object bottom < drawTileY
+            }//end of if not null
+        }//end of for loop through nonTileObjs
+
+        //sort the objects to draw array so the objects closer to the bottom
+        //of the screen are at the end of the array and are drawn last
+        objectsToDraw.sort((a, b) => ((a.y + a.h) > (b.y + b.h)) ? 1 : -1);
+
+        //Finally actually draw these objects (NPCs, cell phones, etc.)
+        for(let i = 0; i < objectsToDraw.length; i++) {
+            objectsToDraw[i].draw();
+        }
+
+    } //end of outer part of nested for loop (just finished all rows)
 
 } //end of draw world
 

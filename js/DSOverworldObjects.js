@@ -160,7 +160,7 @@ function initializeOverworldObjects() {
         southWest:null
     }
 
-    let rose = new OverworldObject("Rose", 280, 520, 32, 32, roseAnimations); //put her next to store
+    let rose = new OverworldObject("Rose", 280, 520, 26, 62, roseAnimations); //put her next to store
     rose.dialogue = new Dialogue();
     rose.colour = "#8789C0";
     

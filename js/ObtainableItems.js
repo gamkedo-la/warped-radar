@@ -109,6 +109,7 @@ function ObtainableItem(drawTileX,drawTileY, tileWidth,tileHeight, name, descrip
   this.rightEdge = drawTileX + WORLD_W;
   this.topEdge = drawTileY;
   this.bottomEdge = drawTileY + WORLD_H;
+  this.h = WORLD_H;
 
   this.obtainable = false;
 

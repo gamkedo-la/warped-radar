@@ -8,6 +8,7 @@ let johnWalkSide; //West and East (flip)
 let johnWalkUpDiag; //NorthWest and NorthEast(flip)
 let johnWalkDownDiag; //SouthWest and SouthEast(flip)
 //let johnWalkSide45Deg;
+let frameDelayWalk = framesPerSecond / 6; //higher number equals slower walk cycle speed
 
 let roseIdle;
 
@@ -42,42 +43,42 @@ function makeAnimatedSprites() {
 		name: "johnWalkAnimationUp",
 		spriteSheet: johnAnimationUp,
 		animationColFrames: 4,
-		framesUntilNext: 10,
+		framesUntilNext: frameDelayWalk,
 	});
 
 	johnWalkDown = new AnimatedSpriteClass({
 		name: "johnWalkAnimationDown",
 		spriteSheet: johnAnimationDown,
 		animationColFrames: 4,
-		framesUntilNext: 10,
+		framesUntilNext: frameDelayWalk,
 	});
 
     johnIdle = new AnimatedSpriteClass({
 		name: "johnIdleAnimaton",
 		spriteSheet: johnAnimationIdle,
 		animationColFrames: 26,
-		framesUntilNext: 10,
+		framesUntilNext: frameDelayWalk,
 	});
 
     johnWalkSide = new AnimatedSpriteClass({
 		name: "johnWalkSideAnimaton",
 		spriteSheet: johnAnimationSide,
 		animationColFrames: 4,//24,
-		framesUntilNext: 10,//4,
+		framesUntilNext: frameDelayWalk,//4,
 	});
 
     johnWalkDownDiag = new AnimatedSpriteClass({
 		name: "johnWalkDownDiagAnimaton",
 		spriteSheet: johnAnimationDownDiag,
 		animationColFrames: 4,
-		framesUntilNext: 10,
+		framesUntilNext: frameDelayWalk,
 	});
 	
 	johnWalkUpDiag = new AnimatedSpriteClass({
 		name: "johnWalkUpDiagAnimaton",
 		spriteSheet: johnAnimationUpDiag,
 		animationColFrames: 4,
-		framesUntilNext: 10,
+		framesUntilNext: frameDelayWalk,
 	});
 
 	//Rose
@@ -85,7 +86,7 @@ function makeAnimatedSprites() {
 		name: "roseAnimationIdle",
 		spriteSheet: roseAnimationIdle,
 		animationColFrames: 40,
-		framesUntilNext: 10,
+		framesUntilNext: frameDelayWalk,
 	});
 };
 

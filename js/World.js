@@ -86,19 +86,15 @@ const TILE = {
     CITY_50:75,
     CITY_51:76,
     CITY_52:77,
+
+    BLANK:576
 };
 
 let tileSet;// = new Tileset(worldTiles, 40, 40);
 
 //const TILE_CITY_TILES = 40;
 
-let solidTiles = [
-                2, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17,
-                 29, 30, 31, 32, 33, 34, 38, 39, 40, 41, 42, 43, 44, 45,
-                46, 47, 48, 49, 50, 51, 52, 53, 54, 55,
-                56, 57, 58, 59, 60, 61, 62, 63, 64, 65,
-                66, 67, 68, 69, 70, 71, 72, 73, 74, 75,
-                76, 77];
+let solidTiles = [2];
 
 let locationList = [theCity, johnsRoom, johnsHallway, johnsKitchen];
 let locationNow = 0;
@@ -166,10 +162,7 @@ function drawLayer(layer) {
             }
                         
             tileSet.drawTileAt(scaledContext, tileKindHere, drawTileX, drawTileY);
-
-            //assignXAndYCoordinatesOfItems(tileKindHere, drawTileX,drawTileY);
             drawGrid(drawTileX, drawTileY);
-
             drawTileX += WORLD_W;
 
         } //end of inner part of nested for loop (just drew an entire row, move to the next row)
@@ -200,8 +193,14 @@ function drawInteractionLayer(nonTileObjs) {
             } else {
                 tileKindHere = 0; // or whatever default/black to fill in with
             }
-            
-            tileSet.drawTileAt(scaledContext, tileKindHere, drawTileX, drawTileY);
+            if(tileKindHere == TILE.WALL
+                || tileKindHere == TILE.PLAYER_START
+                || tileKindHere == TILE.SWITCH_LOCATION){
+                tileSet.drawTileAt(scaledContext, TILE.BLANK, drawTileX, drawTileY);
+            } //don't draw the collision tiles or action tiles
+            else{
+                tileSet.drawTileAt(scaledContext, tileKindHere, drawTileX, drawTileY);
+            }
             
             //assignXAndYCoordinatesOfItems(tileKindHere, drawTileX,drawTileY);
             drawGrid(drawTileX, drawTileY);
@@ -258,7 +257,7 @@ function returnTileTypeAtColRow(col, row) {
     if (col >= 0 && col < worldCols &&
         row >= 0 && row < worldRows) {
         let worldIndexUnderCoord = rowColToArrayIndex(col, row);
-        return locationList[locationNow].layers[Layer.Ground][worldIndexUnderCoord];
+        return locationList[locationNow].layers[Layer.Interaction][worldIndexUnderCoord];
     } else {
         return TILE.WALL;
     }

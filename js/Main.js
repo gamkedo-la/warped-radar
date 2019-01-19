@@ -122,18 +122,21 @@ function update (delta) {
 }
 // All things drawn to screen every frame here
 function render () {
+    
     if(gameIsStarted === false){
         Menu.draw();
         return; // skip game logic below
     }
-    mainCamera.beginPan();
     clearScreen();
+    mainCamera.beginPan();
+    
+    
+    //scaledContext.clearRect(0,0,scaledCanvas.width,scaledCanvas.height)
 
     let nonTileObjects = [];
     nonTileObjects.push(player);
     nonTileObjects = nonTileObjects.concat(allNPCs);
     nonTileObjects = nonTileObjects.concat(arrayOfObtainableItems);
-
     drawWorld(nonTileObjects);
 
     drawWeatherEffects();
@@ -164,6 +167,8 @@ function render () {
         currentlyPlayingCutscene = testScene;
     }
     // TO-DO END: reorganize cutscene system/manager
+
+    drawScaledCanvas(); //draw everthing on the pixel-scale canvas to the larger game canvas
 }
 
 function goToNextLevel () {
@@ -195,8 +200,14 @@ function loadLevel (whichLevel) {
 }
 
 function clearScreen () {
-    canvasContext.drawImage(scaledCanvas, 0, 0, scaledCanvas.width, scaledCanvas.height,
-        0, 0, canvas.width, canvas.height);
+    scaledContext.clearRect(0,0,scaledCanvas.width,scaledCanvas.height);
+    drawRectToContext(scaledContext, 0,0,scaledCanvas.width, scaledCanvas.height, "#223344");
+    //canvasContext.drawImage(scaledCanvas, 0, 0, scaledCanvas.width, scaledCanvas.height, 0, 0, canvas.width, canvas.height);
+}
+
+function drawScaledCanvas () {
+    //canvasContext.clearRect(0,0,canvas.width,canvas.height);
+    canvasContext.drawImage(scaledCanvas, 0, 0, scaledCanvas.width, scaledCanvas.height, 0, 0, canvas.width, canvas.height);
 }
 
 function drawGameBorder () {

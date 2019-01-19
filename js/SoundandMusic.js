@@ -34,13 +34,18 @@ if (use_web_audio_api) {
 
 let audioFormat;
 
+
+let dialogueChoiceSound = new Audio("./audio/snd_voice1.mp3");
+let inventoryChoiceSound = new Audio("./audio/snd_voice3.mp3");
+let selected = new Audio("./audio/selected.mp3");
+selected.volume = 0.2;
+
 //second parameter is soundType for web audio API hookups, ["general", 'johns voice', 'npc voice']
-let dialogueChoiceSound = new SoundOverlapsClass("./audio/snd_voice1", 0);
 let voiceHigh2 = new SoundOverlapsClass("./audio/snd_voice2", 2);
-let inventoryChoiceSound = new SoundOverlapsClass("./audio/snd_voice3", 0);
+// inventoryChoiceSound.volume = "0.35";
 let voiceLow1 = new SoundOverlapsClass("./audio/snd_voice3", 1);
 let voiceLow2 = new SoundOverlapsClass("./audio/snd_voice4", 0);
-let selected = new SoundOverlapsClass("./audio/selected", 0);
+
 
 //how to add music: let bgMusic = "./audio/bgMusic";
 

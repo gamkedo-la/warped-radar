@@ -221,7 +221,7 @@ function Dialogue() {
             if (cursorUp) {
                 if (cursorKeyPresses === 1) {
                     choiceCursor--;
-                    //choiceSound.play();
+                    dialogueChoiceSound.play();
                     if (choiceCursor < 0) {
                         choiceCursor += choiceList.length;
                     }
@@ -230,7 +230,7 @@ function Dialogue() {
             if (cursorDown) {
                 if (cursorKeyPresses === 1) {
                     choiceCursor = (choiceCursor + 1) % choiceList.length;
-                    //choiceSound.play();
+                    dialogueChoiceSound.play();
                     if (choiceCursor > choiceList.length - 1) {
                         choiceCursor = 0;
                     }

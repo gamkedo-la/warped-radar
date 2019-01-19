@@ -48,6 +48,7 @@ function Dialogue() {
     let choiceCursorX = 0;
     let choiceCursorY = 0;
     let choiceCursor = 0;
+    //let choiceSound = voiceHigh1;
     let selectSound = selected;
     let choiceTextAlign = textAlign;
     let cursorTextColour = "yellow";
@@ -220,7 +221,7 @@ function Dialogue() {
             if (cursorUp) {
                 if (cursorKeyPresses === 1) {
                     choiceCursor--;
-                    choiceSound.play();
+                    //choiceSound.play();
                     if (choiceCursor < 0) {
                         choiceCursor += choiceList.length;
                     }
@@ -229,7 +230,7 @@ function Dialogue() {
             if (cursorDown) {
                 if (cursorKeyPresses === 1) {
                     choiceCursor = (choiceCursor + 1) % choiceList.length;
-                    choiceSound.play();
+                    //choiceSound.play();
                     if (choiceCursor > choiceList.length - 1) {
                         choiceCursor = 0;
                     }

@@ -87,6 +87,7 @@ function start () {
 loadImages();
 
 // Called from start(), keeps the game loop and delta in check
+//practice commit - will remove
 function gameLoop () {
     let now = Date.now();
     delta = (now - then) * deltaMultiplier;

@@ -87,6 +87,7 @@ function start () {
 loadImages();
 
 // Called from start(), keeps the game loop and delta in check
+
 function gameLoop () {
     let now = Date.now();
     delta = (now - then) * deltaMultiplier;
@@ -107,7 +108,7 @@ function gameLoop () {
 // All game logic to update every frame here
 function update (delta) {
     //Reset it every frame
-    if (gameIsStarted === false) {
+    if (gameIsStarted === false || paused) {
         Menu.update();
     }
     else {
@@ -138,7 +139,7 @@ function render () {
     nonTileObjects = nonTileObjects.concat(allNPCs);
     nonTileObjects = nonTileObjects.concat(arrayOfObtainableItems);
     drawWorld(nonTileObjects);
-
+    drawScaledCanvas(); //draw everthing on the pixel-scale canvas to the larger game canvas
     drawWeatherEffects();
     drawGameBorder();
     drawDebugText();
@@ -168,7 +169,7 @@ function render () {
     }
     // TO-DO END: reorganize cutscene system/manager
 
-    drawScaledCanvas(); //draw everthing on the pixel-scale canvas to the larger game canvas
+    
 }
 
 function goToNextLevel () {
@@ -269,7 +270,7 @@ function fastRadar() {
 
 function pauseRadar(){
     if (!paused){
-        colorText("PAUSE", 400, 300, "red", "30px Arial", "center", 10);
+        Menu.draw();
         if (!useRequestAnimationFrame) {
             clearInterval(interval);
         }

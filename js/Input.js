@@ -96,7 +96,7 @@ function keysPressed() {
 function keydownControl(evt, keydownMap) {
     let isKeyPressed = evt.type == "keydown";
 
-    keySet(evt, player, isKeyPressed);
+    keySet(player);    
 
     if (isKeyPressed) {
         levelEditor.editorKeyHandle(evt.keyCode);
@@ -165,23 +165,9 @@ function keydownControl(evt, keydownMap) {
     }
 }
 
-function keySet(keyEvent, whichEntity, setTo) {
-    switch (keyEvent.keyCode) {
-        case whichEntity.controlKeyLeft:
-        case whichEntity.controlKeyLeft2:
-            whichEntity.keyHeld_walkLeft = setTo;
-            break;
-        case whichEntity.controlKeyRight:
-        case whichEntity.controlKeyRight2:
-            whichEntity.keyHeld_walkRight = setTo;
-            break;
-        case whichEntity.controlKeyUp:
-        case whichEntity.controlKeyUp2:
-            whichEntity.keyHeld_walkUp = setTo;
-            break;
-        case whichEntity.controlKeyDown:
-        case whichEntity.controlKeyDown2:
-            whichEntity.keyHeld_walkDown = setTo;
-            break;
-    }
+function keySet(whichEntity) {
+    whichEntity.keyHeld_walkLeft = keysPressed(whichEntity.controlKeyLeft) || keysPressed(whichEntity.controlKeyLeft2);        
+    whichEntity.keyHeld_walkRight = keysPressed(whichEntity.controlKeyRight) || keysPressed(whichEntity.controlKeyRight2);        
+    whichEntity.keyHeld_walkUp = keysPressed(whichEntity.controlKeyUp) || keysPressed(whichEntity.controlKeyUp2);        
+    whichEntity.keyHeld_walkDown = keysPressed(whichEntity.controlKeyDown) || keysPressed(whichEntity.controlKeyDown2);
 }

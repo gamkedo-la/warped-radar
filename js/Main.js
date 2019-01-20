@@ -138,7 +138,7 @@ function render () {
     nonTileObjects = nonTileObjects.concat(allNPCs);
     nonTileObjects = nonTileObjects.concat(arrayOfObtainableItems);
     drawWorld(nonTileObjects);
-
+    drawScaledCanvas(); //draw everthing on the pixel-scale canvas to the larger game canvas
     drawWeatherEffects();
     drawGameBorder();
     drawDebugText();
@@ -168,7 +168,7 @@ function render () {
     }
     // TO-DO END: reorganize cutscene system/manager
 
-    drawScaledCanvas(); //draw everthing on the pixel-scale canvas to the larger game canvas
+    
 }
 
 function goToNextLevel () {

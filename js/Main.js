@@ -108,7 +108,7 @@ function gameLoop () {
 // All game logic to update every frame here
 function update (delta) {
     //Reset it every frame
-    if (gameIsStarted === false) {
+    if (gameIsStarted === false || paused) {
         Menu.update();
     }
     else {
@@ -270,7 +270,7 @@ function fastRadar() {
 
 function pauseRadar(){
     if (!paused){
-        colorText("PAUSE", 400, 300, "red", "30px Arial", "center", 10);
+        Menu.draw();
         if (!useRequestAnimationFrame) {
             clearInterval(interval);
         }

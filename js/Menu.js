@@ -7,8 +7,8 @@ const Menu = new (function() {
     const EPISODE_PAGE = 5;
     const PAUSED_PAGE = 6;
 
-    let itemsX = 340;
-    let topItemY = 260;
+    let itemsX = 540;
+    let topItemY = 240;
     let itemsWidth = 300;
     let rowHeight = 40;
 
@@ -143,6 +143,7 @@ const Menu = new (function() {
           currentPage = MENU_PAGE;
         }
         this.redraw();
+        canvasContext.drawImage(logoPic, 0, 0);
         }else {
         currentPage = PAUSED_PAGE;
         canvasContext.clearRect(itemsX -50,topItemY - rowHeight,
@@ -156,13 +157,11 @@ const Menu = new (function() {
             for (let i = 0; i < creditsList.length; i++) {
                 colorText(creditsList[i],creditsX, creditsTopY + creditsLineSkipY * i, textColour, textFontFace, 'left', 'top');
             }
-        } else {
-            canvasContext.drawImage(logoPic, 0, 0);
+        } 
             for (let i=0; i<menuPageText[currentPage].length; i++){
                 colorText(menuPageText[currentPage][i], itemsX,topItemY + rowHeight * i,textColour, textFontFace, 'left', 'top');
+                 //Draw cursor after background image
+                canvasContext.drawImage(arrowPic,itemsX -55 ,topItemY + (cursor1 * rowHeight) -42);
             }
-        }
-        //Draw cursor after background image
-        canvasContext.drawImage(arrowPic,itemsX -55 ,topItemY + (cursor1 * rowHeight) -42);
     };
 })();

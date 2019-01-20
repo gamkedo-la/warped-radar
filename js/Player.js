@@ -1,9 +1,20 @@
+const UP = 1;
+const DOWN = 2;
+const LEFT = 3;
+const RIGHT = 4;
+const UP_LEFT = 5;
+const UP_RIGHT = 6;
+const DOWN_LEFT = 7;
+const DOWN_RIGHT = 8;
+
 function Player () {
     this.x = 100;
     this.y = 100;
     this.w = 64;
     this.h = johnIdle.spriteSheet.height;
     this.walkSpeed = useRequestAnimationFrame ? 140 : 3;
+
+    this.currentlyFacingDir = DOWN;    
 
     this.keyHeld_walkUp = false;
     this.keyHeld_walkDown = false;
@@ -245,32 +256,80 @@ function Player () {
         } else if (this.states.walking && currentlyPlayingCutscene == null) {
             if (this.keyHeld_walkUp) {
             	if ((this.keyHeld_walkUp) && (this.keyHeld_walkLeft)) {
-            		johnWalkUpDiag.draw(scaledContext, this.x, this.y);
+            		this.currentlyFacingDir = UP_LEFT
             	} else if (this.keyHeld_walkUp) {
             		if ((this.keyHeld_walkUp) && (this.keyHeld_walkRight)) {
-            			johnWalkUpDiag.draw(scaledContext, this.x, this.y, 1, true);
+            			this.currentlyFacingDir = UP_RIGHT;
             		} else {
-                		johnWalkUp.draw(scaledContext, this.x, this.y);
+                		this.currentlyFacingDir = UP;
                 	}
             	}
             } else if (this.keyHeld_walkDown) {
             	if ((this.keyHeld_walkDown) && (this.keyHeld_walkLeft)) {
-            		johnWalkDownDiag.draw(scaledContext, this.x, this.y);
+            		this.currentlyFacingDir = DOWN_LEFT;
             	} else if (this.keyHeld_walkDown) {
             		if ((this.keyHeld_walkDown) && (this.keyHeld_walkRight)) {
-            			johnWalkDownDiag.draw(scaledContext, this.x, this.y, 1, true);
+            			this.currentlyFacingDir = DOWN_RIGHT;
             		} else {
-                		johnWalkDown.draw(scaledContext, this.x, this.y);
+                		this.currentlyFacingDir = DOWN;
                 	}
             	}
             } else if (this.keyHeld_walkLeft) {
-                johnWalkSide.draw(scaledContext, this.x, this.y);
+                this.currentlyFacingDir = LEFT;
             } else if (this.keyHeld_walkRight) {
-                johnWalkSide.draw(scaledContext, this.x, this.y, 1, true);
+                this.currentlyFacingDir = RIGHT;
             }
-        } else {
-            johnIdle.draw(scaledContext, this.x, this.y);            
-        }
+        } 
         //outlineCircle(scaledContext, this.x, this.y, 2, "green", lineWidth = 1) //DEBUG
+
+        switch(this.currentlyFacingDir) {
+            case UP:
+                johnWalkUp.draw(scaledContext, this.x, this.y);
+                johnWalkUp.paused = !this.states.walking;
+                if (!this.states.walking) johnWalkUp.setFrame(0);
+                break;
+            
+            case DOWN:
+                johnWalkDown.draw(scaledContext, this.x, this.y);
+                johnWalkDown.paused = !this.states.walking;
+                if (!this.states.walking) johnWalkDown.setFrame(0);
+                break;
+
+            case LEFT:
+                johnWalkSide.draw(scaledContext, this.x, this.y);
+                johnWalkSide.paused = !this.states.walking;
+                if (!this.states.walking) johnWalkSide.setFrame(1);
+                break;
+            
+            case RIGHT:
+                johnWalkSide.draw(scaledContext, this.x, this.y, 1, true);
+                johnWalkSide.paused = !this.states.walking;
+                if (!this.states.walking) johnWalkSide.setFrame(1);
+                break;
+
+            case UP_LEFT:
+                johnWalkUpDiag.draw(scaledContext, this.x, this.y);
+                johnWalkUpDiag.paused = !this.states.walking;
+                if (!this.states.walking) johnWalkUpDiag.setFrame(1);
+                break;
+            
+            case UP_RIGHT:
+                johnWalkUpDiag.draw(scaledContext, this.x, this.y, 1, true);
+                johnWalkUpDiag.paused = !this.states.walking;
+                if (!this.states.walking) johnWalkUpDiag.setFrame(1);
+                break;
+
+            case DOWN_LEFT:
+                johnWalkDownDiag.draw(scaledContext, this.x, this.y);
+                johnWalkDownDiag.paused = !this.states.walking;
+                if (!this.states.walking) johnWalkDownDiag.setFrame(1);
+                break;
+
+            case DOWN_RIGHT:
+                johnWalkDownDiag.draw(scaledContext, this.x, this.y, 1, true);
+                johnWalkDownDiag.paused = !this.states.walking;
+                if (!this.states.walking) johnWalkDownDiag.setFrame(1);
+                break;
+        }
     };
 }

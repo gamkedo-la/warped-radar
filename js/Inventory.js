@@ -6,8 +6,6 @@ let inventory = new(function () {
     this.selectAction = false;
     this.index = 0;
 
-    let navigationSound = voiceHigh2;
-
     let width = 624;
     let height = 390;
 

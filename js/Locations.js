@@ -22,7 +22,7 @@ let johnsRoom = {
         TileMaps.JohnsRoom.layers[Layer.Depth_Sorted].data,
         //Layer.Heightmap(index 3)
         //TODO: Restore the following line when JohnsRoom has Heightmap data
-//      TileMaps.JohnsRoom.layers[Layer.Heightmap].data,
+        TileMaps.JohnsRoom.layers[Layer.Heightmap].data,
     ],
     columns: TileMaps.JohnsRoom.width,
     rows: TileMaps.JohnsRoom.height,
@@ -40,7 +40,7 @@ let johnsHallway = {
         TileMaps.JohnsHallway.layers[Layer.Depth_Sorted].data,
         //Layer.Heightmap(index 3)
         //TODO: Restore the following line when JohnsHallway has Heightmap data
-//      TileMaps.JohnsHallway.layers[Layer.Heightmap].data,
+        TileMaps.JohnsHallway.layers[Layer.Heightmap].data,
     ],
     columns: TileMaps.JohnsHallway.width,
     rows: TileMaps.JohnsHallway.height,
@@ -58,7 +58,7 @@ let johnsKitchen = {
         TileMaps.JohnsKitchen.layers[Layer.Depth_Sorted].data,
         //Layer.Heightmap(index 3)
         //TODO: Restore the following line when JohnsKitchen has Heightmap data
-//        TileMaps.JohnsKitchen.layers[Layer.Heightmap].data,
+        TileMaps.JohnsKitchen.layers[Layer.Heightmap].data,
     ],
     columns: TileMaps.JohnsKitchen.width,
     rows: TileMaps.JohnsKitchen.height,

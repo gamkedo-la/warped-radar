@@ -11,7 +11,7 @@ function Player () {
     this.x = 100;
     this.y = 100;
     this.w = 64;
-    this.h = johnIdle.spriteSheet.height;
+    this.h = 67;//makes depth sorting better even though sprite is only 58 visible pixels high
     this.walkSpeed = useRequestAnimationFrame ? 140 : 3;
 
     this.currentlyFacingDir = DOWN;    
@@ -34,9 +34,9 @@ function Player () {
 	this.controlKeyRight2;
 
     this.collider = new Collider(this.x, this.y, this.w, this.h, 0, 0);
-    const idleWidth = 0.80 * johnIdle.spriteSheet.width/(4 * johnIdle.animationColFrames);
+    const idleWidth = 1.5 * johnIdle.spriteSheet.width/(4 * johnIdle.animationColFrames);
     this.tileCollider = {x:this.x - idleWidth / 2, y:this.y + (0.38 * this.h), 
-                         width: idleWidth, height:0.05 * this.h};
+                         width: idleWidth, height:6};
     this.setTileCollider = function(newX, newY) {
         this.tileCollider.x = newX - idleWidth / 2;
         this.tileCollider.y = newY + 0.38 * this.h;

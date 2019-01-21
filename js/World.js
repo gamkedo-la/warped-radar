@@ -90,9 +90,7 @@ const TILE = {
     BLANK:576
 };
 
-let tileSet;// = new Tileset(worldTiles, 40, 40);
-
-//const TILE_CITY_TILES = 40;
+let tileSet;
 
 let solidTiles = [2];
 
@@ -105,11 +103,8 @@ let locationNow = 0;
 let worldCols = locationList[locationNow].columns;
 let worldRows = locationList[locationNow].rows;
 
-//let worldGrid = [];
-
 console.log("Current location: " + locationNow + " size: " + worldCols + 'x' + worldRows);
 
-//worldGrid = locationList[locationNow].layers[Layer.Ground];
 let visibleGrid = false;
 
 function rowColToArrayIndex(col, row) {
@@ -171,77 +166,112 @@ function drawLayer(layer) {
     }
 }
 
-function drawInteractionLayer(nonTileObjs) {
-    let arrayIndex = 0;
+function drawDepthSorted(nonTileObjs) {
     let drawTileX = 0;
     let drawTileY = 0;
+    const layer = locationList[locationNow].layers[Layer.Depth_Sorted];
+    const heightMap = locationList[locationNow].layers[Layer.Heightmap];
+    let groundValue = locationList[locationNow].groundValue;//may not be zero because Tiled...
     const minColSize = locationList[locationNow].columns;
     const minRowSize = locationList[locationNow].rows;
 
+    //objects closer to the top of the screen have
+    //index values closer to zero 
+    const sortedObjectsToDraw = findAndSortObjectsToDraw(nonTileObjs);
+    const tilesToDrawLater = [];
+
     for (let eachRow = 0; eachRow < minRowSize; eachRow++) {
         for (let eachCol = 0; eachCol < minColSize; eachCol++) {
-            //do not draw if outside viewport, but still need to increment draw position
-            if(!isInViewPort(scaledCanvas, drawTileX, drawTileY)) {
-                drawTileX += WORLD_W;
-                continue;
-            }
+            //This is where actual depth sorting and drawing logic starts
+            const arrayIndex = rowColToArrayIndex(eachCol, eachRow);
+            let tileKindHere = layer[arrayIndex];
 
-            let tileKindHere;
-            if (eachCol < worldCols && eachRow < worldRows) {
-                let arrayIndex = rowColToArrayIndex(eachCol, eachRow);
-                tileKindHere = locationList[locationNow].layers[Layer.Interaction][arrayIndex];
+            if((tileKindHere == TILE.WALL) ||
+               (tileKindHere == TILE.PLAYER_START) ||
+               (tileKindHere == TILE.SWITCH_LOCATION)) {//don't draw the collision tiles or action tiles
+                    tileSet.drawTileAt(scaledContext, TILE.BLANK, drawTileX, drawTileY);
             } else {
-                tileKindHere = 0; // or whatever default/black to fill in with
-            }
-            if(tileKindHere == TILE.WALL
-                || tileKindHere == TILE.PLAYER_START
-                || tileKindHere == TILE.SWITCH_LOCATION){
-                tileSet.drawTileAt(scaledContext, TILE.BLANK, drawTileX, drawTileY);
-            } //don't draw the collision tiles or action tiles
-            else{
-                tileSet.drawTileAt(scaledContext, tileKindHere, drawTileX, drawTileY);
-            }
-            
-            //assignXAndYCoordinatesOfItems(tileKindHere, drawTileX,drawTileY);
-            drawGrid(drawTileX, drawTileY);
+                //Need to find out if this tile has a height above the ground
+                if(heightMap[arrayIndex] - groundValue >= 0) {
+                    //this tile should be drawn later because it is not at the ground level
+                    //Fortunately, it is already sorted with the tiles closest to the top of the screen 
+                    //having smaller indexes
+                    tilesToDrawLater.push({kind:tileKindHere, height:(heightMap[arrayIndex] - groundValue), x:drawTileX, y:drawTileY});
+                } else {
+                    //this tile is at the ground level, need to find out if there are any sortedObjectsToDraw on this tile
+                    for(let i = 0; i < sortedObjectsToDraw.length; i++) {
+                        if(sortedObjectsToDraw[i] != null) {//these objects will be set to null once they are drawn
+                            const thisObj = sortedObjectsToDraw[i];
 
-            drawTileX += WORLD_W;
+                            if(thisObj.y + thisObj.h > drawTileY + WORLD_H) {break;}//this is too far down to draw and all other objects will be further down
 
-        } //end of inner part of nested for loop (just drew an entire row, move to the next row)
-        drawTileY += WORLD_H;
-        drawTileX = 0;
+                            if(thisObj.y + thisObj.h < drawTileY + WORLD_H) {
+                                //the bottom of thisObj is closer to the top of the screen 
+                                //than the bottom of this row of tiles => draw thisObj
+                                thisObj.draw();
+                                sortedObjectsToDraw[i] = null;
+                            }//end of ifthisObj effective y pos < tile effective y pos
+                        }//end of if sortedObjects[i] != null
+                    }//end of for loop through sortedObjectsToDraw
 
-        //draw anything which appears on top of the tiles and whose Y-Pos is closer to the top
-        //of the screen than the top of the next row of tiles
-        const objectsToDraw = [];
-        for(let i = 0; i < nonTileObjs.length; i++) {
-            if(nonTileObjs[i] != null) {
-                if(nonTileObjs[i].y + nonTileObjs[i].h < drawTileY) {
-                    if(isInViewPort(scaledCanvas, nonTileObjs[i].x, nonTileObjs[i].y)) {
-                        objectsToDraw.push(nonTileObjs[i]);
+                    if(isInViewPort(scaledCanvas, drawTileX, drawTileY)) {
+                        tileSet.drawTileAt(scaledContext, tileKindHere, drawTileX, drawTileY);
                     }
 
-                    nonTileObjs[i] = null;
-                }//end of if object bottom < drawTileY
-            }//end of if not null
-        }//end of for loop through nonTileObjs
+                }//end of if-else heightMap data is > 0
+            }//end if-else for not drawing TILE.WALL etc
 
-        //sort the objects to draw array so the objects closer to the bottom
-        //of the screen are at the end of the array and are drawn last
-        objectsToDraw.sort((a, b) => ((a.y + a.h) > (b.y + b.h)) ? 1 : -1);
+            for(let j = 0; j < tilesToDrawLater.length; j++) {
+                const aLaterTile = tilesToDrawLater[j];
+                if(aLaterTile != null) {
+                    if(aLaterTile.y + WORLD_H * aLaterTile.height < drawTileY) {
+                        if(isInViewPort(scaledCanvas, aLaterTile.x, aLaterTile.y)) {
+                            tileSet.drawTileAt(scaledContext, aLaterTile.kind, aLaterTile.x, aLaterTile.y);
+                            tilesToDrawLater[j] = null;
+                        }
+                    }//end of if effective y pos < bottom of current row
+                }//end of if aLaterTile != null
+            }//end of for loop through the tilesToDrawLater
 
-        //Finally actually draw these objects (NPCs, cell phones, etc.)
-        for(let i = 0; i < objectsToDraw.length; i++) {
-            objectsToDraw[i].draw();
+            drawGrid(drawTileX, drawTileY);
+            drawTileX += WORLD_W;
+        }//end of inner loop (done drawing a row)
+
+        drawTileY += WORLD_H;
+        drawTileX = 0;
+    }//end of outer loop (done drawing from tile map)
+
+    for(let i = 0; i < tilesToDrawLater.length; i++) {
+        if(tilesToDrawLater[i] != null) {
+            const aLaterTile = tilesToDrawLater[i];
+            if(isInViewPort(scaledCanvas, aLaterTile.x, aLaterTile.y)) {
+                tileSet.drawTileAt(scaledContext, aLaterTile.kind, aLaterTile.x, aLaterTile.y);
+            }
         }
+    }
+}//End of drawDepthSorted function
 
-    } //end of outer part of nested for loop (just finished all rows)
+function findAndSortObjectsToDraw(objArray) {
+    const resultArray = [];
+    for(let i = 0; i < objArray.length; i++) {
+        const thisObj = objArray[i];
+
+        //Is this object on screen?
+        if(isInViewPort(scaledCanvas, thisObj.x, thisObj.y)) {
+            resultArray.push(thisObj);
+        }
+    }
+
+    //sort the result array so the objects closer to the bottom
+    //of the screen are at the end of the array
+    resultArray.sort((a, b) => ((a.y + a.h) > (b.y + b.h)) ? 1 : -1);
+
+    return resultArray;
 }
 
 function drawWorld(nonTileObjs) {
     drawLayer(locationList[locationNow].layers[Layer.Ground]);
-    drawInteractionLayer(nonTileObjs);
-    drawLayer(locationList[locationNow].layers[Layer.Overhead]);
+    drawDepthSorted(nonTileObjs);
 } //end of draw world
 
 function isInViewPort(aCanvas, x, y) {

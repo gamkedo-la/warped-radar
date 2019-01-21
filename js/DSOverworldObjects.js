@@ -23,10 +23,10 @@ function OverworldObject(name, leftEdge, topEdge, width, height, animations = nu
         southWest: false
     }
 
-    const idleWidth = 0.80 * roseIdle.spriteSheet.width/(4 * roseIdle.animationColFrames);
+    const idleWidth = 1.5 * roseIdle.spriteSheet.width/(4 * roseIdle.animationColFrames);
     const idleHeight = roseIdle.spriteSheet.height;
     this.tileCollider = {x:this.x - idleWidth / 2, y:this.y + (0.38 * idleHeight), 
-                         width: idleWidth, height:0.05 * idleHeight};
+                         width: idleWidth, height:6};
     this.setTileCollider = function(newX, newY) {
         this.tileCollider.x = newX - idleWidth / 2;
         this.tileCollider.y = newY + 0.38 * idleHeight;

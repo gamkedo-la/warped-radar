@@ -51,6 +51,7 @@ const Menu = new (function() {
             }
             if(keysPressed(KEY_UP)) {
                 cursor1--;
+                navigationSound.play();
                 if (cursor1 < 0) {
                     cursor1 = menuPageText[currentPage].length - 1;
                 }
@@ -58,6 +59,7 @@ const Menu = new (function() {
             }
             if(keysPressed(KEY_DOWN)) {
                 cursor1++;
+                navigationSound.play();
                 if (cursor1 >= menuPageText[currentPage].length) {
                     cursor1 = 0;
                 }
@@ -157,7 +159,7 @@ const Menu = new (function() {
             for (let i = 0; i < creditsList.length; i++) {
                 colorText(creditsList[i],creditsX, creditsTopY + creditsLineSkipY * i, textColour, textFontFace, 'left', 'top');
             }
-        } 
+        }
             for (let i=0; i<menuPageText[currentPage].length; i++){
                 colorText(menuPageText[currentPage][i], itemsX,topItemY + rowHeight * i,textColour, textFontFace, 'left', 'top');
                  //Draw cursor after background image

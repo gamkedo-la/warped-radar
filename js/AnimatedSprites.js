@@ -104,6 +104,7 @@ function AnimatedSpriteClass(data) {
 	this.animationColFrames = data.animationColFrames;
 	this.framesUntilNext = data.framesUntilNext;
 	this.loops = (data.loops == undefined) ? true : data.loops;
+	this.paused = false;
 	this.currentFrameIndex = (data.currentFrameIndex == undefined) ? 0 : data.currentFrameIndex;
 	this.framesMoveSideways = (data.framesMoveSideways == undefined) ? true : data.framesMoveSideways;
 	this.framesBetweenLoops = (data.framesBetweenLoops == undefined) ? 0 : data.framesBetweenLoops;
@@ -148,7 +149,7 @@ function AnimatedSpriteClass(data) {
 			whichContext.scale(-1,1);
 			}
 		}
-		if (this.loops) {
+		if (this.loops && !this.paused) {
 			if(this.currentPauseFramesLeft <= 0) {
                 if (framesFromGameStart % this.framesUntilNext == 0) {
                 	if (loopsToEndAndBack) {

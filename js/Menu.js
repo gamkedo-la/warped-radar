@@ -73,10 +73,19 @@ const Menu = new (function() {
     this.checkState = function() {
         switch (menuPageText[currentPage][cursor1]) {
             case "Story":
-                gameIsStarted = true;
                 warpedRadarBackgroundMusic.loopSong("audio/stebs_warped_radar_song");
                 warpedRadarBackgroundMusic.setVolume(0.35);//trying to balance background music with dialogue volume
                 cursor1 = 0;
+
+                let transitionDuration = 500;
+                PageTransition.init({
+                    duration:transitionDuration,
+                    pixelW: 100,
+                    pixelH: 2,
+                });
+                setTimeout(() => {
+                    gameIsStarted = true;
+                }, transitionDuration/2); // show new scene halfway through duration, so it can be seen as transition is ending.
                 break;
             case "Continue":
                 currentPage = CONTINUE_PAGE;

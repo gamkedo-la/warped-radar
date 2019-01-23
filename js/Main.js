@@ -9,6 +9,7 @@ let framesFromGameStart = 0;
 
 let debug = false;
 let paused = false;
+let transitioning = false;
 
 let mainCamera;
 let levelEditor;
@@ -120,12 +121,18 @@ function update (delta) {
         mainCamera.follow(player);
         levelEditor.showNewGrid();
     }
+    if (transitioning) {
+        PageTransition.update();
+    }
 }
 // All things drawn to screen every frame here
 function render () {
     
     if(gameIsStarted === false){
         Menu.draw();
+        if (transitioning) {
+            PageTransition.draw();
+        }
         return; // skip game logic below
     }
     clearScreen();
@@ -169,7 +176,9 @@ function render () {
     }
     // TO-DO END: reorganize cutscene system/manager
 
-    
+    if (transitioning) {
+        PageTransition.draw();
+    }
 }
 
 function goToNextLevel () {

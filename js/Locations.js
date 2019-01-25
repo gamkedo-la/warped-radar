@@ -82,3 +82,37 @@ let theCity = {
     name: "theCity",
     groundValue: TileMaps.City.tilesets[TileSet.Height].firstgid
 }
+
+let davesHouse = { 
+    layers: [
+        //Layer.Ground (index 0)
+        TileMaps.DavesHouse.layers[Layer.Ground].data,
+        //Layer.Interaction (index 1)
+        TileMaps.DavesHouse.layers[Layer.Interaction].data,
+        //Layer.Depth_Sorted (index 2)
+        TileMaps.DavesHouse.layers[Layer.Depth_Sorted].data,
+        //Layer.Heightmap(index 3)
+        TileMaps.DavesHouse.layers[Layer.Heightmap].data,
+    ],
+    columns: TileMaps.DavesHouse.width,
+    rows: TileMaps.DavesHouse.height,
+    name: "davesHouse",
+    groundValue: TileMaps.DavesHouse.tilesets[TileSet.Height].firstgid
+} 
+
+let juliesStore = { 
+    layers: [
+        //Layer.Ground (index 0)
+        TileMaps.JuliesStore.layers[Layer.Ground].data,
+        //Layer.Interaction (index 1)
+        TileMaps.JuliesStore.layers[Layer.Interaction].data,
+        //Layer.Depth_Sorted (index 2)
+        TileMaps.JuliesStore.layers[Layer.Depth_Sorted].data,
+        //Layer.Heightmap(index 3)
+        TileMaps.JuliesStore.layers[Layer.Heightmap].data,
+    ],
+    columns: TileMaps.JuliesStore.width,
+    rows: TileMaps.JuliesStore.height,
+    name: "juliesStore",
+    groundValue: TileMaps.JuliesStore.tilesets[TileSet.Height].firstgid
+}

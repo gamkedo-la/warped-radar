@@ -140,6 +140,7 @@ function Player () {
             }
             
             let nextTileTypes = getNextTileTypesAtRectInLayer(this.tileCollider, deltaX, deltaY, locationList[locationNow].layers[Layer.Interaction]);
+
             if(nextX > this.x) {//trying to move right
                 if((moveOntoTileIfAble(nextTileTypes.upperRight)) && 
                    (moveOntoTileIfAble(nextTileTypes.lowerRight))) {
@@ -207,6 +208,23 @@ function Player () {
                     }//end if-else nearObjOrNPC 
                 }//end if moveOntoTileIfAble
             }//end if-else nextX > this.x
+
+            // fix the ability to slide along walls by ignoring
+            // collisions in opposite diagonal than we're moving
+            if (deltaX!=0 && deltaY!=0) { // we are moving diagonally
+               
+                let ur=moveOntoTileIfAble(nextTileTypes.upperRight);
+                let ul=moveOntoTileIfAble(nextTileTypes.upperLeft);
+                let lr=moveOntoTileIfAble(nextTileTypes.lowerRight);
+                let ll=moveOntoTileIfAble(nextTileTypes.lowerLeft);
+
+                if (deltaX>0 && (!ul||!ll)) shouldMoveX = true;
+                if (deltaX<0 && (!ur||!lr)) shouldMoveX = true;
+                if (deltaY>0 && (!ur||!ul)) shouldMoveY = true;
+                if (deltaY<0 && (!lr||!ll)) shouldMoveY = true;
+                
+                //console.log('move ur:'+ur+',ul:'+ul+',lr:'+lr+',ll:'+ll+' deltaxy:'+deltaX+','+deltaY+' should movexy:'+shouldMoveX+','+shouldMoveY+' objCollisionData:'+objCollisionData);
+                }
 
             if(shouldMoveX) {
                 this.x = nextX;

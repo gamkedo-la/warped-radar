@@ -140,15 +140,18 @@ function Player () {
             }
             
             let nextTileTypes = getNextTileTypesAtRectInLayer(this.tileCollider, deltaX, deltaY, locationList[locationNow].layers[Layer.Interaction]);
+            let ur=moveOntoTileIfAble(nextTileTypes.upperRight);
+            let ul=moveOntoTileIfAble(nextTileTypes.upperLeft);
+            let lr=moveOntoTileIfAble(nextTileTypes.lowerRight);
+            let ll=moveOntoTileIfAble(nextTileTypes.lowerLeft);
+            //is there is no object or NPC nearby who has a collider?
+            let thingNearby = ((this.nearObjOrNPC == null) || 
+            (this.nearObjOrNPC.tileCollider == undefined) || 
+            (this.nearObjOrNPC.tileCollider == null));
 
             if(nextX > this.x) {//trying to move right
-                if((moveOntoTileIfAble(nextTileTypes.upperRight)) && 
-                   (moveOntoTileIfAble(nextTileTypes.lowerRight))) {
-                    if((this.nearObjOrNPC == null) || 
-                       (this.nearObjOrNPC.tileCollider == undefined) || 
-                       (this.nearObjOrNPC.tileCollider == null)) {
-                           //if there is no object or NPC near, can't collide
-                           //if there is an object/NPC near but it has no tile collider, can't collide
+                if (ur && lr) {
+                    if (thingNearby) {
                         shouldMoveX = true;
                     } else {
                         if((objCollisionData.topRight == false) && 
@@ -158,13 +161,8 @@ function Player () {
                     }//end if-else nearObjOrNPC         
                 }//end if moveOntoTileIfAble
             } else if(nextX < this.x) {//trying to move left
-                if((moveOntoTileIfAble(nextTileTypes.upperLeft)) && 
-                   (moveOntoTileIfAble(nextTileTypes.lowerLeft))) {
-                    if((this.nearObjOrNPC == null) || 
-                       (this.nearObjOrNPC.tileCollider == undefined) || 
-                       (this.nearObjOrNPC.tileCollider == null)) {
-                           //if there is no object or NPC near, can't collide
-                           //if there is an object/NPC near but it has no tile collider, can't collide
+                if (ul && ll) {
+                    if (thingNearby) {
                         shouldMoveX = true;
                     } else {
                         if((objCollisionData.topLeft == false) && 
@@ -176,13 +174,8 @@ function Player () {
             }//end if-else nextX > this.x
 
             if(nextY > this.y) {//trying to walk down
-                if((moveOntoTileIfAble(nextTileTypes.lowerRight)) && 
-                   (moveOntoTileIfAble(nextTileTypes.lowerLeft))) {
-                    if((this.nearObjOrNPC == null) || 
-                       (this.nearObjOrNPC.tileCollider == undefined) || 
-                       (this.nearObjOrNPC.tileCollider == null)) {
-                           //if there is no object or NPC near, can't collide
-                           //if there is an object/NPC near but it has no tile collider, can't collide
+                if (lr && ll) {
+                    if (thingNearby) {
                         shouldMoveY = true;
                     } else {
                         if((objCollisionData.bottomRight == false) && 
@@ -192,13 +185,8 @@ function Player () {
                     }//end if-else nearObjOrNPC 
                 }//end if moveOntoTileIfAble
             } else if(nextY < this.y) {//trying to walk up
-                if((moveOntoTileIfAble(nextTileTypes.upperRight)) && 
-                   (moveOntoTileIfAble(nextTileTypes.upperLeft))) {
-                    if((this.nearObjOrNPC == null) || 
-                       (this.nearObjOrNPC.tileCollider == undefined) || 
-                       (this.nearObjOrNPC.tileCollider == null)) {
-                           //if there is no object or NPC near, can't collide
-                           //if there is an object/NPC near but it has no tile collider, can't collide
+                if (ur && ul) {
+                    if (thingNearby) {
                         shouldMoveY = true;
                     } else {
                         if((objCollisionData.topRight == false) && 
@@ -213,11 +201,6 @@ function Player () {
             // collisions in opposite diagonal than we're moving
             if (deltaX!=0 && deltaY!=0) { // we are moving diagonally
                
-                let ur=moveOntoTileIfAble(nextTileTypes.upperRight);
-                let ul=moveOntoTileIfAble(nextTileTypes.upperLeft);
-                let lr=moveOntoTileIfAble(nextTileTypes.lowerRight);
-                let ll=moveOntoTileIfAble(nextTileTypes.lowerLeft);
-
                 if (deltaX>0 && (!ul||!ll)) shouldMoveX = true;
                 if (deltaX<0 && (!ur||!lr)) shouldMoveX = true;
                 if (deltaY>0 && (!ur||!ul)) shouldMoveY = true;

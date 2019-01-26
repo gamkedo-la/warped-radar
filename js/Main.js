@@ -183,6 +183,7 @@ function render () {
 }
 
 function goToDestinationFor(arrayIndexUnderPlayer) {
+    
     let newSwitchIndex = -1;
     let shouldReloadLevel = false;
     if(locationList[locationNow] === locationList[Place.TheCity]) {
@@ -246,6 +247,14 @@ function goToDestinationFor(arrayIndexUnderPlayer) {
         player.setRowColPos(newPlayerPos.row, newPlayerPos.col);
 
         mainCamera.instantFollow(player);
+
+        PageTransition.init({
+            duration:500,
+            pixelW: 16,
+            pixelH: 16,
+            colorArray: ["#000000", "#110011", "#111111"]
+    
+        });
     }
 }
 

@@ -8,6 +8,8 @@ const johnHappyPic = document.createElement("img");
 const johnMadPic = document.createElement("img");
 const roseHappyPic = document.createElement("img");
 const roseAnnoyedPic = document.createElement("img");
+const julieHappyPic = document.createElement("img");
+const julieWorriedPic = document.createElement("img");
 
 function imageForString(string) {
 	switch(string) {
@@ -44,13 +46,13 @@ function loadImages() {
 	    {imgName: johnHappyPic, theFile: "john.png", speaker:Speaker.John},
 	    {imgName: johnMadPic, theFile: "john2.png", speaker:Speaker.John},
 	    {imgName: roseHappyPic, theFile: "rose.png", speaker:Speaker.Rose},
-	    {imgName: roseAnnoyedPic, theFile: "rose2.png", speaker:Speaker.Rose},
+		{imgName: roseAnnoyedPic, theFile: "rose2.png", speaker:Speaker.Rose},
+		{imgName: julieHappyPic, theFile: "julie1.png", speaker:Speaker.Julie}, //placeholder
+		{imgName: julieWorriedPic, theFile: "julie1.png", speaker:Speaker.Julie},
 	];
-	//Temporary while there are no images
-	picsToLoad = 1;
-	countLoadedImageAndLaunchIfReady();
-	
+
 	picsToLoad = imageList.length;
+	countLoadedImageAndLaunchIfReady();
 
 	for (let i = 0; i < imageList.length; i++) {
 		beginLoadingImage(imageList[i].imgName, imageList[i].theFile);

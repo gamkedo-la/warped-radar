@@ -19,6 +19,7 @@ let johnHappyPic = document.createElement("img");
 let johnMadPic = document.createElement("img");
 let roseHappyPic = document.createElement("img");
 let roseAnnoyedPic = document.createElement("img");
+let julieWorriedPic = document.createElement("img");
 
 let johnMouthAnimatedSheet = document.createElement("img");
 let johnMouthAnimationAngrySheet = document.createElement("img");
@@ -34,6 +35,8 @@ let johnAnimationSide = document.createElement("img");
 
 let roseAnimationIdle = document.createElement("img");
 let roseAnimationWorry = document.createElement("img");
+
+let julieAnimationIdle = document.createElement("img");
 
 let rainEffectImage = document.createElement("img");
 let fogEffectImage = document.createElement("img");
@@ -74,6 +77,7 @@ function loadImages() {
         {varName: johnMadPic, theFile: "john2.png"},
         {varName: roseHappyPic, theFile: "rose.png"},
         {varName: roseAnnoyedPic, theFile: "rose2.png"},
+        {varName: julieWorriedPic, theFile: "julie1.png"},
 
         //PORTRAIT ANIMS
         {varName: johnMouthAnimatedSheet, theFile: "johnmouthmove.png"},
@@ -92,6 +96,8 @@ function loadImages() {
         
         {varName: roseAnimationIdle, theFile: "rosesprite-sheet-IDLE.png"},
         {varName: roseAnimationWorry, theFile: "rosesprite-sheet-IDLE-WORRY.png"},
+
+        {varName: julieAnimationIdle, theFile: "juliesprite-sheet-IDLE.png"},
 
         //DEFAULT GAMESTART ITEMS
         {varName: notePic, theFile: "note.png"},

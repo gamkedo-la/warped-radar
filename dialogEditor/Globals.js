@@ -47,6 +47,7 @@ const LineWidth = {
 const Speaker = {
 	John:'John',
 	Rose:'Rose',
+	Julie:'Julie',
 	Cat:'Cat'
 };
 //JohnColor is special, don't need to call out other colors separately
@@ -65,6 +66,10 @@ function colorsForSpeaker(speaker) {
 		case Speaker.Rose:
 			colors.bkgd = 'pink';
 			colors.line = 'red';
+		break;
+		case Speaker.Julie:
+			colors.bkgd = 'white';
+			colors.line = '#b12f0c';
 		break;
 		case Speaker.Cat:
 			colors.bkgd = 'yellow';

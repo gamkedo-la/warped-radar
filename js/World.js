@@ -94,6 +94,18 @@ let tileSet;
 
 let solidTiles = [2];
 
+const Switch = {
+    TheCityToJohnsRoom:752,
+    JohnsRoomToJohnsHallway:95,
+    JohnsHallwayToJohnsKitchen:79,
+    JohnsKitchenToTheCity:50
+};
+const Place = {
+    TheCity:0,
+    JohnsRoom:1,
+    JohnsHallway:2,
+    JohnsKitchen:3
+};
 let locationList = [theCity, johnsRoom, johnsHallway, johnsKitchen];
 let locationNow = 0;
 
@@ -109,6 +121,13 @@ let visibleGrid = false;
 
 function rowColToArrayIndex(col, row) {
     return col + worldCols * row;
+}
+
+function arrayIndexToRowCol(arrayIndex) {
+    const thisCol = arrayIndex % worldCols;
+    const thisRow = Math.floor(arrayIndex / worldCols);
+
+    return {row:thisRow, col:thisCol};
 }
 
 function tileTypeHasTransparency(tileToCheck) {
@@ -306,14 +325,15 @@ function returnTileTypeAtColRowInLayer(col, row, layer) {
 function playerWorldHandling(whichEntity) {
     let playerWorldCol = Math.floor(whichEntity.x / WORLD_H);
     let playerWorldRow = Math.floor(whichEntity.y / WORLD_H);
-    let trackIndexUnderCar = rowColToArrayIndex(playerWorldCol, playerWorldRow);
+    let arrayIndexUnderPlayer = rowColToArrayIndex(playerWorldCol, playerWorldRow);
 
     if (playerWorldCol >= 0 && playerWorldCol < worldCols &&
         playerWorldRow >= 0 && playerWorldRow < worldRows) {
         let tileHere = returnTileTypeAtColRow(playerWorldCol, playerWorldRow);
 
         if (tileHere == TILE.SWITCH_LOCATION) {
-            goToNextLevel();
+//            goToNextLevel();
+            goToDestinationFor(arrayIndexUnderPlayer);
         }
     }
 }

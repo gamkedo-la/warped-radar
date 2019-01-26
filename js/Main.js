@@ -181,15 +181,30 @@ function render () {
     }
 }
 
-function goToNextLevel () {
-    locationNow++;
-    if (locationNow >= locationList.length) {
-        locationNow = 0;
+function goToDestinationFor(arrayIndexUnderPlayer) {
+    let newSwitchIndex = -1;
+    if(locationList[locationNow] === locationList[Place.TheCity]) {
+        if(arrayIndexUnderPlayer === Switch.TheCityToJohnsRoom) {
+            locationNow = Place.JohnsRoom;
+            newSwitchIndex = Switch.TheCityToJohnsRoom;
+        }
+    } else if(locationList[locationNow] === locationList[Place.JohnsRoom]) {
+        if(arrayIndexUnderPlayer === Switch.JohnsRoomToJohnsHallway) {
+            locationNow = Place.JohnsHallway;
+        }
+    } else if(locationList[locationNow] === locationList[Place.JohnsHallway]) {
+        if(arrayIndexUnderPlayer === Switch.JohnsHallwayToJohnsKitchen) {
+            locationNow = Place.JohnsKitchen;
+        }
+    } else if(locationList[locationNow] === locationList[Place.JohnsKitchen]) {
+        if(arrayIndexUnderPlayer === Switch.JohnsKitchenToTheCity) {
+            locationNow = Place.TheCity;
+        }
     }
 
     loadLevel(locationList[locationNow]);
 
-
+    const newPlayerPos = arrayIndexToRowCol()
 }
 
 function loadLevel (whichLevel) {

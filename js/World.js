@@ -139,7 +139,11 @@ let visibleGrid = false;
 
 /**
  * 
+<<<<<<< HEAD
  * @param {object} location a location object from locations.js
+=======
+ * @param {object} location a location object from worlds.js
+>>>>>>> 23f9d50b967bc5abfd0cfb92aa41f56f36a642c4
  * @param {int} x map coordinate in tiles
  * @param {int} y map coordinate in tiles
  */

@@ -38,6 +38,8 @@ let roseAnimationWorry = document.createElement("img");
 
 let julieAnimationIdle = document.createElement("img");
 
+let daveIdle = document.createElement("img");
+
 let rainEffectImage = document.createElement("img");
 let fogEffectImage = document.createElement("img");
 let dustEffectImage = document.createElement("img");
@@ -98,6 +100,8 @@ function loadImages() {
         {varName: roseAnimationWorry, theFile: "rosesprite-sheet-IDLE-WORRY.png"},
 
         {varName: julieAnimationIdle, theFile: "juliesprite-sheet-IDLE.png"},
+
+        {varName: daveIdle, theFile: "tempDave.png"},
 
         //DEFAULT GAMESTART ITEMS
         {varName: notePic, theFile: "note.png"},

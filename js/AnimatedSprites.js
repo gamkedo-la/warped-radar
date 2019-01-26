@@ -104,6 +104,14 @@ function makeAnimatedSprites() {
 		animationColFrames: 26,
 		framesUntilNext: frameDelayWalk,
 	});
+
+	//Dave
+	daveIdle = new AnimatedSpriteClass({
+		name: "daveAnimationIdle",
+		spriteSheet: daveIdle,
+		animationColFrames: 1,
+		framesUntilNext: frameDelayWalk,
+	});
 };
 
 function AnimatedSpriteClass(data) {

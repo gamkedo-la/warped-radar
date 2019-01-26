@@ -172,6 +172,7 @@ function initializeOverworldObjects() {
 
     allNPCs.push(initializeRose());
     allNPCs.push(initializeJulie());
+    allNPCs.push(initializeDave());
 }
 
 function initializeRose() {
@@ -226,6 +227,31 @@ function initializeJulie() {
     }
 
     return julie;
+}
+
+function initializeDave() {
+    const daveAnimations = {
+        idle:daveIdle,
+        worry:null,
+        north:null,
+        south:null,
+        east:null,
+        west:null,
+        northEast:null,
+        northWest:null,
+        southEast:null,
+        southWest:null
+    }
+
+    let dave = new OverworldObject("Uncle Dave", 580, 600, 62, 26, daveAnimations); //Not sure where this puts her
+    dave.dialogue = new Dialogue();
+    dave.colour = "blue";
+    
+    dave.chatEvents = function (createElseIncrement) {
+        this.text(createElseIncrement, [johnAndRoseConvo, johnAndRoseConvo2, johnAndRoseConvo3]);//need to replace these conversations
+    }
+
+    return dave;
 }
 
 let allNPCs = [];

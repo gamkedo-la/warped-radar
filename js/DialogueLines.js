@@ -486,3 +486,125 @@ let johnAndRoseConvo3 = [
         choices: null
     }
 ];
+
+let UncleDaveDiscovery = [
+    {
+        scene: "UncleDaveDiscovery",
+        who: "John",
+        nameCol: "lightBlue",
+        voice: voiceLow1,
+        text: "Uncle Dave, I finally made it!",
+        nextPage: 1,
+        leftPic: johnHappyPic,
+        rightPic: null,
+
+        leftPicLeave: null,
+        rightPicLeave: null,
+
+        choices: null,
+
+        position: {x: 659.5, y: -942}
+    },
+    {
+        scene: "",
+        who: "John",
+        nameCol: "lightBlue",
+        voice: voiceLow1,
+        text: "Uncle Dave, did you hear me?",
+        nextPage: 2,
+        leftPic: johnHappyPic,
+        rightPic: null,
+
+        leftPicLeave: null,
+        rightPicLeave: null,
+
+        choices: null,
+
+        position: {x: 659.5, y: -672}
+    },
+    {
+        scene: "",
+        who: "John",
+        nameCol: "lightBlue",
+        voice: voiceLow1,
+        text: "Uncle Dave, are you there?",
+        nextPage: 3,
+        leftPic: johnHappyPic,
+        rightPic: null,
+
+        leftPicLeave: null,
+        rightPicLeave: null,
+
+        choices: null,
+
+        position: {x: 659.5, y: -402}
+    },
+    {
+        scene: "",
+        who: "John",
+        nameCol: "lightBlue",
+        voice: voiceLow1,
+        text: "Uncle Dave!!!!!",
+        nextPage: 4,
+        leftPic: johnMadPic,
+        rightPic: null,
+
+        leftPicLeave: null,
+        rightPicLeave: null,
+
+        choices: null,
+
+        position: {x: 659.5, y: -132}
+    },
+    {
+        scene: "",
+        who: "John",
+        nameCol: "lightBlue",
+        voice: voiceLow1,
+        text: "Oh no! What happened?",
+        nextPage: 5,
+        leftPic: johnMadPic,
+        rightPic: null,
+
+        leftPicLeave: null,
+        rightPicLeave: null,
+
+        choices: null,
+
+        position: {x: 659.5, y: 138}
+    },
+    {
+        scene: "",
+        who: "John",
+        nameCol: "lightBlue",
+        voice: voiceLow1,
+        text: "Who did this?",
+        nextPage: 6,
+        leftPic: johnMadPic,
+        rightPic: null,
+
+        leftPicLeave: null,
+        rightPicLeave: null,
+
+        choices: null,
+
+        position: {x: 659.5, y: 408}
+    },
+    {
+        scene: "",
+        who: "John",
+        nameCol: "lightBlue",
+        voice: voiceLow1,
+        text: "Uncle Dave, I'll figure this out if it's the last thing I do!",
+        nextPage: 7,
+        leftPic: johnMadPic,
+        rightPic: null,
+
+        leftPicLeave: null,
+        rightPicLeave: null,
+
+        choices: null,
+
+        position: {x: 659.5, y: 678}
+    },
+];

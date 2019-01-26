@@ -14,6 +14,7 @@ let transitioning = false;
 let mainCamera;
 let levelEditor;
 let player;
+let daveHasBeenDiscovered = false;
 
 let warpedRadarBackgroundMusic = new backgroundMusicClass();
 

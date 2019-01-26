@@ -99,11 +99,14 @@ function OverworldObject(name, leftEdge, topEdge, width, height, animations = nu
 
     this.onTrigger = function (dialogue) {
         if (this.nearPlayer() && !dialogue.isShowing && !inventory.isShowing) {
+            if(this.name == "Uncle Dave") {daveHasBeenDiscovered = true;}
             if (keysPressed(KEY_SPACE) || keysPressed(KEY_ENTER)) {
                 if (dialogue.page <= 0) {
                     dialogue.isShowing = true;
                     dialogue.letterCounter = 0;
-                    this.messageCounter++;
+                    if(this.shouldIncrementMessageCounter()) {
+                        this.messageCounter++;
+                    }
                 }
                 if ((dialogue.speakerX <= dialogue.speakerStartX) && (dialogue.speaker2X >= dialogue.speaker2StartX)) {
                     dialogue.page = 0;
@@ -180,6 +183,10 @@ function initializeRose() {
     
     }
 
+    rose.shouldIncrementMessageCounter = function() {
+        return true;
+    };
+
     return rose;
 }
 
@@ -207,6 +214,14 @@ function initializeJulie() {
     
     }
 
+    julie.shouldIncrementMessageCounter = function() {
+        if((this.messageCounter < 1) || (daveHasBeenDiscovered)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     return julie;
 }
 
@@ -230,7 +245,15 @@ function initializeDave() {
     dave.location = Place.DavesHouse;
     
     dave.chatEvents = function (createElseIncrement) {
-        this.text(createElseIncrement, [johnAndRoseConvo, johnAndRoseConvo2, johnAndRoseConvo3]);//need to replace these conversations
+        this.text(createElseIncrement, [UncleDaveDiscovery]);//need to replace these conversations
+    }
+
+    dave.shouldIncrementMessageCounter = function() {
+        if(this.messageCounter < 1) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     return dave;

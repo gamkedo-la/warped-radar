@@ -271,7 +271,8 @@ function Dialogue() {
 
         canvasContext.globalAlpha = this.speakerAlpha;
 
-        if (switchPic) {//fade out on the previous pic
+        if ((switchPic) && (this.page > 0)) {//fade out on the previous pic
+            console.log("SpeakerImageList length: " + speakerImgList.length + ", This Page: " + this.page);
             canvasContext.drawImage(speakerImgList[this.page - 1], this.speakerX, speakerY);
         } else {//fade in on the next (when poses switch)
             canvasContext.drawImage(speakerImgList[this.page], this.speakerX, speakerY);
@@ -323,21 +324,7 @@ function Dialogue() {
     }
 
     this.setupSpeaker2Tween = function (dialogueList, nameList, speaker2ImgList, leaveScreenList) {
-        /*if (this.isShowing) {
-            this.speakerAlpha2 += this.alphaChange;
-            if (this.speakerAlpha2 >= 1.0) {
-                this.speakerAlpha2 = 1.0;
-            }
-        } else {
-            this.speakerAlpha2 -= this.alphaChange;
-            if (this.speakerAlpha2 <= 0.0) {
-                this.speakerAlpha2 = 0.0;
-            }
-        }
-*/
-        //canvasContext.globalAlpha = this.speakerAlpha2;
         canvasContext.drawImage(speaker2ImgList[this.page], this.speaker2X, speaker2Y);
-        //canvasContext.globalAlpha = 1;
 
         if (leaveScreenList[this.page] && this.speaker2X <= this.speaker2StartX) {
 

@@ -183,45 +183,81 @@ function render () {
 
 function goToDestinationFor(arrayIndexUnderPlayer) {
     let newSwitchIndex = -1;
+    let shouldReloadLevel = false;
     if(locationList[locationNow] === locationList[Place.TheCity]) {
         if(arrayIndexUnderPlayer === Switch.TheCityToJohnsRoom) {
             locationNow = Place.JohnsRoom;
-            newSwitchIndex = Switch.TheCityToJohnsRoom;
+            newSwitchIndex = Switch.JohnsRoomFromTheCity;
+            shouldReloadLevel = true;
+        } else if(arrayIndexUnderPlayer === Switch.TheCityToJuliesStore) {
+            locationNow = Place.JuliesStore;
+            newSwitchIndex = Switch.JuliesStoreFromTheCity;
+            shouldReloadLevel = true;
+        } else if(arrayIndexUnderPlayer === Switch.TheCityToDavesHouse) {
+            locationNow = Place.DavesHouse;
+            newSwitchIndex = Switch.DavesHouseFromTheCity;
+            shouldReloadLevel = true;
         }
     } else if(locationList[locationNow] === locationList[Place.JohnsRoom]) {
-        if(arrayIndexUnderPlayer === Switch.JohnsRoomToJohnsHallway) {
+        if(arrayIndexUnderPlayer === Switch.JohnsRoomToTheCity) {
+            locationNow = Place.TheCity;
+            newSwitchIndex = Switch.TheCityFromJohnsRoom;
+            shouldReloadLevel = true;
+        } else if(arrayIndexUnderPlayer === Switch.JohnsRoomToJohnsHallway) {
             locationNow = Place.JohnsHallway;
+            newSwitchIndex = Switch.JohnsHallwayFromJohnsRoom;
+            shouldReloadLevel = true;
         }
     } else if(locationList[locationNow] === locationList[Place.JohnsHallway]) {
         if(arrayIndexUnderPlayer === Switch.JohnsHallwayToJohnsKitchen) {
             locationNow = Place.JohnsKitchen;
+            newSwitchIndex = Switch.JohnsKitchenFromJohnsHallway;
+            shouldReloadLevel = true;
+        } else if(arrayIndexUnderPlayer === Switch.JohnsHallwayToJohnsRoom) {
+            locationNow = Place.JohnsRoom;
+            newSwitchIndex = Switch.JohnsRoomFromJohnsHallway;
+            shouldReloadLevel = true;
         }
     } else if(locationList[locationNow] === locationList[Place.JohnsKitchen]) {
-        if(arrayIndexUnderPlayer === Switch.JohnsKitchenToTheCity) {
+        if(arrayIndexUnderPlayer === Switch.JohnsKitchenToJohnsHallway) {
+            locationNow = Place.JohnsHallway;
+            newSwitchIndex = Switch.JohnsHallwayFromJohnsKitchen;
+            shouldReloadLevel = true;
+        }
+    } else if(locationList[locationNow] === locationList[Place.JuliesStore]) {
+        if(arrayIndexUnderPlayer === Switch.JuliesStoreToTheCity) {
             locationNow = Place.TheCity;
+            newSwitchIndex = Switch.TheCityFromJuliesStore;
+            shouldReloadLevel = true;
+        }
+    } else if(locationList[locationNow] === locationList[Place.DavesHouse]) {
+        if(arrayIndexUnderPlayer === Switch.DavesHouseToTheCity) {
+            locationNow = Place.TheCity;
+            newSwitchIndex = Switch.TheCityFromDavesHouse;
+            shouldReloadLevel = true;
         }
     }
 
-    loadLevel(locationList[locationNow]);
+    if(shouldReloadLevel) {
+        loadLevel(locationList[locationNow]);
 
-    const newPlayerPos = arrayIndexToRowCol()
+        const newPlayerPos = arrayIndexToRowCol(newSwitchIndex);
+        player.setRowColPos(newPlayerPos.row, newPlayerPos.col);
+
+        mainCamera.instantFollow(player);
+    }
 }
 
 function loadLevel (whichLevel) {
-//    worldGrid = whichLevel.layers[Layer.Ground].slice();
     // these need to be updated to reflect the new location
     worldCols = whichLevel.columns;
     worldRows = whichLevel.rows;
-    mainCamera.camPanX = 0;
-    mainCamera.camPanY = 0;
 
     if (locationNow === 0) { //only render fog in the city
     	isFoggy = true;
     } else {
     	isFoggy = false;
     }
-
-    player.reset();
 }
 
 function clearScreen () {

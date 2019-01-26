@@ -96,17 +96,35 @@ let solidTiles = [2];
 
 const Switch = {
     TheCityToJohnsRoom:752,
-    JohnsRoomToJohnsHallway:95,
+    TheCityFromJohnsRoom:812,
+    TheCityToJuliesStore:736,
+    TheCityFromJuliesStore:796,
+    TheCityToDavesHouse:727,
+    TheCityFromDavesHouse:787,
+    JohnsRoomToTheCity:95,
+    JohnsRoomFromTheCity:85,
+    JohnsRoomToJohnsHallway:39,
+    JohnsRoomFromJohnsHallway:38,
+    JohnsHallwayToJohnsRoom:64,
+    JohnsHallwayFromJohnsRoom:65,
     JohnsHallwayToJohnsKitchen:79,
-    JohnsKitchenToTheCity:50
+    JohnsHallwayFromJohnsKitchen:78,
+    JohnsKitchenToJohnsHallway:50,
+    JohnsKitchenFromJohnsHallway:51,
+    JuliesStoreToTheCity:285,
+    JuliesStoreFromTheCity:265,
+    DavesHouseToTheCity:285,
+    DavesHouseFromTheCity:265
 };
 const Place = {
     TheCity:0,
     JohnsRoom:1,
     JohnsHallway:2,
-    JohnsKitchen:3
+    JohnsKitchen:3,
+    DavesHouse:4,
+    JuliesStore:5
 };
-let locationList = [theCity, johnsRoom, johnsHallway, johnsKitchen];
+let locationList = [theCity, johnsRoom, johnsHallway, johnsKitchen, davesHouse, juliesStore];
 let locationNow = 0;
 
     window.locations = locationList
@@ -324,7 +342,7 @@ function returnTileTypeAtColRowInLayer(col, row, layer) {
 
 function playerWorldHandling(whichEntity) {
     let playerWorldCol = Math.floor(whichEntity.x / WORLD_H);
-    let playerWorldRow = Math.floor(whichEntity.y / WORLD_H);
+    let playerWorldRow = Math.floor(1 + whichEntity.y / WORLD_H);
     let arrayIndexUnderPlayer = rowColToArrayIndex(playerWorldCol, playerWorldRow);
 
     if (playerWorldCol >= 0 && playerWorldCol < worldCols &&
@@ -332,7 +350,6 @@ function playerWorldHandling(whichEntity) {
         let tileHere = returnTileTypeAtColRow(playerWorldCol, playerWorldRow);
 
         if (tileHere == TILE.SWITCH_LOCATION) {
-//            goToNextLevel();
             goToDestinationFor(arrayIndexUnderPlayer);
         }
     }

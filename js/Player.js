@@ -77,14 +77,18 @@ function Player () {
             for (let eachCol = 0; eachCol < worldRows; eachCol++) {
                 let arrayIndex = rowColToArrayIndex(eachCol, eachRow);
                 if (locationList[locationNow].layers[Layer.Interaction][arrayIndex] == TILE.PLAYER_START) {
-                    this.x = eachCol * WORLD_W + WORLD_W / 2;
-                    this.y = eachRow * WORLD_H + ((WORLD_H / 2) - 20);
-                    this.collider.setCollider(this.x, this.y);
-                    this.setTileCollider(this.x, this.y);
+                    this.setRowColPos(eachRow, eachCol);
                     return;
                 }
             }
         }
+    };
+
+    this.setRowColPos = function(row, col) {
+        this.x = col * WORLD_W + WORLD_W / 2;
+        this.y = row * WORLD_H - 5;//5 fudge to move player off grid lines when changing locations[locationNow]
+        this.collider.setCollider(this.x, this.y);
+        this.setTileCollider(this.x, this.y);
     };
 
     this.move = function (delta, moveSpeed = this.walkSpeed) {

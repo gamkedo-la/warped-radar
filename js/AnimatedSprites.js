@@ -10,7 +10,7 @@ let johnWalkDownDiag; //SouthWest and SouthEast(flip)
 //let johnWalkSide45Deg;
 let frameDelayWalk = framesPerSecond / 6; //higher number equals slower walk cycle speed
 
-let roseIdle;
+let roseIdle, roseWalkUp, /*North*/ roseWalkDown, /*South*/ roseWalkSide; /*West and East (flip);*/
 let julieIdle;
 
 function makeAnimatedSprites() {
@@ -94,6 +94,27 @@ function makeAnimatedSprites() {
 		name: "roseAnimationWorry",
 		spriteSheet: roseAnimationWorry,
 		animationColFrames: 43,
+		framesUntilNext: frameDelayWalk,
+	});
+
+	roseWalkUp = new AnimatedSpriteClass({
+		name: "roseUpAnimation",
+		spriteSheet: roseAnimationUp,
+		animationColFrames: 4,
+		framesUntilNext: frameDelayWalk,
+	});
+
+	roseWalkDown = new AnimatedSpriteClass({
+		name: "roseDownAnimation",
+		spriteSheet: roseAnimationDown,
+		animationColFrames: 4,
+		framesUntilNext: frameDelayWalk,
+	});
+
+	roseWalkSide = new AnimatedSpriteClass({
+		name: "roseSideAnimation",
+		spriteSheet: roseAnimationSide,
+		animationColFrames: 4,
 		framesUntilNext: frameDelayWalk,
 	});
 

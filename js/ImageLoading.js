@@ -35,6 +35,9 @@ let johnAnimationSide = document.createElement("img");
 
 let roseAnimationIdle = document.createElement("img");
 let roseAnimationWorry = document.createElement("img");
+let roseAnimationUp = document.createElement("img");
+let roseAnimationDown = document.createElement("img");
+let roseAnimationSide = document.createElement("img");
 
 let julieAnimationIdle = document.createElement("img");
 
@@ -98,6 +101,9 @@ function loadImages() {
         
         {varName: roseAnimationIdle, theFile: "rosesprite-sheet-IDLE.png"},
         {varName: roseAnimationWorry, theFile: "rosesprite-sheet-IDLE-WORRY.png"},
+        {varName: roseAnimationSide, theFile: "rosesprite-sheet-SIDE.png"},
+        {varName: roseAnimationUp, theFile: "rosesprite-sheet-UP.png"},
+        {varName: roseAnimationDown, theFile: "rosesprite-sheet-DOWN.png"},
 
         {varName: julieAnimationIdle, theFile: "juliesprite-sheet-IDLE.png"},
 

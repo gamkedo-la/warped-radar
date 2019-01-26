@@ -48,7 +48,7 @@ function OverworldObject(name, leftEdge, topEdge, width, height, animations = nu
                     } else if(this.facing.south) {
                         animations.south.draw(scaledContext, this.x, this.y);                        
                     } else if(this.facing.east) {
-                        animations.east.draw(scaledContext, this.x, this.y);
+                        animations.east.draw(scaledContext, this.x, this.y, 1, true);  //flip spritesheet to the right
                     } else if(this.facing.west) {
                         animations.west.draw(scaledContext, this.x, this.y);
                     } else if(this.facing.northEast) {
@@ -161,10 +161,10 @@ function initializeRose() {
     const roseAnimations = {
         idle:roseIdle,
         worry:roseWorry,
-        north:null,
-        south:null,
-        east:null,
-        west:null,
+        north:roseWalkUp,
+        south:roseWalkDown,
+        east:roseWalkSide,
+        west:roseWalkSide,
         northEast:null,
         northWest:null,
         southEast:null,
@@ -177,10 +177,18 @@ function initializeRose() {
     rose.states.idle = false;
     rose.states.worrying = true;
     rose.location = Place.TheCity;
+
+    //Temporary
+
+    rose.states.walking = true;
+    rose.states.idle = false;
+    rose.facing.east = true;
+    rose.facing.south = false;
+
+    //End Temporary
     
     rose.chatEvents = function (createElseIncrement) {
         this.text(createElseIncrement, [johnAndRoseConvo, johnAndRoseConvo2, johnAndRoseConvo3]);
-    
     }
 
     rose.shouldIncrementMessageCounter = function() {

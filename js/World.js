@@ -95,26 +95,26 @@ let tileSet;
 let solidTiles = [2];
 
 const Switch = {
-    TheCityToJohnsRoom:752,
-    TheCityFromJohnsRoom:812,
-    TheCityToJuliesStore:736,
-    TheCityFromJuliesStore:796,
-    TheCityToDavesHouse:727,
-    TheCityFromDavesHouse:787,
-    JohnsRoomToTheCity:95,
-    JohnsRoomFromTheCity:85,
-    JohnsRoomToJohnsHallway:39,
-    JohnsRoomFromJohnsHallway:38,
-    JohnsHallwayToJohnsRoom:64,
-    JohnsHallwayFromJohnsRoom:65,
-    JohnsHallwayToJohnsKitchen:79,
-    JohnsHallwayFromJohnsKitchen:78,
-    JohnsKitchenToJohnsHallway:50,
-    JohnsKitchenFromJohnsHallway:51,
-    JuliesStoreToTheCity:285,
-    JuliesStoreFromTheCity:265,
-    DavesHouseToTheCity:285,
-    DavesHouseFromTheCity:265
+    TheCityToJohnsRoom:             getTileIndex(theCity, 32, 12),
+    TheCityFromJohnsRoom:           getTileIndex(theCity, 32, 13),
+    TheCityToJuliesStore:           getTileIndex(theCity, 16, 12),
+    TheCityFromJuliesStore:         getTileIndex(theCity, 16, 13),
+    TheCityToDavesHouse:            getTileIndex(theCity, 7, 12),
+    TheCityFromDavesHouse:          getTileIndex(theCity, 7, 13),
+    JohnsRoomToTheCity:             getTileIndex(johnsRoom, 5, 9),
+    JohnsRoomFromTheCity:           getTileIndex(johnsRoom, 5, 8),
+    JohnsRoomToJohnsHallway:        getTileIndex(johnsRoom, 9, 3),
+    JohnsRoomFromJohnsHallway:      getTileIndex(johnsRoom, 8, 3),
+    JohnsHallwayToJohnsRoom:        getTileIndex(johnsHallway, 0, 4),
+    JohnsHallwayFromJohnsRoom:      getTileIndex(johnsHallway, 1, 4),
+    JohnsHallwayToJohnsKitchen:     getTileIndex(johnsHallway, 15, 4),
+    JohnsHallwayFromJohnsKitchen:   getTileIndex(johnsHallway, 14, 4),
+    JohnsKitchenToJohnsHallway:     getTileIndex(johnsKitchen, 0, 5),
+    JohnsKitchenFromJohnsHallway:   getTileIndex(johnsKitchen, 1, 5),
+    JuliesStoreToTheCity:           getTileIndex(juliesStore, 5, 14),
+    JuliesStoreFromTheCity:         getTileIndex(juliesStore, 5, 13),
+    DavesHouseToTheCity:            getTileIndex(davesHouse, 5, 14),
+    DavesHouseFromTheCity:          getTileIndex(davesHouse, 5, 13)
 };
 const Place = {
     TheCity:0,
@@ -136,6 +136,17 @@ let worldRows = locationList[locationNow].rows;
 console.log("Current location: " + locationNow + " size: " + worldCols + 'x' + worldRows);
 
 let visibleGrid = false;
+
+/**
+ * 
+ * @param {object} location a location object from worlds.js
+ * @param {int} x map coordinate in tiles
+ * @param {int} y map coordinate in tiles
+ */
+function getTileIndex(location, x, y){
+    let cols = location.columns;
+    return x + cols * y;
+}
 
 function rowColToArrayIndex(col, row) {
     return col + worldCols * row;

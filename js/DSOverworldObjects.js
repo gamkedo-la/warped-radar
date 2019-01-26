@@ -6,6 +6,7 @@ function OverworldObject(name, leftEdge, topEdge, width, height, animations = nu
     this.h = height;
     this.colour = "#6B6570";
     this.messageCounter = 0;
+    this.location;
 
     this.states = {
         idle: true,
@@ -39,7 +40,7 @@ function OverworldObject(name, leftEdge, topEdge, width, height, animations = nu
                 this.tileCollider.width, this.tileCollider.height);
         }
 
-        if (locationList[locationNow] == theCity) {
+        if(this.location == locationNow) {
             if(animations != null) {
                 if(this.states.walking) {
                     if(this.facing.north) {
@@ -148,28 +149,6 @@ function OverworldObject(name, leftEdge, topEdge, width, height, animations = nu
 }
 
 function initializeOverworldObjects() {
-/*    const roseAnimations = {
-        idle:roseIdle,
-        worry:roseWorry,
-        north:null,
-        south:null,
-        east:null,
-        west:null,
-        northEast:null,
-        northWest:null,
-        southEast:null,
-        southWest:null
-    }
-
-    let rose = new OverworldObject("Rose", 280, 520, 26, 62, roseAnimations); //put her next to store
-    rose.dialogue = new Dialogue();
-    rose.colour = "#8789C0";
-    
-    rose.chatEvents = function (createElseIncrement) {
-        this.text(createElseIncrement, [johnAndRoseConvo, johnAndRoseConvo2, johnAndRoseConvo3]);
-    
-    }*/
-
     allNPCs.push(initializeRose());
     allNPCs.push(initializeJulie());
     allNPCs.push(initializeDave());
@@ -194,6 +173,7 @@ function initializeRose() {
     rose.colour = "#8789C0";
     rose.states.idle = false;
     rose.states.worrying = true;
+    rose.location = Place.TheCity;
     
     rose.chatEvents = function (createElseIncrement) {
         this.text(createElseIncrement, [johnAndRoseConvo, johnAndRoseConvo2, johnAndRoseConvo3]);
@@ -217,9 +197,10 @@ function initializeJulie() {
         southWest:null
     }
 
-    let julie = new OverworldObject("Julie", 580, 520, 26, 62, julieAnimations); //Not sure where this puts her
+    let julie = new OverworldObject("Julie", 120, 400, 26, 62, julieAnimations); //Not sure where this puts her
     julie.dialogue = new Dialogue();
     julie.colour = "#b12f0c";
+    julie.location = Place.JuliesStore;
     
     julie.chatEvents = function (createElseIncrement) {
         this.text(createElseIncrement, [johnAndRoseConvo, johnAndRoseConvo2, johnAndRoseConvo3]);//need to replace these conversations
@@ -243,9 +224,10 @@ function initializeDave() {
         southWest:null
     }
 
-    let dave = new OverworldObject("Uncle Dave", 580, 600, 62, 26, daveAnimations); //Not sure where this puts her
+    let dave = new OverworldObject("Uncle Dave", 320, 320, 62, 26, daveAnimations); //Not sure where this puts her
     dave.dialogue = new Dialogue();
     dave.colour = "blue";
+    dave.location = Place.DavesHouse;
     
     dave.chatEvents = function (createElseIncrement) {
         this.text(createElseIncrement, [johnAndRoseConvo, johnAndRoseConvo2, johnAndRoseConvo3]);//need to replace these conversations

@@ -8,8 +8,9 @@ function OverworldObject(name, leftEdge, topEdge, width, height, animations = nu
     this.messageCounter = 0;
 
     this.states = {
+        idle: true,
         walking: false,
-        worrying: true
+        worrying: false
     }
 
     this.facing = {
@@ -60,7 +61,7 @@ function OverworldObject(name, leftEdge, topEdge, width, height, animations = nu
                     }
                 } else if(this.states.worrying) {
                     animations.worry.draw(scaledContext, this.x, this.y);
-                } else {
+                } else if(this.states.idle) {
                     animations.idle.draw(scaledContext, this.x, this.y);
                 }
             } else {
@@ -147,7 +148,7 @@ function OverworldObject(name, leftEdge, topEdge, width, height, animations = nu
 }
 
 function initializeOverworldObjects() {
-    const roseAnimations = {
+/*    const roseAnimations = {
         idle:roseIdle,
         worry:roseWorry,
         north:null,
@@ -167,9 +168,64 @@ function initializeOverworldObjects() {
     rose.chatEvents = function (createElseIncrement) {
         this.text(createElseIncrement, [johnAndRoseConvo, johnAndRoseConvo2, johnAndRoseConvo3]);
     
+    }*/
+
+    allNPCs.push(initializeRose());
+    allNPCs.push(initializeJulie());
+}
+
+function initializeRose() {
+    const roseAnimations = {
+        idle:roseIdle,
+        worry:roseWorry,
+        north:null,
+        south:null,
+        east:null,
+        west:null,
+        northEast:null,
+        northWest:null,
+        southEast:null,
+        southWest:null
     }
 
-    allNPCs.push(rose);
+    let rose = new OverworldObject("Rose", 280, 520, 26, 62, roseAnimations); //put her next to store
+    rose.dialogue = new Dialogue();
+    rose.colour = "#8789C0";
+    rose.states.idle = false;
+    rose.states.worrying = true;
+    
+    rose.chatEvents = function (createElseIncrement) {
+        this.text(createElseIncrement, [johnAndRoseConvo, johnAndRoseConvo2, johnAndRoseConvo3]);
+    
+    }
+
+    return rose;
+}
+
+function initializeJulie() {
+    const julieAnimations = {
+        idle:julieIdle,
+        worry:null,
+        north:null,
+        south:null,
+        east:null,
+        west:null,
+        northEast:null,
+        northWest:null,
+        southEast:null,
+        southWest:null
+    }
+
+    let julie = new OverworldObject("Julie", 580, 520, 26, 62, julieAnimations); //Not sure where this puts her
+    julie.dialogue = new Dialogue();
+    julie.colour = "#b12f0c";
+    
+    julie.chatEvents = function (createElseIncrement) {
+        this.text(createElseIncrement, [johnAndRoseConvo, johnAndRoseConvo2, johnAndRoseConvo3]);//need to replace these conversations
+    
+    }
+
+    return julie;
 }
 
 let allNPCs = [];

@@ -11,6 +11,7 @@ let johnWalkDownDiag; //SouthWest and SouthEast(flip)
 let frameDelayWalk = framesPerSecond / 6; //higher number equals slower walk cycle speed
 
 let roseIdle;
+let julieIdle;
 
 function makeAnimatedSprites() {
 	//Mouth Movement Animations
@@ -93,6 +94,14 @@ function makeAnimatedSprites() {
 		name: "roseAnimationWorry",
 		spriteSheet: roseAnimationWorry,
 		animationColFrames: 43,
+		framesUntilNext: frameDelayWalk,
+	});
+
+	//Julie
+	julieIdle = new AnimatedSpriteClass({
+		name: "julieAnimationIdle",
+		spriteSheet: julieAnimationIdle,
+		animationColFrames: 26,
 		framesUntilNext: frameDelayWalk,
 	});
 };

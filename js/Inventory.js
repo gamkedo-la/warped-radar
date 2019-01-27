@@ -209,7 +209,7 @@ let inventory = new(function () {
     }
 
     this.toggle = function () {
-        if (!levelEditor.isOn) {
+        if (!levelEditor.isOn && gameIsStarted) {
             this.isShowing = !this.isShowing;
         }
     }

@@ -101,30 +101,28 @@ const Switch = {
     TheCityFromJuliesStore:         getTileIndex(theCity, 16, 13),
     TheCityToDavesHouse:            getTileIndex(theCity, 7, 12),
     TheCityFromDavesHouse:          getTileIndex(theCity, 7, 13),
-    JohnsRoomToTheCity:             getTileIndex(johnsRoom, 7, 25),
-    JohnsRoomFromTheCity:           getTileIndex(johnsRoom, 7, 24),
-    JohnsRoomToJohnsHallway:        getTileIndex(johnsRoom, 9, 3),
-    JohnsRoomFromJohnsHallway:      getTileIndex(johnsRoom, 8, 3),
-    JohnsHallwayToJohnsRoom:        getTileIndex(johnsHallway, 0, 4),
-    JohnsHallwayFromJohnsRoom:      getTileIndex(johnsHallway, 1, 4),
-    JohnsHallwayToJohnsKitchen:     getTileIndex(johnsHallway, 15, 4),
-    JohnsHallwayFromJohnsKitchen:   getTileIndex(johnsHallway, 14, 4),
-    JohnsKitchenToJohnsHallway:     getTileIndex(johnsKitchen, 0, 5),
-    JohnsKitchenFromJohnsHallway:   getTileIndex(johnsKitchen, 1, 5),
+    JohnsRoomToTheCity:             getTileIndex(johnsRoom, 6, 23),
+    JohnsRoomFromTheCity:           getTileIndex(johnsRoom, 6, 22),
+    // JohnsRoomToJohnsHallway:        getTileIndex(johnsRoom, 9, 3),
+    // JohnsRoomFromJohnsHallway:      getTileIndex(johnsRoom, 8, 3),
+    // JohnsHallwayToJohnsRoom:        getTileIndex(johnsHallway, 0, 4),
+    // JohnsHallwayFromJohnsRoom:      getTileIndex(johnsHallway, 1, 4),
+    // JohnsHallwayToJohnsKitchen:     getTileIndex(johnsHallway, 15, 4),
+    // JohnsHallwayFromJohnsKitchen:   getTileIndex(johnsHallway, 14, 4),
+    // JohnsKitchenToJohnsHallway:     getTileIndex(johnsKitchen, 0, 5),
+    // JohnsKitchenFromJohnsHallway:   getTileIndex(johnsKitchen, 1, 5),
     JuliesStoreToTheCity:           getTileIndex(juliesStore, 5, 14),
     JuliesStoreFromTheCity:         getTileIndex(juliesStore, 5, 13),
-    DavesHouseToTheCity:            getTileIndex(davesHouse, 5, 14),
-    DavesHouseFromTheCity:          getTileIndex(davesHouse, 5, 13)
+    DavesHouseToTheCity:            getTileIndex(davesHouse, 14, 18),
+    DavesHouseFromTheCity:          getTileIndex(davesHouse, 14, 17)
 };
 const Place = {
     TheCity:0,
     JohnsRoom:1,
-    JohnsHallway:2,
-    JohnsKitchen:3,
-    DavesHouse:4,
-    JuliesStore:5
+    DavesHouse:2,
+    JuliesStore:3
 };
-let locationList = [theCity, johnsRoom, johnsHallway, johnsKitchen, davesHouse, juliesStore];
+let locationList = [theCity, johnsRoom, davesHouse, juliesStore];
 let locationNow = 0;
 
     window.locations = locationList

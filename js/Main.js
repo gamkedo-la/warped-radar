@@ -2,7 +2,7 @@ const CANVAS_WIDTH = 800;
 const CANVAS_HEIGHT = 600;
 const PIXELS_PER_SCALE = 2.0;
 
-let scaledCanvas, scaledContext;
+let scaledCanvas, scaledContext, fxCanvas, fxContext;
 let canvas, canvasContext;
 
 let framesFromGameStart = 0;
@@ -47,12 +47,18 @@ function start () {
     scaledCanvas.height = CANVAS_HEIGHT / PIXELS_PER_SCALE;
     //document.body.appendChild(scaledCanvas);
 
+    fxCanvas = document.createElement("canvas");
+    fxContext = fxCanvas.getContext("2d");
+    fxCanvas.width = CANVAS_WIDTH / PIXELS_PER_SCALE;
+    fxCanvas.height = CANVAS_HEIGHT / PIXELS_PER_SCALE;
+
     canvasContext.imageSmoothingEnabled = false;
     canvasContext.msImageSmoothingEnabled = false;
     canvasContext.imageSmoothingEnabled = false;
     scaledContext.imageSmoothingEnabled = false;
     scaledContext.msImageSmoothingEnabled = false;
     scaledContext.imageSmoothingEnabled = false;
+    fxContext.filter = 'blur(4px)';
 
     makeAnimatedSprites();
     mainCamera = new Camera();
@@ -98,6 +104,7 @@ function gameLoop () {
         update(delta / 1000);
         framesFromGameStart++;
         render();
+        //postRender();
     }
 
     then = now;
@@ -128,7 +135,7 @@ function update (delta) {
 }
 // All things drawn to screen every frame here
 function render () {
-    
+
     if(gameIsStarted === false){
         Menu.draw();
         if (transitioning) {
@@ -147,7 +154,8 @@ function render () {
     nonTileObjects = nonTileObjects.concat(allNPCs);
     nonTileObjects = nonTileObjects.concat(arrayOfObtainableItems);
     drawWorld(nonTileObjects);
-    drawScaledCanvas(); //draw everthing on the pixel-scale canvas to the larger game canvas
+     //draw everthing on the pixel-scale canvas to the larger game canvas
+    
     drawWeatherEffects();
     drawGameBorder();
     drawDebugText();
@@ -180,8 +188,22 @@ function render () {
     if (transitioning) {
         PageTransition.draw();
     }
-}
 
+    postRender();
+    drawScaledCanvas();
+    
+}
+function postRender () {
+    fxContext.drawImage(scaledCanvas, 0,0, scaledCanvas.width, scaledCanvas.height, 0, 0, fxCanvas.width/2, fxCanvas.height/2);
+    //fxContext.fillStyle = "#fff";
+    //fxContext.fillRect(0,0,64,64);
+    scaledContext.save();
+    scaledContext.globalCompositeOperation = "lighter";
+    scaledContext.globalAlpha = 0.55;
+    scaledContext.drawImage(fxCanvas, 0,0, fxCanvas.width/2, fxCanvas.height/2, 0,0, scaledCanvas.width, scaledCanvas.height);
+    scaledContext.restore();
+    
+}
 function goToDestinationFor(arrayIndexUnderPlayer) {
     
     let newSwitchIndex = -1;

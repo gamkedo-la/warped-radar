@@ -49,8 +49,8 @@ function start () {
 
     fxCanvas = document.createElement("canvas");
     fxContext = fxCanvas.getContext("2d");
-    fxCanvas.width = CANVAS_WIDTH / PIXELS_PER_SCALE;
-    fxCanvas.height = CANVAS_HEIGHT / PIXELS_PER_SCALE;
+    fxCanvas.width = CANVAS_WIDTH;
+    fxCanvas.height = CANVAS_HEIGHT;
 
     canvasContext.imageSmoothingEnabled = false;
     canvasContext.msImageSmoothingEnabled = false;
@@ -58,7 +58,7 @@ function start () {
     scaledContext.imageSmoothingEnabled = false;
     scaledContext.msImageSmoothingEnabled = false;
     scaledContext.imageSmoothingEnabled = false;
-    fxContext.filter = 'blur(4px)';
+    fxContext.filter = 'blur(8px)';
 
     makeAnimatedSprites();
     mainCamera = new Camera();
@@ -154,7 +154,7 @@ function render () {
     nonTileObjects = nonTileObjects.concat(allNPCs);
     nonTileObjects = nonTileObjects.concat(arrayOfObtainableItems);
     drawWorld(nonTileObjects);
-     //draw everthing on the pixel-scale canvas to the larger game canvas
+    drawScaledCanvas(); //draw everthing on the pixel-scale canvas to the larger game canvas
     
     drawWeatherEffects();
     drawGameBorder();
@@ -190,18 +190,17 @@ function render () {
     }
 
     postRender();
-    drawScaledCanvas();
     
 }
 function postRender () {
-    fxContext.drawImage(scaledCanvas, 0,0, scaledCanvas.width, scaledCanvas.height, 0, 0, fxCanvas.width/2, fxCanvas.height/2);
+    fxContext.drawImage(canvas, 0,0, canvas.width, canvas.height, 0, 0, fxCanvas.width, fxCanvas.height);
     //fxContext.fillStyle = "#fff";
     //fxContext.fillRect(0,0,64,64);
-    scaledContext.save();
-    scaledContext.globalCompositeOperation = "lighter";
-    scaledContext.globalAlpha = 0.55;
-    scaledContext.drawImage(fxCanvas, 0,0, fxCanvas.width/2, fxCanvas.height/2, 0,0, scaledCanvas.width, scaledCanvas.height);
-    scaledContext.restore();
+    canvasContext.save();
+    canvasContext.globalCompositeOperation = "lighter";
+    canvasContext.globalAlpha = 0.55;
+    canvasContext.drawImage(fxCanvas, 0,0, fxCanvas.width, fxCanvas.height, 0,0, canvas.width, canvas.height);
+    canvasContext.restore();
     
 }
 function goToDestinationFor(arrayIndexUnderPlayer) {
@@ -232,22 +231,23 @@ function goToDestinationFor(arrayIndexUnderPlayer) {
             newSwitchIndex = Switch.JohnsHallwayFromJohnsRoom;
             shouldReloadLevel = true;
         }
-    } else if(locationList[locationNow] === locationList[Place.JohnsHallway]) {
-        if(arrayIndexUnderPlayer === Switch.JohnsHallwayToJohnsKitchen) {
-            locationNow = Place.JohnsKitchen;
-            newSwitchIndex = Switch.JohnsKitchenFromJohnsHallway;
-            shouldReloadLevel = true;
-        } else if(arrayIndexUnderPlayer === Switch.JohnsHallwayToJohnsRoom) {
-            locationNow = Place.JohnsRoom;
-            newSwitchIndex = Switch.JohnsRoomFromJohnsHallway;
-            shouldReloadLevel = true;
-        }
-    } else if(locationList[locationNow] === locationList[Place.JohnsKitchen]) {
-        if(arrayIndexUnderPlayer === Switch.JohnsKitchenToJohnsHallway) {
-            locationNow = Place.JohnsHallway;
-            newSwitchIndex = Switch.JohnsHallwayFromJohnsKitchen;
-            shouldReloadLevel = true;
-        }
+    // } else if(locationList[locationNow] === locationList[Place.JohnsHallway]) {
+    //     if(arrayIndexUnderPlayer === Switch.JohnsHallwayToJohnsKitchen) {
+    //         locationNow = Place.JohnsKitchen;
+    //         newSwitchIndex = Switch.JohnsKitchenFromJohnsHallway;
+    //         shouldReloadLevel = true;
+    //     } else if(arrayIndexUnderPlayer === Switch.JohnsHallwayToJohnsRoom) {
+    //         locationNow = Place.JohnsRoom;
+    //         newSwitchIndex = Switch.JohnsRoomFromJohnsHallway;
+    //         shouldReloadLevel = true;
+    //     }
+    // } else if(locationList[locationNow] === locationList[Place.JohnsKitchen]) {
+    //     if(arrayIndexUnderPlayer === Switch.JohnsKitchenToJohnsHallway) {
+    //         locationNow = Place.JohnsHallway;
+    //         newSwitchIndex = Switch.JohnsHallwayFromJohnsKitchen;
+    //         shouldReloadLevel = true;
+    //     }
+    // } 
     } else if(locationList[locationNow] === locationList[Place.JuliesStore]) {
         if(arrayIndexUnderPlayer === Switch.JuliesStoreToTheCity) {
             locationNow = Place.TheCity;

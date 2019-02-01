@@ -107,10 +107,6 @@ function OverworldObject(name, leftEdge, topEdge, width, height, animations = nu
                 return;
             }
             if (keysPressed(KEY_SPACE) || keysPressed(KEY_ENTER)) {
-                if(this.name == "Uncle Dave") {
-                    console.log("Setting Found Dave to true");
-                    GameEvent.FoundDave = true;
-                }
                 if (dialogue.page <= 0) {
                     dialogue.isShowing = true;
                     dialogue.letterCounter = 0;
@@ -119,13 +115,12 @@ function OverworldObject(name, leftEdge, topEdge, width, height, animations = nu
                 if ((dialogue.speakerX <= dialogue.speakerStartX) && (dialogue.speaker2X >= dialogue.speaker2StartX)) {
                     dialogue.setPage(0);
                 }
-            } else {
-                dialogue.isShowing = false;
-                dialogue.setPage(0);
             }
         } else if (!this.nearPlayer()) {
             dialogue.isShowing = false;
             dialogue.setPage(0);
+        } else if ((dialogue.isShowing) && (this.name == "Uncle Dave")) {
+            GameEvent.FoundDave = true;
         }
     }
 

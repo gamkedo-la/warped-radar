@@ -60,7 +60,6 @@ function EventManager() {
             }
                 break;
             case "Uncle Dave":
-                console.log("Can talk to uncle Dave? " + GameEvent.FoundDave);
                 if(!GameEvent.FoundDave) {
                     result = 0;
                 }

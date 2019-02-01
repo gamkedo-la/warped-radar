@@ -76,6 +76,22 @@ const Place = {
 let locationList = [theCity, johnsRoom, davesHouse, juliesStore];
 let locationNow = 0;
 
+//Look for where the PLAYER_START tile is so we can load the
+//correct part of the map to start the game.
+let foundStart = false;
+for(let i = 0; i < locationList.length; i++) {
+    const dataArray = locationList[i].layers[Layer.Interaction];
+    for(let j = 0; j < dataArray.length; j++) {
+        if(dataArray[j] == TILE.PLAYER_START) {
+            locationNow = i;
+            foundStart = true;
+            break;
+        }
+    }
+    if(foundStart) {break;}
+}
+
+
     window.locations = locationList
 //--------------------------------------
 

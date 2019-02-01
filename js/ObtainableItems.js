@@ -1,31 +1,39 @@
 function initializeObtainableItems() {
-  let arrayIndex = 0;
   let tileX = 0;
   let tileY = 0;
-  for (let eachRow = 0; eachRow < worldRows; eachRow++) {
-      for (let eachCol = 0; eachCol < worldCols; eachCol++) {
-          let arrayIndex = rowColToArrayIndex(eachCol, eachRow);
-          let tileKindHere = locationList[locationNow].layers[Layer.Depth_Sorted][arrayIndex];
+  for(let eachLocation = 0; eachLocation < locationList.length; eachLocation++) {
+    const thisLocation = locationList[eachLocation];
+    const rows = thisLocation.rows;
+    const cols = thisLocation.columns;
 
-          for(let i = 0; i < arrayOfObtainableItems.length; i++) {
-            if(tileKindHere == arrayOfObtainableItems[i].tileType) {
-              arrayOfObtainableItems[i].drawTileX = tileX;
-              arrayOfObtainableItems[i].drawTileY = tileY;
-              arrayOfObtainableItems[i].leftEdge = arrayOfObtainableItems[i].drawTileX;
-              arrayOfObtainableItems[i].rightEdge = arrayOfObtainableItems[i].drawTileX + WORLD_W;
-              arrayOfObtainableItems[i].topEdge = arrayOfObtainableItems[i].drawTileY;
-              arrayOfObtainableItems[i].bottomEdge = arrayOfObtainableItems[i].drawTileY + WORLD_H;
-            }
+    for (let eachRow = 0; eachRow < rows; eachRow++) {
+      for (let eachCol = 0; eachCol < cols; eachCol++) {
+        let arrayIndex = rowColToArrayIndex(eachCol, eachRow, cols);
+        let tileKindHere = thisLocation.layers[Layer.Depth_Sorted][arrayIndex];
+
+        for(let i = 0; i < arrayOfObtainableItems.length; i++) {
+          if(tileKindHere == arrayOfObtainableItems[i].tileType) {
+            arrayOfObtainableItems[i].drawTileX = tileX;
+            arrayOfObtainableItems[i].drawTileY = tileY;
+            arrayOfObtainableItems[i].leftEdge = arrayOfObtainableItems[i].drawTileX;
+            arrayOfObtainableItems[i].rightEdge = arrayOfObtainableItems[i].drawTileX + WORLD_W;
+            arrayOfObtainableItems[i].topEdge = arrayOfObtainableItems[i].drawTileY;
+            arrayOfObtainableItems[i].bottomEdge = arrayOfObtainableItems[i].drawTileY + WORLD_H;
+            arrayOfObtainableItems[i].location = eachLocation;
           }
+        }
 
-          tileX += WORLD_W;
-   }
-   tileY += WORLD_H;
-   tileX = 0;
- }
+        tileX += WORLD_W;
+      }
+      tileY += WORLD_H;
+      tileX = 0;
+    }
+
+    tileY = 0;
+  }
 }
 
-function ObtainableItem(drawTileX,drawTileY, tileWidth,tileHeight, name, description, image, tileType) {
+function ObtainableItem(drawTileX,drawTileY, tileWidth,tileHeight, name, description, image, tileType, location) {
   this.drawTileX = drawTileX;
   this.drawTileY = drawTileY;
   this.tileWidth = tileWidth;
@@ -42,22 +50,25 @@ function ObtainableItem(drawTileX,drawTileY, tileWidth,tileHeight, name, descrip
   this.description = description;
   this.image = image;
   this.tileType = tileType;
+  this.location = location;
 }
 
-let brokenSkateBoard = new ObtainableItem(undefined,undefined, WORLD_W,WORLD_H, "brokenSkateBoard", "Broken Skateboard", null, TILE.BROKEN_SKATEBOARD);
-let burnerPhone = new ObtainableItem(undefined,undefined, WORLD_W,WORLD_H, "burnerPhone", "Burner Phone", null, TILE.BURNER_PHONE);
-let crowbar = new ObtainableItem(undefined,undefined, WORLD_W,WORLD_H, "crowbar", "Crowbar", null, TILE.CROWBAR);
-let hoodie = new ObtainableItem(undefined,undefined, WORLD_W,WORLD_H, "hoodie", "Hoodie", null, TILE.HOODIE);
-let medicalNotebook = new ObtainableItem(undefined,undefined, WORLD_W,WORLD_H, "medicalNotebook", "Medical Notebook", null, TILE.MEDICAL_NOTEBOOK);
-let sealedTube = new ObtainableItem(undefined,undefined, WORLD_W,WORLD_H, "sealedTube", "Sealed Tube", null, TILE.SEALED_TUBE);
-let thumbDrive = new ObtainableItem(undefined,undefined, WORLD_W,WORLD_H, "thumbDrive", "Thumb Drive", null, TILE.THUMB_DRIVE);
-let trainTicket = new ObtainableItem(undefined,undefined, WORLD_W,WORLD_H, "trainTicket", "Train Ticket", null, TILE.TRAIN_TICKET);
+let brokenSkateBoard = new ObtainableItem(undefined,undefined, WORLD_W,WORLD_H, "brokenSkateBoard", "Broken Skateboard", null, TILE.BROKEN_SKATEBOARD, locationNow);
+let burnerPhone = new ObtainableItem(undefined,undefined, WORLD_W,WORLD_H, "burnerPhone", "Burner Phone", null, TILE.BURNER_PHONE, locationNow);
+let crowbar = new ObtainableItem(undefined,undefined, WORLD_W,WORLD_H, "crowbar", "Crowbar", null, TILE.CROWBAR, locationNow);
+let hoodie = new ObtainableItem(undefined,undefined, WORLD_W,WORLD_H, "hoodie", "Hoodie", null, TILE.HOODIE, locationNow);
+let medicalNotebook = new ObtainableItem(undefined,undefined, WORLD_W,WORLD_H, "medicalNotebook", "Medical Notebook", null, TILE.MEDICAL_NOTEBOOK, locationNow);
+let sealedTube = new ObtainableItem(undefined,undefined, WORLD_W,WORLD_H, "sealedTube", "Sealed Tube", null, TILE.SEALED_TUBE, locationNow);
+let thumbDrive = new ObtainableItem(undefined,undefined, WORLD_W,WORLD_H, "thumbDrive", "Thumb Drive", null, TILE.THUMB_DRIVE, locationNow);
+let trainTicket = new ObtainableItem(undefined,undefined, WORLD_W,WORLD_H, "trainTicket", "Train Ticket", null, TILE.TRAIN_TICKET, locationNow);
 
 let arrayOfObtainableItems = [brokenSkateBoard, burnerPhone, crowbar, hoodie, medicalNotebook, sealedTube, thumbDrive, trainTicket];
 
 function checkForObtainableItems() {
   for (let obtainableItemsIndex = 0; obtainableItemsIndex < arrayOfObtainableItems.length; obtainableItemsIndex++) {
     let itemTile = arrayOfObtainableItems[obtainableItemsIndex];
+    if(itemTile.location != locationNow) {continue;}//only include obtainableItems in the current location
+
     if (player.x > itemTile.leftEdge && player.x < itemTile.rightEdge &&  player.y + 30 > itemTile.topEdge && player.y < itemTile.bottomEdge) {
       itemTile.obtainable = true;
       player.nearObjOrNPC = arrayOfObtainableItems[obtainableItemsIndex];

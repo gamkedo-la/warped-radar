@@ -27,8 +27,8 @@ function getTextWidth(txt, font) {
 	return width;
 }
 
-function rowColToArrayIndex(col, row) {
-    return col + worldCols * row;
+function rowColToArrayIndex(col, row, currentWorldCols = worldCols) {
+    return col + currentWorldCols * row;
 }
 
 function getTileTypesAtRectInLayer(x, y, width, height, layer) {

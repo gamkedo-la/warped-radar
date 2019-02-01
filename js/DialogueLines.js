@@ -737,7 +737,7 @@ let johnAndJulie_1 = [
         who: "Julie",
         nameCol: "#b12f0c",
         voice: voiceHigh2,
-        text: "Of course not! You think this is a charity?  Go away.",
+        text: "I like your smile, but it won't put food on my table. Come back when you have Credits.",
         nextPage: 3,
         leftPic: johnHappyPic,
         rightPic: julieWorriedPic,

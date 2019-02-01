@@ -65,8 +65,6 @@ function start () {
     levelEditor = new LevelEditor();
     player = new Player();
 
-//    worldGrid = locationList[locationNow].layers[Layer.Ground];
-
     if (useRequestAnimationFrame) {
         gameLoop();
     } else {

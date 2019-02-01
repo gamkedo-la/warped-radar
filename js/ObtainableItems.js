@@ -5,7 +5,7 @@ function initializeObtainableItems() {
   for (let eachRow = 0; eachRow < worldRows; eachRow++) {
       for (let eachCol = 0; eachCol < worldCols; eachCol++) {
           let arrayIndex = rowColToArrayIndex(eachCol, eachRow);
-          let tileKindHere = locationList[locationNow].layers[Layer.Ground][arrayIndex];
+          let tileKindHere = locationList[locationNow].layers[Layer.Depth_Sorted][arrayIndex];
 
           for(let i = 0; i < arrayOfObtainableItems.length; i++) {
             if(tileKindHere == arrayOfObtainableItems[i].tileType) {
@@ -82,8 +82,8 @@ function obtainItemIfApplicable() {
       for (let eachRow = 0; eachRow < worldRows; eachRow++) {//replace item tile with ground tile
           for (let eachCol = 0; eachCol < worldCols; eachCol++) {
               let arrayIndex = rowColToArrayIndex(eachCol, eachRow);
-              if (locationList[locationNow].layers[Layer.Ground][arrayIndex] === arrayOfObtainableItems[i].tileType) {
-                locationList[locationNow].layers[Layer.Ground][arrayIndex] = TILE.GROUND;
+              if (locationList[locationNow].layers[Layer.Depth_Sorted][arrayIndex] === arrayOfObtainableItems[i].tileType) {
+                locationList[locationNow].layers[Layer.Depth_Sorted][arrayIndex] = TILE.BLANK;
               }//end of change item tile to ground tile
             }//end of column loop
           }//end of row loop

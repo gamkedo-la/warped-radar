@@ -193,9 +193,6 @@ function initializeRose(arrayIndex) {
     rose.states.worrying = true;
     rose.location = Place.TheCity;
 
-    //Search through the interaction layer of rose.location looking for Tile.ROSE.  When it is found, set Rose xPos and yPos based on it.
-    //Working Here.
-
     //Temporary
 
     rose.states.walking = true;

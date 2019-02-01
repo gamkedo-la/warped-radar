@@ -199,9 +199,10 @@ function drawDepthSorted(nonTileObjs) {
             const arrayIndex = rowColToArrayIndex(eachCol, eachRow);
             let tileKindHere = layer[arrayIndex];
 
-            if((tileKindHere == TILE.WALL) ||
+            if(!shouldDrawTile(tileKindHere))
+/*            if((tileKindHere == TILE.WALL) ||
                (tileKindHere == TILE.PLAYER_START) ||
-               (tileKindHere == TILE.SWITCH_LOCATION)) {//don't draw the collision tiles or action tiles
+               (tileKindHere == TILE.SWITCH_LOCATION)) */{//don't draw the collision tiles or action tiles
                     tileSet.drawTileAt(scaledContext, TILE.BLANK, drawTileX, drawTileY);
             } else {
                 //Need to find out if this tile has a height above the ground
@@ -272,6 +273,9 @@ function findAndSortObjectsToDraw(objArray) {
         //Is this object on screen?
         if(isInViewPort(scaledCanvas, thisObj.x, thisObj.y)) {
             resultArray.push(thisObj);
+            if(thisObj.name == "crowbar") {
+//                console.log("The crowbar is in the set");
+            }
         }
     }
 
@@ -280,6 +284,24 @@ function findAndSortObjectsToDraw(objArray) {
     resultArray.sort((a, b) => ((a.y + a.h) > (b.y + b.h)) ? 1 : -1);
 
     return resultArray;
+}
+
+function shouldDrawTile(tileKind) {
+    if((tileKind == TILE.BROKEN_SKATEBOARD) ||
+    (tileKind == TILE.BURNER_PHONE) ||
+    (tileKind == TILE.CROWBAR) ||
+    (tileKind == TILE.HOODIE) ||
+    (tileKind == TILE.MEDICAL_NOTEBOOK) ||
+    (tileKind == TILE.SEALED_TUBE) ||
+    (tileKind == TILE.THUMB_DRIVE) ||
+    (tileKind == TILE.TRAIN_TICKET) ||
+    (tileKind == TILE.SWITCH_LOCATION) ||
+    (tileKind == TILE.WALL) ||
+    (tileKind == TILE.PLAYER_START))  {
+        return false;
+    }
+
+    return true;
 }
 
 function drawWorld(nonTileObjs) {

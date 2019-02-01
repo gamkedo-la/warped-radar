@@ -15,6 +15,8 @@ function initializeObtainableItems() {
           if(tileKindHere == arrayOfObtainableItems[i].tileType) {
             arrayOfObtainableItems[i].drawTileX = tileX;
             arrayOfObtainableItems[i].drawTileY = tileY;
+            arrayOfObtainableItems[i].x = tileX;
+            arrayOfObtainableItems[i].y = tileY;
             arrayOfObtainableItems[i].leftEdge = arrayOfObtainableItems[i].drawTileX;
             arrayOfObtainableItems[i].rightEdge = arrayOfObtainableItems[i].drawTileX + WORLD_W;
             arrayOfObtainableItems[i].topEdge = arrayOfObtainableItems[i].drawTileY;
@@ -43,14 +45,23 @@ function ObtainableItem(drawTileX,drawTileY, tileWidth,tileHeight, name, descrip
   this.topEdge = drawTileY;
   this.bottomEdge = drawTileY + WORLD_H;
   this.h = WORLD_H;
+  this.x = drawTileX;
+  this.y = drawTileY;
 
   this.obtainable = false;
+  this.obtained = false;
 
   this.name = name;
   this.description = description;
   this.image = image;
   this.tileType = tileType;
   this.location = location;
+
+  this.draw = function() {
+    if(!this.obtained) {
+      tileSet.drawTileAt(scaledContext, this.tileType, this.drawTileX, this.drawTileY);
+    }
+  }
 }
 
 let brokenSkateBoard = new ObtainableItem(undefined,undefined, WORLD_W,WORLD_H, "brokenSkateBoard", "Broken Skateboard", null, TILE.BROKEN_SKATEBOARD, locationNow);
@@ -68,6 +79,7 @@ function checkForObtainableItems() {
   for (let obtainableItemsIndex = 0; obtainableItemsIndex < arrayOfObtainableItems.length; obtainableItemsIndex++) {
     let itemTile = arrayOfObtainableItems[obtainableItemsIndex];
     if(itemTile.location != locationNow) {continue;}//only include obtainableItems in the current location
+    if(!eventManager.canShowObtainableItem(itemTile)) {continue;}//don't show items until the right events have transpired
 
     if (player.x > itemTile.leftEdge && player.x < itemTile.rightEdge &&  player.y + 30 > itemTile.topEdge && player.y < itemTile.bottomEdge) {
       itemTile.obtainable = true;
@@ -83,6 +95,7 @@ function obtainItemIfApplicable() {
   for (let i = 0; i < arrayOfObtainableItems.length; i++) {
     if (arrayOfObtainableItems[i].obtainable) {
       console.log(arrayOfObtainableItems[i].name + " obtained");
+      arrayOfObtainableItems[i].obtained = true;
       eventManager.obtainedItem(arrayOfObtainableItems[i]);
       
       notificationWindow.setMessage('You picked up: ' + arrayOfObtainableItems[i].name + '!');

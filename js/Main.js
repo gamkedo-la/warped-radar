@@ -152,7 +152,17 @@ function render () {
     let nonTileObjects = [];
     nonTileObjects.push(player);
     nonTileObjects = nonTileObjects.concat(allNPCs);
-    nonTileObjects = nonTileObjects.concat(arrayOfObtainableItems);
+
+    //only add obtainable items which are available for pick up (don't draw those which shouldn't be visible)
+    let availableObtainableItems = [];
+    for(let i = 0; i < arrayOfObtainableItems.length; i++) {
+        if(eventManager.canShowObtainableItem(arrayOfObtainableItems[i])) {
+//            console.log("It's available! " + arrayOfObtainableItems[i].name);
+            availableObtainableItems.push(arrayOfObtainableItems[i]);
+        }
+    }
+    nonTileObjects = nonTileObjects.concat(availableObtainableItems);
+    
     drawWorld(nonTileObjects);
     drawScaledCanvas(); //draw everthing on the pixel-scale canvas to the larger game canvas
     
@@ -329,11 +339,13 @@ function drawDebugText () {
 
 function drawTextNearObjOrNPC() {
     if(player.nearObjOrNPC != null) {
-        // Draw text for NPC
-        colorText(player.nearObjOrNPC.name, (player.nearObjOrNPC.x*2 - mainCamera.camPanX*2) - 15, (player.nearObjOrNPC.y*2 - mainCamera.camPanY*2) + 15, "white", "14px Arial", "left", 1);
-
-        // Draw text for obtainable items
-        colorText(player.nearObjOrNPC.description, (player.nearObjOrNPC.drawTileX*2 - mainCamera.camPanX*2) -15, (player.nearObjOrNPC.drawTileY*2 - mainCamera.camPanY*2) + 15, "white", "14px Arial", "left", 1);
+        if(player.nearObjOrNPC.obtainable == undefined) {//NPCs can't be 'obtained', so this property is not defined for them
+            // Draw text for NPC
+            colorText(player.nearObjOrNPC.name, (player.nearObjOrNPC.x*2 - mainCamera.camPanX*2) - 15, (player.nearObjOrNPC.y*2 - mainCamera.camPanY*2) + 15, "white", "14px Arial", "left", 1);
+        } else {
+            // Draw text for obtainable items
+            colorText(player.nearObjOrNPC.description, (player.nearObjOrNPC.drawTileX*2 - mainCamera.camPanX*2) -15, (player.nearObjOrNPC.drawTileY*2 - mainCamera.camPanY*2) + 15, "white", "14px Arial", "left", 1);
+        }
     }
 }
 

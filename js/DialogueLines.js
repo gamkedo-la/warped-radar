@@ -1,3 +1,91 @@
+let JohnAndRose_1 = [
+    {
+        scene: "Greeting",
+        who: "John",
+        nameCol: "lightBlue",
+        voice: voiceLow1,
+        text: "Hi, how are you?",
+        nextPage: 1,
+        leftPic: johnHappyPic,
+        rightPic: roseHappyPic,
+
+        leftPicLeave: false,
+        rightPicLeave: false,
+
+        choices: null,
+
+        position: {x: 501.5, y: -226}
+    },
+    {
+        scene: "Response",
+        who: "Rose",
+        nameCol: "pink",
+        voice: voiceHigh2,
+        text: "I just got here. I don't know what's going on.",
+        nextPage: 2,
+        leftPic: johnHappyPic,
+        rightPic: roseAnnoyedPic,
+
+        leftPicLeave: false,
+        rightPicLeave: false,
+
+        choices: null,
+
+        position: {x: 501.5, y: 44}
+    },
+    {
+        scene: "Query",
+        who: "John",
+        nameCol: "lightBlue",
+        voice: voiceLow1,
+        text: "",
+        nextPage: null,
+        leftPic: johnMadPic,
+        rightPic: roseAnnoyedPic,
+
+        leftPicLeave: false,
+        rightPicLeave: false,
+
+        choices: [["Are you ok?", "YesOk"], ["Why are you so worried?", "ImNotWorried"]],
+
+        position: {x: 501.5, y: 334}
+    },
+    {
+        scene: "YesOk",
+        who: "Rose",
+        nameCol: "pink",
+        voice: voiceHigh2,
+        text: "Yes, why wouldn't I be?",
+        nextPage: 4,
+        leftPic: johnMadPic,
+        rightPic: roseAnnoyedPic,
+
+        leftPicLeave: false,
+        rightPicLeave: false,
+
+        choices: null,
+
+        position: {x: 501.5, y: 604}
+    },
+    {
+        scene: "ImNotWorried",
+        who: "Rose",
+        nameCol: "pink",
+        voice: voiceHigh2,
+        text: "I'm not worried!",
+        nextPage: 5,
+        leftPic: johnMadPic,
+        rightPic: roseAnnoyedPic,
+
+        leftPicLeave: false,
+        rightPicLeave: false,
+
+        choices: null,
+
+        position: {x: 976.5, y: 426}
+    },
+];
+
 let johnAndRoseConvo = [
     {
         scene: "neutral",
@@ -606,5 +694,59 @@ let UncleDaveDiscovery = [
         choices: null,
 
         position: {x: 659.5, y: 678}
+    },
+];
+
+let johnAndJulie_1 = [
+    {
+        scene: "page1",
+        who: "Julie",
+        nameCol: "#b12f0c",
+        voice: voiceHigh2,
+        text: "Welcome to Julie's Automail, I'm Julie.",
+        nextPage: 1,
+        leftPic: johnHappyPic,
+        rightPic: julieWorriedPic,
+
+        leftPicLeave: false,
+        rightPicLeave: false,
+
+        choices: null,
+
+        position: {x: 527.5, y: -308}
+    },
+    {
+        scene: "page2",
+        who: "John",
+        nameCol: "lightBlue",
+        voice: voiceLow1,
+        text: "Hi, do you have any enhancements available for free?",
+        nextPage: 2,
+        leftPic: johnHappyPic,
+        rightPic: julieWorriedPic,
+
+        leftPicLeave: false,
+        rightPicLeave: false,
+
+        choices: null,
+
+        position: {x: 527.5, y: -17}
+    },
+    {
+        scene: "page3",
+        who: "Julie",
+        nameCol: "#b12f0c",
+        voice: voiceHigh2,
+        text: "Of course not! You think this is a charity?  Go away.",
+        nextPage: 3,
+        leftPic: johnHappyPic,
+        rightPic: julieWorriedPic,
+
+        leftPicLeave: false,
+        rightPicLeave: false,
+
+        choices: null,
+
+        position: {x: 529.5, y: 273}
     },
 ];

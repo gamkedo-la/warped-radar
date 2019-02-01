@@ -2,6 +2,9 @@ function Dialogue() {
     this.isShowing = false;
     this.letterCounter = 0;
     this.page = -1;
+    this.setPage = function(newPage) {
+        this.page = newPage;
+    };
 
     this.speakerAlpha = 0.0;
     this.speakerAlpha2 = 0.0;
@@ -108,7 +111,7 @@ function Dialogue() {
             showingChoiceMenu = false;
             for (let d = 0; d < conversation.length; d++) {
                 if (conversation[d].scene == nextChoiceLabel) {
-                    this.page = d; // found the index where .scene
+                    this.setPage(d); // found the index where .scene
                     break; // bail from for loop, quit searching
                 }
             }
@@ -174,6 +177,7 @@ function Dialogue() {
     this.showChoices = function (conversation, choiceList, dialogueList) {
         let sceneText = this.getSceneLength(conversation);
         if (!showingChoiceMenu) choiceCursor = 0;
+        if(this.page < 0) {this.page = 0;}
         if (conversation[this.page].text == "" && choiceList[this.page] != null && this.isShowing) {
             this.setupChoices(conversation, choiceList[this.page]);
             canvasContext.drawImage(choiceCursorPic, choiceCursorX, choiceCursorY);
@@ -428,9 +432,9 @@ function Dialogue() {
             this.letterCounter = 0;
 
 			if(pages[this.page] != undefined) {
-				this.page = pages[this.page];
+				this.setPage(pages[this.page]);
 			} else {
-				this.page++;
+				this.setPage(this.page + 1);
 				console.log("Used the fall back");
 			}
 
@@ -449,7 +453,9 @@ function Dialogue() {
                     this.isShowing = false;
                 }
                 //to prevent portrait incrementing once text is over
-                if (!this.isShowing) this.page = this.page - 1;
+                if (!this.isShowing) {
+                    this.setPage(this.page - 1);
+                }
                 this.resetBranchingDialogueVars();
             }
         } else if (this.page >= dialogue.length - 1) {

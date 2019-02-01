@@ -724,7 +724,7 @@ function DialogLine(position) {
 		
 		saveString += "nameCol: ";
 		if(speaker != null) {
-			saveString += "\"" + bkgdColor + "\""
+			saveString += "\"" + (this.nameColorStringForSpeaker(speaker)) + "\""
 		} else {
 			saveString += "null";
 		}
@@ -886,6 +886,8 @@ function DialogLine(position) {
 				return "voiceLow1";
 			case Speaker.Rose:
 				return "voiceHigh2";
+			case Speaker.Julie:
+				return "voiceHigh2";
 		}
 	}
 	
@@ -899,6 +901,20 @@ function DialogLine(position) {
 				return "roseHappyPic";
 			case roseAnnoyedPic:
 				return "roseAnnoyedPic";
+			case julieHappyPic:
+			case julieWorriedPic:
+				return "julieWorriedPic";
 		}
 	};
+
+	this.nameColorStringForSpeaker = function(speaker) {
+		switch(speaker) {
+			case Speaker.John:
+				return "lightBlue";
+			case Speaker.Rose:
+				return "pink";
+			case Speaker.Julie:
+				return "#b12f0c";
+		}
+	}
 }

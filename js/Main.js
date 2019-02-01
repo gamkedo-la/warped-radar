@@ -14,7 +14,8 @@ let transitioning = false;
 let mainCamera;
 let levelEditor;
 let player;
-let daveHasBeenDiscovered = false;
+let eventManager;
+//let daveHasBeenDiscovered = false;
 
 let warpedRadarBackgroundMusic = new backgroundMusicClass();
 
@@ -81,6 +82,7 @@ function start () {
     console.log(arrayOfObtainableItems);
     notificationWindow.initialize();
     initializeOverworldObjects();
+    eventManager = new EventManager();
 
     //Start background music
     warpedRadarBackgroundMusic.loopSong("audio/MainMenu");

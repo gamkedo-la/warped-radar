@@ -3,7 +3,6 @@ function Collider(x, y, width, height, offsetX, offsetY) {
     this.offsetY = offsetY;
 
 	this.width = width;
-	console.log("width: " + this.width/2);
     this.height = height;
     this.x = x + this.offsetX;
     this.y = y + this.offsetY;

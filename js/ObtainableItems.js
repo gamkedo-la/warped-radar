@@ -83,6 +83,7 @@ function obtainItemIfApplicable() {
   for (let i = 0; i < arrayOfObtainableItems.length; i++) {
     if (arrayOfObtainableItems[i].obtainable) {
       console.log(arrayOfObtainableItems[i].name + " obtained");
+      eventManager.obtainedItem(arrayOfObtainableItems[i]);
       
       notificationWindow.setMessage('You picked up: ' + arrayOfObtainableItems[i].name + '!');
 

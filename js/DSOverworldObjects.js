@@ -40,7 +40,10 @@ function OverworldObject(name, leftEdge, topEdge, width, height, animations = nu
                 this.tileCollider.width, this.tileCollider.height);
         }
 
+
         if(this.location == locationNow) {
+            if(!eventManager.canShowNPC(this)) {return;}
+            
             if(animations != null) {
                 if(this.states.walking) {
                     if(this.facing.north) {
@@ -99,22 +102,30 @@ function OverworldObject(name, leftEdge, topEdge, width, height, animations = nu
 
     this.onTrigger = function (dialogue) {
         if (this.nearPlayer() && !dialogue.isShowing && !inventory.isShowing) {
-            if(this.name == "Uncle Dave") {daveHasBeenDiscovered = true;}
+            const nextMessageCounter = eventManager.nextDialogWithNPC(this);
+            if(nextMessageCounter == null) {
+                return;
+            }
             if (keysPressed(KEY_SPACE) || keysPressed(KEY_ENTER)) {
+                if(this.name == "Uncle Dave") {
+                    console.log("Setting Found Dave to true");
+                    GameEvent.FoundDave = true;
+                }
                 if (dialogue.page <= 0) {
                     dialogue.isShowing = true;
                     dialogue.letterCounter = 0;
-                    if(this.shouldIncrementMessageCounter()) {
-                        this.messageCounter++;
-                    }
+                    this.messageCounter = nextMessageCounter;
                 }
                 if ((dialogue.speakerX <= dialogue.speakerStartX) && (dialogue.speaker2X >= dialogue.speaker2StartX)) {
-                    dialogue.page = 0;
+                    dialogue.setPage(0);
                 }
+            } else {
+                dialogue.isShowing = false;
+                dialogue.setPage(0);
             }
         } else if (!this.nearPlayer()) {
             dialogue.isShowing = false;
-            dialogue.page = 0;
+            dialogue.setPage(0);
         }
     }
 
@@ -136,12 +147,13 @@ function OverworldObject(name, leftEdge, topEdge, width, height, animations = nu
 
     this.text = function (createElseIncrement, dialogueList) {
         let chat = null;
-        let chatLine = this.messageCounter - 1; //already 1 when dialogue starts
+        let chatLine = this.messageCounter; //already 1 when dialogue starts
         if (chatLine >= dialogueList.length) {
             chatLine = dialogueList.length - 1;
         } else if (chatLine < 0) {
             return;
         }
+
         chat = dialogueList[chatLine];
         this.initText(createElseIncrement, chat);
     }
@@ -157,13 +169,22 @@ function initializeOverworldObjects() {
     for(let i = 0; i < dataArray.length; i++) {
         switch(dataArray[i]) {
             case TILE.ROSE:
-                allNPCs.push(initializeRose(i));
+                const rose = initializeRose(i);
+                if(eventManager.canShowNPC(rose)) {
+                    allNPCs.push(rose);
+                }
                 break;
             case TILE.JULIE:
-                allNPCs.push(initializeJulie(i));
+                const julie = initializeJulie(i);
+                if(eventManager.canShowNPC(julie)) {
+                    allNPCs.push(julie);
+                }
                 break;
             case TILE.DAVE:
-                allNPCs.push(initializeDave(i));
+                const dave = initializeDave(i);
+                if(eventManager.canShowNPC(dave)) {
+                    allNPCs.push(dave);
+                }
                 break;
         }
     }
@@ -186,7 +207,7 @@ function initializeRose(arrayIndex) {
     const columns = locationList[locationNow].columns;
     const xPos = (arrayIndex % columns) * WORLD_W;
     const yPos = Math.floor(arrayIndex / columns) * WORLD_H;
-    let rose = new OverworldObject("Rose", xPos, yPos, 26, 62, roseAnimations); //put her next to store
+    let rose = new OverworldObject("Rose", xPos, yPos, 26, 62, roseAnimations);
     rose.dialogue = new Dialogue();
     rose.colour = "#8789C0";
     rose.states.idle = false;
@@ -203,7 +224,7 @@ function initializeRose(arrayIndex) {
     //End Temporary
     
     rose.chatEvents = function (createElseIncrement) {
-        this.text(createElseIncrement, [johnAndRoseConvo, johnAndRoseConvo2, johnAndRoseConvo3]);
+        this.text(createElseIncrement, [JohnAndRose_1, johnAndRoseConvo2, johnAndRoseConvo3]);
     }
 
     rose.shouldIncrementMessageCounter = function() {
@@ -230,18 +251,18 @@ function initializeJulie(arrayIndex) {
     const columns = locationList[locationNow].columns;
     const xPos = (arrayIndex % columns) * WORLD_W;
     const yPos = Math.floor(arrayIndex / columns) * WORLD_H;
-    let julie = new OverworldObject("Julie", xPos, yPos, 26, 62, julieAnimations); //Not sure where this puts her
+    let julie = new OverworldObject("Julie", xPos, yPos, 26, 62, julieAnimations);
     julie.dialogue = new Dialogue();
     julie.colour = "#b12f0c";
     julie.location = locationNow;
     
     julie.chatEvents = function (createElseIncrement) {
-        this.text(createElseIncrement, [johnAndRoseConvo, johnAndRoseConvo2, johnAndRoseConvo3]);//need to replace these conversations
+        this.text(createElseIncrement, [johnAndJulie_1, johnAndRoseConvo2, johnAndRoseConvo3]);//need to replace these conversations
     
     }
 
     julie.shouldIncrementMessageCounter = function() {
-        if((this.messageCounter < 1) || (daveHasBeenDiscovered)) {
+        if((this.messageCounter < 1) || (GameEvent.FoundDave)) {
             return true;
         } else {
             return false;

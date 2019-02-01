@@ -119,8 +119,8 @@ function OverworldObject(name, leftEdge, topEdge, width, height, animations = nu
         } else if (!this.nearPlayer()) {
             dialogue.isShowing = false;
             dialogue.setPage(0);
-        } else if ((dialogue.isShowing) && (this.name == "Uncle Dave")) {
-            GameEvent.FoundDave = true;
+        } else if(dialogue.isShowing) {
+            eventManager.spokeToNPC(this);
         }
     }
 

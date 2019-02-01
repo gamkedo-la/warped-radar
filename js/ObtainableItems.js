@@ -84,7 +84,6 @@ function checkForObtainableItems() {
     if (player.x > itemTile.leftEdge && player.x < itemTile.rightEdge &&  player.y + 30 > itemTile.topEdge && player.y < itemTile.bottomEdge) {
       itemTile.obtainable = true;
       player.nearObjOrNPC = arrayOfObtainableItems[obtainableItemsIndex];
-      console.log(itemTile.name + " obtainable");
     } else {
       itemTile.obtainable = false;
     }
@@ -94,7 +93,6 @@ function checkForObtainableItems() {
 function obtainItemIfApplicable() {
   for (let i = 0; i < arrayOfObtainableItems.length; i++) {
     if (arrayOfObtainableItems[i].obtainable) {
-      console.log(arrayOfObtainableItems[i].name + " obtained");
       arrayOfObtainableItems[i].obtained = true;
       eventManager.obtainedItem(arrayOfObtainableItems[i]);
       

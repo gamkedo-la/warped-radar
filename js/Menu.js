@@ -6,6 +6,7 @@ const Menu = new (function() {
     const CREDITS_PAGE = 4;
     const EPISODE_PAGE = 5;
     const PAUSED_PAGE = 6;
+    const GAMEPLAY_PAGE = 7;
 
     let itemsX = 540;
     let topItemY = 240;
@@ -26,8 +27,9 @@ const Menu = new (function() {
     let guideList= ["Gameplay","Gamepad", "Back"];
     let pausedList =['resume', 'sound' , 'record'];
     let creditsList =["Kise: Project lead", "BackSpace"];
+    let gameplayList = ["      Move John", "W/Up Arrow: up", "D/Right Arrow: right", "S/Down Arrow: down", "A/Left Arrow: left", "     Game Actions", "P: pause/resume", "Enter/Space: interact", "Z: inventory"];
 
-    let menuPageText = [menuList, continueList, optionsList, guideList, creditsList, episodeList, pausedList];
+    let menuPageText = [menuList, continueList, optionsList, guideList, creditsList, episodeList, pausedList, gameplayList];
     // A super-janky menu input key repeat delay variable
     const KEY_REPEAT_FRAME_DELAY = 10;
 
@@ -110,8 +112,9 @@ const Menu = new (function() {
             case "Controls":
                 console.log("TODO Added Controls changer");
                 break;
-            case "How to play":
-                console.log("TODO implement how to play");
+            case "Gameplay":
+                cursor1 = 0;
+                currentPage = GAMEPLAY_PAGE;
                 break;
             case "Control layout":
                 console.log("TODO implement control layout");

@@ -268,6 +268,8 @@ function goToDestinationFor(arrayIndexUnderPlayer) {
         const newPlayerPos = arrayIndexToRowCol(newSwitchIndex);
         player.setRowColPos(newPlayerPos.row, newPlayerPos.col);
 
+        initializeOverworldObjects();
+
         mainCamera.instantFollow(player);
 
         PageTransition.init({
@@ -309,9 +311,10 @@ function drawGameBorder () {
 
 function drawDebugText () {
     colorText("Pressed Space: " + interact_key, 20, 30, "white", "20px Arial", "left", 1);
-    colorText("Near Rose: " + allNPCs[0].nearPlayer(), 20, 50, "white", "20px Arial", "left", 1);//assumes Rose is the first NPC added to the allNPCs array
+    if(allNPCs.length > 0) {
+        colorText("Near Rose: " + allNPCs[0].nearPlayer(), 20, 50, "white", "20px Arial", "left", 1);//assumes Rose is the first NPC added to the allNPCs array
+    }
     colorText("[CTRL+E] Level Editor: " + (levelEditor.isOn ? "ON" : "OFF"), 800, 30, "white", "20px Arial", "right", 1);
-
     colorText(locationList[locationNow].name, canvas.width/2, 80, "white", "20px Arial", "center", 1);
 
     let editorInstructionsTextYStart = 420;

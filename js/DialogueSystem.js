@@ -272,7 +272,6 @@ function Dialogue() {
         canvasContext.globalAlpha = this.speakerAlpha;
 
         if ((switchPic) && (this.page > 0)) {//fade out on the previous pic
-            console.log("SpeakerImageList length: " + speakerImgList.length + ", This Page: " + this.page);
             canvasContext.drawImage(speakerImgList[this.page - 1], this.speakerX, speakerY);
         } else {//fade in on the next (when poses switch)
             canvasContext.drawImage(speakerImgList[this.page], this.speakerX, speakerY);

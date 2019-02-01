@@ -152,12 +152,24 @@ function OverworldObject(name, leftEdge, topEdge, width, height, animations = nu
 }
 
 function initializeOverworldObjects() {
-    allNPCs.push(initializeRose());
-    allNPCs.push(initializeJulie());
-    allNPCs.push(initializeDave());
+    allNPCs = [];
+    const dataArray = locationList[locationNow].layers[Layer.Interaction];
+    for(let i = 0; i < dataArray.length; i++) {
+        switch(dataArray[i]) {
+            case TILE.ROSE:
+                allNPCs.push(initializeRose(i));
+                break;
+            case TILE.JULIE:
+                allNPCs.push(initializeJulie(i));
+                break;
+            case TILE.DAVE:
+                allNPCs.push(initializeDave(i));
+                break;
+        }
+    }
 }
 
-function initializeRose() {
+function initializeRose(arrayIndex) {
     const roseAnimations = {
         idle:roseIdle,
         worry:roseWorry,
@@ -171,12 +183,18 @@ function initializeRose() {
         southWest:null
     }
 
-    let rose = new OverworldObject("Rose", 280, 520, 26, 62, roseAnimations); //put her next to store
+    const columns = locationList[locationNow].columns;
+    const xPos = (arrayIndex % columns) * WORLD_W;
+    const yPos = Math.floor(arrayIndex / columns) * WORLD_H;
+    let rose = new OverworldObject("Rose", xPos, yPos, 26, 62, roseAnimations); //put her next to store
     rose.dialogue = new Dialogue();
     rose.colour = "#8789C0";
     rose.states.idle = false;
     rose.states.worrying = true;
     rose.location = Place.TheCity;
+
+    //Search through the interaction layer of rose.location looking for Tile.ROSE.  When it is found, set Rose xPos and yPos based on it.
+    //Working Here.
 
     //Temporary
 
@@ -198,7 +216,7 @@ function initializeRose() {
     return rose;
 }
 
-function initializeJulie() {
+function initializeJulie(arrayIndex) {
     const julieAnimations = {
         idle:julieIdle,
         worry:null,
@@ -212,10 +230,13 @@ function initializeJulie() {
         southWest:null
     }
 
-    let julie = new OverworldObject("Julie", 120, 400, 26, 62, julieAnimations); //Not sure where this puts her
+    const columns = locationList[locationNow].columns;
+    const xPos = (arrayIndex % columns) * WORLD_W;
+    const yPos = Math.floor(arrayIndex / columns) * WORLD_H;
+    let julie = new OverworldObject("Julie", xPos, yPos, 26, 62, julieAnimations); //Not sure where this puts her
     julie.dialogue = new Dialogue();
     julie.colour = "#b12f0c";
-    julie.location = Place.JuliesStore;
+    julie.location = locationNow;
     
     julie.chatEvents = function (createElseIncrement) {
         this.text(createElseIncrement, [johnAndRoseConvo, johnAndRoseConvo2, johnAndRoseConvo3]);//need to replace these conversations
@@ -233,7 +254,7 @@ function initializeJulie() {
     return julie;
 }
 
-function initializeDave() {
+function initializeDave(arrayIndex) {
     const daveAnimations = {
         idle:daveIdle,
         worry:null,
@@ -247,7 +268,10 @@ function initializeDave() {
         southWest:null
     }
 
-    let dave = new OverworldObject("Uncle Dave", 320, 320, 62, 26, daveAnimations); //Not sure where this puts her
+    const columns = locationList[locationNow].columns;
+    const xPos = (arrayIndex % columns) * WORLD_W;
+    const yPos = Math.floor(arrayIndex / columns) * WORLD_H;
+    let dave = new OverworldObject("Uncle Dave", xPos, yPos, 62, 26, daveAnimations); //Not sure where this puts her
     dave.dialogue = new Dialogue();
     dave.colour = "blue";
     dave.location = Place.DavesHouse;

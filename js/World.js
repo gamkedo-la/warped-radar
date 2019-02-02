@@ -305,7 +305,9 @@ function shouldDrawTile(tileKind) {
 
 function drawWorld(nonTileObjs) {
     drawLayer(locationList[locationNow].layers[Layer.Ground]);
+    drawTraffic(true);
     drawDepthSorted(nonTileObjs);
+    drawTraffic(false);
 } //end of draw world
 
 function isInViewPort(aCanvas, x, y) {

@@ -20,6 +20,7 @@ let johnMadPic = document.createElement("img");
 let roseHappyPic = document.createElement("img");
 let roseAnnoyedPic = document.createElement("img");
 let julieWorriedPic = document.createElement("img");
+let npc_agentPic = document.createElement("img");
 
 let johnMouthAnimatedSheet = document.createElement("img");
 let johnMouthAnimationAngrySheet = document.createElement("img");
@@ -40,6 +41,8 @@ let roseAnimationDown = document.createElement("img");
 let roseAnimationSide = document.createElement("img");
 
 let julieAnimationIdle = document.createElement("img");
+
+let npc_agentIdle = document.createElement("img");
 
 let daveIdle = document.createElement("img");
 
@@ -83,6 +86,7 @@ function loadImages() {
         {varName: roseHappyPic, theFile: "rose.png"},
         {varName: roseAnnoyedPic, theFile: "rose2.png"},
         {varName: julieWorriedPic, theFile: "julie1.png"},
+        {varName: npc_agentPic, theFile: "npc_agent.png"},
 
         //PORTRAIT ANIMS
         {varName: johnMouthAnimatedSheet, theFile: "johnmouthmove.png"},
@@ -106,6 +110,8 @@ function loadImages() {
         {varName: roseAnimationDown, theFile: "rosesprite-sheet-DOWN.png"},
 
         {varName: julieAnimationIdle, theFile: "juliesprite-sheet-IDLE.png"},
+
+        {varName: npc_agentIdle, theFile: "npc_agent-idle.png"},
 
         {varName: daveIdle, theFile: "tempDave.png"},
 

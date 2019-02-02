@@ -750,3 +750,77 @@ let johnAndJulie_1 = [
         position: {x: 529.5, y: 273}
     },
 ];
+
+let familyPhotoInJohnsRoom = [
+    {
+        scene: "firstLine",
+        who: "John",
+        nameCol: "lightBlue",
+        voice: voiceLow1,
+        text: "That was such a fun trip.  It has been such a long time since I saw Uncle Dave",
+        nextPage: 1,
+        leftPic: johnHappyPic,
+        rightPic: null,
+
+        leftPicLeave: false,
+        rightPicLeave: null,
+
+        choices: null,
+
+        position: {x: 492.5, y: 140}
+    },
+    {
+        scene: "secondLine",
+        who: "John",
+        nameCol: "lightBlue",
+        voice: voiceLow1,
+        text: "I need to go by his house and see how Uncle Dave doing.",
+        nextPage: 2,
+        leftPic: johnHappyPic,
+        rightPic: null,
+
+        leftPicLeave: false,
+        rightPicLeave: null,
+
+        choices: null,
+
+        position: {x: 492.5, y: 430}
+    },
+];
+
+let familyPhotoInDavesHouse = [
+    {
+        scene: "firstLine",
+        who: "John",
+        nameCol: "lightBlue",
+        voice: voiceLow1,
+        text: "Strange...He was looking at that same photo of our fishing trip...",
+        nextPage: 1,
+        leftPic: johnMadPic,
+        rightPic: null,
+
+        leftPicLeave: false,
+        rightPicLeave: null,
+
+        choices: null,
+
+        position: {x: 492.5, y: 140}
+    },
+    {
+        scene: "secondLine",
+        who: "John",
+        nameCol: "lightBlue",
+        voice: voiceLow1,
+        text: "I wonder why?",
+        nextPage: 2,
+        leftPic: johnMadPic,
+        rightPic: null,
+
+        leftPicLeave: false,
+        rightPicLeave: null,
+
+        choices: null,
+
+        position: {x: 492.5, y: 140}
+    },
+];

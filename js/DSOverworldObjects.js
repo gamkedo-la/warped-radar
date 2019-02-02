@@ -106,6 +106,7 @@ function OverworldObject(name, leftEdge, topEdge, width, height, animations = nu
             if(nextMessageCounter == null) {
                 return;
             }
+
             if (keysPressed(KEY_SPACE) || keysPressed(KEY_ENTER)) {
                 if (dialogue.page <= 0) {
                     dialogue.isShowing = true;
@@ -142,7 +143,7 @@ function OverworldObject(name, leftEdge, topEdge, width, height, animations = nu
 
     this.text = function (createElseIncrement, dialogueList) {
         let chat = null;
-        let chatLine = this.messageCounter; //already 1 when dialogue starts
+        let chatLine = this.messageCounter;
         if (chatLine >= dialogueList.length) {
             chatLine = dialogueList.length - 1;
         } else if (chatLine < 0) {
@@ -222,10 +223,6 @@ function initializeRose(arrayIndex) {
         this.text(createElseIncrement, [JohnAndRose_1, johnAndRoseConvo2, johnAndRoseConvo3]);
     }
 
-    rose.shouldIncrementMessageCounter = function() {
-        return true;
-    };
-
     return rose;
 }
 
@@ -256,14 +253,6 @@ function initializeJulie(arrayIndex) {
     
     }
 
-    julie.shouldIncrementMessageCounter = function() {
-        if((this.messageCounter < 1) || (GameEvent.FoundDave)) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
     return julie;
 }
 
@@ -284,21 +273,13 @@ function initializeDave(arrayIndex) {
     const columns = locationList[locationNow].columns;
     const xPos = (arrayIndex % columns) * WORLD_W;
     const yPos = Math.floor(arrayIndex / columns) * WORLD_H;
-    let dave = new OverworldObject("Uncle Dave", xPos, yPos, 62, 26, daveAnimations); //Not sure where this puts her
+    let dave = new OverworldObject("Uncle Dave", xPos, yPos, 62, 26, daveAnimations);
     dave.dialogue = new Dialogue();
     dave.colour = "blue";
     dave.location = Place.DavesHouse;
     
     dave.chatEvents = function (createElseIncrement) {
-        this.text(createElseIncrement, [UncleDaveDiscovery]);//need to replace these conversations
-    }
-
-    dave.shouldIncrementMessageCounter = function() {
-        if(this.messageCounter < 1) {
-            return true;
-        } else {
-            return false;
-        }
+        this.text(createElseIncrement, [UncleDaveDiscovery]);
     }
 
     return dave;

@@ -420,14 +420,21 @@ function Dialogue() {
         let dialogue = [];
         let pages = [];
         let sceneText = this.getSceneLength(conversation);
+        
         for (let i = 0; i < conversation.length; i++) {
             if ("text" in conversation[i]) {
 	            dialogue.push(conversation[i].text);
 	            pages.push(conversation[i].nextPage);
 	        }
         }
+
         if (this.letterCounter < dialogue[this.page].length) {
             this.letterCounter = dialogue[this.page].length;
+        } else if (this.page >= dialogue.length - 1) {
+            this.isShowing = false;
+            this.letterCounter = 0;
+            //if branching dialogue finishes at the end of the array, reset variables
+            this.resetBranchingDialogueVars();
         } else if (this.page < dialogue.length - 1 && !showingChoiceMenu || nextChoiceLabel != -1 && (choiceCounter < sceneText.length)) {
             this.letterCounter = 0;
 
@@ -458,11 +465,6 @@ function Dialogue() {
                 }
                 this.resetBranchingDialogueVars();
             }
-        } else if (this.page >= dialogue.length - 1) {
-            this.isShowing = false;
-            this.letterCounter = 0;
-            //if branching dialogue finishes at the end of the array, reset variables
-            this.resetBranchingDialogueVars();
-        }
+        } 
     }
 }

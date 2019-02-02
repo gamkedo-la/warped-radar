@@ -124,6 +124,7 @@ function keydownControl(evt, keydownMap) {
         if (!levelEditor.isOn) {
             obtainItemIfApplicable(); //in obtainableItems.js
             incrementTextPages();
+            incrementOBJTextPages();
             cursorKeyPresses = isKeyPressed ? cursorKeyPresses + 1 : 0;
         }
     } else if (keysPressed(KEY_Z) || keysPressed(KEY_I) ) {
@@ -153,7 +154,7 @@ function keydownControl(evt, keydownMap) {
     //     console.log("Play cutscene? " + playTheScene);
     // }
     if (keysPressed(KEY_SPACE)) {
-        if (inventory.items[inventory.index] != undefined && inventory.isShowing && dialogueNotShowing()) {
+        if (inventory.items[inventory.index] != undefined && inventory.isShowing && dialogueNotShowing() && dialogueOBJNotShowing()) {
             if (inventory.items[inventory.index].actions != undefined && (!inventory.showActions && !inventory.selectAction)) {
                 setTimeout(function () {
                     inventory.showActions = true;

@@ -81,8 +81,9 @@ function start () {
     initializeObtainableItems();
     console.log(arrayOfObtainableItems);
     notificationWindow.initialize();
-    initializeOverworldObjects();
     eventManager = new EventManager();
+    initializeOverworldObjects();
+    initializeInteractableItems();
 
     //Start background music
     warpedRadarBackgroundMusic.loopSong("audio/MainMenu");
@@ -123,9 +124,11 @@ function update (delta) {
     else {
         player.nearObjOrNPC = null;
         checkForNearbyNPCs();
+        checkForNearbyOBJs();
         player.move(delta);
         checkForObtainableItems(); //in obtainableItems.js
         triggerNPCDialogue();
+        triggerOBJDialogue();
         mainCamera.follow(player);
         levelEditor.showNewGrid();
     }
@@ -157,11 +160,11 @@ function render () {
     let availableObtainableItems = [];
     for(let i = 0; i < arrayOfObtainableItems.length; i++) {
         if(eventManager.canShowObtainableItem(arrayOfObtainableItems[i])) {
-//            console.log("It's available! " + arrayOfObtainableItems[i].name);
             availableObtainableItems.push(arrayOfObtainableItems[i]);
         }
     }
     nonTileObjects = nonTileObjects.concat(availableObtainableItems);
+    nonTileObjects = nonTileObjects.concat(arrayOfInteractableItems);
     
     drawWorld(nonTileObjects);
     drawScaledCanvas(); //draw everthing on the pixel-scale canvas to the larger game canvas
@@ -171,6 +174,7 @@ function render () {
     drawDebugText();
     drawTextNearObjOrNPC();
     createDialogueEvents();
+    createOBJDialogueEvents();
     inventory.draw();
     inventory.interactWithItems();
     mainCamera.endPan();
@@ -204,8 +208,6 @@ function render () {
 }
 function postRender () {
     fxContext.drawImage(canvas, 0,0, canvas.width, canvas.height, 0, 0, fxCanvas.width, fxCanvas.height);
-    //fxContext.fillStyle = "#fff";
-    //fxContext.fillRect(0,0,64,64);
     canvasContext.save();
     canvasContext.globalCompositeOperation = "lighter";
     canvasContext.globalAlpha = 0.55;
@@ -240,24 +242,7 @@ function goToDestinationFor(arrayIndexUnderPlayer) {
             locationNow = Place.JohnsHallway;
             newSwitchIndex = Switch.JohnsHallwayFromJohnsRoom;
             shouldReloadLevel = true;
-        }
-    // } else if(locationList[locationNow] === locationList[Place.JohnsHallway]) {
-    //     if(arrayIndexUnderPlayer === Switch.JohnsHallwayToJohnsKitchen) {
-    //         locationNow = Place.JohnsKitchen;
-    //         newSwitchIndex = Switch.JohnsKitchenFromJohnsHallway;
-    //         shouldReloadLevel = true;
-    //     } else if(arrayIndexUnderPlayer === Switch.JohnsHallwayToJohnsRoom) {
-    //         locationNow = Place.JohnsRoom;
-    //         newSwitchIndex = Switch.JohnsRoomFromJohnsHallway;
-    //         shouldReloadLevel = true;
-    //     }
-    // } else if(locationList[locationNow] === locationList[Place.JohnsKitchen]) {
-    //     if(arrayIndexUnderPlayer === Switch.JohnsKitchenToJohnsHallway) {
-    //         locationNow = Place.JohnsHallway;
-    //         newSwitchIndex = Switch.JohnsHallwayFromJohnsKitchen;
-    //         shouldReloadLevel = true;
-    //     }
-    // } 
+        } 
     } else if(locationList[locationNow] === locationList[Place.JuliesStore]) {
         if(arrayIndexUnderPlayer === Switch.JuliesStoreToTheCity) {
             locationNow = Place.TheCity;

@@ -8,6 +8,7 @@ const GameEvent = {
     FoundSealedTube:false,
     FoundThumbDrive:false,
     FoundTrainTicket:false,
+    FoundPhoto:false,
     FoundDave:false,
     Talk_Rose_0:false,
     Talk_Rose_1:false,
@@ -23,43 +24,45 @@ function EventManager() {
                 if(GameEvent.FoundDave) {
                     result = true;
                 }
-                break;
+            break;
             case "trainTicket":
                 if(GameEvent.FoundDave) {
                     result = true;
                 }
-                break;
+            break;
         };
 
         return result;
     };
 
     this.obtainedItem = function(item) {
+        initializeInteractableItems();//obtaining an item can change what objects are interactable
+
         switch(item.name) {
             case "brokenSkateBoard":
                 GameEvent.FoundSkateBoard = true;
-                break;
+            break;
             case "burnerPhone":
                 GameEvent.FoundBurnerPhone = true;
-                break;
+            break;
             case "crowbar":
                 GameEvent.FoundCrowbar = true;
-                break;
+            break;
             case "hoodie":
                 GameEvent.FoundHoodie = true;
-                break;
+            break;
             case "medicalNotebook":
                 GameEvent.FoundNoteBook = true;
-                break;
+            break;
             case "sealedTube":
                 GameEvent.FoundSealedTube = true;
-                break;
+            break;
             case "thumbDrive":
                 GameEvent.FoundThumbDrive = true;
-                break;
+            break;
             case "trainTicket":
                 GameEvent.FoundTrainTicket = true;
-                break;
+            break;
         };
    }
 
@@ -71,13 +74,13 @@ function EventManager() {
                 if((locationNow == Place.TheCity) && (!GameEvent.FoundDave)) {
                     result = true;
                 }
-                break;
+            break;
             case "Uncle Dave":
                 result = true;
-                break;
+            break;
             case "Julie":
                 result = true;
-                break;
+            break;
         }
 
         return result;
@@ -91,12 +94,12 @@ function EventManager() {
                 if((locationNow == Place.TheCity) && (!GameEvent.FoundDave)) {
                     result = 0;
                 }
-                break;
+            break;
             case "Uncle Dave":
                 if(!GameEvent.FoundDave) {
                     result = 0;
                 }
-                break;
+            break;
             case "Julie":
                 if(GameEvent.Talk_Julie_0) {
                     if(!GameEvent.FoundDave) {
@@ -107,13 +110,15 @@ function EventManager() {
                 } else {
                     result = 0;
                 }
-                break;
+            break;
         }
 
         return result;
     };
 
     this.spokeToNPC = function(npc) {
+        initializeInteractableItems();//speaking to an NPC can change what objects are interactable
+
         switch(npc.name) {
             case "Rose":
                 if(npc.messageCounter == 0) {
@@ -121,15 +126,57 @@ function EventManager() {
                 } else if(npc.messageCounter == 1) {
                     GameEvent.Talk_Rose_1 = true;
                 }
-                break;
+            break;
             case "Uncle Dave":
                 GameEvent.FoundDave = true;
-                break;
+            break;
             case "Julie":
                 if(npc.messageCounter == 0) {
                     GameEvent.Talk_Julie_0 = true;
                 }
-                break;
+            break;
+        }
+    };
+
+    this.canShowObj = function(obj) {
+        let result = false;
+
+        switch(obj.name) {
+            case "familyPhoto":
+                if(locationNow == Place.JohnsRoom) {
+                    result = true;
+                } else if((locationNow == Place.DavesHouse) && (GameEvent.FoundDave)) {
+                    result = true;
+                }
+            break;
+        }
+
+        return result;
+    };
+
+    this.nextDialogWithObj = function(obj) {
+        let result = null;
+
+        switch(obj.name) {
+            case "familyPhoto":
+                if((!GameEvent.FoundDave) && (locationNow == Place.JohnsRoom)) {
+                    result = 0;
+                } else if((GameEvent.FoundDave) && (locationNow == Place.DavesHouse)) {
+                    result = 1;
+                }
+            break;
+        }
+
+        return result;
+    };
+
+    this.interactedWithObj = function(obj) {
+        initializeInteractableItems();//interacting with an object can change what objects are interactable
+
+        switch(obj.name) {
+            case "familyPhoto":
+                GameEvent.FoundPhoto = true;
+            break;
         }
     };
 }

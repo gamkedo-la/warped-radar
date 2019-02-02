@@ -38,6 +38,8 @@ const TILE = {
     DAVE:116,
     NPC:117,
 
+    FAMILY_PHOTO:138, //I think?
+
     BLANK:576
 };
 
@@ -273,9 +275,6 @@ function findAndSortObjectsToDraw(objArray) {
         //Is this object on screen?
         if(isInViewPort(scaledCanvas, thisObj.x, thisObj.y)) {
             resultArray.push(thisObj);
-            if(thisObj.name == "crowbar") {
-//                console.log("The crowbar is in the set");
-            }
         }
     }
 

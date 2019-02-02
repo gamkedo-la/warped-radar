@@ -24,6 +24,11 @@ function EventManager() {
                     result = true;
                 }
                 break;
+            case "trainTicket":
+                if(GameEvent.FoundDave) {
+                    result = true;
+                }
+                break;
         };
 
         return result;

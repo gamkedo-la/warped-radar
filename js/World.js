@@ -38,7 +38,7 @@ const TILE = {
     DAVE:116,
     NPC:117,
 
-    FAMILY_PHOTO:138, //I think?
+    FAMILY_PHOTO:149, //I think?
 
     BLANK:576
 };

@@ -10,6 +10,8 @@ const roseHappyPic = document.createElement("img");
 const roseAnnoyedPic = document.createElement("img");
 const julieHappyPic = document.createElement("img");
 const julieWorriedPic = document.createElement("img");
+const npcAgentFlatPic = document.createElement("img");
+const npcAgentAngryPic = document.createElement("img");
 
 function imageForString(string) {
 	switch(string) {
@@ -21,6 +23,14 @@ function imageForString(string) {
 			return roseHappyPic;
 		case "roseAnnoyedPic":
 			return roseAnnoyedPic;
+		case "julieHappyPic":
+			return julieHappyPic;
+		case "julieWorriedPic":
+			return julieWorriedPic;
+		case "npcAgentFlatPic":
+			return npcAgentFlatPic;
+		case "npcAgentAngryPic":
+			return npcAgentAngryPic;
 	}
 }
 
@@ -49,6 +59,8 @@ function loadImages() {
 		{imgName: roseAnnoyedPic, theFile: "rose2.png", speaker:Speaker.Rose},
 		{imgName: julieHappyPic, theFile: "julie1.png", speaker:Speaker.Julie}, //placeholder
 		{imgName: julieWorriedPic, theFile: "julie1.png", speaker:Speaker.Julie},
+		{imgName: npcAgentFlatPic, theFile: "npc_agent.png", speaker:Speaker.NPCAgent},
+		{imgName: npcAgentAngryPic, theFile: "npc_agent.png", speaker:Speaker.NPCAgent},//placeholder
 	];
 
 	picsToLoad = imageList.length;

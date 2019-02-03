@@ -1,7 +1,7 @@
-const trafficXMin = -1920;
-const trafficXMax = 1920;
-const trafficY = 555;
-const trafficDepthNudge = 10;
+const trafficXMin = -1920; // start before being visible
+const trafficXMax = 2400; // go past the end of the map
+const trafficY = 555; // where the street is
+const trafficDepthNudge = 10; // so it looks right
 
 let trafficX = 0;
 

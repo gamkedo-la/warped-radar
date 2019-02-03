@@ -66,8 +66,8 @@ const Switch = {
     // JohnsKitchenFromJohnsHallway:   getTileIndex(johnsKitchen, 1, 5),
     JuliesStoreToTheCity:           getTileIndex(juliesStore, 5, 14),
     JuliesStoreFromTheCity:         getTileIndex(juliesStore, 5, 13),
-    DavesHouseToTheCity:            getTileIndex(davesHouse, 14, 18),
-    DavesHouseFromTheCity:          getTileIndex(davesHouse, 14, 17)
+    DavesHouseToTheCity:            getTileIndex(davesHouse, 6, 11),
+    DavesHouseFromTheCity:          getTileIndex(davesHouse, 6, 10)
 };
 const Place = {
     TheCity:0,

@@ -149,6 +149,11 @@ function EventManager() {
                     result = true;
                 }
             break;
+            case "wallOutlet":
+            if(locationNow == Place.JohnsRoom) {
+                result = true;
+            }    
+            break;
         }
 
         return result;
@@ -165,6 +170,9 @@ function EventManager() {
                     result = 1;
                 }
             break;
+            case"wallOutlet":
+                result = 0;
+            break;
         }
 
         return result;
@@ -176,6 +184,11 @@ function EventManager() {
         switch(obj.name) {
             case "familyPhoto":
                 GameEvent.FoundPhoto = true;
+            break;
+        }
+        switch(obj.name) {
+            case "wallOutlet":
+                GameEvent.wallOutlet = true;
             break;
         }
     };

@@ -16,13 +16,23 @@ function initializeInteractableItems() {
             let tileKindHere = thisLocation.layers[Layer.Interaction][arrayIndex];
   
             switch(tileKindHere) {
-                case TILE.FAMILY_PHOTO:
-                    const anInteractable = initializeInteractable(tileX, tileY, WORLD_W, WORLD_H, 
+                case TILE.FAMILY_PHOTO: { //switch cases need curly braces if re-declaring var names
+                    let anInteractable = initializeInteractable(tileX, tileY, WORLD_W, WORLD_H, 
                                            "familyPhoto", "Photo of John and Uncle Dave", 
                                            TILE.FAMILY_PHOTO, [familyPhotoInJohnsRoom, familyPhotoInDavesHouse], locationNow);//TODO: replace UncleDaveDiscovery
                     if(eventManager.canShowObj(anInteractable)) {
                         arrayOfInteractableItems.push(anInteractable);
                     }
+                }
+                break;
+                case TILE.WALL_OUTLET: { //switch cases need curly braces if re-declaring var names
+                let anInteractable = initializeInteractable(tileX, tileY, WORLD_W, WORLD_H, 
+                    "wall outlet", "Just a wall outlet", 
+                    TILE.WALL_OUTLET, [wallOutletinJohnsHouse], locationNow);
+                    if(eventManager.canShowObj(anInteractable)) {
+                    arrayOfInteractableItems.push(anInteractable);
+                    }
+                }
                 break;
             }
   

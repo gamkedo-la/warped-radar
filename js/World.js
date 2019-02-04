@@ -38,6 +38,8 @@ const TILE = {
     DAVE:116,
     NPC:117,
 
+    WALL_OUTLET: 139,
+
     FAMILY_PHOTO:149, //I think?
 
     BLANK:576

@@ -824,3 +824,23 @@ let familyPhotoInDavesHouse = [
         position: {x: 492.5, y: 140}
     },
 ];
+
+let wallOutletinJohnsHouse = [
+    {
+        scene: "firstLine",
+        who: "John",
+        nameCol: "lightBlue",
+        voice: voiceLow1,
+        text: "Just a wall outlet. nothing to see here.",
+        nextPage: 1,
+        leftPic: johnMadPic,
+        rightPic: null,
+
+        leftPicLeave: false,
+        rightPicLeave: null,
+
+        choices: null,
+
+        position: {x: 492.5, y: 140}
+    }
+];    

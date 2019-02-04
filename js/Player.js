@@ -101,14 +101,12 @@ function Player () {
 
                 if (this.keyHeld_walkUp) {
                     nextY -= moveSpeed;
-                }
-                if (this.keyHeld_walkDown) {
+                } else if (this.keyHeld_walkDown) {
                     nextY += moveSpeed;
                 }
                 if (this.keyHeld_walkLeft) {
                     nextX -= moveSpeed;
-                }
-                if (this.keyHeld_walkRight) {
+                } else if (this.keyHeld_walkRight) {
                     nextX += moveSpeed;
                 }
 

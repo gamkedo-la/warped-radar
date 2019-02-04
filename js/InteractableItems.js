@@ -27,10 +27,10 @@ function initializeInteractableItems() {
                 break;
                 case TILE.WALL_OUTLET: { //switch cases need curly braces if re-declaring var names
                 let anInteractable = initializeInteractable(tileX, tileY, WORLD_W, WORLD_H, 
-                    "wall outlet", "Just a wall outlet", 
+                    "wallOutlet", "Just a wall outlet", 
                     TILE.WALL_OUTLET, [wallOutletinJohnsHouse], locationNow);
                     if(eventManager.canShowObj(anInteractable)) {
-                    arrayOfInteractableItems.push(anInteractable);
+                       arrayOfInteractableItems.push(anInteractable);
                     }
                 }
                 break;

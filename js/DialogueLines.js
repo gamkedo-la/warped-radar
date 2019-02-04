@@ -831,8 +831,25 @@ let wallOutletinJohnsHouse = [
         who: "John",
         nameCol: "lightBlue",
         voice: voiceLow1,
-        text: "Just a wall outlet. nothing to see here.",
+        text: "Just a wall outlet.",
         nextPage: 1,
+        leftPic: johnMadPic,
+        rightPic: null,
+
+        leftPicLeave: false,
+        rightPicLeave: null,
+
+        choices: null,
+
+        position: {x: 492.5, y: 140}
+    },
+    {
+        scene: "secondLine",
+        who: "John",
+        nameCol: "lightBlue",
+        voice: voiceLow1,
+        text: "Nothing to see here.",
+        nextPage: 2,
         leftPic: johnMadPic,
         rightPic: null,
 

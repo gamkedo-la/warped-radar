@@ -8,6 +8,7 @@ const GameEvent = {
     FoundSealedTube:false,
     FoundThumbDrive:false,
     FoundTrainTicket:false,
+    FoundWallOutlet:false,
     FoundPhoto:false,
     FoundDave:false,
     Talk_Rose_0:false,
@@ -36,8 +37,6 @@ function EventManager() {
     };
 
     this.obtainedItem = function(item) {
-        initializeInteractableItems();//obtaining an item can change what objects are interactable
-
         switch(item.name) {
             case "brokenSkateBoard":
                 GameEvent.FoundSkateBoard = true;
@@ -63,8 +62,10 @@ function EventManager() {
             case "trainTicket":
                 GameEvent.FoundTrainTicket = true;
             break;
-        };
-   }
+        }
+
+        initializeInteractableItems();//obtaining an item can change what objects are interactable
+    };
 
     this.canShowNPC = function(npc) {
         let result = false;
@@ -117,8 +118,6 @@ function EventManager() {
     };
 
     this.spokeToNPC = function(npc) {
-        initializeInteractableItems();//speaking to an NPC can change what objects are interactable
-
         switch(npc.name) {
             case "Rose":
                 if(npc.messageCounter == 0) {
@@ -136,6 +135,8 @@ function EventManager() {
                 }
             break;
         }
+
+        initializeInteractableItems();//speaking to an NPC can change what objects are interactable
     };
 
     this.canShowObj = function(obj) {
@@ -179,17 +180,17 @@ function EventManager() {
     };
 
     this.interactedWithObj = function(obj) {
-        initializeInteractableItems();//interacting with an object can change what objects are interactable
-
         switch(obj.name) {
             case "familyPhoto":
                 GameEvent.FoundPhoto = true;
             break;
-        }
-        switch(obj.name) {
             case "wallOutlet":
-                GameEvent.wallOutlet = true;
+                GameEvent.FoundWallOutlet = true;
             break;
         }
+
+        //This next line wipes out the object as you're interacting with it, so it is a problem,
+        //need to find a work around.
+//        initializeInteractableItems();//interacting with an object can change what objects are interactable
     };
 }

@@ -40,7 +40,7 @@ const TILE = {
 
     WALL_OUTLET: 139,
 
-    FAMILY_PHOTO:149, //I think?
+    FAMILY_PHOTO:149,
 
     BLANK:576
 };

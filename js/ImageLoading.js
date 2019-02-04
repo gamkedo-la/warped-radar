@@ -42,6 +42,8 @@ let roseAnimationSide = document.createElement("img");
 
 let julieAnimationIdle = document.createElement("img");
 
+let catManAnimationIdle = document.createElement("img");
+
 let npc_agentIdle = document.createElement("img");
 
 let daveIdle = document.createElement("img");
@@ -111,6 +113,8 @@ function loadImages() {
         {varName: roseAnimationDown, theFile: "rosesprite-sheet-DOWN.png"},
 
         {varName: julieAnimationIdle, theFile: "juliesprite-sheet-IDLE.png"},
+
+        {varName: catManAnimationIdle, theFile: "catMan.png"},
 
         {varName: npc_agentIdle, theFile: "npc_agent-idle.png"},
 

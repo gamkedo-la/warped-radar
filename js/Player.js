@@ -101,14 +101,12 @@ function Player () {
 
                 if (this.keyHeld_walkUp) {
                     nextY -= moveSpeed;
-                }
-                if (this.keyHeld_walkDown) {
+                } else if (this.keyHeld_walkDown) {
                     nextY += moveSpeed;
                 }
                 if (this.keyHeld_walkLeft) {
                     nextX -= moveSpeed;
-                }
-                if (this.keyHeld_walkRight) {
+                } else if (this.keyHeld_walkRight) {
                     nextX += moveSpeed;
                 }
 
@@ -137,25 +135,27 @@ function Player () {
             let deltaY = nextY - this.y;
 
             let objCollisionData;
+
+            let nothingNearby = true;
             if(!((this.nearObjOrNPC == null) || 
                (this.nearObjOrNPC.tileCollider == undefined) || 
                (this.nearObjOrNPC.tileCollider == null))) {
                 objCollisionData = doRectsIntersect(this.tileCollider, this.nearObjOrNPC.tileCollider, deltaX, deltaY);
+                nothingNearby = false;
+            } else {
+                //Nothing to collide with, so all collision checks result in no collision
+                objCollisionData = {upperRight:false, lowerRight:false, lowerLeft:false, upperLeft:false};
             }
             
             let nextTileTypes = getNextTileTypesAtRectInLayer(this.tileCollider, deltaX, deltaY, locationList[locationNow].layers[Layer.Interaction]);
-            let ur=moveOntoTileIfAble(nextTileTypes.upperRight);
-            let ul=moveOntoTileIfAble(nextTileTypes.upperLeft);
-            let lr=moveOntoTileIfAble(nextTileTypes.lowerRight);
-            let ll=moveOntoTileIfAble(nextTileTypes.lowerLeft);
-            //is there is no object or NPC nearby who has a collider?
-            let thingNearby = ((this.nearObjOrNPC == null) || 
-            (this.nearObjOrNPC.tileCollider == undefined) || 
-            (this.nearObjOrNPC.tileCollider == null));
+            const ur = moveOntoTileIfAble(nextTileTypes.upperRight);
+            const ul = moveOntoTileIfAble(nextTileTypes.upperLeft);
+            const lr = moveOntoTileIfAble(nextTileTypes.lowerRight);
+            const ll = moveOntoTileIfAble(nextTileTypes.lowerLeft);
 
             if(nextX > this.x) {//trying to move right
                 if (ur && lr) {
-                    if (thingNearby) {
+                    if (nothingNearby) {
                         shouldMoveX = true;
                     } else {
                         if((objCollisionData.topRight == false) && 
@@ -166,7 +166,7 @@ function Player () {
                 }//end if moveOntoTileIfAble
             } else if(nextX < this.x) {//trying to move left
                 if (ul && ll) {
-                    if (thingNearby) {
+                    if (nothingNearby) {
                         shouldMoveX = true;
                     } else {
                         if((objCollisionData.topLeft == false) && 
@@ -179,7 +179,7 @@ function Player () {
 
             if(nextY > this.y) {//trying to walk down
                 if (lr && ll) {
-                    if (thingNearby) {
+                    if (nothingNearby) {
                         shouldMoveY = true;
                     } else {
                         if((objCollisionData.bottomRight == false) && 
@@ -190,7 +190,7 @@ function Player () {
                 }//end if moveOntoTileIfAble
             } else if(nextY < this.y) {//trying to walk up
                 if (ur && ul) {
-                    if (thingNearby) {
+                    if (nothingNearby) {
                         shouldMoveY = true;
                     } else {
                         if((objCollisionData.topRight == false) && 
@@ -203,15 +203,25 @@ function Player () {
 
             // fix the ability to slide along walls by ignoring
             // collisions in opposite diagonal than we're moving
-            if (deltaX!=0 && deltaY!=0) { // we are moving diagonally
-               
-                if (deltaX>0 && (!ul||!ll)) shouldMoveX = true;
-                if (deltaX<0 && (!ur||!lr)) shouldMoveX = true;
-                if (deltaY>0 && (!ur||!ul)) shouldMoveY = true;
-                if (deltaY<0 && (!lr||!ll)) shouldMoveY = true;
-                
-                //console.log('move ur:'+ur+',ul:'+ul+',lr:'+lr+',ll:'+ll+' deltaxy:'+deltaX+','+deltaY+' should movexy:'+shouldMoveX+','+shouldMoveY+' objCollisionData:'+objCollisionData);
+            if (deltaX != 0 && deltaY != 0) { // we are moving diagonally
+                if(deltaX > 0) {//moving diagonal to the right
+                    if(deltaY > 0) {//moving down-right
+                        if(ur) {shouldMoveX = true;}
+                        if(ll) {shouldMoveY = true;}
+                    } else {//moving up-right
+                        if(lr) {shouldMoveX = true;}
+                        if(ul) {shouldMoveY = true;}
+                    }
+                } else {//moving diagonal to the left
+                    if(deltaY > 0) {//moving down-left
+                        if(ul) {shouldMoveX = true;}
+                        if(lr) {shouldMoveY = true;}
+                    } else {//moving up-left
+                        if(ll) {shouldMoveX = true;}
+                        if(ur) {shouldMoveY = true;}
+                    }
                 }
+            }
 
             if(shouldMoveX) {
                 this.x = nextX;

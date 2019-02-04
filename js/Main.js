@@ -126,6 +126,7 @@ function update (delta) {
         checkForNearbyNPCs();
         checkForNearbyOBJs();
         player.move(delta);
+        updateOverworldObjects(delta);
         checkForObtainableItems(); //in obtainableItems.js
         triggerNPCDialogue();
         triggerOBJDialogue();
@@ -136,6 +137,14 @@ function update (delta) {
         PageTransition.update();
     }
 }
+
+// Update NPCs (really just Rose since she can walk around)
+function updateOverworldObjects(delta) {
+    for(let i = 0; i < allNPCs.length; i++) {
+        allNPCs[i].update(delta);
+    }
+}
+
 // All things drawn to screen every frame here
 function render () {
 
@@ -264,6 +273,7 @@ function goToDestinationFor(arrayIndexUnderPlayer) {
         player.setRowColPos(newPlayerPos.row, newPlayerPos.col);
 
         initializeOverworldObjects();
+        initializeInteractableItems();
 
         mainCamera.instantFollow(player);
 

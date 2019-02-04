@@ -34,6 +34,10 @@ function OverworldObject(name, leftEdge, topEdge, width, height, animations = nu
         this.tileCollider.y = newY + 0.38 * idleHeight;
     }
 
+    this.update = function(delta) {
+        return;//override this function for any NPCs who can move around
+    }
+
     this.draw = function () {
         if(debug) {
             scaledContext.strokeRect(this.tileCollider.x, this.tileCollider.y, 
@@ -221,6 +225,20 @@ function initializeRose(arrayIndex) {
     
     rose.chatEvents = function (createElseIncrement) {
         this.text(createElseIncrement, [JohnAndRose_1, johnAndRoseConvo2, johnAndRoseConvo3]);
+    }
+
+    rose.update = function(delta) {
+        if(!isInViewPort(scaledCanvas, this.x, this.y)) {return;} //don't update while off screen
+        if(!eventManager.canShowNPC(this)) {return;} //don't update if can't be shown
+
+        if(!GameEvent.FoundDave) {
+            rose.states.walking = false;
+            rose.states.idle = true;
+            rose.facing.east = false;
+            rose.facing.south = true;
+        }
+
+        return;
     }
 
     return rose;

@@ -144,7 +144,7 @@ function EventManager() {
 
         switch(obj.name) {
             case "familyPhoto":
-                if(locationNow == Place.JohnsRoom) {
+                if((!GameEvent.FoundDave) && (locationNow == Place.JohnsRoom)) {
                     result = true;
                 } else if((locationNow == Place.DavesHouse) && (GameEvent.FoundDave)) {
                     result = true;

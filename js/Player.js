@@ -141,7 +141,6 @@ function Player () {
                (this.nearObjOrNPC.tileCollider == undefined) || 
                (this.nearObjOrNPC.tileCollider == null))) {
                 objCollisionData = doRectsIntersect(this.tileCollider, this.nearObjOrNPC.tileCollider, deltaX, deltaY);
-                console.log("Did enter ObjCollisionIf: " + objCollisionData);
                 nothingNearby = false;
             } else {
                 //Nothing to collide with, so all collision checks result in no collision

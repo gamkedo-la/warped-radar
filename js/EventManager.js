@@ -82,6 +82,9 @@ function EventManager() {
             case "Julie":
                 result = true;
             break;
+            case "Agent":
+                result = true;
+            break;
         }
 
         return result;

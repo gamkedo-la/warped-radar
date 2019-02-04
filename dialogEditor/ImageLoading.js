@@ -60,7 +60,7 @@ function loadImages() {
 		{imgName: julieHappyPic, theFile: "julie1.png", speaker:Speaker.Julie}, //placeholder
 		{imgName: julieWorriedPic, theFile: "julie1.png", speaker:Speaker.Julie},
 		{imgName: npcAgentFlatPic, theFile: "npc_agent.png", speaker:Speaker.NPCAgent},
-		{imgName: npcAgentAngryPic, theFile: "npc_agent.png", speaker:Speaker.NPCAgent},//placeholder
+		{imgName: npcAgentAngryPic, theFile: "npc_agent2.png", speaker:Speaker.NPCAgent},//placeholder
 	];
 
 	picsToLoad = imageList.length;

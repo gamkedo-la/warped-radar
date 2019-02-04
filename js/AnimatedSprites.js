@@ -7,6 +7,7 @@ let johnWalkDown; //South
 let johnWalkSide; //West and East (flip)
 let johnWalkUpDiag; //NorthWest and NorthEast(flip)
 let johnWalkDownDiag; //SouthWest and SouthEast(flip)
+
 //let johnWalkSide45Deg;
 let frameDelayWalk = framesPerSecond / 6; //higher number equals slower walk cycle speed
 
@@ -131,6 +132,14 @@ function makeAnimatedSprites() {
 		name: "daveAnimationIdle",
 		spriteSheet: daveIdle,
 		animationColFrames: 1,
+		framesUntilNext: frameDelayWalk,
+	});
+
+	//Agent
+	agentIdle = new AnimatedSpriteClass({
+		name: "agentAnimationIdle",
+		spriteSheet: agentAnimationIdle,
+		animationColFrames: 24,
 		framesUntilNext: frameDelayWalk,
 	});
 };

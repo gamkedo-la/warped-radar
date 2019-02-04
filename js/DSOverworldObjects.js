@@ -186,6 +186,12 @@ function initializeOverworldObjects() {
                     allNPCs.push(dave);
                 }
                 break;
+            case TILE.NPC:
+                const agent = initializeAgent(i);
+                if(eventManager.canShowNPC(agent)) {
+                    allNPCs.push(agent);
+                }
+                break;
         }
     }
 }
@@ -301,6 +307,35 @@ function initializeDave(arrayIndex) {
     }
 
     return dave;
+}
+
+function initializeAgent(arrayIndex) {
+    const agentAnimations = {
+        idle:agentIdle,
+        worry:null,
+        north:null,
+        south:null,
+        east:null,
+        west:null,
+        northEast:null,
+        northWest:null,
+        southEast:null,
+        southWest:null
+    }
+
+    const columns = locationList[locationNow].columns;
+    const xPos = (arrayIndex % columns) * WORLD_W;
+    const yPos = Math.floor(arrayIndex / columns) * WORLD_H;
+    let agent = new OverworldObject("Agent", xPos, yPos, 62, 26, agentAnimations);
+    agent.dialogue = new Dialogue();
+    agent.colour = "blue";
+    agent.location = Place.TheCity;
+    
+    // agent.chatEvents = function (createElseIncrement) {
+    //     this.text(createElseIncrement, [UncleDaveDiscovery]);
+    // }
+
+    return agent;
 }
 
 let allNPCs = [];

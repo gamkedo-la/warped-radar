@@ -44,7 +44,7 @@ let julieAnimationIdle = document.createElement("img");
 
 let catManAnimationIdle = document.createElement("img");
 
-let npc_agentIdle = document.createElement("img");
+let agentAnimationIdle = document.createElement("img");
 
 let daveIdle = document.createElement("img");
 
@@ -116,7 +116,7 @@ function loadImages() {
 
         {varName: catManAnimationIdle, theFile: "catMan.png"},
 
-        {varName: npc_agentIdle, theFile: "npc_agent-idle.png"},
+        {varName: agentAnimationIdle, theFile: "npc_agent-idle.png"},
 
         {varName: daveIdle, theFile: "tempDave.png"},
 

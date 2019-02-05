@@ -117,6 +117,16 @@ function EventManager() {
                 }
             break;
             case "Agent":
+/*
+                if(locationNow == Place.TheCity) {
+                    if((npc.x == 100) && (npc.y == 150)) {
+                        result = 0;
+                    } else if ((npc.x == 200) && (npc.y == 220)) {
+                        result = 1;
+                    }
+                }
+
+*/
                 result = 0;
             break;
         }

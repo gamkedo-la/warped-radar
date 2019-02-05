@@ -14,6 +14,7 @@ const GameEvent = {
     Talk_Rose_0:false,
     Talk_Rose_1:false,
     Talk_Julie_0:false,
+    Talk_Agent_1:false,
 }
 
 function EventManager() {
@@ -115,6 +116,9 @@ function EventManager() {
                     result = 0;
                 }
             break;
+            case "Agent":
+                result = 0;
+            break;
         }
 
         return result;
@@ -136,6 +140,9 @@ function EventManager() {
                 if(npc.messageCounter == 0) {
                     GameEvent.Talk_Julie_0 = true;
                 }
+            break;
+            case "Agent":
+                GameEvent.Talk_Agent_1 = true;
             break;
         }
 

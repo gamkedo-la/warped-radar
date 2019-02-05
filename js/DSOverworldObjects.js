@@ -331,9 +331,9 @@ function initializeAgent(arrayIndex) {
     agent.colour = "blue";
     agent.location = Place.TheCity;
     
-    // agent.chatEvents = function (createElseIncrement) {
-    //     this.text(createElseIncrement, [UncleDaveDiscovery]);
-    // }
+    agent.chatEvents = function (createElseIncrement) {
+        this.text(createElseIncrement, [npcConvo]);
+    }
 
     return agent;
 }

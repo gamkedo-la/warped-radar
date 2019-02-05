@@ -833,7 +833,7 @@ let wallOutletinJohnsHouse = [
         voice: voiceLow1,
         text: "Just a wall outlet.",
         nextPage: 1,
-        leftPic: johnMadPic,
+        leftPic: npc_agentPic,
         rightPic: null,
 
         leftPicLeave: false,
@@ -860,4 +860,42 @@ let wallOutletinJohnsHouse = [
 
         position: {x: 492.5, y: 140}
     }
-];    
+];   
+
+
+let npcConvo = [
+    {
+        scene: "firstLine",
+        who: "Agent",
+        nameCol: "lightBlue",
+        voice: voiceLow1,
+        text: "I'm the pink-haired signpost.",
+        nextPage: 1,
+        leftPic: npc_agentPic,
+        rightPic: null,
+
+        leftPicLeave: false,
+        rightPicLeave: null,
+
+        choices: null,
+
+        position: {x: 492.5, y: 140}
+    },
+    {
+        scene: "secondLine",
+        who: "Agent",
+        nameCol: "lightBlue",
+        voice: voiceLow1,
+        text: "Here I am, an agent of exposition. Blah blah important clue or maybe red herring blah blah blah",
+        nextPage: 2,
+        leftPic: npc_agentPic,
+        rightPic: null,
+
+        leftPicLeave: false,
+        rightPicLeave: null,
+
+        choices: null,
+
+        position: {x: 492.5, y: 140}
+    }
+];

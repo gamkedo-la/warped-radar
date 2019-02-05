@@ -66,12 +66,6 @@ function start () {
     levelEditor = new LevelEditor();
     player = new Player();
 
-    if (useRequestAnimationFrame) {
-        gameLoop();
-    } else {
-        interval = setInterval(gameLoop, 1000/framesPerSecond);
-    }
-
     setupInput();
     tileSet = new Tileset(worldTiles, 40, 40);
     player.reset();
@@ -88,6 +82,13 @@ function start () {
     //Start background music
     warpedRadarBackgroundMusic.loopSong("audio/MainMenu");
     warpedRadarBackgroundMusic.setVolume(0.35);//trying to balance background music with dialogue volume
+
+    if (useRequestAnimationFrame) {
+        gameLoop();
+    } else {
+        interval = setInterval(gameLoop, 1000/framesPerSecond);
+    }
+
 };
 
 //This is the call that gets the game started.
@@ -207,6 +208,8 @@ function render () {
         currentlyPlayingCutscene = testScene;
     }
     // TO-DO END: reorganize cutscene system/manager
+
+    Intros.draw(); // if any
 
     if (transitioning) {
         PageTransition.draw();

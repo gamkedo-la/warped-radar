@@ -88,6 +88,10 @@ const Menu = new (function() {
                 setTimeout(() => {
                     gameIsStarted = true;
                 }, transitionDuration/2); // show new scene halfway through duration, so it can be seen as transition is ending.
+                // trigger intro cinematic
+                setTimeout(Intros.start(introText),transitionDuration);
+
+
                 break;
             case "Continue":
                 currentPage = CONTINUE_PAGE;

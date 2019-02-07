@@ -333,7 +333,7 @@ function initializeAgent(arrayIndex) {
     const columns = locationList[locationNow].columns;
     const xPos = (arrayIndex % columns) * WORLD_W;
     const yPos = Math.floor(arrayIndex / columns) * WORLD_H;
-    let agent = new OverworldObject("Agent", xPos, yPos, 62, 26, agentAnimations);
+    let agent = new OverworldObject("Agent", xPos, yPos, 26, 62, agentAnimations);
     agent.dialogue = new Dialogue();
     agent.colour = "blue";
     agent.location = Place.TheCity;
@@ -363,7 +363,7 @@ function initializeCop1(arrayIndex) {
     const columns = locationList[locationNow].columns;
     const xPos = (arrayIndex % columns) * WORLD_W;
     const yPos = Math.floor(arrayIndex / columns) * WORLD_H;
-    let cop1 = new OverworldObject("Cop_1", xPos, yPos, 62, 26, copAnimations);
+    let cop1 = new OverworldObject("Cop_1", xPos, yPos, 26, 62, copAnimations);
     cop1.dialogue = new Dialogue();
     cop1.colour = "blue";
     cop1.location = Place.TheCity;

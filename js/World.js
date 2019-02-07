@@ -50,8 +50,8 @@ let tileSet;
 let solidTiles = [2];
 
 const Switch = {
-    TheCityToJohnsRoom:             getTileIndex(theCity, 32, 12),
-    TheCityFromJohnsRoom:           getTileIndex(theCity, 32, 13),
+    TheCityToJohnsRoom:             getTileIndex(theCity, 46, 42),
+    TheCityFromJohnsRoom:           getTileIndex(theCity, 46, 43),
     TheCityToJuliesStore:           getTileIndex(theCity, 16, 12),
     TheCityFromJuliesStore:         getTileIndex(theCity, 16, 13),
     TheCityToDavesHouse:            getTileIndex(theCity, 7, 12),

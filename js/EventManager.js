@@ -15,6 +15,7 @@ const GameEvent = {
     Talk_Rose_1:false,
     Talk_Julie_0:false,
     Talk_Agent_1:false,
+    Talk_Cop1_1:false,
 }
 
 function EventManager() {
@@ -86,6 +87,9 @@ function EventManager() {
             case "Agent":
                 result = true;
             break;
+            case "Cop_1":
+                result = true;
+            break;
         }
 
         return result;
@@ -129,6 +133,9 @@ function EventManager() {
 */
                 result = 0;
             break;
+            case "Cop_1":
+                result = 0;
+            break;
         }
 
         return result;
@@ -153,6 +160,9 @@ function EventManager() {
             break;
             case "Agent":
                 GameEvent.Talk_Agent_1 = true;
+            break;
+            case "Cop_1":
+                GameEvent.Talk_Cop1_1 = true;
             break;
         }
 

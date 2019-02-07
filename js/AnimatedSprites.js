@@ -142,6 +142,14 @@ function makeAnimatedSprites() {
 		animationColFrames: 24,
 		framesUntilNext: frameDelayWalk,
 	});
+
+	//Cop
+	copIdle = new AnimatedSpriteClass({
+		name: "copAnimationIdle",
+		spriteSheet: copAnimationIdle,
+		animationColFrames: 24,
+		framesUntilNext: frameDelayWalk,
+	});
 };
 
 function AnimatedSpriteClass(data) {

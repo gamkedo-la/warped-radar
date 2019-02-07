@@ -48,6 +48,8 @@ let agentAnimationIdle = document.createElement("img");
 
 let daveIdle = document.createElement("img");
 
+let copAnimationIdle = document.createElement("img");
+
 let rainEffectImage = document.createElement("img");
 let fogEffectImage = document.createElement("img");
 let dustEffectImage = document.createElement("img");
@@ -118,7 +120,9 @@ function loadImages() {
 
         {varName: agentAnimationIdle, theFile: "npc_agent-idle.png"},
 
-        {varName: daveIdle, theFile: "tempDave.png"},
+        {varName: daveIdle, theFile: "DaveSprite_Dead.png"},
+
+        {varName: copAnimationIdle, theFile: "npc_cop-idle.png"},
 
         //DEFAULT GAMESTART ITEMS
         {varName: notePic, theFile: "note.png"},

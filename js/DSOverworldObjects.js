@@ -133,6 +133,7 @@ function OverworldObject(name, leftEdge, topEdge, width, height, animations = nu
         if (createElseIncrement) {
             this.dialogue.create(dialogue);
         } else {
+            if(this.dialogue.page < 0) {return;}
             this.dialogue.incrementPage(dialogue);
         }
     }
@@ -173,25 +174,31 @@ function initializeOverworldObjects() {
                 if(eventManager.canShowNPC(rose)) {
                     allNPCs.push(rose);
                 }
-                break;
+            break;
             case TILE.JULIE:
                 const julie = initializeJulie(i);
                 if(eventManager.canShowNPC(julie)) {
                     allNPCs.push(julie);
                 }
-                break;
+            break;
             case TILE.DAVE:
                 const dave = initializeDave(i);
                 if(eventManager.canShowNPC(dave)) {
                     allNPCs.push(dave);
                 }
-                break;
+            break;
             case TILE.NPC:
                 const agent = initializeAgent(i);
                 if(eventManager.canShowNPC(agent)) {
                     allNPCs.push(agent);
                 }
-                break;
+            break;
+            case TILE.COP:
+                const cop1 = initializeCop1(i);
+                if(eventManager.canShowNPC(cop1)) {
+                    allNPCs.push(cop1);
+                }
+            break;
         }
     }
 }
@@ -337,6 +344,36 @@ function initializeAgent(arrayIndex) {
     }
 
     return agent;
+}
+
+function initializeCop1(arrayIndex) {
+    const copAnimations = {
+        idle:copIdle,
+        worry:null,
+        north:null,
+        south:null,
+        east:null,
+        west:null,
+        northEast:null,
+        northWest:null,
+        southEast:null,
+        southWest:null
+    }
+
+    const columns = locationList[locationNow].columns;
+    const xPos = (arrayIndex % columns) * WORLD_W;
+    const yPos = Math.floor(arrayIndex / columns) * WORLD_H;
+    let cop1 = new OverworldObject("Cop_1", xPos, yPos, 62, 26, copAnimations);
+    cop1.dialogue = new Dialogue();
+    cop1.colour = "blue";
+    cop1.location = Place.TheCity;
+    
+    cop1.chatEvents = function (createElseIncrement) {
+        //Add additional conversations in this array if you want the Agent to say different things (or different Agents to say different things)
+        this.text(createElseIncrement, [cop1Convo]);
+    }
+
+    return cop1;
 }
 
 let allNPCs = [];

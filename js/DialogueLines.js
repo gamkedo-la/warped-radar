@@ -862,7 +862,6 @@ let wallOutletinJohnsHouse = [
     }
 ];   
 
-
 let npcConvo = [
     {
         scene: "firstLine",
@@ -887,6 +886,43 @@ let npcConvo = [
         nameCol: "lightBlue",
         voice: voiceLow1,
         text: "Here I am, an agent of exposition. Blah blah important clue or maybe red herring blah blah blah",
+        nextPage: 2,
+        leftPic: npc_agentPic,
+        rightPic: null,
+
+        leftPicLeave: false,
+        rightPicLeave: null,
+
+        choices: null,
+
+        position: {x: 492.5, y: 140}
+    }
+];
+
+let cop1Convo = [
+    {
+        scene: "firstLine",
+        who: "Cop",
+        nameCol: "darkBlue",
+        voice: voiceLow1,
+        text: "I'm a Cop, hear me roar.",
+        nextPage: 1,
+        leftPic: npc_agentPic,
+        rightPic: null,
+
+        leftPicLeave: false,
+        rightPicLeave: null,
+
+        choices: null,
+
+        position: {x: 492.5, y: 140}
+    },
+    {
+        scene: "secondLine",
+        who: "Cop",
+        nameCol: "darkBlue",
+        voice: voiceLow1,
+        text: "That's going to be an expensive mistake.",
         nextPage: 2,
         leftPic: npc_agentPic,
         rightPic: null,

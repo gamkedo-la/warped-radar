@@ -14,6 +14,7 @@ const GameEvent = {
     Talk_Rose_0:false,
     Talk_Rose_1:false,
     Talk_Julie_0:false,
+    Talk_Agent_1:false,
 }
 
 function EventManager() {
@@ -115,6 +116,19 @@ function EventManager() {
                     result = 0;
                 }
             break;
+            case "Agent":
+/*
+                if(locationNow == Place.TheCity) {
+                    if((npc.x == 100) && (npc.y == 150)) {
+                        result = 0;
+                    } else if ((npc.x == 200) && (npc.y == 220)) {
+                        result = 1;
+                    }
+                }
+
+*/
+                result = 0;
+            break;
         }
 
         return result;
@@ -136,6 +150,9 @@ function EventManager() {
                 if(npc.messageCounter == 0) {
                     GameEvent.Talk_Julie_0 = true;
                 }
+            break;
+            case "Agent":
+                GameEvent.Talk_Agent_1 = true;
             break;
         }
 

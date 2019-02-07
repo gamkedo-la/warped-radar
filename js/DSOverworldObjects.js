@@ -332,6 +332,7 @@ function initializeAgent(arrayIndex) {
     agent.location = Place.TheCity;
     
     agent.chatEvents = function (createElseIncrement) {
+        //Add additional conversations in this array if you want the Agent to say different things (or different Agents to say different things)
         this.text(createElseIncrement, [npcConvo]);
     }
 

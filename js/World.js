@@ -52,22 +52,14 @@ let tileSet;
 let solidTiles = [2];
 
 const Switch = {
-    TheCityToJohnsRoom:             getTileIndex(theCity, 46, 42),
-    TheCityFromJohnsRoom:           getTileIndex(theCity, 46, 43),
-    TheCityToJuliesStore:           getTileIndex(theCity, 16, 12),
-    TheCityFromJuliesStore:         getTileIndex(theCity, 16, 13),
-    TheCityToDavesHouse:            getTileIndex(theCity, 7, 12),
-    TheCityFromDavesHouse:          getTileIndex(theCity, 7, 13),
+    TheCityToJohnsRoom:             getTileIndex(theCity, 42, 22),
+    TheCityFromJohnsRoom:           getTileIndex(theCity, 42, 23),
+    TheCityToJuliesStore:           getTileIndex(theCity, 26, 22),
+    TheCityFromJuliesStore:         getTileIndex(theCity, 26, 23),
+    TheCityToDavesHouse:            getTileIndex(theCity, 17, 22),
+    TheCityFromDavesHouse:          getTileIndex(theCity, 17, 23),
     JohnsRoomToTheCity:             getTileIndex(johnsRoom, 6, 23),
     JohnsRoomFromTheCity:           getTileIndex(johnsRoom, 6, 22),
-    // JohnsRoomToJohnsHallway:        getTileIndex(johnsRoom, 9, 3),
-    // JohnsRoomFromJohnsHallway:      getTileIndex(johnsRoom, 8, 3),
-    // JohnsHallwayToJohnsRoom:        getTileIndex(johnsHallway, 0, 4),
-    // JohnsHallwayFromJohnsRoom:      getTileIndex(johnsHallway, 1, 4),
-    // JohnsHallwayToJohnsKitchen:     getTileIndex(johnsHallway, 15, 4),
-    // JohnsHallwayFromJohnsKitchen:   getTileIndex(johnsHallway, 14, 4),
-    // JohnsKitchenToJohnsHallway:     getTileIndex(johnsKitchen, 0, 5),
-    // JohnsKitchenFromJohnsHallway:   getTileIndex(johnsKitchen, 1, 5),
     JuliesStoreToTheCity:           getTileIndex(juliesStore, 5, 14),
     JuliesStoreFromTheCity:         getTileIndex(juliesStore, 5, 13),
     DavesHouseToTheCity:            getTileIndex(davesHouse, 6, 11),
@@ -111,12 +103,12 @@ let visibleGrid = false;
 /**
  * 
  * @param {object} location a location object from locations.js
- * @param {int} x map coordinate in tiles
- * @param {int} y map coordinate in tiles
+ * @param {int} col map coordinate in tiles
+ * @param {int} row map coordinate in tiles
  */
-function getTileIndex(location, x, y){
+function getTileIndex(location, col, row){
     let cols = location.columns;
-    return x + cols * y;
+    return col + cols * row;
 }
 
 function rowColToArrayIndex(col, row) {

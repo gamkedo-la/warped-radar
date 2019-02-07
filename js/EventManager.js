@@ -160,6 +160,9 @@ function EventManager() {
             break;
             case "Agent":
                 GameEvent.Talk_Agent_1 = true;
+                if((locationNow == Place.TheCity) && (!GameEvent.FoundDave)) {
+                    activateDoorToDavesHouse();
+                }
             break;
             case "Cop_1":
                 GameEvent.Talk_Cop1_1 = true;
@@ -222,5 +225,9 @@ function EventManager() {
         //This next line wipes out the object as you're interacting with it, so it is a problem,
         //need to find a work around.
 //        initializeInteractableItems();//interacting with an object can change what objects are interactable
+    };
+
+    const activateDoorToDavesHouse = function() {
+        locationList[Place.TheCity].layers[Layer.Interaction][Switch.TheCityToDavesHouse] = TILE.SWITCH_LOCATION;
     };
 }

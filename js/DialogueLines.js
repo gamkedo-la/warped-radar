@@ -866,12 +866,12 @@ let npcConvo = [
     {
         scene: "firstLine",
         who: "Agent",
-        nameCol: "lightBlue",
+        nameCol: "purple",
         voice: voiceLow1,
-        text: "I'm the pink-haired signpost.",
+        text: "I'm Agent Jen.  You can't enter here.",
         nextPage: 1,
-        leftPic: npc_agentPic,
-        rightPic: null,
+        leftPic: johnHappyPic,
+        rightPic: npc_agentPic,
 
         leftPicLeave: false,
         rightPicLeave: null,
@@ -882,13 +882,30 @@ let npcConvo = [
     },
     {
         scene: "secondLine",
-        who: "Agent",
+        who: "John",
         nameCol: "lightBlue",
         voice: voiceLow1,
-        text: "Here I am, an agent of exposition. Blah blah important clue or maybe red herring blah blah blah",
+        text: "But this is my uncle's house.  What's going on?",
         nextPage: 2,
-        leftPic: npc_agentPic,
-        rightPic: null,
+        leftPic: johnHappyPic,
+        rightPic: npc_agentPic,
+
+        leftPicLeave: false,
+        rightPicLeave: null,
+
+        choices: null,
+
+        position: {x: 492.5, y: 140}
+    },
+    {
+        scene: "thirdLine",
+        who: "Agent",
+        nameCol: "purple",
+        voice: voiceLow1,
+        text: "Ok.  Just a quick look, but only because I like your look.",
+        nextPage: 3,
+        leftPic: johnHappyPic,
+        rightPic: npc_agentPic,
 
         leftPicLeave: false,
         rightPicLeave: null,

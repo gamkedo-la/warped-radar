@@ -70,12 +70,12 @@ function ObtainableItem(drawTileX,drawTileY, tileWidth,tileHeight, name, descrip
 
 let brokenSkateBoard = new ObtainableItem(undefined,undefined, WORLD_W,WORLD_H, "brokenSkateBoard", "Broken Skateboard", null, TILE.BROKEN_SKATEBOARD, locationNow);
 let burnerPhone = new ObtainableItem(undefined,undefined, WORLD_W,WORLD_H, "burnerPhone", "Burner Phone", null, TILE.BURNER_PHONE, locationNow);
-let crowbar = new ObtainableItem(undefined,undefined, WORLD_W,WORLD_H, "crowbar", "Crowbar", null, TILE.CROWBAR, locationNow);
-let hoodie = new ObtainableItem(undefined,undefined, WORLD_W,WORLD_H, "hoodie", "Hoodie", null, TILE.HOODIE, locationNow);
-let medicalNotebook = new ObtainableItem(undefined,undefined, WORLD_W,WORLD_H, "medicalNotebook", "Medical Notebook", null, TILE.MEDICAL_NOTEBOOK, locationNow);
+let crowbar = new ObtainableItem(undefined,undefined, WORLD_W,WORLD_H, "crowbar", "Crowbar", null, TILE.CROWBAR, locationNow, [["Inspect", "It's clean.  Too clean..."], ["Swing", "It makes a loud whistling sound"]]);
+let hoodie = new ObtainableItem(undefined,undefined, WORLD_W,WORLD_H, "hoodie", "Hoodie", null, TILE.HOODIE, locationNow, [["Inspect", "There's a long orange hair on it"], ["Put On", "It fits, and smells like Uncle Dave"]]);
+let medicalNotebook = new ObtainableItem(undefined,undefined, WORLD_W,WORLD_H, "medicalNotebook", "Medical Notebook", null, TILE.MEDICAL_NOTEBOOK, locationNow, [["Inspect", "It contains medical notes for the impact of cybernetics on human physiology"], ["Read", "It's too long and complicated, but it looks like Rose's handwriting"]]);
 let sealedTube = new ObtainableItem(undefined,undefined, WORLD_W,WORLD_H, "sealedTube", "Sealed Tube", null, TILE.SEALED_TUBE, locationNow);
-let thumbDrive = new ObtainableItem(undefined,undefined, WORLD_W,WORLD_H, "thumbDrive", "Thumb Drive", null, TILE.THUMB_DRIVE, locationNow);
-let trainTicket = new ObtainableItem(undefined,undefined, WORLD_W,WORLD_H, "trainTicket", "Train Ticket", null, TILE.TRAIN_TICKET, locationNow, [["Read", "2200 train to Ampere for last night"], ["Inspect", "There's an odd hair on it"]]);
+let thumbDrive = new ObtainableItem(undefined,undefined, WORLD_W,WORLD_H, "thumbDrive", "Thumb Drive", null, TILE.THUMB_DRIVE, locationNow, [["Inspect", "It's an older one, but it checks out"], ["Install", "There's too much data to sift through right now"]]);
+let trainTicket = new ObtainableItem(undefined,undefined, WORLD_W,WORLD_H, "trainTicket", "Train Ticket", null, TILE.TRAIN_TICKET, locationNow, [["Read", "2200 train to Ampere for last night"], ["Inspect", "It's torn the same way as the note, like they were torn together..."]]);
 
 let arrayOfObtainableItems = [brokenSkateBoard, burnerPhone, crowbar, hoodie, medicalNotebook, sealedTube, thumbDrive, trainTicket];
 

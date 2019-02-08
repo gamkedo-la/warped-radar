@@ -26,12 +26,27 @@ function EventManager() {
 
         switch(item.name) {
             case "crowbar":
-                if(GameEvent.FoundDave) {
+                if((locationNow == Place.DavesHouse) && (GameEvent.FoundDave)) {
+                    result = true;
+                }
+            break;
+            case "medicalNotebook":
+                if((locationNow == Place.TheCity) && (GameEvent.Talk_Rose_0)) {
+                    result = true;
+                }
+            break;
+            case "hoodie":
+                if((locationNow == Place.TheCity) && (GameEvent.Talk_Julie_0)) {
+                    result = true;
+                }
+            break;
+            case "thumbDrive":
+                if((locationNow == Place.JuliesStore) && (GameEvent.FoundDave)) {
                     result = true;
                 }
             break;
             case "trainTicket":
-                if(GameEvent.FoundDave) {
+                if((locationNow == Place.DavesHouse) && (GameEvent.FoundDave)) {
                     result = true;
                 }
             break;

@@ -20,12 +20,12 @@ const Menu = new (function() {
     let textFontFace = "30px Impact";
     let textColour = "pink" ;
 
-    let menuList = ["Story", "Continue", "Options", "Guide" , "Credits"];
+    let menuList = ["Story", "Options", "Guide" , "Credits"];
     let episodeList = ["Episode 1", "Episode 2", "Episode 3", "Back"];
     let continueList = ["Remember", "Episodes", "Back"];
-    let optionsList = ["Mute", "Controls", "Back"];
-    let guideList= ["Gameplay","Gamepad", "Back"];
-    let pausedList =['resume', 'mute' , 'record'];
+    let optionsList = ["Mute", "Back"];
+    let guideList= ["Gameplay","Gamepad", "Back"]; //skip
+    let pausedList =['resume', 'mute'];
     let creditsList =["Kise: Project lead", "BackSpace"];
     let gameplayList = ["      Move John", "W/Up Arrow: up", "D/Right Arrow: right", "S/Down Arrow: down", "A/Left Arrow: left", "     Game Actions", "P: pause/resume", "Enter/Space: interact", "Z: inventory"];
 
@@ -71,8 +71,12 @@ const Menu = new (function() {
         keyRepeatWait = Math.max(0, keyRepeatWait - 1);
     };
 
-
     this.checkState = function() {
+        if (currentPage == GAMEPLAY_PAGE) {
+            currentPage = MENU_PAGE;
+            cursor1 =0;
+            return;
+         }
         switch (menuPageText[currentPage][cursor1]) {
             case "Story":
                 warpedRadarBackgroundMusic.loopSong("audio/stebs_warped_radar_song");
@@ -103,7 +107,7 @@ const Menu = new (function() {
                 break;
             case "Guide":
                 cursor1 = 0;
-                currentPage  = GUIDE_PAGE;
+                currentPage = GAMEPLAY_PAGE;
                 break;
             case "Credits":
                 cursor1 = 0;
@@ -177,9 +181,13 @@ const Menu = new (function() {
             }
         }
             for (let i=0; i<menuPageText[currentPage].length; i++){
-                colorText(menuPageText[currentPage][i], itemsX,topItemY + rowHeight * i,textColour, textFontFace, 'left', 'top');
+                colorText(menuPageText[currentPage][i], itemsX - (currentPage == GAMEPLAY_PAGE ? 300 : 0),topItemY + rowHeight * i,textColour, textFontFace, 'left', 'top');
+                }
+                if(currentPage != GAMEPLAY_PAGE){
                  //Draw cursor after background image
-                canvasContext.drawImage(arrowPic,itemsX -55 ,topItemY + (cursor1 * rowHeight) -42);
-            }
+                 canvasContext.drawImage(arrowPic,itemsX -55 ,topItemY + (cursor1 * rowHeight) -42);
+                }
+                
+            
     };
 })();

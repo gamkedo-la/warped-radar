@@ -108,12 +108,13 @@ function gameLoop () {
     let now = Date.now();
     delta = (now - then); // * deltaMultiplier;
 
-    if (!paused) {
-        update(delta / 1000);
-        framesFromGameStart++;
-        render();
-        //postRender();
-    }
+     
+    update(delta / 1000);
+    framesFromGameStart++;
+    
+
+    render();
+    //postRender();
 
     then = now;
 
@@ -155,7 +156,7 @@ function updateOverworldObjects(delta) {
 // All things drawn to screen every frame here
 function render () {
 
-    if(gameIsStarted === false){
+    if(gameIsStarted === false || paused){
         Menu.draw();
         if (transitioning) {
             PageTransition.draw();
@@ -381,7 +382,7 @@ function drawTextNearObjOrNPC() {
 
 function pauseRadar(){
     if (!paused){
-        Menu.draw();
+        //Menu.draw();
         // if (!useRequestAnimationFrame) {
         //     clearInterval(interval);
         // }

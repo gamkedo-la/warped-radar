@@ -74,9 +74,9 @@ function EventManager() {
 
         switch(npc.name) {
             case "Rose":
-                if((locationNow == Place.TheCity) && (!GameEvent.FoundDave)) {
+//                if((locationNow == Place.TheCity) && (!GameEvent.FoundDave)) {
                     result = true;
-                }
+//                }
             break;
             case "Uncle Dave":
                 result = true;
@@ -102,6 +102,8 @@ function EventManager() {
             case "Rose":
                 if((locationNow == Place.TheCity) && (!GameEvent.FoundDave)) {
                     result = 0;
+                } else if((locationNow == Place.TheCity) && (GameEvent.FoundDave)) {
+                    result = 1;
                 }
             break;
             case "Uncle Dave":

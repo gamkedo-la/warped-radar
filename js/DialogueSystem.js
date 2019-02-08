@@ -439,9 +439,9 @@ function Dialogue() {
             this.letterCounter = 0;
 
 			if(pages[this.page] != undefined) {
-				this.setPage(pages[this.page]);
-			} else {
-				this.setPage(this.page + 1);
+                this.setPage(pages[this.page]);
+            } else {
+                this.isShowing = false;
 				console.log("Used the fall back");
 			}
 
@@ -455,7 +455,7 @@ function Dialogue() {
                 if (dialogue[this.page] == "") {
                     //choices in branching text? Reset variables
                     this.resetBranchingDialogueVars();
-                } else {
+                } else if((pages[this.page] == null) && (playerChoices[this.page] == null)) {
                     //end conversation once branching dialogue has been all read, but not at the end of the array
                     this.isShowing = false;
                 }

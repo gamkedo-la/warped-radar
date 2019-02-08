@@ -17,7 +17,7 @@ function Tileset(image, tileWidth, tileHeight) {
     };
 
     this.positionForIndex = function(index) {
-        const xPos = this.tileWidth * Math.floor(index % tilesPerRow);
+        const xPos = this.tileWidth * (index % tilesPerRow);
         const yPos = this.tileHeight * Math.floor(index / tilesPerRow);
 
         return {x:xPos, y:yPos};

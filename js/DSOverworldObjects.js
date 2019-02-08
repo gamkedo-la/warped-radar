@@ -237,7 +237,7 @@ function initializeRose(arrayIndex) {
     //End Temporary
     
     rose.chatEvents = function (createElseIncrement) {
-        this.text(createElseIncrement, [JohnAndRose_1, johnAndRoseConvo2, johnAndRoseConvo3]);
+        this.text(createElseIncrement, [JohnAndRose_1, roseInquiry, johnAndRoseConvo3]);
     }
 
     rose.update = function(delta) {
@@ -308,6 +308,9 @@ function initializeDave(arrayIndex) {
     dave.dialogue = new Dialogue();
     dave.colour = "blue";
     dave.location = Place.DavesHouse;
+
+    //adjust position since Davy is lying down vice standing/walking
+    dave.setTileCollider(dave.tileCollider.x + 15, dave.tileCollider.y - 50);
     
     dave.chatEvents = function (createElseIncrement) {
         this.text(createElseIncrement, [UncleDaveDiscovery]);

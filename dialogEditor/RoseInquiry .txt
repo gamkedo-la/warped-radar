@@ -1,0 +1,14 @@
+John: Rose, my Uncle Dave is dead!
+Rose: Oh no! What happened?
+John: I don't know. I went visit him just now and his place is surrounded by cops and he's dead.
+Rose: I'm so sorry John.
+John: I wish I had been there to protect him last night, but I had plans...
+Rose: ...
+John: Wait! Where did you say you were last night?
+Rose: Something came up.
+John: What 'something'?
+Rose: Are you accusing me of hurting your Uncle Dave?
+John: {No, I just want to know.}{Well, where were you?}
+Rose: I was at Julie's.
+John: At Julie's!?! I thought you hated augmentation?
+Rose: Well...I...I have to go.

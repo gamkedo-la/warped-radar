@@ -50,7 +50,8 @@ function getTileTypesAtRectInLayer(x, y, width, height, layer) {
 
 function getNextTileTypesAtRectInLayer(rect, deltaX, deltaY, layer) {
 	const newX = rect.x + deltaX;
-	const newY = rect.y + deltaY;
+	const fudge = (rect.y / WORLD_H) - rect.height;//accounts for proportional offset in yDirection
+	const newY = rect.y + deltaY - fudge;
 
 	return getTileTypesAtRectInLayer(newX, newY, rect.width, rect.height, layer);
 }

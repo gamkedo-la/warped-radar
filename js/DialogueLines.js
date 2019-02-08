@@ -56,7 +56,7 @@ let JohnAndRose_1 = [
         nameCol: "pink",
         voice: voiceHigh2,
         text: "Yes, I'm fine.  I need to go now.",
-        nextPage: 4,
+        nextPage: null,
         leftPic: johnMadPic,
         rightPic: roseAnnoyedPic,
 
@@ -86,103 +86,115 @@ let JohnAndRose_1 = [
     },
 ];
 
-let johnAndRoseConvo = [
+let roseInquiry = [
     {
-        scene: "neutral",
+        scene: "firstPage",
         who: "John",
         nameCol: "lightBlue",
         voice: voiceLow1,
-        text: "Hi there.",
+        text: "Rose, my Uncle Dave is dead!",
         nextPage: 1,
-        leftPic: johnHappyPic,
-        rightPic: null,
+        leftPic: johnMadPic,
+        rightPic: roseHappyPic,
 
         leftPicLeave: false,
         rightPicLeave: false,
 
-        choices: null
+        choices: null,
+
+        position: {x: 513, y: -3020}
     },
     {
-        scene: "neutral",
+        scene: "secondPage",
         who: "Rose",
         nameCol: "pink",
         voice: voiceHigh2,
-        text: "Hi! How are you?",
+        text: "Oh no! What happened?",
         nextPage: 2,
-        leftPic: johnHappyPic,
-        rightPic: roseHappyPic,
+        leftPic: johnMadPic,
+        rightPic: roseAnnoyedPic,
 
         leftPicLeave: false,
         rightPicLeave: false,
 
-        choices: null
+        choices: null,
+
+        position: {x: 515, y: -2750}
     },
     {
-        scene: "neutral",
+        scene: "thirdPage",
         who: "John",
         nameCol: "lightBlue",
         voice: voiceLow1,
-        text: "",
-        nextPage: null,
-        leftPic: johnHappyPic,
+        text: "I don't know. I went visit him just now and his place is surrounded by cops and he's dead.",
+        nextPage: 3,
+        leftPic: johnMadPic,
         rightPic: roseHappyPic,
 
         leftPicLeave: false,
         rightPicLeave: false,
 
-        choices: [["Good, how about you?", "Good end"], ["Meh", "Bad end"], ["I like tortles", "Tortle end"]]
+        choices: null,
+
+        position: {x: 514, y: -2480}
     },
     {
-        scene: "Good end",
-        who: "John",
-        nameCol: "lightBlue",
-        voice: voiceLow1,
-        text: "I'm good. So how've you been?",
-        nextPage: 22,
-        leftPic: johnHappyPic,
-        rightPic: roseHappyPic,
-
-        leftPicLeave: false,
-        rightPicLeave: false,
-
-        choices: null
-    },
-    {
-        scene: "Good end",
+        scene: "fourthPage",
         who: "Rose",
         nameCol: "pink",
         voice: voiceHigh2,
-        text: "I'm fine.",
-        nextPage: 5,
+        text: "I'm so sorry John.",
+        nextPage: 4,
         leftPic: johnHappyPic,
+        rightPic: roseHappyPic,
+
+        leftPicLeave: null,
+        rightPicLeave: null,
+
+        choices: null,
+
+        position: {x: 514, y: -2170}
+    },
+    {
+        scene: "fifthPage",
+        who: "John",
+        nameCol: "lightBlue",
+        voice: voiceLow1,
+        text: "I wish I had been there to protect him last night, but I had plans...",
+        nextPage: 5,
+        leftPic: johnMadPic,
         rightPic: roseHappyPic,
 
         leftPicLeave: false,
         rightPicLeave: false,
 
-        choices: null
+        choices: null,
+
+        position: {x: 514, y: -1901}
     },
     {
-        scene: "Good end",
-        who: "John",
-        nameCol: "lightBlue",
-        voice: voiceLow1,
-        text: "Oh that's great.",
+        scene: "sixthPage",
+        who: "Rose",
+        nameCol: "pink",
+        voice: voiceHigh2,
+        text: "...",
         nextPage: 6,
         leftPic: johnHappyPic,
-        rightPic: roseHappyPic,
+        rightPic: roseAnnoyedPic,
 
         leftPicLeave: false,
         rightPicLeave: false,
 
-        choices: null
+        choices: null,
+
+        position: {x: 514, y: -1610}
     },
     {
-        scene: "Good end",
+        scene: "seventhPage",
         who: "John",
         nameCol: "lightBlue",
         voice: voiceLow1,
-        text: "Hold on, let me just show the player that I also have an angry face portrait.",
+        text: "Wait! Where did you say you were last night?",
         nextPage: 7,
         leftPic: johnMadPic,
         rightPic: roseHappyPic,
@@ -190,248 +202,180 @@ let johnAndRoseConvo = [
         leftPicLeave: false,
         rightPicLeave: false,
 
-        choices: null
+        choices: null,
+
+        position: {x: 515, y: -1340}
     },
     {
-        scene: "Good end",
-        who: "John",
-        nameCol: "lightBlue",
-        voice: voiceLow1,
-        text: "GRRR!",
-        nextPage: 8,
-        leftPic: johnMadPic,
-        rightPic: roseHappyPic,
-
-        leftPicLeave: false,
-        rightPicLeave: false,
-
-        choices: null
-    },
-    {
-        scene: "Good end",
+        scene: "eighthPage",
         who: "Rose",
         nameCol: "pink",
         voice: voiceHigh2,
-        text: "Uhh, ok, see ya.",
-        nextPage: 9,
+        text: "Something came up.",
+        nextPage: 8,
         leftPic: johnHappyPic,
         rightPic: roseAnnoyedPic,
 
         leftPicLeave: false,
         rightPicLeave: false,
 
-        choices: null
+        choices: null,
+
+        position: {x: 514, y: -1050}
     },
     {
-        scene: "Good end",
+        scene: "ninthPage",
         who: "John",
         nameCol: "lightBlue",
         voice: voiceLow1,
-        text: "Hey, wait!",
-        nextPage: 10,
+        text: "What 'something'?",
+        nextPage: 9,
         leftPic: johnMadPic,
         rightPic: roseAnnoyedPic,
 
         leftPicLeave: false,
-        rightPicLeave: true,
+        rightPicLeave: false,
 
-        choices: null
+        choices: null,
+
+        position: {x: 514, y: -780}
     },
     {
-        scene: "Good end",
-        who: "John",
-        nameCol: "lightBlue",
-        voice: voiceLow1,
-        text: "...",
-        nextPage: 11,
-        leftPic: johnMadPic,
-        rightPic: null,
+        scene: "tenthPage",
+        who: "Rose",
+        nameCol: "pink",
+        voice: voiceHigh2,
+        text: "Are you accusing me of hurting your Uncle Dave?",
+        nextPage: 10,
+        leftPic: johnHappyPic,
+        rightPic: roseAnnoyedPic,
 
         leftPicLeave: false,
         rightPicLeave: false,
 
-        choices: null
+        choices: null,
+
+        position: {x: 514, y: -510}
     },
     {
-        scene: "Good end",
+        scene: "eleventhPage",
+        who: "John",
+        nameCol: "lightBlue",
+        voice: voiceLow1,
+        text: "",
+        nextPage: null,
+        leftPic: johnHappyPic,
+        rightPic: roseAnnoyedPic,
+
+        leftPicLeave: false,
+        rightPicLeave: false,
+
+        choices: [["No, I just want to know.", "twelfthPage"], ["Well, where were you?", "fifteenthPage"]],
+
+        position: {x: 514, y: -221}
+    },
+    {
+        scene: "twelfthPage",
         who: "Rose",
         nameCol: "pink",
         voice: voiceHigh2,
-        text: "Just kidding!",
+        text: "I was at Julie's.",
         nextPage: 12,
         leftPic: johnHappyPic,
-        rightPic: roseHappyPic,
+        rightPic: roseAnnoyedPic,
 
         leftPicLeave: false,
         rightPicLeave: false,
 
-        choices: null
+        choices: null,
+
+        position: {x: 504, y: 70}
     },
     {
-        scene: "Good end",
-        who: "Rose",
-        nameCol: "pink",
-        voice: voiceHigh2,
-        text: "Do you want to talk some more?",
+        scene: "thirteenthPage",
+        who: "John",
+        nameCol: "lightBlue",
+        voice: voiceLow1,
+        text: "At Julie's!?! I thought you hated augmentation?",
         nextPage: 13,
-        leftPic: johnHappyPic,
-        rightPic: roseHappyPic,
+        leftPic: johnMadPic,
+        rightPic: roseAnnoyedPic,
 
         leftPicLeave: false,
         rightPicLeave: false,
 
-        choices: null
+        choices: null,
+
+        position: {x: 516, y: 346}
     },
     {
-        scene: "Good end",
+        scene: "fourteenthPage",
         who: "Rose",
         nameCol: "pink",
         voice: voiceHigh2,
-        text: "",
+        text: "Well...I...I have to go",
         nextPage: null,
-        leftPic: johnHappyPic,
-        rightPic: roseHappyPic,
+        leftPic: johnMadPic,
+        rightPic: roseAnnoyedPic,
 
         leftPicLeave: false,
         rightPicLeave: false,
 
-        choices: [["Yes", "Talk more"], ["No", "Really?"]]
+        choices: null,
+
+        position: {x: 517, y: 637}
     },
     {
-        scene: "Talk more",
+        scene: "fifteenthPage",
         who: "Rose",
         nameCol: "pink",
         voice: voiceHigh2,
-        text: "Yay! Too bad, I have to go though.",
+        text: "I was at Julie's.",
         nextPage: 15,
-        leftPic: johnHappyPic,
-        rightPic: roseHappyPic,
-
-        leftPicLeave: false,
-        rightPicLeave: false,
-
-        choices: null
-    },
-    {
-        scene: "Talk more",
-        who: "Rose",
-        nameCol: "pink",
-        voice: voiceHigh2,
-        text: "Let's talk later!",
-        nextPage: 16,
-        leftPic: johnHappyPic,
-        rightPic: roseHappyPic,
-
-        leftPicLeave: false,
-        rightPicLeave: false,
-
-        choices: null
-    },
-    {
-        scene: "Really?",
-        who: "Rose",
-        nameCol: "pink",
-        voice: voiceHigh2,
-        text: "Really, are you sure?",
-        nextPage: 17,
-        leftPic: johnHappyPic,
-        rightPic: roseHappyPic,
-
-        leftPicLeave: false,
-        rightPicLeave: false,
-
-        choices: null
-    },
-    {
-        scene: "Really?",
-        who: "Rose",
-        nameCol: "pink",
-        voice: voiceHigh2,
-        text: "",
-        nextPage: null,
-        leftPic: johnHappyPic,
-        rightPic: roseHappyPic,
-
-        leftPicLeave: false,
-        rightPicLeave: false,
-
-        choices: [["no", "Bad end"], ["actually, yes", "Talk more"]]
-    },
-    {
-        scene: "Bad end",
-        who: "Rose",
-        nameCol: "pink",
-        voice: voiceHigh2,
-        text: "Yeah, I feel you.",
-        nextPage: 19,
-        leftPic: johnHappyPic,
-        rightPic: roseHappyPic,
-
-        leftPicLeave: false,
-        rightPicLeave: false,
-
-        choices: null
-    },
-    {
-        scene: "Bad end",
-        who: "Rose",
-        nameCol: "pink",
-        voice: voiceHigh2,
-        text: "Welp, gotta go!",
-        nextPage: 20,
         leftPic: johnHappyPic,
         rightPic: roseAnnoyedPic,
 
         leftPicLeave: false,
         rightPicLeave: false,
 
-        choices: null
+        choices: null,
+
+        position: {x: 504, y: 70}
     },
     {
-        scene: "Tortle end",
-        who: "Rose",
-        nameCol: "pink",
-        voice: voiceHigh2,
-        text: "JONATHAN IS THAT YOU?!",
-        nextPage: 21,
-        leftPic: johnHappyPic,
-        rightPic: roseHappyPic,
+        scene: "sixteenthPage",
+        who: "John",
+        nameCol: "lightBlue",
+        voice: voiceLow1,
+        text: "At Julie's!?! I thought you hated augmentation?",
+        nextPage: 16,
+        leftPic: johnMadPic,
+        rightPic: roseAnnoyedPic,
 
         leftPicLeave: false,
         rightPicLeave: false,
 
-        choices: null
+        choices: null,
+
+        position: {x: 516, y: 346}
     },
     {
-        scene: "Tortle end",
+        scene: "seventeenthPage",
         who: "Rose",
         nameCol: "pink",
         voice: voiceHigh2,
-        text: "BOI!!!",
-        nextPage: 22,
-        leftPic: johnHappyPic,
-        rightPic: roseHappyPic,
+        text: "Well...I...I have to go",
+        nextPage: null,
+        leftPic: johnMadPic,
+        rightPic: roseAnnoyedPic,
 
         leftPicLeave: false,
         rightPicLeave: false,
 
-        choices: null
+        choices: null,
+
+        position: {x: 517, y: 637}
     },
-    {
-        scene: "Scene I inserted",
-        who: "Rose",
-        nameCol: "pink",
-        voice: voiceHigh2,
-        text: "You shouldn't just butt in like that.",
-        nextPage: 4,
-        leftPic: johnHappyPic,
-        rightPic: roseHappyPic,
-
-        leftPicLeave: false,
-        rightPicLeave: false,
-
-        choices: null
-    }
 ];
 
 let johnAndRoseConvo2 = [

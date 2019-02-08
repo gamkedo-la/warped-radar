@@ -17,8 +17,8 @@ const Menu = new (function() {
     let currentPage = 0;
     let keyRepeatWait = 0;
 
-    let textFontFace = "30px Impact";
-    let textColour = "pink" ;
+    let textFontFace = "40px Kelly Slab";
+    let textColour = "#5a8488" ;
 
     let menuList = ["Story", "Options", "Guide" , "Credits"];
     let episodeList = ["Episode 1", "Episode 2", "Episode 3", "Back"];
@@ -181,7 +181,7 @@ const Menu = new (function() {
             }
         }
             for (let i=0; i<menuPageText[currentPage].length; i++){
-                colorText(menuPageText[currentPage][i], itemsX - (currentPage == GAMEPLAY_PAGE ? 300 : 0),topItemY + rowHeight * i,textColour, textFontFace, 'left', 'top');
+                colorText(menuPageText[currentPage][i], itemsX - (currentPage == GAMEPLAY_PAGE ? 275 : 0),topItemY + rowHeight * i,textColour, textFontFace, 'left', 'top');
                 }
                 if(currentPage != GAMEPLAY_PAGE){
                  //Draw cursor after background image

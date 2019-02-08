@@ -382,7 +382,7 @@ function drawTextNearObjOrNPC() {
 
 function pauseRadar(){
     if (!paused){
-        //Menu.draw();
+        //colorText(PAUSED', 20, 30, "white", "20px Arial", "left", 1);
         // if (!useRequestAnimationFrame) {
         //     clearInterval(interval);
         // }

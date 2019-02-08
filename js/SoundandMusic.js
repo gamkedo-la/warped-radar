@@ -195,7 +195,8 @@ function getRandomVolume(){
 
 function toggleMute() {
 	isMuted = !isMuted;
-	currentBackgroundMusic.setVolume(musicVolume);
+	warpedRadarBackgroundMusic.setVolume(musicVolume);
+	console.log('isMusicMuted?' + isMuted);
 }
 
 function setEffectsVolume(amount)

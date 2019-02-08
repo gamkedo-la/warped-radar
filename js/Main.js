@@ -1,3 +1,7 @@
+var stats = new Stats();
+stats.showPanel( 1 ); // 0: fps, 1: ms, 2: mb, 3+: custom
+document.body.appendChild( stats.dom );
+
 const CANVAS_WIDTH = 800;
 const CANVAS_HEIGHT = 600;
 const PIXELS_PER_SCALE = 2.0;
@@ -83,11 +87,11 @@ function start () {
     warpedRadarBackgroundMusic.loopSong("audio/MainMenu");
     warpedRadarBackgroundMusic.setVolume(0.35);//trying to balance background music with dialogue volume
 
-    if (useRequestAnimationFrame) {
-        gameLoop();
-    } else {
-        interval = setInterval(gameLoop, 1000/framesPerSecond);
-    }
+    // if (useRequestAnimationFrame) {
+    gameLoop();
+    // } else {
+    //     interval = setInterval(gameLoop, 1000/framesPerSecond);
+    // }
 
 };
 
@@ -99,8 +103,10 @@ loadImages();
 // Called from start(), keeps the game loop and delta in check
 
 function gameLoop () {
+    stats.begin();
+
     let now = Date.now();
-    delta = (now - then) * deltaMultiplier;
+    delta = (now - then); // * deltaMultiplier;
 
     if (!paused) {
         update(delta / 1000);
@@ -111,9 +117,9 @@ function gameLoop () {
 
     then = now;
 
-    if (useRequestAnimationFrame) {
+        stats.end();
         requestAnimationFrame(gameLoop);
-    }
+
 }
 
 // All game logic to update every frame here
@@ -347,43 +353,43 @@ function drawTextNearObjOrNPC() {
     }
 }
 
-function fastRadar() {
-    if (useRequestAnimationFrame) {
-        if (!isFastInterval) {
-            deltaMultiplier = 2;
-            isFastInterval = true;
-            console.log("fastRadar(): Sped up!");
-        } else {
-            deltaMultiplier = 1;
-            isFastInterval = false;
-            console.log("fastRadar(): Normal speed!");
-        }
-    } else {
-        if (!isFastInterval) {
-            interval = setInterval(gameLoop, 1000/framesPerSecond);
-            isFastInterval = true;
-            console.log("fastRadar(): Sped up!");
-        } else {
-            clearInterval(interval);
-            console.log(interval);
-            isFastInterval = false;
-            console.log("fastRadar(): Normal speed!");
-        }
-        console.log(isFastInterval);
-    }
-}
+// function fastRadar() {
+//     if (useRequestAnimationFrame) {
+//         if (!isFastInterval) {
+//             deltaMultiplier = 2;
+//             isFastInterval = true;
+//             console.log("fastRadar(): Sped up!");
+//         } else {
+//             deltaMultiplier = 1;
+//             isFastInterval = false;
+//             console.log("fastRadar(): Normal speed!");
+//         }
+//     } else {
+//         if (!isFastInterval) {
+//             interval = setInterval(gameLoop, 1000/framesPerSecond);
+//             isFastInterval = true;
+//             console.log("fastRadar(): Sped up!");
+//         } else {
+//             clearInterval(interval);
+//             console.log(interval);
+//             isFastInterval = false;
+//             console.log("fastRadar(): Normal speed!");
+//         }
+//         console.log(isFastInterval);
+//     }
+// }
 
 function pauseRadar(){
     if (!paused){
         Menu.draw();
-        if (!useRequestAnimationFrame) {
-            clearInterval(interval);
-        }
+        // if (!useRequestAnimationFrame) {
+        //     clearInterval(interval);
+        // }
         paused = true;
     } else {
-        if (!useRequestAnimationFrame) {
-            interval = setInterval(gameLoop, 1000/framesPerSecond);
-        }
+        // if (!useRequestAnimationFrame) {
+        //     interval = setInterval(gameLoop, 1000/framesPerSecond);
+        // }
         paused = false;
     }
   }

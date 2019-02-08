@@ -21,7 +21,7 @@ function Cutscene() {
     this.textColour = "white";
     this.textFontFace = "25px consolas";
     this.textAlign = "left";
-    this.letterSpeed = useRequestAnimationFrame ? 0.5 : 1;
+    this.letterSpeed = 0.6;
     this.pauseBetweenPages = 2; //in seconds
 
     this.charMoveSpeed = 7;

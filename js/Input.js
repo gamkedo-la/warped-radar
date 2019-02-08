@@ -140,10 +140,11 @@ function keydownControl(evt, keydownMap) {
     } else if (keysPressed(KEY_G)) {
         toggleGrid();
     }else if (this.keysPressed(KEY_P)) {
-        pauseRadar();       
-    }else if (this.keysPressed(KEY_SHIFT, KEY_F)) {
-        fastRadar();       
-    }
+        pauseRadar();  
+    }     
+    // }else if (this.keysPressed(KEY_SHIFT, KEY_F)) {
+    //     fastRadar();       
+    // }
     if (keysPressed(KEY_SHIFT, KEY_D) && debug) {
         debug = false;
     } else if (keysPressed(KEY_SHIFT, KEY_D) && !debug) {

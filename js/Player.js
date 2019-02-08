@@ -12,7 +12,7 @@ function Player () {
     this.y = 100;
     this.w = 64;
     this.h = 67;//makes depth sorting better even though sprite is only 58 visible pixels high
-    this.walkSpeed = useRequestAnimationFrame ? 140 : 3;
+    this.walkSpeed = 100;
 
     this.currentlyFacingDir = DOWN;    
 
@@ -97,7 +97,8 @@ function Player () {
             let nextY = this.y;
 
             if (currentlyPlayingCutscene == null) {
-                moveSpeed *= useRequestAnimationFrame ? delta : 1;
+                //moveSpeed *= useRequestAnimationFrame ? delta : 1;
+                moveSpeed *= delta;
 
                 if (this.keyHeld_walkUp) {
                     nextY -= moveSpeed;

@@ -5,9 +5,9 @@ let then = Date.now();
 let delta = (Date.now() - then) * deltaMultiplier;
 let interval;
 
-let isFastInterval = false;
+//let isFastInterval = false;
 
-let useRequestAnimationFrame = false;
+//let useRequestAnimationFrame = false;
 
 let framesPerSecond = 30;
 

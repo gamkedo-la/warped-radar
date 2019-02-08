@@ -13,7 +13,7 @@ function Tileset(image, tileWidth, tileHeight) {
 
         context.drawImage(this.image, tilePosition.x, tilePosition.y, 
                                       this.tileWidth, this.tileHeight, 
-                                      drawX, drawY, drawWidth, drawHeight);
+                                      Math.floor(drawX), Math.floor(drawY), drawWidth, drawHeight);
     };
 
     this.positionForIndex = function(index) {

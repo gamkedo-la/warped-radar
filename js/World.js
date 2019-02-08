@@ -146,19 +146,18 @@ function tileTypeHasTransparency(tileToCheck) {
 }
 
 function drawLayer(layer) {
-    let drawTileX = 0;
-    let drawTileY = 0;
-    const minColSize = locationList[locationNow].columns;
-    const minRowSize = locationList[locationNow].rows;
+    let drawTileX = mainCamera.camPanX / WORLD_W; 
+    let drawTileY = mainCamera.camPanY / WORLD_H;
+    
+    const minColSize = drawTileX + 10;//locations.locationNow.columns;
+    const minRowSize = drawTileY + 8;//locations.locationNow.columns;
+
+    
+    //let startTile = rowColToArrayIndex(cameraTileOffsetX, cameraTileOffsetY);
 
     for (let eachRow = 0; eachRow < minRowSize; eachRow++) {
         for (let eachCol = 0; eachCol < minColSize; eachCol++) {
-            //do not draw if outside viewport, but still need to increment draw position
-            if(!isInViewPort(scaledCanvas, drawTileX, drawTileY)) {
-                drawTileX += WORLD_W;
-                continue;
-            }
-
+            
             let tileKindHere;
             if (eachCol < worldCols && eachRow < worldRows) {
                 let arrayIndex = rowColToArrayIndex(eachCol, eachRow);
@@ -178,13 +177,16 @@ function drawLayer(layer) {
 }
 
 function drawDepthSorted(nonTileObjs) {
-    let drawTileX = 0;
-    let drawTileY = 0;
+    let drawTileX = mainCamera.camPanX / WORLD_W; 
+    let drawTileY = mainCamera.camPanY / WORLD_H;
+    
+    const minColSize = drawTileX + 10;//locations.locationNow.columns;
+    const minRowSize = drawTileY + 8;//locations.locationNow.columns;
     const layer = locationList[locationNow].layers[Layer.Depth_Sorted];
     const heightMap = locationList[locationNow].layers[Layer.Heightmap];
     let groundValue = locationList[locationNow].groundValue;//may not be zero because Tiled...
-    const minColSize = locationList[locationNow].columns;
-    const minRowSize = locationList[locationNow].rows;
+    // const minColSize = locationList[locationNow].columns;
+    // const minRowSize = locationList[locationNow].rows;
 
     //objects closer to the top of the screen have
     //index values closer to zero 
@@ -226,9 +228,9 @@ function drawDepthSorted(nonTileObjs) {
                         }//end of if sortedObjects[i] != null
                     }//end of for loop through sortedObjectsToDraw
 
-                    if(isInViewPort(scaledCanvas, drawTileX, drawTileY)) {
+                    //if(isInViewPort(scaledCanvas, drawTileX, drawTileY)) {
                         tileSet.drawTileAt(scaledContext, tileKindHere, drawTileX, drawTileY);
-                    }
+                   // }
 
                 }//end of if-else heightMap data is > 0
             }//end if-else for not drawing TILE.WALL etc
@@ -237,10 +239,10 @@ function drawDepthSorted(nonTileObjs) {
                 const aLaterTile = tilesToDrawLater[j];
                 if(aLaterTile != null) {
                     if(aLaterTile.y + WORLD_H * aLaterTile.height < drawTileY) {
-                        if(isInViewPort(scaledCanvas, aLaterTile.x, aLaterTile.y)) {
+                        //if(isInViewPort(scaledCanvas, aLaterTile.x, aLaterTile.y)) {
                             tileSet.drawTileAt(scaledContext, aLaterTile.kind, aLaterTile.x, aLaterTile.y);
                             tilesToDrawLater[j] = null;
-                        }
+                        //}
                     }//end of if effective y pos < bottom of current row
                 }//end of if aLaterTile != null
             }//end of for loop through the tilesToDrawLater
@@ -256,9 +258,9 @@ function drawDepthSorted(nonTileObjs) {
     for(let i = 0; i < tilesToDrawLater.length; i++) {
         if(tilesToDrawLater[i] != null) {
             const aLaterTile = tilesToDrawLater[i];
-            if(isInViewPort(scaledCanvas, aLaterTile.x, aLaterTile.y)) {
+            //if(isInViewPort(scaledCanvas, aLaterTile.x, aLaterTile.y)) {
                 tileSet.drawTileAt(scaledContext, aLaterTile.kind, aLaterTile.x, aLaterTile.y);
-            }
+           //}
         }
     }
 }//End of drawDepthSorted function
@@ -301,18 +303,21 @@ function shouldDrawTile(tileKind) {
 
 function drawWorld(nonTileObjs) {
     drawLayer(locationList[locationNow].layers[Layer.Ground]);
+    //drawLayer(locationList[locationNow].layers[Layer.Depth_Sorted]);
+    //findAndSortObjectsToDraw(nonTileObjs).forEach(o=>{o.draw()});
     drawTraffic(true);
     drawDepthSorted(nonTileObjs);
     drawTraffic(false);
 } //end of draw world
 
 function isInViewPort(aCanvas, x, y) {
-    if(x > mainCamera.camPanX + aCanvas.width) {return false;}
-    if(x < mainCamera.camPanX - WORLD_W) {return false;}
-    if(y > mainCamera.camPanY + aCanvas.height) {return false;}
-    if(y < mainCamera.camPanY - WORLD_H) {return false;}
-
-    return true;
+    return (
+        x < mainCamera.camPanX + aCanvas.width &&
+        x > mainCamera.camPanX - WORLD_W &&
+        y < mainCamera.camPanY + aCanvas.height &&
+        y > mainCamera.camPanY - WORLD_H
+    )
+    
 }
 
 function returnTileTypeAtColRow(col, row) {

@@ -10,7 +10,7 @@ function Camera () {
     this.instantFollow = function (target) {
         this.camPanX = target.x - scaledCanvas.width / 2;
         this.camPanY = target.y - scaledCanvas.height / 2;
-    };
+     };
 
     this.follow = function (target, targetDistBeforePan = this.targetDistFromCenterBeforePan, speed = this.speed, editorSpeed = this.editorSpeed) {
         let cameraFocusCenterX = this.camPanX + scaledCanvas.width / 2;

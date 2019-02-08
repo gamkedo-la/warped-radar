@@ -11,7 +11,7 @@ let canvas, canvasContext;
 
 let framesFromGameStart = 0;
 
-let debug = false;
+let debug = true;
 let paused = false;
 let transitioning = false;
 

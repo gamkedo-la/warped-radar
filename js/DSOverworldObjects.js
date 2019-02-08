@@ -237,7 +237,7 @@ function initializeRose(arrayIndex) {
     //End Temporary
     
     rose.chatEvents = function (createElseIncrement) {
-        this.text(createElseIncrement, [JohnAndRose_1, johnAndRoseConvo2, johnAndRoseConvo3]);
+        this.text(createElseIncrement, [JohnAndRose_1, roseInquiry, johnAndRoseConvo3]);
     }
 
     rose.update = function(delta) {

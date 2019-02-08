@@ -36,8 +36,8 @@ const Menu = new (function() {
     this.menuMouse = function(){
      for (let i = 0; i < menuPageText[currentPage].length; i++) {
         if(mouseX > itemsX && mouseX < itemsX + itemsWidth
-            && mouseY > topItemY + (i * rowHeight) && mouseY < topItemY + (i+1) * rowHeight) {
-            this.cursor1 = i;
+            && mouseY > topItemY + (i * rowHeight - 40) && mouseY < topItemY + (i+1) * rowHeight) {
+            cursor1 = i;
         }
       }
     }

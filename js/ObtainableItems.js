@@ -14,9 +14,9 @@ function initializeObtainableItems() {
         for(let i = 0; i < arrayOfObtainableItems.length; i++) {
           if(tileKindHere == arrayOfObtainableItems[i].tileType) {
             arrayOfObtainableItems[i].drawTileX = tileX;
-            arrayOfObtainableItems[i].drawTileY = tileY;
+            arrayOfObtainableItems[i].drawTileY = tileY + tileY/WORLD_H;
             arrayOfObtainableItems[i].x = tileX;
-            arrayOfObtainableItems[i].y = tileY;
+            arrayOfObtainableItems[i].y = tileY + tileY/WORLD_H;
             arrayOfObtainableItems[i].leftEdge = arrayOfObtainableItems[i].drawTileX;
             arrayOfObtainableItems[i].rightEdge = arrayOfObtainableItems[i].drawTileX + WORLD_W;
             arrayOfObtainableItems[i].topEdge = arrayOfObtainableItems[i].drawTileY;
@@ -59,7 +59,7 @@ function ObtainableItem(drawTileX,drawTileY, tileWidth,tileHeight, name, descrip
 
   this.draw = function() {
     if(!this.obtained) {
-      tileSet.drawTileAt(scaledContext, this.tileType, this.drawTileX, this.drawTileY);
+      tileSet.drawTileAt(scaledContext, this.tileType, this.drawTileX, this.drawTileY);//+ this.drawTileY/WORLD_H is a fudge factor to place obtainable items more accurately
     }
   }
 

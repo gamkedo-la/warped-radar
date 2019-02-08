@@ -224,8 +224,9 @@ function initializeRose(arrayIndex) {
     rose.dialogue = new Dialogue();
     rose.colour = "#8789C0";
     rose.states.idle = false;
-    rose.states.worrying = true;
+    rose.states.worrying = false;
     rose.location = Place.TheCity;
+    rose.walkingSpeed = 50;
 
     //Temporary
 
@@ -237,18 +238,34 @@ function initializeRose(arrayIndex) {
     //End Temporary
     
     rose.chatEvents = function (createElseIncrement) {
-        this.text(createElseIncrement, [JohnAndRose_1, roseInquiry, johnAndRoseConvo3]);
+        this.text(createElseIncrement, [JohnAndRose_1, roseReallyNeedToGo, roseInquiry]);
     }
 
     rose.update = function(delta) {
         if(!isInViewPort(scaledCanvas, this.x, this.y)) {return;} //don't update while off screen
         if(!eventManager.canShowNPC(this)) {return;} //don't update if can't be shown
 
-        if(!GameEvent.FoundDave) {
-            rose.states.walking = false;
+        if(rose.dialogue.isShowing) {
             rose.states.idle = true;
+            rose.states.walking = false;
+        } else if(!GameEvent.FoundDave) {
+            rose.facing.west = true;
             rose.facing.east = false;
+            rose.facing.south = false;
+
+            rose.x -= rose.walkingSpeed * delta;
+            rose.setTileCollider(rose.x, rose.y);
+
+            rose.states.walking = true;
+            rose.states.idle = false;
+        } else {
             rose.facing.south = true;
+            rose.facing.east = false;
+            rose.facing.west = false;
+
+            rose.states.worrying = true;
+            rose.states.walking = false;
+            rose.states.idle = false;
         }
 
         return;

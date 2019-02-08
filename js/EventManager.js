@@ -13,6 +13,7 @@ const GameEvent = {
     FoundDave:false,
     Talk_Rose_0:false,
     Talk_Rose_1:false,
+    Talk_Rose_2:false,
     Talk_Julie_0:false,
     Talk_Agent_1:false,
     Talk_Cop1_1:false,
@@ -101,9 +102,15 @@ function EventManager() {
         switch(npc.name) {
             case "Rose":
                 if((locationNow == Place.TheCity) && (!GameEvent.FoundDave)) {
-                    result = 0;
+                    if(GameEvent.Talk_Rose_0) {
+                        if(!GameEvent.Talk_Rose_1) {//she won't talk to you a third time until you find Uncle Dave
+                            result = 1;
+                        }
+                    } else {
+                        result = 0;
+                    }
                 } else if((locationNow == Place.TheCity) && (GameEvent.FoundDave)) {
-                    result = 1;
+                    result = 2;
                 }
             break;
             case "Uncle Dave":

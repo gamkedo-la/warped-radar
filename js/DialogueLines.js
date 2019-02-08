@@ -86,6 +86,43 @@ let JohnAndRose_1 = [
     },
 ];
 
+let roseReallyNeedToGo = [
+    {
+        scene: "firstPage",
+        who: "John",
+        nameCol: "lightBlue",
+        voice: voiceLow1,
+        text: "Wait! Where are you going?",
+        nextPage: 1,
+        leftPic: johnMadPic,
+        rightPic: roseHappyPic,
+
+        leftPicLeave: false,
+        rightPicLeave: false,
+
+        choices: null,
+
+        position: {x: 513, y: -3020}
+    },
+    {
+        scene: "secondPage",
+        who: "Rose",
+        nameCol: "pink",
+        voice: voiceHigh2,
+        text: "Just running some errands.  I really need to go.",
+        nextPage: null,
+        leftPic: johnMadPic,
+        rightPic: roseAnnoyedPic,
+
+        leftPicLeave: false,
+        rightPicLeave: false,
+
+        choices: null,
+
+        position: {x: 515, y: -2750}
+    }
+];
+
 let roseInquiry = [
     {
         scene: "firstPage",

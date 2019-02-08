@@ -23,9 +23,9 @@ const Menu = new (function() {
     let menuList = ["Story", "Continue", "Options", "Guide" , "Credits"];
     let episodeList = ["Episode 1", "Episode 2", "Episode 3", "Back"];
     let continueList = ["Remember", "Episodes", "Back"];
-    let optionsList = ["Volume", "Controls", "Back"];
+    let optionsList = ["Mute", "Controls", "Back"];
     let guideList= ["Gameplay","Gamepad", "Back"];
-    let pausedList =['resume', 'sound' , 'record'];
+    let pausedList =['resume', 'mute' , 'record'];
     let creditsList =["Kise: Project lead", "BackSpace"];
     let gameplayList = ["      Move John", "W/Up Arrow: up", "D/Right Arrow: right", "S/Down Arrow: down", "A/Left Arrow: left", "     Game Actions", "P: pause/resume", "Enter/Space: interact", "Z: inventory"];
 
@@ -110,8 +110,8 @@ const Menu = new (function() {
                 currentPage  = CREDITS_PAGE;
                 break;
 
-            case "Volume":
-                console.log("TODO implement volume changer");
+            case "Mute":
+                toggleMute();
                 break;
             case "Controls":
                 console.log("TODO Added Controls changer");
@@ -130,8 +130,8 @@ const Menu = new (function() {
             case 'resume':
                  paused = false;
                 break;
-            case 'sound':
-            //muteSFXandBackground();
+            case 'mute':
+            toggleMute();
                 break;
             case 'record':
             console.log('savegame');

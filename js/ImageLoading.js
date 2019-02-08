@@ -21,6 +21,8 @@ let roseHappyPic = document.createElement("img");
 let roseAnnoyedPic = document.createElement("img");
 let julieWorriedPic = document.createElement("img");
 let npc_agentPic = document.createElement("img");
+let placeholderNormalPic = document.createElement("img");
+let placeholderAngryPic = document.createElement("img");
 
 let johnMouthAnimatedSheet = document.createElement("img");
 let johnMouthAnimationAngrySheet = document.createElement("img");
@@ -92,6 +94,8 @@ function loadImages() {
         {varName: roseAnnoyedPic, theFile: "rose2.png"},
         {varName: julieWorriedPic, theFile: "julie1.png"},
         {varName: npc_agentPic, theFile: "npc_agent.png"},
+        {varName: placeholderNormalPic, theFile: "PlaceholderPortrait.png"},
+        {varName: placeholderAngryPic, theFile: "PlaceholderPortrait.png"},
 
         //PORTRAIT ANIMS
         {varName: johnMouthAnimatedSheet, theFile: "johnmouthmove.png"},

@@ -15,6 +15,7 @@ const GameEvent = {
     Talk_Rose_1:false,
     Talk_Rose_2:false,
     Talk_Julie_0:false,
+    Talk_Cat_1:false,
     Talk_Agent_1:false,
     Talk_Cop1_1:false,
 }
@@ -85,11 +86,18 @@ function EventManager() {
             case "Julie":
                 result = true;
             break;
+            case "Cat":
+                if(locationNow == Place.JuliesStore) {
+                    result = true;
+                }
+            break;
             case "Agent":
                 result = true;
             break;
             case "Cop_1":
-                result = true;
+                if(locationNow == Place.TheCity) {
+                    result = true;
+                }
             break;
         }
 
@@ -129,17 +137,10 @@ function EventManager() {
                     result = 0;
                 }
             break;
+            case "Cat":
+                result = 0;
+            break;
             case "Agent":
-/*
-                if(locationNow == Place.TheCity) {
-                    if((npc.x == 100) && (npc.y == 150)) {
-                        result = 0;
-                    } else if ((npc.x == 200) && (npc.y == 220)) {
-                        result = 1;
-                    }
-                }
-
-*/
                 result = 0;
             break;
             case "Cop_1":
@@ -166,6 +167,9 @@ function EventManager() {
                 if(npc.messageCounter == 0) {
                     GameEvent.Talk_Julie_0 = true;
                 }
+            break;
+            case "Cat":
+                GameEvent.Talk_Cat_1 = true;
             break;
             case "Agent":
                 GameEvent.Talk_Agent_1 = true;

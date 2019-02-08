@@ -43,6 +43,7 @@ const TILE = {
     FAMILY_PHOTO:149,
 
     COP:173,
+    CAT:174,
 
     BLANK:576
 };

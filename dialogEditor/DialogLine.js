@@ -890,6 +890,8 @@ function DialogLine(position) {
 				return "voiceHigh2";
 			case Speaker.NPCAgent:
 				return "voiceHigh2";
+			case Speaker.Cat:
+				return "voiceLow1";
 		}
 	}
 	
@@ -909,6 +911,9 @@ function DialogLine(position) {
 			case npcAgentFlatPic:
 			case npcAgentAngryPic:
 				return "npcAgentFlatPic";
+			case placeholderNormalPic:
+			case placeholderAngryPic:
+				return "placeholderAngryPic"
 		}
 	};
 
@@ -922,6 +927,8 @@ function DialogLine(position) {
 				return "#b12f0c";
 			case Speaker.NPCAgent:
 				return "#223344";
+			case Speaker.Cat:
+				return "yellow";
 		}
 	}
 }

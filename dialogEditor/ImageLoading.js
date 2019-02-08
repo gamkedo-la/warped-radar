@@ -12,6 +12,8 @@ const julieHappyPic = document.createElement("img");
 const julieWorriedPic = document.createElement("img");
 const npcAgentFlatPic = document.createElement("img");
 const npcAgentAngryPic = document.createElement("img");
+const placeholderNormalPic = document.createElement("img");
+const placeholderAngryPic = document.createElement("img");
 
 function imageForString(string) {
 	switch(string) {
@@ -31,6 +33,10 @@ function imageForString(string) {
 			return npcAgentFlatPic;
 		case "npcAgentAngryPic":
 			return npcAgentAngryPic;
+		case "PlaceholderNormalPic":
+			return placeholderNormalPic;
+		case "PlaceholderAngryPic":
+			return placeholderAngryPic;
 	}
 }
 
@@ -60,7 +66,9 @@ function loadImages() {
 		{imgName: julieHappyPic, theFile: "julie1.png", speaker:Speaker.Julie}, //placeholder
 		{imgName: julieWorriedPic, theFile: "julie1.png", speaker:Speaker.Julie},
 		{imgName: npcAgentFlatPic, theFile: "npc_agent.png", speaker:Speaker.NPCAgent},
-		{imgName: npcAgentAngryPic, theFile: "npc_agent2.png", speaker:Speaker.NPCAgent},//placeholder
+		{imgName: npcAgentAngryPic, theFile: "npc_agent.png", speaker:Speaker.NPCAgent},//placeholder
+		{imgName: placeholderNormalPic, theFile: "PlaceholderPortrait.png", speaker:Speaker.Cat},//placeholder
+		{imgName: placeholderAngryPic, theFile: "PlaceholderPortrait.png", speaker:Speaker.Cat},//placeholder
 	];
 
 	picsToLoad = imageList.length;

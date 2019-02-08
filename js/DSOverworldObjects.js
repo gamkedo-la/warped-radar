@@ -193,6 +193,11 @@ function initializeOverworldObjects() {
                     allNPCs.push(agent);
                 }
             break;
+            case TILE.CAT:
+                const cat = initializeCat(i);
+                if(eventManager.canShowNPC(cat)) {
+                    allNPCs.push(cat);
+                }
             case TILE.COP:
                 const cop1 = initializeCop1(i);
                 if(eventManager.canShowNPC(cop1)) {
@@ -380,6 +385,36 @@ function initializeJulie(arrayIndex) {
     }
 
     return julie;
+}
+
+function initializeCat(arrayIndex) {
+    const catAnimations = {
+        idle:catManIdle,
+        worry:null,
+        north:null,
+        south:null,
+        east:null,
+        west:null,
+        northEast:null,
+        northWest:null,
+        southEast:null,
+        southWest:null
+    }
+
+    const columns = locationList[locationNow].columns;
+    const xPos = (arrayIndex % columns) * WORLD_W;
+    const yPos = Math.floor(arrayIndex / columns) * WORLD_H;
+    let catMan = new OverworldObject("Cat", xPos, yPos, 26, 62, catAnimations);
+    catMan.dialogue = new Dialogue();
+    catMan.colour = "yellow";
+    catMan.location = Place.JuliesStore;
+    
+    catMan.chatEvents = function (createElseIncrement) {
+        this.text(createElseIncrement, [julieCatArgument]);//need to replace these conversations
+    
+    }
+
+    return catMan;
 }
 
 function initializeDave(arrayIndex) {

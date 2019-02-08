@@ -127,6 +127,14 @@ function makeAnimatedSprites() {
 		framesUntilNext: frameDelayWalk,
 	});
 
+	//Cat Man
+	catManIdle = new AnimatedSpriteClass({
+		name: "catManAnimationIdle",
+		spriteSheet: catManAnimationIdle,
+		animationColFrames: 1,
+		framesUntilNext: frameDelayWalk,
+	});
+
 	//Dave
 	daveIdle = new AnimatedSpriteClass({
 		name: "daveAnimationIdle",

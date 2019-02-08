@@ -933,3 +933,108 @@ let cop1Convo = [
         position: {x: 492.5, y: 140}
     }
 ];
+
+let julieCatArgument = [
+    {
+        scene: "page1",
+        who: "Cat",
+        nameCol: "yellow",
+        voice: voiceLow1,
+        text: "Hi, I'm Felen.  Julie hired me to run her shop.",
+        nextPage: 1,
+        leftPic: johnHappyPic,
+        rightPic: placeholderAngryPic,
+
+        leftPicLeave: false,
+        rightPicLeave: false,
+
+        choices: null,
+
+        position: {x: 452, y: -535}
+    },
+    {
+        scene: "page2",
+        who: "Julie",
+        nameCol: "#b12f0c",
+        voice: voiceHigh2,
+        text: "I HIRED you to watch the shop at night! Where were you last night?",
+        nextPage: 2,
+        leftPic: johnHappyPic,
+        rightPic: julieWorriedPic,
+
+        leftPicLeave: false,
+        rightPicLeave: false,
+
+        choices: null,
+
+        position: {x: 452, y: -245}
+    },
+    {
+        scene: "page3",
+        who: "Cat",
+        nameCol: "yellow",
+        voice: voiceLow1,
+        text: "I had some business to take care of.",
+        nextPage: 3,
+        leftPic: johnHappyPic,
+        rightPic: placeholderAngryPic,
+
+        leftPicLeave: false,
+        rightPicLeave: false,
+
+        choices: null,
+
+        position: {x: 451, y: 44}
+    },
+    {
+        scene: "page4",
+        who: "Julie",
+        nameCol: "#b12f0c",
+        voice: voiceHigh2,
+        text: "Your business was to watch the shop.",
+        nextPage: 4,
+        leftPic: johnHappyPic,
+        rightPic: julieWorriedPic,
+
+        leftPicLeave: false,
+        rightPicLeave: false,
+
+        choices: null,
+
+        position: {x: 452, y: 335}
+    },
+    {
+        scene: "page5",
+        who: "Cat",
+        nameCol: "yellow",
+        voice: voiceLow1,
+        text: "Yeah? Well, where were YOU last night? Huh?",
+        nextPage: 5,
+        leftPic: johnHappyPic,
+        rightPic: placeholderAngryPic,
+
+        leftPicLeave: false,
+        rightPicLeave: false,
+
+        choices: null,
+
+        position: {x: 452, y: 625}
+    },
+    {
+        scene: "page6",
+        who: "Julie",
+        nameCol: "#b12f0c",
+        voice: voiceHigh2,
+        text: "None of your business. Get back to work!",
+        nextPage: null,
+        leftPic: johnHappyPic,
+        rightPic: julieWorriedPic,
+
+        leftPicLeave: false,
+        rightPicLeave: false,
+
+        choices: null,
+
+        position: {x: 451, y: 915}
+    },
+];

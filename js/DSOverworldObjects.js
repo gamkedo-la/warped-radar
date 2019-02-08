@@ -223,20 +223,18 @@ function initializeRose(arrayIndex) {
     let rose = new OverworldObject("Rose", xPos, yPos, 26, 62, roseAnimations);
     rose.dialogue = new Dialogue();
     rose.colour = "#8789C0";
-    rose.states.idle = false;
-    rose.states.worrying = false;
     rose.location = Place.TheCity;
-    rose.walkingSpeed = 50;
-
-    //Temporary
+    rose.walkingSpeed = 90;
 
     rose.states.walking = true;
     rose.states.idle = false;
+    rose.states.worrying = false;
+
     rose.facing.east = true;
     rose.facing.south = false;
-
-    //End Temporary
     
+    if(rose.y < WORLD_H * 26.5) {rose.y = WORLD_H * 26.5;}
+
     rose.chatEvents = function (createElseIncrement) {
         this.text(createElseIncrement, [JohnAndRose_1, roseReallyNeedToGo, roseInquiry]);
     }
@@ -249,15 +247,95 @@ function initializeRose(arrayIndex) {
             rose.states.idle = true;
             rose.states.walking = false;
         } else if(!GameEvent.FoundDave) {
-            rose.facing.west = true;
-            rose.facing.east = false;
-            rose.facing.south = false;
+            if(rose.facing.east) {
+                if(rose.x < WORLD_W * 45.5) {//this is where the sidewalk turns
+                    rose.x += rose.walkingSpeed * delta;
+                    rose.setTileCollider(rose.x, rose.y);
+        
+                    rose.states.walking = true;
+                    rose.states.idle = false;
 
-            rose.x -= rose.walkingSpeed * delta;
-            rose.setTileCollider(rose.x, rose.y);
+                    rose.states.worrying = false;
+                } else {
+                    rose.facing.south = true;
+                    rose.facing.east = false;
+                    rose.facing.west = false;
+                    rose.facing.north = false;
+        
+                    rose.y += rose.walkingSpeed * delta;
+                    rose.setTileCollider(rose.x, rose.y);
+        
+                    rose.states.walking = true;
+                    rose.states.idle = false;
+                    rose.states.worrying = false;
+                }
+            } else if(rose.facing.south) {
+                if(rose.y < WORLD_H * 55.0) {//this is where the sidewalk turns
+                    rose.y += rose.walkingSpeed * delta;
+                    rose.setTileCollider(rose.x, rose.y);
+        
+                    rose.states.walking = true;
+                    rose.states.idle = false;
 
-            rose.states.walking = true;
-            rose.states.idle = false;
+                    rose.states.worrying = false;
+                } else {
+                    rose.facing.west = true;
+                    rose.facing.south = false;
+                    rose.facing.east = false;
+                    rose.facing.north = false;
+        
+                    rose.x -= rose.walkingSpeed * delta;
+                    rose.setTileCollider(rose.x, rose.y);
+        
+                    rose.states.walking = true;
+                    rose.states.idle = false;
+                    rose.states.worrying = false;
+                }
+            } else if(rose.facing.west) {
+                if(rose.x > WORLD_W * 19.5) {//this is where the sidewalk turns
+                    rose.x -= rose.walkingSpeed * delta;
+                    rose.setTileCollider(rose.x, rose.y);
+        
+                    rose.states.walking = true;
+                    rose.states.idle = false;
+
+                    rose.states.worrying = false;
+                } else {
+                    rose.facing.north = true;
+                    rose.facing.west = false;
+                    rose.facing.south = false;
+                    rose.facing.east = false;
+        
+                    rose.y -= rose.walkingSpeed * delta;
+                    rose.setTileCollider(rose.x, rose.y);
+        
+                    rose.states.walking = true;
+                    rose.states.idle = false;
+                    rose.states.worrying = false;
+                }
+            } else if(rose.facing.north) {
+                if(rose.y > WORLD_H * 26.5) {//this is where the sidewalk turns
+                    rose.y -= rose.walkingSpeed * delta;
+                    rose.setTileCollider(rose.x, rose.y);
+        
+                    rose.states.walking = true;
+                    rose.states.idle = false;
+
+                    rose.states.worrying = false;
+                } else {
+                    rose.facing.east = true;
+                    rose.facing.north = false;
+                    rose.facing.west = false;
+                    rose.facing.south = false;
+        
+                    rose.x += rose.walkingSpeed * delta;
+                    rose.setTileCollider(rose.x, rose.y);
+        
+                    rose.states.walking = true;
+                    rose.states.idle = false;
+                    rose.states.worrying = false;
+                }
+            }
         } else {
             rose.facing.south = true;
             rose.facing.east = false;

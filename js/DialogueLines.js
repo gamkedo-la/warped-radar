@@ -56,7 +56,7 @@ let JohnAndRose_1 = [
         nameCol: "pink",
         voice: voiceHigh2,
         text: "Yes, I'm fine.  I need to go now.",
-        nextPage: 4,
+        nextPage: null,
         leftPic: johnMadPic,
         rightPic: roseAnnoyedPic,
 

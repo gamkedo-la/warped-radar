@@ -308,6 +308,9 @@ function initializeDave(arrayIndex) {
     dave.dialogue = new Dialogue();
     dave.colour = "blue";
     dave.location = Place.DavesHouse;
+
+    //adjust position since Davy is lying down vice standing/walking
+    dave.setTileCollider(dave.tileCollider.x + 15, dave.tileCollider.y - 50);
     
     dave.chatEvents = function (createElseIncrement) {
         this.text(createElseIncrement, [UncleDaveDiscovery]);

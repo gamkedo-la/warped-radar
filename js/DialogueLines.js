@@ -905,7 +905,7 @@ let cop1Convo = [
         voice: voiceLow1,
         text: "I'm a Cop, hear me roar.",
         nextPage: 1,
-        leftPic: npc_agentPic,
+        leftPic: placeholderAngryPic,
         rightPic: null,
 
         leftPicLeave: false,
@@ -922,7 +922,7 @@ let cop1Convo = [
         voice: voiceLow1,
         text: "That's going to be an expensive mistake.",
         nextPage: 2,
-        leftPic: npc_agentPic,
+        leftPic: placeholderAngryPic,
         rightPic: null,
 
         leftPicLeave: false,

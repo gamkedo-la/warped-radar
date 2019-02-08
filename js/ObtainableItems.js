@@ -35,7 +35,7 @@ function initializeObtainableItems() {
   }
 }
 
-function ObtainableItem(drawTileX,drawTileY, tileWidth,tileHeight, name, description, image, tileType, location) {
+function ObtainableItem(drawTileX,drawTileY, tileWidth,tileHeight, name, description, image, tileType, location, actions = null) {
   this.drawTileX = drawTileX;
   this.drawTileY = drawTileY;
   this.tileWidth = tileWidth;
@@ -62,6 +62,10 @@ function ObtainableItem(drawTileX,drawTileY, tileWidth,tileHeight, name, descrip
       tileSet.drawTileAt(scaledContext, this.tileType, this.drawTileX, this.drawTileY);
     }
   }
+
+  if(actions != null) {
+    this.actions = actions;
+  }
 }
 
 let brokenSkateBoard = new ObtainableItem(undefined,undefined, WORLD_W,WORLD_H, "brokenSkateBoard", "Broken Skateboard", null, TILE.BROKEN_SKATEBOARD, locationNow);
@@ -71,7 +75,7 @@ let hoodie = new ObtainableItem(undefined,undefined, WORLD_W,WORLD_H, "hoodie", 
 let medicalNotebook = new ObtainableItem(undefined,undefined, WORLD_W,WORLD_H, "medicalNotebook", "Medical Notebook", null, TILE.MEDICAL_NOTEBOOK, locationNow);
 let sealedTube = new ObtainableItem(undefined,undefined, WORLD_W,WORLD_H, "sealedTube", "Sealed Tube", null, TILE.SEALED_TUBE, locationNow);
 let thumbDrive = new ObtainableItem(undefined,undefined, WORLD_W,WORLD_H, "thumbDrive", "Thumb Drive", null, TILE.THUMB_DRIVE, locationNow);
-let trainTicket = new ObtainableItem(undefined,undefined, WORLD_W,WORLD_H, "trainTicket", "Train Ticket", null, TILE.TRAIN_TICKET, locationNow);
+let trainTicket = new ObtainableItem(undefined,undefined, WORLD_W,WORLD_H, "trainTicket", "Train Ticket", null, TILE.TRAIN_TICKET, locationNow, [["Read", "2200 train to Ampere for last night"], ["Inspect", "There's an odd hair on it"]]);
 
 let arrayOfObtainableItems = [brokenSkateBoard, burnerPhone, crowbar, hoodie, medicalNotebook, sealedTube, thumbDrive, trainTicket];
 
@@ -115,7 +119,8 @@ function obtainItemIfApplicable() {
         {
           name: arrayOfObtainableItems[i].name,
           description: arrayOfObtainableItems[i].description,
-          image: arrayOfObtainableItems[i].tileType
+          image: arrayOfObtainableItems[i].tileType,
+          actions: arrayOfObtainableItems[i].actions
         }
       )//end of push item to inventory.items
     }//end of if itemIsObtainable

@@ -903,7 +903,7 @@ let cop1Convo = [
         who: "Cop",
         nameCol: "darkBlue",
         voice: voiceLow1,
-        text: "I'm a Cop, hear me roar.",
+        text: "I'm Lieutenant Dan.",
         nextPage: 1,
         leftPic: placeholderAngryPic,
         rightPic: null,
@@ -920,7 +920,7 @@ let cop1Convo = [
         who: "Cop",
         nameCol: "darkBlue",
         voice: voiceLow1,
-        text: "That's going to be an expensive mistake.",
+        text: "I'm trying to find out who is responsible.",
         nextPage: 2,
         leftPic: placeholderAngryPic,
         rightPic: null,
@@ -1036,5 +1036,331 @@ let julieCatArgument = [
         choices: null,
 
         position: {x: 451, y: 915}
+    },
+];
+
+let accusation = [
+    {
+        scene: "accusation1",
+        who: "John",
+        nameCol: "lightBlue",
+        voice: voiceLow1,
+        text: "I figured it out!",
+        nextPage: 1,
+        leftPic: johnHappyPic,
+        rightPic: placeholderAngryPic,
+
+        leftPicLeave: false,
+        rightPicLeave: false,
+
+        choices: null,
+
+        position: {x: -439, y: -560}
+    },
+    {
+        scene: "accusation2",
+        who: "NPCAgent",
+        nameCol: "#223344",
+        voice: voiceHigh2,
+        text: "Oh yeah? Who did it then?",
+        nextPage: 2,
+        leftPic: johnHappyPic,
+        rightPic: placeholderAngryPic,
+
+        leftPicLeave: false,
+        rightPicLeave: false,
+
+        choices: null,
+
+        position: {x: -439, y: -290}
+    },
+    {
+        scene: "accusation3",
+        who: "John",
+        nameCol: "lightBlue",
+        voice: voiceLow1,
+        text: "",
+        nextPage: null,
+        leftPic: johnHappyPic,
+        rightPic: placeholderAngryPic,
+
+        leftPicLeave: false,
+        rightPicLeave: false,
+
+        choices: [["Rose", "accusationRose1"], ["Julie", "accusationJulie1"], ["Felen", "accusationFelen1"], ["Agent Jen", "accusationJen1"]],
+
+        position: {x: -437, y: -18}
+    },
+    {
+        scene: "accusationRose1",
+        who: "NPCAgent",
+        nameCol: "#223344",
+        voice: voiceHigh2,
+        text: "Huh.  Got any evidence?",
+        nextPage: 4,
+        leftPic: johnHappyPic,
+        rightPic: placeholderAngryPic,
+
+        leftPicLeave: false,
+        rightPicLeave: false,
+
+        choices: null,
+
+        position: {x: -938, y: 28}
+    },
+    {
+        scene: "accusationRose2",
+        who: "John",
+        nameCol: "lightBlue",
+        voice: voiceLow1,
+        text: "",
+        nextPage: null,
+        leftPic: johnHappyPic,
+        rightPic: placeholderAngryPic,
+
+        leftPicLeave: false,
+        rightPicLeave: false,
+
+        choices: [["Medical Notebook", "accusationRoseSuccess"], ["Hoodie", "accusationRoseFail"], ["Thumb Drive", "accusationRoseFail"], ["Crowbar", "accusationRoseFail"]],
+
+        position: {x: -938, y: 298}
+    },
+    {
+        scene: "accusationRoseSuccess",
+        who: "NPCAgent",
+        nameCol: "#223344",
+        voice: voiceHigh2,
+        text: "That's amazing kid!  You're absolutely right! You should be a detective.",
+        nextPage: null,
+        leftPic: johnHappyPic,
+        rightPic: placeholderAngryPic,
+
+        leftPicLeave: false,
+        rightPicLeave: false,
+
+        choices: null,
+
+        position: {x: -1468, y: 143}
+    },
+    {
+        scene: "accusationRoseFail",
+        who: "NPCAgent",
+        nameCol: "#223344",
+        voice: voiceHigh2,
+        text: "Nice try.  I don't think that's quite right.  You might need to keep looking for more evidence.",
+        nextPage: null,
+        leftPic: johnHappyPic,
+        rightPic: placeholderAngryPic,
+
+        leftPicLeave: false,
+        rightPicLeave: false,
+
+        choices: null,
+
+        position: {x: -1466, y: 430}
+    },
+    {
+        scene: "accusationJulie1",
+        who: "NPCAgent",
+        nameCol: "#223344",
+        voice: voiceHigh2,
+        text: "Huh. Got any evidence?",
+        nextPage: 8,
+        leftPic: johnHappyPic,
+        rightPic: placeholderAngryPic,
+
+        leftPicLeave: false,
+        rightPicLeave: false,
+
+        choices: null,
+
+        position: {x: -440, y: 329}
+    },
+    {
+        scene: "accusationJulie2",
+        who: "John",
+        nameCol: "lightBlue",
+        voice: voiceLow1,
+        text: "",
+        nextPage: null,
+        leftPic: johnHappyPic,
+        rightPic: placeholderAngryPic,
+
+        leftPicLeave: false,
+        rightPicLeave: false,
+
+        choices: [["Medical Notebook", "accusationJulieFail"], ["Hoodie", "accusationJulieSuccess"], ["Thumb Drive", "accusationJulieFail"], ["Crowbar", "accusationJulieFail"]],
+
+        position: {x: -440, y: 599}
+    },
+    {
+        scene: "accusationJulieFail",
+        who: "NPCAgent",
+        nameCol: "#223344",
+        voice: voiceHigh2,
+        text: "Nice try.  I don't think that's quite right.  You might need to keep looking for more evidence.",
+        nextPage: null,
+        leftPic: johnHappyPic,
+        rightPic: placeholderAngryPic,
+
+        leftPicLeave: false,
+        rightPicLeave: false,
+
+        choices: null,
+
+        position: {x: -974, y: 667}
+    },
+    {
+        scene: "accusationJulieSuccess",
+        who: "NPCAgent",
+        nameCol: "#223344",
+        voice: voiceHigh2,
+        text: "That's amazing kid!  You're absolutely right!  You should be a detective.",
+        nextPage: null,
+        leftPic: johnHappyPic,
+        rightPic: placeholderAngryPic,
+
+        leftPicLeave: false,
+        rightPicLeave: false,
+
+        choices: null,
+
+        position: {x: -974, y: 977}
+    },
+    {
+        scene: "accusationFelen1",
+        who: "NPCAgent",
+        nameCol: "#223344",
+        voice: voiceHigh2,
+        text: "Huh.  Got any evidence?",
+        nextPage: 12,
+        leftPic: johnHappyPic,
+        rightPic: placeholderAngryPic,
+
+        leftPicLeave: false,
+        rightPicLeave: false,
+
+        choices: null,
+
+        position: {x: 58, y: -122}
+    },
+    {
+        scene: "accusationFelen2",
+        who: "John",
+        nameCol: "lightBlue",
+        voice: voiceLow1,
+        text: "",
+        nextPage: null,
+        leftPic: johnHappyPic,
+        rightPic: placeholderAngryPic,
+
+        leftPicLeave: false,
+        rightPicLeave: false,
+
+        choices: [["Medical Notebook", "accusationFelenFail"], ["Hoodie", "accusationFelenFail"], ["Thumb Drive", "accusationFelenSuccess"], ["Corwbar", "accusationFelenFail"]],
+
+        position: {x: 566, y: -173}
+    },
+    {
+        scene: "accusationFelenFail",
+        who: "NPCAgent",
+        nameCol: "#223344",
+        voice: voiceHigh2,
+        text: "Nice Try.  I don't think that's quite right.  You might need to keep looking for more evidence.",
+        nextPage: null,
+        leftPic: johnHappyPic,
+        rightPic: placeholderAngryPic,
+
+        leftPicLeave: false,
+        rightPicLeave: false,
+
+        choices: null,
+
+        position: {x: 571, y: 142}
+    },
+    {
+        scene: "accusationFelenSuccess",
+        who: "NPCAgent",
+        nameCol: "#223344",
+        voice: voiceHigh2,
+        text: "That's amazing kid!  You're absolutely right!  You should be a detective.",
+        nextPage: null,
+        leftPic: johnHappyPic,
+        rightPic: placeholderAngryPic,
+
+        leftPicLeave: false,
+        rightPicLeave: false,
+
+        choices: null,
+
+        position: {x: 977, y: 59}
+    },
+    {
+        scene: "accusationJen1",
+        who: "NPCAgent",
+        nameCol: "#223344",
+        voice: voiceHigh2,
+        text: "Huh.  Got any evidence?",
+        nextPage: 16,
+        leftPic: johnHappyPic,
+        rightPic: placeholderAngryPic,
+
+        leftPicLeave: false,
+        rightPicLeave: false,
+
+        choices: null,
+
+        position: {x: 53, y: 154}
+    },
+    {
+        scene: "accusationJen2",
+        who: "John",
+        nameCol: "lightBlue",
+        voice: voiceLow1,
+        text: "",
+        nextPage: null,
+        leftPic: johnHappyPic,
+        rightPic: placeholderAngryPic,
+
+        leftPicLeave: false,
+        rightPicLeave: false,
+
+        choices: [["Medical Notebook", "accusationJenFail"], ["Hoodie", "accusationJenFail"], ["Thumb Drive", "accusationJenFail"], ["Crowbar", "accusationJenSuccess"]],
+
+        position: {x: 53, y: 424}
+    },
+    {
+        scene: "accusationJenFail",
+        who: "NPCAgent",
+        nameCol: "#223344",
+        voice: voiceHigh2,
+        text: "Nice Try.  I don't think that's quite right.  You might need to keep looking for more evidence.",
+        nextPage: null,
+        leftPic: johnHappyPic,
+        rightPic: placeholderAngryPic,
+
+        leftPicLeave: false,
+        rightPicLeave: false,
+
+        choices: null,
+
+        position: {x: 509, y: 552}
+    },
+    {
+        scene: "accusationJenSuccess",
+        who: "NPCAgent",
+        nameCol: "#223344",
+        voice: voiceHigh2,
+        text: "That's amazing kid!  You're absolutely right!  You should be a detective.",
+        nextPage: null,
+        leftPic: johnHappyPic,
+        rightPic: placeholderAngryPic,
+
+        leftPicLeave: false,
+        rightPicLeave: false,
+
+        choices: null,
+
+        position: {x: 44, y: 799}
     },
 ];

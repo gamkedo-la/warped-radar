@@ -158,6 +158,12 @@ function Dialogue() {
             if (showingChoiceMenu && interact_key) {
                 choiceCounter = 1;
                 nextChoiceLabel = choiceList[this.page][selectedChoice][1];
+                if((nextChoiceLabel == "accusationRoseSuccess") ||
+                (nextChoiceLabel == "accusationJulieSuccess") ||
+                (nextChoiceLabel == "accusationFelenSuccess") ||
+                (nextChoiceLabel == "accusationJenSuccess")) {
+                    console.log("Yay! You figured it out and beat the game!!!");
+                }
             }
         }
     }

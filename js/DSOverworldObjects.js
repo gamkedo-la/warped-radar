@@ -503,7 +503,7 @@ function initializeCop1(arrayIndex) {
     
     cop1.chatEvents = function (createElseIncrement) {
         //Add additional conversations in this array if you want the Agent to say different things (or different Agents to say different things)
-        this.text(createElseIncrement, [cop1Convo]);
+        this.text(createElseIncrement, [accusation, cop1Convo]);
     }
 
     return cop1;

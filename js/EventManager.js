@@ -18,6 +18,7 @@ const GameEvent = {
     Talk_Cat_1:false,
     Talk_Agent_1:false,
     Talk_Cop1_1:false,
+    Talk_Cop1_2:false
 }
 
 function EventManager() {
@@ -91,9 +92,7 @@ function EventManager() {
 
         switch(npc.name) {
             case "Rose":
-//                if((locationNow == Place.TheCity) && (!GameEvent.FoundDave)) {
                     result = true;
-//                }
             break;
             case "Uncle Dave":
                 result = true;

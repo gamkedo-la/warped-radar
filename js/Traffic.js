@@ -14,16 +14,18 @@ function drawTraffic(drawingUnderPlayer) {
 
     trafficX++;
 
-    console.log(trafficX);
-    if (trafficX === 590) {
+
+    console.log((Math.floor(player.x) - trafficX) );
+    if ( (Math.floor(player.x) - trafficX) === 800) {
       horn_2_trimmed.play();
     }
-    if (trafficX === 990) {
+    if ( (Math.floor(player.x) - trafficX) === 425) {
       horn_1_trimmed.play();
     }
-    if (trafficX === 1040) {
+    if ( (Math.floor(player.x) - trafficX) === 325) {
       horn_3_trimmed.play();
     }
+    
 
     if (drawingUnderPlayer && player.y<=trafficY+trafficDepthNudge) return; // player not in front of cars - don't draw
 

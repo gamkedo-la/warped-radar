@@ -47,12 +47,12 @@ let voiceHigh2 = new SoundOverlapsClass("./audio/snd_voice2", 2);
 let voiceLow1 = new SoundOverlapsClass("./audio/snd_voice3", 1);
 let voiceLow2 = new SoundOverlapsClass("./audio/snd_voice4", 0);
 
-let horn_1 = new Audio("./audio/horn_1.mp3");
-let horn_2 = new Audio("./audio/horn_2.mp3");
-horn_1.volume = 0.2;
-horn_2.volume = 0.2;
-horn_1.loop = 'true';
-horn_2.loop = 'true';
+let horn_1_trimmed = new Audio("./audio/horn_1_trimmed.mp3");
+let horn_2_trimmed = new Audio("./audio/horn_2_trimmed.mp3");
+let horn_3_trimmed = new Audio("./audio/horn_3_trimmed.mp3");
+horn_1_trimmed.volume = 0.2;
+horn_2_trimmed.volume = 0.2;
+horn_3_trimmed.volume = 0.2;
 
 
 //how to add music: let bgMusic = "./audio/bgMusic";

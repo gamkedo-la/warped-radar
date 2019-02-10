@@ -14,12 +14,22 @@ function drawTraffic(drawingUnderPlayer) {
 
     trafficX++;
 
+    console.log(trafficX);
+    if (trafficX === 590) {
+      horn_2_trimmed.play();
+    }
+    if (trafficX === 990) {
+      horn_1_trimmed.play();
+    }
+    if (trafficX === 1040) {
+      horn_3_trimmed.play();
+    }
+
     if (drawingUnderPlayer && player.y<=trafficY+trafficDepthNudge) return; // player not in front of cars - don't draw
 
     if (!drawingUnderPlayer && player.y>trafficY+trafficDepthNudge) return; // player not behind cars - don't draw
 
     if (trafficX > trafficXMax) trafficX = trafficXMin; // scroll and loop
 
-    scaledContext.drawImage(trafficEffectImage,trafficX,trafficY);  
+    scaledContext.drawImage(trafficEffectImage,trafficX,trafficY);
 }
-

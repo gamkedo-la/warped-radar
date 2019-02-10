@@ -112,14 +112,6 @@ function gameLoop () {
     update(delta / 1000);
     framesFromGameStart++;
 
-    if (locationNow === 0) {
-      horn_1.play();
-      horn_2.play();
-    } else {
-      horn_1.pause();
-      horn_2.pause();
-    }
-    
     render();
     //postRender();
 

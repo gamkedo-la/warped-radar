@@ -108,11 +108,18 @@ function gameLoop () {
     let now = Date.now();
     delta = (now - then); // * deltaMultiplier;
 
-     
+
     update(delta / 1000);
     framesFromGameStart++;
-    
 
+    if (locationNow === 0) {
+      horn_1.play();
+      horn_2.play();
+    } else {
+      horn_1.pause();
+      horn_2.pause();
+    }
+    
     render();
     //postRender();
 
@@ -165,8 +172,8 @@ function render () {
     }
     clearScreen();
     mainCamera.beginPan();
-    
-    
+
+
     //scaledContext.clearRect(0,0,scaledCanvas.width,scaledCanvas.height)
 
     let nonTileObjects = [];
@@ -182,10 +189,10 @@ function render () {
     }
     nonTileObjects = nonTileObjects.concat(availableObtainableItems);
     nonTileObjects = nonTileObjects.concat(arrayOfInteractableItems);
-    
+
     drawWorld(nonTileObjects);
     drawScaledCanvas(); //draw everthing on the pixel-scale canvas to the larger game canvas
-    
+
     drawWeatherEffects();
     drawGameBorder();
     drawDebugText();
@@ -223,7 +230,7 @@ function render () {
     }
 
     postRender();
-    
+
 }
 function postRender () {
     fxContext.drawImage(canvas, 0,0, canvas.width, canvas.height, 0, 0, fxCanvas.width, fxCanvas.height);
@@ -232,10 +239,10 @@ function postRender () {
     canvasContext.globalAlpha = 0.55;
     canvasContext.drawImage(fxCanvas, 0,0, fxCanvas.width, fxCanvas.height, 0,0, canvas.width, canvas.height);
     canvasContext.restore();
-    
+
 }
 function goToDestinationFor(arrayIndexUnderPlayer) {
-    
+
     let newSwitchIndex = -1;
     let shouldReloadLevel = false;
     if(locationList[locationNow] === locationList[Place.TheCity]) {
@@ -261,7 +268,7 @@ function goToDestinationFor(arrayIndexUnderPlayer) {
             locationNow = Place.JohnsHallway;
             newSwitchIndex = Switch.JohnsHallwayFromJohnsRoom;
             shouldReloadLevel = true;
-        } 
+        }
     } else if(locationList[locationNow] === locationList[Place.JuliesStore]) {
         if(arrayIndexUnderPlayer === Switch.JuliesStoreToTheCity) {
             locationNow = Place.TheCity;
@@ -292,7 +299,7 @@ function goToDestinationFor(arrayIndexUnderPlayer) {
             pixelW: 16,
             pixelH: 16,
             colorArray: ["#000000", "#110011", "#111111"]
-    
+
         });
     }
 }

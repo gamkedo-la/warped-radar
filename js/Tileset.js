@@ -11,7 +11,7 @@ function Tileset(image, tileWidth, tileHeight) {
         if(index == 0) {return;}//0 used as a transparent tile as a placeholder in the data
         const tilePosition = this.positionForIndex(index - 1);
 
-        context.drawImage(this.image, tilePosition.x, tilePosition.y, 
+        context.drawImage(this.image, Math.floor(tilePosition.x), Math.floor(tilePosition.y), 
                                       this.tileWidth, this.tileHeight, 
                                       Math.floor(drawX), Math.floor(drawY), drawWidth, drawHeight);
     };

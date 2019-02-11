@@ -42,7 +42,7 @@ const TILE = {
 
     FAMILY_PHOTO:149,
 
-    COP:173,
+    COP:202,
     CAT:174,
 
     BLANK:576
@@ -178,7 +178,7 @@ function drawLayer(layer) {
 }
 
 function drawDepthSorted(nonTileObjs) {
-    let drawTileX = mainCamera.camPanX / WORLD_W; 
+    let drawTileX =  mainCamera.camPanX / WORLD_W; 
     let drawTileY = mainCamera.camPanY / WORLD_H;
     
     const minColSize = drawTileX + 10;//locations.locationNow.columns;

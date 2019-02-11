@@ -227,7 +227,7 @@ function turnVolumeDown() {
 	setEffectsVolume(effectsVolume - VOLUME_INCREMENT);
 }
 
-let ambient_street_noise_1 = new Audio("./audio/WARPED_RADAR_BUSY_STREET_LOOP1.mp3");
+let ambient_street_noise_1 = new Audio("./audio/WARPED_RADAR_BUSY_STREET_LOOP1_TRIMMED.mp3");
 ambient_street_noise_1.volume = 0.065;
 ambient_street_noise_1.loop = "true";
 let ambient_street_noise_2 = new Audio("./audio/MiscBG01.mp3");
@@ -237,13 +237,15 @@ ambient_street_noise_2.loop = "true";
 ambient_street_noise_1.addEventListener('timeupdate', function(){
 	var buffer = .44;
     if(this.currentTime > this.duration - buffer) {
-    	this.currentTime = 0;
+    	this.currentTime = 0.5;
         this.play();
+        console.log("ambient noise 1 looped");
 }}, false);
 
 ambient_street_noise_2.addEventListener('timeupdate', function(){
 	var buffer = .44;
     if(this.currentTime > this.duration - buffer) {
-    	this.currentTime = 0;
+    	this.currentTime = 0.5;
         this.play();
+        console.log("ambient noise 2 looped");
 }}, false);

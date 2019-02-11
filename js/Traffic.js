@@ -14,8 +14,6 @@ function drawTraffic(drawingUnderPlayer) {
 
     trafficX++;
 
-
-    console.log((Math.floor(player.x) - trafficX) );
     if ( ( Math.floor(player.x) - trafficX >= 800 ) &&  ( Math.floor(player.x) - trafficX <= 803 ) ) {
       horn_2_trimmed.play();
     }

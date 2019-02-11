@@ -228,5 +228,8 @@ function turnVolumeDown() {
 }
 
 let ambient_street_noise_1 = new Audio("./audio/WARPED_RADAR_BUSY_STREET_LOOP1.mp3");
-ambient_street_noise_1.volume = 0.075;
+ambient_street_noise_1.volume = 0.065;
 ambient_street_noise_1.loop = "true";
+let ambient_street_noise_2 = new Audio("./audio/MiscBG01.mp3");
+ambient_street_noise_2.volume = 0.35;
+ambient_street_noise_2.loop = "true";

@@ -16,16 +16,16 @@ function drawTraffic(drawingUnderPlayer) {
 
 
     console.log((Math.floor(player.x) - trafficX) );
-    if ( (Math.floor(player.x) - trafficX) === 800) {
+    if ( ( Math.floor(player.x) - trafficX >= 800 ) &&  ( Math.floor(player.x) - trafficX <= 803 ) ) {
       horn_2_trimmed.play();
     }
-    if ( (Math.floor(player.x) - trafficX) === 425) {
+    if ( ( Math.floor(player.x) - trafficX >= 425 ) && ( Math.floor(player.x) - trafficX <= 428 ) ) {
       horn_1_trimmed.play();
     }
-    if ( (Math.floor(player.x) - trafficX) === 325) {
+    if ( ( Math.floor(player.x) - trafficX >= 325 ) && ( Math.floor(player.x) - trafficX <= 328 ) ) {
       horn_3_trimmed.play();
     }
-    
+
 
     if (drawingUnderPlayer && player.y<=trafficY+trafficDepthNudge) return; // player not in front of cars - don't draw
 

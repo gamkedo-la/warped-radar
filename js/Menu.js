@@ -80,7 +80,7 @@ const Menu = new (function() {
         switch (menuPageText[currentPage][cursor1]) {
             case "Story":
                 warpedRadarBackgroundMusic.loopSong("audio/stebs_warped_radar_song");
-                warpedRadarBackgroundMusic.setVolume(0.35);//trying to balance background music with dialogue volume
+                warpedRadarBackgroundMusic.setVolume(0.45);//trying to balance background music with dialogue volume
                 cursor1 = 0;
 
                 let transitionDuration = 500;

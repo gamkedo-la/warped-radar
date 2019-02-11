@@ -22,6 +22,8 @@ let eventManager;
 //let daveHasBeenDiscovered = false;
 
 let warpedRadarBackgroundMusic = new backgroundMusicClass();
+let warpedRadarAmbientNoise = new backgroundMusicClass();
+warpedRadarAmbientNoise.volume = 0.2;
 
 let testScene = new Cutscene();
 let playTheScene = false;
@@ -238,24 +240,29 @@ function goToDestinationFor(arrayIndexUnderPlayer) {
     let newSwitchIndex = -1;
     let shouldReloadLevel = false;
     if(locationList[locationNow] === locationList[Place.TheCity]) {
+      ambient_street_noise_1.play();
         if(arrayIndexUnderPlayer === Switch.TheCityToJohnsRoom) {
             locationNow = Place.JohnsRoom;
             newSwitchIndex = Switch.JohnsRoomFromTheCity;
             shouldReloadLevel = true;
+            ambient_street_noise_1.pause();
         } else if(arrayIndexUnderPlayer === Switch.TheCityToJuliesStore) {
             locationNow = Place.JuliesStore;
             newSwitchIndex = Switch.JuliesStoreFromTheCity;
             shouldReloadLevel = true;
+            ambient_street_noise_1.pause();
         } else if(arrayIndexUnderPlayer === Switch.TheCityToDavesHouse) {
             locationNow = Place.DavesHouse;
             newSwitchIndex = Switch.DavesHouseFromTheCity;
             shouldReloadLevel = true;
+            ambient_street_noise_1.pause();
         }
     } else if(locationList[locationNow] === locationList[Place.JohnsRoom]) {
         if(arrayIndexUnderPlayer === Switch.JohnsRoomToTheCity) {
             locationNow = Place.TheCity;
             newSwitchIndex = Switch.TheCityFromJohnsRoom;
             shouldReloadLevel = true;
+            ambient_street_noise_1.play();
         } else if(arrayIndexUnderPlayer === Switch.JohnsRoomToJohnsHallway) {
             locationNow = Place.JohnsHallway;
             newSwitchIndex = Switch.JohnsHallwayFromJohnsRoom;
@@ -266,12 +273,14 @@ function goToDestinationFor(arrayIndexUnderPlayer) {
             locationNow = Place.TheCity;
             newSwitchIndex = Switch.TheCityFromJuliesStore;
             shouldReloadLevel = true;
+            ambient_street_noise_1.play();
         }
     } else if(locationList[locationNow] === locationList[Place.DavesHouse]) {
         if(arrayIndexUnderPlayer === Switch.DavesHouseToTheCity) {
             locationNow = Place.TheCity;
             newSwitchIndex = Switch.TheCityFromDavesHouse;
             shouldReloadLevel = true;
+            ambient_street_noise_1.play();
         }
     }
 

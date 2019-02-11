@@ -187,7 +187,7 @@ const Menu = new (function() {
                  //Draw cursor after background image
                  canvasContext.drawImage(arrowPic,itemsX -55 ,topItemY + (cursor1 * rowHeight) -42);
                 }
-                
-            
+
+
     };
 })();

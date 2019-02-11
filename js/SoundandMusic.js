@@ -54,7 +54,6 @@ horn_1_trimmed.volume = 0.2;
 horn_2_trimmed.volume = 0.2;
 horn_3_trimmed.volume = 0.2;
 
-
 //how to add music: let bgMusic = "./audio/bgMusic";
 
 let musicVolume;
@@ -88,13 +87,6 @@ function setFormat() {
         audioFormat = ".ogg";
     }
 }
-
-/*
-let stebs_warped_radar_song = new backgroundMusicClass();
-stebs_warped_radar_song.loopSong("audio/stebs_warped_radar_song");
-let currentBackgroundMusic = stebs_warped_radar_song;
-setMusicVolume(0.4);
-*/
 
 
 function backgroundMusicClass() {
@@ -234,3 +226,7 @@ function turnVolumeDown() {
 	setMusicVolume(musicVolume - VOLUME_INCREMENT);
 	setEffectsVolume(effectsVolume - VOLUME_INCREMENT);
 }
+
+let ambient_street_noise_1 = new Audio("./audio/WARPED_RADAR_BUSY_STREET_LOOP1.mp3");
+ambient_street_noise_1.volume = 0.075;
+ambient_street_noise_1.loop = "true";

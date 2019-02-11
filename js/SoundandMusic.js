@@ -233,3 +233,17 @@ ambient_street_noise_1.loop = "true";
 let ambient_street_noise_2 = new Audio("./audio/MiscBG01.mp3");
 ambient_street_noise_2.volume = 0.35;
 ambient_street_noise_2.loop = "true";
+
+ambient_street_noise_1.addEventListener('timeupdate', function(){
+	var buffer = .44;
+    if(this.currentTime > this.duration - buffer) {
+    	this.currentTime = 0;
+        this.play();
+}}, false);
+
+ambient_street_noise_2.addEventListener('timeupdate', function(){
+	var buffer = .44;
+    if(this.currentTime > this.duration - buffer) {
+    	this.currentTime = 0;
+        this.play();
+}}, false);

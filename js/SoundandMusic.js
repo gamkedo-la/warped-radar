@@ -239,7 +239,6 @@ ambient_street_noise_1.addEventListener('timeupdate', function(){
     if(this.currentTime > this.duration - buffer) {
     	this.currentTime = 0.1;
         this.play();
-        console.log("ambient noise 1 looped");
 }}, false);
 
 ambient_street_noise_2.addEventListener('timeupdate', function(){
@@ -247,5 +246,4 @@ ambient_street_noise_2.addEventListener('timeupdate', function(){
     if(this.currentTime > this.duration - buffer) {
     	this.currentTime = 0.1;
         this.play();
-        console.log("ambient noise 2 looped");
 }}, false);

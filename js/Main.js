@@ -140,6 +140,8 @@ function update (delta) {
         triggerNPCDialogue();
         triggerOBJDialogue();
         mainCamera.follow(player);
+        mainCamera.camPanX = Math.round(mainCamera.camPanX);
+        mainCamera.camPanY = Math.round(mainCamera.camPanY);
         levelEditor.showNewGrid();
     }
     if (transitioning) {

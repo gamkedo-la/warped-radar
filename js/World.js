@@ -1,6 +1,10 @@
 const WORLD_W = 40;
 const WORLD_H = 40;
 
+// experiment to stop seams when scrolling
+// snap tiles to integer positions
+const SNAP_TILES_TO_INTEGER_POSITIONS = true;
+
 const TILE = {
     //Basic Overworld tiles 
     GROUND:1,
@@ -149,6 +153,11 @@ function tileTypeHasTransparency(tileToCheck) {
 function drawLayer(layer) {
     let drawTileX = mainCamera.camPanX / WORLD_W; 
     let drawTileY = mainCamera.camPanY / WORLD_H;
+
+    if (SNAP_TILES_TO_INTEGER_POSITIONS) {
+        drawTileX = Math.ceil(drawTileX);
+        drawTileY = Math.ceil(drawTileY);
+    }
     
     const minColSize = drawTileX + 10;//locations.locationNow.columns;
     const minRowSize = drawTileY + 8;//locations.locationNow.columns;
@@ -181,6 +190,11 @@ function drawDepthSorted(nonTileObjs) {
     let drawTileX =  mainCamera.camPanX / WORLD_W; 
     let drawTileY = mainCamera.camPanY / WORLD_H;
     
+    if (SNAP_TILES_TO_INTEGER_POSITIONS) {
+        drawTileX = Math.ceil(drawTileX);
+        drawTileY = Math.ceil(drawTileY);
+    }
+
     const minColSize = drawTileX + 10;//locations.locationNow.columns;
     const minRowSize = drawTileY + 8;//locations.locationNow.columns;
     const layer = locationList[locationNow].layers[Layer.Depth_Sorted];

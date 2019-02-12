@@ -24,7 +24,7 @@ let johnsRoom = {
     columns: TileMaps.JohnsRoom.width,
     rows: TileMaps.JohnsRoom.height,
     name: "johnsRoom",
-//    groundValue: TileMaps.JohnsRoom.tilesets[TileSet.Height].firstgid
+    groundValue: TileMaps.JohnsRoom.tilesets[TileSet.Height].firstgid
 }
 
 let theCity = { 

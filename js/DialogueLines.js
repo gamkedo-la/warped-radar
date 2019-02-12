@@ -721,7 +721,7 @@ let johnAndJulie_1 = [
         text: "I like your smile, but it won't put food on my table. Come back when you have Credits.",
         nextPage: 3,
         leftPic: johnHappyPic,
-        rightPic: julieWorriedPic,
+        rightPic: julieMadPic,
 
         leftPicLeave: false,
         rightPicLeave: false,
@@ -943,7 +943,7 @@ let julieCatArgument = [
         text: "Hi, I'm Felen.  Julie hired me to run her shop.",
         nextPage: 1,
         leftPic: johnHappyPic,
-        rightPic: placeholderAngryPic,
+        rightPic: catManPic,
 
         leftPicLeave: false,
         rightPicLeave: false,
@@ -977,7 +977,7 @@ let julieCatArgument = [
         text: "I had some business to take care of.",
         nextPage: 3,
         leftPic: johnHappyPic,
-        rightPic: placeholderAngryPic,
+        rightPic: catManPic,
 
         leftPicLeave: false,
         rightPicLeave: false,
@@ -1011,7 +1011,7 @@ let julieCatArgument = [
         text: "Yeah? Well, where were YOU last night? Huh?",
         nextPage: 5,
         leftPic: johnHappyPic,
-        rightPic: placeholderAngryPic,
+        rightPic: catManPic,
 
         leftPicLeave: false,
         rightPicLeave: false,

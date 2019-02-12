@@ -229,7 +229,7 @@ function initializeRose(arrayIndex) {
     rose.dialogue = new Dialogue();
     rose.colour = "#8789C0";
     rose.location = Place.TheCity;
-    rose.walkingSpeed = 90;
+    rose.walkingSpeed = 50;
 
     rose.states.walking = true;
     rose.states.idle = false;

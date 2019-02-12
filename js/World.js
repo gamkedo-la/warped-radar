@@ -43,7 +43,7 @@ const TILE = {
     FAMILY_PHOTO:149,
 
     COP:202,
-    CAT:174,
+    CAT:205,
 
     BLANK:576
 };
@@ -61,8 +61,8 @@ const Switch = {
     TheCityFromDavesHouse:          getTileIndex(theCity, 17, 23),
     JohnsRoomToTheCity:             getTileIndex(johnsRoom, 6, 23),
     JohnsRoomFromTheCity:           getTileIndex(johnsRoom, 6, 22),
-    JuliesStoreToTheCity:           getTileIndex(juliesStore, 5, 14),
-    JuliesStoreFromTheCity:         getTileIndex(juliesStore, 5, 13),
+    JuliesStoreToTheCity:           getTileIndex(juliesStore, 8, 13),
+    JuliesStoreFromTheCity:         getTileIndex(juliesStore, 8, 12),
     DavesHouseToTheCity:            getTileIndex(davesHouse, 6, 11),
     DavesHouseFromTheCity:          getTileIndex(davesHouse, 6, 10)
 };

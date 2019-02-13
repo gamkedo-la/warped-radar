@@ -14,13 +14,31 @@ function drawTraffic(drawingUnderPlayer) {
 
     trafficX++;
 
+    let playerInTrafficStreet = false;
+    if (player.y > 950 && player.y < 1033) {
+      playerInTrafficStreet = true;
+    }
+
+    let playerXCloseToFirstCar = false;
     if ( ( Math.floor(player.x) - trafficX >= 800 ) &&  ( Math.floor(player.x) - trafficX <= 803 ) ) {
+      playerXCloseToFirstCar = true;
+    }
+    let playerXClosetoSecondCar = false;
+    if ( ( Math.floor(player.x) - trafficX >= 425 ) && ( Math.floor(player.x) - trafficX <= 428 ) ) {
+      playerXClosetoSecondCar = true;
+    }
+    let playerXCloseToThirdCar = false;
+    if ( ( Math.floor(player.x) - trafficX >= 325 ) &&  ( Math.floor(player.x) - trafficX <= 328 ) ) {
+      playerXCloseToThirdCar = true;
+    }
+
+    if ( playerXCloseToFirstCar && playerInTrafficStreet ) {
       horn_2_trimmed.play();
     }
-    if ( ( Math.floor(player.x) - trafficX >= 425 ) && ( Math.floor(player.x) - trafficX <= 428 ) ) {
+    if ( playerXClosetoSecondCar && playerInTrafficStreet ) {
       horn_1_trimmed.play();
     }
-    if ( ( Math.floor(player.x) - trafficX >= 325 ) && ( Math.floor(player.x) - trafficX <= 328 ) ) {
+    if ( playerXCloseToThirdCar && playerInTrafficStreet ) {
       horn_3_trimmed.play();
     }
 

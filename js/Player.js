@@ -10,7 +10,7 @@ const DOWN_RIGHT = 8;
 function Player () {
     this.x = 100;
     this.y = 100;
-    this.w = 64;
+    this.w = 63;
     this.h = 67;//makes depth sorting better even though sprite is only 58 visible pixels high
     this.walkSpeed = 100;
 
@@ -231,6 +231,9 @@ function Player () {
             if(shouldMoveY) {
                 this.y = nextY;
             }
+            
+            this.x = Math.round(this.x);
+            this.y = Math.round(this.y);
 
             this.collider.setCollider(this.x, this.y);
             this.setTileCollider(this.x, this.y);

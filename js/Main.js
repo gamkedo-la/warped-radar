@@ -187,6 +187,11 @@ function render () {
     nonTileObjects = nonTileObjects.concat(availableObtainableItems);
     nonTileObjects = nonTileObjects.concat(arrayOfInteractableItems);
 
+    // if (transitioning) {
+    //   scaledContext.globalAlpha = worldAlpha;
+    //   worldAlpha += 0.01;
+    // }
+
     drawWorld(nonTileObjects);
     drawScaledCanvas(); //draw everthing on the pixel-scale canvas to the larger game canvas
 
@@ -229,6 +234,9 @@ function render () {
     postRender();
 
 }
+
+let worldAlpha = 0;
+
 function postRender () {
     fxContext.drawImage(canvas, 0,0, canvas.width, canvas.height, 0, 0, fxCanvas.width, fxCanvas.height);
     canvasContext.save();

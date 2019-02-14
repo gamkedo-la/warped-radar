@@ -134,7 +134,7 @@ const Menu = new (function() {
                 setTimeout(() => {
                     gameIsStarted = true;
 
-                }, transitionDuration/2); // show new scene halfway through duration, so it can be seen as transition is ending.
+                }, transitionDuration*0.275); // show new scene halfway through duration, so it can be seen as transition is ending.
                 // trigger intro cinematic
                 setTimeout(Intros.start(introText),transitionDuration);
                 warpedRadarBackgroundMusic.startOrStopMusic();
@@ -204,8 +204,14 @@ const Menu = new (function() {
         canvasContext.restore();
     };
 
-
+    this.alpha = 1;
     this.draw = function() {
+
+        if (transitioning) {
+          this.alpha -= 0.02;
+          canvasContext.globalAlpha = this.alpha;
+        }
+
         if(gameIsStarted === false){
         if(currentPage == PAUSED_PAGE){
           currentPage = MENU_PAGE;
@@ -236,6 +242,6 @@ const Menu = new (function() {
                  canvasContext.drawImage(arrowPic,itemsX -55 ,topItemY + (cursor1 * rowHeight) -42);
                 }
 
-
+        //canvasContext.globalAlpha = 1;
     };
 })();

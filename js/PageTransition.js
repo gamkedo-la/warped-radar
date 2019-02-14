@@ -1,32 +1,32 @@
 /**
  *    -------------- Page Transition-------------
- * 
+ *
  *     PageTransition is an overlay of graphic
  *     pixels that get drawn op top of everything
  *     else. They then start disappearing halfway
- *     through, makeing transitions between screens 
+ *     through, makeing transitions between screens
  *     more seemless.
- * 
+ *
  *     Start PageTransition by using `init` method:
  *
  *          PageTransition.init();
- * 
+ *
  *     Change behaviour with configuration:
- *  
+ *
  *         PageTransition.init({
  *             duration: 500,
  *             pixelW: 40,
  *             pixelH: 10,
  *             colorArray: ["red", "green", "blue"]
  *         });
- * 
+ *
  *     Configuration options are:
- * 
+ *
  *         duration: length of transition in m/s.
  *         pixelW: width of each pixel.
  *         pixelH: height of each pixel.
  *         colorArray: colors used in transition.
- * 
+ *
  */
 
 const PageTransition = new (function () {
@@ -51,7 +51,7 @@ const PageTransition = new (function () {
         this.pixelArr        = new Array(this.pixelCount).fill(false);
         this.tranInArr       = Array.apply(null, {length: this.pixelCount}).map(Number.call, Number) // [1, 2, 3, ... 4800]
         this.tranOutArr      = Array.apply(null, {length: this.pixelCount}).map(Number.call, Number)
-        
+
         // Start the transition in main loops
         transitioning = true;
     }
@@ -60,11 +60,11 @@ const PageTransition = new (function () {
         // PixelArr -> random colors at randomn spots
         if (this.tranInArr.length > 0) {
             this.updatePixelColor(this.tranInArr, this.colorArray);
-        
+
         // PixelArr -> transparent at random spots
         } else if (this.tranOutArr.length > 0) {
             this.updatePixelColor(this.tranOutArr, ["rgba(225,225,225,0)"]);
-        
+
         // Stop the transition
         } else {
             transitioning = false;
@@ -94,7 +94,7 @@ const PageTransition = new (function () {
     }
 
     this.updatePixelColor = function (array, colors) {
-        // Remove a random # in array 
+        // Remove a random # in array
         // -> use to populate pixelArr with color
         for (var i=0; i<this.pixelRenderRate; i++) {
             let color = colors[Math.floor(Math.random() * colors.length)];

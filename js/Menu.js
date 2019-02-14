@@ -82,10 +82,10 @@ const Menu = new (function() {
                   console.log("hello game start");
 
 
-                warpedRadarBackgroundMusic.setVolume(0.45);//trying to balance background music with dialogue volume
+                //warpedRadarBackgroundMusic.setVolume(0.45);//trying to balance background music with dialogue volume
                 cursor1 = 0;
-
-                let transitionDuration = 500;
+                delayedUIChoiceSound();
+                let transitionDuration = 3000;
                 PageTransition.init({
                     duration:transitionDuration,
                     pixelW: 100,
@@ -93,11 +93,13 @@ const Menu = new (function() {
                 });
                 setTimeout(() => {
                     gameIsStarted = true;
-                    johns_house_song.play();
+
                 }, transitionDuration/2); // show new scene halfway through duration, so it can be seen as transition is ending.
                 // trigger intro cinematic
                 setTimeout(Intros.start(introText),transitionDuration);
                 warpedRadarBackgroundMusic.startOrStopMusic();
+                johns_house_song.play();
+                johns_house_song.fadingIn = true;
 
 
                 break;

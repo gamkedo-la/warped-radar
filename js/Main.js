@@ -147,6 +147,7 @@ function update (delta) {
     if (transitioning) {
         PageTransition.update();
     }
+    fade_songs();
 }
 
 // Update NPCs (really just Rose since she can walk around)
@@ -248,24 +249,30 @@ function goToDestinationFor(arrayIndexUnderPlayer) {
             locationNow = Place.JohnsRoom;
             newSwitchIndex = Switch.JohnsRoomFromTheCity;
             shouldReloadLevel = true;
-            city_song.pause();
+            //city_song.pause();
+            city_song.fadingOut = true;
             johns_house_song.play();
+            johns_house_song.fadingIn = true;
             ambient_street_noise_1.pause();
             ambient_street_noise_2.pause();
         } else if(arrayIndexUnderPlayer === Switch.TheCityToJuliesStore) {
             locationNow = Place.JuliesStore;
             newSwitchIndex = Switch.JuliesStoreFromTheCity;
             shouldReloadLevel = true;
-            city_song.pause();
+            //city_song.pause();
+            city_song.fadingOut = true;
             julies_store_song.play();
+            julies_store_song.fadingIn = true;
             ambient_street_noise_1.pause();
             ambient_street_noise_2.pause();
         } else if(arrayIndexUnderPlayer === Switch.TheCityToDavesHouse) {
             locationNow = Place.DavesHouse;
             newSwitchIndex = Switch.DavesHouseFromTheCity;
             shouldReloadLevel = true;
-            city_song.pause();
+            //city_song.pause();
+            city_song.fadingOut = true;
             daves_house_song.play();
+            daves_house_song.fadingIn = true;
             ambient_street_noise_1.pause();
             ambient_street_noise_2.pause();
         }
@@ -274,8 +281,10 @@ function goToDestinationFor(arrayIndexUnderPlayer) {
             locationNow = Place.TheCity;
             newSwitchIndex = Switch.TheCityFromJohnsRoom;
             shouldReloadLevel = true;
-            johns_house_song.pause();
+            //johns_house_song.pause();
+            johns_house_song.fadingOut = true;
             city_song.play();
+            city_song.fadingIn = true;
             ambient_street_noise_1.play();
             ambient_street_noise_2.play();
         } else if(arrayIndexUnderPlayer === Switch.JohnsRoomToJohnsHallway) {
@@ -288,8 +297,10 @@ function goToDestinationFor(arrayIndexUnderPlayer) {
             locationNow = Place.TheCity;
             newSwitchIndex = Switch.TheCityFromJuliesStore;
             shouldReloadLevel = true;
-            julies_store_song.pause();
+            //julies_store_song.pause();
+            julies_store_song.fadingOut = true;
             city_song.play();
+            city_song.fadingIn = true;
             ambient_street_noise_1.play();
             ambient_street_noise_2.play();
         }
@@ -298,8 +309,10 @@ function goToDestinationFor(arrayIndexUnderPlayer) {
             locationNow = Place.TheCity;
             newSwitchIndex = Switch.TheCityFromDavesHouse;
             shouldReloadLevel = true;
-            daves_house_song.pause();
+            //daves_house_song.pause();
+            daves_house_song.fadingOut = true;
             city_song.play();
+            city_song.fadingIn = true;
             ambient_street_noise_1.play();
             ambient_street_noise_2.play();
         }
@@ -317,7 +330,7 @@ function goToDestinationFor(arrayIndexUnderPlayer) {
         mainCamera.instantFollow(player);
 
         PageTransition.init({
-            duration:500,
+            duration:2500,
             pixelW: 16,
             pixelH: 16,
             colorArray: ["#000000", "#110011", "#111111"]

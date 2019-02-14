@@ -250,11 +250,77 @@ ambient_street_noise_2.addEventListener('timeupdate', function(){
 
 let johns_house_song = new Audio("audio/klaim_cityscape.mp3");
 johns_house_song.loop = "true";
+johns_house_song.fadingIn = false;
+johns_house_song.fadingOut = false;
+johns_house_song.targetFadeInVolume = 0.98;
+johns_house_song.volume = 0;
+
 let city_song = new Audio("audio/stebs_warped_radar_song.mp3");
 city_song.loop = "true";
-city_song.volume = 0.4;
+city_song.targetFadeInVolume = 0.25;
+city_song.fadingIn = false;
+city_song.fadingOut = false;
+city_song.volume = 0;
+
 let julies_store_song = new Audio("audio/unfinished_thing.mp3");
 julies_store_song.loop = "true";
+julies_store_song.targetFadeInVolume = 0.98;
+julies_store_song.fadingIn = false;
+julies_store_song.fadingOut = false;
+julies_store_song.volume = 0;
+
 let daves_house_song = new Audio("audio/klaim_neon_zone.mp3");
 daves_house_song.loop = "true";
-daves_house_song.volume = 0.35;
+daves_house_song.targetFadeInVolume = 0.35;
+daves_house_song.fadingIn = false;
+daves_house_song.fadingOut = false;
+daves_house_song.volume = 0;
+
+let warped_UI_choice_sound = new Audio("audio/warped_UI_choice.mp3");
+warped_UI_choice_sound.volume = 0.3;
+function playUIChoiceSound() {
+  warped_UI_choice_sound.play();
+}
+function delayedUIChoiceSound() {
+  setTimeout(playUIChoiceSound, 200);
+}
+
+let fading_out_song = undefined;
+let fading_in_song = undefined;
+
+function fadeOutSong(song) {
+  if (song.volume > 0) {
+    song.volume -= 0.005;
+    //song.volume = Math.floor(song.volume*1000)/1000;
+  }
+  if (song.volume <= 0.05) {
+    song.volume = 0;
+    song.fadingOut = false;
+    song.pause();
+  }
+}
+
+function fadeInSong(song) {
+  if (song.volume < song.targetFadeInVolume) {
+    song.volume += 0.005;
+
+  }
+  if (song.volume > song.targetFadeInVolume) {
+    song.volume = song.targetFadeInVolume;
+    song.fadingIn = false;
+  }
+
+}
+
+let array_of_fadable_songs = [johns_house_song,city_song,julies_store_song,daves_house_song];
+
+function fade_songs() {
+  for (let i = 0; i < array_of_fadable_songs.length; i++) {
+    if (array_of_fadable_songs[i].fadingIn) {
+      fadeInSong(array_of_fadable_songs[i]);
+    }
+    if (array_of_fadable_songs[i].fadingOut) {
+      fadeOutSong(array_of_fadable_songs[i]);
+    }
+  }
+}

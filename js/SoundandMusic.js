@@ -247,3 +247,14 @@ ambient_street_noise_2.addEventListener('timeupdate', function(){
     	this.currentTime = 0.1;
         this.play();
 }}, false);
+
+let johns_house_song = new Audio("audio/klaim_cityscape.mp3");
+johns_house_song.loop = "true";
+let city_song = new Audio("audio/stebs_warped_radar_song.mp3");
+city_song.loop = "true";
+city_song.volume = 0.4;
+let julies_store_song = new Audio("audio/unfinished_thing.mp3");
+julies_store_song.loop = "true";
+let daves_house_song = new Audio("audio/klaim_neon_zone.mp3");
+daves_house_song.loop = "true";
+daves_house_song.volume = 0.35;

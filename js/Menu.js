@@ -79,7 +79,9 @@ const Menu = new (function() {
          }
         switch (menuPageText[currentPage][cursor1]) {
             case "Story":
-                warpedRadarBackgroundMusic.loopSong("audio/stebs_warped_radar_song");
+                  console.log("hello game start");
+
+
                 warpedRadarBackgroundMusic.setVolume(0.45);//trying to balance background music with dialogue volume
                 cursor1 = 0;
 
@@ -91,9 +93,11 @@ const Menu = new (function() {
                 });
                 setTimeout(() => {
                     gameIsStarted = true;
+                    johns_house_song.play();
                 }, transitionDuration/2); // show new scene halfway through duration, so it can be seen as transition is ending.
                 // trigger intro cinematic
                 setTimeout(Intros.start(introText),transitionDuration);
+                warpedRadarBackgroundMusic.startOrStopMusic();
 
 
                 break;

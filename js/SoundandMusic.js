@@ -101,6 +101,14 @@ function backgroundMusicClass() {
             musicSound = null;
         }
         musicSound = new Audio(filenameWithPath + audioFormat);
+        //musicSound.currentTime = 32; // starting near the end of the track to calibrate loop
+        //without needing to listen to the whole track
+        musicSound.addEventListener('timeupdate', function(){
+        	var buffer = .3625;
+            if(this.currentTime > this.duration - buffer) {
+            	this.currentTime = 0.05;
+                this.play();
+        }}, false);
         musicSound.loop = true;
 		this.setVolume(musicVolume);
 		console.log("Now playing track: ", filenameWithPath + audioFormat);
@@ -132,6 +140,7 @@ function backgroundMusicClass() {
 			musicSound.play();
 		}
 	}
+
 }
 
 function SoundOverlapsClass(filenameWithPath, soundTypeIndex) {
@@ -247,6 +256,7 @@ ambient_street_noise_2.addEventListener('timeupdate', function(){
     	this.currentTime = 0.1;
         this.play();
 }}, false);
+
 
 let johns_house_song = new Audio("audio/klaim_cityscape.mp3");
 johns_house_song.loop = "true";

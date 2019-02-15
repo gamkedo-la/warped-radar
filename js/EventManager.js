@@ -20,8 +20,7 @@ const GameEvent = {
     Talk_Agent_1:false,
     Talk_Agent_2:false,
     Talk_Fusion_1:false,
-    Talk_Cop1_1:false,
-    Talk_Cop1_2:false
+    Talk_Dan_1:false
 }
 
 function EventManager() {
@@ -108,14 +107,19 @@ function EventManager() {
                     result = true;
                 }
             break;
-            case "Agent":
+            case "Jen":
                 if(!GameEvent.EnteredDavesHouse) {
                     result = true;
                 } else if(!GameEvent.Talk_Agent_2) {
                     result = true;
                 }
             break;
-            case "Cop_1":
+            case "Dan":
+                if(locationNow == Place.TheCity) {
+                    result = true;
+                }
+            break;
+            case "Cop":
                 if(locationNow == Place.TheCity) {
                     result = true;
                 }
@@ -166,7 +170,7 @@ function EventManager() {
             case "Cat":
                 result = 0;
             break;
-            case "Agent":
+            case "Jen":
                 if(GameEvent.Talk_Fusion_1) {
                     if(GameEvent.Talk_Agent_1) {
                         result = 2;
@@ -177,7 +181,14 @@ function EventManager() {
                     result = 0;
                 }
             break;
-            case "Cop_1":
+            case "Dan":
+                if((GameEvent.Talk_Dan_1) && (GameEvent.FoundDave)) {
+                    result = 1;
+                } else {
+                    result = 0;
+                }
+            break;
+            case "Cop":
                 result = 0;
             break;
             case "Fusion":
@@ -208,7 +219,7 @@ function EventManager() {
             case "Cat":
                 GameEvent.Talk_Cat_1 = true;
             break;
-            case "Agent":
+            case "Jen":
                 if(!GameEvent.Talk_Agent_1) {
                     GameEvent.Talk_Agent_1 = true;
                 } else if(GameEvent.Talk_Fusion_1) {
@@ -218,8 +229,13 @@ function EventManager() {
                     }
                 }
             break;
-            case "Cop_1":
-                GameEvent.Talk_Cop1_1 = true;
+            case "Dan":
+                if(!GameEvent.Talk_Dan_1) {
+                    GameEvent.Talk_Dan_1 = true;
+                }
+            break;
+            case "Cop":
+                //Do nothing?
             break;
             case "Fusion":
                 GameEvent.Talk_Fusion_1 = true;

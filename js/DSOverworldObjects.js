@@ -199,9 +199,17 @@ function initializeOverworldObjects() {
                     allNPCs.push(cat);
                 }
             case TILE.COP:
-                const cop1 = initializeCop1(i);
-                if(eventManager.canShowNPC(cop1)) {
-                    allNPCs.push(cop1);
+                if(i == getTileIndex(theCity, 68, 38)) {
+                    console.log("Initializing the Confessor");
+                    const confessor = initializeConfessor(i);
+                    if(eventManager.canShowNPC(confessor)) {
+                        allNPCs.push(confessor);
+                    }
+                } else {
+                    const cop1 = initializeCop1(i);
+                    if(eventManager.canShowNPC(cop1)) {
+                        allNPCs.push(cop1);
+                    }
                 }
             break;
             case TILE.FUSION:
@@ -472,7 +480,7 @@ function initializeAgent(arrayIndex) {
     const columns = locationList[locationNow].columns;
     const xPos = (arrayIndex % columns) * WORLD_W;
     const yPos = Math.floor(arrayIndex / columns) * WORLD_H;
-    let agent = new OverworldObject("Agent", xPos, yPos, 26, 62, agentAnimations);
+    let agent = new OverworldObject("Jen", xPos, yPos, 26, 62, agentAnimations);
     agent.dialogue = new Dialogue();
     agent.colour = "blue";
     agent.location = Place.TheCity;
@@ -515,6 +523,36 @@ function initializeFusion(arrayIndex) {
     return fusion;
 }
 
+function initializeConfessor(arrayIndex) {
+    const copAnimations = {
+        idle:copIdle,
+        worry:null,
+        north:null,
+        south:null,
+        east:null,
+        west:null,
+        northEast:null,
+        northWest:null,
+        southEast:null,
+        southWest:null
+    }
+
+    const columns = locationList[locationNow].columns;
+    const xPos = (arrayIndex % columns) * WORLD_W;
+    const yPos = Math.floor(arrayIndex / columns) * WORLD_H;
+    let confessor = new OverworldObject("Dan", xPos, yPos, 26, 62, copAnimations);
+    confessor.dialogue = new Dialogue();
+    confessor.colour = "blue";
+    confessor.location = Place.TheCity;
+    
+    confessor.chatEvents = function (createElseIncrement) {
+        //Add additional conversations in this array if you want the Agent to say different things (or different Agents to say different things)
+        this.text(createElseIncrement, [confessorConvo1, accusation]);
+    }
+
+    return confessor;
+}
+
 function initializeCop1(arrayIndex) {
     const copAnimations = {
         idle:copIdle,
@@ -532,14 +570,14 @@ function initializeCop1(arrayIndex) {
     const columns = locationList[locationNow].columns;
     const xPos = (arrayIndex % columns) * WORLD_W;
     const yPos = Math.floor(arrayIndex / columns) * WORLD_H;
-    let cop1 = new OverworldObject("Cop_1", xPos, yPos, 26, 62, copAnimations);
+    let cop1 = new OverworldObject("Cop", xPos, yPos, 26, 62, copAnimations);
     cop1.dialogue = new Dialogue();
     cop1.colour = "blue";
     cop1.location = Place.TheCity;
     
     cop1.chatEvents = function (createElseIncrement) {
         //Add additional conversations in this array if you want the Agent to say different things (or different Agents to say different things)
-        this.text(createElseIncrement, [accusation, cop1Convo]);
+        this.text(createElseIncrement, [copConvo]);
     }
 
     return cop1;

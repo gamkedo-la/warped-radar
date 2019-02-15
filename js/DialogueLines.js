@@ -846,7 +846,7 @@ let wallOutletinJohnsHouse = [
 let jenConvo1 = [
     {
         scene: "firstLine",
-        who: "Agent",
+        who: "Jen",
         nameCol: "purple",
         voice: voiceLow1,
         text: "I'm Agent Jen.  You can't enter here.",
@@ -880,7 +880,7 @@ let jenConvo1 = [
     },
     {
         scene: "thirdLine",
-        who: "Agent",
+        who: "Jen",
         nameCol: "purple",
         voice: voiceLow1,
         text: "You're cute, but I can't let you in.  You need to go to the police station.",
@@ -900,7 +900,7 @@ let jenConvo1 = [
 let jenConvo2 = [
     {
         scene: "page1",
-        who: "Agent",
+        who: "Jen",
         nameCol: "#223344",
         voice: voiceHigh2,
         text: "I'm Agent Jen.  You can't enter here.",
@@ -934,7 +934,7 @@ let jenConvo2 = [
     },
     {
         scene: "page3",
-        who: "Agent",
+        who: "Jen",
         nameCol: "#223344",
         voice: voiceHigh2,
         text: "You need to go to the police station and see if they can help you out.",
@@ -951,7 +951,7 @@ let jenConvo2 = [
     },
     {
         scene: "page4",
-        who: "Agent",
+        who: "Jen",
         nameCol: "#223344",
         voice: voiceHigh2,
         text: "Ok, but just a quick look around and don't touch ANYTHING!",
@@ -971,7 +971,7 @@ let jenConvo2 = [
 let jenConvo3 = [
     {
         scene: "page1",
-        who: "Agent",
+        who: "Jen",
         nameCol: "#223344",
         voice: voiceHigh2,
         text: "Back again?",
@@ -1005,7 +1005,7 @@ let jenConvo3 = [
     },
     {
         scene: "page3",
-        who: "Agent",
+        who: "Jen",
         nameCol: "#223344",
         voice: voiceHigh2,
         text: "Ok, but just a quick look around, don't tell anyone I let you in.",
@@ -1022,7 +1022,7 @@ let jenConvo3 = [
     },
     {
         scene: "page4",
-        who: "Agent",
+        who: "Jen",
         nameCol: "#223344",
         voice: voiceHigh2,
         text: "and don't touch ANYTHING!",
@@ -1039,16 +1039,16 @@ let jenConvo3 = [
     },
 ];
 
-let cop1Convo = [
+let confessorConvo1 = [
     {
         scene: "firstLine",
         who: "Cop",
         nameCol: "darkBlue",
         voice: voiceLow1,
-        text: "I'm Lieutenant Dan.",
+        text: "I'm Detective Dan.",
         nextPage: 1,
-        leftPic: placeholderAngryPic,
-        rightPic: null,
+        leftPic: johnHappyPic,
+        rightPic: copPic,
 
         leftPicLeave: false,
         rightPicLeave: null,
@@ -1062,13 +1062,50 @@ let cop1Convo = [
         who: "Cop",
         nameCol: "darkBlue",
         voice: voiceLow1,
-        text: "I'm trying to find out who is responsible.",
+        text: "I work in Homicide.",
         nextPage: 2,
-        leftPic: placeholderAngryPic,
-        rightPic: null,
+        leftPic: johnHappyPic,
+        rightPic: copPic,
 
         leftPicLeave: false,
         rightPicLeave: null,
+
+        choices: null,
+
+        position: {x: 492.5, y: 140}
+    }
+];
+
+let copConvo = [
+    {
+        scene: "firstLine",
+        who: "Cop",
+        nameCol: "darkBlue",
+        voice: voiceLow1,
+        text: "Move along.",
+        nextPage: 1,
+        leftPic: johnHappyPic,
+        rightPic: copPic,
+
+        leftPicLeave: false,
+        rightPicLeave: false,
+
+        choices: null,
+
+        position: {x: 492.5, y: 140}
+    },
+    {
+        scene: "secondLine",
+        who: "Cop",
+        nameCol: "darkBlue",
+        voice: voiceLow1,
+        text: "Nothing to see here.",
+        nextPage: 2,
+        leftPic: johnHappyPic,
+        rightPic: copPic,
+
+        leftPicLeave: false,
+        rightPicLeave: false,
 
         choices: null,
 
@@ -1312,7 +1349,7 @@ let accusation = [
         text: "I figured it out!",
         nextPage: 1,
         leftPic: johnHappyPic,
-        rightPic: placeholderAngryPic,
+        rightPic: copPic,
 
         leftPicLeave: false,
         rightPicLeave: false,
@@ -1323,13 +1360,13 @@ let accusation = [
     },
     {
         scene: "accusation2",
-        who: "NPCAgent",
+        who: "Dan",
         nameCol: "#223344",
         voice: voiceHigh2,
         text: "Oh yeah? Who did it then?",
         nextPage: 2,
         leftPic: johnHappyPic,
-        rightPic: placeholderAngryPic,
+        rightPic: copPic,
 
         leftPicLeave: false,
         rightPicLeave: false,
@@ -1346,7 +1383,7 @@ let accusation = [
         text: "",
         nextPage: null,
         leftPic: johnHappyPic,
-        rightPic: placeholderAngryPic,
+        rightPic: copPic,
 
         leftPicLeave: false,
         rightPicLeave: false,
@@ -1357,13 +1394,13 @@ let accusation = [
     },
     {
         scene: "accusationRose1",
-        who: "NPCAgent",
+        who: "Dan",
         nameCol: "#223344",
         voice: voiceHigh2,
         text: "Huh.  Got any evidence?",
         nextPage: 4,
         leftPic: johnHappyPic,
-        rightPic: placeholderAngryPic,
+        rightPic: copPic,
 
         leftPicLeave: false,
         rightPicLeave: false,
@@ -1380,7 +1417,7 @@ let accusation = [
         text: "",
         nextPage: null,
         leftPic: johnHappyPic,
-        rightPic: placeholderAngryPic,
+        rightPic: copPic,
 
         leftPicLeave: false,
         rightPicLeave: false,
@@ -1391,13 +1428,13 @@ let accusation = [
     },
     {
         scene: "accusationRoseSuccess",
-        who: "NPCAgent",
+        who: "Dan",
         nameCol: "#223344",
         voice: voiceHigh2,
         text: "That's amazing kid!  You're absolutely right! You should be a detective.",
         nextPage: null,
         leftPic: johnHappyPic,
-        rightPic: placeholderAngryPic,
+        rightPic: copPic,
 
         leftPicLeave: false,
         rightPicLeave: false,
@@ -1408,13 +1445,13 @@ let accusation = [
     },
     {
         scene: "accusationRoseFail",
-        who: "NPCAgent",
+        who: "Dan",
         nameCol: "#223344",
         voice: voiceHigh2,
         text: "Nice try.  I don't think that's quite right.  You might need to keep looking for more evidence.",
         nextPage: null,
         leftPic: johnHappyPic,
-        rightPic: placeholderAngryPic,
+        rightPic: copPic,
 
         leftPicLeave: false,
         rightPicLeave: false,
@@ -1425,13 +1462,13 @@ let accusation = [
     },
     {
         scene: "accusationJulie1",
-        who: "NPCAgent",
+        who: "Dan",
         nameCol: "#223344",
         voice: voiceHigh2,
         text: "Huh. Got any evidence?",
         nextPage: 8,
         leftPic: johnHappyPic,
-        rightPic: placeholderAngryPic,
+        rightPic: copPic,
 
         leftPicLeave: false,
         rightPicLeave: false,
@@ -1448,7 +1485,7 @@ let accusation = [
         text: "",
         nextPage: null,
         leftPic: johnHappyPic,
-        rightPic: placeholderAngryPic,
+        rightPic: copPic,
 
         leftPicLeave: false,
         rightPicLeave: false,
@@ -1459,13 +1496,13 @@ let accusation = [
     },
     {
         scene: "accusationJulieFail",
-        who: "NPCAgent",
+        who: "Dan",
         nameCol: "#223344",
         voice: voiceHigh2,
         text: "Nice try.  I don't think that's quite right.  You might need to keep looking for more evidence.",
         nextPage: null,
         leftPic: johnHappyPic,
-        rightPic: placeholderAngryPic,
+        rightPic: copPic,
 
         leftPicLeave: false,
         rightPicLeave: false,
@@ -1476,13 +1513,13 @@ let accusation = [
     },
     {
         scene: "accusationJulieSuccess",
-        who: "NPCAgent",
+        who: "Dan",
         nameCol: "#223344",
         voice: voiceHigh2,
         text: "That's amazing kid!  You're absolutely right!  You should be a detective.",
         nextPage: null,
         leftPic: johnHappyPic,
-        rightPic: placeholderAngryPic,
+        rightPic: copPic,
 
         leftPicLeave: false,
         rightPicLeave: false,
@@ -1493,13 +1530,13 @@ let accusation = [
     },
     {
         scene: "accusationFelen1",
-        who: "NPCAgent",
+        who: "Dan",
         nameCol: "#223344",
         voice: voiceHigh2,
         text: "Huh.  Got any evidence?",
         nextPage: 12,
         leftPic: johnHappyPic,
-        rightPic: placeholderAngryPic,
+        rightPic: copPic,
 
         leftPicLeave: false,
         rightPicLeave: false,
@@ -1516,7 +1553,7 @@ let accusation = [
         text: "",
         nextPage: null,
         leftPic: johnHappyPic,
-        rightPic: placeholderAngryPic,
+        rightPic: copPic,
 
         leftPicLeave: false,
         rightPicLeave: false,
@@ -1527,13 +1564,13 @@ let accusation = [
     },
     {
         scene: "accusationFelenFail",
-        who: "NPCAgent",
+        who: "Dan",
         nameCol: "#223344",
         voice: voiceHigh2,
         text: "Nice Try.  I don't think that's quite right.  You might need to keep looking for more evidence.",
         nextPage: null,
         leftPic: johnHappyPic,
-        rightPic: placeholderAngryPic,
+        rightPic: copPic,
 
         leftPicLeave: false,
         rightPicLeave: false,
@@ -1544,13 +1581,13 @@ let accusation = [
     },
     {
         scene: "accusationFelenSuccess",
-        who: "NPCAgent",
+        who: "Dan",
         nameCol: "#223344",
         voice: voiceHigh2,
         text: "That's amazing kid!  You're absolutely right!  You should be a detective.",
         nextPage: null,
         leftPic: johnHappyPic,
-        rightPic: placeholderAngryPic,
+        rightPic: copPic,
 
         leftPicLeave: false,
         rightPicLeave: false,
@@ -1561,13 +1598,13 @@ let accusation = [
     },
     {
         scene: "accusationJen1",
-        who: "NPCAgent",
+        who: "Dan",
         nameCol: "#223344",
         voice: voiceHigh2,
         text: "Huh.  Got any evidence?",
         nextPage: 16,
         leftPic: johnHappyPic,
-        rightPic: placeholderAngryPic,
+        rightPic: copPic,
 
         leftPicLeave: false,
         rightPicLeave: false,
@@ -1584,7 +1621,7 @@ let accusation = [
         text: "",
         nextPage: null,
         leftPic: johnHappyPic,
-        rightPic: placeholderAngryPic,
+        rightPic: copPic,
 
         leftPicLeave: false,
         rightPicLeave: false,
@@ -1595,13 +1632,13 @@ let accusation = [
     },
     {
         scene: "accusationJenFail",
-        who: "NPCAgent",
+        who: "Dan",
         nameCol: "#223344",
         voice: voiceHigh2,
         text: "Nice Try.  I don't think that's quite right.  You might need to keep looking for more evidence.",
         nextPage: null,
         leftPic: johnHappyPic,
-        rightPic: placeholderAngryPic,
+        rightPic: copPic,
 
         leftPicLeave: false,
         rightPicLeave: false,
@@ -1612,13 +1649,13 @@ let accusation = [
     },
     {
         scene: "accusationJenSuccess",
-        who: "NPCAgent",
+        who: "Dan",
         nameCol: "#223344",
         voice: voiceHigh2,
         text: "That's amazing kid!  You're absolutely right!  You should be a detective.",
         nextPage: null,
         leftPic: johnHappyPic,
-        rightPic: placeholderAngryPic,
+        rightPic: copPic,
 
         leftPicLeave: false,
         rightPicLeave: false,

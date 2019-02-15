@@ -199,8 +199,7 @@ function initializeOverworldObjects() {
                     allNPCs.push(cat);
                 }
             case TILE.COP:
-                if(i == getTileIndex(theCity, 68, 38)) {
-                    console.log("Initializing the Confessor");
+                if((locationNow == Place.TheCity) && (i == getTileIndex(theCity, 68, 38))) {
                     const confessor = initializeConfessor(i);
                     if(eventManager.canShowNPC(confessor)) {
                         allNPCs.push(confessor);
@@ -208,6 +207,9 @@ function initializeOverworldObjects() {
                 } else {
                     const cop1 = initializeCop1(i);
                     if(eventManager.canShowNPC(cop1)) {
+                        if(locationNow == Place.DavesHouse) {
+                            console.log("Should be drawing Dave's Cop");
+                        }
                         allNPCs.push(cop1);
                     }
                 }
@@ -573,11 +575,11 @@ function initializeCop1(arrayIndex) {
     let cop1 = new OverworldObject("Cop", xPos, yPos, 26, 62, copAnimations);
     cop1.dialogue = new Dialogue();
     cop1.colour = "blue";
-    cop1.location = Place.TheCity;
+    cop1.location = locationNow;
     
     cop1.chatEvents = function (createElseIncrement) {
         //Add additional conversations in this array if you want the Agent to say different things (or different Agents to say different things)
-        this.text(createElseIncrement, [copConvo]);
+        this.text(createElseIncrement, [copConvo1, copConvo2, copConvo3]);
     }
 
     return cop1;

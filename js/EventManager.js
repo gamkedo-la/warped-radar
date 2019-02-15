@@ -128,6 +128,8 @@ function EventManager() {
             case "Cop":
                 if(locationNow == Place.TheCity) {
                     result = true;
+                } else if(locationNow == Place.DavesHouse) {
+                    result = true;
                 }
             break;
             case "Fusion":
@@ -195,11 +197,18 @@ function EventManager() {
                 }
             break;
             case "Cop":
-                result = 0;
+                if(locationNow == Place.DavesHouse) {
+                    if(GameEvent.FoundDave) {
+                        result = 2;
+                    } else {
+                        result = 1;
+                    }
+                } else {
+                    result = 0;
+                }
             break;
             case "Fusion":
                 if(GameEvent.Talk_Fusion_2) {
-                    
                     result = 2;
                 } else if((GameEvent.Talk_Fusion_1) && (GameEvent.Talk_Agent_2)) {
                     result = 1;

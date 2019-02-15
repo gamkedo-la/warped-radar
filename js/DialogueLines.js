@@ -1076,7 +1076,7 @@ let confessorConvo1 = [
     }
 ];
 
-let copConvo = [
+let copConvo1 = [
     {
         scene: "firstLine",
         who: "Cop",
@@ -1100,6 +1100,131 @@ let copConvo = [
         nameCol: "darkBlue",
         voice: voiceLow1,
         text: "Nothing to see here.",
+        nextPage: 2,
+        leftPic: johnHappyPic,
+        rightPic: copPic,
+
+        leftPicLeave: false,
+        rightPicLeave: false,
+
+        choices: null,
+
+        position: {x: 492.5, y: 140}
+    }
+];
+
+let copConvo3 = [
+    {
+        scene: "page1",
+        who: "Cop",
+        nameCol: "darkBlue",
+        voice: voiceLow1,
+        text: "You shouldn't be here.  Who let you in?",
+        nextPage: 1,
+        leftPic: johnHappyPic,
+        rightPic: copPic,
+
+        leftPicLeave: false,
+        rightPicLeave: false,
+
+        choices: null,
+
+        position: {x: 492.5, y: 140}
+    },
+    {
+        scene: "page2",
+        who: "John",
+        nameCol: "lightBlue",
+        voice: voiceLow1,
+        text: "",
+        nextPage: null,
+        leftPic: johnHappyPic,
+        rightPic: copPic,
+
+        leftPicLeave: false,
+        rightPicLeave: false,
+
+        choices: [["Agent Jen.", "page3"], ["Nobody. I'm just looking for my Uncle Dave.", "page5"]],
+
+        position: {x: 505.5, y: 324}
+    },
+    {
+        scene: "page3",
+        who: "Cop",
+        nameCol: "darkBlue",
+        voice: voiceLow1,
+        text: "That's the second strange thing she did today.",
+        nextPage: 3,
+        leftPic: johnHappyPic,
+        rightPic: copPic,
+
+        leftPicLeave: false,
+        rightPicLeave: false,
+
+        choices: null,
+
+        position: {x: 492.5, y: 140}
+    },
+    {
+        scene: "page4",
+        who: "Cop",
+        nameCol: "darkBlue",
+        voice: voiceLow1,
+        text: "The first was telling me to throw out this broken skateboard...",
+        nextPage: null,
+        leftPic: johnHappyPic,
+        rightPic: copPic,
+
+        leftPicLeave: false,
+        rightPicLeave: false,
+
+        choices: null,
+
+        position: {x: 492.5, y: 140}
+    },
+    {
+        scene: "page5",
+        who: "Cop",
+        nameCol: "darkBlue",
+        voice: voiceLow1,
+        text: "Well you need to get out of here!",
+        nextPage: null,
+        leftPic: johnHappyPic,
+        rightPic: copPic,
+
+        leftPicLeave: false,
+        rightPicLeave: false,
+
+        choices: null,
+
+        position: {x: 492.5, y: 140}
+    }
+];
+
+let copConvo2 = [
+    {
+        scene: "firstLine",
+        who: "Cop",
+        nameCol: "darkBlue",
+        voice: voiceLow1,
+        text: "You shouldn't be here.",
+        nextPage: 1,
+        leftPic: johnHappyPic,
+        rightPic: copPic,
+
+        leftPicLeave: false,
+        rightPicLeave: false,
+
+        choices: null,
+
+        position: {x: 492.5, y: 140}
+    },
+    {
+        scene: "secondLine",
+        who: "Cop",
+        nameCol: "darkBlue",
+        voice: voiceLow1,
+        text: "You need to leave immediately.",
         nextPage: 2,
         leftPic: johnHappyPic,
         rightPic: copPic,

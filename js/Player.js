@@ -14,7 +14,7 @@ function Player () {
     this.h = 67;//makes depth sorting better even though sprite is only 58 visible pixels high
     this.walkSpeed = 100;
 
-    this.currentlyFacingDir = DOWN;    
+    this.currentlyFacingDir = DOWN;
 
     this.keyHeld_walkUp = false;
     this.keyHeld_walkDown = false;
@@ -35,7 +35,7 @@ function Player () {
 
     this.collider = new Collider(this.x, this.y, this.w, this.h, 0, 0);
     const idleWidth = 1.5 * johnIdle.spriteSheet.width/(4 * johnIdle.animationColFrames);
-    this.tileCollider = {x:this.x - idleWidth / 2, y:this.y + (0.38 * this.h), 
+    this.tileCollider = {x:this.x - idleWidth / 2, y:this.y + (0.38 * this.h),
                          width: idleWidth, height:6};
     this.setTileCollider = function(newX, newY) {
         this.tileCollider.x = newX - idleWidth / 2;
@@ -130,6 +130,13 @@ function Player () {
                 }
             }
 
+            if (this.states.walking && !footsteps_sounding) {
+              street_footsteps.play();
+            }
+            if (!this.states.walking) {
+              street_footsteps.pause();
+            }
+
             let shouldMoveX = false;
             let shouldMoveY = false;
             let deltaX = nextX - this.x;
@@ -138,8 +145,8 @@ function Player () {
             let objCollisionData;
 
             let nothingNearby = true;
-            if(!((this.nearObjOrNPC == null) || 
-               (this.nearObjOrNPC.tileCollider == undefined) || 
+            if(!((this.nearObjOrNPC == null) ||
+               (this.nearObjOrNPC.tileCollider == undefined) ||
                (this.nearObjOrNPC.tileCollider == null))) {
                 objCollisionData = doRectsIntersect(this.tileCollider, this.nearObjOrNPC.tileCollider, deltaX, deltaY);
                 nothingNearby = false;
@@ -147,7 +154,7 @@ function Player () {
                 //Nothing to collide with, so all collision checks result in no collision
                 objCollisionData = {upperRight:false, lowerRight:false, lowerLeft:false, upperLeft:false};
             }
-            
+
             let nextTileTypes = getNextTileTypesAtRectInLayer(this.tileCollider, deltaX, deltaY, locationList[locationNow].layers[Layer.Interaction]);
             const ur = moveOntoTileIfAble(nextTileTypes.upperRight);
             const ul = moveOntoTileIfAble(nextTileTypes.upperLeft);
@@ -159,22 +166,22 @@ function Player () {
                     if (nothingNearby) {
                         shouldMoveX = true;
                     } else {
-                        if((objCollisionData.topRight == false) && 
+                        if((objCollisionData.topRight == false) &&
                            (objCollisionData.bottomRight == false)) {
                             shouldMoveX = true;
                         }//end if objCollisionData check
-                    }//end if-else nearObjOrNPC         
+                    }//end if-else nearObjOrNPC
                 }//end if moveOntoTileIfAble
             } else if(nextX < this.x) {//trying to move left
                 if (ul && ll) {
                     if (nothingNearby) {
                         shouldMoveX = true;
                     } else {
-                        if((objCollisionData.topLeft == false) && 
+                        if((objCollisionData.topLeft == false) &&
                            (objCollisionData.bottomLeft == false)) {
                             shouldMoveX = true;
                         }//end if objCollisionData check
-                    }//end if-else nearObjOrNPC 
+                    }//end if-else nearObjOrNPC
                 }//end if moveOntoTileIfAble
             }//end if-else nextX > this.x
 
@@ -183,22 +190,22 @@ function Player () {
                     if (nothingNearby) {
                         shouldMoveY = true;
                     } else {
-                        if((objCollisionData.bottomRight == false) && 
+                        if((objCollisionData.bottomRight == false) &&
                            (objCollisionData.bottomLeft == false)) {
                             shouldMoveY = true;
                         }//end if objCollisionData check
-                    }//end if-else nearObjOrNPC 
+                    }//end if-else nearObjOrNPC
                 }//end if moveOntoTileIfAble
             } else if(nextY < this.y) {//trying to walk up
                 if (ur && ul) {
                     if (nothingNearby) {
                         shouldMoveY = true;
                     } else {
-                        if((objCollisionData.topRight == false) && 
+                        if((objCollisionData.topRight == false) &&
                            (objCollisionData.topLeft == false)) {
                             shouldMoveY = true;
                         }//end if objCollisionData check
-                    }//end if-else nearObjOrNPC 
+                    }//end if-else nearObjOrNPC
                 }//end if moveOntoTileIfAble
             }//end if-else nextX > this.x
 
@@ -231,20 +238,20 @@ function Player () {
             if(shouldMoveY) {
                 this.y = nextY;
             }
-            
+
             this.x = Math.round(this.x);
             this.y = Math.round(this.y);
 
             this.collider.setCollider(this.x, this.y);
             this.setTileCollider(this.x, this.y);
-            
+
             playerWorldHandling(this);
         }
     };
 
     this.draw = function () {
         if(debug) {
-            scaledContext.strokeRect(this.tileCollider.x, this.tileCollider.y, 
+            scaledContext.strokeRect(this.tileCollider.x, this.tileCollider.y,
                 this.tileCollider.width, this.tileCollider.height);
         }
         if (this.states.walking && whoMoving != null) {
@@ -254,7 +261,7 @@ function Player () {
             if (this.facing.south) {
                 johnWalkDown.draw(scaledContext, this.x, this.y);
             }
-            if (this.facing.west) { 
+            if (this.facing.west) {
                 johnWalkSide.draw(scaledContext, this.x, this.y); //default Side spritesheet is facing to the left
             }
             if (this.facing.east) {
@@ -298,7 +305,7 @@ function Player () {
             } else if (this.keyHeld_walkRight) {
                 this.currentlyFacingDir = RIGHT;
             }
-        } 
+        }
         //outlineCircle(scaledContext, this.x, this.y, 2, "green", lineWidth = 1) //DEBUG
 
         switch(this.currentlyFacingDir) {
@@ -307,7 +314,7 @@ function Player () {
                 johnWalkUp.paused = !this.states.walking;
                 if (!this.states.walking) johnWalkUp.setFrame(0);
                 break;
-            
+
             case DOWN:
                 johnWalkDown.draw(scaledContext, this.x, this.y);
                 johnWalkDown.paused = !this.states.walking;
@@ -319,7 +326,7 @@ function Player () {
                 johnWalkSide.paused = !this.states.walking;
                 if (!this.states.walking) johnWalkSide.setFrame(1);
                 break;
-            
+
             case RIGHT:
                 johnWalkSide.draw(scaledContext, this.x, this.y, 1, true);
                 johnWalkSide.paused = !this.states.walking;
@@ -331,7 +338,7 @@ function Player () {
                 johnWalkUpDiag.paused = !this.states.walking;
                 if (!this.states.walking) johnWalkUpDiag.setFrame(1);
                 break;
-            
+
             case UP_RIGHT:
                 johnWalkUpDiag.draw(scaledContext, this.x, this.y, 1, true);
                 johnWalkUpDiag.paused = !this.states.walking;

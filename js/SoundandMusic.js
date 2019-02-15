@@ -50,6 +50,24 @@ horn_1_trimmed.volume = 0.2;
 horn_2_trimmed.volume = 0.2;
 horn_3_trimmed.volume = 0.2;
 
+let inventory_open_sound = new Audio("./audio/zip_open.mp3");
+let inventory_close_sound = new Audio("./audio/zip_close.mp3");
+
+let rug_footsteps = new Audio("./audio/rug_step.mp3");
+rug_footsteps.loop = "true";
+let street_footsteps = new Audio("./audio/street_step.mp3");
+street_footsteps.loop = "true";
+street_footsteps.volume = 0.05;
+street_footsteps.playbackRate = 1.3;
+
+street_footsteps.addEventListener('timeupdate', function(){
+	var buffer = .44;
+    if(this.currentTime > this.duration - buffer) {
+    	this.currentTime = 0;
+        this.play();
+}}, false);
+
+let footsteps_sounding = false;
 //how to add music: let bgMusic = "./audio/bgMusic";
 
 let musicVolume;

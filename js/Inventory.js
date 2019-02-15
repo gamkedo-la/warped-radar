@@ -211,6 +211,11 @@ let inventory = new(function () {
     this.toggle = function () {
         if (!levelEditor.isOn && gameIsStarted) {
             this.isShowing = !this.isShowing;
+            if (!this.isShowing) {
+              inventory_open_sound.play();
+            } else {
+              inventory_close_sound.play();
+            }
         }
     }
 

@@ -1039,6 +1039,128 @@ let julieCatArgument = [
     },
 ];
 
+let fusionConvo = [
+    {
+        scene: "page1",
+        who: "Fusion",
+        nameCol: "#b09145",
+        voice: voiceLow1,
+        text: "The name's Fusion.  You looking for some enhancements?",
+        nextPage: 1,
+        leftPic: johnHappyPic,
+        rightPic: fusionFlatPic,
+
+        leftPicLeave: false,
+        rightPicLeave: false,
+
+        choices: null,
+
+        position: {x: 505.5, y: 34}
+    },
+    {
+        scene: "page2",
+        who: "John",
+        nameCol: "lightBlue",
+        voice: voiceLow1,
+        text: "",
+        nextPage: null,
+        leftPic: johnHappyPic,
+        rightPic: fusionFlatPic,
+
+        leftPicLeave: false,
+        rightPicLeave: false,
+
+        choices: [["Yes, I just can't keep up and I need a job.", "page3"], ["No, I think they ruined Ohm City and I refuse to become part of the refuse.", "page7"]],
+
+        position: {x: 505.5, y: 324}
+    },
+    {
+        scene: "page3",
+        who: "Fusion",
+        nameCol: "#b09145",
+        voice: voiceLow1,
+        text: "Well, they don't come cheap but I can make you a better deal than Julie.",
+        nextPage: 3,
+        leftPic: johnHappyPic,
+        rightPic: fusionFlatPic,
+
+        leftPicLeave: false,
+        rightPicLeave: false,
+
+        choices: null,
+
+        position: {x: 503.5, y: 679}
+    },
+    {
+        scene: "page4",
+        who: "John",
+        nameCol: "lightBlue",
+        voice: voiceLow1,
+        text: "",
+        nextPage: null,
+        leftPic: johnHappyPic,
+        rightPic: fusionFlatPic,
+
+        leftPicLeave: false,
+        rightPicLeave: false,
+
+        choices: [["I don't have any Credits", "page5"], ["Can I do a job for you to earn the Credits I need?", "page6"]],
+
+        position: {x: 511.5, y: 990}
+    },
+    {
+        scene: "page5",
+        who: "Fusion",
+        nameCol: "#b09145",
+        voice: voiceLow1,
+        text: "Well, I can do it cheap, but not that cheap.",
+        nextPage: null,
+        leftPic: johnHappyPic,
+        rightPic: fusionFlatPic,
+
+        leftPicLeave: false,
+        rightPicLeave: false,
+
+        choices: null,
+
+        position: {x: 90.5, y: 1060}
+    },
+    {
+        scene: "page6",
+        who: "Fusion",
+        nameCol: "#b09145",
+        voice: voiceLow1,
+        text: "Go talk to Agent Jen and come back.  Then we'll see what can be done.",
+        nextPage: null,
+        leftPic: johnHappyPic,
+        rightPic: fusionFlatPic,
+
+        leftPicLeave: false,
+        rightPicLeave: false,
+
+        choices: null,
+
+        position: {x: 937.5, y: 1077}
+    },
+    {
+        scene: "page7",
+        who: "Fusion",
+        nameCol: "#b09145",
+        voice: voiceLow1,
+        text: "I hear you man.  Stay strong.",
+        nextPage: null,
+        leftPic: johnHappyPic,
+        rightPic: fusionFlatPic,
+
+        leftPicLeave: false,
+        rightPicLeave: false,
+
+        choices: null,
+
+        position: {x: 964.5, y: 452}
+    },
+];
+
 let accusation = [
     {
         scene: "accusation1",

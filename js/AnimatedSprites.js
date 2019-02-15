@@ -151,6 +151,14 @@ function makeAnimatedSprites() {
 		framesUntilNext: frameDelayWalk,
 	});
 
+	//Fusion
+	fusionIdle = new AnimatedSpriteClass({
+		name: "fusionAnimationIdle",
+		spriteSheet: fusionAnimationIdle,
+		animationColFrames: 42,
+		framesUntilNext: frameDelayWalk,
+	});
+
 	//Cop
 	copIdle = new AnimatedSpriteClass({
 		name: "copAnimationIdle",

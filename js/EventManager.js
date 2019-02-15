@@ -113,6 +113,11 @@ function EventManager() {
                     result = true;
                 }
             break;
+            case "Fusion":
+                if(locationNow == Place.TheCity) {
+                    result = true;
+                }
+            break;
         }
 
         return result;
@@ -160,6 +165,9 @@ function EventManager() {
             case "Cop_1":
                 result = 0;
             break;
+            case "Fusion":
+                result = 0;
+            break;
         }
 
         return result;
@@ -193,6 +201,9 @@ function EventManager() {
             break;
             case "Cop_1":
                 GameEvent.Talk_Cop1_1 = true;
+            break;
+            case "Fusion":
+                //no action required?
             break;
         }
 

@@ -23,6 +23,7 @@ let julieWorriedPic = document.createElement("img");
 let julieMadPic = document.createElement("img");
 let npc_agentPic = document.createElement("img");
 let catManPic = document.createElement("img");
+let fusionFlatPic = document.createElement("img");
 let placeholderNormalPic = document.createElement("img");
 let placeholderAngryPic = document.createElement("img");
 
@@ -45,14 +46,12 @@ let roseAnimationDown = document.createElement("img");
 let roseAnimationSide = document.createElement("img");
 
 let julieAnimationIdle = document.createElement("img");
-
 let catManAnimationIdle = document.createElement("img");
-
 let agentAnimationIdle = document.createElement("img");
+let copAnimationIdle = document.createElement("img");
+let fusionAnimationIdle = document.createElement("img");
 
 let daveIdle = document.createElement("img");
-
-let copAnimationIdle = document.createElement("img");
 
 let rainEffectImage = document.createElement("img");
 let fogEffectImage = document.createElement("img");
@@ -97,6 +96,7 @@ function loadImages() {
         {varName: julieWorriedPic, theFile: "julie1.png"},
         {varName: julieMadPic, theFile: "julie2.png"},
         {varName: npc_agentPic, theFile: "npc_agent.png"},
+        {varName: fusionFlatPic, theFile: "NPC-Fusion-Portrait.png"},
         {varName: catManPic, theFile: "CatMan-Portrait.png"},
         {varName: placeholderNormalPic, theFile: "PlaceholderPortrait.png"},
         {varName: placeholderAngryPic, theFile: "PlaceholderPortrait.png"},
@@ -123,14 +123,12 @@ function loadImages() {
         {varName: roseAnimationDown, theFile: "rosesprite-sheet-DOWN.png"},
 
         {varName: julieAnimationIdle, theFile: "juliesprite-sheet-IDLE.png"},
-
         {varName: catManAnimationIdle, theFile: "catMan.png"},
-
         {varName: agentAnimationIdle, theFile: "npc_agent-idle.png"},
+        {varName: fusionAnimationIdle, theFile: "NPC-Fusion-Sprite-IDLE.png"},
+        {varName: copAnimationIdle, theFile: "npc_cop-idle.png"},
 
         {varName: daveIdle, theFile: "DaveSprite_Dead.png"},
-
-        {varName: copAnimationIdle, theFile: "npc_cop-idle.png"},
 
         //DEFAULT GAMESTART ITEMS
         {varName: notePic, theFile: "note.png"},

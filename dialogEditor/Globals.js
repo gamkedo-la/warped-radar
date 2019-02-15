@@ -49,7 +49,8 @@ const Speaker = {
 	Rose:'Rose',
 	Julie:'Julie',
 	NPCAgent:'NPCAgent',
-	Cat:'Cat'
+	Cat:'Cat',
+	Fusion:'Fusion'
 };
 //JohnColor is special, don't need to call out other colors separately
 const JohnColor = {
@@ -79,6 +80,10 @@ function colorsForSpeaker(speaker) {
 		case Speaker.Cat:
 			colors.bkgd = 'yellow';
 			colors.line = 'darkBlue';
+		break;
+		case Speaker.Fusion:
+			colors.bkgd = '#440055';
+			colors.line = '#b09145';
 		break;
 	}
 	

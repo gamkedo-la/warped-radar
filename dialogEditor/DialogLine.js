@@ -892,6 +892,8 @@ function DialogLine(position) {
 				return "voiceHigh2";
 			case Speaker.Cat:
 				return "voiceLow1";
+			case Speaker.Fusion:
+				return "voiceLow1";
 		}
 	}
 	
@@ -914,6 +916,9 @@ function DialogLine(position) {
 			case placeholderNormalPic:
 			case placeholderAngryPic:
 				return "placeholderAngryPic"
+			case fusionFlatPic:
+			case fusionAngryPic:
+				return "fusionFlatPic";
 		}
 	};
 
@@ -929,6 +934,8 @@ function DialogLine(position) {
 				return "#223344";
 			case Speaker.Cat:
 				return "yellow";
+			case Speaker.Fusion:
+				return "#b09145";
 		}
 	}
 }

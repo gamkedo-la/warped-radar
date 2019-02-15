@@ -12,6 +12,8 @@ const julieHappyPic = document.createElement("img");
 const julieWorriedPic = document.createElement("img");
 const npcAgentFlatPic = document.createElement("img");
 const npcAgentAngryPic = document.createElement("img");
+const fusionFlatPic = document.createElement("img");
+const fusionAngryPic = document.createElement("img");
 const placeholderNormalPic = document.createElement("img");
 const placeholderAngryPic = document.createElement("img");
 
@@ -67,6 +69,8 @@ function loadImages() {
 		{imgName: julieWorriedPic, theFile: "julie1.png", speaker:Speaker.Julie},
 		{imgName: npcAgentFlatPic, theFile: "npc_agent.png", speaker:Speaker.NPCAgent},
 		{imgName: npcAgentAngryPic, theFile: "npc_agent.png", speaker:Speaker.NPCAgent},//placeholder
+		{imgName: fusionFlatPic, theFile: "NPC-Fusion-Portrait.png", speaker:Speaker.Fusion},
+		{imgName: fusionAngryPic, theFile: "NPC-Fusion-Portrait.png", speaker:Speaker.Fusion},//placeholder
 		{imgName: placeholderNormalPic, theFile: "PlaceholderPortrait.png", speaker:Speaker.Cat},//placeholder
 		{imgName: placeholderAngryPic, theFile: "PlaceholderPortrait.png", speaker:Speaker.Cat},//placeholder
 	];

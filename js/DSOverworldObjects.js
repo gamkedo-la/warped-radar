@@ -170,6 +170,7 @@ function initializeOverworldObjects() {
     for(let i = 0; i < dataArray.length; i++) {
         switch(dataArray[i]) {
             case TILE.ROSE:
+                console.log("Making Rose");
                 const rose = initializeRose(i);
                 if(eventManager.canShowNPC(rose)) {
                     allNPCs.push(rose);
@@ -202,6 +203,13 @@ function initializeOverworldObjects() {
                 const cop1 = initializeCop1(i);
                 if(eventManager.canShowNPC(cop1)) {
                     allNPCs.push(cop1);
+                }
+            break;
+            case TILE.FUSION:
+                console.log("Making Fusion");
+                const fusion = initializeFusion(i);
+                if(eventManager.canShowNPC(fusion)) {
+                    allNPCs.push(fusion);
                 }
             break;
         }
@@ -477,6 +485,36 @@ function initializeAgent(arrayIndex) {
     }
 
     return agent;
+}
+
+function initializeFusion(arrayIndex) {
+    const fusionAnimations = {
+        idle:fusionIdle,
+        worry:null,
+        north:null,
+        south:null,
+        east:null,
+        west:null,
+        northEast:null,
+        northWest:null,
+        southEast:null,
+        southWest:null
+    }
+
+    const columns = locationList[locationNow].columns;
+    const xPos = (arrayIndex % columns) * WORLD_W + WORLD_W / 2;
+    const yPos = Math.floor(arrayIndex / columns) * WORLD_H;
+    let fusion = new OverworldObject("Fusion", xPos, yPos, 26, 62, fusionAnimations);
+    fusion.dialogue = new Dialogue();
+    fusion.colour = "yellow";
+    fusion.location = Place.TheCity;
+    
+    fusion.chatEvents = function (createElseIncrement) {
+        //Add additional conversations in this array if you want the Agent to say different things (or different Agents to say different things)
+        this.text(createElseIncrement, [fusionConvo]);
+    }
+
+    return fusion;
 }
 
 function initializeCop1(arrayIndex) {

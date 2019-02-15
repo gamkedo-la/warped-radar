@@ -48,6 +48,7 @@ const TILE = {
 
     COP:202,
     CAT:205,
+    FUSION:207,
 
     BLANK:576
 };

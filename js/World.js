@@ -181,7 +181,11 @@ function drawLayer(layer) {
 
         } //end of inner part of nested for loop (just drew an entire row, move to the next row)
         drawTileY += WORLD_H;
-        drawTileX = 0;
+//        drawTileX = 0;
+        drawTileX = mainCamera.camPanX / WORLD_W;
+        if(SNAP_TILES_TO_INTEGER_POSITIONS) {
+            drawTileX = Math.ceil(drawTileX);
+        }
     }
 }
 
@@ -266,7 +270,11 @@ function drawDepthSorted(nonTileObjs) {
         }//end of inner loop (done drawing a row)
 
         drawTileY += WORLD_H;
-        drawTileX = 0;
+ //        drawTileX = 0;
+        drawTileX = mainCamera.camPanX / WORLD_W;
+        if(SNAP_TILES_TO_INTEGER_POSITIONS) {
+            drawTileX = Math.ceil(drawTileX);
+        }
     }//end of outer loop (done drawing from tile map)
 
     for(let i = 0; i < tilesToDrawLater.length; i++) {

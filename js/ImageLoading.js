@@ -116,7 +116,6 @@ function loadImages() {
         {varName: johnAnimationUpDiag, theFile: "johnsprite-sheet-UP-DIAG.png"},
         {varName: johnAnimationDownDiag, theFile: "johnsprite-sheet-DOWN-DIAG.png"},
         {varName: johnAnimationIdle, theFile: "johnsprite-sheet-IDLE.png"},
-        //{varName: johnSide45Animation, theFile: "johnspriteside45-sheet.png"},//legacy diagonal animation
         
         {varName: roseAnimationIdle, theFile: "rosesprite-sheet-IDLE.png"},
         {varName: roseAnimationWorry, theFile: "rosesprite-sheet-IDLE-WORRY.png"},

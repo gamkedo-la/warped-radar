@@ -20,6 +20,7 @@ const GameEvent = {
     Talk_Agent_1:false,
     Talk_Agent_2:false,
     Talk_Fusion_1:false,
+    Talk_Fusion_2:false,
     Talk_Dan_1:false
 }
 
@@ -50,6 +51,11 @@ function EventManager() {
             break;
             case "trainTicket":
                 if((locationNow == Place.DavesHouse) && (GameEvent.FoundDave)) {
+                    result = true;
+                }
+            break;
+            case "burnerPhone":
+                if((locationNow == Place.TheCity) && (GameEvent.Talk_Fusion_2)) {
                     result = true;
                 }
             break;
@@ -192,7 +198,14 @@ function EventManager() {
                 result = 0;
             break;
             case "Fusion":
-                result = 0;
+                if(GameEvent.Talk_Fusion_2) {
+                    
+                    result = 2;
+                } else if((GameEvent.Talk_Fusion_1) && (GameEvent.Talk_Agent_2)) {
+                    result = 1;
+                } else {
+                    result = 0;
+                }
             break;
         }
 
@@ -238,7 +251,11 @@ function EventManager() {
                 //Do nothing?
             break;
             case "Fusion":
-                GameEvent.Talk_Fusion_1 = true;
+                if(!GameEvent.Talk_Fusion_1) {
+                    GameEvent.Talk_Fusion_1 = true;
+                } else if(GameEvent.Talk_Agent_2) {
+                    GameEvent.Talk_Fusion_2 = true;
+                }
             break;
         }
 

@@ -69,7 +69,7 @@ function ObtainableItem(drawTileX,drawTileY, tileWidth,tileHeight, name, descrip
 }
 
 let brokenSkateBoard = new ObtainableItem(undefined,undefined, WORLD_W,WORLD_H, "brokenSkateBoard", "Broken Skateboard", null, TILE.BROKEN_SKATEBOARD, locationNow);
-let burnerPhone = new ObtainableItem(undefined,undefined, WORLD_W,WORLD_H, "burnerPhone", "Burner Phone", null, TILE.BURNER_PHONE, locationNow);
+let burnerPhone = new ObtainableItem(undefined,undefined, WORLD_W,WORLD_H, "burnerPhone", "Burner Phone", null, TILE.BURNER_PHONE, locationNow, [["Inspect", "Notification: 'Rose, you never shoul...'"], ["Open", "It needs a passcode."]]);
 let crowbar = new ObtainableItem(undefined,undefined, WORLD_W,WORLD_H, "crowbar", "Crowbar", null, TILE.CROWBAR, locationNow, [["Inspect", "It's clean.  Too clean..."], ["Swing", "It makes a loud whistling sound"]]);
 let hoodie = new ObtainableItem(undefined,undefined, WORLD_W,WORLD_H, "hoodie", "Hoodie", null, TILE.HOODIE, locationNow, [["Inspect", "There's a long orange hair on it"], ["Put On", "It fits, and smells like Uncle Dave"]]);
 let medicalNotebook = new ObtainableItem(undefined,undefined, WORLD_W,WORLD_H, "medicalNotebook", "Medical Notebook", null, TILE.MEDICAL_NOTEBOOK, locationNow, [["Inspect", "It contains medical notes for the impact of cybernetics on human physiology"], ["Read", "It's too long and complicated, but it looks like Rose's handwriting"]]);

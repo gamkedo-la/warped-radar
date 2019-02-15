@@ -1340,6 +1340,80 @@ let fusionConvo = [
     },
 ];
 
+let fusionConvo2 = [
+    {
+        scene: "page1",
+        who: "Fusion",
+        nameCol: "#b09145",
+        voice: voiceLow1,
+        text: "I heard about your Uncle Dave.",
+        nextPage: 1,
+        leftPic: johnHappyPic,
+        rightPic: fusionFlatPic,
+
+        leftPicLeave: false,
+        rightPicLeave: false,
+
+        choices: null,
+
+        position: {x: 622.5, y: 140}
+    },
+    {
+        scene: "page2",
+        who: "Fusion",
+        nameCol: "#b09145",
+        voice: voiceLow1,
+        text: "Here, take this. It'll help you figure out who did it.",
+        nextPage: null,
+        leftPic: johnHappyPic,
+        rightPic: fusionFlatPic,
+
+        leftPicLeave: false,
+        rightPicLeave: false,
+
+        choices: null,
+
+        position: {x: 622.5, y: 410}
+    },
+];
+
+let fusionConvo3 = [
+    {
+        scene: "page1",
+        who: "Fusion",
+        nameCol: "#b09145",
+        voice: voiceLow1,
+        text: "I'd love to help more, but that's all I know.",
+        nextPage: 1,
+        leftPic: johnHappyPic,
+        rightPic: fusionFlatPic,
+
+        leftPicLeave: false,
+        rightPicLeave: false,
+
+        choices: null,
+
+        position: {x: 622.5, y: 140}
+    },
+    {
+        scene: "page2",
+        who: "Fusion",
+        nameCol: "#b09145",
+        voice: voiceLow1,
+        text: "Come back when you have some Creds and we'll do that enhancement.",
+        nextPage: null,
+        leftPic: johnHappyPic,
+        rightPic: fusionFlatPic,
+
+        leftPicLeave: false,
+        rightPicLeave: false,
+
+        choices: null,
+
+        position: {x: 622.5, y: 410}
+    },
+];
+
 let accusation = [
     {
         scene: "accusation1",

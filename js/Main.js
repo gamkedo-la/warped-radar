@@ -11,7 +11,7 @@ let canvas, canvasContext;
 
 let framesFromGameStart = 0;
 
-let debug = true;
+let debug = false;
 let paused = false;
 let transitioning = false;
 
@@ -197,7 +197,9 @@ function render () {
 
     drawWeatherEffects();
     drawGameBorder();
-    // drawDebugText();
+    if(debug) {
+     drawDebugText();
+    }
     drawTextNearObjOrNPC();
     createDialogueEvents();
     createOBJDialogueEvents();
@@ -394,12 +396,19 @@ function drawDebugText () {
 
 function drawTextNearObjOrNPC() {
     if(player.nearObjOrNPC != null) {
-        if(player.nearObjOrNPC.obtainable == undefined) {//NPCs can't be 'obtained', so this property is not defined for them
-            // Draw text for NPC
-            colorText(player.nearObjOrNPC.name, (player.nearObjOrNPC.x*2 - mainCamera.camPanX*2) - 15, (player.nearObjOrNPC.y*2 - mainCamera.camPanY*2) + 15, "white", "14px Arial", "left", 1);
-        } else {
-            // Draw text for obtainable items
-            colorText(player.nearObjOrNPC.description, (player.nearObjOrNPC.drawTileX*2 - mainCamera.camPanX*2) -15, (player.nearObjOrNPC.drawTileY*2 - mainCamera.camPanY*2) + 15, "white", "14px Arial", "left", 1);
+        if( dialogueNotShowing() ) {
+            if(player.nearObjOrNPC.obtainable == undefined) {//NPCs can't be 'obtained', so this property is not defined for them
+                // Draw text for NPC
+                colorText(player.nearObjOrNPC.name, (player.nearObjOrNPC.x*2 - mainCamera.camPanX*2) - 15, (player.nearObjOrNPC.y*2 - johnSprite.height *4/3 - mainCamera.camPanY*2) + 15, "white", "14px Arial", "left", 1);
+            } else {
+                // Draw text for obtainable items
+                colorText(player.nearObjOrNPC.description, (player.nearObjOrNPC.drawTileX*2 - mainCamera.camPanX*2) -15, (player.nearObjOrNPC.drawTileY*2 - mainCamera.camPanY*2) + 15, "white", "14px Arial", "left", 1);
+            }
+
+            // shadow
+            colorText("Space to Interact", (player.x*2 + johnSprite.width / 2 - mainCamera.camPanX*2) - 15+1, (player.y*2 + johnSprite.height *3/4 - mainCamera.camPanY*2) + 15+1, "black", "14px Arial", "center", 1);
+            // main
+            colorText("Space to Interact", (player.x*2 + johnSprite.width / 2 - mainCamera.camPanX*2) - 15, (player.y*2 + johnSprite.height *3/4 - mainCamera.camPanY*2) + 15, "white", "14px Arial", "center", 1);
         }
     }
 }

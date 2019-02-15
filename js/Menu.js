@@ -119,10 +119,6 @@ const Menu = new (function() {
          }
         switch (menuPageText[currentPage][cursor1]) {
             case "Story":
-                  console.log("hello game start");
-
-
-                //warpedRadarBackgroundMusic.setVolume(0.45);//trying to balance background music with dialogue volume
                 cursor1 = 0;
                 delayedUIChoiceSound();
                 let transitionDuration = 3000;
@@ -164,14 +160,14 @@ const Menu = new (function() {
                 toggleMute();
                 break;
             case "Controls":
-                console.log("TODO Added Controls changer");
+//                console.log("TODO Added Controls changer");
                 break;
             case "Gameplay":
                 cursor1 = 0;
                 currentPage = GAMEPLAY_PAGE;
                 break;
             case "Control layout":
-                console.log("TODO implement control layout");
+//                console.log("TODO implement control layout");
                 break;
             case "Back":
                 currentPage  = MENU_PAGE;
@@ -184,12 +180,10 @@ const Menu = new (function() {
             toggleMute();
                 break;
             case 'record':
-            console.log('savegame');
+//            console.log('savegame');
             break;
             default:
-                break;
-            //if (cursor1 >= menuPageText[currentPage].length){//if we're going to shorter menu
-            //   cursor1 = menuPageText[currentPage].length - 1;
+            break;
         }
     };
 

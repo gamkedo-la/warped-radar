@@ -151,8 +151,6 @@ function loadImages() {
 
     ];
 
-    console.log(imageList);
-
     picsToLoad = imageList.length;
 
     let loadResult = false;

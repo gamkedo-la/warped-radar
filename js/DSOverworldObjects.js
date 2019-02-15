@@ -142,7 +142,7 @@ function OverworldObject(name, leftEdge, topEdge, width, height, animations = nu
         try {
             this.initText(createElseIncrement, dialogue);
         } catch {
-            console.log("Error Fix! You triggered a special event without un-colliding/re-colliding with NPC");
+            console.error("Error Fix! You triggered a special event without un-colliding/re-colliding with NPC");
         }
     }
 
@@ -207,9 +207,6 @@ function initializeOverworldObjects() {
                 } else {
                     const cop1 = initializeCop1(i);
                     if(eventManager.canShowNPC(cop1)) {
-                        if(locationNow == Place.DavesHouse) {
-                            console.log("Should be drawing Dave's Cop");
-                        }
                         allNPCs.push(cop1);
                     }
                 }

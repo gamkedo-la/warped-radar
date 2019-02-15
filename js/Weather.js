@@ -49,7 +49,6 @@ function drawWeatherEffects() {
             var tempcontext = tempcanvas.getContext('2d');
             tempcontext.drawImage(perlinNoiseImage, 0, 0 );
             perlinByteArray = tempcontext.getImageData(0, 0, perlinNoiseImage.width, perlinNoiseImage.height).data;
-            console.log("Perlin noise data generated...");
         }
 
         // fade in and out randonly, irregularly

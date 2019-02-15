@@ -117,7 +117,7 @@ function Dialogue() {
             }
         }
         if (this.page == -1) { // means we didn't find a scene label match in the list
-            console.log("Error: no scene found matching target label " + nextChoiceLabel);
+            console.error("Error: no scene found matching target label " + nextChoiceLabel);
         }
     }
 
@@ -193,7 +193,6 @@ function Dialogue() {
         } else {
             if (selectedChoice != -1 && showingChoiceMenu && this.page >= dialogueList.length - 1) {
                 showingChoiceMenu = false;
-                console.log("default bool switch");
             }
         }
     }
@@ -444,13 +443,6 @@ function Dialogue() {
         } else if (this.page < dialogue.length - 1 && !showingChoiceMenu || nextChoiceLabel != -1 && (choiceCounter < sceneText.length)) {
             this.letterCounter = 0;
 
-			if(pages[this.page] != undefined) {
-                this.setPage(pages[this.page]);
-            } else {
-                this.isShowing = false;
-				console.log("Used the fall back");
-			}
-
             //fade effect for left pic
             if (currentPic != nextPic) switchPic = true;
 
@@ -471,6 +463,13 @@ function Dialogue() {
                 }
                 this.resetBranchingDialogueVars();
             }
+
+            if(pages[this.page] != undefined) {
+                this.setPage(pages[this.page]);
+            } else {
+                this.isShowing = false;
+			}
+
         } 
     }
 }

@@ -77,9 +77,7 @@ function start () {
     player.reset();
     timer.setupTimer();
     initializeDefaultItems();
-    console.log(note);
     initializeObtainableItems();
-    console.log(arrayOfObtainableItems);
     notificationWindow.initialize();
     eventManager = new EventManager();
     initializeOverworldObjects();
@@ -417,43 +415,10 @@ function drawTextNearObjOrNPC() {
     }
 }
 
-// function fastRadar() {
-//     if (useRequestAnimationFrame) {
-//         if (!isFastInterval) {
-//             deltaMultiplier = 2;
-//             isFastInterval = true;
-//             console.log("fastRadar(): Sped up!");
-//         } else {
-//             deltaMultiplier = 1;
-//             isFastInterval = false;
-//             console.log("fastRadar(): Normal speed!");
-//         }
-//     } else {
-//         if (!isFastInterval) {
-//             interval = setInterval(gameLoop, 1000/framesPerSecond);
-//             isFastInterval = true;
-//             console.log("fastRadar(): Sped up!");
-//         } else {
-//             clearInterval(interval);
-//             console.log(interval);
-//             isFastInterval = false;
-//             console.log("fastRadar(): Normal speed!");
-//         }
-//         console.log(isFastInterval);
-//     }
-// }
-
 function pauseRadar(){
     if (!paused){
-        //colorText(PAUSED', 20, 30, "white", "20px Arial", "left", 1);
-        // if (!useRequestAnimationFrame) {
-        //     clearInterval(interval);
-        // }
         paused = true;
     } else {
-        // if (!useRequestAnimationFrame) {
-        //     interval = setInterval(gameLoop, 1000/framesPerSecond);
-        // }
         paused = false;
     }
   }

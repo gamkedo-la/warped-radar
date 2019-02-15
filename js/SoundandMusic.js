@@ -26,10 +26,6 @@ if (use_web_audio_api) {
   var hard_right_dialogue_panner_node = web_audio_api_context2.createStereoPanner();
   hard_right_dialogue_panner_node.connect(web_audio_api_context2.destination);
   hard_right_dialogue_panner_node.pan.value = 1;//panning right for npc's
-
-  console.log("we're in Firefox and utilizing web audio api where desired");
-  console.log("use_web_audio_api", use_web_audio_api);
-  console.log("panner nodes created", hard_left_dialogue_panner_node, hard_right_dialogue_panner_node);
 }
 
 let audioFormat;
@@ -61,7 +57,6 @@ let effectsVolume;
 try {
 	musicVolume = localStorage.getItem("musicVolume");
 	effectsVolume = localStorage.getItem("effectsVolume");
-	console.log(musicVolume + ", ", + effectsVolume);
 }
 catch {
 	// default volumes
@@ -111,7 +106,6 @@ function backgroundMusicClass() {
         }}, false);
         musicSound.loop = true;
 		this.setVolume(musicVolume);
-		console.log("Now playing track: ", filenameWithPath + audioFormat);
     }
 
     this.pauseSound = function() {
@@ -148,7 +142,6 @@ function SoundOverlapsClass(filenameWithPath, soundTypeIndex) {
 
     let arrayOfSoundTypes = ["general", 'johns voice', 'npc voice'];
     this.soundType = arrayOfSoundTypes[soundTypeIndex];
-    console.log(this.soundType);
     let fullFilename = filenameWithPath;
 		let soundIndex = 0;
     let sounds = [new Audio(fullFilename + audioFormat), new Audio(fullFilename + audioFormat)];
@@ -167,8 +160,6 @@ function SoundOverlapsClass(filenameWithPath, soundTypeIndex) {
 				web_audio_api_source_nodes[1].connect(hard_right_dialogue_panner_node);
 		}
 
-		console.log("sounds in class initialization", sounds);
-
     this.play = function() {
 
 				if(!sounds[soundIndex].paused) {
@@ -185,7 +176,6 @@ function SoundOverlapsClass(filenameWithPath, soundTypeIndex) {
           }
 					sounds.splice(soundIndex, 0, new_audio_tag);
 				}
-				// console.log("sounds within play method", sounds);
         sounds[soundIndex].currentTime = 0;
         sounds[soundIndex].volume = Math.pow(getRandomVolume() * effectsVolume * !isMuted, 2);
         sounds[soundIndex].play();

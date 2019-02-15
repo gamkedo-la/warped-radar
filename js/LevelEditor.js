@@ -6,8 +6,6 @@ function LevelEditor () {
     let levelCol = 0;
     let levelRow = 0;
     let defaultSet = Object.values(TILE);
-//    let defaultSet = [TILE.GROUND, TILE.WALL, TILE.SWITCH_LOCATION, TILE.BROKEN_SKATEBOARD, TILE.BURNER_PHONE, TILE.CROWBAR, TILE.HOODIE, TILE.MEDICAL_NOTEBOOK, TILE.SEALED_TUBE, TILE.THUMB_DRIVE, TILE.TRAIN_TICKET]; //will switch out for different tiles later
-    console.log("Default Set length: " + defaultSet.length);
     let tileSets = {
         sideWalks: [TILE.SIDEWALK, TILE.SIDEWALK_VERTICAL, TILE.SIDEWALK_RIGHT_CORNER],
         buildings: [TILE.BUILDING_LEFT, TILE.BUILDING_RIGHT, TILE.BUILDING_BOTTOM_LEFT, TILE.BUILDING_BOTTOM_RIGHT, TILE.CONVENIENCE_STORE_LEFT, TILE.CONVENIENCE_STORE_MIDDLE, TILE.CONVENIENCE_STORE_RIGHT, TILE.CONVENIENCE_STORE_BOTTOM_LEFT, TILE.CONVENIENCE_STORE_BOTTOM_MIDDLE, TILE.CONVENIENCE_STORE_BOTTOM_RIGHT]
@@ -27,13 +25,11 @@ function LevelEditor () {
                 currentTileIndex--;
                 if (currentTileIndex <= 0) {
                       currentTileIndex = currentlySelectedSet.length - 1;
-//                    currentTileIndex = 0;
                 }
             } else if (keysPressed(KEY_D)) {
                 currentTileIndex++;
                 if (currentTileIndex >= currentlySelectedSet.length)
                       currentTileIndex = 0;
-//                    currentTileIndex = currentlySelectedSet.length - 1;
             } else if (keysPressed(KEY_ZERO)) {
                 this.pickASet(defaultSet);
             } else if (keysPressed(KEY_ONE)) {
@@ -66,11 +62,11 @@ function LevelEditor () {
     }
 
     this.editTileOnMouseClick = function () {
-        console.log("Current Tile Index: " + currentTileIndex);
+//        console.log("Current Tile Index: " + currentTileIndex);
         if (this.isOn) {
             scaledContext.lineWidth = 7;
             if (currentlySelectedSet[currentTileIndex] == undefined) {
-                console.log("undefined");
+//                console.log("undefined");
                 return;
             }
             locationList[locationNow].layers[Layer.Ground][tileUnderMouse] = currentlySelectedSet[currentTileIndex];

@@ -102,8 +102,6 @@ for(let i = 0; i < locationList.length; i++) {
 let worldCols = locationList[locationNow].columns;
 let worldRows = locationList[locationNow].rows;
 
-console.log("Current location: " + locationNow + " size: " + worldCols + 'x' + worldRows);
-
 let visibleGrid = false;
 
 /**

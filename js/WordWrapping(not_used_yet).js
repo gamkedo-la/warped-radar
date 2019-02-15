@@ -89,10 +89,7 @@ function MessageBox (x, y, options) {
         text = newText;
         words = text.split(" ");
     }
-    /*
-    this.getCurrentText = function(){
-        console.log("Text:" + words);
-    }*/
+
     this.update = function () {
 
         if (!this.isAlive) return; //our box is inactive

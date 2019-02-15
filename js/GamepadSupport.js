@@ -37,12 +37,12 @@ function GamepadSupport() {
 
     window.addEventListener("gamepadconnected", function (e) {
         // Gamepad connected
-        console.log("Gamepad connected", e.gamepad);
+//        console.log("Gamepad connected", e.gamepad);
     });
 
     window.addEventListener("gamepaddisconnected", function (e) {
         // Gamepad disconnected
-        console.log("Gamepad disconnected", e.gamepad);
+//        console.log("Gamepad disconnected", e.gamepad);
     });
 
     function applyDeadzone(number, threshold) {
@@ -58,7 +58,7 @@ function GamepadSupport() {
         {
             //console.log("Init gamepad..."); // spammy
             if (!navigator.getGamepads) {
-                console.log("Gamepad NOT supported on this browser!");
+//                console.log("Gamepad NOT supported on this browser!");
                 return; // not supported?
             }
         }

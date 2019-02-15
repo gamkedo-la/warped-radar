@@ -21,6 +21,7 @@ const GameEvent = {
     Talk_Agent_2:false,
     Talk_Fusion_1:false,
     Talk_Fusion_2:false,
+    Talk_DavesCop_1:false,
     Talk_Dan_1:false
 }
 
@@ -29,6 +30,11 @@ function EventManager() {
         let result = false;
 
         switch(item.name) {
+            case "brokenSkateBoard":
+                if(GameEvent.Talk_DavesCop_1) {
+                    result = true;
+                }
+            break;
             case "crowbar":
                 if((locationNow == Place.DavesHouse) && (GameEvent.FoundDave)) {
                     result = true;
@@ -257,7 +263,9 @@ function EventManager() {
                 }
             break;
             case "Cop":
-                //Do nothing?
+                if((GameEvent.FoundDave) && (locationNow == Place.DavesHouse)) {
+                    GameEvent.Talk_DavesCop_1 = true;
+                }
             break;
             case "Fusion":
                 if(!GameEvent.Talk_Fusion_1) {

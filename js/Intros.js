@@ -53,7 +53,7 @@ let Intros = new function() {
     const lineHeight = 28;
 
     this.start = function(txt) {
-        console.log("Intro start:"+txt);
+//        console.log("Intro start:"+txt);
         currentTxt = txt;
         txtX = Math.round(canvas.width/2);
         txtY = Math.round(canvas.height/3);

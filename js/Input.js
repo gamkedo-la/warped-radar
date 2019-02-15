@@ -142,18 +142,11 @@ function keydownControl(evt, keydownMap) {
     }else if (this.keysPressed(KEY_P)) {
         pauseRadar();  
     }     
-    // }else if (this.keysPressed(KEY_SHIFT, KEY_F)) {
-    //     fastRadar();       
-    // }
     if (keysPressed(KEY_SHIFT, KEY_D) && debug) {
         debug = false;
     } else if (keysPressed(KEY_SHIFT, KEY_D) && !debug) {
         debug = true;
     }
-    // if (keysPressed(KEY_X)) {
-    //     playTheScene = !playTheScene;
-    //     console.log("Play cutscene? " + playTheScene);
-    // }
     if (keysPressed(KEY_SPACE)) {
         if (inventory.items[inventory.index] != undefined && inventory.isShowing && dialogueNotShowing() && dialogueOBJNotShowing()) {
             if (inventory.items[inventory.index].actions != undefined && (!inventory.showActions && !inventory.selectAction)) {

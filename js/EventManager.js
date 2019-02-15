@@ -11,12 +11,15 @@ const GameEvent = {
     FoundWallOutlet:false,
     FoundPhoto:false,
     FoundDave:false,
+    EnteredDavesHouse:false,
     Talk_Rose_0:false,
     Talk_Rose_1:false,
     Talk_Rose_2:false,
     Talk_Julie_0:false,
     Talk_Cat_1:false,
     Talk_Agent_1:false,
+    Talk_Agent_2:false,
+    Talk_Fusion_1:false,
     Talk_Cop1_1:false,
     Talk_Cop1_2:false
 }
@@ -106,7 +109,11 @@ function EventManager() {
                 }
             break;
             case "Agent":
-                result = true;
+                if(!GameEvent.EnteredDavesHouse) {
+                    result = true;
+                } else if(!GameEvent.Talk_Agent_2) {
+                    result = true;
+                }
             break;
             case "Cop_1":
                 if(locationNow == Place.TheCity) {
@@ -160,7 +167,15 @@ function EventManager() {
                 result = 0;
             break;
             case "Agent":
-                result = 0;
+                if(GameEvent.Talk_Fusion_1) {
+                    if(GameEvent.Talk_Agent_1) {
+                        result = 2;
+                    } else {
+                        result = 1;
+                    }
+                } else {
+                    result = 0;
+                }
             break;
             case "Cop_1":
                 result = 0;
@@ -194,16 +209,20 @@ function EventManager() {
                 GameEvent.Talk_Cat_1 = true;
             break;
             case "Agent":
-                GameEvent.Talk_Agent_1 = true;
-                if((locationNow == Place.TheCity) && (!GameEvent.FoundDave)) {
-                    activateDoorToDavesHouse();
+                if(!GameEvent.Talk_Agent_1) {
+                    GameEvent.Talk_Agent_1 = true;
+                } else if(GameEvent.Talk_Fusion_1) {
+                    GameEvent.Talk_Agent_2 = true;
+                    if((locationNow == Place.TheCity) && (!GameEvent.FoundDave)) {
+                        activateDoorToDavesHouse();
+                    }
                 }
             break;
             case "Cop_1":
                 GameEvent.Talk_Cop1_1 = true;
             break;
             case "Fusion":
-                //no action required?
+                GameEvent.Talk_Fusion_1 = true;
             break;
         }
 

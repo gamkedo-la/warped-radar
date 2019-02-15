@@ -170,7 +170,6 @@ function initializeOverworldObjects() {
     for(let i = 0; i < dataArray.length; i++) {
         switch(dataArray[i]) {
             case TILE.ROSE:
-                console.log("Making Rose");
                 const rose = initializeRose(i);
                 if(eventManager.canShowNPC(rose)) {
                     allNPCs.push(rose);
@@ -206,7 +205,6 @@ function initializeOverworldObjects() {
                 }
             break;
             case TILE.FUSION:
-                console.log("Making Fusion");
                 const fusion = initializeFusion(i);
                 if(eventManager.canShowNPC(fusion)) {
                     allNPCs.push(fusion);
@@ -481,7 +479,7 @@ function initializeAgent(arrayIndex) {
     
     agent.chatEvents = function (createElseIncrement) {
         //Add additional conversations in this array if you want the Agent to say different things (or different Agents to say different things)
-        this.text(createElseIncrement, [npcConvo]);
+        this.text(createElseIncrement, [jenConvo1, jenConvo2, jenConvo3]);
     }
 
     return agent;

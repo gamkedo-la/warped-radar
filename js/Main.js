@@ -354,10 +354,14 @@ function loadLevel (whichLevel) {
     worldCols = whichLevel.columns;
     worldRows = whichLevel.rows;
 
-    if (locationNow === 0) { //only render fog in the city
+    if (locationNow === Place.TheCity) { //only render fog in the city
     	isFoggy = true;
     } else {
     	isFoggy = false;
+    }
+
+    if(locationNow == Place.DavesHouse) {
+        GameEvent.EnteredDavesHouse = true;
     }
 }
 

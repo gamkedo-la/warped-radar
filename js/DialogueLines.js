@@ -843,7 +843,7 @@ let wallOutletinJohnsHouse = [
     }
 ];   
 
-let npcConvo = [
+let jenConvo1 = [
     {
         scene: "firstLine",
         who: "Agent",
@@ -883,7 +883,7 @@ let npcConvo = [
         who: "Agent",
         nameCol: "purple",
         voice: voiceLow1,
-        text: "Ok.  Just a quick look, but only because I like your look.",
+        text: "You're cute, but I can't let you in.  You need to go to the police station.",
         nextPage: 3,
         leftPic: johnHappyPic,
         rightPic: npc_agentPic,
@@ -895,6 +895,148 @@ let npcConvo = [
 
         position: {x: 492.5, y: 140}
     }
+];
+
+let jenConvo2 = [
+    {
+        scene: "page1",
+        who: "Agent",
+        nameCol: "#223344",
+        voice: voiceHigh2,
+        text: "I'm Agent Jen.  You can't enter here.",
+        nextPage: 1,
+        leftPic: johnHappyPic,
+        rightPic: npc_agentPic,
+
+        leftPicLeave: false,
+        rightPicLeave: false,
+
+        choices: null,
+
+        position: {x: 965, y: 140}
+    },
+    {
+        scene: "page2",
+        who: "John",
+        nameCol: "lightBlue",
+        voice: voiceLow1,
+        text: "",
+        nextPage: null,
+        leftPic: johnHappyPic,
+        rightPic: npc_agentPic,
+
+        leftPicLeave: false,
+        rightPicLeave: false,
+
+        choices: [["But this is my Uncle's House.  What's going on?", "page3"], ["But Fusion sent me and I'm trying to go see my Uncle Dave.", "page4"]],
+
+        position: {x: 965, y: 430}
+    },
+    {
+        scene: "page3",
+        who: "Agent",
+        nameCol: "#223344",
+        voice: voiceHigh2,
+        text: "You need to go to the police station and see if they can help you out.",
+        nextPage: null,
+        leftPic: johnHappyPic,
+        rightPic: npc_agentPic,
+
+        leftPicLeave: false,
+        rightPicLeave: false,
+
+        choices: null,
+
+        position: {x: 485, y: 503}
+    },
+    {
+        scene: "page4",
+        who: "Agent",
+        nameCol: "#223344",
+        voice: voiceHigh2,
+        text: "Ok, but just a quick look around and don't touch ANYTHING!",
+        nextPage: 4,
+        leftPic: johnHappyPic,
+        rightPic: npc_agentPic,
+
+        leftPicLeave: false,
+        rightPicLeave: false,
+
+        choices: null,
+
+        position: {x: 1406, y: 557}
+    }
+];
+
+let jenConvo3 = [
+    {
+        scene: "page1",
+        who: "Agent",
+        nameCol: "#223344",
+        voice: voiceHigh2,
+        text: "Back again?",
+        nextPage: 1,
+        leftPic: johnHappyPic,
+        rightPic: npc_agentPic,
+
+        leftPicLeave: false,
+        rightPicLeave: false,
+
+        choices: null,
+
+        position: {x: 965, y: 140}
+    },
+    {
+        scene: "page2",
+        who: "John",
+        nameCol: "lightBlue",
+        voice: voiceLow1,
+        text: "Yes, Fusion sent me back.",
+        nextPage: 2,
+        leftPic: johnHappyPic,
+        rightPic: npc_agentPic,
+
+        leftPicLeave: false,
+        rightPicLeave: false,
+
+        choices: null,
+
+        position: {x: 965, y: 410}
+    },
+    {
+        scene: "page3",
+        who: "Agent",
+        nameCol: "#223344",
+        voice: voiceHigh2,
+        text: "Ok, but just a quick look around, don't tell anyone I let you in.",
+        nextPage: 3,
+        leftPic: johnHappyPic,
+        rightPic: npc_agentPic,
+
+        leftPicLeave: false,
+        rightPicLeave: false,
+
+        choices: null,
+
+        position: {x: 965, y: 680}
+    },
+    {
+        scene: "page4",
+        who: "Agent",
+        nameCol: "#223344",
+        voice: voiceHigh2,
+        text: "and don't touch ANYTHING!",
+        nextPage: null,
+        leftPic: johnHappyPic,
+        rightPic: npc_agentPic,
+
+        leftPicLeave: false,
+        rightPicLeave: false,
+
+        choices: null,
+
+        position: {x: 965, y: 969}
+    },
 ];
 
 let cop1Convo = [

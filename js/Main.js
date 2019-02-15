@@ -197,7 +197,7 @@ function render () {
 
     drawWeatherEffects();
     drawGameBorder();
-    drawDebugText();
+    // drawDebugText();
     drawTextNearObjOrNPC();
     createDialogueEvents();
     createOBJDialogueEvents();

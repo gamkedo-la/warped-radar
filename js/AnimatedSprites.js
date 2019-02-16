@@ -40,6 +40,14 @@ function makeAnimatedSprites() {
 		framesUntilNext: 4,
 	});
 
+	//Fusion
+	fusionMouthMove = new AnimatedSpriteClass({
+		name: "fusionAnimatedMouth",
+		spriteSheet: fusionMouthAnimatedSheet,
+		animationColFrames: 18,
+		framesUntilNext: 4,
+	});
+
 	//Alex
 	alexMouthMove = new AnimatedSpriteClass({
 		name: "alexAnimatedMouth",

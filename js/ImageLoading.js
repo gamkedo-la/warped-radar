@@ -32,6 +32,7 @@ let placeholderAngryPic = document.createElement("img");
 let johnMouthAnimatedSheet = document.createElement("img");
 let johnMouthAnimationAngrySheet = document.createElement("img");
 let roseMouthAnimatedSheet = document.createElement("img");
+let fusionMouthAnimatedSheet = document.createElement("img");
 let alexMouthAnimatedSheet = document.createElement("img");
 
 let johnAnimationIdle = document.createElement("img");
@@ -110,6 +111,7 @@ function loadImages() {
         {varName: johnMouthAnimatedSheet, theFile: "johnmouthmove.png"},
         {varName: johnMouthAnimationAngrySheet, theFile: "johnmouthmove_angry.png"},
         {varName: roseMouthAnimatedSheet, theFile: "rosemouthmove.png"},
+        {varName: fusionMouthAnimatedSheet, theFile: "NPC-Fusion-MouthMove.png"},
         {varName: alexMouthAnimatedSheet, theFile: "NPC-Alex-MouthMove.png"},
 
         //OVERWORLD CHARACTER ANIMS

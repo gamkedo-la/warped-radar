@@ -47,33 +47,33 @@ function OverworldObject(name, leftEdge, topEdge, width, height, animations = nu
 
         if(this.location == locationNow) {
             if(!eventManager.canShowNPC(this)) {return;}
-            
+            const anXDraw = this.x + Math.floor(mainCamera.camPanX/WORLD_W);
             if(animations != null) {
                 if(this.states.walking) {
                     if(this.facing.north) {
-                        animations.north.draw(scaledContext, this.x, this.y);
+                        animations.north.draw(scaledContext, anXDraw, this.y);
                     } else if(this.facing.south) {
-                        animations.south.draw(scaledContext, this.x, this.y);                        
+                        animations.south.draw(scaledContext, anXDraw, this.y);                        
                     } else if(this.facing.east) {
-                        animations.east.draw(scaledContext, this.x, this.y, 1, true);  //flip spritesheet to the right
+                        animations.east.draw(scaledContext, anXDraw, this.y, 1, true);  //flip spritesheet to the right
                     } else if(this.facing.west) {
-                        animations.west.draw(scaledContext, this.x, this.y);
+                        animations.west.draw(scaledContext, anXDraw, this.y);
                     } else if(this.facing.northEast) {
-                        animations.northEast.draw(scaledContext, this.x, this.y);
+                        animations.northEast.draw(scaledContext, anXDraw, this.y);
                     } else if(this.facing.northWest) {
-                        animations.northWest.draw(scaledContext, this.x, this.y);
+                        animations.northWest.draw(scaledContext, anXDraw, this.y);
                     } else if(this.facing.southEast) {
-                        animations.southEast.draw(scaledContext, this.x, this.y);
+                        animations.southEast.draw(scaledContext, anXDraw, this.y);
                     } else if(this.facing.southWest) {
-                        animations.southWest.draw(scaledContext, this.x, this.y);
+                        animations.southWest.draw(scaledContext, anXDraw, this.y);
                     }
                 } else if(this.states.worrying) {
-                    animations.worry.draw(scaledContext, this.x, this.y);
+                    animations.worry.draw(scaledContext, anXDraw, this.y);
                 } else if(this.states.idle) {
-                    animations.idle.draw(scaledContext, this.x, this.y);
+                    animations.idle.draw(scaledContext, anXDraw, this.y);
                 }
             } else {
-                drawRectToContext(scaledContext, this.x, this.y, this.w, this.h, this.colour, 1);
+                drawRectToContext(scaledContext, anXDraw, this.y, this.w, this.h, this.colour, 1);
             }//end if-else animations != null
         }//end if locationList
     }//end this.draw()

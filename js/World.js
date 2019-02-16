@@ -158,11 +158,8 @@ function drawLayer(layer) {
         drawTileY = Math.ceil(drawTileY);
     }
     
-    const minColSize = drawTileX + 10;//locations.locationNow.columns;
-    const minRowSize = drawTileY + 8;//locations.locationNow.columns;
-
-    
-    //let startTile = rowColToArrayIndex(cameraTileOffsetX, cameraTileOffsetY);
+    const minColSize = drawTileX + 10;
+    const minRowSize = drawTileY + 8;
 
     for (let eachRow = 0; eachRow < minRowSize; eachRow++) {
         for (let eachCol = 0; eachCol < minColSize; eachCol++) {
@@ -172,7 +169,7 @@ function drawLayer(layer) {
                 let arrayIndex = rowColToArrayIndex(eachCol, eachRow);
                 tileKindHere = layer[arrayIndex];
             } else {
-                tileKindHere = 0; // or whatever default/black to fill in with
+                tileKindHere = 0; // default/empty tile
             }
                         
             tileSet.drawTileAt(scaledContext, tileKindHere, drawTileX, drawTileY);
@@ -181,7 +178,6 @@ function drawLayer(layer) {
 
         } //end of inner part of nested for loop (just drew an entire row, move to the next row)
         drawTileY += WORLD_H;
-//        drawTileX = 0;
         drawTileX = mainCamera.camPanX / WORLD_W;
         if(SNAP_TILES_TO_INTEGER_POSITIONS) {
             drawTileX = Math.ceil(drawTileX);
@@ -198,13 +194,11 @@ function drawDepthSorted(nonTileObjs) {
         drawTileY = Math.ceil(drawTileY);
     }
 
-    const minColSize = drawTileX + 10;//locations.locationNow.columns;
-    const minRowSize = drawTileY + 8;//locations.locationNow.columns;
+    const minColSize = drawTileX + 10;
+    const minRowSize = drawTileY + 8;
     const layer = locationList[locationNow].layers[Layer.Depth_Sorted];
     const heightMap = locationList[locationNow].layers[Layer.Heightmap];
     let groundValue = locationList[locationNow].groundValue;//may not be zero because Tiled...
-    // const minColSize = locationList[locationNow].columns;
-    // const minRowSize = locationList[locationNow].rows;
 
     //objects closer to the top of the screen have
     //index values closer to zero 
@@ -217,10 +211,7 @@ function drawDepthSorted(nonTileObjs) {
             const arrayIndex = rowColToArrayIndex(eachCol, eachRow);
             let tileKindHere = layer[arrayIndex];
 
-            if(!shouldDrawTile(tileKindHere))
-/*            if((tileKindHere == TILE.WALL) ||
-               (tileKindHere == TILE.PLAYER_START) ||
-               (tileKindHere == TILE.SWITCH_LOCATION)) */{//don't draw the collision tiles or action tiles
+            if(!shouldDrawTile(tileKindHere)) {//don't draw the collision tiles or action tiles
                     tileSet.drawTileAt(scaledContext, TILE.BLANK, drawTileX, drawTileY);
             } else {
                 //Need to find out if this tile has a height above the ground
@@ -270,7 +261,6 @@ function drawDepthSorted(nonTileObjs) {
         }//end of inner loop (done drawing a row)
 
         drawTileY += WORLD_H;
- //        drawTileX = 0;
         drawTileX = mainCamera.camPanX / WORLD_W;
         if(SNAP_TILES_TO_INTEGER_POSITIONS) {
             drawTileX = Math.ceil(drawTileX);

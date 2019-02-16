@@ -350,13 +350,21 @@ function Dialogue() {
             this.speaker2X -= tweenInSpeed;
 
             //speaker specific mouth anims for when tweening in
-            this.setupAnimatedMouths(dialogueList, nameList, "Rose", false, roseMouthMove, 170, 300);
+            if(nameList[this.page] == "Rose") {
+                this.setupAnimatedMouths(dialogueList, nameList, "Rose", false, roseMouthMove, 170, 300);
+            } else if(nameList[this.page] == "Alex") {
+                this.setupAnimatedMouths(dialogueList, nameList, "Alex", false, alexMouthMove, 150, 300);
+            }
 
         } else if (this.speaker2X <= speaker2FinalX) {
             this.speaker2X = speaker2FinalX;
 
             //speaker specific mouth anims when at final pos
-            this.setupAnimatedMouths(dialogueList, nameList, "Rose", false, roseMouthMove, 150, 300);
+            if(nameList[this.page] == "Rose") {
+                this.setupAnimatedMouths(dialogueList, nameList, "Rose", false, roseMouthMove, 150, 300);
+            } else if(nameList[this.page] == "Alex") {
+                this.setupAnimatedMouths(dialogueList, nameList, "Alex", false, alexMouthMove, 150, 300);
+            }
         }
 
     }

@@ -25,6 +25,7 @@ function OverworldObject(name, leftEdge, topEdge, width, height, animations = nu
         southWest: false
     }
 
+    const xCamAdjust = Math.floor(leftEdge/WORLD_W);
     const idleWidth = 1.5 * roseIdle.spriteSheet.width/(4 * roseIdle.animationColFrames);
     const idleHeight = roseIdle.spriteSheet.height;
     this.tileCollider = {x:this.x - idleWidth / 2, y:this.y + (0.38 * idleHeight), 
@@ -44,36 +45,36 @@ function OverworldObject(name, leftEdge, topEdge, width, height, animations = nu
                 this.tileCollider.width, this.tileCollider.height);
         }
 
+        const deltaX = Math.floor(mainCamera.camPanX/WORLD_W) - xCamAdjust;
 
         if(this.location == locationNow) {
             if(!eventManager.canShowNPC(this)) {return;}
-            const anXDraw = this.x + Math.floor(mainCamera.camPanX/WORLD_W);
             if(animations != null) {
                 if(this.states.walking) {
                     if(this.facing.north) {
-                        animations.north.draw(scaledContext, anXDraw, this.y);
+                        animations.north.draw(scaledContext, this.x + deltaX, this.y);
                     } else if(this.facing.south) {
-                        animations.south.draw(scaledContext, anXDraw, this.y);                        
+                        animations.south.draw(scaledContext, this.x + deltaX, this.y);                        
                     } else if(this.facing.east) {
-                        animations.east.draw(scaledContext, anXDraw, this.y, 1, true);  //flip spritesheet to the right
+                        animations.east.draw(scaledContext, this.x + deltaX, this.y, 1, true);  //flip spritesheet to the right
                     } else if(this.facing.west) {
-                        animations.west.draw(scaledContext, anXDraw, this.y);
+                        animations.west.draw(scaledContext, this.x + deltaX, this.y);
                     } else if(this.facing.northEast) {
-                        animations.northEast.draw(scaledContext, anXDraw, this.y);
+                        animations.northEast.draw(scaledContext, this.x + deltaX, this.y);
                     } else if(this.facing.northWest) {
-                        animations.northWest.draw(scaledContext, anXDraw, this.y);
+                        animations.northWest.draw(scaledContext, this.x + deltaX, this.y);
                     } else if(this.facing.southEast) {
-                        animations.southEast.draw(scaledContext, anXDraw, this.y);
+                        animations.southEast.draw(scaledContext, this.x + deltaX, this.y);
                     } else if(this.facing.southWest) {
-                        animations.southWest.draw(scaledContext, anXDraw, this.y);
+                        animations.southWest.draw(scaledContext, this.x + deltaX, this.y);
                     }
                 } else if(this.states.worrying) {
-                    animations.worry.draw(scaledContext, anXDraw, this.y);
+                    animations.worry.draw(scaledContext, this.x + deltaX, this.y);
                 } else if(this.states.idle) {
-                    animations.idle.draw(scaledContext, anXDraw, this.y);
+                    animations.idle.draw(scaledContext, this.x + deltaX, this.y);
                 }
             } else {
-                drawRectToContext(scaledContext, anXDraw, this.y, this.w, this.h, this.colour, 1);
+                drawRectToContext(scaledContext, this.x + deltaX, this.y, this.w, this.h, this.colour, 1);
             }//end if-else animations != null
         }//end if locationList
     }//end this.draw()
@@ -242,7 +243,7 @@ function initializeRose(arrayIndex) {
     }
 
     const columns = locationList[locationNow].columns;
-    const xPos = (arrayIndex % columns) * WORLD_W;
+    const xPos = (1 + arrayIndex % columns) * WORLD_W + Math.floor(mainCamera.camPanX / WORLD_W);
     const yPos = Math.floor(arrayIndex / columns) * WORLD_H;
     let rose = new OverworldObject("Rose", xPos, yPos, 26, 62, roseAnimations);
     rose.dialogue = new Dialogue();
@@ -391,7 +392,7 @@ function initializeJulie(arrayIndex) {
     }
 
     const columns = locationList[locationNow].columns;
-    const xPos = (arrayIndex % columns) * WORLD_W;
+    const xPos = (1 + arrayIndex % columns) * WORLD_W + Math.floor(mainCamera.camPanX / WORLD_W);
     const yPos = Math.floor(arrayIndex / columns) * WORLD_H;
     let julie = new OverworldObject("Julie", xPos, yPos, 26, 62, julieAnimations);
     julie.dialogue = new Dialogue();
@@ -421,7 +422,7 @@ function initializeCat(arrayIndex) {
     }
 
     const columns = locationList[locationNow].columns;
-    const xPos = (arrayIndex % columns) * WORLD_W;
+    const xPos = (1 + arrayIndex % columns) * WORLD_W + Math.floor(mainCamera.camPanX / WORLD_W);
     const yPos = Math.floor(arrayIndex / columns) * WORLD_H;
     let catMan = new OverworldObject("Cat", xPos, yPos, 26, 62, catAnimations);
     catMan.dialogue = new Dialogue();
@@ -451,7 +452,7 @@ function initializeDave(arrayIndex) {
     }
 
     const columns = locationList[locationNow].columns;
-    const xPos = (arrayIndex % columns) * WORLD_W;
+    const xPos = (1 + arrayIndex % columns) * WORLD_W + Math.floor(mainCamera.camPanX / WORLD_W);
     const yPos = Math.floor(arrayIndex / columns) * WORLD_H;
     let dave = new OverworldObject("Uncle Dave", xPos, yPos, 62, 26, daveAnimations);
     dave.dialogue = new Dialogue();
@@ -483,7 +484,7 @@ function initializeAgent(arrayIndex) {
     }
 
     const columns = locationList[locationNow].columns;
-    const xPos = (arrayIndex % columns) * WORLD_W;
+    const xPos = (1 + arrayIndex % columns) * WORLD_W + Math.floor(mainCamera.camPanX / WORLD_W);
     const yPos = Math.floor(arrayIndex / columns) * WORLD_H;
     let agent = new OverworldObject("Jen", xPos, yPos, 26, 62, agentAnimations);
     agent.dialogue = new Dialogue();
@@ -513,7 +514,7 @@ function initializeFusion(arrayIndex) {
     }
 
     const columns = locationList[locationNow].columns;
-    const xPos = (arrayIndex % columns) * WORLD_W + WORLD_W / 2;
+    const xPos = (1 + arrayIndex % columns) * WORLD_W + WORLD_W / 2 + Math.floor(mainCamera.camPanX / WORLD_W);
     const yPos = Math.floor(arrayIndex / columns) * WORLD_H;
     let fusion = new OverworldObject("Fusion", xPos, yPos, 26, 62, fusionAnimations);
     fusion.dialogue = new Dialogue();
@@ -543,7 +544,7 @@ function initializeAlex(arrayIndex) {
     }
 
     const columns = locationList[locationNow].columns;
-    const xPos = (arrayIndex % columns) * WORLD_W + WORLD_W / 2;
+    const xPos = (1 + arrayIndex % columns) * WORLD_W + WORLD_W / 2 + Math.floor(mainCamera.camPanX / WORLD_W);
     const yPos = Math.floor(arrayIndex / columns) * WORLD_H;
     let alex = new OverworldObject("Alex", xPos, yPos, 26, 62, alexAnimations);
     alex.dialogue = new Dialogue();
@@ -573,7 +574,7 @@ function initializeConfessor(arrayIndex) {
     }
 
     const columns = locationList[locationNow].columns;
-    const xPos = (arrayIndex % columns) * WORLD_W;
+    const xPos = (1 + arrayIndex % columns) * WORLD_W + Math.floor(mainCamera.camPanX / WORLD_W);
     const yPos = Math.floor(arrayIndex / columns) * WORLD_H;
     let confessor = new OverworldObject("Dan", xPos, yPos, 26, 62, copAnimations);
     confessor.dialogue = new Dialogue();
@@ -603,7 +604,7 @@ function initializeCop1(arrayIndex) {
     }
 
     const columns = locationList[locationNow].columns;
-    const xPos = (arrayIndex % columns) * WORLD_W;
+    const xPos = (1 + arrayIndex % columns) * WORLD_W + Math.floor(mainCamera.camPanX / WORLD_W);
     const yPos = Math.floor(arrayIndex / columns) * WORLD_H;
     let cop1 = new OverworldObject("Cop", xPos, yPos, 26, 62, copAnimations);
     cop1.dialogue = new Dialogue();

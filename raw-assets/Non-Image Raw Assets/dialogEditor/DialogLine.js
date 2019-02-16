@@ -888,12 +888,16 @@ function DialogLine(position) {
 				return "voiceHigh2";
 			case Speaker.Julie:
 				return "voiceHigh2";
-			case Speaker.NPCAgent:
+			case Speaker.Jen:
 				return "voiceHigh2";
 			case Speaker.Cat:
 				return "voiceLow1";
 			case Speaker.Fusion:
 				return "voiceLow1";
+			case Speaker.Alex:
+				return "voiceLow1";
+			case Speaker.NPC:
+				return "voiceHigh2";
 		}
 	}
 	
@@ -908,17 +912,20 @@ function DialogLine(position) {
 			case roseAnnoyedPic:
 				return "roseAnnoyedPic";
 			case julieHappyPic:
+				return "julieHappyPic";
 			case julieWorriedPic:
 				return "julieWorriedPic";
 			case npcAgentFlatPic:
-			case npcAgentAngryPic:
+//			case npcAgentAngryPic:
 				return "npcAgentFlatPic";
 			case placeholderNormalPic:
-			case placeholderAngryPic:
-				return "placeholderAngryPic"
+//			case placeholderAngryPic:
+				return "placeholderNormalPic"
 			case fusionFlatPic:
-			case fusionAngryPic:
+//			case fusionAngryPic:
 				return "fusionFlatPic";
+			case alexFlatPic:
+				return "alexFlatPic";
 		}
 	};
 
@@ -936,6 +943,10 @@ function DialogLine(position) {
 				return "yellow";
 			case Speaker.Fusion:
 				return "#b09145";
+			case Speaker.Alex:
+				return "#c26682";
+			case Speaker.NPC:
+				return "#aa9977"
 		}
 	}
 }

@@ -25,12 +25,14 @@ let npc_agentPic = document.createElement("img");
 let copPic = document.createElement("img");
 let catManPic = document.createElement("img");
 let fusionFlatPic = document.createElement("img");
+let alexFlatPic = document.createElement("img");
 let placeholderNormalPic = document.createElement("img");
 let placeholderAngryPic = document.createElement("img");
 
 let johnMouthAnimatedSheet = document.createElement("img");
 let johnMouthAnimationAngrySheet = document.createElement("img");
 let roseMouthAnimatedSheet = document.createElement("img");
+let alexMouthAnimatedSheet = document.createElement("img");
 
 let johnAnimationIdle = document.createElement("img");
 let johnAnimationUp = document.createElement("img");
@@ -38,7 +40,6 @@ let johnAnimationUpDiag = document.createElement("img");
 let johnAnimationDown = document.createElement("img");
 let johnAnimationDownDiag = document.createElement("img");
 let johnAnimationSide = document.createElement("img");
-//let johnSide45Animation = document.createElement("img");
 
 let roseAnimationIdle = document.createElement("img");
 let roseAnimationWorry = document.createElement("img");
@@ -51,6 +52,7 @@ let catManAnimationIdle = document.createElement("img");
 let agentAnimationIdle = document.createElement("img");
 let copAnimationIdle = document.createElement("img");
 let fusionAnimationIdle = document.createElement("img");
+let alexAnimationIdle = document.createElement("img");
 
 let daveIdle = document.createElement("img");
 
@@ -99,6 +101,7 @@ function loadImages() {
         {varName: npc_agentPic, theFile: "npc_agent.png"},
         {varName: copPic, theFile: "cop-portrait.png"},
         {varName: fusionFlatPic, theFile: "NPC-Fusion-Portrait.png"},
+        {varName: alexFlatPic, theFile: "NPC-Alex-Portrait.png"},
         {varName: catManPic, theFile: "CatMan-Portrait.png"},
         {varName: placeholderNormalPic, theFile: "PlaceholderPortrait.png"},
         {varName: placeholderAngryPic, theFile: "PlaceholderPortrait.png"},
@@ -107,6 +110,7 @@ function loadImages() {
         {varName: johnMouthAnimatedSheet, theFile: "johnmouthmove.png"},
         {varName: johnMouthAnimationAngrySheet, theFile: "johnmouthmove_angry.png"},
         {varName: roseMouthAnimatedSheet, theFile: "rosemouthmove.png"},
+        {varName: alexMouthAnimatedSheet, theFile: "NPC-Alex-MouthMove.png"},
 
         //OVERWORLD CHARACTER ANIMS
         {varName: johnSprite, theFile: "johnside.png"},
@@ -128,6 +132,7 @@ function loadImages() {
         {varName: agentAnimationIdle, theFile: "npc_agent-idle.png"},
         {varName: fusionAnimationIdle, theFile: "NPC-Fusion-Sprite-IDLE.png"},
         {varName: copAnimationIdle, theFile: "npc_cop-idle.png"},
+        {varName: alexAnimationIdle, theFile: "NPC-Alex-Sprite-IDLE.png"},
 
         {varName: daveIdle, theFile: "DaveSprite_Dead.png"},
 

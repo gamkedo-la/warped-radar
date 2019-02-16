@@ -48,9 +48,11 @@ const Speaker = {
 	John:'John',
 	Rose:'Rose',
 	Julie:'Julie',
-	NPCAgent:'NPCAgent',
+	Jen:'Jen',
 	Cat:'Cat',
-	Fusion:'Fusion'
+	Fusion:'Fusion',
+	Alex: 'Alex',
+	NPC: 'NPC'
 };
 //JohnColor is special, don't need to call out other colors separately
 const JohnColor = {
@@ -73,7 +75,7 @@ function colorsForSpeaker(speaker) {
 			colors.bkgd = 'white';
 			colors.line = '#b12f0c';
 		break;
-		case Speaker.NPCAgent:
+		case Speaker.Jen:
 			colors.bkgd = '#ee00aa';
 			colors.line = '#223344';
 		break;
@@ -84,6 +86,14 @@ function colorsForSpeaker(speaker) {
 		case Speaker.Fusion:
 			colors.bkgd = '#440055';
 			colors.line = '#b09145';
+		break;
+		case Speaker.Alex:
+			colors.bkgd = '#c26682';
+			colors.line = '#5f0a00';
+		break;
+		case Speaker.NPC:
+			colors.bkgd = '#aa9977';
+			colors.line = '#440055';
 		break;
 	}
 	

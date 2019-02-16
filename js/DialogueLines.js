@@ -1539,6 +1539,256 @@ let fusionConvo3 = [
     },
 ];
 
+let alexConvo1 = [
+    {
+        scene: "page1",
+        who: "Alex",
+        nameCol: "#c26682",
+        voice: voiceLow1,
+        text: "Hey man, you got any Creds?  I just need a couple more to get another enhancement.",
+        nextPage: 1,
+        leftPic: johnHappyPic,
+        rightPic: alexFlatPic,
+
+        leftPicLeave: false,
+        rightPicLeave: false,
+
+        choices: null,
+
+        position: {x: 449.5, y: 139}
+    },
+    {
+        scene: "page2",
+        who: "John",
+        nameCol: "lightBlue",
+        voice: voiceLow1,
+        text: "",
+        nextPage: null,
+        leftPic: johnHappyPic,
+        rightPic: alexFlatPic,
+
+        leftPicLeave: false,
+        rightPicLeave: false,
+
+        choices: [["No", "snubbedAlex"], ["Sorry, I don't.  Have you asked Julie if she can float you a few?", "page4"]],
+
+        position: {x: 450.5, y: 448}
+    },
+    {
+        scene: "snubbedAlex",
+        who: "Alex",
+        nameCol: "#c26682",
+        voice: voiceLow1,
+        text: "Huh.  Well, don't ask me for any help later...",
+        nextPage: null,
+        leftPic: johnHappyPic,
+        rightPic: alexFlatPic,
+
+        leftPicLeave: false,
+        rightPicLeave: false,
+
+        choices: null,
+
+        position: {x: 46.5, y: 530}
+    },
+    {
+        scene: "page4",
+        who: "Alex",
+        nameCol: "#c26682",
+        voice: voiceLow1,
+        text: "I haven't.  Maybe you'll put in a good word me.  I go by 'Alex', it was a pleasure to meet you.",
+        nextPage: null,
+        leftPic: johnHappyPic,
+        rightPic: alexFlatPic,
+
+        leftPicLeave: false,
+        rightPicLeave: false,
+
+        choices: null,
+
+        position: {x: 897.5, y: 573}
+    },
+];
+
+let alexConvo2 = [
+    {
+        scene: "page1",
+        who: "Alex",
+        nameCol: "#c26682",
+        voice: voiceLow1,
+        text: "Hey man, you got any Creds you can spare?  I came up a few short for my next enhancement.",
+        nextPage: 1,
+        leftPic: johnHappyPic,
+        rightPic: alexFlatPic,
+
+        leftPicLeave: false,
+        rightPicLeave: false,
+
+        choices: null,
+
+        position: {x: 455.5, y: 95}
+    },
+    {
+        scene: "page2",
+        who: "John",
+        nameCol: "lightBlue",
+        voice: voiceLow1,
+        text: "",
+        nextPage: null,
+        leftPic: johnHappyPic,
+        rightPic: alexFlatPic,
+
+        leftPicLeave: false,
+        rightPicLeave: false,
+
+        choices: [["No", "snubbedAlex"], ["You should go see Fusion, I think he could help you out.", "page4"]],
+
+        position: {x: 455.5, y: 405}
+    },
+    {
+        scene: "snubbedAlex",
+        who: "Alex",
+        nameCol: "#c26682",
+        voice: voiceLow1,
+        text: "Huh.  Well don't ask me for any help in the future...",
+        nextPage: null,
+        leftPic: johnHappyPic,
+        rightPic: alexFlatPic,
+
+        leftPicLeave: false,
+        rightPicLeave: false,
+
+        choices: null,
+
+        position: {x: 45.5, y: 472}
+    },
+    {
+        scene: "page4",
+        who: "Alex",
+        nameCol: "#c26682",
+        voice: voiceLow1,
+        text: "Thanks man, I appreciate the recommendation.  They call me 'Alex', let me know if you need anything.",
+        nextPage: null,
+        leftPic: johnHappyPic,
+        rightPic: alexFlatPic,
+
+        leftPicLeave: false,
+        rightPicLeave: false,
+
+        choices: null,
+
+        position: {x: 923.5, y: 437}
+    },
+];
+
+let alexConvo3 = [
+    {
+        scene: "page1",
+        who: "Alex",
+        nameCol: "#c26682",
+        voice: voiceLow1,
+        text: "Good to see you again John.  Any chance you could spare a couple of Creds for a brother?",
+        nextPage: 1,
+        leftPic: johnHappyPic,
+        rightPic: alexFlatPic,
+
+        leftPicLeave: false,
+        rightPicLeave: false,
+
+        choices: null,
+
+        position: {x: 448.5, y: 140}
+    },
+    {
+        scene: "page2",
+        who: "John",
+        nameCol: "lightBlue",
+        voice: voiceLow1,
+        text: "",
+        nextPage: null,
+        leftPic: johnHappyPic,
+        rightPic: alexFlatPic,
+
+        leftPicLeave: false,
+        rightPicLeave: false,
+
+        choices: [["No", "snubbedAlex"], ["You should go see Fusion, I think he could help you out.", "page4"]],
+
+        position: {x: 448.5, y: 450}
+    },
+    {
+        scene: "snubbedAlex",
+        who: "Alex",
+        nameCol: "#c26682",
+        voice: voiceLow1,
+        text: "Huh.  Well, don't ask me for any help later...",
+        nextPage: null,
+        leftPic: johnHappyPic,
+        rightPic: alexFlatPic,
+
+        leftPicLeave: false,
+        rightPicLeave: false,
+
+        choices: null,
+
+        position: {x: 23.5, y: 502}
+    },
+    {
+        scene: "page4",
+        who: "Alex",
+        nameCol: "#c26682",
+        voice: voiceLow1,
+        text: "Thanks man, I think I will.  I appreciate the recommendation.",
+        nextPage: null,
+        leftPic: johnHappyPic,
+        rightPic: alexFlatPic,
+
+        leftPicLeave: false,
+        rightPicLeave: false,
+
+        choices: null,
+
+        position: {x: 940.5, y: 542}
+    },
+];
+
+let alexConvo4 = [
+    {
+        scene: "firstLine",
+        who: "Alex",
+        nameCol: "#c26682",
+        voice: voiceLow1,
+        text: "Go away man.",
+        nextPage: 1,
+        leftPic: johnHappyPic,
+        rightPic: alexFlatPic,
+
+        leftPicLeave: false,
+        rightPicLeave: false,
+
+        choices: null,
+
+        position: {x: 492.5, y: 140}
+    },
+    {
+        scene: "secondLine",
+        who: "Alex",
+        nameCol: "#c26682",
+        voice: voiceLow1,
+        text: "I got nothin' to say to you.",
+        nextPage: null,
+        leftPic: johnHappyPic,
+        rightPic: alexFlatPic,
+
+        leftPicLeave: false,
+        rightPicLeave: false,
+
+        choices: null,
+
+        position: {x: 492.5, y: 140}
+    }
+];
+
 let accusation = [
     {
         scene: "accusation1",

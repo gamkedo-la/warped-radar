@@ -217,6 +217,12 @@ function initializeOverworldObjects() {
                     allNPCs.push(fusion);
                 }
             break;
+            case TILE.ALEX:
+                const alex = initializeAlex(i);
+                if(eventManager.canShowNPC(alex)) {
+                    allNPCs.push(alex);
+                }
+            break;
         }
     }
 }
@@ -520,6 +526,36 @@ function initializeFusion(arrayIndex) {
     }
 
     return fusion;
+}
+
+function initializeAlex(arrayIndex) {
+    const alexAnimations = {
+        idle:alexIdle,
+        worry:null,
+        north:null,
+        south:null,
+        east:null,
+        west:null,
+        northEast:null,
+        northWest:null,
+        southEast:null,
+        southWest:null
+    }
+
+    const columns = locationList[locationNow].columns;
+    const xPos = (arrayIndex % columns) * WORLD_W + WORLD_W / 2;
+    const yPos = Math.floor(arrayIndex / columns) * WORLD_H;
+    let alex = new OverworldObject("Alex", xPos, yPos, 26, 62, alexAnimations);
+    alex.dialogue = new Dialogue();
+    alex.colour = "#c26682";
+    alex.location = locationNow;
+    
+    alex.chatEvents = function (createElseIncrement) {
+        //Add additional conversations in this array if you want the Agent to say different things (or different Agents to say different things)
+        this.text(createElseIncrement, [alexConvo1, alexConvo2, alexConvo3, alexConvo4]);
+    }
+
+    return alex;
 }
 
 function initializeConfessor(arrayIndex) {

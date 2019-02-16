@@ -11,11 +11,12 @@ const roseAnnoyedPic = document.createElement("img");
 const julieHappyPic = document.createElement("img");
 const julieWorriedPic = document.createElement("img");
 const npcAgentFlatPic = document.createElement("img");
-const npcAgentAngryPic = document.createElement("img");
+//const npcAgentAngryPic = document.createElement("img");
 const fusionFlatPic = document.createElement("img");
-const fusionAngryPic = document.createElement("img");
+//const fusionAngryPic = document.createElement("img");
+const alexFlatPic = document.createElement("img");
 const placeholderNormalPic = document.createElement("img");
-const placeholderAngryPic = document.createElement("img");
+//const placeholderAngryPic = document.createElement("img");
 
 function imageForString(string) {
 	switch(string) {
@@ -33,12 +34,16 @@ function imageForString(string) {
 			return julieWorriedPic;
 		case "npcAgentFlatPic":
 			return npcAgentFlatPic;
-		case "npcAgentAngryPic":
-			return npcAgentAngryPic;
+		case "fusionFlatPic":
+			return fusionFlatPic;
+		case "alexFlatPic":
+			return alexFlatPic;
 		case "PlaceholderNormalPic":
 			return placeholderNormalPic;
+/*		case "npcAgentAngryPic":
+			return npcAgentAngryPic;
 		case "PlaceholderAngryPic":
-			return placeholderAngryPic;
+			return placeholderAngryPic;*/
 	}
 }
 
@@ -65,14 +70,16 @@ function loadImages() {
 	    {imgName: johnMadPic, theFile: "john2.png", speaker:Speaker.John},
 	    {imgName: roseHappyPic, theFile: "rose.png", speaker:Speaker.Rose},
 		{imgName: roseAnnoyedPic, theFile: "rose2.png", speaker:Speaker.Rose},
-		{imgName: julieHappyPic, theFile: "julie1.png", speaker:Speaker.Julie}, //placeholder
+		{imgName: julieHappyPic, theFile: "julie1.png", speaker:Speaker.Julie}, 
 		{imgName: julieWorriedPic, theFile: "julie1.png", speaker:Speaker.Julie},
 		{imgName: npcAgentFlatPic, theFile: "npc_agent.png", speaker:Speaker.NPCAgent},
-		{imgName: npcAgentAngryPic, theFile: "npc_agent.png", speaker:Speaker.NPCAgent},//placeholder
+//		{imgName: npcAgentAngryPic, theFile: "npc_agent.png", speaker:Speaker.NPCAgent},//placeholder
 		{imgName: fusionFlatPic, theFile: "NPC-Fusion-Portrait.png", speaker:Speaker.Fusion},
-		{imgName: fusionAngryPic, theFile: "NPC-Fusion-Portrait.png", speaker:Speaker.Fusion},//placeholder
-		{imgName: placeholderNormalPic, theFile: "PlaceholderPortrait.png", speaker:Speaker.Cat},//placeholder
-		{imgName: placeholderAngryPic, theFile: "PlaceholderPortrait.png", speaker:Speaker.Cat},//placeholder
+		{imgName: alexFlatPic, theFile: "NPC-Alex-Portrait.png", speaker:Speaker.Alex},//placeholder
+		{imgName: placeholderNormalPic, theFile: "PlaceholderPortrait.png", speaker:Speaker.NPC},//placeholder
+/*		{imgName: fusionAngryPic, theFile: "NPC-Fusion-Portrait.png", speaker:Speaker.Fusion},//placeholder
+		
+		{imgName: placeholderAngryPic, theFile: "PlaceholderPortrait.png", speaker:Speaker.Cat},//placeholder*/
 	];
 
 	picsToLoad = imageList.length;

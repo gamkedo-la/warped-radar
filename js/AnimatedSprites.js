@@ -159,6 +159,14 @@ function makeAnimatedSprites() {
 		framesUntilNext: frameDelayWalk,
 	});
 
+	//Alex
+	alexIdle = new AnimatedSpriteClass({
+		name: "alexAnimationIdle",
+		spriteSheet: alexAnimationIdle,
+		animationColFrames: 34,
+		framesUntilNext: frameDelayWalk,
+	});
+
 	//Cop
 	copIdle = new AnimatedSpriteClass({
 		name: "copAnimationIdle",

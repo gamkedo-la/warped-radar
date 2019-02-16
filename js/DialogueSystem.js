@@ -163,6 +163,8 @@ function Dialogue() {
                 (nextChoiceLabel == "accusationFelenSuccess") ||
                 (nextChoiceLabel == "accusationJenSuccess")) {
                     console.log("Yay! You figured it out and beat the game!!!");
+                } else if(nextChoiceLabel == "snubbedAlex") {
+                    GameEvent.SnubbedAlex = true;
                 }
             }
         }

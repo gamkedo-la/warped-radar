@@ -22,7 +22,9 @@ const GameEvent = {
     Talk_Fusion_1:false,
     Talk_Fusion_2:false,
     Talk_DavesCop_1:false,
-    Talk_Dan_1:false
+    Talk_Dan_1:false,
+    Talk_Alex_1:false,
+    SnubbedAlex:false
 }
 
 function EventManager() {
@@ -143,6 +145,11 @@ function EventManager() {
                     result = true;
                 }
             break;
+            case "Alex":
+                if(locationNow == Place.TheCity) {
+                    result = true;
+                }
+            break;
         }
 
         return result;
@@ -222,6 +229,21 @@ function EventManager() {
                     result = 0;
                 }
             break;
+            case "Alex":
+                if(GameEvent.SnubbedAlex) {
+                    result = 3;
+                } else {
+                    if(GameEvent.Talk_Fusion_1) {
+                        if(GameEvent.Talk_Alex_1) {
+                            result = 2;
+                        } else {
+                            result = 1;
+                        }
+                    } else {
+                        result = 0;
+                    }
+                }
+            break;
         }
 
         return result;
@@ -273,6 +295,9 @@ function EventManager() {
                 } else if(GameEvent.Talk_Agent_2) {
                     GameEvent.Talk_Fusion_2 = true;
                 }
+            break;
+            case "Alex":
+                GameEvent.Talk_Alex_1 = true;
             break;
         }
 

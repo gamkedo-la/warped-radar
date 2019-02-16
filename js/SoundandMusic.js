@@ -282,7 +282,7 @@ city_song.volume = 0;
 
 let julies_store_song = new Audio("audio/unfinished_thing.mp3");
 julies_store_song.loop = "true";
-julies_store_song.targetFadeInVolume = 0.98;
+julies_store_song.targetFadeInVolume = 0.75;
 julies_store_song.fadingIn = false;
 julies_store_song.fadingOut = false;
 julies_store_song.volume = 0;

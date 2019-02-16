@@ -32,6 +32,7 @@ let placeholderAngryPic = document.createElement("img");
 let johnMouthAnimatedSheet = document.createElement("img");
 let johnMouthAnimationAngrySheet = document.createElement("img");
 let roseMouthAnimatedSheet = document.createElement("img");
+let jenMouthAnimatedSheet = document.createElement("img");
 let fusionMouthAnimatedSheet = document.createElement("img");
 let alexMouthAnimatedSheet = document.createElement("img");
 
@@ -111,6 +112,7 @@ function loadImages() {
         {varName: johnMouthAnimatedSheet, theFile: "johnmouthmove.png"},
         {varName: johnMouthAnimationAngrySheet, theFile: "johnmouthmove_angry.png"},
         {varName: roseMouthAnimatedSheet, theFile: "rosemouthmove.png"},
+        {varName: jenMouthAnimatedSheet, theFile: "NPC-Jen-MouthMove.png"},
         {varName: fusionMouthAnimatedSheet, theFile: "NPC-Fusion-MouthMove.png"},
         {varName: alexMouthAnimatedSheet, theFile: "NPC-Alex-MouthMove.png"},
 

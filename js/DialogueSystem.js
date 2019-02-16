@@ -352,6 +352,8 @@ function Dialogue() {
             //speaker specific mouth anims for when tweening in
             if(nameList[this.page] == "Rose") {
                 this.setupAnimatedMouths(dialogueList, nameList, "Rose", false, roseMouthMove, 170, 300);
+            } else if(nameList[this.page] == "Jen") {
+                this.setupAnimatedMouths(dialogueList, nameList, "Jen", false, jenMouthMove, 148, 300);
             } else if(nameList[this.page] == "Fusion") {
                 this.setupAnimatedMouths(dialogueList, nameList, "Fusion", false, fusionMouthMove, 152, 300);
             } else if(nameList[this.page] == "Alex") {
@@ -364,6 +366,8 @@ function Dialogue() {
             //speaker specific mouth anims when at final pos
             if(nameList[this.page] == "Rose") {
                 this.setupAnimatedMouths(dialogueList, nameList, "Rose", false, roseMouthMove, 150, 300);
+            } else if(nameList[this.page] == "Jen") {
+                this.setupAnimatedMouths(dialogueList, nameList, "Jen", false, jenMouthMove, 148, 300);
             } else if(nameList[this.page] == "Fusion") {
                 this.setupAnimatedMouths(dialogueList, nameList, "Fusion", false, fusionMouthMove, 152, 300);
             } else if(nameList[this.page] == "Alex") {

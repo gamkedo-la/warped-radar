@@ -1,6 +1,8 @@
 let johnMouthMove;
 let johnAngryMouthMove;
 let roseMouthMove;
+let jenMouthMove;
+let fusionMouthMove;
 let alexMouthMove;
 let johnIdle;
 let johnWalkUp; //North
@@ -36,6 +38,14 @@ function makeAnimatedSprites() {
     roseMouthMove = new AnimatedSpriteClass({
 		name: "roseAnimatedMouth",
 		spriteSheet: roseMouthAnimatedSheet,
+		animationColFrames: 18,
+		framesUntilNext: 4,
+	});
+
+	//Jen
+	jenMouthMove = new AnimatedSpriteClass({
+		name: "jenAnimatedMouth",
+		spriteSheet: jenMouthAnimatedSheet,
 		animationColFrames: 18,
 		framesUntilNext: 4,
 	});

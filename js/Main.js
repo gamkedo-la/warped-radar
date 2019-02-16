@@ -124,7 +124,7 @@ function gameLoop () {
 
 // All game logic to update every frame here
 function update (delta) {
-    if (locationNow === 0) {
+    if (locationNow === 0 || locationNow === 3) {
       street_footsteps.volume = 0.2;
     } else {
       street_footsteps.volume = 0.05;

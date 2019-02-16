@@ -135,6 +135,7 @@ function Player () {
             }
             if (!this.states.walking) {
               street_footsteps.pause();
+              footsteps_sounding = false;
             }
 
             let shouldMoveX = false;

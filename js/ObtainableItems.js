@@ -99,7 +99,7 @@ function obtainItemIfApplicable() {
     if (arrayOfObtainableItems[i].obtainable) {
       arrayOfObtainableItems[i].obtained = true;
       eventManager.obtainedItem(arrayOfObtainableItems[i]);
-      
+      item_pickup_sound.play();
       notificationWindow.setMessage('You picked up: ' + arrayOfObtainableItems[i].name + '!');
 
       arrayOfObtainableItems[i].leftEdge = undefined;

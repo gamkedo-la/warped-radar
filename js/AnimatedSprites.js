@@ -12,7 +12,7 @@ let johnWalkUpDiag; //NorthWest and NorthEast(flip)
 let johnWalkDownDiag; //SouthWest and SouthEast(flip)
 
 //let johnWalkSide45Deg;
-let frameDelayWalk = framesPerSecond / 6; //higher number equals slower walk cycle speed
+let frameDelayWalk = framesPerSecond / 3; //higher number equals slower walk cycle speed
 
 let roseIdle, roseWalkUp, /*North*/ roseWalkDown, /*South*/ roseWalkSide; /*West and East (flip);*/
 let julieIdle;

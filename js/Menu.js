@@ -87,6 +87,11 @@ const Menu = new (function() {
             if (keysPressed(KEY_SPACE) || keysPressed(KEY_ENTER)) {
                 this.checkState();
                 keyRepeatWait = KEY_REPEAT_FRAME_DELAY;
+                if(gameIsBeat) {
+                    gameIsBeat = false;
+//                    resetAll(); //This method doesn't work
+                    location.reload(); //This is the nuclear option, reloads the game
+                }
             } else if (keysPressed(KEY_BACKSPACE)) {
                 currentPage = MENU_PAGE;
                 cursor1 = 0;

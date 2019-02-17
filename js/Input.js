@@ -127,6 +127,7 @@ function keydownControl(evt, keydownMap) {
     //
    if (keysPressed(KEY_SPACE) || keysPressed(KEY_ENTER)) {
         if (!levelEditor.isOn) {
+            if(gameIsBeat) {return;}
             obtainItemIfApplicable(); //in obtainableItems.js
             incrementTextPages();
             incrementOBJTextPages();

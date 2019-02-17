@@ -295,6 +295,20 @@ daves_house_song.fadingIn = false;
 daves_house_song.fadingOut = false;
 daves_house_song.volume = 0;
 
+let end_game_song = new Audio("audio/MysteriousMysteries.mp3");
+end_game_song.loop = true;
+end_game_song.targetFadeInVolume = 0.98;
+end_game_song.fadingIn = false;
+end_game_song.fadingOut = false;
+end_game_song.volume = 0;
+
+end_game_song.addEventListener('timeupdate', function(){
+	var buffer = .44;
+    if(this.currentTime > this.duration - buffer) {
+    	this.currentTime = 0.1;
+        this.play();
+}}, false);
+
 let warped_UI_choice_sound = new Audio("audio/warped_UI_choice.mp3");
 warped_UI_choice_sound.volume = 0.3;
 function playUIChoiceSound() {
@@ -331,7 +345,7 @@ function fadeInSong(song) {
 
 }
 
-let array_of_fadable_songs = [johns_house_song,city_song,julies_store_song,daves_house_song];
+let array_of_fadable_songs = [johns_house_song,city_song,julies_store_song,daves_house_song,end_game_song];
 
 function fade_songs() {
   for (let i = 0; i < array_of_fadable_songs.length; i++) {

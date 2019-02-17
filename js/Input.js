@@ -18,6 +18,7 @@ const KEY_Z = 90;
 const KEY_X = 88;
 
 const KEY_G = 71; //toggle grid
+const KEY_B = 66; //beat the game hack
 
 const KEY_ONE = 49;
 const KEY_TWO = 50;
@@ -101,7 +102,7 @@ function keysPressed() {
 function keydownControl(evt, keydownMap) {
     let isKeyPressed = evt.type == "keydown";
 
-    keySet(player);    
+    keySet(player);
 
     if (isKeyPressed) {
         levelEditor.editorKeyHandle(evt.keyCode);
@@ -147,8 +148,16 @@ function keydownControl(evt, keydownMap) {
     } else if (keysPressed(KEY_G)) {
         toggleGrid();
     }else if (this.keysPressed(KEY_P)) {
-        pauseRadar();  
-    }     
+        pauseRadar();
+    }else if (keysPressed(KEY_B)) {
+      gameIsBeat = true;
+      for (let i = 0; i < array_of_fadable_songs.length - 1; i++) {
+        array_of_fadable_songs[i].pause();
+      }
+
+      end_game_song.play();
+      end_game_song.fadingIn = true;
+    }
     if (keysPressed(KEY_SHIFT, KEY_D) && debug) {
         debug = false;
     } else if (keysPressed(KEY_SHIFT, KEY_D) && !debug) {
@@ -166,8 +175,8 @@ function keydownControl(evt, keydownMap) {
 }
 
 function keySet(whichEntity) {
-    whichEntity.keyHeld_walkLeft = keysPressed(whichEntity.controlKeyLeft) || keysPressed(whichEntity.controlKeyLeft2);        
-    whichEntity.keyHeld_walkRight = keysPressed(whichEntity.controlKeyRight) || keysPressed(whichEntity.controlKeyRight2);        
-    whichEntity.keyHeld_walkUp = keysPressed(whichEntity.controlKeyUp) || keysPressed(whichEntity.controlKeyUp2);        
+    whichEntity.keyHeld_walkLeft = keysPressed(whichEntity.controlKeyLeft) || keysPressed(whichEntity.controlKeyLeft2);
+    whichEntity.keyHeld_walkRight = keysPressed(whichEntity.controlKeyRight) || keysPressed(whichEntity.controlKeyRight2);
+    whichEntity.keyHeld_walkUp = keysPressed(whichEntity.controlKeyUp) || keysPressed(whichEntity.controlKeyUp2);
     whichEntity.keyHeld_walkDown = keysPressed(whichEntity.controlKeyDown) || keysPressed(whichEntity.controlKeyDown2);
 }

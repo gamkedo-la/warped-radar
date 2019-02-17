@@ -164,6 +164,9 @@ function Dialogue() {
                 (nextChoiceLabel == "accusationJenSuccess")) {
                     console.log("Yay! You figured it out and beat the game!!!");
                     gameIsBeat = true;
+                    city_song.fadingOut = true;
+                    end_game_song.play();
+                    end_game_song.fadingIn = true;
                     gameOverText = new Outros();
                     gameOverText.start(outroText);
                 } else if(nextChoiceLabel == "snubbedAlex") {
@@ -458,7 +461,7 @@ function Dialogue() {
         let dialogue = [];
         let pages = [];
         let sceneText = this.getSceneLength(conversation);
-        
+
         for (let i = 0; i < conversation.length; i++) {
             if ("text" in conversation[i]) {
 	            dialogue.push(conversation[i].text);
@@ -503,6 +506,6 @@ function Dialogue() {
                 this.isShowing = false;
 			}
 
-        } 
+        }
     }
 }

@@ -2007,7 +2007,7 @@ let accusation = [
         leftPicLeave: false,
         rightPicLeave: false,
 
-        choices: [["Medical Notebook", "accusationFelenFail"], ["Hoodie", "accusationFelenFail"], ["Thumb Drive", "accusationFelenSuccess"], ["Corwbar", "accusationFelenFail"]],
+        choices: [["Medical Notebook", "accusationFelenFail"], ["Hoodie", "accusationFelenFail"], ["Thumb Drive", "accusationFelenSuccess"], ["Crowbar", "accusationFelenFail"]],
 
         position: {x: 566, y: -173}
     },

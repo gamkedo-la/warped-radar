@@ -98,7 +98,7 @@ function loadImages() {
         {varName: inventoryPic, theFile: "inventory.png"},
         {varName: arrowPic, theFile: "UI/arrowPic.png"},
         {varName: logoPic, theFile: "UI/logoPic.png"},
-        {varName: endGamePic, theFile: "UI/endscreen.png"},
+        {varName: endGameImage, theFile: "UI/endscreen.png"},
 
         //PORTRAITS
         {varName: johnHappyPic, theFile: "john.png"},

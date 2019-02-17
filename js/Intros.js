@@ -139,7 +139,7 @@ let Outros = function() {
     this.draw = function() {
         if (!active) return;
         frameCount++;
-        
+        canvasContext.drawImage(endGameImage, 0 , 0);
         // current line
         txtOpacity = 1;
         colorText(currentTxt[currentLine], txtX + 1,txtY + 1 - frameCount / 4, "black", txtFont, txtAlign, txtOpacity);

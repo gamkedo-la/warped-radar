@@ -163,6 +163,9 @@ function Dialogue() {
                 (nextChoiceLabel == "accusationFelenSuccess") ||
                 (nextChoiceLabel == "accusationJenSuccess")) {
                     console.log("Yay! You figured it out and beat the game!!!");
+                    gameIsBeat = true;
+                    gameOverText = new Outros();
+                    gameOverText.start(outroText);
                 } else if(nextChoiceLabel == "snubbedAlex") {
                     GameEvent.SnubbedAlex = true;
                 }

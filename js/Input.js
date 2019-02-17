@@ -128,6 +128,7 @@ function keydownControl(evt, keydownMap) {
             cursorKeyPresses = isKeyPressed ? cursorKeyPresses + 1 : 0;
         }
     } else if (keysPressed(KEY_Z) || keysPressed(KEY_I) ) {
+        if(gameIsBeat) {return;}
         if (!inventory.showActions && !inventory.selectAction && currentlyPlayingCutscene == null) {
             inventory.toggle();
         }

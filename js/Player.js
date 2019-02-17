@@ -92,6 +92,8 @@ function Player () {
     };
 
     this.move = function (delta, moveSpeed = this.walkSpeed) {
+        if(gameIsBeat) {return;}
+        
         if (dialogueNotShowing() && !inventory.isShowing && !levelEditor.isOn) {
             let nextX = this.x;
             let nextY = this.y;

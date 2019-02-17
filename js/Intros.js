@@ -35,6 +35,17 @@ const introText = [
 "beta butt out of bed."
 ];
 
+const outroText = [
+"That's a wrap folks!",
+"Many thanks to the great folks at Gamkedo",
+"for helping to make this murder mystery",
+"everything it could be.",
+"",
+"A special thanks to you, the player",
+"for identifying Dave's killer.",
+"Join us next time when we seek revenge..."
+];
+
 let Intros = new function() {
     
     let frameCount = 0;
@@ -99,3 +110,59 @@ let Intros = new function() {
     }
 
 }();
+
+let Outros = function() {
+    
+    let frameCount = 0;
+    let framesPerLine = 80;
+    let currentLine = 0;
+    let active = false;
+    
+    let currentTxt = [""];
+    let txtX = 0;
+    let txtY = 0;
+    let txtOpacity = 1.0;
+
+    const txtColor = "white";
+    const txtFont = "18px Tahoma";
+    const txtAlign = "center";
+    const lineHeight = 28;
+
+    this.start = function(txt) {
+        currentTxt = txt;
+        txtX = Math.round(canvas.width / 2);
+        txtY = Math.round(canvas.height / 3);
+        active = true;
+        frameCount = 0;
+    } 
+
+    this.draw = function() {
+        if (!active) return;
+        frameCount++;
+        
+        // current line
+        txtOpacity = 1;
+        colorText(currentTxt[currentLine], txtX + 1,txtY + 1 - frameCount / 4, "black", txtFont, txtAlign, txtOpacity);
+        colorText(currentTxt[currentLine], txtX, txtY - frameCount / 4, txtColor, txtFont ,txtAlign, txtOpacity);
+
+        // prev line fades out and floats away
+        if (currentLine > 0) {
+            txtOpacity = 1 - (frameCount / framesPerLine);
+            colorText(currentTxt[currentLine - 1], txtX + 1,txtY + 1 - ((framesPerLine + frameCount) / 4), "black", txtFont, txtAlign, txtOpacity);
+            colorText(currentTxt[currentLine - 1], txtX, txtY - ((framesPerLine + frameCount) / 4),txtColor, txtFont, txtAlign, txtOpacity);
+        }
+
+        if (frameCount >= framesPerLine) {
+            currentLine++;
+            frameCount = 0;
+        }
+
+        if(currentLine >= outroText.length) {
+            Menu.showCredits();
+            console.log("Finished showing the out text.");
+            outTextComplete = true;
+        }
+
+        active = (currentLine < currentTxt.length);
+    }
+}

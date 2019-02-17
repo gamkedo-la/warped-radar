@@ -90,6 +90,11 @@ const Menu = new (function() {
             } else if (keysPressed(KEY_BACKSPACE)) {
                 currentPage = MENU_PAGE;
                 cursor1 = 0;
+                if(gameIsBeat) {
+                    gameIsBeat = false;
+//                    resetAll(); //This method doesn't work
+                    location.reload(); //This is the nuclear option, reloads the game
+                }
             }
             if(keysPressed(KEY_UP)) {
                 cursor1--;
@@ -111,6 +116,12 @@ const Menu = new (function() {
         keyRepeatWait = Math.max(0, keyRepeatWait - 1);
     };
 
+    this.showCredits = function() {
+        gameIsStarted = false;
+        currentPage = CREDITS_PAGE;
+        cursor1 = 3;
+    };
+
     this.checkState = function() {
         if (currentPage == GAMEPLAY_PAGE || currentPage == CREDITS_PAGE) {
             currentPage = MENU_PAGE;
@@ -130,9 +141,9 @@ const Menu = new (function() {
                 setTimeout(() => {
                     gameIsStarted = true;
 
-                }, transitionDuration*0.275); // show new scene halfway through duration, so it can be seen as transition is ending.
+                }, transitionDuration * 0.275); // show new scene halfway through duration, so it can be seen as transition is ending.
                 // trigger intro cinematic
-                setTimeout(Intros.start(introText),transitionDuration);
+                setTimeout(Intros.start(introText), transitionDuration);
                 warpedRadarBackgroundMusic.startOrStopMusic();
                 johns_house_song.play();
                 johns_house_song.fadingIn = true;
@@ -200,23 +211,23 @@ const Menu = new (function() {
 
     this.alpha = 1;
     this.draw = function() {
-
         if (transitioning) {
           this.alpha -= 0.02;
           canvasContext.globalAlpha = this.alpha;
         }
 
         if(gameIsStarted === false){
-        if(currentPage == PAUSED_PAGE){
-          currentPage = MENU_PAGE;
+            if(currentPage == PAUSED_PAGE){
+            currentPage = MENU_PAGE;
+            }
+            this.redraw();
+            canvasContext.drawImage(logoPic, 0, 0);
+        } else {
+            currentPage = PAUSED_PAGE;
+            canvasContext.clearRect(itemsX -50,topItemY - rowHeight,
+            itemsWidth, rowHeight * menuPageText[currentPage].length + rowHeight  );
         }
-        this.redraw();
-        canvasContext.drawImage(logoPic, 0, 0);
-        }else {
-        currentPage = PAUSED_PAGE;
-        canvasContext.clearRect(itemsX -50,topItemY - rowHeight,
-        itemsWidth, rowHeight * menuPageText[currentPage].length + rowHeight  );
-    }
+
         if(currentPage == CREDITS_PAGE) {
             colorRect( 0, 0, gameCanvas.width, gameCanvas.height, "black", 0.2);
             let creditsX = 5;
@@ -226,15 +237,17 @@ const Menu = new (function() {
             for (let i = 0; i < creditsList.length; i++) {
                 colorText(creditsList[i],creditsX, creditsTopY + creditsLineSkipY * i, textColour, creditsFontFace, 'left', 'top');
             }
+            
             return;
         }
             for (let i=0; i<menuPageText[currentPage].length; i++){
                 colorText(menuPageText[currentPage][i], itemsX - (currentPage == GAMEPLAY_PAGE ? 275 : 0),topItemY + rowHeight * i,textColour, textFontFace, 'left', 'top');
-                }
-                if(currentPage != GAMEPLAY_PAGE){
-                 //Draw cursor after background image
-                 canvasContext.drawImage(arrowPic,itemsX -55 ,topItemY + (cursor1 * rowHeight) -42);
-                }
+            }
+
+            if(currentPage != GAMEPLAY_PAGE){
+                //Draw cursor after background image
+                canvasContext.drawImage(arrowPic,itemsX -55 ,topItemY + (cursor1 * rowHeight) -42);
+            }
 
         //canvasContext.globalAlpha = 1;
     };

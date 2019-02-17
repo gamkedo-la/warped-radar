@@ -28,6 +28,37 @@ warpedRadarAmbientNoise.volume = 0.2;
 let testScene = new Cutscene();
 let playTheScene = false;
 let gameIsStarted = true;
+let gameIsBeat = false;
+let gameOverText = null;
+let outTextComplete = false;
+let currentGameFrame = null;
+
+function resetAll() { //Not used because it doesn't work
+    framesFromGameStart = 0;
+
+    debug = false;
+    paused = false;
+    transitioning = false;
+
+    testScene = new Cutscene();
+    playTheScene = false;
+    gameIsStarted = false;
+    gameIsBeat = false;
+    gameOverText = null;
+    outTextComplete = false;
+    currentGameFrame = null;
+
+    player.reset();
+    timer.setupTimer();
+    initializeDefaultItems();
+    initializeObtainableItems();
+    notificationWindow.initialize();
+    eventManager = new EventManager();
+    initializeOverworldObjects();
+    initializeInteractableItems();
+
+    gameLoop();
+}
 
 // Things that are set once for the entire run of the game here
 function start () {
@@ -118,7 +149,7 @@ function gameLoop () {
     then = now;
 
         stats.end();
-        requestAnimationFrame(gameLoop);
+        currentGameFrame = requestAnimationFrame(gameLoop);
 
 }
 
@@ -164,13 +195,14 @@ function updateOverworldObjects(delta) {
 // All things drawn to screen every frame here
 function render () {
 
-    if(gameIsStarted === false || paused){
+    if(gameIsStarted === false || paused) {
         Menu.draw();
         if (transitioning) {
             PageTransition.draw();
         }
         return; // skip game logic below
     }
+
     clearScreen();
     mainCamera.beginPan();
 
@@ -232,6 +264,9 @@ function render () {
     // TO-DO END: reorganize cutscene system/manager
 
     Intros.draw(); // if any
+    if((gameIsBeat) && (gameOverText != null)) {
+        gameOverText.draw();
+    }
 
     if (transitioning) {
         PageTransition.draw();

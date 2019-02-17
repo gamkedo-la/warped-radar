@@ -1,6 +1,6 @@
-var stats = new Stats();
-stats.showPanel( 1 ); // 0: fps, 1: ms, 2: mb, 3+: custom
-document.body.appendChild( stats.dom );
+// var stats = new Stats();
+// stats.showPanel( 1 ); // 0: fps, 1: ms, 2: mb, 3+: custom
+// document.body.appendChild( stats.dom );
 
 const CANVAS_WIDTH = 800;
 const CANVAS_HEIGHT = 600;
@@ -134,7 +134,7 @@ loadImages();
 // Called from start(), keeps the game loop and delta in check
 
 function gameLoop () {
-    stats.begin();
+    //stats.begin();
 
     let now = Date.now();
     delta = (now - then); // * deltaMultiplier;
@@ -148,7 +148,7 @@ function gameLoop () {
 
     then = now;
 
-        stats.end();
+       // stats.end();
         currentGameFrame = requestAnimationFrame(gameLoop);
 
 }

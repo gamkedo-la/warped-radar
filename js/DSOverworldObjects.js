@@ -400,7 +400,7 @@ function initializeJulie(arrayIndex) {
     julie.location = locationNow;
     
     julie.chatEvents = function (createElseIncrement) {
-        this.text(createElseIncrement, [johnAndJulie_1, johnAndRoseConvo2, johnAndRoseConvo3]);//need to replace these conversations
+        this.text(createElseIncrement, [johnAndJulie_1]);//need to replace these conversations
     
     }
 

@@ -415,7 +415,7 @@ let roseInquiry = [
     },
 ];
 
-let johnAndRoseConvo2 = [
+/*let johnAndRoseConvo2 = [
         {
         scene: "A Basic Conversation",
         who: "John",
@@ -476,9 +476,9 @@ let johnAndRoseConvo2 = [
 
         choices: null
     }
-];
+];*/
 
-let johnAndRoseConvo3 = [
+/*let johnAndRoseConvo3 = [
     {
         scene: "Convo3",
         who: "John",
@@ -554,7 +554,7 @@ let johnAndRoseConvo3 = [
 
         choices: null
     }
-];
+];*/
 
 let UncleDaveDiscovery = [
     {
@@ -2007,7 +2007,7 @@ let accusation = [
         leftPicLeave: false,
         rightPicLeave: false,
 
-        choices: [["Medical Notebook", "accusationFelenFail"], ["Hoodie", "accusationFelenFail"], ["Thumb Drive", "accusationFelenSuccess"], ["Crowbar", "accusationFelenFail"]],
+        choices: [["Medical Notebook", "accusationFelenFail"], ["Hoodie", "accusationFelenFail"], ["Thumb Drive", "accusationFelenSuccess"], ["Corwbar", "accusationFelenFail"]],
 
         position: {x: 566, y: -173}
     },

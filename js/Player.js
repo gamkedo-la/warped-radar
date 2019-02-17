@@ -85,7 +85,7 @@ function Player () {
     };
 
     this.setRowColPos = function(row, col) {
-        this.x = col * WORLD_W + WORLD_W / 2;
+        this.x = (col * WORLD_W) + (WORLD_W / 2);
         this.y = row * WORLD_H - 5;//5 fudge to move player off grid lines when changing locations[locationNow]
         this.collider.setCollider(this.x, this.y);
         this.setTileCollider(this.x, this.y);

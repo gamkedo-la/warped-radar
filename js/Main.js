@@ -342,6 +342,7 @@ function goToDestinationFor(arrayIndexUnderPlayer) {
         initializeInteractableItems();
 
         mainCamera.instantFollow(player);
+        player.x += Math.floor(mainCamera.camPanX/WORLD_W);
 
         PageTransition.init({
             duration:2500,

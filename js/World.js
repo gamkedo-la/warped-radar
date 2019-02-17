@@ -354,7 +354,7 @@ function returnTileTypeAtColRowInLayer(col, row, layer) {
 }
 
 function playerWorldHandling(whichEntity) {
-    let playerWorldCol = Math.floor(whichEntity.x / WORLD_H);
+    let playerWorldCol = Math.floor((whichEntity.x - Math.floor(mainCamera.camPanX/WORLD_W)) / WORLD_W);
     let playerWorldRow = Math.floor(1 + whichEntity.y / WORLD_H);
     let arrayIndexUnderPlayer = rowColToArrayIndex(playerWorldCol, playerWorldRow);
 

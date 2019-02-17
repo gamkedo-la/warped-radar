@@ -1168,7 +1168,7 @@ let confessorConvo1 = [
         text: "I'm Detective Dan.  I work in Homicide.",
         nextPage: 1,
         leftPic: johnHappyPic,
-        rightPic: copPic,
+        rightPic: danPic,
 
         leftPicLeave: false,
         rightPicLeave: null,
@@ -1185,7 +1185,7 @@ let confessorConvo1 = [
         text: "If you're looking for enhancements, you've come to the wrong place.  Go find that street dealer Fusion.",
         nextPage: 2,
         leftPic: johnHappyPic,
-        rightPic: copPic,
+        rightPic: danPic,
 
         leftPicLeave: false,
         rightPicLeave: null,
@@ -1918,7 +1918,7 @@ let accusation = [
         text: "I figured it out!",
         nextPage: 1,
         leftPic: johnHappyPic,
-        rightPic: copPic,
+        rightPic: danPic,
 
         leftPicLeave: false,
         rightPicLeave: false,
@@ -1935,7 +1935,7 @@ let accusation = [
         text: "Oh yeah? Who did it then?",
         nextPage: 2,
         leftPic: johnHappyPic,
-        rightPic: copPic,
+        rightPic: danPic,
 
         leftPicLeave: false,
         rightPicLeave: false,
@@ -1952,7 +1952,7 @@ let accusation = [
         text: "",
         nextPage: null,
         leftPic: johnHappyPic,
-        rightPic: copPic,
+        rightPic: danPic,
 
         leftPicLeave: false,
         rightPicLeave: false,
@@ -1969,7 +1969,7 @@ let accusation = [
         text: "Huh.  Got any evidence?",
         nextPage: 4,
         leftPic: johnHappyPic,
-        rightPic: copPic,
+        rightPic: danPic,
 
         leftPicLeave: false,
         rightPicLeave: false,
@@ -1986,7 +1986,7 @@ let accusation = [
         text: "",
         nextPage: null,
         leftPic: johnHappyPic,
-        rightPic: copPic,
+        rightPic: danPic,
 
         leftPicLeave: false,
         rightPicLeave: false,
@@ -2003,7 +2003,7 @@ let accusation = [
         text: "That's amazing kid!  You're absolutely right! You should be a detective.",
         nextPage: null,
         leftPic: johnHappyPic,
-        rightPic: copPic,
+        rightPic: danPic,
 
         leftPicLeave: false,
         rightPicLeave: false,
@@ -2020,7 +2020,7 @@ let accusation = [
         text: "Nice try.  I don't think that's quite right.  You might need to keep looking for more evidence.",
         nextPage: null,
         leftPic: johnHappyPic,
-        rightPic: copPic,
+        rightPic: danPic,
 
         leftPicLeave: false,
         rightPicLeave: false,
@@ -2037,7 +2037,7 @@ let accusation = [
         text: "Huh. Got any evidence?",
         nextPage: 8,
         leftPic: johnHappyPic,
-        rightPic: copPic,
+        rightPic: danPic,
 
         leftPicLeave: false,
         rightPicLeave: false,
@@ -2054,7 +2054,7 @@ let accusation = [
         text: "",
         nextPage: null,
         leftPic: johnHappyPic,
-        rightPic: copPic,
+        rightPic: danPic,
 
         leftPicLeave: false,
         rightPicLeave: false,
@@ -2071,7 +2071,7 @@ let accusation = [
         text: "Nice try.  I don't think that's quite right.  You might need to keep looking for more evidence.",
         nextPage: null,
         leftPic: johnHappyPic,
-        rightPic: copPic,
+        rightPic: danPic,
 
         leftPicLeave: false,
         rightPicLeave: false,
@@ -2088,7 +2088,7 @@ let accusation = [
         text: "That's amazing kid!  You're absolutely right!  You should be a detective.",
         nextPage: null,
         leftPic: johnHappyPic,
-        rightPic: copPic,
+        rightPic: danPic,
 
         leftPicLeave: false,
         rightPicLeave: false,
@@ -2105,7 +2105,7 @@ let accusation = [
         text: "Huh.  Got any evidence?",
         nextPage: 12,
         leftPic: johnHappyPic,
-        rightPic: copPic,
+        rightPic: danPic,
 
         leftPicLeave: false,
         rightPicLeave: false,
@@ -2122,7 +2122,7 @@ let accusation = [
         text: "",
         nextPage: null,
         leftPic: johnHappyPic,
-        rightPic: copPic,
+        rightPic: danPic,
 
         leftPicLeave: false,
         rightPicLeave: false,
@@ -2139,7 +2139,7 @@ let accusation = [
         text: "Nice Try.  I don't think that's quite right.  You might need to keep looking for more evidence.",
         nextPage: null,
         leftPic: johnHappyPic,
-        rightPic: copPic,
+        rightPic: danPic,
 
         leftPicLeave: false,
         rightPicLeave: false,
@@ -2156,7 +2156,7 @@ let accusation = [
         text: "That's amazing kid!  You're absolutely right!  You should be a detective.",
         nextPage: null,
         leftPic: johnHappyPic,
-        rightPic: copPic,
+        rightPic: danPic,
 
         leftPicLeave: false,
         rightPicLeave: false,
@@ -2173,7 +2173,7 @@ let accusation = [
         text: "Huh.  Got any evidence?",
         nextPage: 16,
         leftPic: johnHappyPic,
-        rightPic: copPic,
+        rightPic: danPic,
 
         leftPicLeave: false,
         rightPicLeave: false,
@@ -2190,7 +2190,7 @@ let accusation = [
         text: "",
         nextPage: null,
         leftPic: johnHappyPic,
-        rightPic: copPic,
+        rightPic: danPic,
 
         leftPicLeave: false,
         rightPicLeave: false,
@@ -2207,7 +2207,7 @@ let accusation = [
         text: "Nice Try.  I don't think that's quite right.  You might need to keep looking for more evidence.",
         nextPage: null,
         leftPic: johnHappyPic,
-        rightPic: copPic,
+        rightPic: danPic,
 
         leftPicLeave: false,
         rightPicLeave: false,
@@ -2224,7 +2224,7 @@ let accusation = [
         text: "That's amazing kid!  You're absolutely right!  You should be a detective.",
         nextPage: null,
         leftPic: johnHappyPic,
-        rightPic: copPic,
+        rightPic: danPic,
 
         leftPicLeave: false,
         rightPicLeave: false,

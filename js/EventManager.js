@@ -16,6 +16,7 @@ const GameEvent = {
     Talk_Rose_1:false,
     Talk_Rose_2:false,
     Talk_Julie_0:false,
+    Talk_Julie_1:false,
     Talk_Cat_1:false,
     Talk_Agent_1:false,
     Talk_Agent_2:false,
@@ -179,9 +180,9 @@ function EventManager() {
             break;
             case "Julie":
                 if(GameEvent.Talk_Julie_0) {
-                    if(!GameEvent.FoundDave) {
-                        result = 0;
-                    } else if(GameEvent.FoundCrowbar) {
+                    if(GameEvent.Talk_Julie_1) {
+                        result = 2;
+                    } else {
                         result = 1;
                     }
                 } else {
@@ -269,21 +270,23 @@ function EventManager() {
                 array_of_fadable_songs[1] = city_song;
             break;
             case "Julie":
-                if(npc.messageCounter == 0) {
+                if(!GameEvent.Talk_Julie_0) {
                     GameEvent.Talk_Julie_0 = true;
+                } else {
+                    GameEvent.Talk_Julie_1 = true;
                 }
             break;
             case "Cat":
                 GameEvent.Talk_Cat_1 = true;
             break;
             case "Jen":
-                if(!GameEvent.Talk_Agent_1) {
-                    GameEvent.Talk_Agent_1 = true;
-                } else if(GameEvent.Talk_Fusion_1) {
+                if(GameEvent.Talk_Fusion_1) {
                     GameEvent.Talk_Agent_2 = true;
                     if((locationNow == Place.TheCity) && (!GameEvent.FoundDave)) {
                         activateDoorToDavesHouse();
                     }
+                } else if(!GameEvent.Talk_Agent_1) {
+                    GameEvent.Talk_Agent_1 = true;
                 }
             break;
             case "Dan":

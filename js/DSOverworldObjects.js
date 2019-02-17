@@ -117,6 +117,7 @@ function OverworldObject(name, leftEdge, topEdge, width, height, animations = nu
                     dialogue.isShowing = true;
                     dialogue.letterCounter = 0;
                     this.messageCounter = nextMessageCounter;
+                    eventManager.spokeToNPC(this);
                 }
                 if ((dialogue.speakerX <= dialogue.speakerStartX) && (dialogue.speaker2X >= dialogue.speaker2StartX)) {
                     dialogue.setPage(0);
@@ -125,8 +126,6 @@ function OverworldObject(name, leftEdge, topEdge, width, height, animations = nu
         } else if (!this.nearPlayer()) {
             dialogue.isShowing = false;
             dialogue.setPage(0);
-        } else if(dialogue.isShowing) {
-            eventManager.spokeToNPC(this);
         }
     }
 
@@ -400,7 +399,7 @@ function initializeJulie(arrayIndex) {
     julie.location = locationNow;
     
     julie.chatEvents = function (createElseIncrement) {
-        this.text(createElseIncrement, [johnAndJulie_1]);//need to replace these conversations
+        this.text(createElseIncrement, [johnAndJulie_1, julieConvo2, julieConvo3]);
     
     }
 

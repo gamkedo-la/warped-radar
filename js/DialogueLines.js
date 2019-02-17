@@ -415,146 +415,266 @@ let roseInquiry = [
     },
 ];
 
-/*let johnAndRoseConvo2 = [
-        {
-        scene: "A Basic Conversation",
-        who: "John",
-        nameCol: "lightBlue",
-        voice: voiceLow1,
-        text: "Hello!",
+let julieConvo2 = [
+    {
+        scene: "page1",
+        who: "Julie",
+        nameCol: "#b12f0c",
+        voice: voiceHigh2,
+        text: "Hey John, is that no good Alex still outside?",
         nextPage: 1,
         leftPic: johnHappyPic,
-        rightPic: null,
+        rightPic: julieWorriedPic,
 
         leftPicLeave: false,
         rightPicLeave: false,
 
-        choices: null
+        choices: null,
+
+        position: {x: 517.5, y: -394}
     },
     {
-        scene: "A Basic Conversation",
-        who: "Rose",
-        nameCol: "pink",
-        voice: voiceHigh2,
-        text: "Oh, it's you again!",
-        nextPage: 2,
-        leftPic: johnHappyPic,
-        rightPic: roseHappyPic,
-
-        leftPicLeave: false,
-        rightPicLeave: false,
-
-        choices: null
-    },
-    {
-        scene: "A Basic Conversation",
+        scene: "page2",
         who: "John",
         nameCol: "lightBlue",
         voice: voiceLow1,
-        text: "Okay I'm gonna go now.",
-        nextPage: 3,
+        text: "",
+        nextPage: null,
         leftPic: johnHappyPic,
-        rightPic: roseHappyPic,
+        rightPic: julieWorriedPic,
 
         leftPicLeave: false,
         rightPicLeave: false,
 
-        choices: null
+        choices: [["Yes", "page3"], ["No", "page4"]],
+
+        position: {x: 517.5, y: -104}
     },
     {
-        scene: "A Basic Conversation",
-        who: "Rose",
-        nameCol: "pink",
+        scene: "page3",
+        who: "Julie",
+        nameCol: "#b12f0c",
         voice: voiceHigh2,
-        text: "Ok.",
+        text: "That's it! I'm calling Agent Jen to take care of him.",
         nextPage: 4,
         leftPic: johnHappyPic,
-        rightPic: roseHappyPic,
+        rightPic: julieWorriedPic,
 
         leftPicLeave: false,
         rightPicLeave: false,
 
-        choices: null
-    }
-];*/
+        choices: null,
 
-/*let johnAndRoseConvo3 = [
-    {
-        scene: "Convo3",
-        who: "John",
-        nameCol: "lightBlue",
-        voice: voiceLow1,
-        text: "Sorry I forgot to tell you somethi-",
-        nextPage: 1,
-        leftPic: johnHappyPic,
-        rightPic: null,
-
-        leftPicLeave: false,
-        rightPicLeave: false,
-
-        choices: null
+        position: {x: 84.5, y: -36}
     },
     {
-        scene: "Convo3",
-        who: "Rose",
-        nameCol: "pink",
+        scene: "page4",
+        who: "Julie",
+        nameCol: "#b12f0c",
         voice: voiceHigh2,
-        text: "Please, just go.",
-        nextPage: 2,
-        leftPic: johnHappyPic,
-        rightPic: roseAnnoyedPic,
-
-        leftPicLeave: false,
-        rightPicLeave: false,
-
-        choices: null
-    },
-    {
-        scene: "Convo3",
-        who: "John",
-        nameCol: "lightBlue",
-        voice: voiceLow1,
-        text: "Ok...",
-        nextPage: 3,
-        leftPic: johnMadPic,
-        rightPic: roseAnnoyedPic,
-
-        leftPicLeave: false,
-        rightPicLeave: false,
-
-        choices: null
-    },
-    {
-        scene: "Convo3",
-        who: "John",
-        nameCol: "lightBlue",
-        voice: voiceLow1,
-        text: "...",
-        nextPage: 4,
-        leftPic: johnMadPic,
-        rightPic: roseAnnoyedPic,
-
-        leftPicLeave: true,
-        rightPicLeave: false,
-
-        choices: null
-    },
-    {
-        scene: "Convo3",
-        who: "Rose",
-        nameCol: "pink",
-        voice: voiceHigh2,
-        text: "That's better.",
+        text: "He isn't?... I wonder why not...",
         nextPage: 5,
-        leftPic: null,
-        rightPic: roseAnnoyedPic,
+        leftPic: johnHappyPic,
+        rightPic: julieWorriedPic,
 
-        leftPicLeave: true,
+        leftPicLeave: false,
         rightPicLeave: false,
 
-        choices: null
-    }
-];*/
+        choices: null,
+
+        position: {x: 981.5, y: -2}
+    },
+    {
+        scene: "page5",
+        who: "Cat",
+        nameCol: "yellow",
+        voice: voiceLow1,
+        text: "Don't bring her here! I'll get rid of him.",
+        nextPage: null,
+        leftPic: johnHappyPic,
+        rightPic: catManPic,
+
+        leftPicLeave: false,
+        rightPicLeave: false,
+
+        choices: null,
+
+        position: {x: 84.5, y: 254}
+    },
+    {
+        scene: "page6",
+        who: "Cat",
+        nameCol: "yellow",
+        voice: voiceLow1,
+        text: "See, I told you I'd take care of him.",
+        nextPage: 6,
+        leftPic: johnHappyPic,
+        rightPic: catManPic,
+
+        leftPicLeave: false,
+        rightPicLeave: false,
+
+        choices: null,
+
+        position: {x: 983.5, y: 268}
+    },
+    {
+        scene: "page7",
+        who: "Julie",
+        nameCol: "#b12f0c",
+        voice: voiceHigh2,
+        text: "That's not what I meant and you know it...",
+        nextPage: null,
+        leftPic: johnHappyPic,
+        rightPic: julieWorriedPic,
+
+        leftPicLeave: false,
+        rightPicLeave: false,
+
+        choices: null,
+
+        position: {x: 982.5, y: 538}
+    },
+];
+
+let julieConvo3 = [
+    {
+        scene: "page1",
+        who: "Julie",
+        nameCol: "#b12f0c",
+        voice: voiceHigh2,
+        text: "Hey John, do you see any enhancements you like?",
+        nextPage: 1,
+        leftPic: johnHappyPic,
+        rightPic: julieWorriedPic,
+
+        leftPicLeave: false,
+        rightPicLeave: false,
+
+        choices: null,
+
+        position: {x: 492.5, y: -377}
+    },
+    {
+        scene: "page2",
+        who: "John",
+        nameCol: "lightBlue",
+        voice: voiceLow1,
+        text: "",
+        nextPage: null,
+        leftPic: johnHappyPic,
+        rightPic: julieWorriedPic,
+
+        leftPicLeave: false,
+        rightPicLeave: false,
+
+        choices: [["Julie, you know what I think about enhancements.", "page3"], ["Nothing I can afford without a discount for having such an amazing smile.", "page7"]],
+
+        position: {x: 492.5, y: -87}
+    },
+    {
+        scene: "page3",
+        who: "Julie",
+        nameCol: "#b12f0c",
+        voice: voiceHigh2,
+        text: "I do, but people change their minds.  Plus, Fusion just posted an article proving you're wrong about the problem. Here I'll transfer it to you.",
+        nextPage: 3,
+        leftPic: johnHappyPic,
+        rightPic: julieWorriedPic,
+
+        leftPicLeave: false,
+        rightPicLeave: false,
+
+        choices: null,
+
+        position: {x: 99.5, y: -19}
+    },
+    {
+        scene: "page4",
+        who: "John",
+        nameCol: "lightBlue",
+        voice: voiceLow1,
+        text: "",
+        nextPage: null,
+        leftPic: johnHappyPic,
+        rightPic: julieWorriedPic,
+
+        leftPicLeave: false,
+        rightPicLeave: false,
+
+        choices: [["That's ok, I've seen all the proof I need.", "page5"], ["Ok, I'll take a look at it...later...", "page6"]],
+
+        position: {x: 99.5, y: 331}
+    },
+    {
+        scene: "page5",
+        who: "Julie",
+        nameCol: "#b12f0c",
+        voice: voiceHigh2,
+        text: "Alright, but I think you're really missing out.  We've got some pretty cool stuff.",
+        nextPage: null,
+        leftPic: johnHappyPic,
+        rightPic: julieWorriedPic,
+
+        leftPicLeave: false,
+        rightPicLeave: false,
+
+        choices: null,
+
+        position: {x: -317.5, y: 396}
+    },
+    {
+        scene: "page6",
+        who: "Julie",
+        nameCol: "#b12f0c",
+        voice: voiceHigh2,
+        text: "Sure you will... Well, there it is.  Let me know if you actually read it.",
+        nextPage: null,
+        leftPic: johnHappyPic,
+        rightPic: julieWorriedPic,
+
+        leftPicLeave: false,
+        rightPicLeave: false,
+
+        choices: null,
+
+        position: {x: 509.5, y: 451}
+    },
+    {
+        scene: "page7",
+        who: "Julie",
+        nameCol: "#b12f0c",
+        voice: voiceHigh2,
+        text: "You know I love that smile, but I think Felen wants some Credits for his work this week.  Even if he wasn't here last night like he was supposed to be.",
+        nextPage: 7,
+        leftPic: johnHappyPic,
+        rightPic: julieWorriedPic,
+
+        leftPicLeave: false,
+        rightPicLeave: false,
+
+        choices: null,
+
+        position: {x: 971.5, y: 87}
+    },
+    {
+        scene: "page8",
+        who: "Cat",
+        nameCol: "yellow",
+        voice: voiceLow1,
+        text: "I better get paid!",
+        nextPage: null,
+        leftPic: johnHappyPic,
+        rightPic: catManPic,
+
+        leftPicLeave: false,
+        rightPicLeave: false,
+
+        choices: null,
+
+        position: {x: 971.5, y: 437}
+    },
+];
 
 let UncleDaveDiscovery = [
     {

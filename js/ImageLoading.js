@@ -25,6 +25,7 @@ let julieAnnoyedPic = document.createElement("img");
 let julieHappyPic = document.createElement("img");
 let npc_agentPic = document.createElement("img");
 let copPic = document.createElement("img");
+let danPic = document.createElement("img");
 let catManPic = document.createElement("img");
 let fusionFlatPic = document.createElement("img");
 let alexFlatPic = document.createElement("img");
@@ -57,6 +58,7 @@ let julieAnimationIdle = document.createElement("img");
 let catManAnimationIdle = document.createElement("img");
 let agentAnimationIdle = document.createElement("img");
 let copAnimationIdle = document.createElement("img");
+let danAnimationIdle = document.createElement("img");
 let fusionAnimationIdle = document.createElement("img");
 let alexAnimationIdle = document.createElement("img");
 
@@ -111,6 +113,7 @@ function loadImages() {
         {varName: julieHappyPic, theFile: "julie3.png"},
         {varName: npc_agentPic, theFile: "npc_agent.png"},
         {varName: copPic, theFile: "NPC-COP-Portrait.png"},
+        {varName: danPic, theFile: "NPC-Dan-Portrait.png"},
         {varName: fusionFlatPic, theFile: "NPC-Fusion-Portrait.png"},
         {varName: alexFlatPic, theFile: "NPC-Alex-Portrait.png"},
         {varName: catManPic, theFile: "CatMan-Portrait.png"},
@@ -147,6 +150,7 @@ function loadImages() {
         {varName: agentAnimationIdle, theFile: "npc_agent-idle.png"},
         {varName: fusionAnimationIdle, theFile: "NPC-Fusion-Sprite-IDLE.png"},
         {varName: copAnimationIdle, theFile: "NPC-COP-Sprite-IDLE.png"},
+        {varName: danAnimationIdle, theFile: "NPC-Dan-Sprite-IDLE.png"},
         {varName: alexAnimationIdle, theFile: "NPC-Alex-Sprite-IDLE.png"},
 
         {varName: daveIdle, theFile: "DaveSprite_Dead.png"},

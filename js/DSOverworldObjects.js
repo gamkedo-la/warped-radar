@@ -200,7 +200,7 @@ function initializeOverworldObjects() {
                     allNPCs.push(cat);
                 }
             case TILE.COP:
-                if((locationNow == Place.TheCity) && (i == getTileIndex(theCity, 68, 38))) {
+                if((locationNow == Place.TheCity) && (i == getTileIndex(theCity, 68, 39))) {
                     const confessor = initializeConfessor(i);
                     if(eventManager.canShowNPC(confessor)) {
                         allNPCs.push(confessor);

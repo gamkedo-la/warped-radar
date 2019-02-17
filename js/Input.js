@@ -50,6 +50,11 @@ let keydownMap = {};
 
 function setupInput() {
     document.addEventListener('click', event => {
+        if(gameIsBeat) {
+            gameIsBeat = false;
+//            resetAll(); //This method doesn't work
+            location.reload(); //This is the nuclear option, reloads the game
+        }
         Menu.checkState();
     });
     canvas.addEventListener("mousemove", updateMousePos);

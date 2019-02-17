@@ -154,7 +154,9 @@ function keydownControl(evt, keydownMap) {
       for (let i = 0; i < array_of_fadable_songs.length - 1; i++) {
         array_of_fadable_songs[i].pause();
       }
-
+      // introText="";
+      gameOverText = new Outros();
+      gameOverText.start(outroText);
       end_game_song.play();
       end_game_song.fadingIn = true;
     }

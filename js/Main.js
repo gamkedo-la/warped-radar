@@ -262,8 +262,9 @@ function render () {
         currentlyPlayingCutscene = testScene;
     }
     // TO-DO END: reorganize cutscene system/manager
-
-    Intros.draw(); // if any
+    if (!gameIsBeat) {
+      Intros.draw(); // if any
+    }
     if((gameIsBeat) && (gameOverText != null)) {
         gameOverText.draw();
     }

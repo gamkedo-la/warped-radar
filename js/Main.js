@@ -85,7 +85,7 @@ function start () {
 
     //Start background music
     warpedRadarBackgroundMusic.loopSong("audio/MainMenu");
-    warpedRadarBackgroundMusic.setVolume(0.35);//trying to balance background music with dialogue volume
+    warpedRadarBackgroundMusic.setVolume(0.5);//trying to balance background music with dialogue volume
 
     // if (useRequestAnimationFrame) {
     gameLoop();

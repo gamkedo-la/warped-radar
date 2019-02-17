@@ -209,6 +209,14 @@ function makeAnimatedSprites() {
 		framesUntilNext: frameDelayWalk,
 	});
 
+	//Dan
+	danIdle = new AnimatedSpriteClass({
+		name: "danAnimationIdle",
+		spriteSheet: danAnimationIdle,
+		animationColFrames: 42,
+		framesUntilNext: 16,
+	});
+	
 	//Cop
 	copIdle = new AnimatedSpriteClass({
 		name: "copAnimationIdle",

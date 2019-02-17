@@ -559,8 +559,8 @@ function initializeAlex(arrayIndex) {
 }
 
 function initializeConfessor(arrayIndex) {
-    const copAnimations = {
-        idle:copIdle,
+    const danAnimations = {
+        idle:danIdle,
         worry:null,
         north:null,
         south:null,
@@ -575,7 +575,7 @@ function initializeConfessor(arrayIndex) {
     const columns = locationList[locationNow].columns;
     const xPos = (1 + arrayIndex % columns) * WORLD_W + Math.floor(mainCamera.camPanX / WORLD_W);
     const yPos = Math.floor(arrayIndex / columns) * WORLD_H;
-    let confessor = new OverworldObject("Dan", xPos, yPos, 26, 62, copAnimations);
+    let confessor = new OverworldObject("Dan", xPos, yPos, 26, 62, danAnimations);
     confessor.dialogue = new Dialogue();
     confessor.colour = "blue";
     confessor.location = Place.TheCity;

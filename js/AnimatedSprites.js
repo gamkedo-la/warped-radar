@@ -213,8 +213,8 @@ function makeAnimatedSprites() {
 	copIdle = new AnimatedSpriteClass({
 		name: "copAnimationIdle",
 		spriteSheet: copAnimationIdle,
-		animationColFrames: 24,
-		framesUntilNext: frameDelayWalk,
+		animationColFrames: 42,
+		framesUntilNext: 16,
 	});
 };
 

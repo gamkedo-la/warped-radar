@@ -146,7 +146,7 @@ function loadImages() {
         {varName: catManAnimationIdle, theFile: "catMan.png"},
         {varName: agentAnimationIdle, theFile: "npc_agent-idle.png"},
         {varName: fusionAnimationIdle, theFile: "NPC-Fusion-Sprite-IDLE.png"},
-        {varName: copAnimationIdle, theFile: "npc_cop-idle.png"},
+        {varName: copAnimationIdle, theFile: "NPC-COP-Sprite-IDLE.png"},
         {varName: alexAnimationIdle, theFile: "NPC-Alex-Sprite-IDLE.png"},
 
         {varName: daveIdle, theFile: "DaveSprite_Dead.png"},

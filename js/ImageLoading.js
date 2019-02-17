@@ -21,6 +21,8 @@ let roseHappyPic = document.createElement("img");
 let roseAnnoyedPic = document.createElement("img");
 let julieWorriedPic = document.createElement("img");
 let julieMadPic = document.createElement("img");
+let julieAnnoyedPic = document.createElement("img");
+let julieHappyPic = document.createElement("img");
 let npc_agentPic = document.createElement("img");
 let copPic = document.createElement("img");
 let catManPic = document.createElement("img");
@@ -100,6 +102,8 @@ function loadImages() {
         {varName: roseAnnoyedPic, theFile: "rose2.png"},
         {varName: julieWorriedPic, theFile: "julie1.png"},
         {varName: julieMadPic, theFile: "julie2.png"},
+        {varName: julieAnnoyedPic, theFile: "julie4.png"},
+        {varName: julieHappyPic, theFile: "julie3.png"},
         {varName: npc_agentPic, theFile: "npc_agent.png"},
         {varName: copPic, theFile: "NPC-COP-Portrait.png"},
         {varName: fusionFlatPic, theFile: "NPC-Fusion-Portrait.png"},

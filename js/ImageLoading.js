@@ -68,6 +68,8 @@ let dustEffectImage = document.createElement("img");
 let perlinNoiseImage = document.createElement("img");
 let trafficEffectImage = document.createElement("img");
 
+let endGameImage = document.createElement("img");
+
 let picsToLoad = 0;
 let worldTiles = document.createElement("img");
 
@@ -96,6 +98,7 @@ function loadImages() {
         {varName: inventoryPic, theFile: "inventory.png"},
         {varName: arrowPic, theFile: "UI/arrowPic.png"},
         {varName: logoPic, theFile: "UI/logoPic.png"},
+        {varName: endGamePic, theFile: "UI/endscreen.png"},
 
         //PORTRAITS
         {varName: johnHappyPic, theFile: "john.png"},

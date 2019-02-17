@@ -366,7 +366,7 @@ function Dialogue() {
                 this.setupAnimatedMouths(dialogueList, nameList, "Alex", false, alexMouthMove, 150, 300);
             } else if(nameList[this.page] == "Julie") {
                 if(speaker2ImgList[this.page] == julieMadPic) {
-                    this.setupAnimatedMouths(dialogueList, nameList, "Julie", false, julieMadMouthMove, 150, 300);
+                    this.setupAnimatedMouths(dialogueList, nameList, "Julie", false, julieMadMouthMove, 148, 307);
                 } else {
                     this.setupAnimatedMouths(dialogueList, nameList, "Julie", false, julieNormalMouthMove, 150, 300);
                 }
@@ -386,7 +386,7 @@ function Dialogue() {
                 this.setupAnimatedMouths(dialogueList, nameList, "Alex", false, alexMouthMove, 150, 300);
             } else if(nameList[this.page] == "Julie") {
                 if(speaker2ImgList[this.page] == julieMadPic) {
-                    this.setupAnimatedMouths(dialogueList, nameList, "Julie", false, julieMadMouthMove, 150, 300);
+                    this.setupAnimatedMouths(dialogueList, nameList, "Julie", false, julieMadMouthMove, 148, 307);
                 } else {
                     this.setupAnimatedMouths(dialogueList, nameList, "Julie", false, julieNormalMouthMove, 150, 300);
                 }

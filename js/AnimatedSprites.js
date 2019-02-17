@@ -42,6 +42,21 @@ function makeAnimatedSprites() {
 		framesUntilNext: 4,
 	});
 
+	//Julie
+    julieNormalMouthMove = new AnimatedSpriteClass({
+		name: "julieNormalAnimatedMouth",
+		spriteSheet: julieNormalMouthAnimatedSheet,
+		animationColFrames: 18,
+		framesUntilNext: 4,
+	});
+	
+    julieMadMouthMove = new AnimatedSpriteClass({
+		name: "julieCrazyAnimatedMouth",
+		spriteSheet: julieMadMouthAnimatedSheet,
+		animationColFrames: 18,
+		framesUntilNext: 4,
+	});
+
 	//Jen
 	jenMouthMove = new AnimatedSpriteClass({
 		name: "jenAnimatedMouth",

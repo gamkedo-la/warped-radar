@@ -260,6 +260,13 @@ function EventManager() {
             break;
             case "Uncle Dave":
                 GameEvent.FoundDave = true;
+                city_song = new Audio("audio/Serendipity.mp3");
+                city_song.loop = "true";
+                city_song.targetFadeInVolume = 0.8;
+                city_song.fadingIn = false;
+                city_song.fadingOut = false;
+                city_song.volume = 0;
+                array_of_fadable_songs[1] = city_song;
             break;
             case "Julie":
                 if(npc.messageCounter == 0) {
@@ -318,7 +325,7 @@ function EventManager() {
             case "wallOutlet":
             if(locationNow == Place.JohnsRoom) {
                 result = true;
-            }    
+            }
             break;
         }
 

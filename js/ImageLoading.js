@@ -101,7 +101,7 @@ function loadImages() {
         {varName: julieWorriedPic, theFile: "julie1.png"},
         {varName: julieMadPic, theFile: "julie2.png"},
         {varName: npc_agentPic, theFile: "npc_agent.png"},
-        {varName: copPic, theFile: "cop-portrait.png"},
+        {varName: copPic, theFile: "NPC-COP-Portrait.png"},
         {varName: fusionFlatPic, theFile: "NPC-Fusion-Portrait.png"},
         {varName: alexFlatPic, theFile: "NPC-Alex-Portrait.png"},
         {varName: catManPic, theFile: "CatMan-Portrait.png"},

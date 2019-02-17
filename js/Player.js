@@ -135,6 +135,7 @@ function Player () {
             }
             if (!this.states.walking) {
               street_footsteps.pause();
+              street_footsteps.currentTime = 0;
               footsteps_sounding = false;
             }
 
